@@ -3,15 +3,15 @@
 ---
 
 ## IMPLEMENTATION PLAN
-_Last Updated: March 4, 2023_
+_Last Updated: March 4, 2025_
 
 ### Phase 1: Project Setup & Architecture (Week 1)
 - [x] Initialize Expo + React Native project
-- [ ] Set up Supabase backend
-  - [ ] Create tables: `users`, `words`, `learned_words`
-  - [ ] Set up serverless functions for WordsAPI integration
-  - [ ] Implement seed function for initial word data (Jan 1 - Mar 3, 2025)
-  - [ ] Configure cron job for daily word updates
+- [x] Set up Supabase backend
+  - [x] Create tables: `words`, `daily_words`, `user_progress`
+  - [x] Set up serverless functions for WordsAPI integration
+  - [x] Implement seed function for initial word data (Jan 1 - Mar 3, 2025)
+  - [x] Implement daily word updates function
 - [ ] Establish design system architecture
   - [ ] Create design tokens (colors, typography, spacing)
   - [ ] Implement theme provider (light/dark mode)
@@ -81,10 +81,16 @@ _Last Updated: March 4, 2023_
 
 ### Backend (Supabase)
 - Anonymous sessions for MVP (no auth requirement)
-- Device ID-based user tracking
-- Edge Functions for WordsAPI integration
+- Device ID-based user tracking implemented in wordService and client.ts
+- Edge Functions deployed for WordsAPI integration:
+  - seedWordsForDateRange: One-time function to populate words for dates from Jan 1 2025 to March 3 2025
+  - addWordForNextDay: Daily function to add new words for the next day
 - WordsAPI Key: 8cc3ff3281msh7ea7e190a1f4805p13cbdejsnb32d65962e66
-- Data schema will support future auth implementation
+- Schema implemented with three tables:
+  - words: Stores detailed word information
+  - daily_words: Maps words to dates and difficulty levels
+  - user_progress: Tracks user interactions with words
+- Row Level Security implemented for data protection
 
 ### State Management
 - Zustand for global state (lightweight, flexible)
@@ -112,7 +118,7 @@ _Last Updated: March 4, 2023_
 
 ## PROGRESS LOG
 
-### March 4, 2023
+### March 4, 2025
 - Created initial project with Expo
 - Established project structure
 - Created implementation plan
@@ -123,16 +129,21 @@ _Last Updated: March 4, 2023_
 - Created WordsAPI integration service
 - Implemented Zustand stores for user and word data
 - Set up root layout with providers
+- Completed Supabase backend implementation:
+  - Created database tables: `words`, `daily_words`, `user_progress` with indexes and constraints
+  - Deployed edge functions: `seedWordsForDateRange` and `addWordForNextDay`
+  - Seeded initial word data for Jan 1, 2025 - Mar 3, 2025
+  - Implemented SQL migrations
+  - Set up Row Level Security policies
 
 ---
 
 ## OPEN QUESTIONS & DECISIONS PENDING
 
-- Specific schema design for Supabase tables
-- Approach for anonymous user tracking without formal auth
 - Caching strategy details (TTL for word data)
 - Specific animation patterns for transitions
 - Design system component list based on Figma
+- Set up scheduled cron job in Supabase dashboard for daily word updates
 
 ---
 
@@ -179,11 +190,11 @@ _Last Updated: March 4, 2023_
 ### **Technical Requirements**  
 
 #### **Backend (Supabase)**  
-- Tables: `users`, `words`, `learned_words`.
-- Use Edge Functions to extract Word and Word related detailed from WordsAPI
-- Each date should be assigned a word for each level (beginner, intermediate, advanced)
-- One time function to populate words for dates from Jan 1 2025 to March 3 2025
-- A cron to populate new word to a new day, everyday run at midnight.
+- Tables: `words`, `daily_words`, `user_progress`.
+- Edge Functions implemented for WordsAPI integration
+- Each date is assigned a word for each level (beginner, intermediate, advanced)
+- seedWordsForDateRange function has populated words for dates from Jan 1 2025 to March 3 2025
+- addWordForNextDay function will add a new word each day at midnight
 - Preload 7 days of words at launch; cache data to minimize API calls.  
 
 #### **State Management**  
