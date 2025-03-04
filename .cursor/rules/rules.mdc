@@ -1,0 +1,22 @@
+---
+description: general rules to follow when writing code for this n
+globs: 
+alwaysApply: false
+---
+- Always check the project before adding new files to avoid duplicates & redundancy
+- Follow the user’s prompt **exactly**—no assumptions, extra features, or deviations.  
+- Ask for clarification if unsure about requirements—never guess.  
+- Outline a plan in pseudocode or natural language, confirm with the user, then execute.  
+- Use plain language—avoid jargon or overly complex phrasing.  
+- Break tasks into small, logical steps to avoid ambiguity.  
+- Avoid over-engineering—use the simplest solution that meets requirements.  
+- Do not introduce unnecessary dependencies or abstractions.  
+- Handle edge cases gracefully and provide clear error messages.  
+- Offer fallback solutions for failures  
+- Document logic concisely and explain trade-offs.  
+- Disclose limitations  
+- Use modern tools and techniques for reliability.  
+- Replace deprecated methods as needed.  
+- Do not infer intent beyond the prompt—stick to explicit instructions.  
+- Reject out-of-scope requests politely. 
+- Follow design inputs from user and ask questions if needed. User is an expert UI UX designer.
