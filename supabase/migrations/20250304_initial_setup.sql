@@ -120,14 +120,28 @@ CREATE OR REPLACE FUNCTION seed_words_for_date_range(
 ) RETURNS VOID AS $$
 DECLARE
   curr_date DATE := start_date;
+  edge_function_url TEXT := 'https://ipljgsggnbdwaomjfuok.supabase.co/functions/v1/seedWordsForDateRange';
+  service_role_key TEXT := current_setting('app.supabase_service_role_key', TRUE);
+  result JSONB;
 BEGIN
-  -- This is just a placeholder. The actual implementation will be in the Edge Function
-  -- which will call WordsAPI and populate the database.
-  WHILE curr_date <= end_date LOOP
-    -- For each date, insert words for each difficulty level
-    -- This will be handled by the Edge Function
-    curr_date := curr_date + INTERVAL '1 day';
-  END LOOP;
+  -- Call the Edge Function with the date range
+  SELECT content::JSONB INTO result FROM 
+  http((
+    'POST',
+    edge_function_url,
+    ARRAY[
+      http_header('Authorization', 'Bearer ' || service_role_key),
+      http_header('Content-Type', 'application/json')
+    ],
+    jsonb_build_object(
+      'startDate', start_date::TEXT,
+      'endDate', end_date::TEXT
+    )::TEXT,
+    NULL
+  ));
+  
+  -- Log the result
+  RAISE NOTICE 'Edge Function Result: %', result;
 END;
 $$ LANGUAGE plpgsql;
 
@@ -136,6 +150,9 @@ CREATE OR REPLACE FUNCTION add_word_for_next_day() RETURNS VOID AS $$
 DECLARE
   latest_date DATE;
   next_date DATE;
+  edge_function_url TEXT := 'https://ipljgsggnbdwaomjfuok.supabase.co/functions/v1/addWordForNextDay';
+  service_role_key TEXT := current_setting('app.supabase_service_role_key', TRUE);
+  result JSONB;
 BEGIN
   -- Find the latest date in the daily_words table
   SELECT MAX(date) INTO latest_date FROM daily_words;
@@ -143,7 +160,22 @@ BEGIN
   -- Calculate the next date
   next_date := latest_date + INTERVAL '1 day';
   
-  -- The actual implementation will be in the Edge Function
-  -- which will call WordsAPI and add words for the next_date.
+  -- Call the Edge Function to add words for the next day
+  SELECT content::JSONB INTO result FROM 
+  http((
+    'POST',
+    edge_function_url,
+    ARRAY[
+      http_header('Authorization', 'Bearer ' || service_role_key),
+      http_header('Content-Type', 'application/json')
+    ],
+    jsonb_build_object(
+      'date', next_date::TEXT
+    )::TEXT,
+    NULL
+  ));
+  
+  -- Log the result
+  RAISE NOTICE 'Edge Function Result: %', result;
 END;
 $$ LANGUAGE plpgsql; 

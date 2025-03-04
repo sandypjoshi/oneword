@@ -3,15 +3,17 @@
 ---
 
 ## IMPLEMENTATION PLAN
-_Last Updated: March 4, 2025_
+_Last Updated: March 6, 2025_
 
 ### Phase 1: Project Setup & Architecture (Week 1)
 - [x] Initialize Expo + React Native project
 - [x] Set up Supabase backend
-  - [x] Create tables: `words`, `daily_words`, `user_progress`
+  - [x] Create tables: `words`, `daily_words`, `user_progress`, `word_distractors`
   - [x] Set up serverless functions for WordsAPI integration
   - [x] Implement seed function for initial word data (Jan 1 - Mar 3, 2025)
   - [x] Implement daily word updates function
+  - [x] Set up automated cron job for daily word updates at midnight UTC
+  - [x] Implement enhanced distractor generation for word quizzes
 - [ ] Establish design system architecture
   - [ ] Create design tokens (colors, typography, spacing)
   - [ ] Implement theme provider (light/dark mode)
@@ -80,17 +82,26 @@ _Last Updated: March 4, 2025_
 ## TECHNICAL DECISIONS
 
 ### Backend (Supabase)
-- Anonymous sessions for MVP (no auth requirement)
-- Device ID-based user tracking implemented in wordService and client.ts
-- Edge Functions deployed for WordsAPI integration:
-  - seedWordsForDateRange: One-time function to populate words for dates from Jan 1 2025 to March 3 2025
-  - addWordForNextDay: Daily function to add new words for the next day
+- Using anonymous sessions for the MVP with no authentication requirement
+- Device ID-based user tracking (implemented in `wordService` and `client.ts`)
+- Deployed Edge Functions for WordsAPI integration:
+  - `seedWordsForDateRange`: One-time function to populate words for dates (Jan 1, 2025 - Mar 3, 2025)
+  - `addWordForNextDay`: Daily function to add new words for next day
+  - Set up scheduled cron job in Supabase to run `addWordForNextDay` function at midnight daily
 - WordsAPI Key: 8cc3ff3281msh7ea7e190a1f4805p13cbdejsnb32d65962e66
-- Schema implemented with three tables:
-  - words: Stores detailed word information
-  - daily_words: Maps words to dates and difficulty levels
-  - user_progress: Tracks user interactions with words
+- Schema implemented with tables:
+  - `words`: Stores detailed word information (definitions, examples, etc.)
+  - `daily_words`: Maps words to dates and difficulty levels
+  - `user_progress`: Tracks user interactions with words
+  - `word_distractors`: Stores high-quality distractors for word quizzes
 - Row Level Security implemented for data protection
+- Enhanced distractor generation using multiple strategies:
+  1. Stored high-quality distractors from a dedicated database table
+  2. Alternative definitions from the same word (different meanings)
+  3. Definitions from synonyms and antonyms of the word
+  4. Part-of-speech specific templates based on difficulty level
+  5. Smart templates using contextually relevant content
+  6. Quality scoring system to improve distractor selection over time
 
 ### State Management
 - Zustand for global state (lightweight, flexible)
@@ -118,6 +129,23 @@ _Last Updated: March 4, 2025_
 
 ## PROGRESS LOG
 
+### March 6, 2025
+- Implemented enhanced distractor generation system for word quizzes:
+  - Created `word_distractors` table with indexes and quality scoring
+  - Developed multi-strategy approach using WordsAPI and template generation
+  - Added SQL functions for similarity checking and retrieving distractors
+  - Seeded database with high-quality distractors by part of speech and difficulty
+  - Updated Edge Functions to use the enhanced implementation
+  - Added distractor database to store and reuse quality distractors over time
+
+### March 5, 2025
+- Implemented automated daily word updates using cron-job.org:
+  - Configured job to run at midnight UTC every day
+  - Set up HTTP POST request to the `addWordForNextDay` Edge Function
+  - Successfully tested with verification in the Supabase database
+  - Established secure authentication using Bearer token
+  - Configured monitoring and failure notifications
+
 ### March 4, 2025
 - Created initial project with Expo
 - Established project structure
@@ -130,7 +158,7 @@ _Last Updated: March 4, 2025_
 - Implemented Zustand stores for user and word data
 - Set up root layout with providers
 - Completed Supabase backend implementation:
-  - Created database tables: `words`, `daily_words`, `user_progress` with indexes and constraints
+  - Created database tables: `words`, `daily_words`, `user_progress`, `word_distractors` with indexes and constraints
   - Deployed edge functions: `seedWordsForDateRange` and `addWordForNextDay`
   - Seeded initial word data for Jan 1, 2025 - Mar 3, 2025
   - Implemented SQL migrations
@@ -143,7 +171,7 @@ _Last Updated: March 4, 2025_
 - Caching strategy details (TTL for word data)
 - Specific animation patterns for transitions
 - Design system component list based on Figma
-- Set up scheduled cron job in Supabase dashboard for daily word updates
+- ~~How to generate high-quality wrong options for quizzes, beyond hardcoded mock data~~
 
 ---
 
@@ -190,7 +218,7 @@ _Last Updated: March 4, 2025_
 ### **Technical Requirements**  
 
 #### **Backend (Supabase)**  
-- Tables: `words`, `daily_words`, `user_progress`.
+- Tables: `words`, `daily_words`, `user_progress`, `word_distractors`.
 - Edge Functions implemented for WordsAPI integration
 - Each date is assigned a word for each level (beginner, intermediate, advanced)
 - seedWordsForDateRange function has populated words for dates from Jan 1 2025 to March 3 2025

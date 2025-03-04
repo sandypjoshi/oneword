@@ -8,6 +8,7 @@
  * - words: Table storing word data fetched from WordsAPI
  * - daily_words: Table mapping words to specific dates and difficulty levels
  * - user_progress: Table tracking user progress with words
+ * - word_distractors: Table storing quality distractors for word quizzes
  */
 
 /**
@@ -101,6 +102,23 @@ export interface DailyWordWithDetails {
 }
 
 /**
+ * Database schema for the word_distractors table
+ * Stores quality distractors for word definitions
+ */
+export interface WordDistractorSchema {
+  id: string; // UUID primary key
+  word: string; // The word the distractor is for
+  part_of_speech: string | null; // Part of speech of the word
+  correct_definition: string; // The correct definition of the word
+  distractor: string; // The distractor (incorrect definition)
+  difficulty: WordDifficulty; // Difficulty level
+  source: string; // Where the distractor came from (e.g., 'template', 'synonym', 'related_word')
+  quality_score: number; // Score to indicate the quality of the distractor (0-1)
+  usage_count: number; // Number of times this distractor has been used
+  created_at: string; // Timestamp when the distractor was created
+}
+
+/**
  * Database table names
  * Used to ensure consistent table name references across the application
  */
@@ -108,6 +126,7 @@ export enum Tables {
   WORDS = 'words',
   DAILY_WORDS = 'daily_words',
   USER_PROGRESS = 'user_progress',
+  WORD_DISTRACTORS = 'word_distractors',
 }
 
 export default {
