@@ -1,92 +1,156 @@
 /**
  * Supabase Edge Function: seedWordsForDateRange
  * 
- * This edge function is designed to be a one-time operation to pre-populate
- * the database with words for a date range (Jan 1, 2025 - Mar 3, 2025).
- * 
- * It:
- * 1. Fetches random words from external sources
- * 2. Retrieves detailed word information from WordsAPI
- * 3. Generates quiz options (wrong answers)
- * 4. Assigns words to dates based on difficulty level
- * 
- * To deploy as a Supabase Edge Function:
- * 1. Create a new Edge Function in the Supabase dashboard
- * 2. Paste this code (adjusted for the Edge Function environment)
- * 3. Deploy the function
- * 4. Invoke it once to seed the initial data
+ * Populates words for the specified date range:
+ * 1. Generates a range of dates from startDate to endDate
+ * 2. For each day, assigns words for each difficulty level
+ * 3. Fetches detailed word info from WordsAPI and Twinword API
+ * 4. Stores the word with distractors in the database
  */
 
-import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.38.4';
+import { serve } from "https://deno.land/std@0.177.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.38.4";
 
-// WordsAPI configuration
-const WORDSAPI_KEY = '8cc3ff3281msh7ea7e190a1f4805p13cbdejsnb32d65962e66';
-const WORDSAPI_HOST = 'wordsapiv1.p.rapidapi.com';
-const WORDSAPI_BASE_URL = 'https://wordsapiv1.p.rapidapi.com/words';
-
-// Difficulty levels
+// Define enums first to avoid reference errors
 enum WordDifficulty {
-  BEGINNER = 'beginner',
-  INTERMEDIATE = 'intermediate',
-  ADVANCED = 'advanced',
+  BEGINNER = "beginner",
+  INTERMEDIATE = "intermediate",
+  ADVANCED = "advanced"
 }
+
+// API Configuration
+const WORDSAPI_KEY = Deno.env.get("WORDSAPI_KEY") || "";
+const WORDSAPI_HOST = "wordsapiv1.p.rapidapi.com";
+const WORDSAPI_BASE_URL = `https://${WORDSAPI_HOST}/words`;
+
+// Twinword API Configuration
+const TWINWORD_API_KEY = Deno.env.get("TWINWORD_API_KEY") || "";
+const TWINWORD_HOST = "twinword-word-graph-dictionary.p.rapidapi.com";
+const TWINWORD_BASE_URL = `https://${TWINWORD_HOST}/associate`;
+
+// Difficulty mapping from numeric score to WordDifficulty enum
+const DIFFICULTY_RANGES = {
+  [WordDifficulty.BEGINNER]: { min: 1, max: 3.5 },
+  [WordDifficulty.INTERMEDIATE]: { min: 3.5, max: 6 },
+  [WordDifficulty.ADVANCED]: { min: 6, max: 10 }
+};
 
 // Word data structure
 interface WordDetails {
   word: string;
   pronunciation?: string;
   partOfSpeech?: string;
-  definitions: string[];
+  definitions: { definition: string, partOfSpeech: string }[];
   examples?: string[];
   synonyms?: string[];
   antonyms?: string[];
   metadata?: any;
+  difficultyScore?: number;
 }
 
 /**
- * Main handler for the Edge Function
+ * Main function to seed words for date range
  */
-// Serve function would be defined differently in the actual Edge Function environment
-// export const serve = async (req) => {
-const seedWordsForDateRange = async (startDate: string, endDate: string) => {
-  console.log(`Seeding words from ${startDate} to ${endDate}...`);
+const seedWordsForDateRange = async (
+  startDate: string, 
+  endDate: string
+): Promise<{
+  success: boolean;
+  message: string;
+  dates?: string[];
+}> => {
+  console.log(`Seeding words from ${startDate} to ${endDate}`);
+  
+  // Create Supabase client
+  const supabase = createSupabaseClient();
   
   try {
-    // Generate dates in the specified range
-    const dateRange = generateDateRange(new Date(startDate), new Date(endDate));
+    // Generate date range
+    const dates = generateDateRange(startDate, endDate);
+    console.log(`Generated ${dates.length} dates to process`);
     
     // Process each date
-    for (const date of dateRange) {
-      console.log(`Processing date: ${date}`);
-      
-      // Assign a word for each difficulty level
-      await assignWordToDate(date, WordDifficulty.BEGINNER);
-      await assignWordToDate(date, WordDifficulty.INTERMEDIATE);
-      await assignWordToDate(date, WordDifficulty.ADVANCED);
+    const results = [];
+    for (const date of dates) {
+      try {
+        console.log(`Processing date: ${date}`);
+        
+        // Skip if words already exist for this date
+        const wordsExist = await checkIfWordsExistForDate(supabase, date);
+        if (wordsExist) {
+          console.log(`Words already exist for ${date}, skipping...`);
+          results.push({ 
+            date, 
+            status: 'skipped', 
+            message: 'Words already exist for this date' 
+          });
+          continue;
+        }
+        
+        // Get list of words already used
+        const usedWords = await getUsedWords(supabase);
+        console.log(`Found ${usedWords.length} words already used`);
+        
+        // Add a word for each difficulty level
+        await assignWordToDate(supabase, date, WordDifficulty.BEGINNER, usedWords);
+        await assignWordToDate(supabase, date, WordDifficulty.INTERMEDIATE, usedWords);
+        await assignWordToDate(supabase, date, WordDifficulty.ADVANCED, usedWords);
+        
+        results.push({ 
+          date, 
+          status: 'success', 
+          message: 'Words added successfully' 
+        });
+      } catch (error) {
+        console.error(`Error processing date ${date}:`, error);
+        results.push({ 
+          date, 
+          status: 'error', 
+          message: error.message 
+        });
+      }
     }
+    
+    // Count successes and errors
+    const successes = results.filter(r => r.status === 'success').length;
+    const skipped = results.filter(r => r.status === 'skipped').length;
+    const errors = results.filter(r => r.status === 'error').length;
     
     return {
       success: true,
-      message: `Successfully seeded words for ${dateRange.length} dates from ${startDate} to ${endDate}`,
-      dates: dateRange,
+      message: `Processed ${dates.length} dates: ${successes} successful, ${skipped} skipped, ${errors} errors`,
+      dates: dates
     };
   } catch (error) {
-    console.error('Error seeding words:', error);
+    console.error('Error in seedWordsForDateRange:', error);
     return {
       success: false,
-      message: `Error seeding words: ${error.message}`,
+      message: `Error seeding words: ${error.message}`
     };
   }
 };
 
 /**
- * Generate an array of date strings in the format YYYY-MM-DD
+ * Generate a range of dates from start to end
  */
-const generateDateRange = (startDate: Date, endDate: Date): string[] => {
-  const dates = [];
-  const currentDate = new Date(startDate);
+const generateDateRange = (startDateStr: string, endDateStr: string): string[] => {
+  const dates: string[] = [];
   
+  const startDate = new Date(startDateStr);
+  const endDate = new Date(endDateStr);
+  
+  // Validate dates
+  if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
+    throw new Error('Invalid date format. Please use YYYY-MM-DD format.');
+  }
+  
+  // Ensure start date is before end date
+  if (startDate > endDate) {
+    throw new Error('Start date must be before end date.');
+  }
+  
+  // Generate date range
+  const currentDate = new Date(startDate);
   while (currentDate <= endDate) {
     dates.push(currentDate.toISOString().split('T')[0]);
     currentDate.setDate(currentDate.getDate() + 1);
@@ -96,526 +160,712 @@ const generateDateRange = (startDate: Date, endDate: Date): string[] => {
 };
 
 /**
- * Get a random word based on difficulty
+ * Check if words already exist for a specific date
  */
-const getRandomWordByDifficulty = async (difficulty: WordDifficulty): Promise<string> => {
-  const supabase = createSupabaseClient();
-  
-  // We need to determine the appropriate WordsAPI difficulty mapping
-  const apiDifficulty = {
-    [WordDifficulty.BEGINNER]: 'elementary',
-    [WordDifficulty.INTERMEDIATE]: 'intermediate',
-    [WordDifficulty.ADVANCED]: 'advanced',
-  }[difficulty];
-  
-  // Get previously used words to avoid duplicates
-  const { data: usedWords, error: usedWordsError } = await supabase
-    .from('daily_words')
-    .select('words(word)')
-    .eq('difficulty', difficulty);
-  
-  if (usedWordsError) {
-    console.error('Error fetching used words:', usedWordsError);
+const checkIfWordsExistForDate = async (supabase: any, date: string): Promise<boolean> => {
+  try {
+    const { data, error } = await supabase
+      .from('daily_words')
+      .select('id')
+      .eq('date', date);
+    
+    if (error) throw error;
+    
+    return data && data.length > 0;
+  } catch (error) {
+    console.error(`Error checking if words exist for date ${date}:`, error);
+    throw error;
   }
-  
-  const usedWordsList = usedWords 
-    ? usedWords
-        .filter(entry => entry.words)
-        .map(entry => entry.words.word)
-    : [];
-  
-  // Try fetching a random word from WordsAPI with appropriate difficulty
-  let word = '';
+};
+
+/**
+ * Get words that have already been used
+ */
+const getUsedWords = async (supabase: any): Promise<string[]> => {
+  try {
+    const { data, error } = await supabase
+      .from('daily_words')
+      .select('words(word)');
+    
+    if (error) throw error;
+    
+    const usedWords = data
+      .filter(entry => entry.words)
+      .map(entry => entry.words.word);
+    
+    return usedWords;
+  } catch (error) {
+    console.error('Error fetching used words:', error);
+    return [];
+  }
+};
+
+/**
+ * Assign a word for a specific date and difficulty
+ */
+const assignWordToDate = async (
+  supabase: any,
+  date: string,
+  difficulty: WordDifficulty,
+  usedWords: string[]
+): Promise<void> => {
+  try {
+    console.log(`Finding word for date ${date}, difficulty ${difficulty}`);
+    
+    // Get random word for this difficulty
+    const word = await getRandomWord(difficulty, usedWords);
+    console.log(`Selected word: ${word}`);
+    
+    // Get detailed information about the word
+    const wordDetails = await getWordDetails(word);
+    
+    // Choose primary definition for the quiz
+    // Select the first definition that matches the primary part of speech
+    let primaryDefinition = '';
+    
+    if (wordDetails.definitions && wordDetails.definitions.length > 0) {
+      // Find a definition matching the primary part of speech if possible
+      const matchingDef = wordDetails.definitions.find(
+        def => def.partOfSpeech === wordDetails.partOfSpeech
+      );
+      
+      if (matchingDef) {
+        primaryDefinition = matchingDef.definition;
+      } else {
+        // Otherwise use the first definition
+        primaryDefinition = wordDetails.definitions[0].definition;
+      }
+    }
+    
+    // Generate wrong options for the quiz
+    const wrongOptions = await generateWrongOptions(
+      supabase,
+      word,
+      primaryDefinition,
+      wordDetails.partOfSpeech || '',
+      difficulty
+    );
+    
+    // Insert into the database
+    const wordEntry = {
+      word,
+      phonetic: wordDetails.pronunciation || '',
+      part_of_speech: wordDetails.partOfSpeech || '',
+      difficulty,
+      definition: primaryDefinition,
+      examples: wordDetails.examples ? wordDetails.examples.join(' | ') : '',
+      quiz_options: [primaryDefinition, ...wrongOptions].sort(() => Math.random() - 0.5),
+      correct_answer: primaryDefinition,
+      metadata: wordDetails.metadata || {}
+    };
+    
+    // Insert into words table
+    const { data: wordData, error: wordError } = await supabase
+      .from('words')
+      .upsert(wordEntry)
+      .select('id');
+    
+    if (wordError) throw wordError;
+    
+    // Insert into daily_words table
+    const { error: dailyWordError } = await supabase
+      .from('daily_words')
+      .insert({
+        date,
+        difficulty,
+        word_id: wordData[0].id
+      });
+    
+    if (dailyWordError) throw dailyWordError;
+    
+    console.log(`Successfully added word "${word}" (${difficulty}) for date ${date}`);
+  } catch (error) {
+    console.error(`Error assigning word for date ${date}, difficulty ${difficulty}:`, error);
+    throw error;
+  }
+};
+
+/**
+ * Get a random word by difficulty level
+ */
+const getRandomWord = async (
+  difficulty: WordDifficulty,
+  usedWords: string[]
+): Promise<string> => {
   let attempts = 0;
   const maxAttempts = 5;
   
   while (attempts < maxAttempts) {
     try {
-      const randomLetterStart = String.fromCharCode(97 + Math.floor(Math.random() * 26)); // 'a' to 'z'
-      const response = await fetch(`https://wordsapiv1.p.rapidapi.com/words/?random=true&hasDetails=definitions&letterPattern=^${randomLetterStart}.*&frequencyMin=3`, {
+      attempts++;
+      
+      // 1. Get a random word from WordsAPI
+      const randomLetterStart = String.fromCharCode(97 + Math.floor(Math.random() * 26));
+      const url = `${WORDSAPI_BASE_URL}/?random=true&hasDetails=definitions&letterPattern=^${randomLetterStart}.*&frequencyMin=3`;
+      
+      const response = await fetch(url, {
         method: 'GET',
         headers: {
-          'X-RapidAPI-Key': WORDSAPI_KEY,
-          'X-RapidAPI-Host': WORDSAPI_HOST,
-        },
+          'x-rapidapi-key': WORDSAPI_KEY,
+          'x-rapidapi-host': WORDSAPI_HOST
+        }
       });
       
       if (!response.ok) {
-        throw new Error(`API request failed with status: ${response.status}`);
+        throw new Error(`WordsAPI error: ${response.status} ${response.statusText}`);
       }
       
       const data = await response.json();
-      word = data.word;
+      const word = data.word;
       
-      // Check if the word has already been used
-      if (!usedWordsList.includes(word)) {
-        break;
+      // Skip words less than 3 characters or more than 10
+      if (!word || word.length < 3 || word.length > 10 || word.includes(' ')) {
+        console.log(`Skipping inappropriate word: ${word}`);
+        continue;
       }
       
-      attempts++;
+      // Skip words that have already been used
+      if (usedWords.includes(word)) {
+        console.log(`Word '${word}' has already been used, trying another...`);
+        continue;
+      }
+      
+      // 2. Verify word difficulty with Twinword API
+      const twinwordData = await fetchFromTwinword(word, supabase);
+      
+      // Parse difficulty (default to 5 if not available)
+      const difficultyScore = parseFloat(twinwordData.difficulty) || 5;
+      
+      // Check if the word matches our target difficulty
+      if (!isCorrectDifficulty(difficultyScore, difficulty)) {
+        console.log(`Word '${word}' has difficulty ${difficultyScore}, but we need ${difficulty}. Trying another...`);
+        continue;
+      }
+      
+      console.log(`Selected word '${word}' with difficulty score ${difficultyScore} for ${difficulty} level`);
+      return word;
+      
     } catch (error) {
-      console.error('Error fetching random word:', error);
-      attempts++;
+      console.error(`Error in attempt ${attempts}/${maxAttempts} to get a random word:`, error);
+      // Continue to the next attempt
     }
   }
   
-  if (word) {
-    return word;
-  } else {
-    throw new Error('Failed to get a random word after multiple attempts');
-  }
+  // Fallback words if all attempts fail, categorized by difficulty
+  const fallbackWords = {
+    [WordDifficulty.BEGINNER]: ['book', 'tree', 'fish', 'house', 'ball', 'car'],
+    [WordDifficulty.INTERMEDIATE]: ['balance', 'feature', 'impact', 'journey', 'resource'],
+    [WordDifficulty.ADVANCED]: ['ambiguous', 'consensus', 'infrastructure', 'phenomenon', 'theoretical']
+  };
+  
+  // Pick a random fallback word that matches the difficulty
+  // and hasn't been used before (if possible)
+  const fallbackOptions = fallbackWords[difficulty].filter(word => !usedWords.includes(word));
+  
+  // If all fallbacks have been used, just pick any one
+  const options = fallbackOptions.length > 0 ? fallbackOptions : fallbackWords[difficulty];
+  const randomIndex = Math.floor(Math.random() * options.length);
+  const fallbackWord = options[randomIndex];
+  
+  console.warn(`Failed to get a random word after ${maxAttempts} attempts. Using fallback word: ${fallbackWord}`);
+  return fallbackWord;
 };
 
 /**
- * Get detailed information about a word from WordsAPI
+ * Create a Supabase client with service role
  */
-const getWordDetails = async (word: string): Promise<WordDetails> => {
+const createSupabaseClient = () => {
+  const SUPABASE_URL = Deno.env.get('SUPABASE_URL') || '';
+  const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || '';
+  
+  return createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+};
+
+/**
+ * Enhanced function to fetch and cache Twinword API associations
+ */
+const fetchFromTwinword = async (word: string, supabase: any): Promise<any> => {
   try {
-    const response = await fetch(`${WORDSAPI_BASE_URL}/${encodeURIComponent(word)}`, {
+    // First check if we have cached results
+    const { data: cachedData, error: cacheError } = await supabase
+      .from('twinword_associations')
+      .select('associated_words')
+      .eq('word', word)
+      .maybeSingle();
+    
+    if (!cacheError && cachedData) {
+      console.log(`Using cached Twinword data for "${word}"`);
+      return cachedData.associated_words;
+    }
+    
+    // No cached data found, make API call
+    const url = `${TWINWORD_BASE_URL}?entry=${encodeURIComponent(word)}`;
+    const response = await fetch(url, {
       method: 'GET',
       headers: {
-        'X-RapidAPI-Key': WORDSAPI_KEY,
-        'X-RapidAPI-Host': WORDSAPI_HOST,
+        'X-RapidAPI-Key': TWINWORD_API_KEY,
+        'X-RapidAPI-Host': TWINWORD_HOST,
       },
     });
 
     if (!response.ok) {
-      throw new Error(`API request failed with status: ${response.status}`);
+      throw new Error(`Twinword API error: ${response.status} ${response.statusText}`);
     }
-
-    const data = await response.json();
     
-    // Transform API response to our schema
-    const wordDetails: WordDetails = {
-      word: data.word,
-      pronunciation: data.pronunciation?.all,
-      partOfSpeech: data.results?.[0]?.partOfSpeech,
-      definitions: data.results?.map(result => result.definition) || [],
-      examples: data.results?.flatMap(result => result.examples || []) || [],
-      synonyms: data.results?.flatMap(result => result.synonyms || []) || [],
-      antonyms: data.results?.flatMap(result => result.antonyms || []) || [],
-      metadata: {
-        syllables: data.syllables,
-        frequency: data.frequency,
-        etymology: data.results?.[0]?.derivation?.[0],
-      },
-    };
-
-    return wordDetails;
+    const result = await response.json();
+    
+    // Cache the response for future use
+    if (result && result.result_code === "200") {
+      try {
+        await supabase
+          .from('twinword_associations')
+          .upsert({
+            word,
+            associated_words: result
+          }, { onConflict: 'word' });
+        
+        console.log(`Cached Twinword data for "${word}"`);
+      } catch (cacheError) {
+        console.error(`Error caching Twinword data: ${cacheError}`);
+      }
+    }
+    
+    return result;
   } catch (error) {
-    console.error('Error fetching word details:', error);
-    throw error;
+    console.error(`Error fetching from Twinword: ${error}`);
+    return null;
   }
 };
 
 /**
- * Generate wrong options for the quiz
+ * Checks if a difficulty score is within the correct range for the specified difficulty level
  */
-const generateWrongOptions = async (
-  correctDefinition: string,
-  difficulty: WordDifficulty,
-  word: string,
-  wordDetails: WordDetails
-): Promise<string[]> => {
-  // Create Supabase client
-  const supabase = createSupabaseClient();
+const isCorrectDifficulty = (score: number, targetDifficulty: WordDifficulty): boolean => {
+  const range = DIFFICULTY_RANGES[targetDifficulty];
+  return score >= range.min && score < range.max;
+};
+
+/**
+ * Sort associations by relevance score in descending order
+ */
+const sortByRelevance = (associations: string): string[] => {
+  if (!associations) return [];
+  
+  // Split and clean the association string
+  return associations
+    .split(',')
+    .map(word => word.trim())
+    .filter(word => word.length > 0);
+};
+
+/**
+ * Get detailed information about a word
+ */
+const getWordDetails = async (word: string): Promise<WordDetails> => {
+  // Create a base word details object with defaults
+    const wordDetails: WordDetails = {
+    word,
+    definitions: [],
+  };
   
   try {
-    // Use multiple approaches to generate high-quality distractors
-    const wrongOptions: string[] = [];
-    const usedApproaches: string[] = [];
-    const partOfSpeech = wordDetails.partOfSpeech || null;
+    // 1. Fetch data from WordsAPI
+    const wordsApiUrl = `${WORDSAPI_BASE_URL}/${encodeURIComponent(word)}`;
+    const wordsApiResponse = await fetch(wordsApiUrl, {
+      method: 'GET',
+      headers: {
+        'x-rapidapi-key': WORDSAPI_KEY,
+        'x-rapidapi-host': WORDSAPI_HOST
+      }
+    });
     
-    // APPROACH 1: Check if we have stored distractors for this word
+    if (!wordsApiResponse.ok) {
+      console.warn(`WordsAPI error for word "${word}": ${wordsApiResponse.status}`);
+      // Continue to try Twinword as fallback
+    } else {
+      const wordsApiData = await wordsApiResponse.json();
+      
+      // Process WordsAPI data
+      wordDetails.pronunciation = wordsApiData.pronunciation?.all || '';
+      
+      // Get primary part of speech
+      const partOfSpeechCounts: Record<string, number> = {};
+      (wordsApiData.results || []).forEach((result: any) => {
+        const pos = result.partOfSpeech;
+        if (pos) {
+          partOfSpeechCounts[pos] = (partOfSpeechCounts[pos] || 0) + 1;
+        }
+      });
+      
+      // Find most common part of speech
+      let maxCount = 0;
+      for (const [pos, count] of Object.entries(partOfSpeechCounts)) {
+        if (count > maxCount) {
+          maxCount = count;
+          wordDetails.partOfSpeech = pos;
+        }
+      }
+      
+      // Extract definitions
+      if (wordsApiData.results) {
+        wordDetails.definitions = wordsApiData.results.map((result: any) => ({
+          definition: result.definition,
+          partOfSpeech: result.partOfSpeech
+        }));
+      }
+      
+      // Extract examples
+      if (wordsApiData.results) {
+        wordDetails.examples = wordsApiData.results
+          .filter((result: any) => result.examples && result.examples.length > 0)
+          .flatMap((result: any) => result.examples)
+          .slice(0, 3); // Take up to 3 examples
+      }
+      
+      // Extract synonyms and antonyms
+      wordDetails.synonyms = wordsApiData.results
+        ?.flatMap((result: any) => result.synonyms || [])
+        .filter((syn: string, i: number, arr: string[]) => arr.indexOf(syn) === i)
+        .slice(0, 10);
+      
+      wordDetails.antonyms = wordsApiData.results
+        ?.flatMap((result: any) => result.antonyms || [])
+        .filter((ant: string, i: number, arr: string[]) => arr.indexOf(ant) === i)
+        .slice(0, 5);
+      
+      // Store additional metadata
+      wordDetails.metadata = {
+        frequency: wordsApiData.frequency,
+        syllables: wordsApiData.syllables,
+      };
+    }
+    
+    // 2. Enrich with Twinword API data
     try {
-      const { data: storedDistractors } = await supabase
-        .from('word_distractors')
-        .select('distractor, quality_score')
-        .eq('word', word)
-        .eq('difficulty', difficulty)
-        .order('quality_score', { ascending: false })
-        .order('usage_count', { ascending: true })
-        .limit(3);
+      const twinwordData = await fetchFromTwinword(word, supabase);
       
-      if (storedDistractors && storedDistractors.length > 0) {
-        usedApproaches.push("stored distractors");
-        // Add stored distractors that aren't too similar to the correct definition
-        for (const item of storedDistractors) {
-          if (wrongOptions.length >= 3) break;
-          
-          // Simple similarity check
-          const isTooSimilar = checkSimilarity(item.distractor, correctDefinition);
-          
-          if (!isTooSimilar && !wrongOptions.includes(item.distractor)) {
-            wrongOptions.push(item.distractor);
-            
-            // Update usage count
-            await supabase
-              .from('word_distractors')
-              .update({ usage_count: supabase.rpc('increment', { inc: 1 }) })
-              .eq('word', word)
-              .eq('distractor', item.distractor);
-          }
-        }
-      }
-    } catch (error) {
-      console.error('Error retrieving stored distractors:', error);
-      // Continue to other approaches if there's an error
-    }
-    
-    // APPROACH 2: Use alternative definitions of the same word
-    if (wrongOptions.length < 3 && wordDetails.definitions && wordDetails.definitions.length > 1) {
-      usedApproaches.push("alternative definitions");
-      
-      // Filter out definitions that are too similar to the correct one
-      const altDefinitions = wordDetails.definitions
-        .filter(def => def !== correctDefinition && !checkSimilarity(def, correctDefinition))
-        .slice(0, 3 - wrongOptions.length);
-      
-      for (const def of altDefinitions) {
-        if (wrongOptions.length >= 3) break;
-        if (!wrongOptions.includes(def)) {
-          wrongOptions.push(def);
-          
-          // Save this quality distractor for future use
-          try {
-            await supabase
-              .from('word_distractors')
-              .insert({
-                word,
-                correct_definition: correctDefinition,
-                distractor: def,
-                part_of_speech: partOfSpeech,
-                difficulty,
-                source: 'alternative_definition',
-                quality_score: 0.9, // High quality score since it's from the same word
-                usage_count: 1
-              })
-              // Remove the onConflict for now to simplify
-              // .onConflict(['word', 'distractor'])
-              // .merge(['usage_count', 'quality_score']);
-            
-            console.log(`Successfully stored alternative definition distractor for word "${word}"`);
-          } catch (error) {
-            console.error('Error saving alternative definition distractor:', error);
-          }
-        }
-      }
-    }
-    
-    // APPROACH 3: Use definitions from synonyms/antonyms
-    if (wrongOptions.length < 3 && 
-        ((wordDetails.synonyms && wordDetails.synonyms.length > 0) || 
-         (wordDetails.antonyms && wordDetails.antonyms.length > 0))) {
-      usedApproaches.push("related words");
-      
-      // Combine synonyms and antonyms, prioritizing synonyms
-      const relatedWords = [
-        ...(wordDetails.synonyms || []).slice(0, 5),
-        ...(wordDetails.antonyms || []).slice(0, 3)
-      ];
-      
-      // Get definitions for related words
-      for (const relatedWord of relatedWords) {
-        if (wrongOptions.length >= 3) break;
+      if (twinwordData) {
+        // Set difficulty score
+        wordDetails.difficultyScore = parseFloat(twinwordData.difficulty) || 5;
         
-        try {
-          // Get related word details using WordsAPI
-          const relatedWordDetails = await getWordDetails(relatedWord);
+        // Add Twinword associations to synonyms if available
+        if (twinwordData.assoc_word) {
+          const associations = sortByRelevance(twinwordData.assoc_word);
           
-          if (relatedWordDetails.definitions && relatedWordDetails.definitions.length > 0) {
-            // Get best definition that isn't too similar to correct definition
-            const relatedDefinition = relatedWordDetails.definitions
-              .find(def => !checkSimilarity(def, correctDefinition));
-            
-            if (relatedDefinition && !wrongOptions.includes(relatedDefinition)) {
-              wrongOptions.push(relatedDefinition);
-              
-              // Determine if it's from a synonym or antonym
-              const source = wordDetails.synonyms?.includes(relatedWord) 
-                ? 'synonym_definition' 
-                : 'antonym_definition';
-              
-              // Save this quality distractor for future use
-              try {
-                await supabase
-                  .from('word_distractors')
-                  .insert({
-                    word,
-                    correct_definition: correctDefinition,
-                    distractor: relatedDefinition,
-                    part_of_speech: partOfSpeech,
-                    difficulty,
-                    source,
-                    quality_score: 0.85, // High quality score since it's from a related word
-                    usage_count: 1
-                  })
-                  // Remove the onConflict for now to simplify
-                  // .onConflict(['word', 'distractor'])
-                  // .merge(['usage_count', 'quality_score']);
-                
-                console.log(`Successfully stored distractor from ${source} for word "${word}"`);
-              } catch (error) {
-                console.error('Error saving related word distractor:', error);
-                // Continue to next related word if there's an error
+          // If we don't have synonyms from WordsAPI, use associations
+          if (!wordDetails.synonyms || wordDetails.synonyms.length === 0) {
+            wordDetails.synonyms = associations.slice(0, 10);
+          } 
+          // Otherwise, combine them without duplicates
+          else {
+            const existingSynonyms = new Set(wordDetails.synonyms);
+            for (const assoc of associations) {
+              if (!existingSynonyms.has(assoc)) {
+                wordDetails.synonyms.push(assoc);
+                existingSynonyms.add(assoc);
+                // Limit to 15 total synonyms
+                if (wordDetails.synonyms.length >= 15) break;
               }
             }
           }
-        } catch (error) {
-          console.error(`Error fetching related word "${relatedWord}":`, error);
-          // Continue to next related word if there's an error
         }
+        
+        // Add data to metadata
+        wordDetails.metadata = {
+          ...wordDetails.metadata,
+          twinword: {
+            difficulty: twinwordData.difficulty,
+            associations: twinwordData.assoc_word,
+          }
+        };
       }
+    } catch (twinwordError) {
+      console.error(`Error enriching with Twinword data for "${word}":`, twinwordError);
+      // Continue with whatever data we have from WordsAPI
     }
+
+    return wordDetails;
+  } catch (error) {
+    console.error(`Error getting word details for "${word}":`, error);
+    // Return basic structure with minimal data
+    return {
+      word,
+      definitions: [{ definition: `A word with no available definition`, partOfSpeech: '' }],
+    };
+  }
+};
+
+/**
+ * Enhanced generateWrongOptions function to leverage Twinword API and word_distractors
+ */
+const generateWrongOptions = async (
+  supabase: any,
+  word: string,
+  correctDefinition: string,
+  partOfSpeech: string,
+  difficulty: WordDifficulty
+): Promise<string[]> => {
+  const wrongOptions: string[] = [];
+  const targetCount = 3; // We want 3 wrong options
+  
+  try {
+    // Strategy 1: Use stored distractors from word_distractors table
+    const { data: storedDistractors, error: distError } = await supabase
+      .from('word_distractors')
+      .select('distractor, quality_score, semantic_distance')
+      .eq('word', word)
+      .eq('part_of_speech', partOfSpeech)
+      .eq('correct_definition', correctDefinition)
+      .order('quality_score', { ascending: false })
+      .limit(targetCount);
     
-    // APPROACH 4: Use simplified direct fallbacks if we still need more options
-    if (wrongOptions.length < 3) {
-      usedApproaches.push("direct fallbacks");
-      
-      const fallbacks = [
-        `A different meaning than "${word}"`,
-        `Not related to ${partOfSpeech || 'the concept of'} "${word}"`,
-        `A ${difficulty} level term unrelated to "${word}"`,
-        `The opposite of "${word}"`,
-        `A concept from a different category than "${word}"`,
-        `A term with no connection to "${word}"`
-      ];
-      
-      // If we have part of speech info, add a specific fallback
-      if (partOfSpeech) {
-        switch(partOfSpeech.toLowerCase()) {
-          case 'noun':
-            fallbacks.push(`A different type of object or concept than "${word}"`);
-            break;
-          case 'verb':
-            fallbacks.push(`An action different from "${word}"`);
-            break;
-          case 'adjective':
-            fallbacks.push(`A quality or characteristic unlike "${word}"`);
-            break;
-          case 'adverb':
-            fallbacks.push(`A manner or method distinct from "${word}"`);
-            break;
-        }
-      }
-      
-      // Shuffle and add fallbacks until we have enough options
-      const shuffledFallbacks = shuffleArray(fallbacks);
-      
-      for (const fallback of shuffledFallbacks) {
-        if (wrongOptions.length >= 3) break;
-        if (!wrongOptions.includes(fallback)) {
-          wrongOptions.push(fallback);
+    if (!distError && storedDistractors && storedDistractors.length > 0) {
+      // Use stored high-quality distractors
+      for (const distractor of storedDistractors) {
+        if (!wrongOptions.includes(distractor.distractor) && 
+            !checkSimilarity(distractor.distractor, correctDefinition)) {
+          wrongOptions.push(distractor.distractor);
           
-          // Save this fallback distractor for future use
+          // Increment usage count
           try {
-            await supabase
-              .from('word_distractors')
-              .insert({
-                word,
-                correct_definition: correctDefinition,
-                distractor: fallback,
-                part_of_speech: partOfSpeech,
-                difficulty,
-                source: 'dynamic_fallback',
-                quality_score: 0.6, // Lower quality score since it's a generic fallback
-                usage_count: 1
-              })
-              // Remove the onConflict for now to simplify
-              // .onConflict(['word', 'distractor'])
-              // .merge(['usage_count']);
-            
-            console.log(`Successfully stored fallback distractor for word "${word}"`);
-          } catch (error) {
-            console.error('Error saving fallback distractor:', error);
+            await supabase.rpc('increment', { 
+              table_name: 'word_distractors',
+              column_name: 'usage_count',
+              row_id: distractor.id
+            });
+          } catch (e) {
+            console.warn('Failed to increment usage count:', e);
           }
         }
       }
+      
+      console.log(`Found ${wrongOptions.length} stored distractors for "${word}"`);
     }
     
-    // Log the approaches used for analytics
-    console.log(`Generated distractors for "${word}" using: ${usedApproaches.join(", ")}`);
+    // If we don't have enough stored distractors, try alternative definitions
+    if (wrongOptions.length < targetCount) {
+      // Get word details to find alternative definitions
+    const wordDetails = await getWordDetails(word);
     
-    return wrongOptions.slice(0, 3);
+      if (wordDetails.definitions.length > 1) {
+        // Filter definitions for the correct part of speech
+        const otherDefinitions = wordDetails.definitions
+          .filter((def, index) => {
+            // Assuming definitions array contains simple strings
+            return def !== correctDefinition;
+          });
+        
+        // Use other definitions as wrong options
+        for (const def of otherDefinitions) {
+          if (wrongOptions.length >= targetCount) break;
+          
+          // Ensure this distractor isn't too similar to correct definition
+          if (!checkSimilarity(def, correctDefinition) && 
+              !wrongOptions.includes(def)) {
+            wrongOptions.push(def);
+            
+            // Store this distractor for future use
+            try {
+              await supabase
+                .from('word_distractors')
+                .insert({
+                  word,
+                  correct_definition: correctDefinition,
+                  distractor: def,
+                  part_of_speech: partOfSpeech,
+                  difficulty,
+                  source: 'alternative_definition',
+                  quality_score: 0.8,
+                  semantic_distance: 0.3 // Medium distance since it's the same word
+                });
+            } catch (e) {
+              console.warn('Failed to store alternative definition distractor:', e);
+            }
+          }
+        }
+        
+        console.log(`Added ${wrongOptions.length} alternative definition distractors`);
+      }
+    }
+    
+    // Strategy 3: Use Twinword API for semantic associations
+    if (wrongOptions.length < targetCount) {
+      const twinwordData = await fetchFromTwinword(word, supabase);
+      
+      if (twinwordData && twinwordData.result_code === "200" && twinwordData.associations) {
+        const associations = sortByRelevance(twinwordData.associations);
+        
+        // Get definitions for associated words to use as distractors
+        for (const assocWord of associations) {
+          if (wrongOptions.length >= targetCount) break;
+          
+          try {
+            const assocDetails = await getWordDetails(assocWord);
+            
+            if (assocDetails.definitions && assocDetails.definitions.length > 0) {
+              // Get the most relevant definition
+              let assocDefinition = assocDetails.definitions[0];
+              
+              if (!checkSimilarity(assocDefinition, correctDefinition) && 
+                  !wrongOptions.includes(assocDefinition)) {
+                wrongOptions.push(assocDefinition);
+                
+                // Store this distractor
+                try {
+                  await supabase
+                    .from('word_distractors')
+                    .insert({
+                      word,
+                      correct_definition: correctDefinition,
+                      distractor: assocDefinition,
+                      part_of_speech: partOfSpeech,
+                      difficulty,
+                      source: 'twinword_association',
+                      quality_score: 0.9, // High quality as it's semantically related
+                      semantic_distance: 0.5 // Moderate distance
+                    });
+                } catch (e) {
+                  console.warn('Failed to store Twinword distractor:', e);
+                }
+              }
+            }
+          } catch (e) {
+            console.warn(`Failed to get details for associated word "${assocWord}":`, e);
+          }
+        }
+        
+        console.log(`Added ${wrongOptions.length} Twinword association distractors`);
+      }
+    }
+    
+    // Strategy 4: Fallback to generic distractors if we still don't have enough
+    if (wrongOptions.length < targetCount) {
+      // Get some generic distractors for the given part of speech
+      const genericDistractors = [
+        `Not a definition of ${word}`,
+        `The opposite meaning of ${word}`,
+        `A common misunderstanding of ${word}`
+      ];
+      
+      for (const distractor of genericDistractors) {
+        if (wrongOptions.length >= targetCount) break;
+        wrongOptions.push(distractor);
+      }
+      
+      console.log(`Added generic fallback distractors to reach ${wrongOptions.length} total distractors`);
+    }
+    
+    // Make sure we don't have more than the target count
+    while (wrongOptions.length > targetCount) {
+      wrongOptions.pop();
+    }
+    
+    // If somehow we still don't have enough (unlikely), add placeholders
+    while (wrongOptions.length < targetCount) {
+      wrongOptions.push(`Option ${wrongOptions.length + 1}`);
+    }
+    
+    return wrongOptions;
   } catch (error) {
-    console.error('Error in generateWrongOptions:', error);
+    console.error(`Error generating wrong options: ${error}`);
     
-    // Even in error cases, create word-specific fallbacks
+    // Return fallback options in case of error
     return [
-      `A concept unrelated to "${word}"`,
-      `A different type of ${wordDetails.partOfSpeech || 'word'} for ${difficulty} level`,
-      `A term from a different category than "${word}"`
+      `Not related to ${word}`,
+      `Incorrect meaning of ${word}`,
+      `Not a definition of ${word}`
     ];
   }
 };
 
 /**
- * Check if two text strings are too similar
+ * Checks if two strings are too similar based on word overlap
  */
-function checkSimilarity(text1: string, text2: string): boolean {
-  if (!text1 || !text2) return false;
+const checkSimilarity = (text1: string, text2: string): boolean => {
+  // Normalize and tokenize both texts
+  const normalize = (text: string) => {
+    return text.toLowerCase()
+      .replace(/[.,;:!?()"']/g, '') // Remove punctuation
+      .split(/\s+/)                  // Split by whitespace
+      .filter(word => word.length > 3); // Filter out short words
+  };
   
-  // Simple word overlap check
-  const words1 = text1.toLowerCase().split(/\W+/).filter(w => w.length > 3);
-  const words2 = text2.toLowerCase().split(/\W+/).filter(w => w.length > 3);
+  const words1 = normalize(text1);
+  const words2 = normalize(text2);
   
-  // Count common significant words
-  const commonWords = words1.filter(word => words2.includes(word));
+  // Count overlapping significant words
+  const overlap = words1.filter(word => words2.includes(word)).length;
   
-  // Too similar if more than 30% overlap for significant words
-  const overlapPercentage = commonWords.length / Math.min(words1.length, words2.length);
-  return overlapPercentage > 0.3;
-}
+  // Calculate similarity ratio based on the shorter text
+  const minLength = Math.min(words1.length, words2.length);
+  const similarityRatio = minLength > 0 ? overlap / minLength : 0;
+  
+  // Return true if texts are too similar (over 40% word overlap)
+  return similarityRatio > 0.4;
+};
 
 /**
- * Utility function to shuffle an array
+ * Shuffles an array in place using Fisher-Yates algorithm
  */
-function shuffleArray<T>(arr: T[]): T[] {
-  const newArray = [...arr];
-  for (let i = newArray.length - 1; i > 0; i--) {
+const shuffleArray = <T>(array: T[]): T[] => {
+  for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    [array[i], array[j]] = [array[j], array[i]];
   }
-  return newArray;
-}
-
-/**
- * Assign a word to a specific date with a specific difficulty
- */
-const assignWordToDate = async (date: string, difficulty: WordDifficulty) => {
-  const supabase = createSupabaseClient();
-  
-  try {
-    // Check if there's already a word for this date and difficulty
-    const { data: existingWords } = await supabase
-      .from('daily_words')
-      .select('id')
-      .eq('date', date)
-      .eq('difficulty', difficulty);
-    
-    if (existingWords && existingWords.length > 0) {
-      console.log(`Word already exists for ${date} with difficulty ${difficulty}`);
-      return;
-    }
-    
-    // Get a random word
-    const word = await getRandomWordByDifficulty(difficulty);
-    
-    // Get details about the word
-    const wordDetails = await getWordDetails(word);
-    
-    // Ensure we have at least one definition
-    if (!wordDetails.definitions || wordDetails.definitions.length === 0) {
-      throw new Error(`No definitions found for word: ${word}`);
-    }
-    
-    // Get the primary definition (first one)
-    const primaryDefinition = wordDetails.definitions[0];
-    
-    // Store the word in the database
-    const { data: wordRecord, error: wordError } = await supabase
-      .from('words')
-      .upsert({
-        word: wordDetails.word,
-        pronunciation: wordDetails.pronunciation,
-        part_of_speech: wordDetails.partOfSpeech,
-        definitions: wordDetails.definitions,
-        examples: wordDetails.examples,
-        synonyms: wordDetails.synonyms,
-        antonyms: wordDetails.antonyms,
-        metadata: wordDetails.metadata,
-      })
-      .select('id')
-      .single();
-    
-    if (wordError) {
-      throw new Error(`Error storing word: ${wordError.message}`);
-    }
-    
-    // Generate wrong options for the quiz
-    const wrongOptions = await generateWrongOptions(
-      primaryDefinition,
-      difficulty,
-      word,
-      wordDetails
-    );
-    
-    // Combine correct and wrong options
-    const allOptions = [primaryDefinition, ...wrongOptions];
-    
-    // Shuffle options
-    const shuffledOptions = shuffleArray(allOptions);
-    
-    // Find the index of the correct option
-    const correctOptionIndex = shuffledOptions.indexOf(primaryDefinition);
-    
-    // Store the daily word
-    const { error: dailyWordError } = await supabase
-      .from('daily_words')
-      .insert({
-        word_id: wordRecord.id,
-        date,
-        difficulty,
-        options: shuffledOptions,
-        correct_option_index: correctOptionIndex,
-      });
-    
-    if (dailyWordError) {
-      throw new Error(`Error storing daily word: ${dailyWordError.message}`);
-    }
-    
-    console.log(`Successfully assigned word "${word}" to ${date} with difficulty ${difficulty}`);
-  } catch (error) {
-    console.error(`Error assigning word to date ${date} with difficulty ${difficulty}:`, error);
-    throw error;
-  }
+  return array;
 };
 
-// Create a Supabase client
-const createSupabaseClient = () => {
-  const SUPABASE_URL = Deno.env.get('SUPABASE_URL') || 'https://ipljgsggnbdwaomjfuok.supabase.co';
-  const SUPABASE_ANON_KEY = Deno.env.get('SUPABASE_ANON_KEY') || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlwbGpnc2dnbmJkd2FvbWpmdW9rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEwODAxMDYsImV4cCI6MjA1NjY1NjEwNn0.Tpqr0Btu0AolHltIv2qa4dLNxd7_wr3eC8NF2oLbGRI';
-  const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
+// Estimates syllables for fallback if API data doesn't include it
+const estimateSyllables = (word: string): number => {
+  const phonetics = word.toLowerCase()
+    .replace(/(?:[^laeiouy]|ed|[^laeiouy]e)$/, '')
+    .replace(/^y/, '')
+    .match(/[aeiouy]{1,2}/g);
   
-  return createClient(
-    SUPABASE_URL,
-    SUPABASE_SERVICE_ROLE_KEY || SUPABASE_ANON_KEY
-  );
+  return phonetics ? phonetics.length : 1;
 };
 
-// HTTP handler for the Edge Function
+// HTTP request handler for the Edge Function
 serve(async (req) => {
   try {
-    // Parse query parameters from URL instead of trying to parse JSON body
+    // Parse request parameters
     const url = new URL(req.url);
     const startDate = url.searchParams.get('startDate');
     const endDate = url.searchParams.get('endDate');
     
+    // Validate required parameters
     if (!startDate || !endDate) {
-      return new Response(
-        JSON.stringify({
-          success: false,
-          message: 'Missing required parameters: startDate and endDate.',
-        }),
-        { status: 400, headers: { 'Content-Type': 'application/json' } }
-      );
+      return new Response(JSON.stringify({
+        status: 'error',
+        message: 'Missing required parameters: startDate and endDate'
+      }), {
+        headers: { 'Content-Type': 'application/json' },
+        status: 400
+      });
     }
     
+    // Execute main function
     const result = await seedWordsForDateRange(startDate, endDate);
     
-    return new Response(
-      JSON.stringify(result),
-      { status: result.success ? 200 : 500, headers: { 'Content-Type': 'application/json' } }
-    );
+    // Return result as JSON
+    return new Response(JSON.stringify({
+      status: result.success ? 'success' : 'error',
+      message: result.message,
+      dates: result.dates
+    }), {
+      headers: { 'Content-Type': 'application/json' },
+      status: result.success ? 200 : 500
+    });
   } catch (error) {
-    console.error('Error in seedWordsForDateRange handler:', error);
+    console.error('Error processing request:', error);
     
-    return new Response(
-      JSON.stringify({
-        success: false,
-        message: `Error: ${error.message}`,
-      }),
-      { status: 500, headers: { 'Content-Type': 'application/json' } }
-    );
+    // Return error as JSON
+    return new Response(JSON.stringify({
+      status: 'error',
+      message: error.message || 'An unexpected error occurred'
+    }), {
+      headers: { 'Content-Type': 'application/json' },
+      status: 500
+    });
   }
 }); 
