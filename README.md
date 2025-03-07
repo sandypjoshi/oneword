@@ -1,6 +1,6 @@
 # OneWord
 
-A mobile application that helps users expand their vocabulary by learning one new word each day.
+A vocabulary learning application that presents users with daily words of varying difficulty levels along with definitions, examples, and quizzes.
 
 ## Features
 
@@ -71,4 +71,74 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details. 
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Recent Improvements
+
+We've made several improvements to address specific concerns:
+
+1. **Enhanced Difficulty Calculation**: 
+   - Updated to give frequency data a higher weight (50%) in difficulty calculations
+   - Added SUBTLEX frequency data import capabilities
+   - Words now have more accurate difficulty ratings
+
+2. **Definition and Example Separation**:
+   - Added functionality to properly parse WordNet glosses
+   - Separated definitions from examples in the words table
+   - Improved data quality for learning experience
+
+3. **Word Metadata Clarification**:
+   - Added documentation for the word_metadata table
+   - Integrated metadata with difficulty calculations and other functions
+   - Added support for storing pronunciation, etymology, and other data
+
+## Scripts
+
+### Setting Up
+
+Install dependencies:
+```bash
+npm install
+```
+
+### Data Import and Processing
+
+- **Import WordNet Data** (if not already done):
+  ```bash
+  npm run import-wordnet
+  ```
+
+- **Import Word Frequency Data**:
+  ```bash
+  npm run populate-frequency
+  ```
+
+- **Extract and Separate Definitions and Examples**:
+  ```bash
+  npm run populate-definitions
+  ```
+
+### Supabase Functions
+
+After making changes to difficulty calculation or other edge functions:
+
+```bash
+cd supabase
+supabase functions deploy calculate-word-difficulty
+supabase functions deploy select-daily-words
+supabase functions deploy generate-distractors
+```
+
+## Database Structure
+
+- **words**: Core word data including difficulty levels and text content
+- **word_metadata**: Additional information like frequency, pronunciation, and etymology
+- **synsets**: WordNet synset data
+- **word_synsets**: Connections between words and their synsets
+- **daily_words**: Words selected for specific dates
+
+## Documentation
+
+For more details on specific components:
+
+- [Word Metadata Documentation](docs/word_metadata.md) 

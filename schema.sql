@@ -12,13 +12,63 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 
-CREATE SCHEMA IF NOT EXISTS "public";
+CREATE EXTENSION IF NOT EXISTS "pg_cron" WITH SCHEMA "pg_catalog";
 
 
-ALTER SCHEMA "public" OWNER TO "pg_database_owner";
+
+
+
+
+CREATE EXTENSION IF NOT EXISTS "pgsodium";
+
+
+
+
 
 
 COMMENT ON SCHEMA "public" IS 'standard public schema';
+
+
+
+CREATE EXTENSION IF NOT EXISTS "pg_graphql" WITH SCHEMA "graphql";
+
+
+
+
+
+
+CREATE EXTENSION IF NOT EXISTS "pg_stat_statements" WITH SCHEMA "extensions";
+
+
+
+
+
+
+CREATE EXTENSION IF NOT EXISTS "pgcrypto" WITH SCHEMA "extensions";
+
+
+
+
+
+
+CREATE EXTENSION IF NOT EXISTS "pgjwt" WITH SCHEMA "extensions";
+
+
+
+
+
+
+CREATE EXTENSION IF NOT EXISTS "supabase_vault" WITH SCHEMA "vault";
+
+
+
+
+
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA "extensions";
+
+
+
 
 
 
@@ -49,6 +99,19 @@ $$;
 
 
 ALTER FUNCTION "public"."get_daily_words"("target_date" "date") OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."update_updated_at_column"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    AS $$
+BEGIN
+    NEW.updated_at = CURRENT_TIMESTAMP;
+    RETURN NEW;
+END;
+$$;
+
+
+ALTER FUNCTION "public"."update_updated_at_column"() OWNER TO "postgres";
 
 
 CREATE OR REPLACE FUNCTION "public"."word_exists"("word_to_check" "text") RETURNS boolean
@@ -118,11 +181,43 @@ CREATE TABLE IF NOT EXISTS "public"."words" (
     "syllables" integer,
     "difficulty_score" double precision,
     "difficulty_level" "text",
-    "created_at" timestamp with time zone DEFAULT "now"()
+    "created_at" timestamp with time zone DEFAULT "now"(),
+    "definitions" "text"[],
+    "examples" "text"[],
+    "frequency" integer,
+    "updated_at" timestamp with time zone DEFAULT CURRENT_TIMESTAMP
 );
 
 
 ALTER TABLE "public"."words" OWNER TO "postgres";
+
+
+COMMENT ON TABLE "public"."words" IS 'Stores detailed information about words including definitions, examples, and difficulty metrics';
+
+
+
+COMMENT ON COLUMN "public"."words"."word" IS 'The word itself (primary key)';
+
+
+
+COMMENT ON COLUMN "public"."words"."pos" IS 'Part of speech (noun, verb, adj, adv)';
+
+
+
+COMMENT ON COLUMN "public"."words"."difficulty_score" IS 'Calculated difficulty score from 1-10';
+
+
+
+COMMENT ON COLUMN "public"."words"."definitions" IS 'Array of definitions for different senses of the word';
+
+
+
+COMMENT ON COLUMN "public"."words"."examples" IS 'Array of example sentences showing word usage';
+
+
+
+COMMENT ON COLUMN "public"."words"."frequency" IS 'Word frequency score based on usage data';
+
 
 
 CREATE OR REPLACE VIEW "public"."complete_word_view" AS
@@ -584,6 +679,22 @@ CREATE INDEX "idx_words_word" ON "public"."words" USING "btree" ("word");
 
 
 
+CREATE INDEX "words_difficulty_score_idx" ON "public"."words" USING "btree" ("difficulty_score");
+
+
+
+CREATE INDEX "words_frequency_idx" ON "public"."words" USING "btree" ("frequency");
+
+
+
+CREATE INDEX "words_pos_idx" ON "public"."words" USING "btree" ("pos");
+
+
+
+CREATE OR REPLACE TRIGGER "update_words_updated_at" BEFORE UPDATE ON "public"."words" FOR EACH ROW EXECUTE FUNCTION "public"."update_updated_at_column"();
+
+
+
 ALTER TABLE ONLY "public"."daily_words"
     ADD CONSTRAINT "daily_words_word_fkey" FOREIGN KEY ("word") REFERENCES "public"."words"("word") ON DELETE CASCADE;
 
@@ -696,6 +807,14 @@ CREATE POLICY "Allow service role to manage" ON "public"."words" USING (("auth".
 
 
 
+CREATE POLICY "Public words are viewable by everyone" ON "public"."words" FOR SELECT TO "authenticated", "anon" USING (true);
+
+
+
+CREATE POLICY "Service role can modify words" ON "public"."words" TO "service_role" USING (true) WITH CHECK (true);
+
+
+
 ALTER TABLE "public"."daily_words" ENABLE ROW LEVEL SECURITY;
 
 
@@ -723,10 +842,216 @@ ALTER TABLE "public"."word_synsets" ENABLE ROW LEVEL SECURITY;
 ALTER TABLE "public"."words" ENABLE ROW LEVEL SECURITY;
 
 
+
+
+ALTER PUBLICATION "supabase_realtime" OWNER TO "postgres";
+
+
+
+
+
 GRANT USAGE ON SCHEMA "public" TO "postgres";
 GRANT USAGE ON SCHEMA "public" TO "anon";
 GRANT USAGE ON SCHEMA "public" TO "authenticated";
 GRANT USAGE ON SCHEMA "public" TO "service_role";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -736,9 +1061,36 @@ GRANT ALL ON FUNCTION "public"."get_daily_words"("target_date" "date") TO "servi
 
 
 
+GRANT ALL ON FUNCTION "public"."update_updated_at_column"() TO "anon";
+GRANT ALL ON FUNCTION "public"."update_updated_at_column"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."update_updated_at_column"() TO "service_role";
+
+
+
 GRANT ALL ON FUNCTION "public"."word_exists"("word_to_check" "text") TO "anon";
 GRANT ALL ON FUNCTION "public"."word_exists"("word_to_check" "text") TO "authenticated";
 GRANT ALL ON FUNCTION "public"."word_exists"("word_to_check" "text") TO "service_role";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -904,6 +1256,30 @@ ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON TAB
 ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON TABLES  TO "anon";
 ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON TABLES  TO "authenticated";
 ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON TABLES  TO "service_role";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
