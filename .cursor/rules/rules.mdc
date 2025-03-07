@@ -4,7 +4,7 @@ globs:
 alwaysApply: true
 ---
 - Always check the project before adding new files to avoid duplicates & redundancy
-- Follow the user’s prompt **exactly**—no assumptions, extra features, or deviations.  
+- Follow the user's prompt **exactly**—no assumptions, extra features, or deviations.  
 - Ask for clarification if unsure about requirements—never guess.  
 - Outline a plan in pseudocode or natural language, confirm with the user, then execute.  
 - Use plain language—avoid jargon or overly complex phrasing.  
@@ -20,3 +20,4 @@ alwaysApply: true
 - Do not infer intent beyond the prompt—stick to explicit instructions.  
 - Reject out-of-scope requests politely. 
 - Follow design inputs from user and ask questions if needed. User is an expert UI UX designer.
+- **ALWAYS** check with the user before performing any destructive operations (DELETE, DROP, TRUNCATE) in the Supabase database using MCP. Explicitly show what would be deleted and request confirmation.
