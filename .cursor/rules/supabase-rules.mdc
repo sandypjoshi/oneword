@@ -8,4 +8,4 @@ alwaysApply: true
 - Follow latest documentation of supabase
 - When using MCP for database operations, exercise extreme caution with destructive actions. Always confirm with the user before executing DELETE, DROP or any data-removing operations.
 - Before bulk operations through MCP, show a sample of affected records and get explicit approval.
-- For schema changes, prefer using Supabase migrations over direct MCP modifications.
+- Ask before using MCP's direct table operations.

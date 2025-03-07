@@ -85,24 +85,36 @@ _Last Updated: March 7, 2025_
 ### Backend (Supabase)
 - Using anonymous sessions for the MVP with no authentication requirement
 - Device ID-based user tracking (implemented in `wordService` and `client.ts`)
-- Deployed Edge Functions for WordsAPI integration:
-  - `seedWordsForDateRange`: One-time function to populate words for dates (Jan 1, 2025 - Mar 3, 2025)
-  - `addWordForNextDay`: Daily function to add new words for next day
-  - Set up scheduled cron job in Supabase to run `addWordForNextDay` function at midnight daily
-- WordsAPI Key: 8cc3ff3281msh7ea7e190a1f4805p13cbdejsnb32d65962e66
+- Deployed Edge Functions for word selection and management:
+  - `generateDailyWords`: Selects words for each difficulty level using WordNet relationships and usage frequency
+  - `enrichWordData`: Enhances word data with Datamuse API for additional context and relationships
+  - Set up scheduled cron job in Supabase to run daily word selection at midnight UTC
 - Schema implemented with tables:
+  - `synsets`: Stores WordNet synsets (117,597 total synsets)
+  - `word_synsets`: Maps words to synsets (316.7k total mappings)
   - `words`: Stores detailed word information (definitions, examples, etc.)
   - `daily_words`: Maps words to dates and difficulty levels
   - `user_progress`: Tracks user interactions with words
   - `word_distractors`: Stores high-quality distractors for word quizzes
+- WordNet Data Integration:
+  - Total synsets: 117,597 (nouns: 81,426, verbs: 13,650, adjectives: 18,877, adverbs: 3,644)
+  - Total word-sense pairs: 207,016 unique pairs
+  - Total word-synset mappings: 316.7k (including all synonymous forms)
+  - Semantic relationships preserved (hypernyms, hyponyms, etc.)
 - Row Level Security implemented for data protection
-- Enhanced distractor generation using multiple strategies:
-  1. Stored high-quality distractors from a dedicated database table
-  2. Alternative definitions from the same word (different meanings)
-  3. Definitions from synonyms and antonyms of the word
-  4. Part-of-speech specific templates based on difficulty level
-  5. Smart templates using contextually relevant content
-  6. Quality scoring system to improve distractor selection over time
+- Word Selection Strategy:
+  1. Use WordNet hierarchical relationships to determine word complexity
+  2. Consider polysemy count (number of senses) for difficulty assessment
+  3. Analyze hypernym chain depth for conceptual complexity
+  4. Use word frequency data from WordNet
+  5. Balance part-of-speech distribution across selections
+- Distractor Generation Strategy:
+  1. Primary: WordNet semantic relationships (siblings, hypernyms, hyponyms)
+  2. Secondary: Datamuse API for contextually related terms
+  3. Tertiary: Alternative senses from the same word
+  4. Quality scoring based on semantic distance and usage frequency
+  5. Cache frequently used distractors for performance
+  6. Fallback to template-based generation for edge cases
 
 ### State Management
 - Zustand for global state (lightweight, flexible)
@@ -262,7 +274,7 @@ _Last Updated: March 7, 2025_
 
 #### **Backend (Supabase)**  
 - Tables: `words`, `daily_words`, `user_progress`, `word_distractors`.
-- Edge Functions implemented for WordsAPI integration
+- Edge Functions implemented for word selection and management
 - Each date is assigned a word for each level (beginner, intermediate, advanced)
 - seedWordsForDateRange function has populated words for dates from Jan 1 2025 to March 3 2025
 - addWordForNextDay function will add a new word each day at midnight
