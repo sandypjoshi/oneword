@@ -1,8 +1,11 @@
 ---
-description: 
+description: Guidelines for working with Supabase
 globs: 
 alwaysApply: true
 ---
 - DON'T USE placeholder for API Keys, USE keys you have or ask user.
 - User supabase CLI and curl to interact with our database when needed. If it fails, ask user to make changes manually on Supabase dashboard.
 - Follow latest documentation of supabase
+- When using MCP for database operations, exercise extreme caution with destructive actions. Always confirm with the user before executing DELETE, DROP or any data-removing operations.
+- Before bulk operations through MCP, show a sample of affected records and get explicit approval.
+- For schema changes, prefer using Supabase migrations over direct MCP modifications.
