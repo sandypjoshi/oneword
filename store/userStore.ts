@@ -8,29 +8,31 @@ import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { WordDifficulty } from '../lib/api/wordsAPI';
 
-// Define user state interface
+interface UserSettings {
+  darkMode: 'light' | 'dark' | 'system';
+  wordDifficulty: 'beginner' | 'intermediate' | 'advanced';
+  notifications: boolean;
+}
+
 interface UserState {
   deviceId: string | null;
   difficulty: WordDifficulty;
   streak: number;
   totalWordsLearned: number;
   daysActive: number;
-  lastActive: string | null; // ISO date string
+  lastActive: Date | null;
   favorites: string[]; // Array of word IDs
-  settings: {
-    notifications: boolean;
-    darkMode: 'system' | 'light' | 'dark';
-  };
+  settings: UserSettings;
   
   // Actions
-  setDeviceId: (deviceId: string) => void;
+  setDeviceId: (id: string) => void;
   setDifficulty: (difficulty: WordDifficulty) => void;
   incrementStreak: () => void;
   resetStreak: () => void;
   incrementWordsLearned: () => void;
   updateLastActive: () => void;
   toggleFavorite: (wordId: string) => void;
-  updateSettings: (settings: Partial<UserState['settings']>) => void;
+  updateSettings: (settings: Partial<UserSettings>) => void;
 }
 
 /**
@@ -48,12 +50,13 @@ export const useUserStore = create<UserState>()(
       lastActive: null,
       favorites: [],
       settings: {
-        notifications: true,
         darkMode: 'system',
+        wordDifficulty: 'intermediate',
+        notifications: true,
       },
       
       // Set the device ID
-      setDeviceId: (deviceId: string) => set({ deviceId }),
+      setDeviceId: (id: string) => set({ deviceId: id }),
       
       // Update user's chosen difficulty level
       setDifficulty: (difficulty: WordDifficulty) => set({ difficulty }),
@@ -70,16 +73,7 @@ export const useUserStore = create<UserState>()(
       
       // Update the last active date and potentially increment days active
       updateLastActive: () => {
-        const today = new Date().toISOString().split('T')[0];
-        const lastActive = get().lastActive;
-        
-        // If this is the first time or a different day than last active
-        if (!lastActive || lastActive !== today) {
-          set({
-            lastActive: today,
-            daysActive: get().daysActive + 1,
-          });
-        }
+        set({ lastActive: new Date() });
       },
       
       // Toggle a word in the favorites list
@@ -96,7 +90,7 @@ export const useUserStore = create<UserState>()(
       },
       
       // Update user settings
-      updateSettings: (newSettings: Partial<UserState['settings']>) => {
+      updateSettings: (newSettings: Partial<UserSettings>) => {
         set((state) => ({
           settings: {
             ...state.settings,
@@ -108,6 +102,10 @@ export const useUserStore = create<UserState>()(
     {
       name: 'oneword-user-storage',
       storage: createJSONStorage(() => AsyncStorage),
+      partialize: (state) => ({
+        deviceId: state.deviceId,
+        settings: state.settings,
+      }),
     }
   )
 );
