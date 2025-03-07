@@ -1,13 +1,11 @@
-// Polyfill for FinalizationRegistry - adding this before any imports
-if (typeof global !== 'undefined') {
-  if (typeof global.FinalizationRegistry === 'undefined') {
-    global.FinalizationRegistry = class {
-      constructor() {}
-      register() {}
-      unregister() {}
-    };
-  }
-}
+/**
+ * Entry point for the OneWord application
+ * Load polyfills before anything else
+ */
 
-// Import the entry point
+// Load polyfills for FinalizationRegistry and WeakRef
+// This must be done before importing any other modules
+import './global';
+
+// Import the main entry point for the app
 import 'expo-router/entry'; 

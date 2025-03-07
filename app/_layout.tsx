@@ -1,16 +1,17 @@
 import React from 'react';
 import { Stack } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
+import { View } from 'react-native';
+import { ThemeProvider } from '../src/theme/ThemeProvider';
 
-// Setting initialRouteName to help Expo Router identify the initial route
-export const unstable_settings = {
-  initialRouteName: "index",
-};
-
-// Simple default export with minimal code
+// Root layout
 export default function RootLayout() {
   return (
-    <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="index" />
-    </Stack>
+    <ThemeProvider defaultTheme="system">
+      <View style={{ flex: 1 }}>
+        <StatusBar style="auto" />
+        <Stack screenOptions={{ headerShown: true }} />
+      </View>
+    </ThemeProvider>
   );
 } 

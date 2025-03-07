@@ -3,7 +3,7 @@
 ---
 
 ## IMPLEMENTATION PLAN
-_Last Updated: March 6, 2025_
+_Last Updated: March 7, 2025_
 
 ### Phase 1: Project Setup & Architecture (Week 1)
 - [x] Initialize Expo + React Native project
@@ -14,13 +14,14 @@ _Last Updated: March 6, 2025_
   - [x] Implement daily word updates function
   - [x] Set up automated cron job for daily word updates at midnight UTC
   - [x] Implement enhanced distractor generation for word quizzes
-- [ ] Establish design system architecture
-  - [ ] Create design tokens (colors, typography, spacing)
-  - [ ] Implement theme provider (light/dark mode)
-  - [ ] Build core UI components based on Figma designs
-- [ ] Configure state management with Zustand
+- [x] Establish design system architecture
+  - [x] Create design tokens (colors, typography, spacing)
+  - [x] Implement theme provider (light/dark mode)
+  - [x] Build core UI components based on Figma designs
+- [x] Configure state management with Zustand
 - [ ] Set up caching strategy for offline support
-- [ ] Implement basic navigation structure with Expo Router
+- [x] Implement basic navigation structure with Expo Router
+- [x] Optimize project by removing unnecessary dependencies and bloat
 
 ### Phase 2: Core Features - MVP (Weeks 2-3)
 - [ ] Splash Screen & App Loading
@@ -105,19 +106,34 @@ _Last Updated: March 6, 2025_
 
 ### State Management
 - Zustand for global state (lightweight, flexible)
-- React Query for API data fetching and caching
+  - Implemented `userStore` for managing user preferences and data
+  - Implemented `wordStore` for handling daily words and user interactions
 - AsyncStorage for persistent local storage
 
 ### UI & Design System
 - Follow Figma designs provided by user
 - Component-based architecture with clear separation
 - Support for both light/dark mode from initial build
-- Design tokens for colors, typography, spacing
+- Implemented React Context-based theme provider:
+  - Automatic light/dark mode detection based on device settings
+  - Manual theme switching capability (light, dark, system)
+  - Semantic color system with background, text, and brand colors
+  - Consistent spacing scale and typography system
+- Implemented theme-aware components:
+  - `Box`: Layout component with automatic spacing and color support
+  - `Text`: Typography component with text variants (h1, body1, etc.)
+  - Custom Button and Card components using theme values
 
 ### Animation Strategy
-- Framer Motion for complex animations
 - React Native Animated for simple UI transitions
 - Haptic feedback for enhanced UX
+
+### Performance Optimization
+- Removed unnecessary UI libraries (GlueStack)
+- Eliminated CSS and styling bloat
+- Reduced dependency count to improve bundle size
+- Simplified project structure
+- Implemented lean theme context with minimal overhead
 
 ### Testing Strategy
 - Jest for unit testing
@@ -128,6 +144,32 @@ _Last Updated: March 6, 2025_
 ---
 
 ## PROGRESS LOG
+
+### March 8, 2025
+- Optimized project to reduce bloat and improve performance:
+  - Removed unnecessary dependencies (NativeWind, Tailwind, React Query, etc.)
+  - Eliminated unused files and configurations
+  - Reduced bundle size by removing external UI libraries
+- Implemented a lightweight theme system:
+  - Created React Context-based ThemeProvider with light/dark mode support
+  - Developed semantic color system with automatic mode switching
+  - Created theme-aware components (Box, Text) for consistent styling
+  - Added comprehensive documentation for the theme system
+- Restructured project for better maintainability:
+  - Removed duplicate project folders
+  - Simplified global polyfills
+  - Organized code into a cleaner folder structure
+- Updated home screen to use the new theme components
+
+### March 7, 2025
+- Simplified app architecture by removing GlueStack UI
+- Created basic UI components using React Native primitives:
+  - Implemented Button component with variants (primary, secondary, outline)
+  - Implemented Card component with variants (elevated, outlined, filled)
+- Set up simple home screen layout to demonstrate component usage
+- Removed tab navigation structure for a simplified app flow
+- Configured basic React Native styling using StyleSheet
+- Updated app layout to use plain React Native components
 
 ### March 6, 2025
 - Implemented enhanced distractor generation system for word quizzes:
@@ -170,8 +212,9 @@ _Last Updated: March 6, 2025_
 
 - Caching strategy details (TTL for word data)
 - Specific animation patterns for transitions
-- Design system component list based on Figma
+- ~~Design system component list based on Figma~~
 - ~~How to generate high-quality wrong options for quizzes, beyond hardcoded mock data~~
+- Component optimization strategies for large word lists
 
 ---
 
@@ -226,20 +269,69 @@ _Last Updated: March 6, 2025_
 - Preload 7 days of words at launch; cache data to minimize API calls.  
 
 #### **State Management**  
-- Use React Native state management (e.g., Zustand, Redux, Context API) for UI interactions.  
-- Observe Supabase data via hooks or subscriptions.  
+- Use Zustand for global state management
+- Implement React Context for theme management
+- Use AsyncStorage for persistent local storage
+- Observe Supabase data via hooks
 
 #### **Animations**  
-- Shake for wrong answers, smooth transitions for date navigation.  
-- Use Framer Motion for performant animations.  
+- Use React Native Animated for transitions and animations
+- Implement shake animation for wrong answers
+- Add smooth transitions for date navigation
 
 #### **Error Handling**  
 - Show "Offline" banner if no internet; skip invalid word data.  
 - Implement retry mechanisms for failed API requests.  
 
 #### **Platform Considerations**  
-- Ensure cross-platform compatibility for iOS and Android.  
-- Use react-native-gesture-handler for swipe interactions.  
-- Implement native push notifications (expo-notifications or Firebase).  
-- Dynamic theming support (light/dark mode).
+- Ensure cross-platform compatibility for iOS and Android.
+- Use react-native-gesture-handler for swipe interactions.
+- Implement native push notifications (expo-notifications or Firebase).
+- Dynamic theming support with ThemeProvider.
+
+---
+
+## **DEVELOPMENT GUIDELINES**
+
+### **UI Component Development**
+- **Use theme-aware and custom components**:
+  - Access theme values with the `useTheme` hook
+  - Use the `Text` component for typography styles
+  - Use the `Box` component for layout with theme-aware spacing
+  - Utilize custom components in the components/common directory
+  - Create new components as needed based on design requirements
+
+- **Proper Component Hierarchy**:
+  - Organize components logically in directories
+  - Keep related components together
+  - Use index files to export components
+  - Wrap app with `ThemeProvider` at the root level
+
+- **Component Selection Process**:
+  1. Use theme-aware components for basic UI elements
+  2. Use custom components from components/common for consistent UI patterns
+  3. Create new custom components when needed, following established patterns
+
+- **UI Consistency**:
+  - Access theme values through the `useTheme` hook
+  - Never hardcode colors or spacing values
+  - Follow naming conventions for component props and style properties
+  - Maintain consistent prop patterns across similar components
+  - Test all components in both light and dark modes
+
+### **Theme System Usage**
+- **Color System**:
+  - Use semantic color names: `colors.background.primary`, `colors.text.secondary`
+  - Access colors through the theme: `const { colors } = useTheme()`
+  - Support both light and dark themes for all UI elements
+
+- **Typography System**:
+  - Use predefined text variants: `<Text variant="h1">`, `<Text variant="body1">`
+  - Apply consistent text styles across the app
+  - Avoid using raw `<Text>` components without variants
+
+- **Spacing System**:
+  - Use theme spacing values: `spacing.md`, `spacing.lg`
+  - Apply consistent spacing through the `Box` component
+  - Use semantic spacing props: `padding="md"`, `marginTop="lg"`
 
