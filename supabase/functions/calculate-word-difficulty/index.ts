@@ -10,10 +10,265 @@ const supabaseClient = createClient(
   Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
 );
 
+// Datamuse API configuration
+const DATAMUSE_BASE_URL = 'https://api.datamuse.com/words';
+const DATAMUSE_RATE_LIMIT = 1000; // 1000ms between calls
+let lastDatamuseCall = 0;
+
+// Cache for Datamuse API results to avoid duplicate calls
+const datamuseCache = new Map();
+
+// Function to call Datamuse API with rate limiting
+async function callDatamuseApi(params: Record<string, string>): Promise<any> {
+  // Generate a cache key from the parameters
+  const cacheKey = JSON.stringify(params);
+  
+  // Check cache first
+  if (datamuseCache.has(cacheKey)) {
+    console.log(`[CACHE] Using cached Datamuse result for ${cacheKey}`);
+    return datamuseCache.get(cacheKey);
+  }
+  
+  // Build URL with parameters
+  const queryString = Object.entries(params)
+    .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+    .join('&');
+  
+  const url = `${DATAMUSE_BASE_URL}?${queryString}`;
+  
+  // Implement rate limiting
+  const now = Date.now();
+  const timeSinceLastCall = now - lastDatamuseCall;
+  
+  if (timeSinceLastCall < DATAMUSE_RATE_LIMIT) {
+    const waitTime = DATAMUSE_RATE_LIMIT - timeSinceLastCall;
+    console.log(`[DATAMUSE] Rate limiting - waiting ${waitTime}ms`);
+    await new Promise(resolve => setTimeout(resolve, waitTime));
+  }
+  
+  try {
+    console.log(`[DATAMUSE] Calling API: ${url}`);
+    lastDatamuseCall = Date.now();
+    
+    const response = await fetch(url);
+    
+    if (!response.ok) {
+      throw new Error(`Datamuse API returned status ${response.status}`);
+    }
+    
+    const data = await response.json();
+    
+    // Store in cache
+    datamuseCache.set(cacheKey, data);
+    
+    return data;
+  } catch (error) {
+    console.error(`[DATAMUSE] API call failed: ${error.message}`);
+    throw error;
+  }
+}
+
+// Get comprehensive word data from Datamuse API
+async function getDatamuseWordData(word: string): Promise<{
+  frequency: number,
+  syllables: number,
+  tags: string[],
+  score: number
+}> {
+  try {
+    // Get word data with frequency, syllable count, and part of speech
+    const data = await callDatamuseApi({
+      'sp': word,
+      'md': 'fps', // f = frequency, p = parts of speech, s = syllables
+      'max': '1'
+    });
+    
+    if (!data || data.length === 0) {
+      console.log(`[DATAMUSE] No data found for word "${word}"`);
+      return {
+        frequency: 0.5, // Default mid-range
+        syllables: estimateSyllables(word),
+        tags: [],
+        score: 0.5
+      };
+    }
+    
+    const wordData = data[0];
+    
+    // Extract frequency metadata (format: f:123.45)
+    let frequency = 0.5; // Default
+    const freqTag = wordData.tags?.find((tag: string) => tag.startsWith('f:'));
+    if (freqTag) {
+      const freqValue = parseFloat(freqTag.substring(2));
+      // Convert Datamuse frequency to our scale (higher value = more difficult)
+      // Datamuse f: values range from ~0 to ~7 for common to rare
+      const MAX_FREQ = 7;
+      const normalizedFreq = Math.min(Math.log(freqValue + 1) / Math.log(MAX_FREQ + 1), 1);
+      // Invert: higher value = more difficult (less frequent)
+      frequency = 1 - normalizedFreq;
+    }
+    
+    // Extract syllable count
+    const syllables = wordData.numSyllables || estimateSyllables(word);
+    
+    // Extract part of speech tags
+    const posTags = wordData.tags?.filter((tag: string) => !tag.includes(':')) || [];
+    
+    return {
+      frequency,
+      syllables,
+      tags: posTags,
+      score: wordData.score || 0
+    };
+  } catch (error) {
+    console.error(`[DATAMUSE] Error getting data for word "${word}": ${error.message}`);
+    
+    // Return fallback values
+    return {
+      frequency: 0.5,
+      syllables: estimateSyllables(word),
+      tags: [],
+      score: 0.5
+    };
+  }
+}
+
+// Calculate syllables when not available from API
+function estimateSyllables(word: string): number {
+  const vowels = ['a', 'e', 'i', 'o', 'u', 'y'];
+  let count = 0;
+  let prevIsVowel = false;
+  
+  for (const char of word.toLowerCase()) {
+    const isVowel = vowels.includes(char);
+    if (isVowel && !prevIsVowel) {
+      count++;
+    }
+    prevIsVowel = isVowel;
+  }
+  
+  // Handle special cases
+  if (count === 0) count = 1;
+  if (word.endsWith('e') && count > 1) count--;
+  
+  return count;
+}
+
+// Default thresholds for difficulty levels
+const DIFFICULTY_THRESHOLDS = {
+  beginner: 0.35,    // 0.0 - 0.35
+  intermediate: 0.65 // 0.35 - 0.65
+  // advanced: > 0.65
+};
+
+// Calculate comprehensive difficulty score
+async function calculateDifficulty(word: string, customThresholds?: Record<string, number>): Promise<{
+  score: number,
+  level: string,
+  metrics: Record<string, number>
+}> {
+  // Use custom thresholds if provided, otherwise use defaults
+  const thresholds = customThresholds || DIFFICULTY_THRESHOLDS;
+  
+  try {
+    // Get data from Datamuse API
+    const wordData = await getDatamuseWordData(word);
+    
+    // Length score (normalized by max reasonable length of 15)
+    const lengthScore = Math.min(word.length / 15, 1);
+    
+    // Syllable score (normalized by max reasonable syllables of 7)
+    const syllableScore = Math.min(wordData.syllables / 7, 1);
+    
+    // Part of speech complexity factor (nouns easier, adjectives harder, etc.)
+    let posComplexity = 0.5; // Default mid-range
+    
+    if (wordData.tags.includes('n')) posComplexity = 0.3; // Nouns (easier)
+    else if (wordData.tags.includes('v')) posComplexity = 0.5; // Verbs (medium)
+    else if (wordData.tags.includes('adj')) posComplexity = 0.7; // Adjectives (harder)
+    else if (wordData.tags.includes('adv')) posComplexity = 0.8; // Adverbs (harder)
+    
+    // Check for hyphenation (increases difficulty)
+    const hyphenationFactor = word.includes('-') ? 0.1 : 0;
+    
+    // Check for uncommon letter combinations
+    const uncommonLettersFactor = (word.includes('z') || word.includes('x') || 
+                                  word.includes('qu') || word.includes('ph')) ? 0.1 : 0;
+    
+    // Calculate weighted score
+    // Frequency is most important (50%)
+    // Syllables and length together (30%)
+    // Other factors (20%)
+    const score = (
+      (wordData.frequency * 0.5) + 
+      (syllableScore * 0.15) + 
+      (lengthScore * 0.15) + 
+      (posComplexity * 0.1) + 
+      (hyphenationFactor * 0.05) + 
+      (uncommonLettersFactor * 0.05)
+    );
+    
+    // Ensure score is between 0 and 1
+    const finalScore = Math.min(Math.max(score, 0), 1);
+    
+    // Determine difficulty level
+    let level = 'beginner';
+    if (finalScore > thresholds.intermediate) {
+      level = 'advanced';
+    } else if (finalScore > thresholds.beginner) {
+      level = 'intermediate';
+    }
+    
+    return {
+      score: finalScore,
+      level,
+      metrics: {
+        frequency: wordData.frequency,
+        syllables: syllableScore,
+        length: lengthScore,
+        posComplexity,
+        hyphenation: hyphenationFactor,
+        uncommonLetters: uncommonLettersFactor
+      }
+    };
+  } catch (error) {
+    console.error(`[ERROR] Error calculating difficulty for "${word}": ${error.message}`);
+    
+    // Fallback to a simple calculation
+    const lengthScore = Math.min(word.length / 15, 1);
+    const syllables = estimateSyllables(word);
+    const syllableScore = Math.min(syllables / 7, 1);
+    
+    // Simple score based on length and syllables
+    const score = (lengthScore * 0.5) + (syllableScore * 0.5);
+    
+    // Determine difficulty level
+    let level = 'beginner';
+    if (score > thresholds.intermediate) {
+      level = 'advanced';
+    } else if (score > thresholds.beginner) {
+      level = 'intermediate';
+    }
+    
+    return {
+      score,
+      level,
+      metrics: {
+        frequency: 0.5,
+        syllables: syllableScore,
+        length: lengthScore,
+        posComplexity: 0.5,
+        hyphenation: 0,
+        uncommonLetters: 0
+      }
+    };
+  }
+}
+
 Deno.serve(async (req) => {
   try {
     // Parse request body
-    const { word, includeFactors = false } = await req.json();
+    const { word, includeFactors = false, thresholds } = await req.json();
     
     if (!word) {
       return new Response(
@@ -39,117 +294,41 @@ Deno.serve(async (req) => {
       .eq('word', word.toLowerCase())
       .maybeSingle();
     
-    if (wordError || !wordData) {
-      return new Response(
-        JSON.stringify({ error: `Word "${word}" not found in database` }),
-        { headers: { 'Content-Type': 'application/json' }, status: 404 }
-      );
+    // Calculate difficulty score
+    const difficultyResult = await calculateDifficulty(word, thresholds);
+    
+    // Update the word in the database if it exists
+    if (wordData?.id) {
+      await supabaseClient
+        .from('words')
+        .update({
+          difficulty_score: difficultyResult.score,
+          difficulty_level: difficultyResult.level
+        })
+        .eq('id', wordData.id);
     }
     
-    // Get related synsets for this word
-    const { data: wordSynsets, error: synsetError } = await supabaseClient
-      .from('word_synsets')
-      .select('synset_id, synsets:synset_id(id, definition, pos, domain)')
-      .eq('word_id', wordData.id);
-      
-    if (synsetError) {
-      console.error('Error fetching synsets:', synsetError);
-    }
-    
-    // Get additional metadata if available
-    const { data: metadata } = await supabaseClient
-      .from('word_metadata')
-      .select('*')
-      .eq('word', word.toLowerCase())
-      .maybeSingle();
-    
-    // Check if we already have a calculated difficulty score
-    if (wordData.difficulty_score !== null && wordData.difficulty_level) {
-      // Return existing difficulty score if already calculated
-      const result: any = {
-        word: wordData.word,
-        score: wordData.difficulty_score,
-        level: wordData.difficulty_level
-      };
-      
-      // Include factors if requested and recalculate them for display
-      if (includeFactors) {
-        // Calculate factors for display only
-        const lengthScore = calculateLengthScore(wordData.word);
-        const syllableScore = calculateSyllableScore(wordData.word);
-        const polysemyScore = calculatePolysemyScore(wordData.polysemy || (wordSynsets?.length || 1));
-        const frequencyScore = calculateFrequencyScore(wordData, metadata);
-        const domainScore = calculateDomainScore(wordSynsets?.map(ws => ws.synsets) || []);
-        
-        result.factors = {
-          length: { value: wordData.word.length, score: lengthScore },
-          syllables: { value: estimateSyllableCount(wordData.word), score: syllableScore },
-          polysemy: { value: wordData.polysemy || (wordSynsets?.length || 1), score: polysemyScore },
-          frequency: { value: wordData.frequency, score: frequencyScore },
-          domain: { value: null, score: domainScore }
-        };
-      }
-      
-      return new Response(
-        JSON.stringify(result),
-        { headers: { 'Content-Type': 'application/json' } }
-      );
-    }
-    
-    // Calculate difficulty factors
-    const lengthScore = calculateLengthScore(wordData.word);
-    const syllableScore = calculateSyllableScore(wordData.word);
-    const polysemyScore = calculatePolysemyScore(wordData.polysemy || (wordSynsets?.length || 1));
-    const frequencyScore = calculateFrequencyScore(wordData, metadata);
-    const domainScore = calculateDomainScore(wordSynsets?.map(ws => ws.synsets) || []);
-    
-    // Calculate composite score with weights
-    const score = (
-      0.15 * lengthScore +         // Reduced from 0.30
-      0.15 * syllableScore +       // Reduced from 0.25
-      0.10 * (1 - polysemyScore) + // Reduced from 0.20
-      0.50 * (1 - frequencyScore) + // Increased from 0.15 - now the dominant factor
-      0.10 * domainScore
-    );
-    
-    // Determine difficulty level
-    const level = getDifficultyLevel(score);
-    
-    // Update word difficulty in database
-    await supabaseClient
-      .from('words')
-      .update({
-        difficulty_score: score,
-        difficulty_level: level,
-        updated_at: new Date().toISOString()
-      })
-      .eq('id', wordData.id);
-    
-    // Create result object
-    const result: any = {
-      word: wordData.word,
-      score: Math.round(score * 100) / 100, // Round to 2 decimal places
-      level
+    // Prepare response
+    const response: any = {
+      word,
+      score: difficultyResult.score,
+      level: difficultyResult.level
     };
     
-    // Include factor details if requested
+    // Include additional metrics if requested
     if (includeFactors) {
-      result.factors = {
-        length: { value: wordData.word.length, score: lengthScore },
-        syllables: { value: estimateSyllableCount(wordData.word), score: syllableScore },
-        polysemy: { value: wordData.polysemy || (wordSynsets?.length || 1), score: polysemyScore },
-        frequency: { value: wordData.frequency, score: frequencyScore },
-        domain: { value: null, score: domainScore }
-      };
+      response.factors = difficultyResult.metrics;
     }
     
     return new Response(
-      JSON.stringify(result),
+      JSON.stringify(response),
       { headers: { 'Content-Type': 'application/json' } }
     );
   } catch (error) {
+    console.error(`[ERROR] ${error.message}`);
+    
     return new Response(
-      JSON.stringify({ error: (error as Error).message }),
+      JSON.stringify({ error: error.message }),
       { headers: { 'Content-Type': 'application/json' }, status: 500 }
     );
   }

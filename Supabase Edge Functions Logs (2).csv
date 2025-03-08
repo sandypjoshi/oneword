@@ -1,0 +1,215 @@
+﻿"event_message","event_type","function_id","id","level","timestamp"
+"[DEBUG] No words selected for 2025-03-25
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","8ff10a39-4fe0-4456-891c-da087bf23177","log","1741448482417751"
+"[DEBUG] No words to insert for date 2025-03-25
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","1036bf32-6c27-45cf-a4e1-8e8fa2775aeb","log","1741448482417528"
+"[DEBUG] Total selected words: 0
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","4c37f1b4-3fad-4678-aed7-6ec6a269a6b5","log","1741448482417378"
+"[ERROR] Error fetching random words: {
+  code: "PGRST100",
+  details: `unexpected '(' expecting letter, digit, "-", "->>", "->", delimiter (.), "," or end of input`,
+  hint: null,
+  message: '"failed to parse order (RANDOM().asc)" (line 1, column 7)'
+}
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","c2f4bb18-8318-4f24-9f1a-84df682b87eb","error","1741448482417180"
+"[DEBUG] Selecting a word for difficulty level: advanced
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","c70ea0a5-ba3e-4bcf-a2a0-fb4eb2da6bb4","log","1741448482415922"
+"[ERROR] Error fetching random words: {
+  code: "PGRST100",
+  details: `unexpected '(' expecting letter, digit, "-", "->>", "->", delimiter (.), "," or end of input`,
+  hint: null,
+  message: '"failed to parse order (RANDOM().asc)" (line 1, column 7)'
+}
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","549be26a-2ea1-43f8-97b1-976d4e12f45f","error","1741448482415726"
+"[DEBUG] Selecting a word for difficulty level: intermediate
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","9c7c752c-c212-4598-96b7-ebec26962103","log","1741448482415007"
+"[ERROR] Error fetching random words: {
+  code: "PGRST100",
+  details: `unexpected '(' expecting letter, digit, "-", "->>", "->", delimiter (.), "," or end of input`,
+  hint: null,
+  message: '"failed to parse order (RANDOM().asc)" (line 1, column 7)'
+}
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","24447aca-9744-440f-915e-6dafe14e675f","error","1741448482414813"
+"[DEBUG] Selecting a word for difficulty level: beginner
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","a0d1fd2b-7f45-4f49-b10b-ffc540b4ff08","log","1741448482414310"
+"[DEBUG] Found 3 recently used words to exclude
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","c42d656a-176a-4078-8cc1-43f59682cb97","log","1741448482414029"
+"[DEBUG] Checking for recently used words since 2025-02-23
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","15a9fdd7-a1ae-4de9-9a78-498f91d8f8b3","log","1741448477427719"
+"[DEBUG] Found 0 existing words for date 2025-03-25
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","3bceb77d-58d2-4f96-923f-c20c4293f339","log","1741448477427491"
+"[DEBUG] selectWordsForDate called for date: 2025-03-25, force: true
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","0367d786-8e51-411a-8859-380a6c834514","log","1741448477425689"
+"[DEBUG] Processing date: 2025-03-25
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","2cbe9bc6-eafd-4fb0-a632-a0ac8db44bb2","log","1741448477425515"
+"[DEBUG] Processing request for date: 2025-03-25, days: 1, force: true
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","e801e048-ab45-4d09-85f7-910605faf3b2","log","1741448477425338"
+"booted (time: 28ms)","Boot","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","ad779aee-bf62-459f-9df4-a71521bdcf6d","log","1741448477425102"
+"[DEBUG] No words selected for 2025-03-21
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","8022a663-ccad-4b52-8fbc-813ac585abf1","log","1741448361883845"
+"[DEBUG] No words to insert for date 2025-03-21
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","dddd0714-5d3d-4258-970b-196c44b7652e","log","1741448361883599"
+"[DEBUG] Total selected words: 0
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","f5f03f1f-2376-4a41-9962-01d792238099","log","1741448361883448"
+"[ERROR] Error fetching random words: {
+  code: "PGRST100",
+  details: `unexpected '(' expecting letter, digit, "-", "->>", "->", delimiter (.), "," or end of input`,
+  hint: null,
+  message: '"failed to parse order (RANDOM().asc)" (line 1, column 7)'
+}
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","171a20b7-dc22-457f-9bbf-ab896e4563c2","error","1741448361883266"
+"[DEBUG] Selecting a word for difficulty level: advanced
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","ade4b210-464e-4ba3-966e-250c7ac33794","log","1741448361880026"
+"[ERROR] Error fetching random words: {
+  code: "PGRST100",
+  details: `unexpected '(' expecting letter, digit, "-", "->>", "->", delimiter (.), "," or end of input`,
+  hint: null,
+  message: '"failed to parse order (RANDOM().asc)" (line 1, column 7)'
+}
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","b431aa0b-1284-40c7-a1c2-78bf8dc1d150","error","1741448361879826"
+"[DEBUG] Selecting a word for difficulty level: intermediate
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","efdc0fd6-4f90-4b23-a231-b2e52ab2c212","log","1741448361874214"
+"[ERROR] Error fetching random words: {
+  code: "PGRST100",
+  details: `unexpected '(' expecting letter, digit, "-", "->>", "->", delimiter (.), "," or end of input`,
+  hint: null,
+  message: '"failed to parse order (RANDOM().asc)" (line 1, column 7)'
+}
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","e6738865-2ad4-4b65-9643-b6c41203bf1e","error","1741448361874002"
+"[DEBUG] Selecting a word for difficulty level: beginner
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","ace5d2ac-0f9f-45ab-8313-a2fdf03ee94b","log","1741448361869070"
+"[DEBUG] Found 3 recently used words to exclude
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","4252adcf-6792-47ef-990b-dc58450a99b4","log","1741448361868839"
+"[DEBUG] Checking for recently used words since 2025-02-19
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","f0c5e19e-35e4-475c-85b0-275b7a7a6da0","log","1741448356770562"
+"[DEBUG] Found 0 existing words for date 2025-03-21
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","0aa3c2a7-b07a-4b02-a9ca-2c1612df1849","log","1741448356770401"
+"[DEBUG] selectWordsForDate called for date: 2025-03-21, force: true
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","e3bef106-1bc3-4233-95c3-2eef2e1aeb7d","log","1741448356768200"
+"[DEBUG] Processing date: 2025-03-21
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","2fbf9187-82a5-4e56-8ba3-a91ab9dc7d3c","log","1741448356767948"
+"[DEBUG] Processing request for date: 2025-03-21, days: 1, force: true
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","bdb36f03-c70b-4162-87b8-7d16125084d8","log","1741448356767674"
+"booted (time: 49ms)","Boot","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","ef204831-3434-4073-8eeb-cf05d3542951","log","1741448356767303"
+"[DEBUG] No words selected for 2025-03-20
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","099ee712-1c96-4482-b96b-98ced63908e8","log","1741448321210964"
+"[DEBUG] No words to insert for date 2025-03-20
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","5a483c91-3d46-497f-9478-7d989142685b","log","1741448321210800"
+"[DEBUG] Total selected words: 0
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","c2c392e3-3275-4ccb-8a31-a97be307e410","log","1741448321210563"
+"[ERROR] Error fetching random words: {
+  code: "PGRST100",
+  details: `unexpected '(' expecting letter, digit, "-", "->>", "->", delimiter (.), "," or end of input`,
+  hint: null,
+  message: '"failed to parse order (RANDOM().asc)" (line 1, column 7)'
+}
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","54da4517-8bba-4761-a1e3-b45493000837","error","1741448321210274"
+"[DEBUG] Selecting a word for difficulty level: advanced
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","900914a5-15ec-4d13-95e7-6fee931711c3","log","1741448316262926"
+"[ERROR] Error fetching random words: {
+  code: "PGRST100",
+  details: `unexpected '(' expecting letter, digit, "-", "->>", "->", delimiter (.), "," or end of input`,
+  hint: null,
+  message: '"failed to parse order (RANDOM().asc)" (line 1, column 7)'
+}
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","5aba5bae-fe57-4b39-b5af-b53a64cb116c","error","1741448316262706"
+"[DEBUG] Selecting a word for difficulty level: intermediate
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","640620c5-1938-4fa0-8431-c6ffa7cd050a","log","1741448316261005"
+"[ERROR] Error fetching random words: {
+  code: "PGRST100",
+  details: `unexpected '(' expecting letter, digit, "-", "->>", "->", delimiter (.), "," or end of input`,
+  hint: null,
+  message: '"failed to parse order (RANDOM().asc)" (line 1, column 7)'
+}
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","9a871e88-4d3c-4a50-bf8b-59556b4d2551","error","1741448316260755"
+"[DEBUG] Selecting a word for difficulty level: beginner
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","85f0f7ca-e24d-4955-9037-f4982dbc3ff2","log","1741448316259097"
+"[DEBUG] Found 3 recently used words to exclude
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","7e31a578-c7f1-4053-9fd8-d5897e0c0ed7","log","1741448316258905"
+"[DEBUG] Checking for recently used words since 2025-02-18
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","d839cf33-ad30-4698-a930-ca9bcbceee12","log","1741448316253809"
+"[DEBUG] Found 0 existing words for date 2025-03-20
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","2be34cb2-288e-4e57-83e0-d9f8a29924fe","log","1741448316253613"
+"[DEBUG] selectWordsForDate called for date: 2025-03-20, force: true
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","dad542c5-0cb8-43f2-9cc2-699dbee4300d","log","1741448316238067"
+"[DEBUG] Processing date: 2025-03-20
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","b39414bb-fb52-49f1-a36e-708fc144ade9","log","1741448316237817"
+"[DEBUG] Processing request for date: 2025-03-20, days: 1, force: true
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","54f86e7e-ac78-4fd1-8bc1-ffbeab06c0de","log","1741448316237511"
+"booted (time: 31ms)","Boot","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","f2c03b55-ef27-4d7b-958a-ec482ac8ca95","log","1741448316237242"
+"shutdown","Shutdown","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","529cb62e-9d61-4332-a1f4-8c1df09f280e","log","1741447984292938"
+"[DEBUG] No words selected for 2025-03-15
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","8ad226be-c89b-4d72-95c8-cadc40cad77d","log","1741447789197698"
+"[DEBUG] No words to insert for date 2025-03-15
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","301a6223-1971-4d52-a369-4665c64210bb","log","1741447789197514"
+"[DEBUG] Total selected words: 0
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","bb082d5a-6294-4d9a-9d38-6d0ad4dc75ae","log","1741447789197375"
+"[ERROR] Error fetching candidates for level advanced: {
+  code: "PGRST100",
+  details: `unexpected '(' expecting letter, digit, "-", "->>", "->", delimiter (.), "," or end of input`,
+  hint: null,
+  message: '"failed to parse order (RANDOM().asc)" (line 1, column 7)'
+}
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","e721ef62-082b-4ab8-adf4-1afc804dfc35","error","1741447789197209"
+"[DEBUG] Fetching candidate words for level: advanced
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","e93f2f1f-fef8-4306-9e25-1609f8e74cd1","log","1741447789194190"
+"[DEBUG] Total words with difficulty level 'advanced': 2
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","be480f1b-25b6-43df-b13b-c683d28c6f81","log","1741447789193984"
+"[DEBUG] Processing difficulty level: advanced
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","0a9107d2-1626-467e-99e0-eeae7eca4f8d","log","1741447789185901"
+"[ERROR] Error fetching candidates for level intermediate: {
+  code: "PGRST100",
+  details: `unexpected '(' expecting letter, digit, "-", "->>", "->", delimiter (.), "," or end of input`,
+  hint: null,
+  message: '"failed to parse order (RANDOM().asc)" (line 1, column 7)'
+}
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","fe7b6956-1e73-45a6-98d6-72fe490b0b94","error","1741447789185744"
+"[DEBUG] Fetching candidate words for level: intermediate
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","3271f189-04c6-4ec5-b136-9d97931f4a42","log","1741447789182180"
+"[DEBUG] Total words with difficulty level 'intermediate': 2
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","b0f8ef56-cb48-492d-b31d-da213ed50ad4","log","1741447789181924"
+"[DEBUG] Processing difficulty level: intermediate
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","acc81a18-5bb5-47f4-b7e6-b20beca221be","log","1741447789180695"
+"[WARN] No words found with difficulty level: beginner
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","4a3293e8-c48d-4677-a50d-d1cf71dddfd0","error","1741447789180527"
+"[DEBUG] Total words with difficulty level 'beginner': 0
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","16831cc2-f614-46d4-aa5b-82f5f389c2f3","log","1741447789180289"
+"[DEBUG] Processing difficulty level: beginner
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","e6e465d8-0a2c-4b86-9d13-9e3826966156","log","1741447789179747"
+"[DEBUG] Recent words sample: pop fly, causal agent, hyperemesis gravidarum
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","83c3cbd2-a4b7-4736-86e4-a286fbf01ba2","log","1741447789179589"
+"[DEBUG] Found 3 recently used words to exclude
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","5d3cc897-4b42-48fc-95c5-1318326db749","log","1741447789179409"
+"[DEBUG] Checking for recently used words since 2025-02-13
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","8f97d3bb-7772-4530-a3fa-ce5310bf7322","log","1741447784142623"
+"[DEBUG] Found 0 existing words for date 2025-03-15
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","ce9bcf5b-7e48-4e3e-bd11-176143bf83a4","log","1741447784142332"
+"[DEBUG] selectWordsForDate called for date: 2025-03-15, force: true
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","548ec261-50e8-42b3-aafa-60ac6bfa8c00","log","1741447784140826"
+"[DEBUG] Processing date: 2025-03-15
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","79391ec6-0e49-4541-a74a-c279d3df83d4","log","1741447784140668"
+"[DEBUG] Processing request for date: 2025-03-15, days: 1, force: true
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","7fdb8edf-1061-42da-bbe9-2e926bfeda59","log","1741447784140519"
+"booted (time: 33ms)","Boot","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","562149cf-da83-4ce7-9c8a-24de8c9af539","log","1741447784140380"
+"shutdown","Shutdown","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","f74b67b0-8039-4f6f-bf14-7ffaa8f18c3b","log","1741447378006828"
+"shutdown","Shutdown","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","404dd8f9-75a3-4eb6-a6dd-2301b7b67de9","log","1741447342201745"
+"No advanced words available for selection
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","fa3f8801-a31a-4106-9da5-d33617eaca80","error","1741447212920909"
+"No intermediate words available for selection
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","5a634a93-b578-415e-a848-ad2459e078c1","error","1741447212919757"
+"No beginner words available for selection
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","de5e6007-2b94-4a47-90f8-5bfb71265528","error","1741447207998884"
+"No advanced words available for selection
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","a40e3856-0cb2-45f9-9f73-73e566e51adf","error","1741447182965789"
+"No intermediate words available for selection
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","bd940e1c-afe8-400b-855b-7dfba8eed364","error","1741447182965375"
+"No beginner words available for selection
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","b16d7f6b-0ac3-4130-aa43-1ba411b32705","error","1741447182962939"
+"booted (time: 29ms)","Boot","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","25f3e413-bdca-40f7-84f6-23068c994c6e","log","1741447177982469"
+"No advanced words available for selection
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","a0c2f0a2-3923-4ff5-9955-c7bf540af3e4","error","1741447142186368"
+"No intermediate words available for selection
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","ec5511e3-db43-461a-bf5a-b5ad16ddf1fe","error","1741447142181983"
+"No beginner words available for selection
+","Log","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","f787b90e-3f1e-49ef-a786-5c5064c4d382","error","1741447142178930"
+"booted (time: 29ms)","Boot","3ed24482-2166-4b92-903e-d2f6c5c2ff9c","6602a39d-801b-475d-9f56-5157b651538b","log","1741447142167709"

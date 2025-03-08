@@ -166,7 +166,8 @@ CREATE TABLE IF NOT EXISTS "public"."word_synsets" (
     "synset_id" "text" NOT NULL,
     "sense_number" integer,
     "tag_count" integer,
-    "created_at" timestamp with time zone DEFAULT "now"()
+    "created_at" timestamp with time zone DEFAULT "now"(),
+    "word_id" bigint NOT NULL
 );
 
 
@@ -250,7 +251,8 @@ CREATE TABLE IF NOT EXISTS "public"."daily_words" (
     "date" "date" NOT NULL,
     "word" "text" NOT NULL,
     "difficulty_level" "text" NOT NULL,
-    "created_at" timestamp with time zone DEFAULT "now"()
+    "created_at" timestamp with time zone DEFAULT "now"(),
+    "difficulty_score" numeric(10,6)
 );
 
 
@@ -663,6 +665,10 @@ CREATE INDEX "idx_word_synsets_word" ON "public"."word_synsets" USING "btree" ("
 
 
 
+CREATE INDEX "idx_word_synsets_word_id" ON "public"."word_synsets" USING "btree" ("word_id");
+
+
+
 CREATE INDEX "idx_words_difficulty_level" ON "public"."words" USING "btree" ("difficulty_level");
 
 
@@ -702,6 +708,11 @@ ALTER TABLE ONLY "public"."daily_words"
 
 ALTER TABLE ONLY "public"."distractors"
     ADD CONSTRAINT "distractors_word_fkey" FOREIGN KEY ("word") REFERENCES "public"."words"("word") ON DELETE CASCADE;
+
+
+
+ALTER TABLE ONLY "public"."word_synsets"
+    ADD CONSTRAINT "fk_word_synsets_words" FOREIGN KEY ("word_id") REFERENCES "public"."words"("id") ON DELETE CASCADE;
 
 
 
