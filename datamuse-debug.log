@@ -1,0 +1,79 @@
+Starting Datamuse enrichment process with smart filtering and eligibility tracking...
+Using 15 words per batch with 5s delay between batches
+Processing words in 1 priority groups
+Daily API request limit: 100000
+Loaded state from /Users/sandeep.joshi/Documents/vibecoding/oneword/enrichment-state.json:
+  Last processed ID: 60
+  Words processed: 77
+  Successful: 1, Failed: 107, Skipped: 26
+  Marked eligible: 68, Marked ineligible: 20
+Starting processing from ID 60
+Total progress so far: 77 processed, 1 successful, 107 failed, 26 skipped
+Eligibility tracking: 68 marked eligible, 20 marked ineligible
+Datamuse rate limit: Using 5 seconds between batches of 15 words
+Estimated requests per batch: 75
+Using API Keys - Anon: eyJhbGciOiJIUzI... Service: eyJhbGciOiJIUzI...
+Eligibility categories: 'eligible-word' (processed with API), 'eligible-phrase' (not processed), 'ineligible'
+Processing batch starting from ID 60...
+Querying database: https://ipljgsggnbdwaomjfuok.supabase.co/rest/v1/words?select=id,word,pos,difficulty_level,frequency,enrichment_eligible,enrichment_ineligible_reason&order=id.asc&id=gt.60&limit=15
+Found 15 candidate words, filtering...
+Marked word ID 61 as eligible-word (will process via API)
+Marked word ID 62 as eligible-word (will process via API)
+Marked word ID 63 as eligible-word (will process via API)
+Marked word ID 64 as eligible-word (will process via API)
+Marked word ID 65 as eligible-phrase
+Marked word ID 66 as eligible-phrase
+Marked word ID 67 as eligible-word (will process via API)
+Marked word ID 68 as eligible-word (will process via API)
+Marked word ID 69 as eligible-phrase
+Marked word ID 70 as eligible-word (will process via API)
+Marked word ID 71 as eligible-word (will process via API)
+Marked word ID 72 as eligible-phrase
+Marked word ID 73 as eligible-phrase
+Marked word ID 74 as eligible-word (will process via API)
+Marked word ID 75 as eligible-word (will process via API)
+Filtering results: 10 words meet criteria, 0 skipped
+Calling datamuse-enrichment edge function with 10 words...
+Error calling edge function: Edge function call failed: timeout of 60000ms exceeded
+Updated startId to 75 after error
+State saved successfully
+Batch complete: Processed 10 words total (0 enriched with Datamuse)
+State saved successfully
+Waiting 5 seconds before next batch...
+Processing batch starting from ID 75...
+Querying database: https://ipljgsggnbdwaomjfuok.supabase.co/rest/v1/words?select=id,word,pos,difficulty_level,frequency,enrichment_eligible,enrichment_ineligible_reason&order=id.asc&id=gt.75&limit=15
+Found 15 candidate words, filtering...
+Marked word ID 76 as eligible-word (will process via API)
+Marked word ID 77 as eligible-word (will process via API)
+Marked word ID 78 as eligible-phrase
+Marked word ID 79 as eligible-word (will process via API)
+Marked word ID 80 as eligible-word (will process via API)
+Marked word ID 81 as eligible-word (will process via API)
+Marked word ID 82 as eligible-word (will process via API)
+Marked word ID 83 as eligible-word (will process via API)
+Marked word ID 84 as eligible-word (will process via API)
+Marked word ID 85 as eligible-word (will process via API)
+Marked word ID 86 as eligible-word (will process via API)
+Marked word ID 87 as eligible-word (will process via API)
+Marked word ID 88 as eligible-word (will process via API)
+Marked word ID 89 as eligible-phrase
+Marked word ID 90 as eligible-word (will process via API)
+Filtering results: 13 words meet criteria, 0 skipped
+Calling datamuse-enrichment edge function with 13 words...
+Error calling edge function: Edge function call failed: timeout of 60000ms exceeded
+Updated startId to 90 after error
+State saved successfully
+Batch complete: Processed 13 words total (0 enriched with Datamuse)
+State saved successfully
+Waiting 5 seconds before next batch...
+Processing batch starting from ID 90...
+Querying database: https://ipljgsggnbdwaomjfuok.supabase.co/rest/v1/words?select=id,word,pos,difficulty_level,frequency,enrichment_eligible,enrichment_ineligible_reason&order=id.asc&id=gt.90&limit=15
+Found 15 candidate words, filtering...
+Marked word ID 91 as eligible-word (will process via API)
+Marked word ID 92 as eligible-word (will process via API)
+Marked word ID 93 as eligible-word (will process via API)
+Marked word ID 94 as eligible-word (will process via API)
+Marked word ID 95 as eligible-word (will process via API)
+Marked word ID 96 as eligible-word (will process via API)
+Marked word ID 97 as eligible-word (will process via API)
+Marked word ID 98 as eligible-word (will process via API)

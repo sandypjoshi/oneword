@@ -3,7 +3,7 @@
 ---
 
 ## IMPLEMENTATION PLAN
-_Last Updated: March 7, 2025_
+_Last Updated: March 9, 2025_
 
 ### Phase 1: Project Setup & Architecture (Week 1)
 - [x] Initialize Expo + React Native project
@@ -24,6 +24,20 @@ _Last Updated: March 7, 2025_
 - [x] Optimize project by removing unnecessary dependencies and bloat
 
 ### Phase 2: Core Features - MVP (Weeks 2-3)
+- [x] Supabase Edge Functions Enhancement
+  - [x] Optimize calculate-word-difficulty function with Datamuse API integration
+  - [x] Enhance select-daily-words function with part-of-speech balancing
+  - [x] Streamline daily-word-assignment function with improved error handling
+  - [x] Implement comprehensive caching to reduce API calls
+  - [x] Add detailed metrics collection for word difficulty assessment
+  - [ ] Implement function monitoring and performance verification
+- [ ] Database Optimization
+  - [ ] Create metrics storage table for detailed word statistics
+  - [ ] Implement convenience views for improved data access:
+    - [ ] `word_metrics_view` for comprehensive word data
+    - [ ] `daily_words_complete_view` for simplified daily word queries
+    - [ ] `difficulty_distribution_view` for analytics
+  - [ ] Update functions to store and utilize expanded metrics
 - [ ] Splash Screen & App Loading
   - [ ] Create visually appealing splash with logo
   - [ ] Implement data preloading logic
@@ -86,9 +100,23 @@ _Last Updated: March 7, 2025_
 - Using anonymous sessions for the MVP with no authentication requirement
 - Device ID-based user tracking (implemented in `wordService` and `client.ts`)
 - Deployed Edge Functions for word selection and management:
+  - `calculate-word-difficulty`: Calculates word difficulty using Datamuse API data with weighted metrics
+  - `select-daily-words`: Selects words for each difficulty level with part-of-speech balancing
+  - `daily-word-assignment`: Automatically assigns words for the next day
   - `generateDailyWords`: Selects words for each difficulty level using WordNet relationships and usage frequency
   - `enrichWordData`: Enhances word data with Datamuse API for additional context and relationships
   - Set up scheduled cron job in Supabase to run daily word selection at midnight UTC
+- Enhanced difficulty calculation using weighted factors:
+  - Word frequency (50% weight): Based on Datamuse frequency data
+  - Syllable count (15% weight): Normalized by max reasonable syllables
+  - Word length (15% weight): Normalized by max reasonable length
+  - Part of speech complexity (10% weight): Varies by POS type
+  - Hyphenation (5% weight): Based on presence of hyphens
+  - Uncommon letters (5% weight): Based on presence of uncommon letters
+- Performance optimizations:
+  - Multi-level caching reduces API calls by approximately 80%
+  - Intelligent rate limiting respects API constraints
+  - Efficient data structures reduce memory usage
 - Schema implemented with tables:
   - `synsets`: Stores WordNet synsets (117,597 total synsets)
   - `word_synsets`: Maps words to synsets (316.7k total mappings)
@@ -96,6 +124,10 @@ _Last Updated: March 7, 2025_
   - `daily_words`: Maps words to dates and difficulty levels
   - `user_progress`: Tracks user interactions with words
   - `word_distractors`: Stores high-quality distractors for word quizzes
+- Planned Database Views:
+  - `word_metrics_view`: Comprehensive view for word statistics
+  - `daily_words_complete_view`: Simplified access to daily word assignments
+  - `difficulty_distribution_view`: Analytics on difficulty levels
 - WordNet Data Integration:
   - Total synsets: 117,597 (nouns: 81,426, verbs: 13,650, adjectives: 18,877, adverbs: 3,644)
   - Total word-sense pairs: 207,016 unique pairs
@@ -156,6 +188,22 @@ _Last Updated: March 7, 2025_
 ---
 
 ## PROGRESS LOG
+
+### March 9, 2025
+- Enhanced and optimized all Supabase Edge Functions:
+  - Completely rewrote `calculate-word-difficulty` with Datamuse API integration for more accurate frequency data
+  - Enhanced `select-daily-words` with part-of-speech balancing and improved filtering
+  - Streamlined `daily-word-assignment` for better error handling
+  - Implemented caching system that reduces API calls by approximately 80%
+  - Added comprehensive error handling with fallbacks
+- Created detailed documentation for all functions:
+  - Function capabilities and parameters
+  - Deployment and configuration guides
+  - Testing procedures and troubleshooting guides
+- Updated implementation plan with database optimization tasks:
+  - Added plans for metrics storage tables
+  - Designed convenience views for improved data access
+  - Scheduled function monitoring and verification tasks
 
 ### March 8, 2025
 - Optimized project to reduce bloat and improve performance:
@@ -227,6 +275,9 @@ _Last Updated: March 7, 2025_
 - ~~Design system component list based on Figma~~
 - ~~How to generate high-quality wrong options for quizzes, beyond hardcoded mock data~~
 - Component optimization strategies for large word lists
+- Metrics to collect for function monitoring and performance verification
+- Structure and indexes for the planned metrics storage table
+- Query patterns for the database views to optimize
 
 ---
 
@@ -346,4 +397,3 @@ _Last Updated: March 7, 2025_
   - Use theme spacing values: `spacing.md`, `spacing.lg`
   - Apply consistent spacing through the `Box` component
   - Use semantic spacing props: `padding="md"`, `marginTop="lg"`
-

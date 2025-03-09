@@ -43,6 +43,14 @@
 - ✅ Create comprehensive test cases for all functions
 - 🔄 Implement automated testing for critical paths
 - 🔄 Conduct load testing to ensure system scalability
+- 🔄 Monitor and verify optimized Supabase functions in production environment
+
+### Database Optimization
+- 🔄 Create metrics storage table for detailed word statistics (frequency, syllables, etc.)
+- 🔄 Implement `word_metrics_view` for comprehensive word data access
+- 🔄 Implement `daily_words_complete_view` for simplified daily word queries
+- 🔄 Implement `difficulty_distribution_view` for analytics on difficulty levels
+- 🔄 Update functions to store and utilize expanded metrics data
 
 ### Frontend Integration
 - 🔄 Update frontend to consume the enhanced difficulty data

@@ -1,0 +1,140 @@
+[2025-03-09 14:11:30] Starting enrichment process monitor (checking every 15 minutes)
+[2025-03-09 14:11:30] Running status check...
+[2025-03-09 14:11:30] ✅ Enrichment process is running
+[2025-03-09 14:11:30] Current state: Processing from ID  625,  500 words processed,  500 successful
+[2025-03-09 14:11:30] Last updated: 
+[2025-03-09 14:11:30] ⚠️ WARNING: State file hasn't been updated recently!
+[2025-03-09 14:11:30] Recent log entries:
+[2025-03-09 14:11:30]   [2025-03-09T08:41:23.585Z] INFO: Update successful for word ID 655 with status 204
+[2025-03-09 14:11:30]   [2025-03-09T08:41:23.585Z] INFO: Update successful for word ID 655
+[2025-03-09 14:11:30]   [2025-03-09T08:41:23.585Z] INFO: Successfully marked word ID 655 as eligible-word (will process via API)
+[2025-03-09 14:11:30]   [2025-03-09T08:41:23.586Z] INFO: Filtering results: 23 words meet criteria, 0 skipped
+[2025-03-09 14:11:30]   [2025-03-09T08:41:23.586Z] INFO: Calling datamuse-enrichment edge function with 23 words...
+[2025-03-09 14:11:30] Attempting to restart the enrichment process...
+[2025-03-09 14:11:30] ✅ Enrichment process restarted successfully
+[2025-03-09 14:11:30] Status check complete. Next check in 15 minutes.
+[2025-03-09 14:11:30] ---------------------------------------------------------------
+[2025-03-09 14:26:30] Running status check...
+[2025-03-09 14:26:30] ✅ Enrichment process is running
+[2025-03-09 14:26:30] Current state: Processing from ID  1218,  964 words processed,  964 successful
+[2025-03-09 14:26:30] Last updated: 
+[2025-03-09 14:26:30] ⚠️ WARNING: State file hasn't been updated recently!
+[2025-03-09 14:26:30] Recent log entries:
+[2025-03-09 14:26:30]   [2025-03-09T08:56:30.675Z] INFO: Update successful for word ID 1239 with status 204
+[2025-03-09 14:26:30]   [2025-03-09T08:56:30.675Z] INFO: Update successful for word ID 1239
+[2025-03-09 14:26:30]   [2025-03-09T08:56:30.675Z] INFO: Successfully marked word ID 1239 as eligible-word (will process via API)
+[2025-03-09 14:26:30]   [2025-03-09T08:56:30.675Z] INFO: Updating word ID 1240 with data: {"enrichment_eligible":"eligible-phrase","updated_at":"2025-03-09T08:56:30.675Z","enrichment_ineligible_reason":null}
+[2025-03-09 14:26:30]   [2025-03-09T08:56:30.675Z] INFO: Sending update for word ID 1240: {"enrichment_eligible":"eligible-phrase","updated_at":"2025-03-09T08:56:30.675Z","enrichment_ineligible_reason":null}
+[2025-03-09 14:26:30] Attempting to restart the enrichment process...
+[2025-03-09 14:26:30] ✅ Enrichment process restarted successfully
+[2025-03-09 14:26:30] Status check complete. Next check in 15 minutes.
+[2025-03-09 14:26:30] ---------------------------------------------------------------
+[2025-03-09 14:41:30] Running status check...
+[2025-03-09 14:41:30] ✅ Enrichment process is running
+[2025-03-09 14:41:30] Current state: Processing from ID  1455,  1109 words processed,  1109 successful
+[2025-03-09 14:41:30] Last updated: 
+[2025-03-09 14:41:30] ⚠️ WARNING: State file hasn't been updated recently!
+[2025-03-09 14:41:30] Recent log entries:
+[2025-03-09 14:41:30]   [2025-03-09T09:11:21.126Z] INFO: Update successful for word ID 1485 with status 204
+[2025-03-09 14:41:30]   [2025-03-09T09:11:21.127Z] INFO: Update successful for word ID 1485
+[2025-03-09 14:41:30]   [2025-03-09T09:11:21.127Z] INFO: Successfully marked word ID 1485 as eligible-word (will process via API)
+[2025-03-09 14:41:30]   [2025-03-09T09:11:21.127Z] INFO: Filtering results: 29 words meet criteria, 0 skipped
+[2025-03-09 14:41:30]   [2025-03-09T09:11:21.127Z] INFO: Calling datamuse-enrichment edge function with 29 words...
+[2025-03-09 14:41:30] Attempting to restart the enrichment process...
+[2025-03-09 14:41:30] ✅ Enrichment process restarted successfully
+[2025-03-09 14:41:30] Status check complete. Next check in 15 minutes.
+[2025-03-09 14:41:30] ---------------------------------------------------------------
+[2025-03-09 14:56:30] Running status check...
+[2025-03-09 14:56:30] ✅ Enrichment process is running
+[2025-03-09 14:56:30] Current state: Processing from ID  1545,  1192 words processed,  1192 successful
+[2025-03-09 14:56:30] Last updated: 
+[2025-03-09 14:56:30] ⚠️ WARNING: State file hasn't been updated recently!
+[2025-03-09 14:56:30] Recent log entries:
+[2025-03-09 14:56:30]   [2025-03-09T09:26:29.523Z] INFO: Update successful for word ID 1575 with status 204
+[2025-03-09 14:56:30]   [2025-03-09T09:26:29.523Z] INFO: Update successful for word ID 1575
+[2025-03-09 14:56:30]   [2025-03-09T09:26:29.523Z] INFO: Successfully marked word ID 1575 as eligible-word (will process via API)
+[2025-03-09 14:56:30]   [2025-03-09T09:26:29.523Z] INFO: Filtering results: 24 words meet criteria, 0 skipped
+[2025-03-09 14:56:30]   [2025-03-09T09:26:29.523Z] INFO: Calling datamuse-enrichment edge function with 24 words...
+[2025-03-09 14:56:30] Attempting to restart the enrichment process...
+[2025-03-09 14:56:30] ✅ Enrichment process restarted successfully
+[2025-03-09 14:56:31] Status check complete. Next check in 15 minutes.
+[2025-03-09 14:56:31] ---------------------------------------------------------------
+[2025-03-09 15:11:31] Running status check...
+[2025-03-09 15:11:31] ✅ Enrichment process is running
+[2025-03-09 15:11:31] Current state: Processing from ID  1575,  1216 words processed,  1216 successful
+[2025-03-09 15:11:31] Last updated: 
+[2025-03-09 15:11:31] ⚠️ WARNING: State file hasn't been updated recently!
+[2025-03-09 15:11:31] Recent log entries:
+[2025-03-09 15:11:31]   [2025-03-09T09:41:29.053Z] INFO: Update successful for word ID 1605 with status 204
+[2025-03-09 15:11:31]   [2025-03-09T09:41:29.054Z] INFO: Update successful for word ID 1605
+[2025-03-09 15:11:31]   [2025-03-09T09:41:29.054Z] INFO: Successfully marked word ID 1605 as eligible-word (will process via API)
+[2025-03-09 15:11:31]   [2025-03-09T09:41:29.054Z] INFO: Filtering results: 22 words meet criteria, 0 skipped
+[2025-03-09 15:11:31]   [2025-03-09T09:41:29.055Z] INFO: Calling datamuse-enrichment edge function with 22 words...
+[2025-03-09 15:11:31] Attempting to restart the enrichment process...
+[2025-03-09 15:11:31] ✅ Enrichment process restarted successfully
+[2025-03-09 15:11:31] Status check complete. Next check in 15 minutes.
+[2025-03-09 15:11:31] ---------------------------------------------------------------
+[2025-03-09 15:26:31] Running status check...
+[2025-03-09 15:26:31] ✅ Enrichment process is running
+[2025-03-09 15:26:31] Current state: Processing from ID  1575,  1216 words processed,  1216 successful
+[2025-03-09 15:26:31] Last updated: 
+[2025-03-09 15:26:31] ⚠️ WARNING: State file hasn't been updated recently!
+[2025-03-09 15:26:31] Recent log entries:
+[2025-03-09 15:26:31]   [2025-03-09T09:56:19.961Z] INFO: Skipping word ID 1603 - already marked as eligible-phrase
+[2025-03-09 15:26:31]   [2025-03-09T09:56:19.961Z] INFO: Skipping word ID 1604 - already marked as eligible-word
+[2025-03-09 15:26:31]   [2025-03-09T09:56:19.961Z] INFO: Skipping word ID 1605 - already marked as eligible-word
+[2025-03-09 15:26:31]   [2025-03-09T09:56:19.961Z] INFO: Filtering results: 22 words meet criteria, 0 skipped
+[2025-03-09 15:26:31]   [2025-03-09T09:56:19.961Z] INFO: Calling datamuse-enrichment edge function with 22 words...
+[2025-03-09 15:26:31] ⚠️ WARNING: Recent errors detected in log file!
+[2025-03-09 15:26:31] Attempting to restart the enrichment process...
+[2025-03-09 15:26:31] ✅ Enrichment process restarted successfully
+[2025-03-09 15:26:31] Status check complete. Next check in 15 minutes.
+[2025-03-09 15:26:31] ---------------------------------------------------------------
+[2025-03-09 15:41:31] Running status check...
+[2025-03-09 15:41:31] ✅ Enrichment process is running
+[2025-03-09 15:41:31] Current state: Processing from ID  355,  289 words processed,  289 successful
+[2025-03-09 15:41:31] Last updated: 
+[2025-03-09 15:41:31] ⚠️ WARNING: State file hasn't been updated recently!
+[2025-03-09 15:41:31] Recent log entries:
+[2025-03-09 15:41:31]   [2025-03-09T10:11:30.521Z] INFO: Updated startId to 355 based on lastProcessedId
+[2025-03-09 15:41:31]   [2025-03-09T10:11:30.522Z] INFO: State saved successfully
+[2025-03-09 15:41:31]   [2025-03-09T10:11:30.522Z] INFO: Batch complete: Processed 12 words total (12 enriched with Datamuse)
+[2025-03-09 15:41:31]   [2025-03-09T10:11:30.523Z] INFO: State saved successfully
+[2025-03-09 15:41:31]   [2025-03-09T10:11:30.523Z] INFO: Waiting 2 seconds before next batch...
+[2025-03-09 15:41:31] ⚠️ WARNING: Recent errors detected in log file!
+[2025-03-09 15:41:31] Attempting to restart the enrichment process...
+[2025-03-09 15:41:31] ✅ Enrichment process restarted successfully
+[2025-03-09 15:41:31] Status check complete. Next check in 15 minutes.
+[2025-03-09 15:41:31] ---------------------------------------------------------------
+[2025-03-09 15:56:31] Running status check...
+[2025-03-09 15:56:31] ✅ Enrichment process is running
+[2025-03-09 15:56:31] Current state: Processing from ID  1049,  823 words processed,  823 successful
+[2025-03-09 15:56:31] Last updated: 
+[2025-03-09 15:56:31] ⚠️ WARNING: State file hasn't been updated recently!
+[2025-03-09 15:56:31] Recent log entries:
+[2025-03-09 15:56:31]   [2025-03-09T10:26:30.224Z] INFO: Updated startId to 1049 based on lastProcessedId
+[2025-03-09 15:56:31]   [2025-03-09T10:26:30.224Z] INFO: State saved successfully
+[2025-03-09 15:56:31]   [2025-03-09T10:26:30.225Z] INFO: Batch complete: Processed 11 words total (11 enriched with Datamuse)
+[2025-03-09 15:56:31]   [2025-03-09T10:26:30.225Z] INFO: State saved successfully
+[2025-03-09 15:56:31]   [2025-03-09T10:26:30.225Z] INFO: Waiting 2 seconds before next batch...
+[2025-03-09 15:56:31] ⚠️ WARNING: Recent errors detected in log file!
+[2025-03-09 15:56:31] Attempting to restart the enrichment process...
+[2025-03-09 15:56:31] ✅ Enrichment process restarted successfully
+[2025-03-09 15:56:31] Status check complete. Next check in 15 minutes.
+[2025-03-09 15:56:31] ---------------------------------------------------------------
+[2025-03-09 16:11:31] Running status check...
+[2025-03-09 16:11:31] ✅ Enrichment process is running
+[2025-03-09 16:11:31] Current state: Processing from ID  1953,  1521 words processed,  1521 successful
+[2025-03-09 16:11:31] Last updated: 
+[2025-03-09 16:11:31] ⚠️ WARNING: State file hasn't been updated recently!
+[2025-03-09 16:11:31] Recent log entries:
+[2025-03-09 16:11:31]   [2025-03-09T10:41:29.172Z] INFO: Estimated API requests so far today: 7655 of 100000
+[2025-03-09 16:11:31]   [2025-03-09T10:41:29.172Z] INFO: Edge function response: {"processed":10,"successful":10,"failed":0,"lastProcessedId":1963,"wordResults":[{"wordId":1954,"word":"mottling","success":true,"frequency":235,"syllables":3},{"wordId":1955,"word":"striping","success":true,"frequency":162,"syllables":2},{"wordId":1956,"word":"clearing","success":true,"frequency":8030,"syllables":2},{"wordId":1957,"word":"clarification","success":true,"frequency":3633,"syllables":5},{"wordId":1958,"word":"enrichment","success":true,"frequency":3350,"syllables":3},{"wordId":1959,"word":"fortification","success":true,"frequency":927,"syllables":5},{"wordId":1960,"word":"humanization","success":true,"frequency":189,"syllables":5},{"wordId":1961,"word":"humanisation","success":true,"frequency":32,"syllables":5},{"wordId":1962,"word":"modernization","success":true,"frequency":5785,"syllables":5},{"wordId":1963,"word":"modernisation","success":true,"frequency":1198,"syllables":5}],"message":"Processed 10 words: 10 successful, 0 failed.","nextStartId":1963}
+[2025-03-09 16:11:31]   [2025-03-09T10:41:29.172Z] INFO: Successfully enriched 10 words in batch 1
+[2025-03-09 16:11:31]   [2025-03-09T10:41:29.173Z] INFO: Updated startId to 1963 based on lastProcessedId
+[2025-03-09 16:11:31]   [2025-03-09T10:41:29.173Z] INFO: Waiting 3 seconds before processing next batch...
+[2025-03-09 16:11:31] ⚠️ WARNING: Recent errors detected in log file!
+[2025-03-09 16:11:31] Attempting to restart the enrichment process...
+[2025-03-09 16:11:31] ✅ Enrichment process restarted successfully
+[2025-03-09 16:11:31] Status check complete. Next check in 15 minutes.
+[2025-03-09 16:11:31] ---------------------------------------------------------------
