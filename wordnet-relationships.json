@@ -1,0 +1,475 @@
+{
+  "time": {
+    "synonyms": [],
+    "hypernyms": [
+      "attribute"
+    ],
+    "hyponyms": [
+      "continuum",
+      "gmt",
+      "hereafter",
+      "continuance",
+      "eternity",
+      "futurity",
+      "infinity",
+      "ut",
+      "nowadays",
+      "duration",
+      "future",
+      "past",
+      "present",
+      "ut1",
+      "yesteryear",
+      "biological_time",
+      "civil_time",
+      "cosmic_time",
+      "daylight-saving_time",
+      "daylight-savings_time",
+      "daylight_saving",
+      "daylight_savings",
+      "geologic_time",
+      "geological_time",
+      "greenwich_mean_time",
+      "greenwich_time",
+      "local_time",
+      "musical_time",
+      "past_times",
+      "standard_time",
+      "time_to_come",
+      "universal_time"
+    ],
+    "cohyponyms": []
+  },
+  "right": {
+    "synonyms": [],
+    "hypernyms": [
+      "turn",
+      "turning"
+    ],
+    "hyponyms": [],
+    "cohyponyms": []
+  },
+  "life": {
+    "synonyms": [],
+    "hypernyms": [
+      "living thing",
+      "animate thing",
+      "animate_thing",
+      "living_thing"
+    ],
+    "hyponyms": [
+      "wildlife"
+    ],
+    "cohyponyms": []
+  },
+  "use": {
+    "synonyms": [],
+    "hypernyms": [
+      "influence"
+    ],
+    "hyponyms": [
+      "mind game",
+      "mind_game"
+    ],
+    "cohyponyms": []
+  },
+  "left": {
+    "synonyms": [],
+    "hypernyms": [
+      "turn",
+      "turning"
+    ],
+    "hyponyms": [],
+    "cohyponyms": []
+  },
+  "house": {
+    "synonyms": [],
+    "hypernyms": [
+      "play",
+      "child's play",
+      "child's_play"
+    ],
+    "hyponyms": [],
+    "cohyponyms": []
+  },
+  "out": {
+    "synonyms": [],
+    "hypernyms": [
+      "failure"
+    ],
+    "hyponyms": [
+      "strikeout",
+      "putout"
+    ],
+    "cohyponyms": []
+  },
+  "way": {
+    "synonyms": [],
+    "hypernyms": [
+      "implementation",
+      "effectuation"
+    ],
+    "hyponyms": [
+      "escape",
+      "fast track",
+      "open sesame",
+      "tooth",
+      "dint",
+      "road",
+      "salvation",
+      "voice",
+      "instrument",
+      "tool",
+      "stepping stone",
+      "expedient",
+      "desperate measure",
+      "wings",
+      "desperate_measure",
+      "fast_track",
+      "open_sesame",
+      "stepping_stone"
+    ],
+    "cohyponyms": []
+  },
+  "down": {
+    "synonyms": [],
+    "hypernyms": [
+      "play",
+      "turn"
+    ],
+    "hyponyms": [],
+    "cohyponyms": []
+  },
+  "state": {
+    "synonyms": [],
+    "hypernyms": [
+      "attribute"
+    ],
+    "hyponyms": [
+      "agency",
+      "condition",
+      "condition",
+      "conditionality",
+      "conflict",
+      "end",
+      "enmity",
+      "flawlessness",
+      "imminency",
+      "imminentness",
+      "imperfectness",
+      "impendency",
+      "isomerism",
+      "merchantability",
+      "motionlessness",
+      "multivalence",
+      "non-issue",
+      "order",
+      "ownership",
+      "point",
+      "position",
+      "preparedness",
+      "relationship",
+      "relationship",
+      "separation",
+      "stage",
+      "tribalism",
+      "unemployment",
+      "unification",
+      "union",
+      "unity",
+      "utilization",
+      "feeling",
+      "action",
+      "beingness",
+      "cleavage",
+      "damnation",
+      "death",
+      "death",
+      "delegacy",
+      "dependance",
+      "employ",
+      "freedom",
+      "heterozygosity",
+      "immatureness",
+      "immaturity",
+      "inaction",
+      "inactiveness",
+      "integrity",
+      "matureness",
+      "maturity",
+      "medium",
+      "nationhood",
+      "obligation",
+      "office",
+      "preparation",
+      "readiness",
+      "representation",
+      "revocation",
+      "status",
+      "status",
+      "utopia",
+      "wild",
+      "antagonism",
+      "being",
+      "dependence",
+      "disorder",
+      "existence",
+      "flux",
+      "forthcomingness",
+      "grace",
+      "imminence",
+      "impendence",
+      "inactivity",
+      "motion",
+      "neotony",
+      "nonbeing",
+      "ornamentation",
+      "paternity",
+      "perfection",
+      "plurality",
+      "polyvalence",
+      "polyvalence",
+      "polyvalency",
+      "polyvalency",
+      "receivership",
+      "situation",
+      "activeness",
+      "activity",
+      "annulment",
+      "degree",
+      "dependency",
+      "destruction",
+      "dystopia",
+      "employment",
+      "enlargement",
+      "homozygosity",
+      "hostility",
+      "illumination",
+      "imperfection",
+      "kalemia",
+      "level",
+      "lifelessness",
+      "multivalency",
+      "omnipotence",
+      "omniscience",
+      "power",
+      "skillfulness",
+      "stillness",
+      "technicality",
+      "turgor",
+      "wholeness",
+      "dead_letter",
+      "eternal_damnation",
+      "face_of_the_earth",
+      "ground_state",
+      "natural_state",
+      "ne_plus_ultra",
+      "saving_grace",
+      "state_of_affairs",
+      "state_of_flux",
+      "state_of_grace",
+      "state_of_nature",
+      "temporary_state"
+    ],
+    "cohyponyms": []
+  },
+  "land": {
+    "synonyms": [],
+    "hypernyms": [
+      "line of_work",
+      "line",
+      "occupation",
+      "job",
+      "business",
+      "line_of_work"
+    ],
+    "hyponyms": [],
+    "cohyponyms": []
+  },
+  "air": {
+    "synonyms": [],
+    "hypernyms": [
+      "travel",
+      "travelling",
+      "traveling"
+    ],
+    "hyponyms": [
+      "flying",
+      "flight"
+    ],
+    "cohyponyms": []
+  },
+  "group": {
+    "synonyms": [],
+    "hypernyms": [
+      "abstraction",
+      "abstract entity",
+      "abstract_entity"
+    ],
+    "hyponyms": [
+      "humanity",
+      "mankind",
+      "actinoid",
+      "actinon",
+      "citizenry",
+      "halogen",
+      "kingdom",
+      "lanthanide",
+      "lanthanon",
+      "multitude",
+      "swarm",
+      "varna",
+      "world",
+      "human race",
+      "human beings",
+      "man",
+      "aggregation",
+      "community",
+      "edition",
+      "lanthanoid",
+      "population",
+      "race",
+      "sainthood",
+      "scheme",
+      "straggle",
+      "system",
+      "humans",
+      "accumulation",
+      "actinide",
+      "arrangement",
+      "assemblage",
+      "circuit",
+      "cloud",
+      "collection",
+      "ethnos",
+      "mass",
+      "masses",
+      "humankind",
+      "association",
+      "people",
+      "people",
+      "people",
+      "series",
+      "subgroup",
+      "biotic_community",
+      "biological_group",
+      "electron_shell",
+      "ethnic_group",
+      "hoi_polloi",
+      "human_beings",
+      "human_race",
+      "rare-earth_element",
+      "rare_earth",
+      "social_group",
+      "the_great_unwashed"
+    ],
+    "cohyponyms": []
+  },
+  "best": {
+    "synonyms": [],
+    "hypernyms": [
+      "effort",
+      "attempt",
+      "endeavour",
+      "try",
+      "endeavor"
+    ],
+    "hyponyms": [],
+    "cohyponyms": []
+  },
+  "course": {
+    "synonyms": [],
+    "hypernyms": [
+      "action"
+    ],
+    "hyponyms": [
+      "collision course",
+      "way of_life",
+      "way",
+      "path",
+      "blind alley",
+      "blind_alley",
+      "collision_course",
+      "way_of_life"
+    ],
+    "cohyponyms": []
+  },
+  "need": {
+    "synonyms": [],
+    "hypernyms": [
+      "psychological feature",
+      "psychological_feature"
+    ],
+    "hyponyms": [
+      "impulse",
+      "life",
+      "ethics",
+      "morals",
+      "urge",
+      "morality",
+      "ethical_motive",
+      "irrational_motive",
+      "mental_energy",
+      "psychic_energy",
+      "rational_motive"
+    ],
+    "cohyponyms": []
+  },
+  "press": {
+    "synonyms": [],
+    "hypernyms": [
+      "push",
+      "pushing"
+    ],
+    "hyponyms": [
+      "compressing",
+      "impression",
+      "compression"
+    ],
+    "cohyponyms": []
+  },
+  "means": {
+    "synonyms": [],
+    "hypernyms": [
+      "implementation",
+      "effectuation"
+    ],
+    "hyponyms": [
+      "escape",
+      "fast track",
+      "open sesame",
+      "tooth",
+      "dint",
+      "road",
+      "salvation",
+      "voice",
+      "instrument",
+      "tool",
+      "stepping stone",
+      "expedient",
+      "desperate measure",
+      "wings",
+      "desperate_measure",
+      "fast_track",
+      "open_sesame",
+      "stepping_stone"
+    ],
+    "cohyponyms": []
+  },
+  "turn": {
+    "synonyms": [],
+    "hypernyms": [
+      "walk"
+    ],
+    "hyponyms": [],
+    "cohyponyms": []
+  },
+  "put": {
+    "synonyms": [],
+    "hypernyms": [
+      "option"
+    ],
+    "hyponyms": [],
+    "cohyponyms": []
+  }
+}

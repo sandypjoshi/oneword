@@ -1,0 +1,20 @@
+time: The ongoing sequence from past to future.
+right: The direction opposite to left.
+life: All living things on Earth.
+business: An organization that sells goods or services.
+year: A period of twelve months.
+government: The group that controls a country.
+health: The condition of being well.
+people: Human beings as a group.
+water: The clear liquid needed for life.
+way: A path, method, or direction.
+love: A strong feeling of caring deeply.
+work: Effort done to achieve something.
+system: A set of connected parts working together.
+place: A specific location or area.
+program: A plan of activities or instructions.
+world: The Earth and all its countries.
+home: The place where someone lives.
+hand: The part of the body at the end of the arm.
+school: A place where people learn.
+family: A group of related people. 

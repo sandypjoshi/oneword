@@ -1,0 +1,118 @@
+[
+  {
+    "id": 1,
+    "word": "entity",
+    "definitions": [
+      "that which is perceived or known or inferred to have its own distinct existence (living or nonliving)"
+    ],
+    "pos": "noun"
+  },
+  {
+    "id": 2,
+    "word": "physical entity",
+    "definitions": [
+      "an entity that has physical existence"
+    ],
+    "pos": "noun"
+  },
+  {
+    "id": 3,
+    "word": "abstraction",
+    "definitions": [
+      "a general concept formed by extracting common features from specific examples",
+      "the act of withdrawing or removing something",
+      "an abstract painting",
+      "a concept or idea not associated with any specific instance;",
+      "the process of formulating general concepts by abstracting common properties of instances",
+      "preoccupation with something to the exclusion of all else"
+    ],
+    "pos": "noun"
+  },
+  {
+    "id": 4,
+    "word": "abstract entity",
+    "definitions": [
+      "a general concept formed by extracting common features from specific examples"
+    ],
+    "pos": "noun"
+  },
+  {
+    "id": 5,
+    "word": "thing",
+    "definitions": [
+      "an action;",
+      "a separate and self-contained entity",
+      "a special situation;",
+      "a special abstraction;",
+      "an artifact;",
+      "an event;",
+      "a vaguely specified concern;",
+      "a statement regarded as an object;",
+      "an entity that is not named specifically;",
+      "any attribute or quality considered as having its own existence;",
+      "a special objective;",
+      "a persistent illogical feeling of desire or aversion;"
+    ],
+    "pos": "noun"
+  },
+  {
+    "id": 6,
+    "word": "object",
+    "definitions": [
+      "express or raise an objection or protest or criticism or express dissent;",
+      "a tangible and visible entity; an entity that can cast a shadow;",
+      "be averse to or express disapproval of;",
+      "the goal intended to be attained (and which is believed to be attainable);",
+      "(grammar) a constituent that is acted upon;",
+      "the focus of cognitions or feelings;",
+      "(computing) a discrete item that provides a description of virtually anything known to a computer;"
+    ],
+    "pos": "noun"
+  },
+  {
+    "id": 7,
+    "word": "physical object",
+    "definitions": [
+      "a tangible and visible entity; an entity that can cast a shadow;"
+    ],
+    "pos": "noun"
+  },
+  {
+    "id": 8,
+    "word": "whole",
+    "definitions": [
+      "an assemblage of parts that is regarded as a single entity;",
+      "including all components without exception; being one unit or constituting the full amount or extent or duration; complete;",
+      "all of something including all its component elements or parts;",
+      "to a complete degree or to the full or entire extent (`whole' is often used informally for `wholly');",
+      "(of siblings) having the same parents;",
+      "not injured or harmed",
+      "exhibiting or restored to vigorous good health;",
+      "acting together as a single undiversified whole;"
+    ],
+    "pos": "noun"
+  },
+  {
+    "id": 9,
+    "word": "unit",
+    "definitions": [
+      "any division of quantity accepted as a standard of measurement or exchange;",
+      "an assemblage of parts that is regarded as a single entity;",
+      "an individual or group or structure or other entity regarded as a structural or functional constituent of a whole;",
+      "an organization regarded as part of a larger social group;",
+      "a single undivided whole;",
+      "a single undivided natural thing occurring in the composition of something else;"
+    ],
+    "pos": "noun"
+  },
+  {
+    "id": 10,
+    "word": "congener",
+    "definitions": [
+      "a whole (a thing or person) of the same kind or category as another;",
+      "an animal or plant that bears a relationship to another (as related by common descent or by membership in the same genus)",
+      "a minor chemical constituent that gives a wine or liquor its distinctive character"
+    ],
+    "pos": "noun"
+  }
+]

@@ -1,211 +1,186 @@
 /**
- * Difficulty Calculation State Tracker
- * 
- * This module helps track which words have already had their difficulty calculated,
- * allowing for efficient resumption of processing.
+ * Difficulty calculation state tracking module
+ * Tracks which words have been processed for difficulty calculation
  */
 
 const fs = require('fs');
 const path = require('path');
 
-// Configuration
-const STATE_FILE = path.join(__dirname, 'difficulty-state.json');
+// State file path
+const STATE_FILE_PATH = path.join(__dirname, 'difficulty-state.json');
 
-/**
- * Default state object
- */
+// Default state
 const DEFAULT_STATE = {
   lastProcessedId: 0,
   totalProcessed: 0,
-  totalWithFrequency: 0,
-  totalWithoutFrequency: 0,
+  totalSuccessful: 0,
+  totalFailed: 0,
+  totalSkipped: 0,
+  processedRanges: [],
   processingStartTime: new Date().toISOString(),
-  lastUpdateTime: new Date().toISOString(),
-  processedRanges: [] // Tracks ranges of IDs that have been processed
+  lastRunTime: new Date().toISOString()
 };
 
 /**
- * Load the difficulty calculation state from file
- * @returns {Object} The loaded state or default state if file doesn't exist
+ * Load the current state from file or create a new one
+ * @returns {Object} The current state
  */
 function loadState() {
   try {
-    if (fs.existsSync(STATE_FILE)) {
-      const stateData = fs.readFileSync(STATE_FILE, 'utf8');
-      return JSON.parse(stateData);
+    if (fs.existsSync(STATE_FILE_PATH)) {
+      const state = JSON.parse(fs.readFileSync(STATE_FILE_PATH, 'utf8'));
+      console.log('Loaded existing difficulty calculation state');
+      return state;
     }
   } catch (error) {
-    console.error(`Error loading difficulty state: ${error.message}`);
+    console.error('Error loading difficulty state file:', error);
   }
-  
-  // Return default state if loading fails
-  return { ...DEFAULT_STATE };
+
+  // Create new state file if it doesn't exist
+  console.log('Creating new difficulty calculation state');
+  saveState(DEFAULT_STATE);
+  return DEFAULT_STATE;
 }
 
 /**
- * Save the difficulty calculation state to file
- * @param {Object} state - The state to save
- * @returns {Boolean} Whether the save was successful
+ * Save the current state to file
+ * @param {Object} state The state to save
  */
 function saveState(state) {
   try {
-    const updatedState = {
-      ...state,
-      lastUpdateTime: new Date().toISOString()
-    };
-    
-    fs.writeFileSync(STATE_FILE, JSON.stringify(updatedState, null, 2));
-    return true;
+    fs.writeFileSync(
+      STATE_FILE_PATH,
+      JSON.stringify({
+        ...state,
+        lastRunTime: new Date().toISOString()
+      }, null, 2)
+    );
   } catch (error) {
-    console.error(`Error saving difficulty state: ${error.message}`);
-    return false;
+    console.error('Error saving difficulty state file:', error);
   }
-}
-
-/**
- * Update the state with newly processed word IDs
- * @param {Number} startId - Starting ID of processed range
- * @param {Number} endId - Ending ID of processed range
- * @param {Number} withFrequency - Count of words with frequency data
- * @param {Number} withoutFrequency - Count of words without frequency data
- * @returns {Object} Updated state
- */
-function updateState(startId, endId, withFrequency, withoutFrequency) {
-  const state = loadState();
-  
-  // Update counts
-  state.totalProcessed += (withFrequency + withoutFrequency);
-  state.totalWithFrequency += withFrequency;
-  state.totalWithoutFrequency += withoutFrequency;
-  
-  // Update last processed ID if this batch went further
-  if (endId > state.lastProcessedId) {
-    state.lastProcessedId = endId;
-  }
-  
-  // Add or merge this range with existing ranges
-  addProcessedRange(state, startId, endId);
-  
-  // Save the updated state
-  saveState(state);
-  
-  return state;
-}
-
-/**
- * Add a processed range to the state, merging with existing ranges if possible
- * @param {Object} state - The state object
- * @param {Number} startId - Start of range
- * @param {Number} endId - End of range
- */
-function addProcessedRange(state, startId, endId) {
-  if (!state.processedRanges) {
-    state.processedRanges = [];
-  }
-  
-  // Add new range
-  const newRange = { start: startId, end: endId };
-  
-  // Try to merge with existing ranges
-  const mergedRanges = [];
-  let merged = false;
-  
-  for (const range of state.processedRanges) {
-    // Check if ranges overlap or are adjacent
-    if (
-      (range.start <= newRange.end + 1 && range.end + 1 >= newRange.start) ||
-      (newRange.start <= range.end + 1 && newRange.end + 1 >= range.start)
-    ) {
-      // Merge ranges
-      newRange.start = Math.min(newRange.start, range.start);
-      newRange.end = Math.max(newRange.end, range.end);
-      merged = true;
-    } else {
-      // Keep non-overlapping range
-      mergedRanges.push(range);
-    }
-  }
-  
-  // Add the new/merged range
-  mergedRanges.push(newRange);
-  
-  // Sort ranges
-  state.processedRanges = mergedRanges.sort((a, b) => a.start - b.start);
 }
 
 /**
  * Check if a word ID has already been processed
- * @param {Number} wordId - The word ID to check
- * @returns {Boolean} Whether the ID has been processed
+ * @param {number} wordId The word ID to check
+ * @param {Object} state The current state
+ * @returns {boolean} True if processed, false otherwise
  */
-function isWordProcessed(wordId) {
-  const state = loadState();
+function isWordProcessed(wordId, state) {
+  if (!state.processedRanges || !state.processedRanges.length) return false;
   
-  if (!state.processedRanges || state.processedRanges.length === 0) {
-    return false;
-  }
-  
-  // Check if the ID falls within any processed range
+  // Check if ID is in any of the processed ranges
   return state.processedRanges.some(range => 
     wordId >= range.start && wordId <= range.end
   );
 }
 
 /**
- * Get unprocessed ranges within a specified range
- * @param {Number} startId - Start of target range
- * @param {Number} endId - End of target range
- * @returns {Array} Array of unprocessed ranges [{start, end}]
+ * Add a processed word ID range to the state
+ * @param {number} startId The start ID of the range
+ * @param {number} endId The end ID of the range
+ * @param {Object} state The current state
+ * @returns {Object} The updated state
  */
-function getUnprocessedRanges(startId, endId) {
-  const state = loadState();
+function addProcessedRange(startId, endId, state) {
+  const newState = { ...state };
   
-  if (!state.processedRanges || state.processedRanges.length === 0) {
-    // If nothing has been processed, return the entire range
-    return [{ start: startId, end: endId }];
+  if (!newState.processedRanges) {
+    newState.processedRanges = [];
   }
   
-  // Sort ranges
-  const sortedRanges = [...state.processedRanges].sort((a, b) => a.start - b.start);
+  // Add the new range
+  newState.processedRanges.push({
+    start: startId,
+    end: endId,
+    timestamp: new Date().toISOString()
+  });
   
-  // Find gaps in the processed ranges
-  const unprocessedRanges = [];
-  let currentStart = startId;
+  // Merge overlapping ranges
+  newState.processedRanges = mergeRanges(newState.processedRanges);
   
-  for (const range of sortedRanges) {
-    // If there's a gap before this range, add it
-    if (currentStart < range.start) {
-      unprocessedRanges.push({
-        start: currentStart,
-        end: Math.min(range.start - 1, endId)
-      });
-    }
-    
-    // Move current start past this range
-    currentStart = Math.max(currentStart, range.end + 1);
-    
-    // If we've moved past the end of our target range, break
-    if (currentStart > endId) {
-      break;
-    }
-  }
-  
-  // If there's a gap after the last range to the end, add it
-  if (currentStart <= endId) {
-    unprocessedRanges.push({
-      start: currentStart,
-      end: endId
-    });
-  }
-  
-  return unprocessedRanges;
+  return newState;
 }
 
-// Export functions
+/**
+ * Merge overlapping ranges
+ * @param {Array} ranges The ranges to merge
+ * @returns {Array} The merged ranges
+ */
+function mergeRanges(ranges) {
+  if (!ranges || ranges.length <= 1) return ranges;
+  
+  // Sort ranges by start ID
+  const sortedRanges = [...ranges].sort((a, b) => a.start - b.start);
+  
+  const mergedRanges = [sortedRanges[0]];
+  
+  for (let i = 1; i < sortedRanges.length; i++) {
+    const currentRange = sortedRanges[i];
+    const lastMerged = mergedRanges[mergedRanges.length - 1];
+    
+    // Check if ranges overlap
+    if (currentRange.start <= lastMerged.end + 1) {
+      // Merge ranges
+      lastMerged.end = Math.max(lastMerged.end, currentRange.end);
+      lastMerged.timestamp = new Date().toISOString();
+    } else {
+      // Add as new range
+      mergedRanges.push(currentRange);
+    }
+  }
+  
+  return mergedRanges;
+}
+
+/**
+ * Update state with newly processed words
+ * @param {Object} state The current state
+ * @param {Object} update The update data
+ * @returns {Object} The updated state
+ */
+function updateState(state, update) {
+  const newState = { 
+    ...state,
+    totalProcessed: (state.totalProcessed || 0) + (update.processed || 0),
+    totalSuccessful: (state.totalSuccessful || 0) + (update.successful || 0),
+    totalFailed: (state.totalFailed || 0) + (update.failed || 0),
+    totalSkipped: (state.totalSkipped || 0) + (update.skipped || 0),
+    lastProcessedId: Math.max(state.lastProcessedId || 0, update.lastProcessedId || 0),
+    lastRunTime: new Date().toISOString()
+  };
+  
+  // Add processed range if IDs are provided
+  if (update.startId !== undefined && update.endId !== undefined) {
+    return addProcessedRange(update.startId, update.endId, newState);
+  }
+  
+  return newState;
+}
+
+/**
+ * Get SQL query for finding unprocessed enriched words
+ * @param {number} limit Maximum number of words to return
+ * @returns {string} SQL query
+ */
+function getUnprocessedEnrichedWordsQuery(limit = 100) {
+  return `
+    SELECT id, word, frequency, syllable_count, pos, enrichment_eligible
+    FROM words
+    WHERE 
+      enrichment_eligible = 'eligible-word'
+      AND frequency IS NOT NULL
+      AND difficulty_score IS NULL
+    ORDER BY id
+    LIMIT ${limit};
+  `;
+}
+
 module.exports = {
   loadState,
   saveState,
-  updateState,
   isWordProcessed,
-  getUnprocessedRanges
+  addProcessedRange,
+  updateState,
+  getUnprocessedEnrichedWordsQuery
 }; 

@@ -1,0 +1,1232 @@
+[
+  {
+    "id": 2418,
+    "word": "time",
+    "pos": "noun",
+    "shortDefinition": "A measure of minutes, hours, days, and years passing",
+    "owadPhrases": [
+      "moving clock",
+      "passing moment"
+    ]
+  },
+  {
+    "id": 2240,
+    "word": "right",
+    "pos": "noun",
+    "shortDefinition": "A fair and legal thing that someone is allowed to do",
+    "owadPhrases": [
+      "legal freedom",
+      "allowed choice"
+    ]
+  },
+  {
+    "id": 2931,
+    "word": "use",
+    "pos": "noun",
+    "shortDefinition": "A way something can be helpful or work for something",
+    "owadPhrases": [
+      "helpful purpose",
+      "working function"
+    ]
+  },
+  {
+    "id": 2660,
+    "word": "life",
+    "pos": "noun",
+    "shortDefinition": "The time from birth to death when something is alive",
+    "owadPhrases": [
+      "living journey",
+      "active existence"
+    ]
+  },
+  {
+    "id": 2230,
+    "word": "left",
+    "pos": "noun",
+    "shortDefinition": "The side or direction opposite to right",
+    "owadPhrases": [
+      "opposite side",
+      "counter direction"
+    ]
+  },
+  {
+    "id": 2360,
+    "word": "house",
+    "pos": "noun",
+    "shortDefinition": "A building where people live and make their home",
+    "owadPhrases": [
+      "living space",
+      "family shelter"
+    ]
+  },
+  {
+    "id": 2922,
+    "word": "out",
+    "pos": "noun",
+    "shortDefinition": "A way or place that leads to the exit",
+    "owadPhrases": [
+      "exit path",
+      "leaving way"
+    ]
+  },
+  {
+    "id": 2941,
+    "word": "way",
+    "pos": "noun",
+    "shortDefinition": "A path, road, or method to reach somewhere",
+    "owadPhrases": [
+      "travel path",
+      "moving route"
+    ]
+  },
+  {
+    "id": 1,
+    "word": "down",
+    "pos": "noun",
+    "shortDefinition": "A movement or direction toward a lower place",
+    "owadPhrases": [
+      "falling path",
+      "lower direction"
+    ]
+  },
+  {
+    "id": 2472,
+    "word": "state",
+    "pos": "noun",
+    "shortDefinition": "A region that is part of a country",
+    "owadPhrases": [
+      "governed region",
+      "country division"
+    ]
+  },
+  {
+    "id": 2377,
+    "word": "land",
+    "pos": "noun",
+    "shortDefinition": "The solid ground of Earth where people live",
+    "owadPhrases": [
+      "ground area",
+      "earth surface"
+    ]
+  },
+  {
+    "id": 2149,
+    "word": "air",
+    "pos": "noun",
+    "shortDefinition": "The invisible gas that surrounds us and we breathe",
+    "owadPhrases": [
+      "breathing gas",
+      "atmosphere layer"
+    ]
+  },
+  {
+    "id": 255,
+    "word": "group",
+    "pos": "noun",
+    "shortDefinition": "A number of people or things together in one place",
+    "owadPhrases": [
+      "gathered team",
+      "united collection"
+    ]
+  },
+  {
+    "id": 570,
+    "word": "best",
+    "pos": "noun",
+    "shortDefinition": "The highest quality or most excellent choice possible",
+    "owadPhrases": [
+      "top choice",
+      "winning option"
+    ]
+  },
+  {
+    "id": 2457,
+    "word": "course",
+    "pos": "noun",
+    "shortDefinition": "A series of classes about a specific subject",
+    "owadPhrases": [
+      "learning program",
+      "study series"
+    ]
+  },
+  {
+    "id": 2460,
+    "word": "need",
+    "pos": "noun",
+    "shortDefinition": "Something that is required or must be had",
+    "owadPhrases": [
+      "a basic requirement",
+      "an essential thing"
+    ]
+  },
+  {
+    "id": 2536,
+    "word": "press",
+    "pos": "noun",
+    "shortDefinition": "A machine that applies force to print or shape things",
+    "owadPhrases": [
+      "a printing machine",
+      "a pressure tool"
+    ]
+  },
+  {
+    "id": 2715,
+    "word": "means",
+    "pos": "noun",
+    "shortDefinition": "A way or method to make something happen",
+    "owadPhrases": [
+      "a useful method",
+      "a working solution"
+    ]
+  },
+  {
+    "id": 2138,
+    "word": "turn",
+    "pos": "noun",
+    "shortDefinition": "A change in direction or movement in a circle",
+    "owadPhrases": [
+      "a direction change",
+      "a rotating move"
+    ]
+  },
+  {
+    "id": 408,
+    "word": "put",
+    "pos": "noun",
+    "shortDefinition": "An act of placing or moving something somewhere",
+    "owadPhrases": [
+      "a placing action",
+      "a movement choice"
+    ]
+  },
+  {
+    "id": 520,
+    "word": "form",
+    "pos": "noun",
+    "shortDefinition": "A paper with spaces to fill in information",
+    "owadPhrases": [
+      "an input document",
+      "a data sheet"
+    ]
+  },
+  {
+    "id": 2392,
+    "word": "find",
+    "pos": "noun",
+    "shortDefinition": "Something valuable or interesting that was discovered",
+    "owadPhrases": [
+      "a lucky discovery",
+      "a found treasure"
+    ]
+  },
+  {
+    "id": 2775,
+    "word": "change",
+    "pos": "noun",
+    "shortDefinition": "A difference in something compared to before",
+    "owadPhrases": [
+      "a new state",
+      "a different form"
+    ]
+  },
+  {
+    "id": 2799,
+    "word": "death",
+    "pos": "noun",
+    "shortDefinition": "The end of life when all body functions stop",
+    "owadPhrases": [
+      "a final ending",
+      "a life closure"
+    ]
+  },
+  {
+    "id": 2864,
+    "word": "stage",
+    "pos": "noun",
+    "shortDefinition": "A raised platform where performances happen",
+    "owadPhrases": [
+      "a performance space",
+      "an acting platform"
+    ]
+  },
+  {
+    "id": 2262,
+    "word": "room",
+    "pos": "noun",
+    "shortDefinition": "A separate area within a building enclosed by walls",
+    "owadPhrases": [
+      "a living space",
+      "an enclosed area"
+    ]
+  },
+  {
+    "id": 2276,
+    "word": "school",
+    "pos": "noun",
+    "shortDefinition": "A place where people learn and study together",
+    "owadPhrases": [
+      "a learning center",
+      "a knowledge hub"
+    ]
+  },
+  {
+    "id": 2209,
+    "word": "people",
+    "pos": "noun",
+    "shortDefinition": "Human beings as individuals or groups",
+    "owadPhrases": [
+      "a living crowd",
+      "a human group"
+    ]
+  },
+  {
+    "id": 2378,
+    "word": "language",
+    "pos": "noun",
+    "shortDefinition": "A system of words used to communicate",
+    "owadPhrases": [
+      "a speech system",
+      "a word bridge"
+    ]
+  },
+  {
+    "id": 2372,
+    "word": "kind",
+    "pos": "noun",
+    "shortDefinition": "A specific type or category of something",
+    "owadPhrases": [
+      "a sorted group",
+      "a matched set"
+    ]
+  },
+  {
+    "id": 2289,
+    "word": "service",
+    "pos": "noun",
+    "shortDefinition": "Work done to help or benefit others",
+    "owadPhrases": [
+      "a helping hand",
+      "a useful task"
+    ]
+  },
+  {
+    "id": 2313,
+    "word": "side",
+    "pos": "noun",
+    "shortDefinition": "An outer surface or edge of something",
+    "owadPhrases": [
+      "an edge part",
+      "a border line"
+    ]
+  },
+  {
+    "id": 2185,
+    "word": "night",
+    "pos": "noun",
+    "shortDefinition": "The dark hours between sunset and sunrise",
+    "owadPhrases": [
+      "a dark time",
+      "a sleeping period"
+    ]
+  },
+  {
+    "id": 2190,
+    "word": "office",
+    "pos": "noun",
+    "shortDefinition": "A place where business work is done",
+    "owadPhrases": [
+      "a work space",
+      "a business room"
+    ]
+  },
+  {
+    "id": 2271,
+    "word": "run",
+    "pos": "noun",
+    "shortDefinition": "Fast movement using legs",
+    "owadPhrases": [
+      "a quick motion",
+      "a speed burst"
+    ]
+  },
+  {
+    "id": 2171,
+    "word": "morning",
+    "pos": "noun",
+    "shortDefinition": "The early part of day after sunrise",
+    "owadPhrases": [
+      "a dawn time",
+      "a rising light"
+    ]
+  },
+  {
+    "id": 2213,
+    "word": "place",
+    "pos": "noun",
+    "shortDefinition": "A specific location or area",
+    "owadPhrases": [
+      "a fixed spot",
+      "a set location"
+    ]
+  },
+  {
+    "id": 2151,
+    "word": "American",
+    "pos": "noun",
+    "shortDefinition": "A person from the United States",
+    "owadPhrases": [
+      "a nation member",
+      "a states citizen"
+    ]
+  },
+  {
+    "id": 220,
+    "word": "march",
+    "pos": "noun",
+    "shortDefinition": "A group walking together with purpose",
+    "owadPhrases": [
+      "a protest walk",
+      "a group parade"
+    ]
+  },
+  {
+    "id": 2847,
+    "word": "whole",
+    "pos": "noun",
+    "shortDefinition": "A complete thing with all parts included",
+    "owadPhrases": [
+      "a complete unit",
+      "an entire piece"
+    ]
+  },
+  {
+    "id": 237,
+    "word": "food",
+    "pos": "noun",
+    "shortDefinition": "Things eaten to provide energy and nutrition",
+    "owadPhrases": [
+      "a daily fuel",
+      "a life source"
+    ]
+  },
+  {
+    "id": 2658,
+    "word": "act",
+    "pos": "noun",
+    "shortDefinition": "Something that someone does or makes happen",
+    "owadPhrases": [
+      "an action taken",
+      "a performed deed"
+    ]
+  },
+  {
+    "id": 280,
+    "word": "going",
+    "pos": "noun",
+    "shortDefinition": "The act of moving from one place to another",
+    "owadPhrases": [
+      "a moving path",
+      "a journey start"
+    ]
+  },
+  {
+    "id": 2168,
+    "word": "post",
+    "pos": "noun",
+    "shortDefinition": "A message or update shared online",
+    "owadPhrases": [
+      "a shared message",
+      "an online update"
+    ]
+  },
+  {
+    "id": 269,
+    "word": "care",
+    "pos": "noun",
+    "shortDefinition": "Attention given to keep something good or healthy",
+    "owadPhrases": [
+      "a gentle touch",
+      "a watchful eye"
+    ]
+  },
+  {
+    "id": 2411,
+    "word": "process",
+    "pos": "noun",
+    "shortDefinition": "A series of steps to achieve something",
+    "owadPhrases": [
+      "a working method",
+      "a step sequence"
+    ]
+  },
+  {
+    "id": 2633,
+    "word": "run",
+    "pos": "noun",
+    "shortDefinition": "Moving quickly on foot at full speed",
+    "owadPhrases": [
+      "a swift move",
+      "a rapid pace"
+    ]
+  },
+  {
+    "id": 273,
+    "word": "space",
+    "pos": "noun",
+    "shortDefinition": "An empty area available for use",
+    "owadPhrases": [
+      "an open area",
+      "a free zone"
+    ]
+  },
+  {
+    "id": 2409,
+    "word": "cell",
+    "pos": "noun",
+    "shortDefinition": "The smallest living unit of life",
+    "owadPhrases": [
+      "a life unit",
+      "a tiny builder"
+    ]
+  },
+  {
+    "id": 2,
+    "word": "nightcap",
+    "pos": "noun",
+    "shortDefinition": "A drink taken before going to bed",
+    "owadPhrases": [
+      "a bedtime drink",
+      "a final sip"
+    ]
+  },
+  {
+    "id": 3,
+    "word": "chinaman",
+    "pos": "noun",
+    "shortDefinition": "A cricket ball that spins from off to leg",
+    "owadPhrases": [
+      "a spinning ball",
+      "a tricky delivery"
+    ]
+  },
+  {
+    "id": 4,
+    "word": "squash",
+    "pos": "noun",
+    "shortDefinition": "A game played with rackets in an enclosed court",
+    "owadPhrases": [
+      "a court game",
+      "a racket sport"
+    ]
+  },
+  {
+    "id": 5,
+    "word": "manhood",
+    "pos": "noun",
+    "shortDefinition": "The state of being an adult male",
+    "owadPhrases": [
+      "a mature state",
+      "an adult phase"
+    ]
+  },
+  {
+    "id": 6,
+    "word": "bat",
+    "pos": "noun",
+    "shortDefinition": "A wooden stick used to hit balls in sports",
+    "owadPhrases": [
+      "a hitting tool",
+      "a game stick"
+    ]
+  },
+  {
+    "id": 7,
+    "word": "frame",
+    "pos": "noun",
+    "shortDefinition": "A border that surrounds and supports something",
+    "owadPhrases": [
+      "a supporting edge",
+      "a firm border"
+    ]
+  },
+  {
+    "id": 8,
+    "word": "bowls",
+    "pos": "noun",
+    "shortDefinition": "A game played by rolling balls toward a target",
+    "owadPhrases": [
+      "a rolling game",
+      "a target sport"
+    ]
+  },
+  {
+    "id": 9,
+    "word": "goalkeeper",
+    "pos": "noun",
+    "shortDefinition": "A player who defends the goal in sports",
+    "owadPhrases": [
+      "a goal defender",
+      "a net guard"
+    ]
+  },
+  {
+    "id": 10,
+    "word": "golf",
+    "pos": "noun",
+    "shortDefinition": "A game of hitting balls into holes with clubs",
+    "owadPhrases": [
+      "a club sport",
+      "a hole game"
+    ]
+  },
+  {
+    "id": 11,
+    "word": "quoits",
+    "pos": "noun",
+    "shortDefinition": "A game of throwing rings at a target peg",
+    "owadPhrases": [
+      "a ring toss",
+      "a target game"
+    ]
+  },
+  {
+    "id": 12,
+    "word": "dribble",
+    "pos": "noun",
+    "shortDefinition": "Small drops of liquid falling continuously",
+    "owadPhrases": [
+      "a liquid drop",
+      "a falling stream"
+    ]
+  },
+  {
+    "id": 13,
+    "word": "contract",
+    "pos": "noun",
+    "shortDefinition": "A written agreement between two or more parties",
+    "owadPhrases": [
+      "a legal bond",
+      "a binding deal"
+    ]
+  },
+  {
+    "id": 14,
+    "word": "monte",
+    "pos": "noun",
+    "shortDefinition": "A gambling card game of Spanish origin",
+    "owadPhrases": [
+      "a card game",
+      "a betting match"
+    ]
+  },
+  {
+    "id": 15,
+    "word": "chicago",
+    "pos": "noun",
+    "shortDefinition": "A card game scoring points with poker hands",
+    "owadPhrases": [
+      "a poker variant",
+      "a point game"
+    ]
+  },
+  {
+    "id": 16,
+    "word": "canasta",
+    "pos": "noun",
+    "shortDefinition": "A card game making sets and sequences",
+    "owadPhrases": [
+      "a set game",
+      "a card match"
+    ]
+  },
+  {
+    "id": 17,
+    "word": "bridge",
+    "pos": "noun",
+    "shortDefinition": "A card game played by four players in pairs",
+    "owadPhrases": [
+      "a partner game",
+      "a trick sport"
+    ]
+  },
+  {
+    "id": 18,
+    "word": "michigan",
+    "pos": "noun",
+    "shortDefinition": "A card game similar to casino",
+    "owadPhrases": [
+      "a table game",
+      "a card sport"
+    ]
+  },
+  {
+    "id": 19,
+    "word": "rum",
+    "pos": "noun",
+    "shortDefinition": "A spirit made from sugarcane",
+    "owadPhrases": [
+      "a cane drink",
+      "a sweet spirit"
+    ]
+  },
+  {
+    "id": 20,
+    "word": "klondike",
+    "pos": "noun",
+    "shortDefinition": "A solitaire card game using seven piles",
+    "owadPhrases": [
+      "a solo game",
+      "a patience match"
+    ]
+  },
+  {
+    "id": 21,
+    "word": "hearts",
+    "pos": "noun",
+    "shortDefinition": "A card game avoiding taking heart cards",
+    "owadPhrases": [
+      "a trick game",
+      "a penalty match"
+    ]
+  },
+  {
+    "id": 22,
+    "word": "samba",
+    "pos": "noun",
+    "shortDefinition": "A lively Brazilian dance in two-four time",
+    "owadPhrases": [
+      "a latin dance",
+      "a rhythm move"
+    ]
+  },
+  {
+    "id": 23,
+    "word": "stud",
+    "pos": "noun",
+    "shortDefinition": "A poker game with cards dealt face up",
+    "owadPhrases": [
+      "a poker game",
+      "an open match"
+    ]
+  },
+  {
+    "id": 24,
+    "word": "nim",
+    "pos": "noun",
+    "shortDefinition": "A game of removing objects from piles",
+    "owadPhrases": [
+      "a taking game",
+      "a pile match"
+    ]
+  },
+  {
+    "id": 25,
+    "word": "ticktacktoe",
+    "pos": "noun",
+    "shortDefinition": "A game marking X and O in nine squares",
+    "owadPhrases": [
+      "a grid game",
+      "a marking match"
+    ]
+  },
+  {
+    "id": 2755,
+    "word": "close",
+    "pos": "noun",
+    "shortDefinition": "The end or final part of something",
+    "owadPhrases": [
+      "a final moment",
+      "an ending point"
+    ]
+  },
+  {
+    "id": 2768,
+    "word": "force",
+    "pos": "noun",
+    "shortDefinition": "Power or strength used to make something happen",
+    "owadPhrases": [
+      "a strong power",
+      "a physical strength"
+    ]
+  },
+  {
+    "id": 2853,
+    "word": "play",
+    "pos": "noun",
+    "shortDefinition": "Fun activity for enjoyment or recreation",
+    "owadPhrases": [
+      "a fun activity",
+      "a joyful game"
+    ]
+  },
+  {
+    "id": 2177,
+    "word": "rise",
+    "pos": "noun",
+    "shortDefinition": "Upward movement or increase in amount",
+    "owadPhrases": [
+      "an upward movement",
+      "a growing increase"
+    ]
+  },
+  {
+    "id": 3011,
+    "word": "round",
+    "pos": "noun",
+    "shortDefinition": "A complete cycle or series in a game",
+    "owadPhrases": [
+      "a complete cycle",
+      "a full turn"
+    ]
+  },
+  {
+    "id": 1109,
+    "word": "using",
+    "pos": "noun",
+    "shortDefinition": "The act of employing something useful",
+    "owadPhrases": [
+      "an active employment",
+      "a practical application"
+    ]
+  },
+  {
+    "id": 2359,
+    "word": "game",
+    "pos": "noun",
+    "shortDefinition": "An activity with rules for fun or competition",
+    "owadPhrases": [
+      "a fun contest",
+      "a playful competition"
+    ]
+  },
+  {
+    "id": 2210,
+    "word": "reach",
+    "pos": "noun",
+    "shortDefinition": "The distance or extent something extends to",
+    "owadPhrases": [
+      "an extending distance",
+      "a spanning length"
+    ]
+  },
+  {
+    "id": 2671,
+    "word": "move",
+    "pos": "noun",
+    "shortDefinition": "An action or change of position",
+    "owadPhrases": [
+      "a position change",
+      "an action step"
+    ]
+  },
+  {
+    "id": 675,
+    "word": "road",
+    "pos": "noun",
+    "shortDefinition": "A paved path for vehicles",
+    "owadPhrases": [
+      "a travel path",
+      "a paved way"
+    ]
+  },
+  {
+    "id": 2456,
+    "word": "fall",
+    "pos": "noun",
+    "shortDefinition": "A downward movement due to gravity",
+    "owadPhrases": [
+      "a downward drop",
+      "a sudden descent"
+    ]
+  },
+  {
+    "id": 222,
+    "word": "person",
+    "pos": "noun",
+    "shortDefinition": "A human being",
+    "owadPhrases": [
+      "a human individual",
+      "a living being"
+    ]
+  },
+  {
+    "id": 366,
+    "word": "cut",
+    "pos": "noun",
+    "shortDefinition": "A split or opening made by cutting",
+    "owadPhrases": [
+      "a sharp slice",
+      "a clean break"
+    ]
+  },
+  {
+    "id": 2432,
+    "word": "thing",
+    "pos": "noun",
+    "shortDefinition": "Any object or item that exists",
+    "owadPhrases": [
+      "an existing object",
+      "a physical item"
+    ]
+  },
+  {
+    "id": 2818,
+    "word": "step",
+    "pos": "noun",
+    "shortDefinition": "A single foot movement while walking",
+    "owadPhrases": [
+      "a foot movement",
+      "a walking motion"
+    ]
+  },
+  {
+    "id": 2438,
+    "word": "cause",
+    "pos": "noun",
+    "shortDefinition": "Something that makes an effect happen",
+    "owadPhrases": [
+      "a driving reason",
+      "a source factor"
+    ]
+  },
+  {
+    "id": 2193,
+    "word": "speed",
+    "pos": "noun",
+    "shortDefinition": "Rate of motion or movement",
+    "owadPhrases": [
+      "a moving rate",
+      "a quick pace"
+    ]
+  },
+  {
+    "id": 1094,
+    "word": "path",
+    "pos": "noun",
+    "shortDefinition": "A way for walking or travel",
+    "owadPhrases": [
+      "a walking trail",
+      "a marked route"
+    ]
+  },
+  {
+    "id": 3019,
+    "word": "interest",
+    "pos": "noun",
+    "shortDefinition": "Attention or curiosity about something",
+    "owadPhrases": [
+      "a keen curiosity",
+      "an active concern"
+    ]
+  },
+  {
+    "id": 2122,
+    "word": "foot",
+    "pos": "noun",
+    "shortDefinition": "The body part used for standing and walking",
+    "owadPhrases": [
+      "a body part",
+      "a walking base"
+    ]
+  },
+  {
+    "id": 2224,
+    "word": "wind",
+    "pos": "noun",
+    "shortDefinition": "Moving air in the atmosphere",
+    "owadPhrases": [
+      "a moving air",
+      "a natural flow"
+    ]
+  },
+  {
+    "id": 2272,
+    "word": "spread",
+    "pos": "noun",
+    "shortDefinition": "The area or distance covered by something",
+    "owadPhrases": [
+      "a wide coverage",
+      "an extended range"
+    ]
+  },
+  {
+    "id": 2373,
+    "word": "fight",
+    "pos": "noun",
+    "shortDefinition": "A violent struggle or conflict",
+    "owadPhrases": [
+      "a physical conflict",
+      "a heated battle"
+    ]
+  },
+  {
+    "id": 2913,
+    "word": "rock",
+    "pos": "noun",
+    "shortDefinition": "A hard mineral material forming part of earth",
+    "owadPhrases": [
+      "a solid stone",
+      "a hard mineral"
+    ]
+  },
+  {
+    "id": 2909,
+    "word": "wave",
+    "pos": "noun",
+    "shortDefinition": "A moving ridge on water's surface",
+    "owadPhrases": [
+      "a water ridge",
+      "a rolling motion"
+    ]
+  },
+  {
+    "id": 369,
+    "word": "plant",
+    "pos": "noun",
+    "shortDefinition": "A living thing that grows from the ground using sunlight",
+    "owadPhrases": [
+      "a growing organism",
+      "a rooted life"
+    ]
+  },
+  {
+    "id": 1180,
+    "word": "knowledge",
+    "pos": "noun",
+    "shortDefinition": "Information and skills gained through learning and experience",
+    "owadPhrases": [
+      "a learned truth",
+      "a mental treasure"
+    ]
+  },
+  {
+    "id": 2380,
+    "word": "call",
+    "pos": "noun",
+    "shortDefinition": "A phone conversation or attempt to reach someone",
+    "owadPhrases": [
+      "a voice connection",
+      "a phone contact"
+    ]
+  },
+  {
+    "id": 2467,
+    "word": "action",
+    "pos": "noun",
+    "shortDefinition": "Something done or performed to achieve a purpose",
+    "owadPhrases": [
+      "a done deed",
+      "a purposeful move"
+    ]
+  },
+  {
+    "id": 2470,
+    "word": "loss",
+    "pos": "noun",
+    "shortDefinition": "The state of no longer having something you once had",
+    "owadPhrases": [
+      "a missing piece",
+      "a taken treasure"
+    ]
+  },
+  {
+    "id": 2486,
+    "word": "leave",
+    "pos": "noun",
+    "shortDefinition": "Permission to be away from work or duty",
+    "owadPhrases": [
+      "a time off",
+      "an approved break"
+    ]
+  },
+  {
+    "id": 2602,
+    "word": "box",
+    "pos": "noun",
+    "shortDefinition": "A container with flat sides and a lid",
+    "owadPhrases": [
+      "a storage cube",
+      "a holding space"
+    ]
+  },
+  {
+    "id": 2748,
+    "word": "service",
+    "pos": "noun",
+    "shortDefinition": "Help or work done for others",
+    "owadPhrases": [
+      "a helpful task",
+      "a useful deed"
+    ]
+  },
+  {
+    "id": 2769,
+    "word": "single",
+    "pos": "noun",
+    "shortDefinition": "One item or person on their own",
+    "owadPhrases": [
+      "a lone unit",
+      "an individual piece"
+    ]
+  },
+  {
+    "id": 2814,
+    "word": "fell",
+    "pos": "noun",
+    "shortDefinition": "A hill or stretch of high moorland",
+    "owadPhrases": [
+      "a highland slope",
+      "a mountain rise"
+    ]
+  },
+  {
+    "id": 2944,
+    "word": "bank",
+    "pos": "noun",
+    "shortDefinition": "A place where people keep and manage their money",
+    "owadPhrases": [
+      "a money house",
+      "a savings place"
+    ]
+  },
+  {
+    "id": 2969,
+    "word": "start",
+    "pos": "noun",
+    "shortDefinition": "The point or time when something begins",
+    "owadPhrases": [
+      "a first moment",
+      "a beginning point"
+    ]
+  },
+  {
+    "id": 2115,
+    "word": "approach",
+    "pos": "noun",
+    "shortDefinition": "A way of dealing with something or someone",
+    "owadPhrases": [
+      "a chosen method",
+      "a handling way"
+    ]
+  },
+  {
+    "id": 994,
+    "word": "increase",
+    "pos": "noun",
+    "shortDefinition": "A rise in amount, number, or size",
+    "owadPhrases": [
+      "a growing sum",
+      "an upward change"
+    ]
+  },
+  {
+    "id": 1083,
+    "word": "practice",
+    "pos": "noun",
+    "shortDefinition": "Repeated exercise to improve a skill",
+    "owadPhrases": [
+      "a learning drill",
+      "a skill builder"
+    ]
+  },
+  {
+    "id": 2199,
+    "word": "coast",
+    "pos": "noun",
+    "shortDefinition": "The land next to or near the sea",
+    "owadPhrases": [
+      "a shore line",
+      "an ocean edge"
+    ]
+  },
+  {
+    "id": 2108,
+    "word": "movement",
+    "pos": "noun",
+    "shortDefinition": "The act of changing position or going from place to place",
+    "owadPhrases": [
+      "a flowing motion",
+      "a changing place"
+    ]
+  },
+  {
+    "id": 235,
+    "word": "soul",
+    "pos": "noun",
+    "shortDefinition": "The spiritual or emotional part of a person",
+    "owadPhrases": [
+      "an inner spirit",
+      "a living force"
+    ]
+  },
+  {
+    "id": 2659,
+    "word": "choice",
+    "pos": "noun",
+    "shortDefinition": "The act of picking between different options",
+    "owadPhrases": [
+      "a picked option",
+      "a free pick"
+    ]
+  },
+  {
+    "id": 2681,
+    "word": "pass",
+    "pos": "noun",
+    "shortDefinition": "A way through or between mountains",
+    "owadPhrases": [
+      "a mountain path",
+      "a clear way"
+    ]
+  },
+  {
+    "id": 2692,
+    "word": "support",
+    "pos": "noun",
+    "shortDefinition": "Help or encouragement given to keep something going",
+    "owadPhrases": [
+      "a helping hand",
+      "a steady base"
+    ]
+  },
+  {
+    "id": 2738,
+    "word": "goal",
+    "pos": "noun",
+    "shortDefinition": "Something you work toward or try to achieve",
+    "owadPhrases": [
+      "a wanted result",
+      "an aimed target"
+    ]
+  },
+  {
+    "id": 2772,
+    "word": "voice",
+    "pos": "noun",
+    "shortDefinition": "The sound made when people speak or sing",
+    "owadPhrases": [
+      "a speaking sound",
+      "a human song"
+    ]
+  },
+  {
+    "id": 2898,
+    "word": "drive",
+    "pos": "noun",
+    "shortDefinition": "A journey traveling by car",
+    "owadPhrases": [
+      "a car journey",
+      "a road trip"
+    ]
+  },
+  {
+    "id": 2196,
+    "word": "drop",
+    "pos": "noun",
+    "shortDefinition": "A small round amount of liquid",
+    "owadPhrases": [
+      "a liquid ball",
+      "a water bead"
+    ]
+  }
+] 

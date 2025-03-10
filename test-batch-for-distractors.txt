@@ -1,0 +1,171 @@
+Word: time
+POS: noun
+Definition: the continuum of experience in which events pass from the future through the present to the past; ;
+Domain: noun.Tops
+Difficulty: beginner
+Broader Terms: attribute
+Narrower Terms: continuum, gmt, hereafter, continuance, eternity, futurity, infinity, ut, nowadays, duration, future, past, present, ut1, yesteryear, biological_time, civil_time, cosmic_time, daylight-saving_time, daylight-savings_time, daylight_saving, daylight_savings, geologic_time, geological_time, greenwich_mean_time, greenwich_time, local_time, musical_time, past_times, standard_time, time_to_come, universal_time
+---
+
+Word: right
+POS: noun
+Definition: a turn toward the side of the body that is on the south when the person is facing east
+Domain: noun.act
+Difficulty: intermediate
+Broader Terms: turn, turning
+---
+
+Word: life
+POS: noun
+Definition: living things collectively
+Domain: noun.Tops
+Difficulty: beginner
+Broader Terms: living thing, animate thing, animate_thing, living_thing
+Narrower Terms: wildlife
+---
+
+Word: use
+POS: noun
+Definition: exerting shrewd or devious influence especially for one's own advantage
+Domain: noun.act
+Difficulty: beginner
+Broader Terms: influence
+Narrower Terms: mind game, mind_game
+---
+
+Word: left
+POS: noun
+Definition: a turn toward the side of the body that is on the north when the person is facing east
+Domain: noun.act
+Difficulty: intermediate
+Broader Terms: turn, turning
+---
+
+Word: house
+POS: noun
+Definition: play in which children take the roles of father or mother or children and pretend to interact like adults
+Domain: noun.act
+Difficulty: intermediate
+Broader Terms: play, child's play, child's_play
+---
+
+Word: out
+POS: noun
+Definition: (baseball) a failure by a batter or runner to reach a base safely in baseball
+Domain: noun.act
+Difficulty: beginner
+Broader Terms: failure
+Narrower Terms: strikeout, putout
+---
+
+Word: way
+POS: noun
+Definition: thing or person that acts to produce a particular effect or achieve an end; ;
+Domain: noun.act
+Difficulty: beginner
+Broader Terms: implementation, effectuation
+Narrower Terms: escape, fast track, open sesame, tooth, dint, road, salvation, voice, instrument, tool, stepping stone, expedient, desperate measure, wings, desperate_measure, fast_track, open_sesame, stepping_stone
+---
+
+Word: down
+POS: noun
+Definition: (American football) a complete play to advance the football
+Domain: noun.act
+Difficulty: intermediate
+Broader Terms: play, turn
+---
+
+Word: state
+POS: noun
+Definition: the way something is with respect to its main attributes; ;
+Domain: noun.Tops
+Difficulty: beginner
+Broader Terms: attribute
+Narrower Terms: agency, condition, condition, conditionality, conflict, end, enmity, flawlessness, imminency, imminentness, imperfectness, impendency, isomerism, merchantability, motionlessness, multivalence, non-issue, order, ownership, point, position, preparedness, relationship, relationship, separation, stage, tribalism, unemployment, unification, union, unity, utilization, feeling, action, beingness, cleavage, damnation, death, death, delegacy, dependance, employ, freedom, heterozygosity, immatureness, immaturity, inaction, inactiveness, integrity, matureness, maturity, medium, nationhood, obligation, office, preparation, readiness, representation, revocation, status, status, utopia, wild, antagonism, being, dependence, disorder, existence, flux, forthcomingness, grace, imminence, impendence, inactivity, motion, neotony, nonbeing, ornamentation, paternity, perfection, plurality, polyvalence, polyvalence, polyvalency, polyvalency, receivership, situation, activeness, activity, annulment, degree, dependency, destruction, dystopia, employment, enlargement, homozygosity, hostility, illumination, imperfection, kalemia, level, lifelessness, multivalency, omnipotence, omniscience, power, skillfulness, stillness, technicality, turgor, wholeness, dead_letter, eternal_damnation, face_of_the_earth, ground_state, natural_state, ne_plus_ultra, saving_grace, state_of_affairs, state_of_flux, state_of_grace, state_of_nature, temporary_state
+---
+
+Word: land
+POS: noun
+Definition: agriculture considered as an occupation or way of life;
+Domain: noun.act
+Difficulty: intermediate
+Broader Terms: line of_work, line, occupation, job, business, line_of_work
+---
+
+Word: air
+POS: noun
+Definition: travel via aircraft;
+Domain: noun.act
+Difficulty: intermediate
+Broader Terms: travel, travelling, traveling
+Narrower Terms: flying, flight
+---
+
+Word: group
+POS: noun
+Definition: any number of entities (members) considered as a unit
+Domain: noun.Tops
+Difficulty: beginner
+Broader Terms: abstraction, abstract entity, abstract_entity
+Narrower Terms: humanity, mankind, actinoid, actinon, citizenry, halogen, kingdom, lanthanide, lanthanon, multitude, swarm, varna, world, human race, human beings, man, aggregation, community, edition, lanthanoid, population, race, sainthood, scheme, straggle, system, humans, accumulation, actinide, arrangement, assemblage, circuit, cloud, collection, ethnos, mass, masses, humankind, association, people, people, people, series, subgroup, biotic_community, biological_group, electron_shell, ethnic_group, hoi_polloi, human_beings, human_race, rare-earth_element, rare_earth, social_group, the_great_unwashed
+---
+
+Word: best
+POS: noun
+Definition: the supreme effort one can make
+Domain: noun.act
+Difficulty: beginner
+Broader Terms: effort, attempt, endeavour, try, endeavor
+---
+
+Word: course
+POS: noun
+Definition: a mode of action;
+Domain: noun.act
+Difficulty: beginner
+Broader Terms: action
+Narrower Terms: collision course, way of_life, way, path, blind alley, blind_alley, collision_course, way_of_life
+---
+
+Word: need
+POS: noun
+Definition: the psychological feature that arouses an organism to action toward a desired goal; the reason for the action; that which gives purpose and direction to behavior;
+Domain: noun.Tops
+Difficulty: beginner
+Broader Terms: psychological feature, psychological_feature
+Narrower Terms: impulse, life, ethics, morals, urge, morality, ethical_motive, irrational_motive, mental_energy, psychic_energy, rational_motive
+---
+
+Word: press
+POS: noun
+Definition: the act of pressing; the exertion of pressure; ;
+Domain: noun.act
+Difficulty: beginner
+Broader Terms: push, pushing
+Narrower Terms: compressing, impression, compression
+---
+
+Word: means
+POS: noun
+Definition: thing or person that acts to produce a particular effect or achieve an end; ;
+Domain: noun.act
+Difficulty: beginner
+Broader Terms: implementation, effectuation
+Narrower Terms: escape, fast track, open sesame, tooth, dint, road, salvation, voice, instrument, tool, stepping stone, expedient, desperate measure, wings, desperate_measure, fast_track, open_sesame, stepping_stone
+---
+
+Word: turn
+POS: noun
+Definition: taking a short walk out and back
+Domain: noun.act
+Difficulty: intermediate
+Broader Terms: walk
+---
+
+Word: put
+POS: noun
+Definition: the option to sell a given stock (or stock index or commodity future) at a given price before a given date
+Domain: noun.act
+Difficulty: beginner
+Broader Terms: option
+---

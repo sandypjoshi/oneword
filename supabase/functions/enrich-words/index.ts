@@ -2,11 +2,13 @@ import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.36.0'
 
 // Constants for API and processing
-const BATCH_SIZE = 20;
+const STATE_ID = 1;  // The ID of the state record in the database
+const BATCH_SIZE = 15;  // Reduced from 30 to 15
 const DATAMUSE_API_BASE = 'https://api.datamuse.com/words';
-const DELAY_BETWEEN_WORDS_MS = 500; // Added for the new processBatch function
+const DELAY_BETWEEN_WORDS_MS = 300;  // Reduced from 500 to 300
 
 interface StateData {
+  id?: number;        // Adding id property
   startId: number;
   totalProcessed: number;
   totalSuccessful: number;
@@ -22,38 +24,68 @@ interface StateData {
 
 serve(async (req) => {
   try {
-    // Create a Supabase client with the project URL and service key
+    // Create a Supabase client
     const supabaseClient = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     );
 
-    // Get parameters from request
-    const { apiKey } = await req.json();
-    
-    // Validate API key if needed
-    if (apiKey !== Deno.env.get('ENRICHMENT_API_KEY')) {
+    // Validate request if needed
+    if (req.method !== 'POST') {
       return new Response(
-        JSON.stringify({ error: 'Unauthorized' }),
-        { status: 401, headers: { 'Content-Type': 'application/json' } }
+        JSON.stringify({ error: 'Method not allowed' }),
+        { status: 405, headers: { 'Content-Type': 'application/json' } }
       );
     }
 
-    // Load the current state
-    const state = await loadState(supabaseClient);
-    
+    console.log('Starting word enrichment...');
+
+    // Get or initialize state
+    let state: StateData;
+    try {
+      state = await loadState(supabaseClient);
+      console.log('Loaded existing state:', JSON.stringify(state));
+    } catch (error) {
+      console.error('Error loading state, initializing new state:', error);
+      // Initialize a new state with default values
+      state = {
+        id: STATE_ID,
+        startId: 0,
+        totalProcessed: 0,
+        totalSuccessful: 0,
+        totalFailed: 0,
+        totalSkipped: 0,
+        totalMarkedEligible: 0,
+        totalMarkedIneligible: 0,
+        lastUpdated: new Date().toISOString(),
+        dailyRequestCount: 0,
+        processingStartTime: new Date().toISOString(),
+        lastRunTime: new Date().toISOString()
+      };
+      
+      // Create the initial state record
+      try {
+        await supabaseClient
+          .from('enrichment_state')
+          .upsert([state]);
+        console.log('Created new state record');
+      } catch (stateError) {
+        console.error('Error creating state record:', stateError);
+      }
+    }
+
     // Process a batch of words
     const result = await processBatch(supabaseClient, state);
     
-    // Return the results
     return new Response(
       JSON.stringify(result),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
   } catch (error) {
-    console.error('Error processing enrichment batch:', error);
+    console.error('Unhandled error in word enrichment:', error);
+    
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: 'Internal server error', details: String(error) }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
   }
@@ -175,16 +207,24 @@ async function updateState(supabase, stateId, stateUpdates) {
  * Process a batch of words
  */
 async function processBatch(supabase, state) {
+  console.log('Starting batch processing with batch size:', BATCH_SIZE);
+  const startTime = new Date();
+  
   // Get words that:
-  // 1. Are marked as eligible (eligible-word or eligible-phrase)
+  // 1. Are marked as eligible-word (skipping eligible-phrase for MVP)
   // 2. Don't have frequency data yet
+  // 3. Have ID greater than our last processed ID
   let { data: words, error } = await supabase
     .from('words')
     .select('id, word')
-    .or('enrichment_eligible.eq.eligible-word,enrichment_eligible.eq.eligible-phrase')
+    .eq('enrichment_eligible', 'eligible-word')  // Only process eligible words, skip phrases
     .is('frequency', null)
+    .gt('id', state.startId)  // Only get words after our last processed ID
     .order('id', { ascending: true })
     .limit(BATCH_SIZE);
+
+  const queryTime = new Date().getTime() - startTime.getTime();
+  console.log(`Database query took ${queryTime}ms`);
 
   if (error) {
     console.error('Error fetching words:', error);
@@ -203,9 +243,10 @@ async function processBatch(supabase, state) {
   let startId = words[0]?.id || 0;
   let endId = words[words.length - 1]?.id || 0;
 
-  console.log(`Processing batch of ${words.length} words (IDs ${startId}-${endId})`);
+  console.log(`Processing batch of ${words.length} single words (IDs ${startId}-${endId})`);
 
   for (const wordData of words) {
+    const wordStartTime = new Date();
     try {
       // Process the word directly with Datamuse API
       const enrichmentData = await enrichWordWithDatamuse(wordData.word);
@@ -215,7 +256,8 @@ async function processBatch(supabase, state) {
       
       if (updateResult.success) {
         successful++;
-        console.log(`Successfully enriched word ID ${wordData.id}: "${wordData.word}" (freq: ${enrichmentData.frequency || 'unknown'}, syllables: ${enrichmentData.syllables || 'unknown'})`);
+        const wordTime = new Date().getTime() - wordStartTime.getTime();
+        console.log(`Successfully enriched word ID ${wordData.id}: "${wordData.word}" (freq: ${enrichmentData.frequency || 'unknown'}, syllables: ${enrichmentData.syllables || 'unknown'}) - took ${wordTime}ms`);
       } else {
         failed++;
         console.error(`Failed to update word ID ${wordData.id}:`, updateResult.error);
@@ -223,7 +265,7 @@ async function processBatch(supabase, state) {
       
       processed++;
       
-      // Delay between words to avoid rate limiting
+      // Delay between words to avoid rate limiting, but only if not the last word
       if (processed < words.length) {
         await new Promise(resolve => setTimeout(resolve, DELAY_BETWEEN_WORDS_MS));
       }
@@ -248,7 +290,10 @@ async function processBatch(supabase, state) {
     lastRunTime: new Date().toISOString()
   };
 
-  await updateState(supabase, state.id, stateUpdates);
+  await updateState(supabase, STATE_ID, stateUpdates);
+  
+  const totalTime = new Date().getTime() - startTime.getTime();
+  console.log(`Batch processing completed in ${totalTime}ms. Processed: ${processed}, Successful: ${successful}, Failed: ${failed}`);
 
   return {
     success: true,
@@ -257,7 +302,8 @@ async function processBatch(supabase, state) {
     failed,
     skipped,
     startId,
-    endId
+    endId,
+    processingTimeMs: totalTime
   };
 }
 
@@ -266,51 +312,49 @@ async function processBatch(supabase, state) {
  */
 async function enrichWordWithDatamuse(word) {
   try {
-    const frequencyResponse = await fetch(`${DATAMUSE_API_BASE}?sp=${encodeURIComponent(word)}&md=f&max=1`);
+    // Normalize the word
+    const normalizedWord = word.trim().toLowerCase();
     
-    if (!frequencyResponse.ok) {
-      throw new Error(`Datamuse API error: ${frequencyResponse.status}`);
+    // Skip empty words
+    if (!normalizedWord) {
+      return { frequency: null, syllables: null };
     }
     
-    const frequencyData = await frequencyResponse.json();
-    
-    // Extract frequency and syllables
+    // Get frequency data from Datamuse API
     let frequency = null;
     let syllables = null;
     
-    if (frequencyData && frequencyData.length > 0) {
-      const match = frequencyData[0];
+    const url = `${DATAMUSE_API_BASE}?sp=${encodeURIComponent(normalizedWord)}&md=fs&max=1`;
+    const response = await fetch(url);
+    
+    if (!response.ok) {
+      throw new Error(`API request failed with status: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    
+    // Extract frequency from the API response
+    if (data && data.length > 0) {
+      const match = data[0];
       
-      // Extract frequency
+      // Extract frequency from tags
       if (match.tags && match.tags.some(tag => tag.startsWith('f:'))) {
         const freqTag = match.tags.find(tag => tag.startsWith('f:'));
-        frequency = parseInt(freqTag.substring(2));
-      }
-    }
-    
-    // Get syllable count in a separate request
-    const syllableResponse = await fetch(`${DATAMUSE_API_BASE}?sp=${encodeURIComponent(word)}&md=s&max=1`);
-    
-    if (syllableResponse.ok) {
-      const syllableData = await syllableResponse.json();
-      
-      if (syllableData && syllableData.length > 0) {
-        const match = syllableData[0];
-        
-        if (match.numSyllables) {
-          syllables = match.numSyllables;
+        if (freqTag) {
+          frequency = parseInt(freqTag.substring(2)) || null;
         }
       }
+      
+      // Extract syllable count
+      if (match.numSyllables !== undefined) {
+        syllables = match.numSyllables;
+      }
     }
     
-    // Return the enrichment data
-    return {
-      frequency,
-      syllables
-    };
+    return { frequency, syllables };
   } catch (error) {
     console.error('Error in enrichWordWithDatamuse:', error);
-    throw error;
+    return { frequency: null, syllables: null };
   }
 }
 
@@ -319,8 +363,8 @@ async function enrichWordWithDatamuse(word) {
  */
 async function updateWordWithEnrichmentData(supabase, wordId, data) {
   try {
-    // Prepare the update data
-    const updateData = {
+    // Prepare the update data with proper type definition
+    const updateData: any = {
       updated_at: new Date().toISOString()
     };
     

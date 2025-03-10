@@ -1,0 +1,52 @@
+[
+  {
+    "word": "time",
+    "distractors": ["space", "thyme", "duration"],
+    "distractor_types": ["co-hyponym", "phonological", "hypernym"]
+  },
+  {
+    "word": "right",
+    "distractors": ["left", "write", "direction"],
+    "distractor_types": ["co-hyponym", "homophone", "hypernym"]
+  },
+  {
+    "word": "life",
+    "distractors": ["death", "live", "existence"],
+    "distractor_types": ["antonym", "phonological", "hypernym"]
+  },
+  {
+    "word": "business",
+    "distractors": ["commerce", "busy", "industry"],
+    "distractor_types": ["synonym", "orthographic", "co-hyponym"]
+  },
+  {
+    "word": "year",
+    "distractors": ["month", "ear", "annum"],
+    "distractor_types": ["co-hyponym", "minimal-pair", "synonym"]
+  },
+  {
+    "word": "government",
+    "distractors": ["authority", "governor", "parliament"],
+    "distractor_types": ["hypernym", "orthographic", "co-hyponym"]
+  },
+  {
+    "word": "health",
+    "distractors": ["wealth", "illness", "condition"],
+    "distractor_types": ["rhyme", "antonym", "hypernym"]
+  },
+  {
+    "word": "people",
+    "distractors": ["persons", "populace", "purple"],
+    "distractor_types": ["synonym", "co-hyponym", "phonological"]
+  },
+  {
+    "word": "water",
+    "distractors": ["liquid", "waiter", "ocean"],
+    "distractor_types": ["hypernym", "phonological", "hyponym"]
+  },
+  {
+    "word": "way",
+    "distractors": ["path", "weigh", "method"],
+    "distractor_types": ["co-hyponym", "homophone", "co-hyponym"]
+  }
+] 

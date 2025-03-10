@@ -1,0 +1,69 @@
+I need you to generate research-based, high-quality distractors for vocabulary assessment. Based on extensive research in language testing (Haladyna & Downing 1993, Nation 2001, Lee & Cheng 2018), each target word needs exactly 3 carefully crafted distractor words that would function as plausible but incorrect options in a multiple-choice quiz.
+
+DISTRACTOR TYPES (in order of effectiveness):
+
+1. SEMANTIC DISTRACTORS (highest priority) - At least one distractor should be from this category:
+   • Co-hyponyms/Coordinate terms: Words from the same semantic category (e.g., "tiger" for "lion")
+   • Hypernyms: Broader category terms (e.g., "animal" for "cat")
+   • Hyponyms: More specific terms within the same category (e.g., "poodle" for "dog")
+   • Meronyms/Holonyms: Words in part-whole relationships (e.g., "wheel" for "car")
+   • Domain-related terms: Words from the same subject field
+
+2. PHONOLOGICAL/ORTHOGRAPHIC DISTRACTORS - At least one distractor should exploit sound/spelling:
+   • Homophones/Near-homophones: Words that sound similar (e.g., "principle" for "principal")
+   • Minimal pairs: Words differing by just one phoneme (e.g., "cap" for "cat")
+   • Similar orthographic patterns: Words with similar spelling (e.g., "careful" for "cheerful")
+   • Rhyming words: Words with the same ending sound (e.g., "light" for "fight")
+
+3. COMMON MISCONCEPTION DISTRACTORS:
+   • Commonly confused words: Words language learners typically confuse
+   • False cognates: Words that appear related but aren't (e.g., "actually" vs. "currently")
+   • Words with similar collocations or usage contexts
+
+CRITICAL REQUIREMENTS:
+
+1. GRAMMATICAL CONSISTENCY: All distractors MUST be the same part of speech as the target
+2. DIFFICULTY MATCHING: Match the target word's difficulty level (±0.5 levels)
+3. DISTINCTIVENESS: All three distractors must use different distractor strategies
+4. PLAUSIBILITY: Must be incorrect but plausible enough to tempt someone with partial knowledge
+5. FORMAT: Single words only (no phrases or expressions)
+6. AVOIDANCE OF OBVIOUS CUES: No superficial clues to eliminate distractors
+
+WORDNET RELATIONSHIP GUIDANCE:
+• When provided, prioritize using my suggested WordNet relationships
+• For co-hyponyms, focus on terms that share the same immediate hypernym
+• For phonological distractors, ensure they maintain the same part of speech
+
+DISTRACTOR MIXTURE FORMULA (research-based):
+• Include at least one semantic distractor (preferably a co-hyponym)
+• Include at least one phonological/orthographic distractor
+• The third distractor should be from any category but must be distinct from the other two
+
+For each word, I'll provide:
+- The word itself
+- Part of speech (n=noun, v=verb, adj=adjective, adv=adverb)
+- Definition
+- Difficulty level
+- WordNet relationships (when available)
+
+Please respond in this exact JSON format with an array of objects, where each object has:
+- word: the original target word
+- distractors: array containing exactly 3 distractor words
+- distractor_types: array of 3 strings describing the type of each distractor (e.g., "co-hyponym", "phonological", "common-misconception")
+
+Example response format:
+[
+  {
+    "word": "canine",
+    "distractors": ["feline", "cannon", "kennel"],
+    "distractor_types": ["co-hyponym", "phonological", "domain-related"]
+  },
+  {
+    "word": "principal",
+    "distractors": ["principle", "superintendent", "primary"],
+    "distractor_types": ["phonological", "co-hyponym", "semantic-associate"]
+  }
+]
+
+Here are the words:
+[PASTE CONTENT FROM test-batch-for-distractors.txt] 
