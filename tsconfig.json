@@ -25,7 +25,11 @@
     ]
   },
   "include": [
-    "scripts/**/*"
+    "scripts/**/*",
+    "src/**/*",
+    "lib/**/*",
+    "app/**/*",
+    "components/**/*"
   ],
   "exclude": [
     "node_modules",
