@@ -1,0 +1,178 @@
+{
+  "dataset": {
+    "total": 315957,
+    "byFormat": {
+      "empty": {
+        "count": 0,
+        "percentage": "0.00%"
+      },
+      "simple_word": {
+        "count": 314853,
+        "percentage": "99.65%"
+      },
+      "underscore": {
+        "count": 0,
+        "percentage": "0.00%"
+      },
+      "hyphen": {
+        "count": 5,
+        "percentage": "0.00%"
+      },
+      "space": {
+        "count": 0,
+        "percentage": "0.00%"
+      },
+      "mixed_separators": {
+        "count": 0,
+        "percentage": "0.00%"
+      },
+      "special_chars": {
+        "count": 1099,
+        "percentage": "0.35%"
+      }
+    },
+    "examples": {
+      "empty": [],
+      "simple_word": [
+        "a",
+        "aah",
+        "aaron",
+        "aback",
+        "abacus",
+        "abandon",
+        "abandoned",
+        "abandoning",
+        "abandonment",
+        "abase"
+      ],
+      "underscore": [],
+      "hyphen": [
+        "itsy-bitsy",
+        "itty-bitty",
+        "teeny-weeny",
+        "t-shirt",
+        "yo-yo"
+      ],
+      "space": [],
+      "mixed_separators": [],
+      "special_chars": [
+        "abel's",
+        "actor's",
+        "adam's",
+        "ada's",
+        "administration's",
+        "adolescent's",
+        "afternoon's",
+        "agamemnon's",
+        "agent's",
+        "agriculture's"
+      ]
+    }
+  },
+  "database": {
+    "total": 1000,
+    "byFormat": {
+      "empty": {
+        "count": 0,
+        "percentage": "0.00%"
+      },
+      "simple_word": {
+        "count": 594,
+        "percentage": "59.40%"
+      },
+      "underscore": {
+        "count": 190,
+        "percentage": "19.00%"
+      },
+      "hyphen": {
+        "count": 49,
+        "percentage": "4.90%"
+      },
+      "space": {
+        "count": 138,
+        "percentage": "13.80%"
+      },
+      "mixed_separators": {
+        "count": 21,
+        "percentage": "2.10%"
+      },
+      "special_chars": {
+        "count": 8,
+        "percentage": "0.80%"
+      }
+    },
+    "examples": {
+      "empty": [],
+      "simple_word": [
+        "0",
+        "1",
+        "10",
+        "100",
+        "1000",
+        "10000",
+        "100000",
+        "1000000",
+        "1000000000",
+        "1000000000000"
+      ],
+      "underscore": [
+        "11_november",
+        "14_july",
+        "15 august_1945",
+        "15_august_1945",
+        "15 may_organization",
+        "15_may_organization",
+        "15_minutes",
+        "16_pf",
+        "17_november",
+        "1_chronicles"
+      ],
+      "hyphen": [
+        "10-membered",
+        "11-plus",
+        "12-tone music",
+        "12-tone system",
+        "18-karat gold",
+        "1-dodecanol",
+        "1-hitter",
+        "1st-class mail",
+        ".22-caliber",
+        ".22-calibre"
+      ],
+      "space": [
+        "11 november",
+        "14 july",
+        "15 minutes",
+        "16 pf",
+        "17 november",
+        "1 chronicles",
+        "1 esdras",
+        "1 kings",
+        "1 maccabees",
+        "1 samuel"
+      ],
+      "mixed_separators": [
+        "12-tone_music",
+        "12-tone_system",
+        "18-karat_gold",
+        "1st-class_mail",
+        "22-karat_gold",
+        "24-hour_interval",
+        "24-karat_gold",
+        "2-hydroxybenzoic_acid",
+        "2-methylpropenoic_acid",
+        "401-k_plan"
+      ],
+      "special_chars": [
+        "20/20",
+        ".22",
+        "24/7",
+        "9/11",
+        "abc's",
+        "ablaze(p)",
+        "about(p)",
+        "abreast(p)"
+      ]
+    }
+  }
+}

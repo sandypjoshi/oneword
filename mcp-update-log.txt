@@ -1,0 +1,20 @@
+Starting database update with MCP...
+Fetching difficulty thresholds from config...
+Error fetching thresholds, using defaults: Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'mcp' imported from /Users/sandeep.joshi/Documents/vibecoding/oneword/update-difficulty-mcp.js
+    at packageResolve (node:internal/modules/esm/resolve:839:9)
+    at moduleResolve (node:internal/modules/esm/resolve:908:18)
+    at defaultResolve (node:internal/modules/esm/resolve:1038:11)
+    at ModuleLoader.defaultResolve (node:internal/modules/esm/loader:557:12)
+    at ModuleLoader.resolve (node:internal/modules/esm/loader:525:25)
+    at ModuleLoader.getModuleJob (node:internal/modules/esm/loader:246:38)
+    at onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:482:36)
+    at TracingChannel.tracePromise (node:diagnostics_channel:337:14)
+    at ModuleLoader.import (node:internal/modules/esm/loader:481:21)
+    at defaultImportModuleDynamicallyForScript (node:internal/modules/esm/utils:227:31) {
+  code: 'ERR_MODULE_NOT_FOUND'
+}
+Loading combined word data...
+Loaded 315957 words from combined dataset.
+Applying current thresholds to difficulty levels...
+Fetching words from database...
+Update process completed.

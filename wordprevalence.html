@@ -1,0 +1,183 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Word Prevalence For Word Puzzle Creation Research | Kaggle</title>
+  <meta charset="utf-8" />
+    <meta name="robots" content="index, follow" />
+  <meta name="description" content="How Many People Actually Know a Given Word?" />
+    <meta name="keywords" content="puzzles" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
+  <meta name="theme-color" content="#008ABC" />
+  <script nonce="0LWPagXHRHEAGGS0LFLjjg==" type="text/javascript">
+    window["pageRequestStartTime"] = 1742021538902;
+    window["pageRequestEndTime"] = 1742021538999;
+    window["initialPageLoadStartTime"] = new Date().getTime();
+  </script>
+  <script nonce="0LWPagXHRHEAGGS0LFLjjg==" id="gsi-client" src="https://accounts.google.com/gsi/client" async defer></script>
+  <script nonce="0LWPagXHRHEAGGS0LFLjjg==">window.KAGGLE_JUPYTERLAB_PATH = "/static/assets/jupyterlab-v4/jupyterlab-index-f271d38db98153fa0082.html";</script>
+  <link rel="preconnect" href="https://www.google-analytics.com" crossorigin="anonymous" /><link rel="preconnect" href="https://stats.g.doubleclick.net" /><link rel="preconnect" href="https://storage.googleapis.com" /><link rel="preconnect" href="https://apis.google.com" />
+    <link href="/static/images/favicon.ico" rel="shortcut icon" type="image/x-icon" id="dynamic-favicon" />
+  <link rel="manifest" href="/static/json/manifest.json" crossorigin="use-credentials">
+
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,400i,500,500i,600,600i,700,700i&display=swap"
+    rel="preload" as="style" />
+  <link href="https://fonts.googleapis.com/css2?family=Google+Symbols:FILL@0..1&display=block"
+    rel="preload" as="style" />
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,400i,500,500i,600,600i,700,700i&display=swap"
+    rel="stylesheet" media="print" id="async-google-font-1" />
+  <link href="https://fonts.googleapis.com/css2?family=Google+Symbols:FILL@0..1&display=block"
+    rel="stylesheet" media="print" id="async-google-font-2" />
+  <script nonce="0LWPagXHRHEAGGS0LFLjjg==" type="text/javascript">
+    const styleSheetIds = ["async-google-font-1", "async-google-font-2"];
+    styleSheetIds.forEach(function (id) {
+      document.getElementById(id).addEventListener("load", function() {
+        this.media = "all";
+      });
+    });
+  </script>
+
+
+    <link rel="canonical" href="https://www.kaggle.com/datasets/dfydata/word-prevalence-for-word-puzzle-creation-research" />
+    <link rel="stylesheet" type="text/css" href="/static/assets/app.css?v=2d4e7ec4eb689d926191" />
+
+  
+    
+ 
+      <script nonce="0LWPagXHRHEAGGS0LFLjjg==">
+        try{(function(a,s,y,n,c,h,i,d,e){d=s.createElement("style");
+        d.appendChild(s.createTextNode(""));s.head.appendChild(d);d=d.sheet;
+        y=y.map(x => d.insertRule(x + "{ opacity: 0 !important }"));
+        h.start=1*new Date;h.end=i=function(){y.forEach(x => x<d.cssRules.length ? d.deleteRule(x) : {})};
+        (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
+        })(window,document,['.site-header-react__nav'],'dataLayer',2000,{'GTM-52LNT9S':true});}catch(ex){}
+    </script>
+    <script nonce="0LWPagXHRHEAGGS0LFLjjg==">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-T7QHS60L4Q', {
+            'optimize_id': 'GTM-52LNT9S',
+            'displayFeaturesTask': null,
+            'send_page_view': false,
+            'content_group1': 'Datasets'
+        });
+    </script>
+    <script nonce="0LWPagXHRHEAGGS0LFLjjg==" async src="https://www.googletagmanager.com/gtag/js?id=G-T7QHS60L4Q"></script>
+
+  
+    
+    <meta property="og:url" content="https://www.kaggle.com/datasets/dfydata/word-prevalence-for-word-puzzle-creation-research" />
+    <meta property="og:title" content="Word Prevalence For Word Puzzle Creation Research" />
+    <meta property="og:description" content="How Many People Actually Know a Given Word?" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://storage.googleapis.com/kaggle-datasets-images/1617268/2659013/383944b7c4b77b1fc3466f6dc7efd0c1/dataset-card.jpg?t=2021-09-28-13-08-37" />
+    <meta property="fb:app_id" content="2665027677054710" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@kaggledatasets" />
+
+
+  <meta name="twitter:site" content="@Kaggle" /> 
+  
+    
+            <script nonce="0LWPagXHRHEAGGS0LFLjjg==" type="application/ld+json">{"@context":"http://schema.org/","@type":"Dataset","name":"Word Prevalence For Word Puzzle Creation Research","description":"### Context\n\nWhen creating any kind of word puzzle, like Crosswords, for example, it helps to know how many people actually know a word, and the general frequency of a word, so you can determine difficulty levels for your word puzzles. This 61k word list (applied 3 different ways - see below) will help with that.\n\n\n### Content\n\nThis collection consists of Word Prevalence files in CSV format. Here is the meaning behind the numbers:\n\nWord prevalence indicates how many people know a word. Because percentage known has an uninteresting distribution, word prevalence is calculated on the basis of a probit transformation. The following are interesting landmarks:\n\nnegative prevalence values: words known by less than 50% of the people; only of interest for word learning studies\nprevalence = 0.0 : 50% of the people know this word\nprevalence = 1.0 : 84% know the word\nprevalence = 1.5 : 93% know the word\nprevalence = 2.0 : 98% know the word\nprevalence = 2.5 : nearly everyone knows the word\n\n**The \"FreqZipfUS\" data** is also included for the general data in the \"word-prevalence.csv\" set. This metric lets you know how frequently a word is used. **1 to 3 is a low frequency word, and 4 to 7 is a high frequency word.**\n\nThe files included are (roughly 61K words in each word list):\n\nGeneral Word Prevalence data (word-prevalence.csv)\nMale vs. Female Prevalence data (male-vs-female.csv)\nUS vs. UK Prevalence data (us-vs-uk.csv)\nWord Prevalence Explanation (Word Prevalence Explained.txt)\n\n\n### Acknowledgements\n\nI can't remember the site where I obtained this information - one of the word science/linguistics sites. But the content is Public Domain. Use it for your puzzle research or however you like.","url":"https://www.kaggle.com/dfydata/word-prevalence-for-word-puzzle-creation-research","version":1,"keywords":["subject, culture and humanities, games, puzzles"],"license":{"@type":"CreativeWork","name":"CC0: Public Domain","url":"https://creativecommons.org/publicdomain/zero/1.0/"},"identifier":["1617268"],"includedInDataCatalog":{"@type":"DataCatalog","name":"Kaggle","url":"https://www.kaggle.com"},"creator":{"@type":"Person","name":"DFY Data","url":"https://www.kaggle.com/dfydata","image":"https://storage.googleapis.com/kaggle-avatars/thumbnails/8457434-kg.jpg"},"distribution":[{"@type":"DataDownload","requiresSubscription":true,"encodingFormat":"zip","fileFormat":"zip","contentUrl":"https://www.kaggle.com/datasets/dfydata/word-prevalence-for-word-puzzle-creation-research/download?datasetVersionNumber=1","contentSize":"1441523 bytes"}],"commentCount":0,"dateModified":"2021-09-28T13:07:10.56Z","discussionUrl":"https://www.kaggle.com/dfydata/word-prevalence-for-word-puzzle-creation-research/discussion","alternateName":"How Many People Actually Know a Given Word?","isAccessibleForFree":true,"thumbnailUrl":"https://storage.googleapis.com/kaggle-datasets-images/1617268/2659013/383944b7c4b77b1fc3466f6dc7efd0c1/dataset-card.jpg?t=2021-09-28-13-08-37","interactionStatistic":[{"@type":"InteractionCounter","interactionType":"http://schema.org/CommentAction","userInteractionCount":0},{"@type":"InteractionCounter","interactionType":"http://schema.org/DownloadAction","userInteractionCount":97},{"@type":"InteractionCounter","interactionType":"http://schema.org/ViewAction","userInteractionCount":1769},{"@type":"InteractionCounter","interactionType":"http://schema.org/LikeAction","userInteractionCount":12}]}</script>
+        
+
+  
+    
+
+  
+    
+
+
+    <script nonce="0LWPagXHRHEAGGS0LFLjjg==">window['useKaggleAnalytics'] = true;</script>
+
+  <script id="gapi-target" nonce="0LWPagXHRHEAGGS0LFLjjg==" src="https://apis.google.com/js/api.js" defer
+    async></script>
+  <script nonce="0LWPagXHRHEAGGS0LFLjjg==" src="/static/assets/runtime.js?v=8bc8e429eb9b3f33e2fc"></script>
+  <script nonce="0LWPagXHRHEAGGS0LFLjjg==" src="/static/assets/vendor.js?v=a62013a985d655b5d6e4"></script>
+  <script nonce="0LWPagXHRHEAGGS0LFLjjg==" src="/static/assets/app.js?v=8c26435fddb1a8dd1c3d"></script>
+    <script nonce="0LWPagXHRHEAGGS0LFLjjg==" type="text/javascript">
+      window.kaggleStackdriverConfig = {
+        key: 'AIzaSyA4eNqUdRRskJsCZWVz-qL655Xa5JEMreE',
+        projectId: 'kaggle-161607',
+        service: 'web-fe',
+        version: 'ci',
+        userId: '0'
+      }
+    </script>
+</head>
+<body>
+  <div id="root">
+    
+
+
+
+
+
+
+
+
+<script nonce="0LWPagXHRHEAGGS0LFLjjg==" type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+    preferredFont: "TeX",
+    availableFonts: ["STIX", "TeX"],
+    linebreaks: {
+    automatic: true
+    },
+    EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+    inlineMath: [["\\(", "\\)"], ["\\\\(", "\\\\)"]],
+    displayMath: [["$$", "$$"], ["\\[", "\\]"]],
+    processEscapes: true,
+    ignoreClass: "tex2jax_ignore|dno"
+    },
+    TeX: {
+    noUndefined: {
+    attributes: {
+    mathcolor: "red",
+    mathbackground: "#FFEEEE",
+    mathsize: "90%"
+    }
+    }
+    },
+    Macros: {
+    href: "{}"
+    },
+    skipStartupTypeset: true,
+    messageStyle: "none",
+    extensions: ["Safe.js"],
+    });
+</script>
+<script type="text/javascript" nonce="0LWPagXHRHEAGGS0LFLjjg==">
+  window.addEventListener("DOMContentLoaded", () => {
+    const head = document.getElementsByTagName("head")[0];
+    const lib = document.createElement("script");
+    lib.type = "text/javascript";
+    // Always use the production asset in local dev, which is served from GCS. We tried to proxy and / or serve this
+    // in a better way in localhost, but it didn't work out. See b/328073416#comment8 for details.
+    const forceProdHost = window.location.hostname === "localhost";
+    lib.src = `${forceProdHost ? "https://www.kaggle.com" : ""}/static/mathjax/2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML`;
+    head.appendChild(lib);
+  });
+</script>
+
+
+
+
+
+
+
+
+
+  </div>
+</body>
+</html>

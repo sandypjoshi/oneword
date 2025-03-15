@@ -73,24 +73,38 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Recent Improvements
+## Recent Improvements and Known Issues
 
-We've made several improvements to address specific concerns:
+### Current Status
+- Total words in database: 212,460
+- Words with frequency data: 8,199 (3.86%)
+- Active development focusing on fixing enrichment process and improving difficulty calculations
 
-1. **Enhanced Difficulty Calculation**: 
-   - Updated to give frequency data a higher weight (50%) in difficulty calculations
-   - Added SUBTLEX frequency data import capabilities
-   - Words now have more accurate difficulty ratings
+### 1. Word Enrichment Process
+- **Current Issues**:
+  - Edge function timing out with larger batches
+  - Limited word eligibility
+  - Processing inefficiencies
+- **Planned Fixes**:
+  - Optimizing edge functions
+  - Updating eligibility criteria
+  - Implementing better monitoring
+  - See [Enrichment Status](docs/enrichment-status.md) for details
 
-2. **Definition and Example Separation**:
-   - Added functionality to properly parse WordNet glosses
-   - Separated definitions from examples in the words table
-   - Improved data quality for learning experience
+### 2. Difficulty Calculation
+- **Recent Updates**:
+  - Implementing logarithmic frequency normalization
+  - Adjusting difficulty thresholds
+  - Improving part of speech scoring
+- **Current Focus**:
+  - Enhancing data quality
+  - Refining scoring algorithms
+  - Validating difficulty classifications
 
-3. **Word Metadata Clarification**:
-   - Added documentation for the word_metadata table
-   - Integrated metadata with difficulty calculations and other functions
-   - Added support for storing pronunciation, etymology, and other data
+### 3. Data Quality
+- Working on improving word frequency data coverage
+- Implementing better monitoring and validation
+- Adding comprehensive data quality checks
 
 ## Scripts
 
@@ -128,6 +142,35 @@ supabase functions deploy calculate-word-difficulty
 supabase functions deploy select-daily-words
 supabase functions deploy generate-distractors
 ```
+
+### Data Enrichment
+
+- **Run Word Enrichment** (Note: Currently being optimized):
+  ```bash
+  npm run enrich-words
+  ```
+
+- **Check Enrichment Status**:
+  ```bash
+  npm run check-enrichment
+  ```
+
+- **Reset Enrichment Process**:
+  ```bash
+  npm run reset-enrichment
+  ```
+
+### Difficulty Calculation
+
+- **Calculate Word Difficulty**:
+  ```bash
+  npm run calculate-difficulty
+  ```
+
+- **Validate Difficulty Levels**:
+  ```bash
+  npm run validate-difficulty
+  ```
 
 ## Database Structure
 

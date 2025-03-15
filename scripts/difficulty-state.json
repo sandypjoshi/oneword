@@ -1,6 +1,6 @@
 {
-  "lastProcessedId": 14395,
-  "totalProcessed": 4214,
+  "lastProcessedId": 17870,
+  "totalProcessed": 4314,
   "totalWithFrequency": 1059,
   "totalWithoutFrequency": 315,
   "processingStartTime": "2025-03-09T11:01:26.384Z",
@@ -1015,10 +1015,20 @@
       "start": 14392,
       "end": 14395,
       "timestamp": "2025-03-10T12:25:19.151Z"
+    },
+    {
+      "start": 14450,
+      "end": 15853,
+      "timestamp": "2025-03-11T06:38:47.219Z"
+    },
+    {
+      "start": 15859,
+      "end": 17870,
+      "timestamp": "2025-03-11T06:49:34.858Z"
     }
   ],
-  "totalSuccessful": 2840,
+  "totalSuccessful": 2940,
   "totalFailed": 0,
   "totalSkipped": 0,
-  "lastRunTime": "2025-03-10T12:25:19.151Z"
+  "lastRunTime": "2025-03-11T06:49:34.858Z"
 }
