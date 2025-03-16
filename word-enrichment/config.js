@@ -1,24 +1,26 @@
 require('dotenv').config();
 
-// API configuration - Multiple API keys for rotation
-// Replace these with your actual API keys
-const GEMINI_API_KEYS = [
-  'AIzaSyDBpCwbZZHBrvC-2hyX3KY7b0c8feHUFvM', // Original key
-  'AIzaSyC1YlD0bgAQNlEKNwwt4c4mb-UyG-uyMPs', // Key 2
-  'AIzaSyB9bSg97Mgks6K1vdBOWz5lB-22fviGDm4', // Key 3  
-  'AIzaSyCQvAm3pVwP8lROepdIu5BFItkAPPOdHDo', // Key 4
-  'AIzaSyCvV1U8ffiiQVn4d6e-N8Ly-6Rqxg0vOb8'  // Key 5
-];
+// IMPORTANT: These are placeholder keys - actual keys should be stored in .env file
+// and loaded through environment variables
+const GEMINI_API_KEYS = process.env.GEMINI_API_KEYS ? 
+  process.env.GEMINI_API_KEYS.split(',') : 
+  [
+    'AIzaSy****************UFvM', // Masked key 1
+    'AIzaSy****************yMPs', // Masked key 2
+    'AIzaSy****************GDm4', // Masked key 3
+    'AIzaSy****************dHDo', // Masked key 4
+    'AIzaSy****************vOb8'  // Masked key 5
+  ];
 
 // Default to the first key for backward compatibility
 const GEMINI_API_KEY = GEMINI_API_KEYS[0];
 const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models';
 const GEMINI_MODEL = 'gemini-2.0-flash'; // Using the latest 2.0 Flash model for better results
 
-// Supabase configuration
-const SUPABASE_URL = process.env.SUPABASE_URL || 'https://ipljgsggnbdwaomjfuok.supabase.co';
-const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlwbGpnc2dnbmJkd2FvbWpmdW9rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEwODAxMDYsImV4cCI6MjA1NjY1NjEwNn0.Tpqr0Btu0AolHltIv2qa4dLNxd7_wr3eC8NF2oLbGRI';
-const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlwbGpnc2dnbmJkd2FvbWpmdW9rIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0MTA4MDEwNiwiZXhwIjoyMDU2NjU2MTA2fQ.qkwn-imaZVnK6IGFgG75eFcFEQySgzIN_gvUJbbDFWE';
+// Supabase configuration - Use environment variables
+const SUPABASE_URL = process.env.SUPABASE_URL || 'https://example.supabase.co';
+const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || 'eyJhbG********************************************';
+const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY || 'eyJhbG********************************************';
 
 // Batch processing configuration
 const BATCH_SIZE = 40; // Restore safer batch size to avoid parsing errors

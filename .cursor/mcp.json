@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "supabase": {
+      "command": "node",
+      "args": ["/Users/sandeep.joshi/Documents/vibecoding/oneword/mcp-supabase/build/start-server.js"]
+    }
+  }
+} 

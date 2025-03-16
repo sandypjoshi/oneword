@@ -1,0 +1,134 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Memory Bank Maintenance Rules
+
+<Prompt>
+    <Context>
+        The Cursor Memory Bank is a critical system for maintaining context between sessions. It must be kept up-to-date to ensure effective continuation of work on the OneWord project.
+    </Context>
+    
+    <Rules>
+        1. The Memory Bank MUST be updated after any significant change to the project.
+        2. When triggered by "update memory bank", ALL files in the Memory Bank MUST be reviewed, even if some don't require updates.
+        3. Focus particularly on activeContext.md and progress.md as they track the current state.
+        4. New task logs MUST be created for each significant task completed.
+        5. Implementation plans MUST be updated when project direction changes.
+        6. All documentation MUST be clear, concise, and accurate.
+        7. Memory Bank files should build upon each other without unnecessary duplication.
+    </Rules>
+    
+    <Progress>
+        Document all tasks. Create a folder in the project root named .cursor/task-logs/ and keep a log of tasks in the following format:
+        
+        GOAL: Detail the goal of the task
+        IMPLEMENTATION: Describe how it was implemented.
+        COMPLETED: The date and time it was completed.
+        
+        [root]
+            [.cursor/task-logs/]
+                task-log_dd-mm-yy-hh-mm.log
+    </Progress>
+    
+    <Instructions>
+        1. After completing a significant task, create a new task log in .cursor/task-logs/.
+        2. Update activeContext.md with current focus, recent changes, and next steps.
+        3. Update progress.md with completed features, in-progress features, and known issues.
+        4. Review and update other Memory Bank files as needed.
+        5. When project direction changes, update implementation plans in .cursor/plans/.
+        6. When adding new technologies or dependencies, update techContext.md.
+        7. When discovering new patterns or architectural decisions, update systemPatterns.md.
+    </Instructions>
+</Prompt>
+
+## Update Triggers
+
+The Memory Bank should be updated when:
+
+1. **Completing a Significant Task**: After implementing a feature, fixing a major bug, or completing a milestone.
+2. **Changing Project Direction**: When requirements change or new priorities emerge.
+3. **Adding New Technologies**: When introducing new dependencies or tools.
+4. **Discovering New Patterns**: When identifying reusable patterns or architectural insights.
+5. **Explicitly Requested**: When the user requests with "update memory bank".
+
+## Update Process
+
+```mermaid
+flowchart TD
+    Start[Update Process]
+    
+    subgraph Process
+        P1[Review ALL Files]
+        P2[Document Current State]
+        P3[Clarify Next Steps]
+        P4[Create Task Log]
+        
+        P1 --> P2 --> P3 --> P4
+    end
+    
+    Start --> Process
+```
+
+## File Update Frequency
+
+| File | Update Frequency | Priority |
+|------|------------------|----------|
+| activeContext.md | After each significant task | High |
+| progress.md | After each significant task | High |
+| task-logs/*.log | After each task | High |
+| plans/*.md | When project direction changes | Medium |
+| techContext.md | When adding new technologies | Medium |
+| systemPatterns.md | When discovering new patterns | Medium |
+| productContext.md | When product goals change | Low |
+| projectbrief.md | When core requirements change | Low |
+
+## Memory Bank Health Checklist
+
+- [ ] All files are up-to-date with current project state
+- [ ] Recent changes are documented in activeContext.md
+- [ ] Current progress is accurately reflected in progress.md
+- [ ] Task logs exist for all completed tasks
+- [ ] Implementation plans match current project direction
+- [ ] Technical context includes all current technologies
+- [ ] System patterns document all architectural decisions 
+
+## Difficulty Scoring System
+
+OneWord uses a multi-factor difficulty calculation algorithm to assign difficulty scores to words. The system:
+
+1. Calculates a raw score from 0-1 based on multiple factors:
+   - Word frequency (55% weight)
+   - Word length (15% weight)
+   - Syllable count (15% weight)
+   - Part of speech complexity (10% weight)
+   - Domain complexity (5% weight)
+
+2. Assigns difficulty levels based on configurable thresholds:
+   - Beginner: score < beginner_threshold (default: 0.33)
+   - Intermediate: beginner_threshold <= score < intermediate_threshold (default: 0.67)
+   - Advanced: score >= intermediate_threshold (default: 0.67)
+
+3. Normalizes related word forms to ensure consistent difficulty levels
+
+### Managing Difficulty Thresholds
+
+The difficulty thresholds are configurable via:
+
+1. The `difficulty_config` database table:
+   - Contains `beginner_threshold` and `intermediate_threshold` values
+   - Updates automatically reflect in word difficulty assignments
+
+2. The `update-thresholds.js` script:
+   ```bash
+   node update-thresholds.js <beginner_threshold> <intermediate_threshold>
+   ```
+   Example: `node update-thresholds.js 0.4 0.75` sets beginner threshold to 0.4 and intermediate to 0.75
+
+3. After updating thresholds, run `update-database.js` to apply them:
+   ```bash
+   node update-database.js
+   ```
+
+This system allows for flexible tuning of difficulty distributions while maintaining consistent scoring logic. 

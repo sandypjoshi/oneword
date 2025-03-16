@@ -1,5 +1,15 @@
 node_modules
-.cursor/
 .env
 .env.local
 .env
+
+# Logs
+*.log
+!word-enrichment/logs/.gitkeep
+
+# Stats files
+word-enrichment/stats/*.json
+!word-enrichment/stats/.gitkeep
+
+# Checkpoint
+word-enrichment/checkpoint.json

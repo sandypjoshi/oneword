@@ -14,6 +14,10 @@ const config = require('./config');
 const path = require('path');
 const fs = require('fs');
 
+// Add more robust error handling for the Gemini API in the generateContent method
+// Add after requires, near the top of the file
+process.env.NODE_OPTIONS = '--max-old-space-size=4096';
+
 // Initialize Supabase client
 const supabase = createClient(
   config.SUPABASE_URL,
@@ -175,15 +179,51 @@ async function processBatch(words) {
   try {
     logger.info(`Sending batch request for ${words.length} words to definition generator...`);
     // Generate new definitions for ALL words in the batch with a single API request
-    const withDefinitions = await definitionGenerator.generateDefinitions(words);
+    let withDefinitions;
+    try {
+      withDefinitions = await definitionGenerator.generateDefinitions(words);
+    } catch (error) {
+      logger.error(`Error generating definitions: ${error.message}`);
+      logger.info('Trying smaller batch size for definitions...');
+      
+      // Try with half the batch size
+      const halfSize = Math.ceil(words.length / 2);
+      const firstHalf = await definitionGenerator.generateDefinitions(words.slice(0, halfSize));
+      const secondHalf = await definitionGenerator.generateDefinitions(words.slice(halfSize));
+      withDefinitions = [...firstHalf, ...secondHalf];
+    }
     
     logger.info(`Sending batch request for ${words.length} words to OWAD generator...`);
     // Generate new OWAD phrases for ALL words in the batch with a single API request
-    const withOwad = await owadGenerator.generateOwadPhrases(withDefinitions);
+    let withOwad;
+    try {
+      withOwad = await owadGenerator.generateOwadPhrases(withDefinitions);
+    } catch (error) {
+      logger.error(`Error generating OWAD phrases: ${error.message}`);
+      logger.info('Trying smaller batch size for OWAD phrases...');
+      
+      // Try with half the batch size
+      const halfSize = Math.ceil(withDefinitions.length / 2);
+      const firstHalf = await owadGenerator.generateOwadPhrases(withDefinitions.slice(0, halfSize));
+      const secondHalf = await owadGenerator.generateOwadPhrases(withDefinitions.slice(halfSize));
+      withOwad = [...firstHalf, ...secondHalf];
+    }
     
     logger.info(`Sending batch request for ${words.length} words to distractor generator...`);
     // Generate new distractors for ALL words in the batch with a single API request
-    const withDistractors = await distractorGenerator.generateDistractors(withOwad);
+    let withDistractors;
+    try {
+      withDistractors = await distractorGenerator.generateDistractors(withOwad);
+    } catch (error) {
+      logger.error(`Error generating distractors: ${error.message}`);
+      logger.info('Trying smaller batch size for distractors...');
+      
+      // Try with half the batch size
+      const halfSize = Math.ceil(withOwad.length / 2);
+      const firstHalf = await distractorGenerator.generateDistractors(withOwad.slice(0, halfSize));
+      const secondHalf = await distractorGenerator.generateDistractors(withOwad.slice(halfSize));
+      withDistractors = [...firstHalf, ...secondHalf];
+    }
     
     // Now process and update each word
     for (let i = 0; i < withDistractors.length; i++) {
@@ -238,9 +278,6 @@ async function processBatch(words) {
   batchStats.endTime = Date.now();
   batchStats.elapsedTimeMs = batchStats.endTime - batchStats.startTime;
   batchStats.elapsedTimeMin = Math.round(batchStats.elapsedTimeMs / 60000 * 10) / 10;
-  batchStats.definitionsUpdated = batchStats.definitionsUpdated;
-  batchStats.owadPhrasesUpdated = batchStats.owadPhrasesUpdated;
-  batchStats.distractorsUpdated = batchStats.distractorsUpdated;
   
   // Add to global stats
   stats.batches.push(batchStats);
@@ -286,43 +323,59 @@ async function main() {
     
     // Continue until all words are processed
     while (currentOffset < totalWordCount) {
-      try {
-        // Fetch next batch of words
-        const words = await fetchWords(BATCH_SIZE, currentOffset);
-        
-        // Process the batch
-        await processBatch(words);
-        
-        // Update offset
-        currentOffset += words.length;
-        
-        // Save checkpoint after each batch
-        saveCheckpoint(currentOffset);
-        
-        // Calculate processing speed and estimated time remaining
-        const elapsedMinutes = (Date.now() - stats.startTime) / 60000;
-        const wordsPerMinute = Math.round(stats.processedWords / elapsedMinutes);
-        const remainingWords = totalWordCount - currentOffset;
-        const estimatedMinRemaining = Math.round(remainingWords / wordsPerMinute);
-        
-        logger.info(`Speed: ${wordsPerMinute} words/minute, Est. time remaining: ${estimatedMinRemaining} minutes`);
-        logger.info(`Progress: ${stats.processedWords}/${totalWordCount} words (${Math.round(stats.processedWords/totalWordCount*100)}%)`);
-        logger.info('-------------------------------------');
-        
-        // Save stats periodically
-        saveStats();
-      } catch (error) {
-        logger.error(`Error processing batch at offset ${currentOffset}: ${error.message}`);
-        
-        // Save checkpoint so we can resume
-        saveCheckpoint(currentOffset);
-        
-        // Save stats
-        saveStats();
-        
-        // Wait before retry
-        logger.info(`Waiting 30 seconds before retrying...`);
-        await new Promise(resolve => setTimeout(resolve, 30000));
+      let retries = 0;
+      const MAX_RETRIES = 3;
+      let success = false;
+      
+      while (!success && retries < MAX_RETRIES) {
+        try {
+          // Fetch next batch of words
+          const words = await fetchWords(BATCH_SIZE, currentOffset);
+          
+          // Process the batch
+          await processBatch(words);
+          
+          // Update offset
+          currentOffset += words.length;
+          
+          // Save checkpoint after each batch
+          saveCheckpoint(currentOffset);
+          
+          // Calculate processing speed and estimated time remaining
+          const elapsedMinutes = (Date.now() - stats.startTime) / 60000;
+          const wordsPerMinute = Math.round(stats.processedWords / elapsedMinutes);
+          const remainingWords = totalWordCount - currentOffset;
+          const estimatedMinRemaining = Math.round(remainingWords / wordsPerMinute);
+          
+          logger.info(`Speed: ${wordsPerMinute} words/minute, Est. time remaining: ${estimatedMinRemaining} minutes`);
+          logger.info(`Progress: ${stats.processedWords}/${totalWordCount} words (${Math.round(stats.processedWords/totalWordCount*100)}%)`);
+          logger.info('-------------------------------------');
+          
+          // Save stats periodically
+          saveStats();
+          
+          // Mark as successful
+          success = true;
+        } catch (error) {
+          retries++;
+          logger.error(`Error processing batch at offset ${currentOffset} (attempt ${retries}): ${error.message}`);
+          
+          if (retries >= MAX_RETRIES) {
+            logger.error(`Failed after ${MAX_RETRIES} attempts, skipping to next batch`);
+            // Skip this batch after max retries
+            currentOffset += BATCH_SIZE;
+            // Save the new checkpoint
+            saveCheckpoint(currentOffset);
+          } else {
+            // Wait before retry, with increasing backoff
+            const waitTime = 30000 * retries;
+            logger.info(`Waiting ${waitTime/1000} seconds before retrying...`);
+            await new Promise(resolve => setTimeout(resolve, waitTime));
+          }
+          
+          // Save stats
+          saveStats();
+        }
       }
     }
     
