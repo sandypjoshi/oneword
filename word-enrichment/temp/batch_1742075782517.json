@@ -1,0 +1,172 @@
+[
+  {
+    "id": 6999,
+    "word": "about",
+    "pos": "adverb",
+    "shortDefinition": "Almost; close to a number or time.",
+    "definition_updated_at": "2025-03-15T21:56:18.736Z",
+    "definition_source": "gemini",
+    "owad_phrase": [
+      "Nearly touching",
+      "Almost there"
+    ],
+    "distractors": [
+      {
+        "type": "semantic",
+        "distractor": "around"
+      },
+      {
+        "type": "semantic",
+        "distractor": "above"
+      },
+      {
+        "type": "frequency-based",
+        "distractor": "almost"
+      },
+      {
+        "type": "phonological",
+        "distractor": "abroad"
+      },
+      {
+        "type": "semantic",
+        "distractor": "already"
+      }
+    ]
+  },
+  {
+    "id": 58309,
+    "word": "two",
+    "pos": "noun",
+    "shortDefinition": "The number after one and before three.",
+    "definition_updated_at": "2025-03-15T21:56:18.736Z",
+    "definition_source": "gemini",
+    "owad_phrase": [
+      "A paired dance",
+      "A double act"
+    ],
+    "distractors": [
+      {
+        "type": "semantic",
+        "distractor": "couple"
+      },
+      {
+        "type": "semantic",
+        "distractor": "brace"
+      },
+      {
+        "type": "semantic",
+        "distractor": "pair"
+      },
+      {
+        "type": "phonological",
+        "distractor": "through"
+      },
+      {
+        "type": "semantic",
+        "distractor": "trio"
+      }
+    ]
+  },
+  {
+    "id": 61876,
+    "word": "who",
+    "pos": "noun",
+    "shortDefinition": "The person that did something or is someone.",
+    "definition_updated_at": "2025-03-15T21:56:18.736Z",
+    "definition_source": "gemini",
+    "owad_phrase": [
+      "A masked figure",
+      "An unnamed soul"
+    ],
+    "distractors": [
+      {
+        "type": "hypernym",
+        "distractor": "person"
+      },
+      {
+        "type": "common misconception",
+        "distractor": "whom"
+      },
+      {
+        "type": "frequency-based",
+        "distractor": "they"
+      },
+      {
+        "type": "semantic",
+        "distractor": "which"
+      },
+      {
+        "type": "semantic",
+        "distractor": "someone"
+      }
+    ]
+  },
+  {
+    "id": 7681,
+    "word": "also",
+    "pos": "adverb",
+    "shortDefinition": "In addition; as well; too; furthermore.",
+    "definition_updated_at": "2025-03-15T21:56:18.736Z",
+    "definition_source": "gemini",
+    "owad_phrase": [
+      "In addition",
+      "Furthermore included"
+    ],
+    "distractors": [
+      {
+        "type": "semantic",
+        "distractor": "too"
+      },
+      {
+        "type": "phonological",
+        "distractor": "although"
+      },
+      {
+        "type": "frequency-based",
+        "distractor": "often"
+      },
+      {
+        "type": "semantic",
+        "distractor": "besides"
+      },
+      {
+        "type": "semantic",
+        "distractor": "always"
+      }
+    ]
+  },
+  {
+    "id": 8197,
+    "word": "are",
+    "pos": "noun",
+    "shortDefinition": "A unit to measure land area.",
+    "definition_updated_at": "2025-03-15T21:56:18.736Z",
+    "definition_source": "gemini",
+    "owad_phrase": [
+      "A diamond dozen",
+      "A metric measure"
+    ],
+    "distractors": [
+      {
+        "type": "phonological",
+        "distractor": "area"
+      },
+      {
+        "type": "semantic",
+        "distractor": "measure"
+      },
+      {
+        "type": "semantic",
+        "distractor": "extent"
+      },
+      {
+        "type": "semantic",
+        "distractor": "surface"
+      },
+      {
+        "type": "hyponym",
+        "distractor": "acre"
+      }
+    ]
+  }
+]

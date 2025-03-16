@@ -1,0 +1,1482 @@
+[
+  {
+    "id": 201,
+    "word": "robbery",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5757,
+    "difficulty_score": 0,
+    "short_definition": "The act of taking property unlawfully by force or threat",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "a bank heist",
+      "an armed holdup"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "bribery"
+      },
+      {
+        "type": "related crime",
+        "distractor": "burglary"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "recovery"
+      },
+      {
+        "type": "different domain",
+        "distractor": "responsibility"
+      },
+      {
+        "type": "different domain",
+        "distractor": "revenge"
+      }
+    ]
+  },
+  {
+    "id": 202,
+    "word": "blackmail",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 5781,
+    "difficulty_score": 0.0150350652536355,
+    "short_definition": "The act of extorting something by threatening to reveal damaging information",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "a secret exposure threat",
+      "compromising photo extortion"
+    ],
+    "distractors": [
+      {
+        "type": "opposite concept",
+        "distractor": "white lie"
+      },
+      {
+        "type": "related concept",
+        "distractor": "bargain"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "mail fraud"
+      },
+      {
+        "type": "consequence of act",
+        "distractor": "revelation"
+      },
+      {
+        "type": "related crime",
+        "distractor": "bribery"
+      }
+    ]
+  },
+  {
+    "id": 203,
+    "word": "protection",
+    "pos": "noun",
+    "sense_count": 7,
+    "source_word_id": 5782,
+    "difficulty_score": 0,
+    "short_definition": "The act of defending from harm, injury, or loss",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "a bodyguard detail",
+      "an insurance policy"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "persecution"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "prescription"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "prevention"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "preservation"
+      },
+      {
+        "type": "cause of needing protection",
+        "distractor": "provocation"
+      }
+    ]
+  },
+  {
+    "id": 204,
+    "word": "contribution",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 5800,
+    "difficulty_score": 0.00677124085566383,
+    "short_definition": "The act of giving something to a common purpose",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "a charity donation",
+      "a team effort"
+    ],
+    "distractors": [
+      {
+        "type": "similar process",
+        "distractor": "distribution"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "detraction"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "congestion"
+      },
+      {
+        "type": "result of having contributions",
+        "distractor": "consumption"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "calculation"
+      }
+    ]
+  },
+  {
+    "id": 205,
+    "word": "stab",
+    "pos": "noun",
+    "sense_count": 6,
+    "source_word_id": 5804,
+    "difficulty_score": 0,
+    "short_definition": "A wound made by a pointed weapon",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "a knife wound",
+      "a sudden thrust"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "slap"
+      },
+      {
+        "type": "protection against",
+        "distractor": "shield"
+      },
+      {
+        "type": "opposite action",
+        "distractor": "soothe"
+      },
+      {
+        "type": "treatment for",
+        "distractor": "salve"
+      },
+      {
+        "type": "similar action",
+        "distractor": "slash"
+      }
+    ]
+  },
+  {
+    "id": 206,
+    "word": "proposition",
+    "pos": "noun",
+    "sense_count": 6,
+    "source_word_id": 5869,
+    "difficulty_score": 0.132013715504174,
+    "short_definition": "A statement expressing a judgment or opinion",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "a business deal",
+      "a marriage proposal"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "opposition"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "preposition"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "supposition"
+      },
+      {
+        "type": "response to a proposition",
+        "distractor": "rejection"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "premonition"
+      }
+    ]
+  },
+  {
+    "id": 207,
+    "word": "campaigning",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 5882,
+    "difficulty_score": 0.351439904570782,
+    "short_definition": "The act of actively promoting a cause or candidate",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "a political rally",
+      "an election promotion"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "complaining"
+      },
+      {
+        "type": "opposite action",
+        "distractor": "collapsing"
+      },
+      {
+        "type": "unrelated action",
+        "distractor": "complying"
+      },
+      {
+        "type": "opposite action",
+        "distractor": "concealing"
+      },
+      {
+        "type": "preceding action",
+        "distractor": "contemplating"
+      }
+    ]
+  },
+  {
+    "id": 208,
+    "word": "rig",
+    "pos": "noun",
+    "sense_count": 11,
+    "source_word_id": 5744,
+    "difficulty_score": 0.116815833252297,
+    "short_definition": "Equipment or machinery for a specific purpose",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "an oil derrick",
+      "sailing equipment"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "dig"
+      },
+      {
+        "type": "action to fix",
+        "distractor": "repair"
+      },
+      {
+        "type": "result of damage",
+        "distractor": "wreck"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "routine"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "rage"
+      }
+    ]
+  },
+  {
+    "id": 209,
+    "word": "try",
+    "pos": "noun",
+    "sense_count": 10,
+    "source_word_id": 5795,
+    "difficulty_score": 0,
+    "short_definition": "An attempt to accomplish something",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "a first attempt",
+      "a test effort"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "lie"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "cry"
+      },
+      {
+        "type": "opposite concept",
+        "distractor": "trust"
+      },
+      {
+        "type": "potential outcome",
+        "distractor": "triumph"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "truth"
+      }
+    ]
+  },
+  {
+    "id": 210,
+    "word": "offer",
+    "pos": "noun",
+    "sense_count": 16,
+    "source_word_id": 5797,
+    "difficulty_score": 0,
+    "short_definition": "An expression of willingness to do or give something",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "a job vacancy",
+      "a price reduction"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "order"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "offense"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "refusal"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "retreat"
+      },
+      {
+        "type": "related concept",
+        "distractor": "oblation"
+      }
+    ]
+  },
+  {
+    "id": 211,
+    "word": "seeking",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5803,
+    "difficulty_score": 0,
+    "short_definition": "The act of attempting to find or obtain something",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "a treasure hunt",
+      "a job search"
+    ],
+    "distractors": [
+      {
+        "type": "similar action",
+        "distractor": "seizing"
+      },
+      {
+        "type": "opposite action",
+        "distractor": "sheltering"
+      },
+      {
+        "type": "unrelated action",
+        "distractor": "settling"
+      },
+      {
+        "type": "unrelated action",
+        "distractor": "sacrificing"
+      },
+      {
+        "type": "unrelated action",
+        "distractor": "skipping"
+      }
+    ]
+  },
+  {
+    "id": 212,
+    "word": "share",
+    "pos": "noun",
+    "sense_count": 10,
+    "source_word_id": 5801,
+    "difficulty_score": 0,
+    "short_definition": "A part or portion belonging to, or contributed by, someone",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "a company holding",
+      "a fair portion"
+    ],
+    "distractors": [
+      {
+        "type": "similar sound",
+        "distractor": "shortage"
+      },
+      {
+        "type": "related concept",
+        "distractor": "shard"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "secret"
+      },
+      {
+        "type": "related concept",
+        "distractor": "solidarity"
+      },
+      {
+        "type": "opposite concept",
+        "distractor": "separation"
+      }
+    ]
+  },
+  {
+    "id": 213,
+    "word": "battle",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 5808,
+    "difficulty_score": 0,
+    "short_definition": "A sustained fight between opposing forces",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "a military conflict",
+      "a decisive fight"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "babble"
+      },
+      {
+        "type": "opposite concept",
+        "distractor": "treaty"
+      },
+      {
+        "type": "similar sound",
+        "distractor": "baffle"
+      },
+      {
+        "type": "potential outcome",
+        "distractor": "benefit"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "burden"
+      }
+    ]
+  },
+  {
+    "id": 214,
+    "word": "duel",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 5809,
+    "difficulty_score": 0,
+    "short_definition": "A prearranged combat between two individuals",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "a pistol challenge",
+      "a formal combat"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "drool"
+      },
+      {
+        "type": "opposite concept",
+        "distractor": "detente"
+      },
+      {
+        "type": "related concept",
+        "distractor": "deal"
+      },
+      {
+        "type": "cause of duel",
+        "distractor": "disagreement"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "duty"
+      }
+    ]
+  },
+  {
+    "id": 215,
+    "word": "test",
+    "pos": "noun",
+    "sense_count": 13,
+    "source_word_id": 5821,
+    "difficulty_score": 0,
+    "short_definition": "A procedure intended to establish the quality or performance",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "a final exam",
+      "a software check"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "trust"
+      },
+      {
+        "type": "potential outcome",
+        "distractor": "triumph"
+      },
+      {
+        "type": "related concept",
+        "distractor": "treatment"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "trial"
+      },
+      {
+        "type": "related concept",
+        "distractor": "task"
+      }
+    ]
+  },
+  {
+    "id": 216,
+    "word": "assay",
+    "pos": "noun",
+    "sense_count": 6,
+    "source_word_id": 5823,
+    "difficulty_score": 0.405725044777854,
+    "short_definition": "A procedure for quantitatively assessing a substance",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "a gold measurement",
+      "a potency determination"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "essay"
+      },
+      {
+        "type": "similar action",
+        "distractor": "assess"
+      },
+      {
+        "type": "related concept",
+        "distractor": "analysis"
+      },
+      {
+        "type": "desired outcome",
+        "distractor": "accuracy"
+      },
+      {
+        "type": "related but outdated field",
+        "distractor": "alchemy"
+      }
+    ]
+  },
+  {
+    "id": 217,
+    "word": "elisa",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 5825,
+    "difficulty_score": 0.71,
+    "short_definition": "A biochemical assay that detects the presence of a substance",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "an antibody detection",
+      "a viral quantification"
+    ],
+    "distractors": [
+      {
+        "type": "related biochemical term",
+        "distractor": "alanine"
+      },
+      {
+        "type": "related biochemical term",
+        "distractor": "endotoxin"
+      },
+      {
+        "type": "related virus name",
+        "distractor": "echovirus"
+      },
+      {
+        "type": "related enzyme name",
+        "distractor": "endonuclease"
+      },
+      {
+        "type": "related medical condition",
+        "distractor": "edema"
+      }
+    ]
+  },
+  {
+    "id": 218,
+    "word": "baby",
+    "pos": "noun",
+    "sense_count": 7,
+    "source_word_id": 5862,
+    "difficulty_score": 0,
+    "short_definition": "A very young human being; an infant",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "a newborn infant",
+      "a small child"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "lady"
+      },
+      {
+        "type": "event related to baby",
+        "distractor": "labor"
+      },
+      {
+        "type": "opposite age",
+        "distractor": "elder"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "brave"
+      },
+      {
+        "type": "related to having a baby",
+        "distractor": "burden"
+      }
+    ]
+  },
+  {
+    "id": 219,
+    "word": "feminism",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5894,
+    "difficulty_score": 0.122364262368849,
+    "short_definition": "The advocacy of women's rights on equality of the sexes",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "equal rights advocacy",
+      "gender equality movement"
+    ],
+    "distractors": [
+      {
+        "type": "opposite concept",
+        "distractor": "masculinity"
+      },
+      {
+        "type": "unrelated philosophical concept",
+        "distractor": "fatalism"
+      },
+      {
+        "type": "related but extreme ideology",
+        "distractor": "fanaticism"
+      },
+      {
+        "type": "unrelated historical concept",
+        "distractor": "feudalism"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "falsity"
+      }
+    ]
+  },
+  {
+    "id": 220,
+    "word": "march",
+    "pos": "noun",
+    "sense_count": 14,
+    "source_word_id": 2117,
+    "difficulty_score": 0,
+    "short_definition": "A measured, rhythmic walk, especially of a group",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "a protest parade",
+      "a military procession"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "munch"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "mass"
+      },
+      {
+        "type": "related concept",
+        "distractor": "motion"
+      },
+      {
+        "type": "opposite concept",
+        "distractor": "moratorium"
+      },
+      {
+        "type": "potential problem",
+        "distractor": "misstep"
+      }
+    ]
+  },
+  {
+    "id": 221,
+    "word": "biont",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 20,
+    "difficulty_score": 0.682311637797255,
+    "short_definition": "An individual living organism",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "a single cell",
+      "a living entity"
+    ],
+    "distractors": [
+      {
+        "type": "related ecological term",
+        "distractor": "biome"
+      },
+      {
+        "type": "related ecological term",
+        "distractor": "biomass"
+      },
+      {
+        "type": "related ecological term",
+        "distractor": "biofilm"
+      },
+      {
+        "type": "related ecological term",
+        "distractor": "biocide"
+      },
+      {
+        "type": "related ecological term",
+        "distractor": "biotic"
+      }
+    ]
+  },
+  {
+    "id": 222,
+    "word": "person",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 25,
+    "difficulty_score": 0,
+    "short_definition": "A human being regarded as an individual",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "an individual citizen",
+      "a human being"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "prison"
+      },
+      {
+        "type": "related concept",
+        "distractor": "persona"
+      },
+      {
+        "type": "related concept",
+        "distractor": "presence"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "poverty"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "portion"
+      }
+    ]
+  },
+  {
+    "id": 223,
+    "word": "congener",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 10,
+    "difficulty_score": 0.71049660760114,
+    "short_definition": "A thing of the same kind or category",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "a homologous series",
+      "a similar compound"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "conjecture"
+      },
+      {
+        "type": "related linguistic term",
+        "distractor": "connotation"
+      },
+      {
+        "type": "related concept",
+        "distractor": "consensus"
+      },
+      {
+        "type": "related concept",
+        "distractor": "contaminant"
+      },
+      {
+        "type": "related biochemical term",
+        "distractor": "coenzyme"
+      }
+    ]
+  },
+  {
+    "id": 224,
+    "word": "organism",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 13,
+    "difficulty_score": 0.0196385426405687,
+    "short_definition": "An individual living thing with organized structure",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "a living creature",
+      "a complex system"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "orgasm"
+      },
+      {
+        "type": "related concept",
+        "distractor": "organic"
+      },
+      {
+        "type": "related concept",
+        "distractor": "organization"
+      },
+      {
+        "type": "related concept",
+        "distractor": "origin"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "ornament"
+      }
+    ]
+  },
+  {
+    "id": 225,
+    "word": "dwarf",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 16,
+    "difficulty_score": 0,
+    "short_definition": "A person of unusually small stature",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "a small person",
+      "a mythical being"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "wharf"
+      },
+      {
+        "type": "opposite concept",
+        "distractor": "giant"
+      },
+      {
+        "type": "mythical creature",
+        "distractor": "dragon"
+      },
+      {
+        "type": "related concept",
+        "distractor": "deformity"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "daredevil"
+      }
+    ]
+  },
+  {
+    "id": 226,
+    "word": "parent",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 18,
+    "difficulty_score": 0,
+    "short_definition": "A person who has begotten or borne offspring",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "a child's mother",
+      "a legal guardian"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "parrot"
+      },
+      {
+        "type": "related concept",
+        "distractor": "peer"
+      },
+      {
+        "type": "related concept",
+        "distractor": "progeny"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "pauper"
+      },
+      {
+        "type": "related concept",
+        "distractor": "partner"
+      }
+    ]
+  },
+  {
+    "id": 227,
+    "word": "presidency",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 4389,
+    "difficulty_score": 0.166853153240473,
+    "short_definition": "The office or term of a president",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "an executive tenure",
+      "a commander-in-chief office"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "residency"
+      },
+      {
+        "type": "related concept",
+        "distractor": "primacy"
+      },
+      {
+        "type": "related concept",
+        "distractor": "privilege"
+      },
+      {
+        "type": "opposite concept",
+        "distractor": "poverty"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "profanity"
+      }
+    ]
+  },
+  {
+    "id": 228,
+    "word": "president",
+    "pos": "noun",
+    "sense_count": 6,
+    "source_word_id": 4392,
+    "difficulty_score": 0,
+    "short_definition": "The elected head of a republic",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "an elected leader",
+      "a chief executive"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "precedent"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "peasant"
+      },
+      {
+        "type": "related concept",
+        "distractor": "proponent"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "prisoner"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "prophet"
+      }
+    ]
+  },
+  {
+    "id": 229,
+    "word": "brute",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 34,
+    "difficulty_score": 0,
+    "short_definition": "A savagely violent person or animal",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "a savage attacker",
+      "a violent beast"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "bruit"
+      },
+      {
+        "type": "opposite concept",
+        "distractor": "beauty"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "burden"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "benefit"
+      },
+      {
+        "type": "related concept",
+        "distractor": "brain"
+      }
+    ]
+  },
+  {
+    "id": 230,
+    "word": "fauna",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 36,
+    "difficulty_score": 0.308515570082791,
+    "short_definition": "The animals of a particular region or period",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "regional animal life",
+      "native wildlife"
+    ],
+    "distractors": [
+      {
+        "type": "related ecological term",
+        "distractor": "flora"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "formula"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "ferment"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "famine"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "fortitude"
+      }
+    ]
+  },
+  {
+    "id": 231,
+    "word": "individual",
+    "pos": "noun",
+    "sense_count": 6,
+    "source_word_id": 26,
+    "difficulty_score": 0,
+    "short_definition": "A single human being as distinct from a group",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "a single person",
+      "a unique entity"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "divisible"
+      },
+      {
+        "type": "related concept",
+        "distractor": "division"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "identical"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "infidel"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "interval"
+      }
+    ]
+  },
+  {
+    "id": 232,
+    "word": "someone",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 27,
+    "difficulty_score": 0,
+    "short_definition": "An unspecified or unknown person",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "an unknown caller",
+      "a nameless figure"
+    ],
+    "distractors": [
+      {
+        "type": "related pronoun",
+        "distractor": "something"
+      },
+      {
+        "type": "related adverb",
+        "distractor": "somewhere"
+      },
+      {
+        "type": "related adverb",
+        "distractor": "somehow"
+      },
+      {
+        "type": "related pronoun",
+        "distractor": "anyone"
+      },
+      {
+        "type": "related pronoun",
+        "distractor": "everyone"
+      }
+    ]
+  },
+  {
+    "id": 233,
+    "word": "somebody",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 28,
+    "difficulty_score": 0,
+    "short_definition": "An unspecified or unknown person",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "an anonymous donor",
+      "an unnamed person"
+    ],
+    "distractors": [
+      {
+        "type": "related adverb",
+        "distractor": "somehow"
+      },
+      {
+        "type": "related adverb",
+        "distractor": "somewhere"
+      },
+      {
+        "type": "related pronoun",
+        "distractor": "something"
+      },
+      {
+        "type": "related pronoun",
+        "distractor": "everybody"
+      },
+      {
+        "type": "opposite concept",
+        "distractor": "nobody"
+      }
+    ]
+  },
+  {
+    "id": 234,
+    "word": "mortal",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 29,
+    "difficulty_score": 0,
+    "short_definition": "A human being subject to death",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "a human being",
+      "a perishable being"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "moral"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "immortal"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "metal"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "mentor"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "matter"
+      }
+    ]
+  },
+  {
+    "id": 235,
+    "word": "soul",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 30,
+    "difficulty_score": 0,
+    "short_definition": "The spiritual or immaterial part of a human being",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "a spiritual essence",
+      "an inner spirit"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "sole"
+      },
+      {
+        "type": "related concept",
+        "distractor": "body"
+      },
+      {
+        "type": "related concept",
+        "distractor": "sorrow"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "soil"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "sound"
+      }
+    ]
+  },
+  {
+    "id": 236,
+    "word": "animal",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 31,
+    "difficulty_score": 0,
+    "short_definition": "A living organism that feeds on organic matter",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "a domestic pet",
+      "a wild beast"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "annual"
+      },
+      {
+        "type": "related concept",
+        "distractor": "animated"
+      },
+      {
+        "type": "related biological classification",
+        "distractor": "vegetable"
+      },
+      {
+        "type": "related geological classification",
+        "distractor": "mineral"
+      },
+      {
+        "type": "related concept",
+        "distractor": "instinct"
+      }
+    ]
+  },
+  {
+    "id": 237,
+    "word": "food",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 44,
+    "difficulty_score": 0,
+    "short_definition": "A substance that provides nutritional support for organisms",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "a nourishing meal",
+      "a daily sustenance"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "mood"
+      },
+      {
+        "type": "related verb",
+        "distractor": "feed"
+      },
+      {
+        "type": "related concept",
+        "distractor": "fuel"
+      },
+      {
+        "type": "related concept",
+        "distractor": "foliage"
+      },
+      {
+        "type": "opposite concept",
+        "distractor": "fasting"
+      }
+    ]
+  },
+  {
+    "id": 238,
+    "word": "nutrient",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 45,
+    "difficulty_score": 0.0102236111798577,
+    "short_definition": "A substance that provides nourishment essential for growth",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "a vitamin source",
+      "an essential element"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "nuisance"
+      },
+      {
+        "type": "related concept",
+        "distractor": "neutral"
+      },
+      {
+        "type": "opposite concept",
+        "distractor": "toxin"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "medication"
+      },
+      {
+        "type": "related concept",
+        "distractor": "nitrogen"
+      }
+    ]
+  },
+  {
+    "id": 239,
+    "word": "attribute",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 56,
+    "difficulty_score": 0,
+    "short_definition": "A quality or characteristic inherent in someone/something",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "a defining trait",
+      "a key characteristic"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "tribute"
+      },
+      {
+        "type": "related concept",
+        "distractor": "attitude"
+      },
+      {
+        "type": "related concept",
+        "distractor": "attachment"
+      },
+      {
+        "type": "opposite concept",
+        "distractor": "detract"
+      },
+      {
+        "type": "opposite concept",
+        "distractor": "absent"
+      }
+    ]
+  },
+  {
+    "id": 240,
+    "word": "matter",
+    "pos": "noun",
+    "sense_count": 7,
+    "source_word_id": 43,
+    "difficulty_score": 0,
+    "short_definition": "A physical substance that occupies space and possesses mass",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:58.843Z",
+    "owad_phrase": [
+      "a solid substance",
+      "a physical material"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "ladder"
+      },
+      {
+        "type": "related concept",
+        "distractor": "manner"
+      },
+      {
+        "type": "opposite concept",
+        "distractor": "spirit"
+      },
+      {
+        "type": "related concept",
+        "distractor": "mind"
+      },
+      {
+        "type": "related concept",
+        "distractor": "movement"
+      }
+    ]
+  }
+]

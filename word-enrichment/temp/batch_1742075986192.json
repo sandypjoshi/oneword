@@ -1,0 +1,104 @@
+[
+  {
+    "id": 56691,
+    "word": "through",
+    "pos": "adjective satellite",
+    "shortDefinition": "Finished; no longer needing to continue doing something.",
+    "definition_updated_at": "2025-03-15T21:59:43.426Z",
+    "definition_source": "gemini",
+    "owad_phrase": [
+      "completely finished",
+      "entirely done"
+    ],
+    "distractors": [
+      {
+        "type": "semantic",
+        "distractor": "finished"
+      },
+      {
+        "type": "semantic",
+        "distractor": "complete"
+      },
+      {
+        "type": "phonological",
+        "distractor": "over"
+      },
+      {
+        "type": "semantic",
+        "distractor": "past"
+      },
+      {
+        "type": "common misconception",
+        "distractor": "along"
+      }
+    ]
+  },
+  {
+    "id": 38301,
+    "word": "must",
+    "pos": "noun",
+    "shortDefinition": "Something that is needed or has to happen.",
+    "definition_updated_at": "2025-03-15T21:59:43.426Z",
+    "definition_source": "gemini",
+    "owad_phrase": [
+      "fresh mold",
+      "grape juice"
+    ],
+    "distractors": [
+      {
+        "type": "hypernym",
+        "distractor": "obligation"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "requirement"
+      },
+      {
+        "type": "semantic",
+        "distractor": "necessity"
+      },
+      {
+        "type": "phonological",
+        "distractor": "dust"
+      },
+      {
+        "type": "phonological",
+        "distractor": "trust"
+      }
+    ]
+  },
+  {
+    "id": 61666,
+    "word": "well",
+    "pos": "noun",
+    "shortDefinition": "A deep hole in the ground with water.",
+    "definition_updated_at": "2025-03-15T21:59:43.426Z",
+    "definition_source": "gemini",
+    "owad_phrase": [
+      "deep hole",
+      "water source"
+    ],
+    "distractors": [
+      {
+        "type": "co-hyponym",
+        "distractor": "spring"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "fountain"
+      },
+      {
+        "type": "hypernym",
+        "distractor": "source"
+      },
+      {
+        "type": "common misconception",
+        "distractor": "ill"
+      },
+      {
+        "type": "phonological",
+        "distractor": "wall"
+      }
+    ]
+  }
+]

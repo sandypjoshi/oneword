@@ -1,0 +1,83 @@
+[
+  {
+    "id": 59423,
+    "word": "united",
+    "pos": "adjective satellite",
+    "distractors": [
+      {
+        "type": "antonym (common misconception)",
+        "distractor": "separated"
+      },
+      {
+        "type": "synonym (frequency-based)",
+        "distractor": "linked"
+      },
+      {
+        "type": "semantic (domain-related)",
+        "distractor": "isolated"
+      },
+      {
+        "type": "semantic (co-hyponym)",
+        "distractor": "similar"
+      },
+      {
+        "type": "semantic (synonym)",
+        "distractor": "allied"
+      }
+    ]
+  },
+  {
+    "id": 42069,
+    "word": "people",
+    "pos": "noun",
+    "distractors": [
+      {
+        "type": "domain-related",
+        "distractor": "personnel"
+      },
+      {
+        "type": "semantic (hypernym)",
+        "distractor": "nation"
+      },
+      {
+        "type": "semantic (synonym)",
+        "distractor": "population"
+      },
+      {
+        "type": "phonological/orthographic",
+        "distractor": "temple"
+      },
+      {
+        "type": "semantic (domain-related)",
+        "distractor": "leaders"
+      }
+    ]
+  },
+  {
+    "id": 45106,
+    "word": "public",
+    "pos": "noun",
+    "distractors": [
+      {
+        "type": "antonym (common misconception)",
+        "distractor": "private"
+      },
+      {
+        "type": "semantic (domain-related)",
+        "distractor": "audience"
+      },
+      {
+        "type": "semantic (domain-related)",
+        "distractor": "policy"
+      },
+      {
+        "type": "phonological/orthographic",
+        "distractor": "republic"
+      },
+      {
+        "type": "domain-related",
+        "distractor": "publisher"
+      }
+    ]
+  }
+]

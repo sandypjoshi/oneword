@@ -1,0 +1,93 @@
+{
+  "words": [
+    {
+      "word": "trouble",
+      "pos": "noun",
+      "originalDefinition": "A state of distress, difficulty, or suffering",
+      "newDefinition": "A state of distress, difficulty, or suffering; adversity",
+      "originalOwad": [
+        "a big problem",
+        "a lot worry"
+      ],
+      "newOwad": [
+        "a big problem",
+        "a real worry"
+      ],
+      "originalDistractors": "hardship, bubble, anxiety, relief, quandary",
+      "newDistractors": "triumph, tranquility, triviality, travesty, trajectory",
+      "issues": [],
+      "qualityScore": 10
+    },
+    {
+      "word": "medium",
+      "pos": "noun",
+      "originalDefinition": "A way of communicating information to people.",
+      "newDefinition": "A substance enabling transmission of forces, effects, or information.",
+      "originalOwad": [
+        "a middle size",
+        "a communication channel"
+      ],
+      "newOwad": [
+        "a middle size",
+        "a go-between person"
+      ],
+      "originalDistractors": "channel, avenue, median, method, large",
+      "newDistractors": "message, median, method, obstacle, element",
+      "issues": [],
+      "qualityScore": 10
+    },
+    {
+      "word": "precise",
+      "pos": "adjective satellite",
+      "originalDefinition": null,
+      "newDefinition": "Exactly stated or strictly defined; accurate in every detail.",
+      "originalOwad": null,
+      "newOwad": [
+        "very accurate",
+        "exactly right"
+      ],
+      "originalDistractors": "None",
+      "newDistractors": "approximate, precious, particular, pertinent, persuasive",
+      "issues": [
+        "Definition contains subjective modifiers"
+      ],
+      "qualityScore": 9
+    },
+    {
+      "word": "abundant",
+      "pos": "adjective",
+      "originalDefinition": "Existing in large quantities; plentiful",
+      "newDefinition": "Existing in large quantities; more than sufficient; plentiful.",
+      "originalOwad": [
+        "very plentiful",
+        "quite ample"
+      ],
+      "newOwad": [
+        "very plentiful",
+        "more than enough"
+      ],
+      "originalDistractors": "scarce, sufficient, plentiful, lacking, overflowing",
+      "newDistractors": "adequate, arid, aspirant, attendant, ascendant",
+      "issues": [],
+      "qualityScore": 10
+    },
+    {
+      "word": "integrate",
+      "pos": "verb",
+      "originalDefinition": null,
+      "newDefinition": "To combine separate elements into a unified, functional whole.",
+      "originalOwad": null,
+      "newOwad": [
+        "to bring together",
+        "to combine parts"
+      ],
+      "originalDistractors": "None",
+      "newDistractors": "segregate, imitate, isolate, intensify, irradiate",
+      "issues": [],
+      "qualityScore": 10
+    }
+  ],
+  "overallScore": 9.8,
+  "issues": [],
+  "timestamp": "2025-03-16T02:12:07.883Z"
+}

@@ -1,0 +1,92 @@
+[
+  {
+    "word": "meticulous",
+    "pos": "adjective",
+    "definition": "Showing great attention to detail and precision",
+    "owad_phrases": [
+      "with extreme attention to detail",
+      "every tiny part perfect"
+    ]
+  },
+  {
+    "word": "telescope",
+    "pos": "noun",
+    "definition": "An optical instrument that magnifies distant objects",
+    "owad_phrases": [
+      "a tool for seeing far into space",
+      "equipment for viewing distant stars"
+    ]
+  },
+  {
+    "word": "calculate",
+    "pos": "verb",
+    "definition": "To determine values using mathematical operations",
+    "owad_phrases": [
+      "to figure out using numbers",
+      "to get the answer with math"
+    ]
+  },
+  {
+    "word": "transparent",
+    "pos": "adjective",
+    "definition": "Allowing light to pass through completely",
+    "owad_phrases": [
+      "see-through like glass",
+      "allowing light to pass freely"
+    ]
+  },
+  {
+    "word": "precisely",
+    "pos": "adverb",
+    "definition": "In an exact and accurate manner",
+    "owad_phrases": [
+      "exactly right",
+      "with perfect accuracy"
+    ]
+  },
+  {
+    "word": "strategy",
+    "pos": "noun",
+    "definition": "A detailed plan for achieving success",
+    "owad_phrases": [
+      "a careful plan to win",
+      "a smart way to reach a goal"
+    ]
+  },
+  {
+    "word": "abundant",
+    "pos": "adjective",
+    "definition": "Existing in large quantities",
+    "owad_phrases": [
+      "more than enough",
+      "a very large amount"
+    ]
+  },
+  {
+    "word": "integrate",
+    "pos": "verb",
+    "definition": "To combine parts into a whole",
+    "owad_phrases": [
+      "to bring together",
+      "to combine into one"
+    ]
+  },
+  {
+    "word": "diligent",
+    "pos": "adjective",
+    "definition": "Working carefully and with great effort",
+    "owad_phrases": [
+      "working very hard",
+      "putting in a lot of effort"
+    ]
+  },
+  {
+    "word": "navigate",
+    "pos": "verb",
+    "definition": "To find a way through or across",
+    "owad_phrases": [
+      "to find the right path",
+      "to guide something to a destination"
+    ]
+  }
+]

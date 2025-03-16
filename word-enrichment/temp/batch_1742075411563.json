@@ -1,0 +1,70 @@
+[
+  {
+    "id": 54580,
+    "word": "such",
+    "pos": "adverb",
+    "shortDefinition": "Very; to a great degree or extent.",
+    "definition_updated_at": "2025-03-15T21:50:09.166Z",
+    "definition_source": "gemini",
+    "owad_phrase": [
+      "really very",
+      "truly so"
+    ],
+    "distractors": [
+      {
+        "type": "synonym",
+        "distractor": "very"
+      },
+      {
+        "type": "synonym",
+        "distractor": "so"
+      },
+      {
+        "type": "frequency-based",
+        "distractor": "much"
+      },
+      {
+        "type": "hypernym",
+        "distractor": "some"
+      },
+      {
+        "type": "semantic-related",
+        "distractor": "thus"
+      }
+    ]
+  },
+  {
+    "id": 7607,
+    "word": "all",
+    "pos": "adjective satellite",
+    "shortDefinition": "The whole number or amount of something.",
+    "definition_updated_at": "2025-03-15T21:50:09.166Z",
+    "definition_source": "gemini",
+    "owad_phrase": [
+      "every single",
+      "each one"
+    ],
+    "distractors": [
+      {
+        "type": "common misconception",
+        "distractor": "any"
+      },
+      {
+        "type": "hypernym",
+        "distractor": "some"
+      },
+      {
+        "type": "synonym",
+        "distractor": "every"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "each"
+      },
+      {
+        "type": "antonym",
+        "distractor": "none"
+      }
+    ]
+  }
+]

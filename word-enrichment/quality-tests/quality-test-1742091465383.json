@@ -1,0 +1,195 @@
+{
+  "words": [
+    {
+      "word": "trouble",
+      "pos": "noun",
+      "difficultyScore": 0,
+      "difficultyLevel": "EASY",
+      "originalDefinition": "A state of distress, difficulty, or suffering",
+      "newDefinition": "A state of distress, difficulty, or suffering; adversity",
+      "originalOwad": [
+        "a big problem",
+        "a lot worry"
+      ],
+      "newOwad": [
+        "a legal predicament",
+        "a financial burden"
+      ],
+      "originalDistractors": "hardship, bubble, anxiety, relief, quandary",
+      "newDistractors": "treasure, tranquility, triumph, turmoil, labor",
+      "issues": [
+        "Easy word should have more phonological distractors"
+      ],
+      "qualityScore": 9
+    },
+    {
+      "word": "medium",
+      "pos": "noun",
+      "difficultyScore": 0,
+      "difficultyLevel": "EASY",
+      "originalDefinition": "A way of communicating information to people.",
+      "newDefinition": "A substance through which signals or forces are conveyed or transmitted",
+      "originalOwad": [
+        "a middle size",
+        "a communication channel"
+      ],
+      "newOwad": [
+        "a radio broadcast",
+        "an oil painting"
+      ],
+      "originalDistractors": "channel, avenue, median, method, large",
+      "newDistractors": "median, remedy, message, method, membrane",
+      "issues": [
+        "Easy word should have more phonological distractors"
+      ],
+      "qualityScore": 9
+    },
+    {
+      "word": "precise",
+      "pos": "adjective satellite",
+      "difficultyScore": 0,
+      "difficultyLevel": "EASY",
+      "originalDefinition": null,
+      "newDefinition": "Exactly stated or strictly defined; accurate in every detail",
+      "originalOwad": null,
+      "newOwad": [
+        "perfectly calibrated instruments",
+        "unambiguous legal language"
+      ],
+      "originalDistractors": "None",
+      "newDistractors": "precious, approximate, persuasive, pristine, pretentious",
+      "issues": [
+        "Definition contains subjective modifiers",
+        "OWAD phrase 1 is too long (over 30 chars)",
+        "Easy word should have more phonological distractors"
+      ],
+      "qualityScore": 7
+    },
+    {
+      "word": "abundant",
+      "pos": "adjective",
+      "difficultyScore": 0,
+      "difficultyLevel": "EASY",
+      "originalDefinition": "Existing in large quantities; plentiful",
+      "newDefinition": "Existing or available in large quantities; plentiful",
+      "originalOwad": [
+        "very plentiful",
+        "quite ample"
+      ],
+      "newOwad": [
+        "overflowing farmers' market",
+        "ample food supplies"
+      ],
+      "originalDistractors": "scarce, sufficient, plentiful, lacking, overflowing",
+      "newDistractors": "absent, attendant, adequate, affluent, arid",
+      "issues": [
+        "Easy word should have more phonological distractors"
+      ],
+      "qualityScore": 9
+    },
+    {
+      "word": "integrate",
+      "pos": "verb",
+      "difficultyScore": 0.14520439460043,
+      "difficultyLevel": "EASY",
+      "originalDefinition": null,
+      "newDefinition": "To combine parts into a functional or unified whole.",
+      "originalOwad": null,
+      "newOwad": [
+        "to merge diverse systems",
+        "to unify separate components"
+      ],
+      "originalDistractors": "None",
+      "newDistractors": "segregate, irritate, insinuate, isolate, invigorate",
+      "issues": [
+        "Easy word should have more phonological distractors"
+      ],
+      "qualityScore": 9
+    },
+    {
+      "word": "exacerbate",
+      "pos": "verb",
+      "difficultyScore": 0.417484984652802,
+      "difficultyLevel": "HARD",
+      "originalDefinition": null,
+      "newDefinition": "To increase the severity, bitterness, or violence of something negative.",
+      "originalOwad": null,
+      "newOwad": [
+        "to worsen existing pain",
+        "to intensify bitter feelings"
+      ],
+      "originalDistractors": "None",
+      "newDistractors": "extricate, alleviate, elaborate, expatiate, exercise",
+      "issues": [],
+      "qualityScore": 10
+    },
+    {
+      "word": "ephemeral",
+      "pos": "noun",
+      "difficultyScore": 0.27613906292443,
+      "difficultyLevel": "MEDIUM",
+      "originalDefinition": null,
+      "newDefinition": "A thing existing briefly; lasting only one day.",
+      "originalOwad": null,
+      "newOwad": [
+        "a fleeting rainbow",
+        "a one-day bloom"
+      ],
+      "originalDistractors": "None",
+      "newDistractors": "eternal, ethereal, episode, elemental, excursion",
+      "issues": [],
+      "qualityScore": 10
+    },
+    {
+      "word": "quintessential",
+      "pos": "adjective",
+      "difficultyScore": 0.396593535111451,
+      "difficultyLevel": "MEDIUM",
+      "originalDefinition": null,
+      "newDefinition": "Representing the most perfect or typical example of a quality",
+      "originalOwad": null,
+      "newOwad": [
+        "archetypal summer blockbuster",
+        "classic detective story"
+      ],
+      "originalDistractors": "None",
+      "newDistractors": "questionable, qualitative, commonplace, eccentric, fundamental",
+      "issues": [],
+      "qualityScore": 10
+    }
+  ],
+  "overallScore": 9.125,
+  "issues": [],
+  "timestamp": "2025-03-16T02:17:15.486Z",
+  "difficultyGroups": [
+    {
+      "level": "EASY",
+      "count": 5,
+      "avgScore": 8.6,
+      "words": [
+        "trouble",
+        "medium",
+        "precise",
+        "abundant",
+        "integrate"
+      ]
+    },
+    {
+      "level": "MEDIUM",
+      "count": 2,
+      "avgScore": 10,
+      "words": [
+        "ephemeral",
+        "quintessential"
+      ]
+    },
+    {
+      "level": "HARD",
+      "count": 1,
+      "avgScore": 10,
+      "words": [
+        "exacerbate"
+      ]
+    }
+  ]
+}

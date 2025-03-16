@@ -1,0 +1,1442 @@
+[
+  {
+    "id": 161,
+    "word": "wrong",
+    "pos": "noun",
+    "sense_count": 13,
+    "source_word_id": 5469,
+    "short_definition": "An unjust, dishonest, or immoral action or situation",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a moral failing",
+      "an unfair act"
+    ],
+    "distractors": [
+      {
+        "type": "co-hyponym",
+        "distractor": "sin"
+      },
+      {
+        "type": "antonym/opposite",
+        "distractor": "right"
+      },
+      {
+        "type": "related concept",
+        "distractor": "harm"
+      },
+      {
+        "type": "common misconception",
+        "distractor": "flaw"
+      },
+      {
+        "type": "functionally related term",
+        "distractor": "error"
+      }
+    ]
+  },
+  {
+    "id": 162,
+    "word": "blasphemy",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5489,
+    "short_definition": "The act of insulting or showing contempt for God",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a holy insult",
+      "a sacred curse"
+    ],
+    "distractors": [
+      {
+        "type": "co-hyponym",
+        "distractor": "heresy"
+      },
+      {
+        "type": "phonological",
+        "distractor": "celibacy"
+      },
+      {
+        "type": "related concept",
+        "distractor": "sacrilege"
+      },
+      {
+        "type": "common misconception",
+        "distractor": "alchemy"
+      },
+      {
+        "type": "opposite",
+        "distractor": "reverence"
+      }
+    ]
+  },
+  {
+    "id": 163,
+    "word": "dishonesty",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5522,
+    "short_definition": "Lack of honesty; a disposition to deceive or defraud",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a blatant lie",
+      "a false statement"
+    ],
+    "distractors": [
+      {
+        "type": "conceptually adjacent",
+        "distractor": "mendacity"
+      },
+      {
+        "type": "antonym",
+        "distractor": "honesty"
+      },
+      {
+        "type": "related crime",
+        "distractor": "robbery"
+      },
+      {
+        "type": "common misconception",
+        "distractor": "discrepancy"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "prevarication"
+      }
+    ]
+  },
+  {
+    "id": 164,
+    "word": "treason",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 5526,
+    "short_definition": "The crime of betraying one's country",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a country betrayal",
+      "a disloyal act"
+    ],
+    "distractors": [
+      {
+        "type": "co-hyponym",
+        "distractor": "sedition"
+      },
+      {
+        "type": "phonological",
+        "distractor": "reason"
+      },
+      {
+        "type": "related concept",
+        "distractor": "espionage"
+      },
+      {
+        "type": "opposite",
+        "distractor": "patriotism"
+      },
+      {
+        "type": "broader category",
+        "distractor": "felony"
+      }
+    ]
+  },
+  {
+    "id": 165,
+    "word": "falsehood",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5536,
+    "short_definition": "A false statement; a lie",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a simple untruth",
+      "an untrue claim"
+    ],
+    "distractors": [
+      {
+        "type": "antonym",
+        "distractor": "truth"
+      },
+      {
+        "type": "related concept",
+        "distractor": "fiction"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "fallacy"
+      },
+      {
+        "type": "phonological",
+        "distractor": "false"
+      },
+      {
+        "type": "related concept",
+        "distractor": "rumor"
+      }
+    ]
+  },
+  {
+    "id": 166,
+    "word": "setup",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 5539,
+    "short_definition": "A configuration or arrangement of something",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a hidden trick",
+      "a planned deception"
+    ],
+    "distractors": [
+      {
+        "type": "related concept",
+        "distractor": "layout"
+      },
+      {
+        "type": "phonological",
+        "distractor": "setback"
+      },
+      {
+        "type": "functionally related",
+        "distractor": "framing"
+      },
+      {
+        "type": "false friend",
+        "distractor": "trickery"
+      },
+      {
+        "type": "related term",
+        "distractor": "stage"
+      }
+    ]
+  },
+  {
+    "id": 167,
+    "word": "injury",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 5471,
+    "short_definition": "Damage or harm done to a person or thing",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a painful wound",
+      "a bodily harm"
+    ],
+    "distractors": [
+      {
+        "type": "co-hyponym",
+        "distractor": "wound"
+      },
+      {
+        "type": "phonological",
+        "distractor": "enquiry"
+      },
+      {
+        "type": "related concept",
+        "distractor": "damage"
+      },
+      {
+        "type": "related concept",
+        "distractor": "insult"
+      },
+      {
+        "type": "related concept",
+        "distractor": "ailment"
+      }
+    ]
+  },
+  {
+    "id": 168,
+    "word": "iniquity",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5474,
+    "short_definition": "Gross injustice or wickedness; a sin",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a great evil",
+      "a wicked deed"
+    ],
+    "distractors": [
+      {
+        "type": "similar concept",
+        "distractor": "wickedness"
+      },
+      {
+        "type": "antonym",
+        "distractor": "equality"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "impiety"
+      },
+      {
+        "type": "common misconception",
+        "distractor": "equity"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "immorality"
+      }
+    ]
+  },
+  {
+    "id": 169,
+    "word": "wickedness",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 5482,
+    "short_definition": "The state of being evil or morally wrong",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a cruel nature",
+      "an evil intent"
+    ],
+    "distractors": [
+      {
+        "type": "similar concept",
+        "distractor": "evil"
+      },
+      {
+        "type": "antonym",
+        "distractor": "goodness"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "villainy"
+      },
+      {
+        "type": "common misconception",
+        "distractor": "weakness"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "iniquity"
+      }
+    ]
+  },
+  {
+    "id": 170,
+    "word": "vice",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5493,
+    "short_definition": "Immoral or wicked behavior",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a bad habit",
+      "a moral flaw"
+    ],
+    "distractors": [
+      {
+        "type": "antonym",
+        "distractor": "virtue"
+      },
+      {
+        "type": "homophone",
+        "distractor": "vise"
+      },
+      {
+        "type": "related concept",
+        "distractor": "temptation"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "sin"
+      },
+      {
+        "type": "related concept",
+        "distractor": "flaw"
+      }
+    ]
+  },
+  {
+    "id": 171,
+    "word": "prostitution",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 5505,
+    "short_definition": "The act of engaging in sexual activity for payment",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a sexual business",
+      "a paid service"
+    ],
+    "distractors": [
+      {
+        "type": "antonym",
+        "distractor": "celibacy"
+      },
+      {
+        "type": "phonological",
+        "distractor": "profession"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "fornication"
+      },
+      {
+        "type": "related concept",
+        "distractor": "institution"
+      },
+      {
+        "type": "related concept",
+        "distractor": "poverty"
+      }
+    ]
+  },
+  {
+    "id": 172,
+    "word": "drink",
+    "pos": "noun",
+    "sense_count": 10,
+    "source_word_id": 5511,
+    "short_definition": "A liquid suitable for drinking",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a tasty beverage",
+      "a liquid refreshment"
+    ],
+    "distractors": [
+      {
+        "type": "antonym",
+        "distractor": "food"
+      },
+      {
+        "type": "phonological",
+        "distractor": "drunk"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "beverage"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "water"
+      },
+      {
+        "type": "functionally related",
+        "distractor": "eat"
+      }
+    ]
+  },
+  {
+    "id": 173,
+    "word": "drinking",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5512,
+    "short_definition": "The consumption of liquids",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a liquid intake",
+      "a beverage consumption"
+    ],
+    "distractors": [
+      {
+        "type": "antonym",
+        "distractor": "eating"
+      },
+      {
+        "type": "unrelated",
+        "distractor": "thinking"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "tippling"
+      },
+      {
+        "type": "unrelated",
+        "distractor": "writing"
+      },
+      {
+        "type": "opposite",
+        "distractor": "sobering"
+      }
+    ]
+  },
+  {
+    "id": 174,
+    "word": "drunkenness",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 5514,
+    "short_definition": "The state of being intoxicated with alcohol",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a tipsy state",
+      "an altered mind"
+    ],
+    "distractors": [
+      {
+        "type": "antonym",
+        "distractor": "sobriety"
+      },
+      {
+        "type": "phonological",
+        "distractor": "dankness"
+      },
+      {
+        "type": "synonym (avoided but closest)",
+        "distractor": "intoxication"
+      },
+      {
+        "type": "related result",
+        "distractor": "sickness"
+      },
+      {
+        "type": "related concept",
+        "distractor": "stupor"
+      }
+    ]
+  },
+  {
+    "id": 175,
+    "word": "fabrication",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 5544,
+    "short_definition": "The act of inventing or creating something untrue",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a made-up story",
+      "a false creation"
+    ],
+    "distractors": [
+      {
+        "type": "antonym",
+        "distractor": "truth"
+      },
+      {
+        "type": "phonological",
+        "distractor": "fabric"
+      },
+      {
+        "type": "related process",
+        "distractor": "invention"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "falsification"
+      },
+      {
+        "type": "related concept",
+        "distractor": "story"
+      }
+    ]
+  },
+  {
+    "id": 176,
+    "word": "deceit",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 5548,
+    "short_definition": "The action or practice of deceiving someone",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a tricky scheme",
+      "a hidden lie"
+    ],
+    "distractors": [
+      {
+        "type": "antonym",
+        "distractor": "honesty"
+      },
+      {
+        "type": "phonological",
+        "distractor": "receipt"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "trickery"
+      },
+      {
+        "type": "related concept",
+        "distractor": "illusion"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "fraud"
+      }
+    ]
+  },
+  {
+    "id": 177,
+    "word": "sophistication",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 5559,
+    "short_definition": "The quality of being refined, cultured, or worldly-wise",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a worldly knowledge",
+      "a refined taste"
+    ],
+    "distractors": [
+      {
+        "type": "antonym",
+        "distractor": "naivete"
+      },
+      {
+        "type": "phonological",
+        "distractor": "situation"
+      },
+      {
+        "type": "related concept",
+        "distractor": "refinement"
+      },
+      {
+        "type": "related concept",
+        "distractor": "complexity"
+      },
+      {
+        "type": "related concept",
+        "distractor": "education"
+      }
+    ]
+  },
+  {
+    "id": 178,
+    "word": "fraud",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 5560,
+    "short_definition": "Wrongful or criminal deception intended to result in financial gain",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a false scheme",
+      "a deceptive act"
+    ],
+    "distractors": [
+      {
+        "type": "antonym",
+        "distractor": "honesty"
+      },
+      {
+        "type": "phonological",
+        "distractor": "void"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "scam"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "forgery"
+      },
+      {
+        "type": "related concept",
+        "distractor": "confidence"
+      }
+    ]
+  },
+  {
+    "id": 179,
+    "word": "cheating",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 5569,
+    "short_definition": "The act of behaving dishonestly to gain an advantage",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a sneaky trick",
+      "an unfair advantage"
+    ],
+    "distractors": [
+      {
+        "type": "antonym",
+        "distractor": "honesty"
+      },
+      {
+        "type": "phonological",
+        "distractor": "meeting"
+      },
+      {
+        "type": "related concept",
+        "distractor": "trickery"
+      },
+      {
+        "type": "related concept",
+        "distractor": "infidelity"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "deception"
+      }
+    ]
+  },
+  {
+    "id": 180,
+    "word": "delusion",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 5571,
+    "short_definition": "A false belief or judgment held despite contradictory evidence",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a false belief",
+      "a fixed fantasy"
+    ],
+    "distractors": [
+      {
+        "type": "antonym",
+        "distractor": "reality"
+      },
+      {
+        "type": "related concept",
+        "distractor": "illusion"
+      },
+      {
+        "type": "phonological",
+        "distractor": "illusionary"
+      },
+      {
+        "type": "related concept",
+        "distractor": "vision"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "fantasy"
+      }
+    ]
+  },
+  {
+    "id": 181,
+    "word": "pretence",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 5574,
+    "short_definition": "An attempt to make something that is not the case appear true",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a fake show",
+      "a false display"
+    ],
+    "distractors": [
+      {
+        "type": "antonym",
+        "distractor": "sincerity"
+      },
+      {
+        "type": "phonological",
+        "distractor": "presence"
+      },
+      {
+        "type": "related concept",
+        "distractor": "deception"
+      },
+      {
+        "type": "related concept",
+        "distractor": "mimicry"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "affectation"
+      }
+    ]
+  },
+  {
+    "id": 182,
+    "word": "simulation",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 5576,
+    "short_definition": "The imitation of a situation or process",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a fake version",
+      "an artificial copy"
+    ],
+    "distractors": [
+      {
+        "type": "antonym",
+        "distractor": "reality"
+      },
+      {
+        "type": "phonological",
+        "distractor": "stimulation"
+      },
+      {
+        "type": "related concept",
+        "distractor": "model"
+      },
+      {
+        "type": "related concept",
+        "distractor": "reenactment"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "imitation"
+      }
+    ]
+  },
+  {
+    "id": 183,
+    "word": "pretend",
+    "pos": "noun",
+    "sense_count": 8,
+    "source_word_id": 5579,
+    "short_definition": "A claim, especially a false or ambitious one",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a make-believe game",
+      "an acted role"
+    ],
+    "distractors": [
+      {
+        "type": "similar concept",
+        "distractor": "claim"
+      },
+      {
+        "type": "phonological",
+        "distractor": "extend"
+      },
+      {
+        "type": "antonym",
+        "distractor": "reality"
+      },
+      {
+        "type": "functionally related",
+        "distractor": "feign"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "lie"
+      }
+    ]
+  },
+  {
+    "id": 184,
+    "word": "envy",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 5602,
+    "short_definition": "A feeling of discontented longing for someone else's possessions",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a jealous feeling",
+      "a resentful desire"
+    ],
+    "distractors": [
+      {
+        "type": "antonym",
+        "distractor": "contentment"
+      },
+      {
+        "type": "phonological",
+        "distractor": "emvy"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "jealousy"
+      },
+      {
+        "type": "related concept",
+        "distractor": "admiration"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "covetousness"
+      }
+    ]
+  },
+  {
+    "id": 185,
+    "word": "wrath",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5612,
+    "short_definition": "Extreme anger; fierce indignation",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a strong anger",
+      "a fiery rage"
+    ],
+    "distractors": [
+      {
+        "type": "antonym",
+        "distractor": "peace"
+      },
+      {
+        "type": "homophone",
+        "distractor": "wraith"
+      },
+      {
+        "type": "related concept",
+        "distractor": "anger"
+      },
+      {
+        "type": "related concept",
+        "distractor": "displeasure"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "fury"
+      }
+    ]
+  },
+  {
+    "id": 186,
+    "word": "offense",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 5645,
+    "short_definition": "A breach of law or rule; an illegal act",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a rude action",
+      "an insulting deed"
+    ],
+    "distractors": [
+      {
+        "type": "antonym",
+        "distractor": "defense"
+      },
+      {
+        "type": "phonological",
+        "distractor": "defence"
+      },
+      {
+        "type": "related concept",
+        "distractor": "crime"
+      },
+      {
+        "type": "related concept",
+        "distractor": "trespass"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "transgression"
+      }
+    ]
+  },
+  {
+    "id": 187,
+    "word": "cheat",
+    "pos": "noun",
+    "sense_count": 9,
+    "source_word_id": 5568,
+    "short_definition": "A person who behaves dishonestly to gain advantage",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a fake person",
+      "a trickster act"
+    ],
+    "distractors": [
+      {
+        "type": "antonym",
+        "distractor": "honesty"
+      },
+      {
+        "type": "homophone",
+        "distractor": "suite"
+      },
+      {
+        "type": "related concept",
+        "distractor": "swindler"
+      },
+      {
+        "type": "common misconception",
+        "distractor": "fool"
+      },
+      {
+        "type": "related term",
+        "distractor": "confidence"
+      }
+    ]
+  },
+  {
+    "id": 188,
+    "word": "pretense",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 5573,
+    "short_definition": "An attempt to make something that is not the case appear true",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a false front",
+      "a fake claim"
+    ],
+    "distractors": [
+      {
+        "type": "antonym",
+        "distractor": "sincerity"
+      },
+      {
+        "type": "phonological",
+        "distractor": "present"
+      },
+      {
+        "type": "related concept",
+        "distractor": "deception"
+      },
+      {
+        "type": "related concept",
+        "distractor": "mimicry"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "affectation"
+      }
+    ]
+  },
+  {
+    "id": 189,
+    "word": "pose",
+    "pos": "noun",
+    "sense_count": 9,
+    "source_word_id": 5582,
+    "short_definition": "A particular way of standing or sitting",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a staged look",
+      "a fake position"
+    ],
+    "distractors": [
+      {
+        "type": "related concept",
+        "distractor": "stance"
+      },
+      {
+        "type": "phonological",
+        "distractor": "prose"
+      },
+      {
+        "type": "functionally related",
+        "distractor": "question"
+      },
+      {
+        "type": "related concept",
+        "distractor": "attitude"
+      },
+      {
+        "type": "related concept",
+        "distractor": "position"
+      }
+    ]
+  },
+  {
+    "id": 190,
+    "word": "greed",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5605,
+    "short_definition": "Intense and selfish desire for something, especially wealth or power",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a selfish desire",
+      "an endless want"
+    ],
+    "distractors": [
+      {
+        "type": "antonym",
+        "distractor": "generosity"
+      },
+      {
+        "type": "phonological",
+        "distractor": "grieve"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "avarice"
+      },
+      {
+        "type": "related concept",
+        "distractor": "desire"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "selfishness"
+      }
+    ]
+  },
+  {
+    "id": 191,
+    "word": "offence",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 5646,
+    "short_definition": "A breach of law or rule; an illegal act",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a hurtful act",
+      "a slight wrong"
+    ],
+    "distractors": [
+      {
+        "type": "antonym",
+        "distractor": "defence"
+      },
+      {
+        "type": "phonological",
+        "distractor": "defense"
+      },
+      {
+        "type": "related concept",
+        "distractor": "crime"
+      },
+      {
+        "type": "related concept",
+        "distractor": "trespass"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "transgression"
+      }
+    ]
+  },
+  {
+    "id": 192,
+    "word": "crime",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5647,
+    "short_definition": "An action that constitutes an offense punishable by law",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a legal wrong",
+      "an illegal act"
+    ],
+    "distractors": [
+      {
+        "type": "antonym",
+        "distractor": "law"
+      },
+      {
+        "type": "phonological",
+        "distractor": "time"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "misdemeanor"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "felony"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "offense"
+      }
+    ]
+  },
+  {
+    "id": 193,
+    "word": "battery",
+    "pos": "noun",
+    "sense_count": 7,
+    "source_word_id": 5654,
+    "short_definition": "The intentional and unlawful physical contact with another person",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a physical attack",
+      "an unlawful touching"
+    ],
+    "distractors": [
+      {
+        "type": "related crime",
+        "distractor": "assault"
+      },
+      {
+        "type": "phonological",
+        "distractor": "buttery"
+      },
+      {
+        "type": "related equipment",
+        "distractor": "electricity"
+      },
+      {
+        "type": "related function",
+        "distractor": "percussion"
+      },
+      {
+        "type": "similar function",
+        "distractor": "energy"
+      }
+    ]
+  },
+  {
+    "id": 194,
+    "word": "foul",
+    "pos": "noun",
+    "sense_count": 16,
+    "source_word_id": 5669,
+    "short_definition": "An unfair or invalid act or play",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "an unfair play",
+      "a dirty deed"
+    ],
+    "distractors": [
+      {
+        "type": "antonym",
+        "distractor": "fair"
+      },
+      {
+        "type": "phonological",
+        "distractor": "fowl"
+      },
+      {
+        "type": "related concept",
+        "distractor": "mistake"
+      },
+      {
+        "type": "related concept",
+        "distractor": "offense"
+      },
+      {
+        "type": "related concept",
+        "distractor": "penalty"
+      }
+    ]
+  },
+  {
+    "id": 195,
+    "word": "sedition",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 5686,
+    "short_definition": "Conduct or speech inciting people to rebel against authority",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a rebellious act",
+      "an uprising cause"
+    ],
+    "distractors": [
+      {
+        "type": "antonym",
+        "distractor": "loyalty"
+      },
+      {
+        "type": "phonological",
+        "distractor": "edition"
+      },
+      {
+        "type": "related crime",
+        "distractor": "rebellion"
+      },
+      {
+        "type": "related concept",
+        "distractor": "opposition"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "mutiny"
+      }
+    ]
+  },
+  {
+    "id": 196,
+    "word": "kidnapping",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 5705,
+    "short_definition": "The action of abducting someone and holding them captive",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a person abduction",
+      "a forced removal"
+    ],
+    "distractors": [
+      {
+        "type": "antonym",
+        "distractor": "release"
+      },
+      {
+        "type": "phonological",
+        "distractor": "napping"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "abduction"
+      },
+      {
+        "type": "related concept",
+        "distractor": "theft"
+      },
+      {
+        "type": "related crime",
+        "distractor": "extortion"
+      }
+    ]
+  },
+  {
+    "id": 197,
+    "word": "assault",
+    "pos": "noun",
+    "sense_count": 7,
+    "source_word_id": 5652,
+    "short_definition": "A physical attack or threat of attack",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a violent attack",
+      "a harmful threat"
+    ],
+    "distractors": [
+      {
+        "type": "antonym",
+        "distractor": "defense"
+      },
+      {
+        "type": "phonological",
+        "distractor": "salt"
+      },
+      {
+        "type": "related crime",
+        "distractor": "battery"
+      },
+      {
+        "type": "similar action",
+        "distractor": "attack"
+      },
+      {
+        "type": "broader category",
+        "distractor": "violence"
+      }
+    ]
+  },
+  {
+    "id": 198,
+    "word": "technical",
+    "pos": "noun",
+    "sense_count": 9,
+    "source_word_id": 5672,
+    "short_definition": "A piece of equipment or hardware used in a specific field",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a skilled method",
+      "a precise art"
+    ],
+    "distractors": [
+      {
+        "type": "antonym",
+        "distractor": "practical"
+      },
+      {
+        "type": "related concept",
+        "distractor": "technique"
+      },
+      {
+        "type": "related concept",
+        "distractor": "equipment"
+      },
+      {
+        "type": "related term",
+        "distractor": "formal"
+      },
+      {
+        "type": "related concept",
+        "distractor": "accessory"
+      }
+    ]
+  },
+  {
+    "id": 199,
+    "word": "bribery",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 5710,
+    "short_definition": "The giving or accepting a bribe",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a paid favor",
+      "a corrupt gift"
+    ],
+    "distractors": [
+      {
+        "type": "antonym",
+        "distractor": "honesty"
+      },
+      {
+        "type": "phonological",
+        "distractor": "ribbery"
+      },
+      {
+        "type": "related crime",
+        "distractor": "corruption"
+      },
+      {
+        "type": "related concept",
+        "distractor": "graft"
+      },
+      {
+        "type": "related crime",
+        "distractor": "extortion"
+      }
+    ]
+  },
+  {
+    "id": 200,
+    "word": "con",
+    "pos": "noun",
+    "sense_count": 6,
+    "source_word_id": 5735,
+    "short_definition": "A confidence trick; a swindle",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:04:13.109Z",
+    "owad_phrase": [
+      "a swindle scheme",
+      "a deceptive trick"
+    ],
+    "distractors": [
+      {
+        "type": "antonym",
+        "distractor": "truth"
+      },
+      {
+        "type": "phonological",
+        "distractor": "Khan"
+      },
+      {
+        "type": "related crime",
+        "distractor": "swindle"
+      },
+      {
+        "type": "similar action",
+        "distractor": "trick"
+      },
+      {
+        "type": "similar crime",
+        "distractor": "deceit"
+      }
+    ]
+  }
+]

@@ -1,0 +1,1482 @@
+[
+  {
+    "id": 321,
+    "word": "lust",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 5619,
+    "difficulty_score": 0,
+    "short_definition": "An intense or overwhelming sexual desire or craving.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "an overwhelming craving",
+      "a forbidden desire"
+    ],
+    "distractors": [
+      {
+        "type": "commonly confused",
+        "distractor": "love"
+      },
+      {
+        "type": "different domain",
+        "distractor": "trust"
+      },
+      {
+        "type": "opposite",
+        "distractor": "loathing"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "loss"
+      },
+      {
+        "type": "different domain",
+        "distractor": "leisure"
+      }
+    ]
+  },
+  {
+    "id": 322,
+    "word": "withdrawal",
+    "pos": "noun",
+    "sense_count": 9,
+    "source_word_id": 228,
+    "difficulty_score": 0,
+    "short_definition": "The act of removing or retracting something previously given or offered.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "sudden medication cessation",
+      "military troop retreat"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "arrival"
+      },
+      {
+        "type": "related action",
+        "distractor": "deposit"
+      },
+      {
+        "type": "semantic overlap",
+        "distractor": "retraction"
+      },
+      {
+        "type": "semantic overlap",
+        "distractor": "withholding"
+      },
+      {
+        "type": "opposite",
+        "distractor": "entrance"
+      }
+    ]
+  },
+  {
+    "id": 323,
+    "word": "terrorism",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 5622,
+    "difficulty_score": 0,
+    "short_definition": "The use of violence and intimidation for political aims.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "politically motivated violence",
+      "fear-inducing attacks"
+    ],
+    "distractors": [
+      {
+        "type": "opposite motivation",
+        "distractor": "patriotism"
+      },
+      {
+        "type": "related action",
+        "distractor": "activism"
+      },
+      {
+        "type": "related action",
+        "distractor": "torture"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "tourism"
+      },
+      {
+        "type": "related crime",
+        "distractor": "treason"
+      }
+    ]
+  },
+  {
+    "id": 324,
+    "word": "retirement",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 232,
+    "difficulty_score": 0.031365561822936,
+    "short_definition": "The act of ceasing employment or active service.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "golden years freedom",
+      "pension funded leisure"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "employment"
+      },
+      {
+        "type": "related action",
+        "distractor": "advancement"
+      },
+      {
+        "type": "related action",
+        "distractor": "resignation"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "retreat"
+      },
+      {
+        "type": "related activity",
+        "distractor": "recreation"
+      }
+    ]
+  },
+  {
+    "id": 325,
+    "word": "desertion",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 238,
+    "difficulty_score": 0.305936106690634,
+    "short_definition": "The act of abandoning a duty or service without permission.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "unauthorized military absence",
+      "abandoned naval post"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "loyalty"
+      },
+      {
+        "type": "related military term",
+        "distractor": "deployment"
+      },
+      {
+        "type": "semantic overlap",
+        "distractor": "devotion"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "dissertation"
+      },
+      {
+        "type": "semantic overlap",
+        "distractor": "defection"
+      }
+    ]
+  },
+  {
+    "id": 326,
+    "word": "abandonment",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 239,
+    "difficulty_score": 0.215140542599786,
+    "short_definition": "The act of forsaking completely; relinquishing all claim or connection.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "utter parental neglect",
+      "shipwrecked vessel's forsaking"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "adoption"
+      },
+      {
+        "type": "related action",
+        "distractor": "desertion"
+      },
+      {
+        "type": "opposite",
+        "distractor": "commitment"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "acquaintance"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "abundance"
+      }
+    ]
+  },
+  {
+    "id": 327,
+    "word": "defection",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 240,
+    "difficulty_score": 0.1726056562656,
+    "short_definition": "The abandonment of allegiance to one's country or cause.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "espionage double-cross",
+      "ideological shift betrayal"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "loyalty"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "infection"
+      },
+      {
+        "type": "semantic overlap",
+        "distractor": "allegiance"
+      },
+      {
+        "type": "semantic overlap",
+        "distractor": "dedication"
+      },
+      {
+        "type": "related action",
+        "distractor": "desertion"
+      }
+    ]
+  },
+  {
+    "id": 328,
+    "word": "modulation",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 1473,
+    "difficulty_score": 0.234583631596776,
+    "short_definition": "A change or variation in tone, pitch, or intensity.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "vocal tone variation",
+      "radio signal adjustment"
+    ],
+    "distractors": [
+      {
+        "type": "related concept",
+        "distractor": "amplification"
+      },
+      {
+        "type": "opposite",
+        "distractor": "stagnation"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "mutilation"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "model"
+      },
+      {
+        "type": "different domain",
+        "distractor": "momentum"
+      }
+    ]
+  },
+  {
+    "id": 329,
+    "word": "evasion",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 272,
+    "difficulty_score": 0.131435366370051,
+    "short_definition": "The act of avoiding or escaping something, especially cleverly.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "tax liability avoidance",
+      "crafty question dodging"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "confrontation"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "invasion"
+      },
+      {
+        "type": "related action",
+        "distractor": "persuasion"
+      },
+      {
+        "type": "different domain",
+        "distractor": "elation"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "equation"
+      }
+    ]
+  },
+  {
+    "id": 330,
+    "word": "dismissal",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 1591,
+    "difficulty_score": 0.0303744965015799,
+    "short_definition": "The act of terminating someone's employment or service.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "sudden job termination",
+      "court case rejection"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "promotion"
+      },
+      {
+        "type": "related action",
+        "distractor": "commission"
+      },
+      {
+        "type": "opposite",
+        "distractor": "admission"
+      },
+      {
+        "type": "related action",
+        "distractor": "submission"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "diminishment"
+      }
+    ]
+  },
+  {
+    "id": 331,
+    "word": "aliyah",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 250,
+    "difficulty_score": 0.500686974526828,
+    "short_definition": "The immigration of Jews from the diaspora to the Land of Israel.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "Jewish homeland return",
+      "diaspora emigration"
+    ],
+    "distractors": [
+      {
+        "type": "opposite concept",
+        "distractor": "galut"
+      },
+      {
+        "type": "related concept",
+        "distractor": "assimilation"
+      },
+      {
+        "type": "related concept",
+        "distractor": "zionism"
+      },
+      {
+        "type": "common misspelling",
+        "distractor": "aliya"
+      },
+      {
+        "type": "related concept",
+        "distractor": "gerut"
+      }
+    ]
+  },
+  {
+    "id": 332,
+    "word": "pullback",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 251,
+    "difficulty_score": 0.167304542597824,
+    "short_definition": "A strategic retreat or withdrawal of forces or support.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "strategic troop relocation",
+      "investment capital retreat"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "advance"
+      },
+      {
+        "type": "related action",
+        "distractor": "boost"
+      },
+      {
+        "type": "related action",
+        "distractor": "push"
+      },
+      {
+        "type": "related action",
+        "distractor": "fallback"
+      },
+      {
+        "type": "related concept",
+        "distractor": "setback"
+      }
+    ]
+  },
+  {
+    "id": 333,
+    "word": "expatriation",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 247,
+    "difficulty_score": 0.438566669318061,
+    "short_definition": "The act of renouncing one's citizenship or residency.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "citizenship renunciation",
+      "permanent foreign residency"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "repatriation"
+      },
+      {
+        "type": "related action",
+        "distractor": "immigration"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "exaggeration"
+      },
+      {
+        "type": "related action",
+        "distractor": "extradition"
+      },
+      {
+        "type": "related action",
+        "distractor": "emigration"
+      }
+    ]
+  },
+  {
+    "id": 334,
+    "word": "immigration",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 248,
+    "difficulty_score": 0.0114348777261273,
+    "short_definition": "The act of moving permanently to a foreign country.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "permanent country relocation",
+      "foreign national settlement"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "emigration"
+      },
+      {
+        "type": "related action",
+        "distractor": "migration"
+      },
+      {
+        "type": "different domain",
+        "distractor": "alienation"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "irrigation"
+      },
+      {
+        "type": "different domain",
+        "distractor": "innovation"
+      }
+    ]
+  },
+  {
+    "id": 335,
+    "word": "exit",
+    "pos": "noun",
+    "sense_count": 6,
+    "source_word_id": 268,
+    "difficulty_score": 0,
+    "short_definition": "A way out; a passage or opening for departure.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "emergency fire escape",
+      "theater stage departure"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "entrance"
+      },
+      {
+        "type": "related concept",
+        "distractor": "access"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "edict"
+      },
+      {
+        "type": "related concept",
+        "distractor": "exile"
+      },
+      {
+        "type": "opposite",
+        "distractor": "inset"
+      }
+    ]
+  },
+  {
+    "id": 336,
+    "word": "overthrow",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 1587,
+    "difficulty_score": 0.0325820618831098,
+    "short_definition": "The removal of a government or authority by force.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "violent regime change",
+      "coup d'état seizure"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "establishment"
+      },
+      {
+        "type": "related concept",
+        "distractor": "upholding"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "oversight"
+      },
+      {
+        "type": "related concept",
+        "distractor": "overture"
+      },
+      {
+        "type": "related concept",
+        "distractor": "overload"
+      }
+    ]
+  },
+  {
+    "id": 337,
+    "word": "maneuver",
+    "pos": "noun",
+    "sense_count": 8,
+    "source_word_id": 276,
+    "difficulty_score": 0.204260831661233,
+    "short_definition": "A planned and regulated movement or procedure; a tactic.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "strategic military tactic",
+      "complex financial operation"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "blunder"
+      },
+      {
+        "type": "related concept",
+        "distractor": "strategy"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "memento"
+      },
+      {
+        "type": "related concept",
+        "distractor": "manipulation"
+      },
+      {
+        "type": "different domain",
+        "distractor": "maintenance"
+      }
+    ]
+  },
+  {
+    "id": 338,
+    "word": "manoeuvre",
+    "pos": "noun",
+    "sense_count": 8,
+    "source_word_id": 277,
+    "difficulty_score": 0.446857221927965,
+    "short_definition": "A planned and regulated movement or procedure; a tactic.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "strategic military tactic",
+      "complex financial operation"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "mishap"
+      },
+      {
+        "type": "related concept",
+        "distractor": "tactic"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "manor"
+      },
+      {
+        "type": "related action",
+        "distractor": "meddling"
+      },
+      {
+        "type": "different domain",
+        "distractor": "maintenance"
+      }
+    ]
+  },
+  {
+    "id": 339,
+    "word": "clinch",
+    "pos": "noun",
+    "sense_count": 11,
+    "source_word_id": 279,
+    "difficulty_score": 0.126758752877457,
+    "short_definition": "A tight hold; a wrestling hold preventing free movement.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "wrestling grappling hold",
+      "unbreakable bargain seal"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "release"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "cinch"
+      },
+      {
+        "type": "different domain",
+        "distractor": "cleanse"
+      },
+      {
+        "type": "different domain",
+        "distractor": "clash"
+      },
+      {
+        "type": "semantic overlap",
+        "distractor": "clench"
+      }
+    ]
+  },
+  {
+    "id": 340,
+    "word": "dodge",
+    "pos": "noun",
+    "sense_count": 6,
+    "source_word_id": 280,
+    "difficulty_score": 0,
+    "short_definition": "A sudden evasive movement to avoid something.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "sudden projectile evasion",
+      "deceptive question avoidance"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "encounter"
+      },
+      {
+        "type": "related movement",
+        "distractor": "lunge"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "lodge"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "doge"
+      },
+      {
+        "type": "related movement",
+        "distractor": "dash"
+      }
+    ]
+  },
+  {
+    "id": 341,
+    "word": "break",
+    "pos": "noun",
+    "sense_count": 75,
+    "source_word_id": 281,
+    "difficulty_score": 0,
+    "short_definition": "An interruption of continuity; a pause or interval.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "brief work pause",
+      "sudden bone fracture"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "continuation"
+      },
+      {
+        "type": "related concept",
+        "distractor": "fracture"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "brake"
+      },
+      {
+        "type": "related concept",
+        "distractor": "breach"
+      },
+      {
+        "type": "opposite",
+        "distractor": "bond"
+      }
+    ]
+  },
+  {
+    "id": 342,
+    "word": "breakout",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 282,
+    "difficulty_score": 0,
+    "short_definition": "A sudden escape, especially from confinement or control.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "sudden prison escape",
+      "rapid skin eruption"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "containment"
+      },
+      {
+        "type": "related concept",
+        "distractor": "breakdown"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "bakeout"
+      },
+      {
+        "type": "related concept",
+        "distractor": "break-in"
+      },
+      {
+        "type": "related concept",
+        "distractor": "breakage"
+      }
+    ]
+  },
+  {
+    "id": 343,
+    "word": "jailbreak",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 283,
+    "difficulty_score": 0.0133959318850889,
+    "short_definition": "An escape from jail by force or illegal means.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "violent prison escape",
+      "coordinated inmate flight"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "incarceration"
+      },
+      {
+        "type": "related term",
+        "distractor": "jailer"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "jailbait"
+      },
+      {
+        "type": "different domain",
+        "distractor": "joyride"
+      },
+      {
+        "type": "related term",
+        "distractor": "jailhouse"
+      }
+    ]
+  },
+  {
+    "id": 344,
+    "word": "gaolbreak",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 284,
+    "difficulty_score": 0.56,
+    "short_definition": "An escape from jail by force or illegal means.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "violent prison escape",
+      "coordinated inmate flight"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "capture"
+      },
+      {
+        "type": "related term",
+        "distractor": "gaol"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "goalpost"
+      },
+      {
+        "type": "different domain",
+        "distractor": "gape"
+      },
+      {
+        "type": "related term",
+        "distractor": "gaolbird"
+      }
+    ]
+  },
+  {
+    "id": 345,
+    "word": "prisonbreak",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 285,
+    "difficulty_score": 0.77009848179294,
+    "short_definition": "An escape from prison by force or illegal means.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "violent prison escape",
+      "coordinated inmate flight"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "imprisonment"
+      },
+      {
+        "type": "related term",
+        "distractor": "prison"
+      },
+      {
+        "type": "related term",
+        "distractor": "prison-issue"
+      },
+      {
+        "type": "related term",
+        "distractor": "prison-yard"
+      },
+      {
+        "type": "related term",
+        "distractor": "prison-guard"
+      }
+    ]
+  },
+  {
+    "id": 346,
+    "word": "lam",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 288,
+    "difficulty_score": 0.54750140653105,
+    "short_definition": "A state of being in flight from the law.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "fugitive's hurried flight",
+      "on-the-run existence"
+    ],
+    "distractors": [
+      {
+        "type": "related concept",
+        "distractor": "law"
+      },
+      {
+        "type": "opposite",
+        "distractor": "calm"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "plum"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "slam"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "lamb"
+      }
+    ]
+  },
+  {
+    "id": 347,
+    "word": "squeaker",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 298,
+    "difficulty_score": 0.35174030750152,
+    "short_definition": "A narrow victory or escape; a close call.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "last-second victory",
+      "narrow race win"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "landslide"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "speaker"
+      },
+      {
+        "type": "related sound",
+        "distractor": "squeal"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "seeker"
+      },
+      {
+        "type": "opposite",
+        "distractor": "silencer"
+      }
+    ]
+  },
+  {
+    "id": 348,
+    "word": "squeak",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 297,
+    "difficulty_score": 0.000592536653861989,
+    "short_definition": "A short, high-pitched sound.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "mouse's high cry",
+      "squeaky hinge sound"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "roar"
+      },
+      {
+        "type": "related action",
+        "distractor": "speak"
+      },
+      {
+        "type": "related action",
+        "distractor": "sneak"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "streak"
+      },
+      {
+        "type": "related sound",
+        "distractor": "squawk"
+      }
+    ]
+  },
+  {
+    "id": 349,
+    "word": "despatch",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 302,
+    "difficulty_score": 0.387805297182142,
+    "short_definition": "The sending of a message, package, or person promptly.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "urgent document sending",
+      "swift courier delivery"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "retention"
+      },
+      {
+        "type": "different domain",
+        "distractor": "dispute"
+      },
+      {
+        "type": "related concept",
+        "distractor": "detachment"
+      },
+      {
+        "type": "common misspelling",
+        "distractor": "dispatch"
+      },
+      {
+        "type": "different domain",
+        "distractor": "display"
+      }
+    ]
+  },
+  {
+    "id": 350,
+    "word": "fruition",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 308,
+    "difficulty_score": 0.324036902380312,
+    "short_definition": "The point at which a plan or project is realized.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "project's final realization",
+      "plan's ultimate success"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "inception"
+      },
+      {
+        "type": "opposite",
+        "distractor": "frustration"
+      },
+      {
+        "type": "different domain",
+        "distractor": "frivolity"
+      },
+      {
+        "type": "related term",
+        "distractor": "fruiterer"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "fusion"
+      }
+    ]
+  },
+  {
+    "id": 351,
+    "word": "climax",
+    "pos": "noun",
+    "sense_count": 6,
+    "source_word_id": 310,
+    "difficulty_score": 0,
+    "short_definition": "The most intense, exciting, or important point of something.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "story's peak moment",
+      "orgasmic sexual release"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "anticlimax"
+      },
+      {
+        "type": "semantic overlap",
+        "distractor": "culmination"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "climate"
+      },
+      {
+        "type": "different domain",
+        "distractor": "clock"
+      },
+      {
+        "type": "related domain",
+        "distractor": "cliffhanger"
+      }
+    ]
+  },
+  {
+    "id": 352,
+    "word": "success",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 319,
+    "difficulty_score": 0,
+    "short_definition": "The accomplishment of an aim or purpose.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "achieved career goals",
+      "business venture triumph"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "failure"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "access"
+      },
+      {
+        "type": "different domain",
+        "distractor": "stress"
+      },
+      {
+        "type": "different domain",
+        "distractor": "surplus"
+      },
+      {
+        "type": "different domain",
+        "distractor": "sacrifice"
+      }
+    ]
+  },
+  {
+    "id": 353,
+    "word": "winning",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 320,
+    "difficulty_score": 0,
+    "short_definition": "The act of achieving victory in a contest or competition.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "lottery jackpot capture",
+      "sporting event victory"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "losing"
+      },
+      {
+        "type": "opposite",
+        "distractor": "beginning"
+      },
+      {
+        "type": "semantic overlap",
+        "distractor": "waning"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "whining"
+      },
+      {
+        "type": "related action",
+        "distractor": "working"
+      }
+    ]
+  },
+  {
+    "id": 354,
+    "word": "circumcision",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 2927,
+    "difficulty_score": 0.361667112911709,
+    "short_definition": "The surgical removal of the foreskin of the penis.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "ritual foreskin removal",
+      "surgical penile alteration"
+    ],
+    "distractors": [
+      {
+        "type": "related term",
+        "distractor": "infection"
+      },
+      {
+        "type": "related term",
+        "distractor": "castration"
+      },
+      {
+        "type": "different domain",
+        "distractor": "creation"
+      },
+      {
+        "type": "related term",
+        "distractor": "conversion"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "circumstance"
+      }
+    ]
+  },
+  {
+    "id": 355,
+    "word": "exercise",
+    "pos": "noun",
+    "sense_count": 11,
+    "source_word_id": 84,
+    "difficulty_score": 0,
+    "short_definition": "Physical activity done to improve health or fitness.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "daily cardio routine",
+      "strength training workout"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "laziness"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "exorcise"
+      },
+      {
+        "type": "related concept",
+        "distractor": "exacerbation"
+      },
+      {
+        "type": "different domain",
+        "distractor": "expertise"
+      },
+      {
+        "type": "opposite",
+        "distractor": "entrance"
+      }
+    ]
+  },
+  {
+    "id": 356,
+    "word": "smasher",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 326,
+    "difficulty_score": 0.0316467653802323,
+    "short_definition": "A strikingly attractive or impressive person or thing.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "strikingly attractive woman",
+      "stunning fashion icon"
+    ],
+    "distractors": [
+      {
+        "type": "related term",
+        "distractor": "smashee"
+      },
+      {
+        "type": "phonologically similar",
+        "distractor": "slasher"
+      },
+      {
+        "type": "related term",
+        "distractor": "smasher"
+      },
+      {
+        "type": "related term",
+        "distractor": "smashed"
+      },
+      {
+        "type": "related term",
+        "distractor": "smash"
+      }
+    ]
+  },
+  {
+    "id": 357,
+    "word": "bang",
+    "pos": "noun",
+    "sense_count": 12,
+    "source_word_id": 328,
+    "difficulty_score": 0,
+    "short_definition": "A sudden loud, explosive noise.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "gunshot loud report",
+      "door slamming noise"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "silence"
+      },
+      {
+        "type": "related concept",
+        "distractor": "clang"
+      },
+      {
+        "type": "different domain",
+        "distractor": "binge"
+      },
+      {
+        "type": "related term",
+        "distractor": "band"
+      },
+      {
+        "type": "different domain",
+        "distractor": "bond"
+      }
+    ]
+  },
+  {
+    "id": 358,
+    "word": "dissolution",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 1584,
+    "difficulty_score": 0.163784754699435,
+    "short_definition": "The closing down or termination of an assembly or partnership.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "parliamentary body termination",
+      "marital union ending"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "establishment"
+      },
+      {
+        "type": "related term",
+        "distractor": "solution"
+      },
+      {
+        "type": "related term",
+        "distractor": "resolution"
+      },
+      {
+        "type": "related term",
+        "distractor": "dissociation"
+      },
+      {
+        "type": "related term",
+        "distractor": "dilution"
+      }
+    ]
+  },
+  {
+    "id": 359,
+    "word": "purge",
+    "pos": "noun",
+    "sense_count": 10,
+    "source_word_id": 1598,
+    "difficulty_score": 0,
+    "short_definition": "An abrupt or violent removal of unwanted people or things.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "political opponent removal",
+      "software system cleaning"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "retention"
+      },
+      {
+        "type": "related term",
+        "distractor": "merge"
+      },
+      {
+        "type": "different domain",
+        "distractor": "pride"
+      },
+      {
+        "type": "related term",
+        "distractor": "pure"
+      },
+      {
+        "type": "different domain",
+        "distractor": "plunge"
+      }
+    ]
+  },
+  {
+    "id": 360,
+    "word": "conquest",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 334,
+    "difficulty_score": 0,
+    "short_definition": "The subjugation and assumption of control of a place/people.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:26:30.087Z",
+    "owad_phrase": [
+      "military territory seizure",
+      "nation's total subjugation"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "defeat"
+      },
+      {
+        "type": "related term",
+        "distractor": "request"
+      },
+      {
+        "type": "opposite",
+        "distractor": "consent"
+      },
+      {
+        "type": "related term",
+        "distractor": "quest"
+      },
+      {
+        "type": "different domain",
+        "distractor": "contract"
+      }
+    ]
+  }
+]

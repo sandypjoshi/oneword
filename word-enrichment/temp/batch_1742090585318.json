@@ -1,0 +1,1442 @@
+[
+  {
+    "id": 41,
+    "word": "jig",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 3981,
+    "short_definition": "A lively, fast dance with leaping steps",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a lively dance",
+      "a quick shake"
+    ],
+    "distractors": [
+      {
+        "type": "distinct semantic category",
+        "distractor": "waltz"
+      },
+      {
+        "type": "phonological",
+        "distractor": "ire"
+      },
+      {
+        "type": "distinct semantic category",
+        "distractor": "pirouette"
+      },
+      {
+        "type": "common misconception",
+        "distractor": "routine"
+      },
+      {
+        "type": "related concept",
+        "distractor": "song"
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "word": "ire",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5614,
+    "short_definition": "Intense anger or wrath",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a strong anger",
+      "a burning rage"
+    ],
+    "distractors": [
+      {
+        "type": "related concept",
+        "distractor": "envy"
+      },
+      {
+        "type": "phonological/orthographic",
+        "distractor": "altar"
+      },
+      {
+        "type": "distinct semantic category",
+        "distractor": "grief"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "jubilee"
+      },
+      {
+        "type": "common misconception",
+        "distractor": "displeasure"
+      }
+    ]
+  },
+  {
+    "id": 43,
+    "word": "reel",
+    "pos": "noun",
+    "sense_count": 9,
+    "source_word_id": 3990,
+    "short_definition": "A rotating device for winding or unwinding something flexible",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a spinning device",
+      "a fishing tool"
+    ],
+    "distractors": [
+      {
+        "type": "related function",
+        "distractor": "wheel"
+      },
+      {
+        "type": "phonological/orthographic",
+        "distractor": "appeal"
+      },
+      {
+        "type": "related concept",
+        "distractor": "dance"
+      },
+      {
+        "type": "semantic",
+        "distractor": "spool"
+      },
+      {
+        "type": "common misconception",
+        "distractor": "film"
+      }
+    ]
+  },
+  {
+    "id": 44,
+    "word": "intonation",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 4022,
+    "short_definition": "The rise and fall of the voice in speaking",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a vocal tone",
+      "speech melody"
+    ],
+    "distractors": [
+      {
+        "type": "phonological/orthographic",
+        "distractor": "intoning"
+      },
+      {
+        "type": "related concept",
+        "distractor": "inflection"
+      },
+      {
+        "type": "distinct semantic category",
+        "distractor": "narration"
+      },
+      {
+        "type": "related concept",
+        "distractor": "imitation"
+      },
+      {
+        "type": "related concept",
+        "distractor": "iteration"
+      }
+    ]
+  },
+  {
+    "id": 45,
+    "word": "strain",
+    "pos": "noun",
+    "sense_count": 20,
+    "source_word_id": 4032,
+    "short_definition": "Force tending to deform a body",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a heavy load",
+      "a great effort"
+    ],
+    "distractors": [
+      {
+        "type": "related concept",
+        "distractor": "stress"
+      },
+      {
+        "type": "phonological/orthographic",
+        "distractor": "train"
+      },
+      {
+        "type": "distinct semantic category",
+        "distractor": "sort"
+      },
+      {
+        "type": "related concept",
+        "distractor": "fracture"
+      },
+      {
+        "type": "distinct semantic category",
+        "distractor": "melody"
+      }
+    ]
+  },
+  {
+    "id": 46,
+    "word": "program",
+    "pos": "noun",
+    "sense_count": 10,
+    "source_word_id": 4066,
+    "short_definition": "A planned sequence of events or activities",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a planned event",
+      "a scheduled show"
+    ],
+    "distractors": [
+      {
+        "type": "related concept",
+        "distractor": "scheme"
+      },
+      {
+        "type": "common misconception",
+        "distractor": "programme"
+      },
+      {
+        "type": "related concept",
+        "distractor": "software"
+      },
+      {
+        "type": "distinct semantic category",
+        "distractor": "diagram"
+      },
+      {
+        "type": "related concept",
+        "distractor": "plan"
+      }
+    ]
+  },
+  {
+    "id": 47,
+    "word": "song",
+    "pos": "noun",
+    "sense_count": 6,
+    "source_word_id": 4031,
+    "short_definition": "A musical composition with words for singing",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a musical piece",
+      "a vocal tune"
+    ],
+    "distractors": [
+      {
+        "type": "related concept",
+        "distractor": "poem"
+      },
+      {
+        "type": "phonological/orthographic",
+        "distractor": "sing"
+      },
+      {
+        "type": "distinct semantic category",
+        "distractor": "opera"
+      },
+      {
+        "type": "related concept",
+        "distractor": "melody"
+      },
+      {
+        "type": "related concept",
+        "distractor": "jig"
+      }
+    ]
+  },
+  {
+    "id": 48,
+    "word": "bow",
+    "pos": "noun",
+    "sense_count": 14,
+    "source_word_id": 4041,
+    "short_definition": "A weapon for shooting arrows, comprised of a curved stave",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a ribbon knot",
+      "a weapon arc"
+    ],
+    "distractors": [
+      {
+        "type": "related concept",
+        "distractor": "curtsy"
+      },
+      {
+        "type": "related concept",
+        "distractor": "arrow"
+      },
+      {
+        "type": "distinct semantic category",
+        "distractor": "guitar"
+      },
+      {
+        "type": "common misconception",
+        "distractor": "stern"
+      },
+      {
+        "type": "related concept",
+        "distractor": "branch"
+      }
+    ]
+  },
+  {
+    "id": 49,
+    "word": "enactment",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 4050,
+    "short_definition": "The process of making a bill or proposal a law",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a staged event",
+      "a law's passage"
+    ],
+    "distractors": [
+      {
+        "type": "related concept",
+        "distractor": "bylaw"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "repeal"
+      },
+      {
+        "type": "related concept",
+        "distractor": "drama"
+      },
+      {
+        "type": "related concept",
+        "distractor": "legislation"
+      },
+      {
+        "type": "phonological/orthographic",
+        "distractor": "engagement"
+      }
+    ]
+  },
+  {
+    "id": 50,
+    "word": "bill",
+    "pos": "noun",
+    "sense_count": 13,
+    "source_word_id": 4068,
+    "short_definition": "A statement of money owed for goods or services",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a payment request",
+      "a bird's beak"
+    ],
+    "distractors": [
+      {
+        "type": "distinct semantic category",
+        "distractor": "duck"
+      },
+      {
+        "type": "related concept",
+        "distractor": "cheque"
+      },
+      {
+        "type": "related concept",
+        "distractor": "law"
+      },
+      {
+        "type": "related concept",
+        "distractor": "invoice"
+      },
+      {
+        "type": "related concept",
+        "distractor": "bulletin"
+      }
+    ]
+  },
+  {
+    "id": 51,
+    "word": "tumult",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 4093,
+    "short_definition": "A loud confused noise, especially caused by a crowd",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a noisy chaos",
+      "a wild uproar"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "silence"
+      },
+      {
+        "type": "related concept",
+        "distractor": "turmoil"
+      },
+      {
+        "type": "related concept",
+        "distractor": "uproar"
+      },
+      {
+        "type": "phonological/orthographic",
+        "distractor": "tumor"
+      },
+      {
+        "type": "distinct semantic category",
+        "distractor": "melody"
+      }
+    ]
+  },
+  {
+    "id": 52,
+    "word": "programme",
+    "pos": "noun",
+    "sense_count": 9,
+    "source_word_id": 4067,
+    "short_definition": "A plan of activities or events, often for public performance",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a planned schedule",
+      "a show's agenda"
+    ],
+    "distractors": [
+      {
+        "type": "related concept",
+        "distractor": "strategy"
+      },
+      {
+        "type": "common misconception",
+        "distractor": "program"
+      },
+      {
+        "type": "related concept",
+        "distractor": "presentation"
+      },
+      {
+        "type": "related concept",
+        "distractor": "algorithm"
+      },
+      {
+        "type": "phonological/orthographic",
+        "distractor": "prognosis"
+      }
+    ]
+  },
+  {
+    "id": 53,
+    "word": "havoc",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 4096,
+    "short_definition": "Widespread destruction or devastation",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a great damage",
+      "utter destruction"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "peace"
+      },
+      {
+        "type": "related concept",
+        "distractor": "turmoil"
+      },
+      {
+        "type": "phonological/orthographic",
+        "distractor": "heaven"
+      },
+      {
+        "type": "related concept",
+        "distractor": "chaos"
+      },
+      {
+        "type": "related concept",
+        "distractor": "damage"
+      }
+    ]
+  },
+  {
+    "id": 54,
+    "word": "turmoil",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 4102,
+    "short_definition": "A state of great disturbance, confusion, or uncertainty",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "an inner chaos",
+      "extreme confusion"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "tranquility"
+      },
+      {
+        "type": "related concept",
+        "distractor": "tumult"
+      },
+      {
+        "type": "related concept",
+        "distractor": "travail"
+      },
+      {
+        "type": "related concept",
+        "distractor": "storm"
+      },
+      {
+        "type": "related concept",
+        "distractor": "torment"
+      }
+    ]
+  },
+  {
+    "id": 55,
+    "word": "ado",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 4114,
+    "short_definition": "Trouble or difficulty; fuss, especially about something unimportant",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a needless fuss",
+      "extra bother"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "calm"
+      },
+      {
+        "type": "distinct semantic category",
+        "distractor": "adventure"
+      },
+      {
+        "type": "phonological",
+        "distractor": "adam"
+      },
+      {
+        "type": "related concept",
+        "distractor": "fuss"
+      },
+      {
+        "type": "related concept",
+        "distractor": "delay"
+      }
+    ]
+  },
+  {
+    "id": 56,
+    "word": "figure",
+    "pos": "noun",
+    "sense_count": 18,
+    "source_word_id": 4127,
+    "short_definition": "A diagram or illustrative drawing in a book",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a visual shape",
+      "a math value"
+    ],
+    "distractors": [
+      {
+        "type": "related concept",
+        "distractor": "digit"
+      },
+      {
+        "type": "phonological/orthographic",
+        "distractor": "fixture"
+      },
+      {
+        "type": "related concept",
+        "distractor": "drawing"
+      },
+      {
+        "type": "related concept",
+        "distractor": "equation"
+      },
+      {
+        "type": "distinct semantic category",
+        "distractor": "statue"
+      }
+    ]
+  },
+  {
+    "id": 57,
+    "word": "blocking",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 4155,
+    "short_definition": "The process of planning actors' movements on stage",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "an obstacle stop",
+      "a staged movement"
+    ],
+    "distractors": [
+      {
+        "type": "distinct semantic category",
+        "distractor": "backstage"
+      },
+      {
+        "type": "phonological/orthographic",
+        "distractor": "blacking"
+      },
+      {
+        "type": "related concept",
+        "distractor": "staging"
+      },
+      {
+        "type": "related concept",
+        "distractor": "dancing"
+      },
+      {
+        "type": "related concept",
+        "distractor": "choreography"
+      }
+    ]
+  },
+  {
+    "id": 58,
+    "word": "interference",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 4157,
+    "short_definition": "The obstruction of a signal or activity",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a disruption cause",
+      "an unwanted action"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "assistance"
+      },
+      {
+        "type": "related concept",
+        "distractor": "interaction"
+      },
+      {
+        "type": "phonological/orthographic",
+        "distractor": "entrance"
+      },
+      {
+        "type": "related concept",
+        "distractor": "intervention"
+      },
+      {
+        "type": "related concept",
+        "distractor": "intermission"
+      }
+    ]
+  },
+  {
+    "id": 59,
+    "word": "bustle",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 4111,
+    "short_definition": "Energetic activity; hurried movement",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a hurried activity",
+      "busy movement"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "slowness"
+      },
+      {
+        "type": "phonological/orthographic",
+        "distractor": "bundle"
+      },
+      {
+        "type": "related concept",
+        "distractor": "hustle"
+      },
+      {
+        "type": "related concept",
+        "distractor": "rest"
+      },
+      {
+        "type": "related concept",
+        "distractor": "activity"
+      }
+    ]
+  },
+  {
+    "id": 60,
+    "word": "fit",
+    "pos": "noun",
+    "sense_count": 16,
+    "source_word_id": 4117,
+    "short_definition": "A sudden attack or convulsion",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a sudden attack",
+      "a proper size"
+    ],
+    "distractors": [
+      {
+        "type": "related concept",
+        "distractor": "attack"
+      },
+      {
+        "type": "phonological/orthographic",
+        "distractor": "fat"
+      },
+      {
+        "type": "related concept",
+        "distractor": "seizure"
+      },
+      {
+        "type": "related concept",
+        "distractor": "tailor"
+      },
+      {
+        "type": "related concept",
+        "distractor": "outburst"
+      }
+    ]
+  },
+  {
+    "id": 61,
+    "word": "block",
+    "pos": "noun",
+    "sense_count": 28,
+    "source_word_id": 4156,
+    "short_definition": "A solid piece of material, typically rectangular",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a solid piece",
+      "an obstacle stop"
+    ],
+    "distractors": [
+      {
+        "type": "related concept",
+        "distractor": "impede"
+      },
+      {
+        "type": "related concept",
+        "distractor": "brick"
+      },
+      {
+        "type": "related concept",
+        "distractor": "barricade"
+      },
+      {
+        "type": "related concept",
+        "distractor": "ice"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "unlock"
+      }
+    ]
+  },
+  {
+    "id": 62,
+    "word": "putting",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 4216,
+    "short_definition": "The act of applying or placing something",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a golf stroke",
+      "a careful placement"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "taking"
+      },
+      {
+        "type": "related concept",
+        "distractor": "clothing"
+      },
+      {
+        "type": "related concept",
+        "distractor": "gifting"
+      },
+      {
+        "type": "related concept",
+        "distractor": "installing"
+      },
+      {
+        "type": "phonological/orthographic",
+        "distractor": "outing"
+      }
+    ]
+  },
+  {
+    "id": 63,
+    "word": "breeze",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 4231,
+    "short_definition": "A gentle wind",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a gentle wind",
+      "an easy task"
+    ],
+    "distractors": [
+      {
+        "type": "related concept",
+        "distractor": "squall"
+      },
+      {
+        "type": "phonological/orthographic",
+        "distractor": "freeze"
+      },
+      {
+        "type": "related concept",
+        "distractor": "air"
+      },
+      {
+        "type": "related concept",
+        "distractor": "tempest"
+      },
+      {
+        "type": "related concept",
+        "distractor": "zephyr"
+      }
+    ]
+  },
+  {
+    "id": 64,
+    "word": "work",
+    "pos": "noun",
+    "sense_count": 34,
+    "source_word_id": 4237,
+    "short_definition": "Activity involving mental or physical effort done to achieve a result",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a job task",
+      "a daily labour"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "leisure"
+      },
+      {
+        "type": "phonological/orthographic",
+        "distractor": "werk"
+      },
+      {
+        "type": "related concept",
+        "distractor": "chore"
+      },
+      {
+        "type": "related concept",
+        "distractor": "employment"
+      },
+      {
+        "type": "related concept",
+        "distractor": "hobby"
+      }
+    ]
+  },
+  {
+    "id": 65,
+    "word": "utility",
+    "pos": "noun",
+    "sense_count": 8,
+    "source_word_id": 4253,
+    "short_definition": "The state of being useful, profitable, or beneficial",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a useful service",
+      "practical benefit"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "uselessness"
+      },
+      {
+        "type": "related concept",
+        "distractor": "futility"
+      },
+      {
+        "type": "related concept",
+        "distractor": "function"
+      },
+      {
+        "type": "phonological/orthographic",
+        "distractor": "unity"
+      },
+      {
+        "type": "related concept",
+        "distractor": "electricity"
+      }
+    ]
+  },
+  {
+    "id": 66,
+    "word": "paperwork",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 4273,
+    "short_definition": "Routine clerical or administrative work consisting of documents",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "office documents",
+      "written records"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "freedom"
+      },
+      {
+        "type": "related concept",
+        "distractor": "red tape"
+      },
+      {
+        "type": "related concept",
+        "distractor": "bureaucracy"
+      },
+      {
+        "type": "related concept",
+        "distractor": "office"
+      },
+      {
+        "type": "related concept",
+        "distractor": "homework"
+      }
+    ]
+  },
+  {
+    "id": 67,
+    "word": "office",
+    "pos": "noun",
+    "sense_count": 7,
+    "source_word_id": 4298,
+    "short_definition": "A room or building used for commercial or professional activities",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a workplace area",
+      "business location"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "home"
+      },
+      {
+        "type": "phonological/orthographic",
+        "distractor": "officer"
+      },
+      {
+        "type": "related concept",
+        "distractor": "workplace"
+      },
+      {
+        "type": "related concept",
+        "distractor": "duty"
+      },
+      {
+        "type": "related concept",
+        "distractor": "agency"
+      }
+    ]
+  },
+  {
+    "id": 68,
+    "word": "place",
+    "pos": "noun",
+    "sense_count": 32,
+    "source_word_id": 4300,
+    "short_definition": "A particular position or location",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a specific spot",
+      "a certain location"
+    ],
+    "distractors": [
+      {
+        "type": "related concept",
+        "distractor": "space"
+      },
+      {
+        "type": "phonological/orthographic",
+        "distractor": "palace"
+      },
+      {
+        "type": "related concept",
+        "distractor": "spot"
+      },
+      {
+        "type": "related concept",
+        "distractor": "location"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "remove"
+      }
+    ]
+  },
+  {
+    "id": 69,
+    "word": "line",
+    "pos": "noun",
+    "sense_count": 36,
+    "source_word_id": 4277,
+    "short_definition": "A long, narrow mark or band",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a drawn mark",
+      "a queue order"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "point"
+      },
+      {
+        "type": "related concept",
+        "distractor": "rope"
+      },
+      {
+        "type": "related concept",
+        "distractor": "queue"
+      },
+      {
+        "type": "related concept",
+        "distractor": "lane"
+      },
+      {
+        "type": "related concept",
+        "distractor": "section"
+      }
+    ]
+  },
+  {
+    "id": 70,
+    "word": "situation",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 4301,
+    "short_definition": "A set of circumstances",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a set state",
+      "current condition"
+    ],
+    "distractors": [
+      {
+        "type": "related concept",
+        "distractor": "circumstance"
+      },
+      {
+        "type": "related concept",
+        "distractor": "location"
+      },
+      {
+        "type": "related concept",
+        "distractor": "solution"
+      },
+      {
+        "type": "related concept",
+        "distractor": "place"
+      },
+      {
+        "type": "related concept",
+        "distractor": "position"
+      }
+    ]
+  },
+  {
+    "id": 71,
+    "word": "admiralty",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 4304,
+    "short_definition": "A government department in charge of naval affairs",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a naval court",
+      "maritime authority"
+    ],
+    "distractors": [
+      {
+        "type": "related concept",
+        "distractor": "legality"
+      },
+      {
+        "type": "related concept",
+        "distractor": "navy"
+      },
+      {
+        "type": "related concept",
+        "distractor": "authority"
+      },
+      {
+        "type": "phonological/orthographic",
+        "distractor": "audacity"
+      },
+      {
+        "type": "related concept",
+        "distractor": "regency"
+      }
+    ]
+  },
+  {
+    "id": 72,
+    "word": "residency",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 4410,
+    "short_definition": "The state of living in a particular place",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a living place",
+      "training period"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "dormancy"
+      },
+      {
+        "type": "related concept",
+        "distractor": "presidency"
+      },
+      {
+        "type": "related concept",
+        "distractor": "citizenship"
+      },
+      {
+        "type": "related concept",
+        "distractor": "visitation"
+      },
+      {
+        "type": "related concept",
+        "distractor": "residence"
+      }
+    ]
+  },
+  {
+    "id": 73,
+    "word": "trade",
+    "pos": "noun",
+    "sense_count": 12,
+    "source_word_id": 4470,
+    "short_definition": "The activity of buying or selling goods or services",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a business deal",
+      "skilled labor"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "commerce"
+      },
+      {
+        "type": "related concept",
+        "distractor": "steal"
+      },
+      {
+        "type": "related concept",
+        "distractor": "business"
+      },
+      {
+        "type": "related concept",
+        "distractor": "craft"
+      },
+      {
+        "type": "related concept",
+        "distractor": "occupation"
+      }
+    ]
+  },
+  {
+    "id": 74,
+    "word": "craft",
+    "pos": "noun",
+    "sense_count": 6,
+    "source_word_id": 4471,
+    "short_definition": "An activity involving skill in making things by hand",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a handmade item",
+      "a skilled art"
+    ],
+    "distractors": [
+      {
+        "type": "related concept",
+        "distractor": "skill"
+      },
+      {
+        "type": "phonological/orthographic",
+        "distractor": "cruft"
+      },
+      {
+        "type": "related concept",
+        "distractor": "trade"
+      },
+      {
+        "type": "related concept",
+        "distractor": "artwork"
+      },
+      {
+        "type": "related concept",
+        "distractor": "vehicle"
+      }
+    ]
+  },
+  {
+    "id": 75,
+    "word": "furnishing",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 4488,
+    "short_definition": "Furniture or fittings in a room or building",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a room item",
+      "home decor"
+    ],
+    "distractors": [
+      {
+        "type": "related concept",
+        "distractor": "appliance"
+      },
+      {
+        "type": "related concept",
+        "distractor": "furniture"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "unfurnished"
+      },
+      {
+        "type": "related concept",
+        "distractor": "décor"
+      },
+      {
+        "type": "related concept",
+        "distractor": "fixture"
+      }
+    ]
+  },
+  {
+    "id": 76,
+    "word": "plum",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 4381,
+    "short_definition": "A fleshy, smooth-skinned fruit with a single hard stone",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a purple fruit",
+      "a choice thing"
+    ],
+    "distractors": [
+      {
+        "type": "related concept",
+        "distractor": "prune"
+      },
+      {
+        "type": "phonological/orthographic",
+        "distractor": "plan"
+      },
+      {
+        "type": "related concept",
+        "distractor": "fruit"
+      },
+      {
+        "type": "related concept",
+        "distractor": "apple"
+      },
+      {
+        "type": "related concept",
+        "distractor": "tomato"
+      }
+    ]
+  },
+  {
+    "id": 77,
+    "word": "prefecture",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 4385,
+    "short_definition": "A district governed by a prefect",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a local district",
+      "governed region"
+    ],
+    "distractors": [
+      {
+        "type": "related concept",
+        "distractor": "province"
+      },
+      {
+        "type": "phonological/orthographic",
+        "distractor": "picture"
+      },
+      {
+        "type": "related concept",
+        "distractor": "regency"
+      },
+      {
+        "type": "related concept",
+        "distractor": "republic"
+      },
+      {
+        "type": "related concept",
+        "distractor": "territory"
+      }
+    ]
+  },
+  {
+    "id": 78,
+    "word": "regency",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 4409,
+    "short_definition": "The office or period of a regent's rule",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a ruler's term",
+      "government period"
+    ],
+    "distractors": [
+      {
+        "type": "related concept",
+        "distractor": "reign"
+      },
+      {
+        "type": "related concept",
+        "distractor": "prefecture"
+      },
+      {
+        "type": "phonological/orthographic",
+        "distractor": "rogaine"
+      },
+      {
+        "type": "related concept",
+        "distractor": "democracy"
+      },
+      {
+        "type": "related concept",
+        "distractor": "aristocracy"
+      }
+    ]
+  },
+  {
+    "id": 79,
+    "word": "education",
+    "pos": "noun",
+    "sense_count": 6,
+    "source_word_id": 4508,
+    "short_definition": "The process of receiving or giving systematic instruction",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a learning process",
+      "formal schooling"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "ignorance"
+      },
+      {
+        "type": "related concept",
+        "distractor": "dedication"
+      },
+      {
+        "type": "related concept",
+        "distractor": "schooling"
+      },
+      {
+        "type": "related concept",
+        "distractor": "learning"
+      },
+      {
+        "type": "related concept",
+        "distractor": "teaching"
+      }
+    ]
+  },
+  {
+    "id": 80,
+    "word": "labour",
+    "pos": "noun",
+    "sense_count": 7,
+    "source_word_id": 4573,
+    "short_definition": "Physical or mental effort exerted in doing something",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:02:45.382Z",
+    "owad_phrase": [
+      "a physical work",
+      "birth process"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "leisure"
+      },
+      {
+        "type": "related concept",
+        "distractor": "laborious"
+      },
+      {
+        "type": "related concept",
+        "distractor": "work"
+      },
+      {
+        "type": "related concept",
+        "distractor": "delivery"
+      },
+      {
+        "type": "related concept",
+        "distractor": "task"
+      }
+    ]
+  }
+]

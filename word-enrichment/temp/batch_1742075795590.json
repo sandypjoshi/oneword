@@ -1,0 +1,172 @@
+[
+  {
+    "id": 56457,
+    "word": "there",
+    "pos": "noun",
+    "shortDefinition": "A place or location that is not here.",
+    "definition_updated_at": "2025-03-15T21:56:32.166Z",
+    "definition_source": "gemini",
+    "owad_phrase": [
+      "a distant place",
+      "an unknown realm"
+    ],
+    "distractors": [
+      {
+        "type": "semantic",
+        "distractor": "location"
+      },
+      {
+        "type": "semantic",
+        "distractor": "absence"
+      },
+      {
+        "type": "semantic",
+        "distractor": "where"
+      },
+      {
+        "type": "phonological",
+        "distractor": "they're"
+      },
+      {
+        "type": "semantic",
+        "distractor": "presence"
+      }
+    ]
+  },
+  {
+    "id": 5064,
+    "word": "one",
+    "pos": "noun",
+    "shortDefinition": "The number after zero; a single thing.",
+    "definition_updated_at": "2025-03-15T21:56:32.166Z",
+    "definition_source": "gemini",
+    "owad_phrase": [
+      "a single entity",
+      "an isolated soul"
+    ],
+    "distractors": [
+      {
+        "type": "semantic",
+        "distractor": "zero"
+      },
+      {
+        "type": "hypernym",
+        "distractor": "number"
+      },
+      {
+        "type": "phonological",
+        "distractor": "won"
+      },
+      {
+        "type": "semantic",
+        "distractor": "unit"
+      },
+      {
+        "type": "semantic",
+        "distractor": "digit"
+      }
+    ]
+  },
+  {
+    "id": 8197,
+    "word": "are",
+    "pos": "noun",
+    "shortDefinition": "A unit of area equal to 100 square meters.",
+    "definition_updated_at": "2025-03-15T21:56:32.166Z",
+    "definition_source": "gemini",
+    "owad_phrase": [
+      "a plural presence",
+      "a collective being"
+    ],
+    "distractors": [
+      {
+        "type": "semantic",
+        "distractor": "being"
+      },
+      {
+        "type": "semantic",
+        "distractor": "existence"
+      },
+      {
+        "type": "phonological",
+        "distractor": "aren't"
+      },
+      {
+        "type": "semantic",
+        "distractor": "is"
+      },
+      {
+        "type": "semantic",
+        "distractor": "were"
+      }
+    ]
+  },
+  {
+    "id": 7681,
+    "word": "also",
+    "pos": "adverb",
+    "shortDefinition": "In addition; as well; too; furthermore.",
+    "definition_updated_at": "2025-03-15T21:56:32.166Z",
+    "definition_source": "gemini",
+    "owad_phrase": [
+      "additionally considered",
+      "furthermore included"
+    ],
+    "distractors": [
+      {
+        "type": "semantic",
+        "distractor": "too"
+      },
+      {
+        "type": "frequency-based",
+        "distractor": "often"
+      },
+      {
+        "type": "frequency-based",
+        "distractor": "always"
+      },
+      {
+        "type": "orthographic",
+        "distractor": "already"
+      },
+      {
+        "type": "semantic",
+        "distractor": "besides"
+      }
+    ]
+  },
+  {
+    "id": 48951,
+    "word": "said",
+    "pos": null,
+    "shortDefinition": "Past tense of say.",
+    "definition_updated_at": "2025-03-15T21:56:32.166Z",
+    "definition_source": "gemini",
+    "owad_phrase": [
+      "to utter words",
+      "to voice opinions"
+    ],
+    "distractors": [
+      {
+        "type": "semantic",
+        "distractor": "stated"
+      },
+      {
+        "type": "semantic",
+        "distractor": "told"
+      },
+      {
+        "type": "semantic",
+        "distractor": "asked"
+      },
+      {
+        "type": "semantic",
+        "distractor": "voiced"
+      },
+      {
+        "type": "semantic",
+        "distractor": "read"
+      }
+    ]
+  }
+]

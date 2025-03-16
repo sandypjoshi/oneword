@@ -1,0 +1,1482 @@
+[
+  {
+    "id": 81,
+    "word": "trouble",
+    "pos": "noun",
+    "sense_count": 11,
+    "source_word_id": 4595,
+    "difficulty_score": 0,
+    "short_definition": "A state of distress, difficulty, or suffering; adversity.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a police investigation",
+      "a marital dispute"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "trifle"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "triumph"
+      },
+      {
+        "type": "different domain",
+        "distractor": "treasure"
+      },
+      {
+        "type": "different domain",
+        "distractor": "trend"
+      },
+      {
+        "type": "different domain",
+        "distractor": "treaty"
+      }
+    ]
+  },
+  {
+    "id": 82,
+    "word": "medium",
+    "pos": "noun",
+    "sense_count": 13,
+    "source_word_id": 4502,
+    "difficulty_score": 0,
+    "short_definition": "A substance through which something is transmitted or carried.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "an oil painting",
+      "a communication channel"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "median"
+      },
+      {
+        "type": "different domain",
+        "distractor": "memory"
+      },
+      {
+        "type": "related concept",
+        "distractor": "method"
+      },
+      {
+        "type": "different domain",
+        "distractor": "message"
+      },
+      {
+        "type": "different domain",
+        "distractor": "moment"
+      }
+    ]
+  },
+  {
+    "id": 83,
+    "word": "theology",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 4518,
+    "difficulty_score": 0,
+    "short_definition": "The study of religious faith, practice, and experience.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a divinity school",
+      "a religious doctrine"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "technology"
+      },
+      {
+        "type": "similar suffix",
+        "distractor": "terminology"
+      },
+      {
+        "type": "related academic field",
+        "distractor": "ideology"
+      },
+      {
+        "type": "related academic field",
+        "distractor": "astrology"
+      },
+      {
+        "type": "related academic field",
+        "distractor": "biology"
+      }
+    ]
+  },
+  {
+    "id": 84,
+    "word": "labor",
+    "pos": "noun",
+    "sense_count": 10,
+    "source_word_id": 4572,
+    "difficulty_score": 0,
+    "short_definition": "Physical or mental exertion; work, especially for wages.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a construction project",
+      "a childbirth process"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "leisure"
+      },
+      {
+        "type": "different domain",
+        "distractor": "liberty"
+      },
+      {
+        "type": "different domain",
+        "distractor": "lover"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "layer"
+      },
+      {
+        "type": "related activity",
+        "distractor": "loiter"
+      }
+    ]
+  },
+  {
+    "id": 85,
+    "word": "struggle",
+    "pos": "noun",
+    "sense_count": 7,
+    "source_word_id": 4583,
+    "difficulty_score": 0,
+    "short_definition": "A forceful or violent effort to get free of restraint.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a wrestling match",
+      "a power contest"
+    ],
+    "distractors": [
+      {
+        "type": "related concept",
+        "distractor": "strength"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "strangle"
+      },
+      {
+        "type": "different domain",
+        "distractor": "structure"
+      },
+      {
+        "type": "related concept",
+        "distractor": "strategy"
+      },
+      {
+        "type": "opposite action",
+        "distractor": "stroll"
+      }
+    ]
+  },
+  {
+    "id": 86,
+    "word": "substituting",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 4594,
+    "difficulty_score": 0.0206224349198341,
+    "short_definition": "The act of replacing one thing with another; replacement.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a sports replacement",
+      "an ingredient exchange"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "subtracting"
+      },
+      {
+        "type": "related concept",
+        "distractor": "submitting"
+      },
+      {
+        "type": "different domain",
+        "distractor": "suffering"
+      },
+      {
+        "type": "related concept",
+        "distractor": "supplying"
+      },
+      {
+        "type": "different domain",
+        "distractor": "submerging"
+      }
+    ]
+  },
+  {
+    "id": 87,
+    "word": "set",
+    "pos": "noun",
+    "sense_count": 45,
+    "source_word_id": 4607,
+    "difficulty_score": 0,
+    "short_definition": "A group of similar things that belong together; collection.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a matching tableware",
+      "a tennis pairing"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "seat"
+      },
+      {
+        "type": "related concept",
+        "distractor": "series"
+      },
+      {
+        "type": "different domain",
+        "distractor": "skill"
+      },
+      {
+        "type": "different domain",
+        "distractor": "solo"
+      },
+      {
+        "type": "different domain",
+        "distractor": "seed"
+      }
+    ]
+  },
+  {
+    "id": 88,
+    "word": "clean",
+    "pos": "noun",
+    "sense_count": 31,
+    "source_word_id": 4620,
+    "difficulty_score": 0,
+    "short_definition": "The act of removing dirt, marks, or unwanted matter.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a spring cleaning",
+      "a surgical disinfection"
+    ],
+    "distractors": [
+      {
+        "type": "related concept",
+        "distractor": "clear"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "clip"
+      },
+      {
+        "type": "different domain",
+        "distractor": "clone"
+      },
+      {
+        "type": "opposite quality",
+        "distractor": "clutter"
+      },
+      {
+        "type": "different domain",
+        "distractor": "claim"
+      }
+    ]
+  },
+  {
+    "id": 89,
+    "word": "yoga",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 4649,
+    "difficulty_score": 0,
+    "short_definition": "A Hindu spiritual and ascetic discipline; union with the divine.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a stretching exercise",
+      "a meditative practice"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "yolk"
+      },
+      {
+        "type": "different domain",
+        "distractor": "yacht"
+      },
+      {
+        "type": "different domain",
+        "distractor": "yearning"
+      },
+      {
+        "type": "different domain",
+        "distractor": "yodel"
+      },
+      {
+        "type": "related life stage",
+        "distractor": "youth"
+      }
+    ]
+  },
+  {
+    "id": 90,
+    "word": "empiricism",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 4662,
+    "difficulty_score": 0.457197577256783,
+    "short_definition": "The theory that knowledge comes from sensory experience.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a scientific observation",
+      "an experimental approach"
+    ],
+    "distractors": [
+      {
+        "type": "opposite philosophical view",
+        "distractor": "idealism"
+      },
+      {
+        "type": "related philosophical view",
+        "distractor": "pragmatism"
+      },
+      {
+        "type": "related philosophical view",
+        "distractor": "rationalism"
+      },
+      {
+        "type": "related philosophical view",
+        "distractor": "determinism"
+      },
+      {
+        "type": "related philosophical view",
+        "distractor": "skepticism"
+      }
+    ]
+  },
+  {
+    "id": 91,
+    "word": "count",
+    "pos": "noun",
+    "sense_count": 12,
+    "source_word_id": 4670,
+    "difficulty_score": 0,
+    "short_definition": "The action of determining the total number of items.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "an inventory check",
+      "an election tally"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "court"
+      },
+      {
+        "type": "different domain",
+        "distractor": "country"
+      },
+      {
+        "type": "different domain",
+        "distractor": "concern"
+      },
+      {
+        "type": "different domain",
+        "distractor": "content"
+      },
+      {
+        "type": "different domain",
+        "distractor": "contrast"
+      }
+    ]
+  },
+  {
+    "id": 92,
+    "word": "microscopy",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 4715,
+    "difficulty_score": 0.369693652461283,
+    "short_definition": "The science of investigating small objects using a microscope.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a cellular analysis",
+      "a pathogen identification"
+    ],
+    "distractors": [
+      {
+        "type": "opposite concept",
+        "distractor": "macroscopy"
+      },
+      {
+        "type": "related field",
+        "distractor": "telescopy"
+      },
+      {
+        "type": "related field",
+        "distractor": "photography"
+      },
+      {
+        "type": "related medical procedure",
+        "distractor": "biopsy"
+      },
+      {
+        "type": "related scientific field",
+        "distractor": "astronomy"
+      }
+    ]
+  },
+  {
+    "id": 93,
+    "word": "search",
+    "pos": "noun",
+    "sense_count": 9,
+    "source_word_id": 4690,
+    "difficulty_score": 0,
+    "short_definition": "An act of trying to find something or someone; quest.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a treasure hunt",
+      "a police investigation"
+    ],
+    "distractors": [
+      {
+        "type": "related concept",
+        "distractor": "source"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "seizure"
+      },
+      {
+        "type": "different domain",
+        "distractor": "secret"
+      },
+      {
+        "type": "different domain",
+        "distractor": "shelter"
+      },
+      {
+        "type": "different domain",
+        "distractor": "sight"
+      }
+    ]
+  },
+  {
+    "id": 94,
+    "word": "survey",
+    "pos": "noun",
+    "sense_count": 9,
+    "source_word_id": 4739,
+    "difficulty_score": 0,
+    "short_definition": "An investigation of opinions or experiences of a group.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a market analysis",
+      "a land measurement"
+    ],
+    "distractors": [
+      {
+        "type": "related concept",
+        "distractor": "summary"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "surgery"
+      },
+      {
+        "type": "different domain",
+        "distractor": "surety"
+      },
+      {
+        "type": "different domain",
+        "distractor": "secret"
+      },
+      {
+        "type": "different domain",
+        "distractor": "system"
+      }
+    ]
+  },
+  {
+    "id": 95,
+    "word": "tabulation",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 4798,
+    "difficulty_score": 0.370258059380575,
+    "short_definition": "The process of arranging data in a table or summary.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a census summary",
+      "a research compilation"
+    ],
+    "distractors": [
+      {
+        "type": "related process",
+        "distractor": "triangulation"
+      },
+      {
+        "type": "related process",
+        "distractor": "titration"
+      },
+      {
+        "type": "different domain",
+        "distractor": "taxation"
+      },
+      {
+        "type": "different domain",
+        "distractor": "translation"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "tremulation"
+      }
+    ]
+  },
+  {
+    "id": 96,
+    "word": "aid",
+    "pos": "noun",
+    "sense_count": 6,
+    "source_word_id": 4818,
+    "difficulty_score": 0,
+    "short_definition": "Help or support given to someone or something; assistance.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a disaster relief",
+      "a financial assistance"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "aide"
+      },
+      {
+        "type": "related concept",
+        "distractor": "aim"
+      },
+      {
+        "type": "different domain",
+        "distractor": "acid"
+      },
+      {
+        "type": "different domain",
+        "distractor": "alien"
+      },
+      {
+        "type": "different domain",
+        "distractor": "art"
+      }
+    ]
+  },
+  {
+    "id": 97,
+    "word": "study",
+    "pos": "noun",
+    "sense_count": 16,
+    "source_word_id": 4740,
+    "difficulty_score": 0,
+    "short_definition": "The devotion of time and attention to acquiring knowledge.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "an academic research",
+      "a legal preparation"
+    ],
+    "distractors": [
+      {
+        "type": "different domain",
+        "distractor": "strife"
+      },
+      {
+        "type": "different domain",
+        "distractor": "style"
+      },
+      {
+        "type": "different domain",
+        "distractor": "stamina"
+      },
+      {
+        "type": "opposite action",
+        "distractor": "scorn"
+      },
+      {
+        "type": "different domain",
+        "distractor": "story"
+      }
+    ]
+  },
+  {
+    "id": 98,
+    "word": "titration",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 4768,
+    "difficulty_score": 0.377801845926997,
+    "short_definition": "A lab technique for quantitative chemical analysis; neutralization.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a chemical analysis",
+      "an acid neutralization"
+    ],
+    "distractors": [
+      {
+        "type": "related process",
+        "distractor": "translation"
+      },
+      {
+        "type": "related process",
+        "distractor": "triangulation"
+      },
+      {
+        "type": "different domain",
+        "distractor": "tradition"
+      },
+      {
+        "type": "related process",
+        "distractor": "transcription"
+      },
+      {
+        "type": "related process",
+        "distractor": "transpiration"
+      }
+    ]
+  },
+  {
+    "id": 99,
+    "word": "hemodialysis",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 4785,
+    "difficulty_score": 0.499580368991933,
+    "short_definition": "A process of purifying blood artificially; renal replacement.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a kidney filtration",
+      "a renal replacement"
+    ],
+    "distractors": [
+      {
+        "type": "related medical concept",
+        "distractor": "homeostasis"
+      },
+      {
+        "type": "related scientific process",
+        "distractor": "hydrolysis"
+      },
+      {
+        "type": "different domain",
+        "distractor": "hypnosis"
+      },
+      {
+        "type": "related medical condition",
+        "distractor": "hemophilia"
+      },
+      {
+        "type": "related surgical procedure",
+        "distractor": "hysterectomy"
+      }
+    ]
+  },
+  {
+    "id": 100,
+    "word": "intervention",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 4837,
+    "difficulty_score": 0.162412237380535,
+    "short_definition": "Action taken to improve a situation, especially medically.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a medical procedure",
+      "a crisis management"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "invention"
+      },
+      {
+        "type": "related concept",
+        "distractor": "intention"
+      },
+      {
+        "type": "related concept",
+        "distractor": "intermission"
+      },
+      {
+        "type": "opposite concept",
+        "distractor": "isolation"
+      },
+      {
+        "type": "related concept",
+        "distractor": "integration"
+      }
+    ]
+  },
+  {
+    "id": 101,
+    "word": "facial",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 4888,
+    "difficulty_score": 0,
+    "short_definition": "A cosmetic treatment of the face; skincare procedure.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a skin exfoliation",
+      "a spa treatment"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "fanciful"
+      },
+      {
+        "type": "related concept",
+        "distractor": "factual"
+      },
+      {
+        "type": "different domain",
+        "distractor": "fallacy"
+      },
+      {
+        "type": "related concept",
+        "distractor": "fashion"
+      },
+      {
+        "type": "opposite concept",
+        "distractor": "failure"
+      }
+    ]
+  },
+  {
+    "id": 102,
+    "word": "implantation",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 4970,
+    "difficulty_score": 0.355958194138685,
+    "short_definition": "The process of embedding an object into tissue; grafting.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a dental fixture",
+      "a heart device"
+    ],
+    "distractors": [
+      {
+        "type": "related medical concept",
+        "distractor": "inflammation"
+      },
+      {
+        "type": "related concept",
+        "distractor": "implication"
+      },
+      {
+        "type": "different domain",
+        "distractor": "impatience"
+      },
+      {
+        "type": "related medical concept",
+        "distractor": "impairment"
+      },
+      {
+        "type": "different domain",
+        "distractor": "importation"
+      }
+    ]
+  },
+  {
+    "id": 103,
+    "word": "treatment",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 4836,
+    "difficulty_score": 0,
+    "short_definition": "Medical care given to a patient for an illness.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a cancer therapy",
+      "a wound care"
+    ],
+    "distractors": [
+      {
+        "type": "opposite concept",
+        "distractor": "triumph"
+      },
+      {
+        "type": "related concept",
+        "distractor": "torment"
+      },
+      {
+        "type": "different domain",
+        "distractor": "transfer"
+      },
+      {
+        "type": "related concept",
+        "distractor": "threat"
+      },
+      {
+        "type": "related concept",
+        "distractor": "trace"
+      }
+    ]
+  },
+  {
+    "id": 104,
+    "word": "hospitalization",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 4838,
+    "difficulty_score": 0.259585744617872,
+    "short_definition": "The act of admitting someone to a hospital for treatment.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a patient admission",
+      "a surgical recovery"
+    ],
+    "distractors": [
+      {
+        "type": "different domain",
+        "distractor": "habitation"
+      },
+      {
+        "type": "related concept",
+        "distractor": "humanization"
+      },
+      {
+        "type": "different domain",
+        "distractor": "humiliation"
+      },
+      {
+        "type": "related medical concept",
+        "distractor": "hallucination"
+      },
+      {
+        "type": "related concept",
+        "distractor": "harmonization"
+      }
+    ]
+  },
+  {
+    "id": 105,
+    "word": "surgery",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 4929,
+    "difficulty_score": 0,
+    "short_definition": "The branch of medicine dealing with operative procedures.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a cardiac procedure",
+      "a tumor removal"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "sorcery"
+      },
+      {
+        "type": "different domain",
+        "distractor": "surety"
+      },
+      {
+        "type": "related concept",
+        "distractor": "synergy"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "sergery"
+      },
+      {
+        "type": "different domain",
+        "distractor": "supplication"
+      }
+    ]
+  },
+  {
+    "id": 106,
+    "word": "incision",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 4971,
+    "difficulty_score": 0.197244585996296,
+    "short_definition": "A surgical cut made in skin or flesh; cut.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a surgical cut",
+      "a biopsy sample"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "insistence"
+      },
+      {
+        "type": "related medical concept",
+        "distractor": "infusion"
+      },
+      {
+        "type": "related medical concept",
+        "distractor": "injection"
+      },
+      {
+        "type": "different domain",
+        "distractor": "insurrection"
+      },
+      {
+        "type": "different domain",
+        "distractor": "inspiration"
+      }
+    ]
+  },
+  {
+    "id": 107,
+    "word": "section",
+    "pos": "noun",
+    "sense_count": 15,
+    "source_word_id": 4972,
+    "difficulty_score": 0,
+    "short_definition": "A distinct part or portion of something; segment.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "an orange slice",
+      "a book chapter"
+    ],
+    "distractors": [
+      {
+        "type": "related concept",
+        "distractor": "selection"
+      },
+      {
+        "type": "related concept",
+        "distractor": "secretion"
+      },
+      {
+        "type": "related medical concept",
+        "distractor": "sedation"
+      },
+      {
+        "type": "related concept",
+        "distractor": "session"
+      },
+      {
+        "type": "related concept",
+        "distractor": "sensation"
+      }
+    ]
+  },
+  {
+    "id": 108,
+    "word": "justice",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 5103,
+    "difficulty_score": 0,
+    "short_definition": "Fairness in the way people are treated; equity.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a courtroom verdict",
+      "an equal treatment"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "jest"
+      },
+      {
+        "type": "related concept",
+        "distractor": "juncture"
+      },
+      {
+        "type": "related field",
+        "distractor": "jurisprudence"
+      },
+      {
+        "type": "different domain",
+        "distractor": "jealousy"
+      },
+      {
+        "type": "related concept",
+        "distractor": "judgment"
+      }
+    ]
+  },
+  {
+    "id": 109,
+    "word": "irrigation",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5109,
+    "difficulty_score": 0.241465073688779,
+    "short_definition": "The artificial application of water to land; watering.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a crop watering",
+      "a sinus rinsing"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "irritation"
+      },
+      {
+        "type": "opposite concept",
+        "distractor": "isolation"
+      },
+      {
+        "type": "different domain",
+        "distractor": "imagination"
+      },
+      {
+        "type": "different domain",
+        "distractor": "ignition"
+      },
+      {
+        "type": "related concept",
+        "distractor": "inundation"
+      }
+    ]
+  },
+  {
+    "id": 110,
+    "word": "neurosurgery",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 5060,
+    "difficulty_score": 0.229255285599807,
+    "short_definition": "Surgery performed on the nervous system; brain surgery.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a brain operation",
+      "a spinal procedure"
+    ],
+    "distractors": [
+      {
+        "type": "related medical concept",
+        "distractor": "neurosis"
+      },
+      {
+        "type": "related medical field",
+        "distractor": "neurology"
+      },
+      {
+        "type": "different domain",
+        "distractor": "neuroskeptic"
+      },
+      {
+        "type": "related medical field",
+        "distractor": "psychosurgery"
+      },
+      {
+        "type": "related surgical procedure",
+        "distractor": "osteotomy"
+      }
+    ]
+  },
+  {
+    "id": 111,
+    "word": "osteotomy",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 5065,
+    "difficulty_score": 0.445426218077064,
+    "short_definition": "Surgical cutting of a bone; bone resection.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a bone reshaping",
+      "a limb alignment"
+    ],
+    "distractors": [
+      {
+        "type": "related surgical procedure",
+        "distractor": "oophorectomy"
+      },
+      {
+        "type": "related medical field",
+        "distractor": "otorhinolaryngology"
+      },
+      {
+        "type": "related medical field",
+        "distractor": "orthodontics"
+      },
+      {
+        "type": "related medical field",
+        "distractor": "oncology"
+      },
+      {
+        "type": "related medical field",
+        "distractor": "ophthalmology"
+      }
+    ]
+  },
+  {
+    "id": 112,
+    "word": "administration",
+    "pos": "noun",
+    "sense_count": 6,
+    "source_word_id": 5104,
+    "difficulty_score": 0.191423907270631,
+    "short_definition": "The process of managing or organizing something; management.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a company management",
+      "a government leadership"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "admiration"
+      },
+      {
+        "type": "related concept",
+        "distractor": "admonition"
+      },
+      {
+        "type": "different domain",
+        "distractor": "adulteration"
+      },
+      {
+        "type": "different domain",
+        "distractor": "adoration"
+      },
+      {
+        "type": "related concept",
+        "distractor": "admission"
+      }
+    ]
+  },
+  {
+    "id": 113,
+    "word": "dressing",
+    "pos": "noun",
+    "sense_count": 7,
+    "source_word_id": 5118,
+    "difficulty_score": 0,
+    "short_definition": "A sterile pad applied to a wound for protection.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a wound covering",
+      "a salad flavoring"
+    ],
+    "distractors": [
+      {
+        "type": "related action",
+        "distractor": "drawing"
+      },
+      {
+        "type": "related action",
+        "distractor": "drilling"
+      },
+      {
+        "type": "related action",
+        "distractor": "dripping"
+      },
+      {
+        "type": "related medical process",
+        "distractor": "dispensing"
+      },
+      {
+        "type": "related medical process",
+        "distractor": "diagnosis"
+      }
+    ]
+  },
+  {
+    "id": 114,
+    "word": "hospice",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5122,
+    "difficulty_score": 0.11894883556612,
+    "short_definition": "A facility providing care for the terminally ill; end-of-life care.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a palliative care",
+      "an end-of-life support"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "hostel"
+      },
+      {
+        "type": "different domain",
+        "distractor": "horoscope"
+      },
+      {
+        "type": "related concept",
+        "distractor": "hospital"
+      },
+      {
+        "type": "different domain",
+        "distractor": "harmony"
+      },
+      {
+        "type": "different domain",
+        "distractor": "heredity"
+      }
+    ]
+  },
+  {
+    "id": 115,
+    "word": "flooding",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 5157,
+    "difficulty_score": 0,
+    "short_definition": "An overflow of water onto normally dry land; inundation.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a river overflow",
+      "a coastal inundation"
+    ],
+    "distractors": [
+      {
+        "type": "related action",
+        "distractor": "folding"
+      },
+      {
+        "type": "related action",
+        "distractor": "floating"
+      },
+      {
+        "type": "different domain",
+        "distractor": "flowering"
+      },
+      {
+        "type": "different domain",
+        "distractor": "fleeting"
+      },
+      {
+        "type": "opposite action",
+        "distractor": "forbidding"
+      }
+    ]
+  },
+  {
+    "id": 116,
+    "word": "colonic",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5114,
+    "difficulty_score": 0.40505909226754,
+    "short_definition": "A procedure to cleanse the colon with fluid; enema.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a bowel cleanse",
+      "an enema procedure"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "chronic"
+      },
+      {
+        "type": "different domain",
+        "distractor": "chaotic"
+      },
+      {
+        "type": "related medical term",
+        "distractor": "clonic"
+      },
+      {
+        "type": "different domain",
+        "distractor": "cosmic"
+      },
+      {
+        "type": "different domain",
+        "distractor": "cynic"
+      }
+    ]
+  },
+  {
+    "id": 117,
+    "word": "psychotherapy",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5144,
+    "difficulty_score": 0.576541514713526,
+    "short_definition": "Treatment of mental disorders by psychological methods; therapy.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a talk therapy",
+      "a mental counseling"
+    ],
+    "distractors": [
+      {
+        "type": "related field",
+        "distractor": "psychometry"
+      },
+      {
+        "type": "related medical condition",
+        "distractor": "psychosis"
+      },
+      {
+        "type": "related medical condition",
+        "distractor": "psychopathy"
+      },
+      {
+        "type": "related medical field",
+        "distractor": "physiotherapy"
+      },
+      {
+        "type": "related treatment",
+        "distractor": "pharmacotherapy"
+      }
+    ]
+  },
+  {
+    "id": 118,
+    "word": "radiotherapy",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 5172,
+    "difficulty_score": 0.366523210787908,
+    "short_definition": "Treatment of disease using ionizing radiation; radiation therapy.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a cancer radiation",
+      "a tumor treatment"
+    ],
+    "distractors": [
+      {
+        "type": "related medical procedure",
+        "distractor": "radiography"
+      },
+      {
+        "type": "related medical field",
+        "distractor": "radiology"
+      },
+      {
+        "type": "different domain",
+        "distractor": "radiotelemetry"
+      },
+      {
+        "type": "related treatment",
+        "distractor": "chemotherapy"
+      },
+      {
+        "type": "related treatment",
+        "distractor": "hydrotherapy"
+      }
+    ]
+  },
+  {
+    "id": 119,
+    "word": "irradiation",
+    "pos": "noun",
+    "sense_count": 6,
+    "source_word_id": 5176,
+    "difficulty_score": 0.580011761131829,
+    "short_definition": "Exposure to radiation; especially for sterilization or preservation.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a food sterilization",
+      "a medical exposure"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "irritation"
+      },
+      {
+        "type": "different domain",
+        "distractor": "innovation"
+      },
+      {
+        "type": "different domain",
+        "distractor": "insinuation"
+      },
+      {
+        "type": "related concept",
+        "distractor": "inundation"
+      },
+      {
+        "type": "related concept",
+        "distractor": "isolation"
+      }
+    ]
+  },
+  {
+    "id": 120,
+    "word": "refrigeration",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5195,
+    "difficulty_score": 0.222597747090256,
+    "short_definition": "The process of cooling or freezing for preservation; chilling.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:23:27.501Z",
+    "owad_phrase": [
+      "a food preservation",
+      "a cold storage"
+    ],
+    "distractors": [
+      {
+        "type": "related process",
+        "distractor": "regeneration"
+      },
+      {
+        "type": "related process",
+        "distractor": "registration"
+      },
+      {
+        "type": "related process",
+        "distractor": "rehabilitation"
+      },
+      {
+        "type": "related process",
+        "distractor": "respiration"
+      },
+      {
+        "type": "different domain",
+        "distractor": "reflection"
+      }
+    ]
+  }
+]

@@ -1,0 +1,104 @@
+[
+  {
+    "id": 60219,
+    "word": "used",
+    "pos": "adjective satellite",
+    "shortDefinition": "Not new; owned or used by someone else.",
+    "definition_updated_at": "2025-03-15T21:59:53.256Z",
+    "definition_source": "gemini",
+    "owad_phrase": [
+      "previously owned",
+      "not new"
+    ],
+    "distractors": [
+      {
+        "type": "co-hyponym",
+        "distractor": "worn"
+      },
+      {
+        "type": "antonym",
+        "distractor": "new"
+      },
+      {
+        "type": "semantic",
+        "distractor": "accustomed"
+      },
+      {
+        "type": "semantic",
+        "distractor": "outdated"
+      },
+      {
+        "type": "semantic",
+        "distractor": "helpful"
+      }
+    ]
+  },
+  {
+    "id": 3134,
+    "word": "part",
+    "pos": "noun",
+    "shortDefinition": "A piece of something; not the whole thing.",
+    "definition_updated_at": "2025-03-15T21:59:53.256Z",
+    "definition_source": "gemini",
+    "owad_phrase": [
+      "a small piece",
+      "an equal share"
+    ],
+    "distractors": [
+      {
+        "type": "co-hyponym",
+        "distractor": "piece"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "portion"
+      },
+      {
+        "type": "antonym",
+        "distractor": "whole"
+      },
+      {
+        "type": "semantic",
+        "distractor": "role"
+      },
+      {
+        "type": "phonological",
+        "distractor": "spart"
+      }
+    ]
+  },
+  {
+    "id": 4482,
+    "word": "like",
+    "pos": "noun",
+    "shortDefinition": "A feeling of enjoying or wanting something.",
+    "definition_updated_at": "2025-03-15T21:59:53.256Z",
+    "definition_source": "gemini",
+    "owad_phrase": [
+      "a common fondness",
+      "a shared interest"
+    ],
+    "distractors": [
+      {
+        "type": "semantic",
+        "distractor": "love"
+      },
+      {
+        "type": "semantic",
+        "distractor": "similar"
+      },
+      {
+        "type": "antonym",
+        "distractor": "dislike"
+      },
+      {
+        "type": "domain-related",
+        "distractor": "taste"
+      },
+      {
+        "type": "phonological",
+        "distractor": "bike"
+      }
+    ]
+  }
+]

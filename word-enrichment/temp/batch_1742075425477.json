@@ -1,0 +1,70 @@
+[
+  {
+    "id": 8197,
+    "word": "are",
+    "pos": "noun",
+    "shortDefinition": null,
+    "definition_updated_at": null,
+    "definition_source": null,
+    "owad_phrase": [
+      "a metric unit",
+      "a land measure"
+    ],
+    "distractors": [
+      {
+        "type": "hypernym",
+        "distractor": "being"
+      },
+      {
+        "type": "synonym",
+        "distractor": "exist"
+      },
+      {
+        "type": "common misconception",
+        "distractor": "were"
+      },
+      {
+        "type": "minimal pair",
+        "distractor": "am"
+      },
+      {
+        "type": "minimal pair",
+        "distractor": "is"
+      }
+    ]
+  },
+  {
+    "id": 8005,
+    "word": "any",
+    "pos": "adverb",
+    "shortDefinition": "At all; to some degree; whatsoever.",
+    "definition_updated_at": "2025-03-15T21:50:23.094Z",
+    "definition_source": "gemini",
+    "owad_phrase": [
+      "slightly at all",
+      "somewhat possibly"
+    ],
+    "distractors": [
+      {
+        "type": "antonym",
+        "distractor": "never"
+      },
+      {
+        "type": "frequency-based",
+        "distractor": "always"
+      },
+      {
+        "type": "synonym (degree)",
+        "distractor": "quite"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "every"
+      },
+      {
+        "type": "orthographic",
+        "distractor": "ever"
+      }
+    ]
+  }
+]

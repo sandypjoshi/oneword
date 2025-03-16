@@ -1,0 +1,104 @@
+[
+  {
+    "id": 60654,
+    "word": "very",
+    "pos": "adverb",
+    "shortDefinition": "To a great degree; extremely.",
+    "definition_updated_at": "2025-03-15T21:59:48.341Z",
+    "definition_source": "gemini",
+    "owad_phrase": [
+      "quite much",
+      "really so"
+    ],
+    "distractors": [
+      {
+        "type": "hypernym",
+        "distractor": "slightly"
+      },
+      {
+        "type": "hyponym",
+        "distractor": "barely"
+      },
+      {
+        "type": "phonological",
+        "distractor": "vary"
+      },
+      {
+        "type": "semantic",
+        "distractor": "truly"
+      },
+      {
+        "type": "frequency-based",
+        "distractor": "extremely"
+      }
+    ]
+  },
+  {
+    "id": 4384,
+    "word": "general",
+    "pos": "noun",
+    "shortDefinition": "A high-ranking leader in the army.",
+    "definition_updated_at": "2025-03-15T21:59:48.341Z",
+    "definition_source": "gemini",
+    "owad_phrase": [
+      "a top leader",
+      "a main boss"
+    ],
+    "distractors": [
+      {
+        "type": "antonym",
+        "distractor": "private"
+      },
+      {
+        "type": "antonym",
+        "distractor": "specific"
+      },
+      {
+        "type": "domain-related",
+        "distractor": "officer"
+      },
+      {
+        "type": "frequency-based",
+        "distractor": "ordinary"
+      },
+      {
+        "type": "hyponym",
+        "distractor": "particular"
+      }
+    ]
+  },
+  {
+    "id": 9787,
+    "word": "before",
+    "pos": "adverb",
+    "shortDefinition": "Earlier in time; in the past.",
+    "definition_updated_at": "2025-03-15T21:59:48.341Z",
+    "definition_source": "gemini",
+    "owad_phrase": [
+      "prior then",
+      "earlier now"
+    ],
+    "distractors": [
+      {
+        "type": "antonym",
+        "distractor": "after"
+      },
+      {
+        "type": "semantic",
+        "distractor": "behind"
+      },
+      {
+        "type": "orthographic",
+        "distractor": "beside"
+      },
+      {
+        "type": "semantic",
+        "distractor": "formerly"
+      },
+      {
+        "type": "semantic",
+        "distractor": "since"
+      }
+    ]
+  }
+]

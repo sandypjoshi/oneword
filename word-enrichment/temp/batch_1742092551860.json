@@ -1,0 +1,1482 @@
+[
+  {
+    "id": 1,
+    "word": "down",
+    "pos": "noun",
+    "sense_count": 26,
+    "source_word_id": 3383,
+    "difficulty_score": 0,
+    "short_definition": "Soft, fluffy feathers providing insulation, especially of waterfowl.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a cozy feather pillow",
+      "a duckling's soft plumage"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "dawn"
+      },
+      {
+        "type": "different domain",
+        "distractor": "stone"
+      },
+      {
+        "type": "rhyme",
+        "distractor": "crown"
+      },
+      {
+        "type": "opposite",
+        "distractor": "up"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "town"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "word": "nightcap",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 3403,
+    "difficulty_score": 0,
+    "short_definition": "An alcoholic drink taken shortly before going to bed.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a warm bedtime drink",
+      "a brandy before sleep"
+    ],
+    "distractors": [
+      {
+        "type": "opposite context",
+        "distractor": "daydream"
+      },
+      {
+        "type": "related item",
+        "distractor": "sunhat"
+      },
+      {
+        "type": "phonological association",
+        "distractor": "nightmare"
+      },
+      {
+        "type": "different domain",
+        "distractor": "soda"
+      },
+      {
+        "type": "related item",
+        "distractor": "sleepwear"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "word": "chinaman",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 3491,
+    "difficulty_score": 0.639474549366885,
+    "short_definition": "An offensive term for a person of Chinese descent.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a deeply offensive slur",
+      "an unacceptable label"
+    ],
+    "distractors": [
+      {
+        "type": "related term",
+        "distractor": "asian"
+      },
+      {
+        "type": "different race",
+        "distractor": "caucasian"
+      },
+      {
+        "type": "different race",
+        "distractor": "european"
+      },
+      {
+        "type": "related term",
+        "distractor": "countryman"
+      },
+      {
+        "type": "related term",
+        "distractor": "clansman"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "word": "squash",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 3510,
+    "difficulty_score": 0,
+    "short_definition": "A gourd-family fruit with a hard rind and edible flesh.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a butternut autumn soup",
+      "a spaghetti garden vegetable"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "stretch"
+      },
+      {
+        "type": "related color",
+        "distractor": "orange"
+      },
+      {
+        "type": "related vegetable",
+        "distractor": "carrot"
+      },
+      {
+        "type": "related fruit",
+        "distractor": "melon"
+      },
+      {
+        "type": "related item",
+        "distractor": "juice"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "word": "manhood",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 4371,
+    "difficulty_score": 0,
+    "short_definition": "The state of being an adult male human.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a soldier's coming-of-age",
+      "a father's responsibility"
+    ],
+    "distractors": [
+      {
+        "type": "opposite",
+        "distractor": "womanhood"
+      },
+      {
+        "type": "related stage of life",
+        "distractor": "childhood"
+      },
+      {
+        "type": "broader category",
+        "distractor": "personhood"
+      },
+      {
+        "type": "related term",
+        "distractor": "knighthood"
+      },
+      {
+        "type": "related stage of life",
+        "distractor": "parenthood"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "word": "bat",
+    "pos": "noun",
+    "sense_count": 10,
+    "source_word_id": 3384,
+    "difficulty_score": 0,
+    "short_definition": "A nocturnal flying mammal with membranous wings.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a nocturnal cave dweller",
+      "a baseball hitting implement"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "rat"
+      },
+      {
+        "type": "related object",
+        "distractor": "ball"
+      },
+      {
+        "type": "related animal",
+        "distractor": "bird"
+      },
+      {
+        "type": "related object",
+        "distractor": "club"
+      },
+      {
+        "type": "different animal",
+        "distractor": "cat"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "word": "frame",
+    "pos": "noun",
+    "sense_count": 18,
+    "source_word_id": 3411,
+    "difficulty_score": 0,
+    "short_definition": "A rigid structure that gives shape or support.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a picture's wooden border",
+      "a bicycle's metal skeleton"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "name"
+      },
+      {
+        "type": "related object",
+        "distractor": "picture"
+      },
+      {
+        "type": "related term",
+        "distractor": "structure"
+      },
+      {
+        "type": "related object",
+        "distractor": "statue"
+      },
+      {
+        "type": "opposite",
+        "distractor": "destroy"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "word": "bowls",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 3420,
+    "difficulty_score": 0,
+    "short_definition": "A lawn game with biased balls rolled towards a target.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a lawn green pastime",
+      "a biased rolling game"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "goals"
+      },
+      {
+        "type": "related game",
+        "distractor": "pins"
+      },
+      {
+        "type": "different game",
+        "distractor": "marbles"
+      },
+      {
+        "type": "different game",
+        "distractor": "checkers"
+      },
+      {
+        "type": "different game",
+        "distractor": "dice"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "word": "goalkeeper",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 3429,
+    "difficulty_score": 0.26352510337043,
+    "short_definition": "A player defending the goal in sports like soccer.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a soccer net defender",
+      "a hockey puck blocker"
+    ],
+    "distractors": [
+      {
+        "type": "opposite role",
+        "distractor": "forward"
+      },
+      {
+        "type": "related role",
+        "distractor": "referee"
+      },
+      {
+        "type": "related role",
+        "distractor": "spectator"
+      },
+      {
+        "type": "related role",
+        "distractor": "defender"
+      },
+      {
+        "type": "related role",
+        "distractor": "coach"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "word": "golf",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 3436,
+    "difficulty_score": 0,
+    "short_definition": "A game using clubs to hit a ball into holes.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a country club sport",
+      "a putter's green pursuit"
+    ],
+    "distractors": [
+      {
+        "type": "related term",
+        "distractor": "turf"
+      },
+      {
+        "type": "related sport",
+        "distractor": "polo"
+      },
+      {
+        "type": "related sport",
+        "distractor": "tennis"
+      },
+      {
+        "type": "related sport",
+        "distractor": "hockey"
+      },
+      {
+        "type": "broader category",
+        "distractor": "sport"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "word": "quoits",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 3446,
+    "difficulty_score": 0.681088260117076,
+    "short_definition": "A game of throwing rings at a target.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a ring-toss pub game",
+      "a target-aiming pastime"
+    ],
+    "distractors": [
+      {
+        "type": "related game",
+        "distractor": "croquet"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "coins"
+      },
+      {
+        "type": "related sport",
+        "distractor": "javelin"
+      },
+      {
+        "type": "related object",
+        "distractor": "rings"
+      },
+      {
+        "type": "related game",
+        "distractor": "darts"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "word": "dribble",
+    "pos": "noun",
+    "sense_count": 7,
+    "source_word_id": 3503,
+    "difficulty_score": 0.1153711876908,
+    "short_definition": "A small quantity of liquid trickling or flowing slowly.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a leaky faucet drop",
+      "a baby's drooling mess"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "dollar"
+      },
+      {
+        "type": "related term",
+        "distractor": "stream"
+      },
+      {
+        "type": "related term",
+        "distractor": "flood"
+      },
+      {
+        "type": "similar term",
+        "distractor": "trickle"
+      },
+      {
+        "type": "related term",
+        "distractor": "torrent"
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "word": "contract",
+    "pos": "noun",
+    "sense_count": 12,
+    "source_word_id": 3583,
+    "difficulty_score": 0,
+    "short_definition": "A legally binding agreement between two or more parties.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a signed legal agreement",
+      "a binding property lease"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "compact"
+      },
+      {
+        "type": "related term",
+        "distractor": "agreement"
+      },
+      {
+        "type": "related term",
+        "distractor": "deal"
+      },
+      {
+        "type": "related term",
+        "distractor": "lawsuit"
+      },
+      {
+        "type": "related term",
+        "distractor": "treaty"
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "word": "monte",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 3598,
+    "difficulty_score": 0.238137950498703,
+    "short_definition": "A Spanish card game where players bet against the dealer.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a street corner gamble",
+      "a Spanish card hustle"
+    ],
+    "distractors": [
+      {
+        "type": "related game",
+        "distractor": "lotto"
+      },
+      {
+        "type": "related game",
+        "distractor": "poker"
+      },
+      {
+        "type": "related location",
+        "distractor": "casino"
+      },
+      {
+        "type": "related game",
+        "distractor": "baccarat"
+      },
+      {
+        "type": "broader category",
+        "distractor": "gambling"
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "word": "chicago",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 3602,
+    "difficulty_score": 0,
+    "short_definition": "A form of gin rummy with specific scoring rules.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a gin rummy variant",
+      "a specific scoring game"
+    ],
+    "distractors": [
+      {
+        "type": "related term",
+        "distractor": "gin"
+      },
+      {
+        "type": "related term",
+        "distractor": "manhattan"
+      },
+      {
+        "type": "related game",
+        "distractor": "pinochle"
+      },
+      {
+        "type": "related game",
+        "distractor": "blackjack"
+      },
+      {
+        "type": "broader category",
+        "distractor": "cardgame"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "word": "canasta",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 3635,
+    "difficulty_score": 0.419258535356266,
+    "short_definition": "A card game using two decks and melding combinations.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a two-deck card game",
+      "a melding combination game"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "casino"
+      },
+      {
+        "type": "similar word",
+        "distractor": "contessa"
+      },
+      {
+        "type": "related game",
+        "distractor": "pinochle"
+      },
+      {
+        "type": "related game",
+        "distractor": "rummy"
+      },
+      {
+        "type": "related game",
+        "distractor": "patience"
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "word": "bridge",
+    "pos": "noun",
+    "sense_count": 12,
+    "source_word_id": 3580,
+    "difficulty_score": 0,
+    "short_definition": "A trick-taking card game played by two teams of two.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a trick-taking partnership",
+      "a card game auction"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "barge"
+      },
+      {
+        "type": "related structure",
+        "distractor": "arch"
+      },
+      {
+        "type": "related structure",
+        "distractor": "tunnel"
+      },
+      {
+        "type": "related structure",
+        "distractor": "drawbridge"
+      },
+      {
+        "type": "related structure",
+        "distractor": "overpass"
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "word": "michigan",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 3601,
+    "difficulty_score": 0,
+    "short_definition": "A poker game where specific hands win the pot.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a poker pot winner",
+      "a specific hand payout"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "misdeal"
+      },
+      {
+        "type": "related game",
+        "distractor": "poker"
+      },
+      {
+        "type": "related term",
+        "distractor": "texas"
+      },
+      {
+        "type": "related game",
+        "distractor": "omaha"
+      },
+      {
+        "type": "related game",
+        "distractor": "blackjack"
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "word": "rum",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 3619,
+    "difficulty_score": 0,
+    "short_definition": "An alcoholic liquor distilled from sugarcane byproducts.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a pirate's favorite drink",
+      "a sugarcane spirit liquor"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "gum"
+      },
+      {
+        "type": "related drink",
+        "distractor": "vodka"
+      },
+      {
+        "type": "related drink",
+        "distractor": "whiskey"
+      },
+      {
+        "type": "different domain",
+        "distractor": "juice"
+      },
+      {
+        "type": "related drink",
+        "distractor": "beer"
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "word": "klondike",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 3623,
+    "difficulty_score": 0.457336629919231,
+    "short_definition": "A solitaire card game also known as patience.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a patience card layout",
+      "a solitaire game version"
+    ],
+    "distractors": [
+      {
+        "type": "related term",
+        "distractor": "goldmine"
+      },
+      {
+        "type": "related game",
+        "distractor": "solitaire"
+      },
+      {
+        "type": "different game",
+        "distractor": "monopoly"
+      },
+      {
+        "type": "related game",
+        "distractor": "cribbage"
+      },
+      {
+        "type": "related game",
+        "distractor": "blackjack"
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "word": "hearts",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 3628,
+    "difficulty_score": 0,
+    "short_definition": "A trick-taking card game where the goal is to avoid points.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a avoid-points card game",
+      "a trick-taking queen penalty"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "darts"
+      },
+      {
+        "type": "related term",
+        "distractor": "clubs"
+      },
+      {
+        "type": "related term",
+        "distractor": "spades"
+      },
+      {
+        "type": "related term",
+        "distractor": "diamonds"
+      },
+      {
+        "type": "related term",
+        "distractor": "joker"
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "word": "samba",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 3639,
+    "difficulty_score": 0.340577114545335,
+    "short_definition": "A Brazilian dance and musical genre with African roots.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a Brazilian carnival dance",
+      "an African-rooted music"
+    ],
+    "distractors": [
+      {
+        "type": "related dance",
+        "distractor": "tango"
+      },
+      {
+        "type": "related dance",
+        "distractor": "salsa"
+      },
+      {
+        "type": "different dance",
+        "distractor": "ballet"
+      },
+      {
+        "type": "related dance",
+        "distractor": "rumba"
+      },
+      {
+        "type": "broader category",
+        "distractor": "music"
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "word": "stud",
+    "pos": "noun",
+    "sense_count": 7,
+    "source_word_id": 3646,
+    "difficulty_score": 0,
+    "short_definition": "A poker variant where some cards are dealt face-up.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a poker face-up variant",
+      "a partially visible hand"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "dud"
+      },
+      {
+        "type": "related term",
+        "distractor": "stake"
+      },
+      {
+        "type": "related term",
+        "distractor": "flop"
+      },
+      {
+        "type": "related term",
+        "distractor": "draw"
+      },
+      {
+        "type": "related term",
+        "distractor": "bluff"
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "word": "nim",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 3659,
+    "difficulty_score": 0.463166988178248,
+    "short_definition": "A mathematical game of strategy involving removing objects.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a mathematical object removal",
+      "a strategic game theory"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "swim"
+      },
+      {
+        "type": "broader category",
+        "distractor": "game"
+      },
+      {
+        "type": "related term",
+        "distractor": "math"
+      },
+      {
+        "type": "related term",
+        "distractor": "algebra"
+      },
+      {
+        "type": "related term",
+        "distractor": "calculus"
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "word": "ticktacktoe",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 3705,
+    "difficulty_score": 0.608721511683792,
+    "short_definition": "A game where players alternate marking spaces to get three-in-a-row.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a three-in-a-row game",
+      "a noughts and crosses"
+    ],
+    "distractors": [
+      {
+        "type": "related game",
+        "distractor": "hopscotch"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "tic"
+      },
+      {
+        "type": "related game",
+        "distractor": "hangman"
+      },
+      {
+        "type": "related game",
+        "distractor": "chess"
+      },
+      {
+        "type": "related game",
+        "distractor": "dominoes"
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "word": "craps",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 3731,
+    "difficulty_score": 0,
+    "short_definition": "A dice game where players bet on the outcome of rolls.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a casino dice table",
+      "a pass line wager"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "caps"
+      },
+      {
+        "type": "related object",
+        "distractor": "dice"
+      },
+      {
+        "type": "related game",
+        "distractor": "poker"
+      },
+      {
+        "type": "related game",
+        "distractor": "roulette"
+      },
+      {
+        "type": "related game",
+        "distractor": "blackjack"
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "word": "cannon",
+    "pos": "noun",
+    "sense_count": 8,
+    "source_word_id": 3662,
+    "difficulty_score": 0,
+    "short_definition": "A large-caliber gun, typically mounted on a carriage.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a naval warship weapon",
+      "a siege artillery piece"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "canon"
+      },
+      {
+        "type": "related object",
+        "distractor": "bullet"
+      },
+      {
+        "type": "related object",
+        "distractor": "mortar"
+      },
+      {
+        "type": "related object",
+        "distractor": "rifle"
+      },
+      {
+        "type": "broader category",
+        "distractor": "weapon"
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "word": "pool",
+    "pos": "noun",
+    "sense_count": 11,
+    "source_word_id": 3665,
+    "difficulty_score": 0,
+    "short_definition": "A cue sport played on a table with pockets.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "an eight-ball table game",
+      "a cue stick sport"
+    ],
+    "distractors": [
+      {
+        "type": "related term",
+        "distractor": "puddle"
+      },
+      {
+        "type": "related game",
+        "distractor": "snooker"
+      },
+      {
+        "type": "related game",
+        "distractor": "billiards"
+      },
+      {
+        "type": "related term",
+        "distractor": "pond"
+      },
+      {
+        "type": "related activity",
+        "distractor": "swim"
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "word": "checkers",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 3677,
+    "difficulty_score": 0,
+    "short_definition": "A board game played with pieces moved diagonally.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a diagonal jump game",
+      "a draughts board pastime"
+    ],
+    "distractors": [
+      {
+        "type": "related game",
+        "distractor": "chess"
+      },
+      {
+        "type": "synonym",
+        "distractor": "draughts"
+      },
+      {
+        "type": "related term",
+        "distractor": "check"
+      },
+      {
+        "type": "related term",
+        "distractor": "checker"
+      },
+      {
+        "type": "related object",
+        "distractor": "tiles"
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "word": "chess",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 3679,
+    "difficulty_score": 0,
+    "short_definition": "A two-player strategy board game with different piece types.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a strategic king capture",
+      "a pawn's battlefield advance"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "checks"
+      },
+      {
+        "type": "related game",
+        "distractor": "checkers"
+      },
+      {
+        "type": "related term",
+        "distractor": "checkmate"
+      },
+      {
+        "type": "different game",
+        "distractor": "poker"
+      },
+      {
+        "type": "related term",
+        "distractor": "check"
+      }
+    ]
+  },
+  {
+    "id": 31,
+    "word": "roulette",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 3735,
+    "difficulty_score": 0.278800042162426,
+    "short_definition": "A casino game involving a spinning wheel and ball.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a spinning casino wheel",
+      "a numbered pocket gamble"
+    ],
+    "distractors": [
+      {
+        "type": "related object",
+        "distractor": "roulette wheel"
+      },
+      {
+        "type": "related activity",
+        "distractor": "lottery"
+      },
+      {
+        "type": "related game",
+        "distractor": "bingo"
+      },
+      {
+        "type": "related game",
+        "distractor": "craps"
+      },
+      {
+        "type": "related location",
+        "distractor": "casino"
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "word": "rag",
+    "pos": "noun",
+    "sense_count": 11,
+    "source_word_id": 3797,
+    "difficulty_score": 0,
+    "short_definition": "A piece of old cloth used for cleaning.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a greasy garage cloth",
+      "a dusting cleaning piece"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "tag"
+      },
+      {
+        "type": "related term",
+        "distractor": "cloth"
+      },
+      {
+        "type": "related term",
+        "distractor": "fabric"
+      },
+      {
+        "type": "related object",
+        "distractor": "carpet"
+      },
+      {
+        "type": "related object",
+        "distractor": "mop"
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "word": "festival",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 3819,
+    "difficulty_score": 0,
+    "short_definition": "A period of celebration, typically religious or cultural.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a harvest season celebration",
+      "a cultural music event"
+    ],
+    "distractors": [
+      {
+        "type": "related term",
+        "distractor": "carnival"
+      },
+      {
+        "type": "related term",
+        "distractor": "ceremony"
+      },
+      {
+        "type": "related event",
+        "distractor": "parade"
+      },
+      {
+        "type": "related term",
+        "distractor": "celebration"
+      },
+      {
+        "type": "related term",
+        "distractor": "festivity"
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "word": "demonstration",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 3857,
+    "difficulty_score": 0.123881730121062,
+    "short_definition": "A public display of group feelings toward a cause.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a protest march display",
+      "a product showcase event"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "demolition"
+      },
+      {
+        "type": "related term",
+        "distractor": "protest"
+      },
+      {
+        "type": "related term",
+        "distractor": "exhibition"
+      },
+      {
+        "type": "related term",
+        "distractor": "presentation"
+      },
+      {
+        "type": "related term",
+        "distractor": "riot"
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "word": "fair",
+    "pos": "noun",
+    "sense_count": 17,
+    "source_word_id": 3833,
+    "difficulty_score": 0,
+    "short_definition": "A gathering for entertainment, trade, or competition.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a summer county competition",
+      "a traveling carnival show"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "fare"
+      },
+      {
+        "type": "related event",
+        "distractor": "carnival"
+      },
+      {
+        "type": "related event",
+        "distractor": "market"
+      },
+      {
+        "type": "related event",
+        "distractor": "festival"
+      },
+      {
+        "type": "opposite",
+        "distractor": "unfair"
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "word": "show",
+    "pos": "noun",
+    "sense_count": 16,
+    "source_word_id": 3842,
+    "difficulty_score": 0,
+    "short_definition": "A public performance or exhibition for entertainment.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a Broadway stage performance",
+      "a television program broadcast"
+    ],
+    "distractors": [
+      {
+        "type": "related term",
+        "distractor": "showcase"
+      },
+      {
+        "type": "related event",
+        "distractor": "movie"
+      },
+      {
+        "type": "related event",
+        "distractor": "performance"
+      },
+      {
+        "type": "related event",
+        "distractor": "concert"
+      },
+      {
+        "type": "related term",
+        "distractor": "spectacle"
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "word": "production",
+    "pos": "noun",
+    "sense_count": 8,
+    "source_word_id": 3861,
+    "difficulty_score": 0,
+    "short_definition": "The process of creating or manufacturing goods or services.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "an assembly line output",
+      "a theatrical stage run"
+    ],
+    "distractors": [
+      {
+        "type": "related term",
+        "distractor": "product"
+      },
+      {
+        "type": "opposite",
+        "distractor": "destruction"
+      },
+      {
+        "type": "related term",
+        "distractor": "creation"
+      },
+      {
+        "type": "related term",
+        "distractor": "process"
+      },
+      {
+        "type": "related term",
+        "distractor": "industry"
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "word": "strip",
+    "pos": "noun",
+    "sense_count": 19,
+    "source_word_id": 3916,
+    "difficulty_score": 0,
+    "short_definition": "A long, narrow piece of something.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a bacon breakfast slice",
+      "a road dividing median"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "stripe"
+      },
+      {
+        "type": "related term",
+        "distractor": "band"
+      },
+      {
+        "type": "related term",
+        "distractor": "ribbon"
+      },
+      {
+        "type": "related term",
+        "distractor": "line"
+      },
+      {
+        "type": "related object",
+        "distractor": "clothe"
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "word": "charleston",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 3955,
+    "difficulty_score": 0.0348678869511567,
+    "short_definition": "A lively dance from the 1920s with swinging arms.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a 1920s flapper dance",
+      "a lively swinging step"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "charlatan"
+      },
+      {
+        "type": "related dance",
+        "distractor": "waltz"
+      },
+      {
+        "type": "related dance",
+        "distractor": "tango"
+      },
+      {
+        "type": "broader category",
+        "distractor": "dance"
+      },
+      {
+        "type": "broader category",
+        "distractor": "music"
+      }
+    ]
+  },
+  {
+    "id": 40,
+    "word": "waltz",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 3967,
+    "difficulty_score": 0,
+    "short_definition": "A dance in triple time, typically performed by couples.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:35:30.571Z",
+    "owad_phrase": [
+      "a ballroom couple dance",
+      "a triple-time romantic spin"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "walt"
+      },
+      {
+        "type": "broader category",
+        "distractor": "dance"
+      },
+      {
+        "type": "related dance",
+        "distractor": "tango"
+      },
+      {
+        "type": "related dance",
+        "distractor": "foxtrot"
+      },
+      {
+        "type": "broader category",
+        "distractor": "music"
+      }
+    ]
+  }
+]

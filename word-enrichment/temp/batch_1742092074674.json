@@ -1,0 +1,1482 @@
+[
+  {
+    "id": 401,
+    "word": "contracting",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 455,
+    "difficulty_score": 0,
+    "short_definition": "The act of shrinking or becoming reduced in size or volume.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "a shrinking muscle fiber",
+      "a binding legal document"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "convicting"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "expanding"
+      },
+      {
+        "type": "different domain",
+        "distractor": "conveying"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "canceling"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "contacting"
+      }
+    ]
+  },
+  {
+    "id": 402,
+    "word": "incurring",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 456,
+    "difficulty_score": 0.244317421688022,
+    "short_definition": "The act of becoming subject to or bringing upon oneself.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "accumulating late fees",
+      "acquiring unexpected costs"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "insuring"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "deterring"
+      },
+      {
+        "type": "related domain",
+        "distractor": "acquiring"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "avoiding"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "interring"
+      }
+    ]
+  },
+  {
+    "id": 403,
+    "word": "moneymaking",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 457,
+    "difficulty_score": 0.311830238187786,
+    "short_definition": "The activity of generating profit or financial gain.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "generating substantial revenue",
+      "creating profitable ventures"
+    ],
+    "distractors": [
+      {
+        "type": "related domain",
+        "distractor": "laundering"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "spending"
+      },
+      {
+        "type": "related domain",
+        "distractor": "budgeting"
+      },
+      {
+        "type": "different domain",
+        "distractor": "donating"
+      },
+      {
+        "type": "related domain",
+        "distractor": "accounting"
+      }
+    ]
+  },
+  {
+    "id": 404,
+    "word": "fetch",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 116,
+    "difficulty_score": 0,
+    "short_definition": "The act of retrieving something and bringing it back.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "a dog's playful return",
+      "an errand's quick completion"
+    ],
+    "distractors": [
+      {
+        "type": "related domain",
+        "distractor": "catch"
+      },
+      {
+        "type": "related domain",
+        "distractor": "catch"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "reach"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "detach"
+      },
+      {
+        "type": "different domain",
+        "distractor": "bestow"
+      }
+    ]
+  },
+  {
+    "id": 405,
+    "word": "catching",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 454,
+    "difficulty_score": 0,
+    "short_definition": "The act of intercepting and holding a moving object.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "intercepting the baseball",
+      "acquiring contagious illness"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "releasing"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "etching"
+      },
+      {
+        "type": "different domain",
+        "distractor": "coaching"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "etching"
+      },
+      {
+        "type": "related domain",
+        "distractor": "fetching"
+      }
+    ]
+  },
+  {
+    "id": 406,
+    "word": "annexation",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 458,
+    "difficulty_score": 0.433936930878288,
+    "short_definition": "The act of incorporating territory into an existing political entity.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "absorbing neighboring territory",
+      "incorporating adjacent land"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "alienation"
+      },
+      {
+        "type": "related domain",
+        "distractor": "accession"
+      },
+      {
+        "type": "different domain",
+        "distractor": "amputation"
+      },
+      {
+        "type": "related domain",
+        "distractor": "repatriation"
+      },
+      {
+        "type": "different domain",
+        "distractor": "adjudication"
+      }
+    ]
+  },
+  {
+    "id": 407,
+    "word": "straddle",
+    "pos": "noun",
+    "sense_count": 7,
+    "source_word_id": 478,
+    "difficulty_score": 0.0311207140271152,
+    "short_definition": "A position with one leg on either side of something.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "a motorcycle seat position",
+      "a fence-sitting stance"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "saddle"
+      },
+      {
+        "type": "related action",
+        "distractor": "stride"
+      },
+      {
+        "type": "different action",
+        "distractor": "stroll"
+      },
+      {
+        "type": "different domain",
+        "distractor": "assemble"
+      },
+      {
+        "type": "related action",
+        "distractor": "squat"
+      }
+    ]
+  },
+  {
+    "id": 408,
+    "word": "put",
+    "pos": "noun",
+    "sense_count": 10,
+    "source_word_id": 477,
+    "difficulty_score": 0,
+    "short_definition": "The action of moving something to a specified place.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "a gentle placement down",
+      "a forceful shove ahead"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "get"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "keep"
+      },
+      {
+        "type": "related action",
+        "distractor": "pull"
+      },
+      {
+        "type": "opposite action",
+        "distractor": "stay"
+      },
+      {
+        "type": "opposite action",
+        "distractor": "push"
+      }
+    ]
+  },
+  {
+    "id": 409,
+    "word": "buying",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 481,
+    "difficulty_score": 0,
+    "short_definition": "The act of acquiring ownership of something by payment.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "purchasing groceries weekly",
+      "acquiring company shares"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "selling"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "lying"
+      },
+      {
+        "type": "related action",
+        "distractor": "renting"
+      },
+      {
+        "type": "related action",
+        "distractor": "borrowing"
+      },
+      {
+        "type": "different domain",
+        "distractor": "searching"
+      }
+    ]
+  },
+  {
+    "id": 410,
+    "word": "purchasing",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 482,
+    "difficulty_score": 0,
+    "short_definition": "The act of obtaining goods or services by payment.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "ordering office supplies",
+      "acquiring retail goods"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "selling"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "rehearsing"
+      },
+      {
+        "type": "related action",
+        "distractor": "leasing"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "selling"
+      },
+      {
+        "type": "related action",
+        "distractor": "renting"
+      }
+    ]
+  },
+  {
+    "id": 411,
+    "word": "shopping",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 483,
+    "difficulty_score": 0,
+    "short_definition": "The activity of visiting stores to look at or buy goods.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "browsing department stores",
+      "visiting local boutiques"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "stopping"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "selling"
+      },
+      {
+        "type": "different domain",
+        "distractor": "stealing"
+      },
+      {
+        "type": "related activity",
+        "distractor": "window-shopping"
+      },
+      {
+        "type": "related activity",
+        "distractor": "trading"
+      }
+    ]
+  },
+  {
+    "id": 412,
+    "word": "marketing",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 484,
+    "difficulty_score": 0,
+    "short_definition": "The process of promoting and selling products or services.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "promoting product features",
+      "advertising service benefits"
+    ],
+    "distractors": [
+      {
+        "type": "related process",
+        "distractor": "remarketing"
+      },
+      {
+        "type": "related activity",
+        "distractor": "bartering"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "hiding"
+      },
+      {
+        "type": "related activity",
+        "distractor": "purchasing"
+      },
+      {
+        "type": "related activity",
+        "distractor": "manufacturing"
+      }
+    ]
+  },
+  {
+    "id": 413,
+    "word": "succession",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 490,
+    "difficulty_score": 0,
+    "short_definition": "The order or process of inheriting a title or office.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "inheriting royal titles",
+      "following presidential terms"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "suppression"
+      },
+      {
+        "type": "related concept",
+        "distractor": "precession"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "rebellion"
+      },
+      {
+        "type": "different domain",
+        "distractor": "creation"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "concurrency"
+      }
+    ]
+  },
+  {
+    "id": 414,
+    "word": "adoption",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 502,
+    "difficulty_score": 0,
+    "short_definition": "The legal process of becoming the parent of another's child.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "legally embracing parenthood",
+      "formally welcoming children"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "adaption"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "abandonment"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "adaption"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "rejection"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "adaption"
+      }
+    ]
+  },
+  {
+    "id": 415,
+    "word": "heritage",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 496,
+    "difficulty_score": 0,
+    "short_definition": "Property or traditions inherited from ancestors; cultural legacy.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "cherishing ancestral traditions",
+      "preserving cultural legacies"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "heresy"
+      },
+      {
+        "type": "related concept",
+        "distractor": "inheritance"
+      },
+      {
+        "type": "related concept",
+        "distractor": "inheritance"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "future"
+      },
+      {
+        "type": "related concept",
+        "distractor": "inheritance"
+      }
+    ]
+  },
+  {
+    "id": 416,
+    "word": "procurement",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 497,
+    "difficulty_score": 0.522698066885636,
+    "short_definition": "The act of obtaining goods or services, especially for business.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "acquiring government contracts",
+      "obtaining essential resources"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "procrastination"
+      },
+      {
+        "type": "opposite action",
+        "distractor": "prohibition"
+      },
+      {
+        "type": "different domain",
+        "distractor": "propinquity"
+      },
+      {
+        "type": "related activity",
+        "distractor": "disbursement"
+      },
+      {
+        "type": "related activity",
+        "distractor": "production"
+      }
+    ]
+  },
+  {
+    "id": 417,
+    "word": "felony",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 5658,
+    "difficulty_score": 0,
+    "short_definition": "A serious crime punishable by imprisonment for more than one year.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "a serious criminal offense",
+      "a punishable severe crime"
+    ],
+    "distractors": [
+      {
+        "type": "opposite severity",
+        "distractor": "misdemeanor"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "falsity"
+      },
+      {
+        "type": "different domain",
+        "distractor": "harmony"
+      },
+      {
+        "type": "opposite consequence",
+        "distractor": "leniency"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "melody"
+      }
+    ]
+  },
+  {
+    "id": 418,
+    "word": "inheritance",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 495,
+    "difficulty_score": 0.222720209601564,
+    "short_definition": "Property or money legally received from a deceased person.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "receiving bequeathed property",
+      "inheriting family wealth"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "inherence"
+      },
+      {
+        "type": "related concept",
+        "distractor": "bequest"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "forfeiture"
+      },
+      {
+        "type": "related concept",
+        "distractor": "donation"
+      },
+      {
+        "type": "related concept",
+        "distractor": "endowment"
+      }
+    ]
+  },
+  {
+    "id": 419,
+    "word": "procurance",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 498,
+    "difficulty_score": 0.646072113358196,
+    "short_definition": "The action of obtaining something, especially with effort.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "obtaining rare artifacts",
+      "acquiring crucial evidence"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "protuberance"
+      },
+      {
+        "type": "different domain",
+        "distractor": "prevarication"
+      },
+      {
+        "type": "opposite action",
+        "distractor": "prohibition"
+      },
+      {
+        "type": "opposite action",
+        "distractor": "forfeiture"
+      },
+      {
+        "type": "different domain",
+        "distractor": "propinquity"
+      }
+    ]
+  },
+  {
+    "id": 420,
+    "word": "procural",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 499,
+    "difficulty_score": 0.673946608666204,
+    "short_definition": "The action of obtaining something, especially with effort.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "finding necessary supplies",
+      "getting required approvals"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "prosecutorial"
+      },
+      {
+        "type": "different domain",
+        "distractor": "prevarication"
+      },
+      {
+        "type": "opposite action",
+        "distractor": "prohibition"
+      },
+      {
+        "type": "opposite action",
+        "distractor": "forfeiture"
+      },
+      {
+        "type": "different domain",
+        "distractor": "propinquity"
+      }
+    ]
+  },
+  {
+    "id": 421,
+    "word": "appropriation",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 500,
+    "difficulty_score": 0.310122623213318,
+    "short_definition": "The act of taking something for one's own use, typically without permission.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "using public funds",
+      "taking intellectual property"
+    ],
+    "distractors": [
+      {
+        "type": "related activity",
+        "distractor": "apportionment"
+      },
+      {
+        "type": "related activity",
+        "distractor": "disbursement"
+      },
+      {
+        "type": "related activity",
+        "distractor": "allocation"
+      },
+      {
+        "type": "opposite action",
+        "distractor": "deprivation"
+      },
+      {
+        "type": "related activity",
+        "distractor": "expropriation"
+      }
+    ]
+  },
+  {
+    "id": 422,
+    "word": "borrowing",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 501,
+    "difficulty_score": 0,
+    "short_definition": "The act of taking something with the intention of returning it.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "renting library books",
+      "taking temporary loans"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "lending"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "burrowing"
+      },
+      {
+        "type": "different domain",
+        "distractor": "stealing"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "finding"
+      },
+      {
+        "type": "related activity",
+        "distractor": "earning"
+      }
+    ]
+  },
+  {
+    "id": 423,
+    "word": "naturalization",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 503,
+    "difficulty_score": 0.271888571423283,
+    "short_definition": "The process of granting citizenship to a foreign national.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "gaining citizenship rights",
+      "becoming legalized resident"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "denaturalization"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "nationalisation"
+      },
+      {
+        "type": "related concept",
+        "distractor": "nationalization"
+      },
+      {
+        "type": "related concept",
+        "distractor": "immigration"
+      },
+      {
+        "type": "related concept",
+        "distractor": "emigration"
+      }
+    ]
+  },
+  {
+    "id": 424,
+    "word": "naturalisation",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 504,
+    "difficulty_score": 0.538482930388974,
+    "short_definition": "The process of granting citizenship to a foreign national.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "gaining citizenship rights",
+      "becoming legalized resident"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "denationalisation"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "naturalization"
+      },
+      {
+        "type": "related concept",
+        "distractor": "nationalisation"
+      },
+      {
+        "type": "related concept",
+        "distractor": "immigration"
+      },
+      {
+        "type": "related concept",
+        "distractor": "emigration"
+      }
+    ]
+  },
+  {
+    "id": 425,
+    "word": "misappropriation",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 505,
+    "difficulty_score": 0.322905633928215,
+    "short_definition": "The act of dishonestly taking something for one's own use.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "embezzling company funds",
+      "diverting charitable donations"
+    ],
+    "distractors": [
+      {
+        "type": "related activity",
+        "distractor": "misapplication"
+      },
+      {
+        "type": "opposite action",
+        "distractor": "restitution"
+      },
+      {
+        "type": "related activity",
+        "distractor": "allocation"
+      },
+      {
+        "type": "related activity",
+        "distractor": "embezzlement"
+      },
+      {
+        "type": "related activity",
+        "distractor": "attribution"
+      }
+    ]
+  },
+  {
+    "id": 426,
+    "word": "seizure",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 508,
+    "difficulty_score": 0,
+    "short_definition": "The act of taking possession of something forcibly or legally.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "confiscating illegal goods",
+      "impounding vehicles forcefully"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "release"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "seasoning"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "sleezer"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "appeasement"
+      },
+      {
+        "type": "different domain",
+        "distractor": "renaissance"
+      }
+    ]
+  },
+  {
+    "id": 427,
+    "word": "usurpation",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 509,
+    "difficulty_score": 0.660701567746154,
+    "short_definition": "The act of wrongfully seizing power or authority.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "overthrowing existing regime",
+      "seizing monarch's authority"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "abdication"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "usurpation"
+      },
+      {
+        "type": "related concept",
+        "distractor": "usury"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "legitimation"
+      },
+      {
+        "type": "related concept",
+        "distractor": "usury"
+      }
+    ]
+  },
+  {
+    "id": 428,
+    "word": "requisition",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 529,
+    "difficulty_score": 0.341853332829253,
+    "short_definition": "An official order laying claim to use of property or materials.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "ordering military supplies",
+      "claiming emergency resources"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "revocation"
+      },
+      {
+        "type": "related concept",
+        "distractor": "acquisition"
+      },
+      {
+        "type": "related concept",
+        "distractor": "acquisition"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "inquisition"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "submission"
+      }
+    ]
+  },
+  {
+    "id": 429,
+    "word": "distress",
+    "pos": "noun",
+    "sense_count": 6,
+    "source_word_id": 512,
+    "difficulty_score": 0,
+    "short_definition": "Extreme anxiety, sorrow, or pain; acute suffering.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "experiencing acute suffering",
+      "feeling extreme anxiety"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "de-stress"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "bliss"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "happiness"
+      },
+      {
+        "type": "related concept",
+        "distractor": "duress"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "distrust"
+      }
+    ]
+  },
+  {
+    "id": 430,
+    "word": "distraint",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 513,
+    "difficulty_score": 0.649116402122699,
+    "short_definition": "The seizure of someone's property to satisfy a debt.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "seizing delinquent assets",
+      "confiscating unpaid property"
+    ],
+    "distractors": [
+      {
+        "type": "related concept",
+        "distractor": "restraint"
+      },
+      {
+        "type": "different domain",
+        "distractor": "disrepair"
+      },
+      {
+        "type": "related activity",
+        "distractor": "disbursement"
+      },
+      {
+        "type": "opposite action",
+        "distractor": "restitution"
+      },
+      {
+        "type": "related concept",
+        "distractor": "discomfort"
+      }
+    ]
+  },
+  {
+    "id": 431,
+    "word": "occupation",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 523,
+    "difficulty_score": 0.0427311796083467,
+    "short_definition": "The act of taking control of a place by military force.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "controlling invaded territory",
+      "taking military possession"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "evacuation"
+      },
+      {
+        "type": "different domain",
+        "distractor": "vacation"
+      },
+      {
+        "type": "related concept",
+        "distractor": "occupancy"
+      },
+      {
+        "type": "related concept",
+        "distractor": "preoccupation"
+      },
+      {
+        "type": "different domain",
+        "distractor": "profession"
+      }
+    ]
+  },
+  {
+    "id": 432,
+    "word": "occupancy",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 524,
+    "difficulty_score": 0,
+    "short_definition": "The state of residing in or using a building or place.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "residing leased apartment",
+      "using rented space"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "vacancy"
+      },
+      {
+        "type": "related concept",
+        "distractor": "occupational"
+      },
+      {
+        "type": "related concept",
+        "distractor": "occupancy"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "eviction"
+      },
+      {
+        "type": "different domain",
+        "distractor": "property"
+      }
+    ]
+  },
+  {
+    "id": 433,
+    "word": "sequestration",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 528,
+    "difficulty_score": 0.613602182887008,
+    "short_definition": "The act of taking legal possession of assets until a debt is paid.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "impounding disputed assets",
+      "freezing contested funds"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "desecration"
+      },
+      {
+        "type": "related concept",
+        "distractor": "separation"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "desecration"
+      },
+      {
+        "type": "opposite action",
+        "distractor": "restitution"
+      },
+      {
+        "type": "related concept",
+        "distractor": "assimilation"
+      }
+    ]
+  },
+  {
+    "id": 434,
+    "word": "arrest",
+    "pos": "noun",
+    "sense_count": 6,
+    "source_word_id": 541,
+    "difficulty_score": 0,
+    "short_definition": "The act of legally detaining someone for suspected criminal activity.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "detaining suspected criminal",
+      "apprehending law violator"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "release"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "rest"
+      },
+      {
+        "type": "different domain",
+        "distractor": "arson"
+      },
+      {
+        "type": "related concept",
+        "distractor": "harassment"
+      },
+      {
+        "type": "related concept",
+        "distractor": "attempt"
+      }
+    ]
+  },
+  {
+    "id": 435,
+    "word": "attainment",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 182,
+    "difficulty_score": 0.140536227581823,
+    "short_definition": "The action or fact of achieving a goal or objective.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "achieving career goals",
+      "earning academic degrees"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "abandonment"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "entrainment"
+      },
+      {
+        "type": "related concept",
+        "distractor": "detainment"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "failure"
+      },
+      {
+        "type": "different domain",
+        "distractor": "entertainment"
+      }
+    ]
+  },
+  {
+    "id": 436,
+    "word": "award",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 533,
+    "difficulty_score": 0,
+    "short_definition": "Something given as recognition of merit or achievement.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "receiving academic honors",
+      "winning athletic prizes"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "penalty"
+      },
+      {
+        "type": "related concept",
+        "distractor": "reward"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "awol"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "detract"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "punishment"
+      }
+    ]
+  },
+  {
+    "id": 437,
+    "word": "awarding",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 534,
+    "difficulty_score": 0.0167987020415759,
+    "short_definition": "The act of formally giving something as a prize or honor.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "presenting service medals",
+      "giving employee recognition"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "penalizing"
+      },
+      {
+        "type": "related concept",
+        "distractor": "warding"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "arriving"
+      },
+      {
+        "type": "related concept",
+        "distractor": "rewarding"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "fining"
+      }
+    ]
+  },
+  {
+    "id": 438,
+    "word": "addiction",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 535,
+    "difficulty_score": 0,
+    "short_definition": "Compulsive engagement in a habit despite harmful consequences.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "compulsive substance abuse",
+      "uncontrollable gaming habit"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "abstinence"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "affection"
+      },
+      {
+        "type": "related concept",
+        "distractor": "affliction"
+      },
+      {
+        "type": "different domain",
+        "distractor": "conviction"
+      },
+      {
+        "type": "related concept",
+        "distractor": "affliction"
+      }
+    ]
+  },
+  {
+    "id": 439,
+    "word": "apprehension",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 540,
+    "difficulty_score": 0.2005341387992,
+    "short_definition": "Anxiety or fear that something bad or unpleasant will happen.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "fearing upcoming surgery",
+      "anticipating negative outcome"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "comprehension"
+      },
+      {
+        "type": "related concept",
+        "distractor": "repression"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "relaxation"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "certainty"
+      },
+      {
+        "type": "related concept",
+        "distractor": "perception"
+      }
+    ]
+  },
+  {
+    "id": 440,
+    "word": "catch",
+    "pos": "noun",
+    "sense_count": 39,
+    "source_word_id": 542,
+    "difficulty_score": 0,
+    "short_definition": "The act of intercepting and holding a moving object.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:27:33.371Z",
+    "owad_phrase": [
+      "a skillful baseball grab",
+      "an unexpected fish haul"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "release"
+      },
+      {
+        "type": "related action",
+        "distractor": "fetch"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "latch"
+      },
+      {
+        "type": "different domain",
+        "distractor": "match"
+      },
+      {
+        "type": "different action",
+        "distractor": "scratch"
+      }
+    ]
+  }
+]

@@ -1,0 +1,70 @@
+[
+  {
+    "id": 38883,
+    "word": "new",
+    "pos": "adjective satellite",
+    "shortDefinition": "Not old; recently made, born, or started.",
+    "definition_updated_at": "2025-03-15T21:50:27.292Z",
+    "definition_source": "gemini",
+    "owad_phrase": [
+      "freshly made",
+      "newly bought"
+    ],
+    "distractors": [
+      {
+        "type": "semantic",
+        "distractor": "recent"
+      },
+      {
+        "type": "semantic",
+        "distractor": "old"
+      },
+      {
+        "type": "phonological",
+        "distractor": "shiny"
+      },
+      {
+        "type": "semantic",
+        "distractor": "novel"
+      },
+      {
+        "type": "semantic",
+        "distractor": "modern"
+      }
+    ]
+  },
+  {
+    "id": 2922,
+    "word": "out",
+    "pos": "noun",
+    "shortDefinition": "The state of not being at home.",
+    "definition_updated_at": "2025-03-15T21:50:27.292Z",
+    "definition_source": "gemini",
+    "owad_phrase": [
+      "an easy exit",
+      "a simple escape"
+    ],
+    "distractors": [
+      {
+        "type": "semantic",
+        "distractor": "in"
+      },
+      {
+        "type": "semantic",
+        "distractor": "exit"
+      },
+      {
+        "type": "semantic",
+        "distractor": "outside"
+      },
+      {
+        "type": "semantic",
+        "distractor": "away"
+      },
+      {
+        "type": "phonological",
+        "distractor": "route"
+      }
+    ]
+  }
+]

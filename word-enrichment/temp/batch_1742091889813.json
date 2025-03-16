@@ -1,0 +1,1482 @@
+[
+  {
+    "id": 161,
+    "word": "wrong",
+    "pos": "noun",
+    "sense_count": 13,
+    "source_word_id": 5469,
+    "difficulty_score": 0,
+    "short_definition": "An unjust, dishonest, or immoral action; a violation of right.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "a moral transgression",
+      "an ethical violation"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "right"
+      },
+      {
+        "type": "similar consequence",
+        "distractor": "harm"
+      },
+      {
+        "type": "related concept",
+        "distractor": "falsehood"
+      },
+      {
+        "type": "religious connotation",
+        "distractor": "sin"
+      },
+      {
+        "type": "common misuse",
+        "distractor": "mistake"
+      }
+    ]
+  },
+  {
+    "id": 162,
+    "word": "blasphemy",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5489,
+    "difficulty_score": 0.142280110149444,
+    "short_definition": "The act of insulting or showing contempt for God or sacred things.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "sacrilegious spoken words",
+      "desecrating holy symbols"
+    ],
+    "distractors": [
+      {
+        "type": "related religious term",
+        "distractor": "heresy"
+      },
+      {
+        "type": "opposite meaning",
+        "distractor": "blessing"
+      },
+      {
+        "type": "similar negative connotation",
+        "distractor": "profanity"
+      },
+      {
+        "type": "similar religious violation",
+        "distractor": "sacrilege"
+      },
+      {
+        "type": "departure from faith",
+        "distractor": "apostasy"
+      }
+    ]
+  },
+  {
+    "id": 163,
+    "word": "dishonesty",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5522,
+    "difficulty_score": 0,
+    "short_definition": "Lack of honesty; the quality of being deceitful or untruthful.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "a fabricated alibi",
+      "a deceptive statement"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "honesty"
+      },
+      {
+        "type": "related betrayal concept",
+        "distractor": "disloyalty"
+      },
+      {
+        "type": "unrelated negligence",
+        "distractor": "carelessness"
+      },
+      {
+        "type": "similar negative behavior",
+        "distractor": "deceit"
+      },
+      {
+        "type": "related lack of faith",
+        "distractor": "mistrust"
+      }
+    ]
+  },
+  {
+    "id": 164,
+    "word": "treason",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 5526,
+    "difficulty_score": 0.062996831646628,
+    "short_definition": "The crime of betraying one's country, especially by attempting to overthrow it.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "betraying state secrets",
+      "aiding enemy forces"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "loyalty"
+      },
+      {
+        "type": "related rebellion act",
+        "distractor": "sedition"
+      },
+      {
+        "type": "phonetically similar",
+        "distractor": "reason"
+      },
+      {
+        "type": "broader category of offense",
+        "distractor": "crime"
+      },
+      {
+        "type": "synonym, but too close",
+        "distractor": "betrayal"
+      }
+    ]
+  },
+  {
+    "id": 165,
+    "word": "falsehood",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5536,
+    "difficulty_score": 0.0457687395350631,
+    "short_definition": "A statement that is not true; a lie.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "a deliberate untruth",
+      "a misleading narrative"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "truth"
+      },
+      {
+        "type": "related logical error",
+        "distractor": "fallacy"
+      },
+      {
+        "type": "irrelevant concept",
+        "distractor": "forgiveness"
+      },
+      {
+        "type": "similar genre",
+        "distractor": "fiction"
+      },
+      {
+        "type": "synonym, but too close",
+        "distractor": "untruth"
+      }
+    ]
+  },
+  {
+    "id": 166,
+    "word": "setup",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 5539,
+    "difficulty_score": 0,
+    "short_definition": "A carefully planned deception to incriminate someone.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "a framed suspect",
+      "a planted evidence"
+    ],
+    "distractors": [
+      {
+        "type": "similar deceptive action",
+        "distractor": "framing"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "setback"
+      },
+      {
+        "type": "opposite outcome",
+        "distractor": "success"
+      },
+      {
+        "type": "similar planning",
+        "distractor": "scheme"
+      },
+      {
+        "type": "neutral meaning of word",
+        "distractor": "arrangement"
+      }
+    ]
+  },
+  {
+    "id": 167,
+    "word": "injury",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 5471,
+    "difficulty_score": 0,
+    "short_definition": "Physical harm or damage to someone's body.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "a fractured bone",
+      "a lacerated wound"
+    ],
+    "distractors": [
+      {
+        "type": "phonologically similar",
+        "distractor": "insult"
+      },
+      {
+        "type": "related health issue",
+        "distractor": "ailment"
+      },
+      {
+        "type": "opposite process",
+        "distractor": "repair"
+      },
+      {
+        "type": "similar severity",
+        "distractor": "trauma"
+      },
+      {
+        "type": "similar negative consequence",
+        "distractor": "damage"
+      }
+    ]
+  },
+  {
+    "id": 168,
+    "word": "iniquity",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5474,
+    "difficulty_score": 0.443898037899602,
+    "short_definition": "Gross injustice or wickedness; a violation of moral principles.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "extreme moral depravity",
+      "gross social injustice"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "equity"
+      },
+      {
+        "type": "phonetically similar",
+        "distractor": "inequity"
+      },
+      {
+        "type": "related lack of reverence",
+        "distractor": "impiety"
+      },
+      {
+        "type": "similar moral failing",
+        "distractor": "immorality"
+      },
+      {
+        "type": "similar state of being",
+        "distractor": "sinfulness"
+      }
+    ]
+  },
+  {
+    "id": 169,
+    "word": "wickedness",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 5482,
+    "difficulty_score": 0.100900277979652,
+    "short_definition": "The state or quality of being evil or morally wrong.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "malevolent scheming",
+      "intentional cruelty"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "goodness"
+      },
+      {
+        "type": "phonetically similar",
+        "distractor": "weakness"
+      },
+      {
+        "type": "unrelated behavior",
+        "distractor": "wildness"
+      },
+      {
+        "type": "very close synonym",
+        "distractor": "evil"
+      },
+      {
+        "type": "related social problem",
+        "distractor": "corruption"
+      }
+    ]
+  },
+  {
+    "id": 170,
+    "word": "vice",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5493,
+    "difficulty_score": 0,
+    "short_definition": "Immoral or wicked behavior; a bad habit.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "a gambling addiction",
+      "a smoking habit"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "virtue"
+      },
+      {
+        "type": "phonetically similar",
+        "distractor": "price"
+      },
+      {
+        "type": "related illegal action",
+        "distractor": "crime"
+      },
+      {
+        "type": "related behavior",
+        "distractor": "habit"
+      },
+      {
+        "type": "similar failing",
+        "distractor": "weakness"
+      }
+    ]
+  },
+  {
+    "id": 171,
+    "word": "prostitution",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 5505,
+    "difficulty_score": 0.300280201499876,
+    "short_definition": "The practice of engaging in sexual activity for payment.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "paid sexual acts",
+      "commercialized intimacy"
+    ],
+    "distractors": [
+      {
+        "type": "opposite state",
+        "distractor": "celibacy"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "constitution"
+      },
+      {
+        "type": "related sexual behavior",
+        "distractor": "promiscuity"
+      },
+      {
+        "type": "related occupation",
+        "distractor": "employment"
+      },
+      {
+        "type": "related negative effect",
+        "distractor": "degradation"
+      }
+    ]
+  },
+  {
+    "id": 172,
+    "word": "drink",
+    "pos": "noun",
+    "sense_count": 10,
+    "source_word_id": 5511,
+    "difficulty_score": 0,
+    "short_definition": "A liquid that is swallowed to quench thirst.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "a refreshing beverage",
+      "a thirst quencher"
+    ],
+    "distractors": [
+      {
+        "type": "related sustenance",
+        "distractor": "food"
+      },
+      {
+        "type": "cause of drinking",
+        "distractor": "thirst"
+      },
+      {
+        "type": "general category",
+        "distractor": "liquid"
+      },
+      {
+        "type": "related action",
+        "distractor": "sip"
+      },
+      {
+        "type": "dangerous liquid",
+        "distractor": "poison"
+      }
+    ]
+  },
+  {
+    "id": 173,
+    "word": "drinking",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5512,
+    "difficulty_score": 0,
+    "short_definition": "The act of consuming liquids, especially alcoholic beverages.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "consuming alcoholic beverages",
+      "social alcohol consumption"
+    ],
+    "distractors": [
+      {
+        "type": "related bodily function",
+        "distractor": "eating"
+      },
+      {
+        "type": "unrelated mental activity",
+        "distractor": "thinking"
+      },
+      {
+        "type": "related action",
+        "distractor": "gulping"
+      },
+      {
+        "type": "opposite state",
+        "distractor": "sobriety"
+      },
+      {
+        "type": "purpose of drinking",
+        "distractor": "hydration"
+      }
+    ]
+  },
+  {
+    "id": 174,
+    "word": "drunkenness",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 5514,
+    "difficulty_score": 0.29697006711329,
+    "short_definition": "The state of being intoxicated with alcohol.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "impaired motor skills",
+      "slurred speech"
+    ],
+    "distractors": [
+      {
+        "type": "opposite state",
+        "distractor": "sobriety"
+      },
+      {
+        "type": "related physical symptom",
+        "distractor": "dizziness"
+      },
+      {
+        "type": "similar state of being",
+        "distractor": "stupor"
+      },
+      {
+        "type": "related activity",
+        "distractor": "drinking"
+      },
+      {
+        "type": "possible side effect",
+        "distractor": "happiness"
+      }
+    ]
+  },
+  {
+    "id": 175,
+    "word": "fabrication",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 5544,
+    "difficulty_score": 0.0523683627666488,
+    "short_definition": "The act of inventing or creating something untrue; a lie.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "inventing a story",
+      "forging documents"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "truth"
+      },
+      {
+        "type": "related action",
+        "distractor": "creation"
+      },
+      {
+        "type": "related distortion",
+        "distractor": "exaggeration"
+      },
+      {
+        "type": "related form of communication",
+        "distractor": "story"
+      },
+      {
+        "type": "similar act of creating",
+        "distractor": "invention"
+      }
+    ]
+  },
+  {
+    "id": 176,
+    "word": "deceit",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 5548,
+    "difficulty_score": 0.152978504701838,
+    "short_definition": "The act or practice of deceiving; deception.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "a calculated deception",
+      "a misleading impression"
+    ],
+    "distractors": [
+      {
+        "type": "opposite meaning",
+        "distractor": "honesty"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "defeat"
+      },
+      {
+        "type": "unrelated mistake",
+        "distractor": "error"
+      },
+      {
+        "type": "similar action",
+        "distractor": "trickery"
+      },
+      {
+        "type": "state of being honest",
+        "distractor": "truthfulness"
+      }
+    ]
+  },
+  {
+    "id": 177,
+    "word": "sophistication",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 5559,
+    "difficulty_score": 0.170493692612741,
+    "short_definition": "The process of becoming refined, cultured, or worldly-wise.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "refined social skills",
+      "worldly knowledge"
+    ],
+    "distractors": [
+      {
+        "type": "opposite quality",
+        "distractor": "simplicity"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "suffocation"
+      },
+      {
+        "type": "related concept",
+        "distractor": "culture"
+      },
+      {
+        "type": "opposite concept",
+        "distractor": "naivete"
+      },
+      {
+        "type": "similar characteristic",
+        "distractor": "worldliness"
+      }
+    ]
+  },
+  {
+    "id": 178,
+    "word": "fraud",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 5560,
+    "difficulty_score": 0,
+    "short_definition": "Wrongful or criminal deception intended to result in financial or personal gain.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "a financial swindle",
+      "identity theft"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "fund"
+      },
+      {
+        "type": "opposite quality",
+        "distractor": "honesty"
+      },
+      {
+        "type": "unrelated mistake",
+        "distractor": "error"
+      },
+      {
+        "type": "similar action",
+        "distractor": "scam"
+      },
+      {
+        "type": "similar act",
+        "distractor": "deception"
+      }
+    ]
+  },
+  {
+    "id": 179,
+    "word": "cheating",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 5569,
+    "difficulty_score": 0,
+    "short_definition": "The act of behaving dishonestly to gain an advantage.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "academic dishonesty",
+      "unfair advantage"
+    ],
+    "distractors": [
+      {
+        "type": "opposite action",
+        "distractor": "helping"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "treating"
+      },
+      {
+        "type": "related activity",
+        "distractor": "gambling"
+      },
+      {
+        "type": "similar action",
+        "distractor": "dishonesty"
+      },
+      {
+        "type": "related activity",
+        "distractor": "playing"
+      }
+    ]
+  },
+  {
+    "id": 180,
+    "word": "delusion",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 5571,
+    "difficulty_score": 0,
+    "short_definition": "An idiosyncratic belief or impression maintained despite being contradicted by reality.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "paranoid suspicions",
+      "grandiose fantasies"
+    ],
+    "distractors": [
+      {
+        "type": "opposite concept",
+        "distractor": "reality"
+      },
+      {
+        "type": "similar misperception",
+        "distractor": "illusion"
+      },
+      {
+        "type": "unrelated choice",
+        "distractor": "decision"
+      },
+      {
+        "type": "related concept",
+        "distractor": "fantasy"
+      },
+      {
+        "type": "similar misperception",
+        "distractor": "hallucination"
+      }
+    ]
+  },
+  {
+    "id": 181,
+    "word": "pretence",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 5574,
+    "difficulty_score": 0.284110616738398,
+    "short_definition": "An attempt to make something that is not the case appear true.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "feigned enthusiasm",
+      "artificial politeness"
+    ],
+    "distractors": [
+      {
+        "type": "opposite quality",
+        "distractor": "sincerity"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "presence"
+      },
+      {
+        "type": "related action",
+        "distractor": "performance"
+      },
+      {
+        "type": "opposite concept",
+        "distractor": "reality"
+      },
+      {
+        "type": "similar behavior",
+        "distractor": "affectation"
+      }
+    ]
+  },
+  {
+    "id": 182,
+    "word": "simulation",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 5576,
+    "difficulty_score": 0.117425228121334,
+    "short_definition": "The imitation of the operation of a real-world process.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "flight training program",
+      "economic modeling"
+    ],
+    "distractors": [
+      {
+        "type": "opposite concept",
+        "distractor": "reality"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "stimulation"
+      },
+      {
+        "type": "opposite of hiding",
+        "distractor": "dissimulation"
+      },
+      {
+        "type": "related action",
+        "distractor": "experiment"
+      },
+      {
+        "type": "similar action",
+        "distractor": "imitation"
+      }
+    ]
+  },
+  {
+    "id": 183,
+    "word": "pretend",
+    "pos": "noun",
+    "sense_count": 8,
+    "source_word_id": 5579,
+    "difficulty_score": 0,
+    "short_definition": "An act of pretending; a make-believe activity.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "children's make-believe",
+      "role-playing exercise"
+    ],
+    "distractors": [
+      {
+        "type": "opposite concept",
+        "distractor": "reality"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "friend"
+      },
+      {
+        "type": "related action",
+        "distractor": "performance"
+      },
+      {
+        "type": "opposite of lying",
+        "distractor": "truth"
+      },
+      {
+        "type": "similar action",
+        "distractor": "simulation"
+      }
+    ]
+  },
+  {
+    "id": 184,
+    "word": "envy",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 5602,
+    "difficulty_score": 0,
+    "short_definition": "A feeling of discontented or resentful longing aroused by someone else's possessions.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "coveting neighbor's car",
+      "resentful longing"
+    ],
+    "distractors": [
+      {
+        "type": "opposite emotion",
+        "distractor": "contentment"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "energy"
+      },
+      {
+        "type": "related emotion",
+        "distractor": "pity"
+      },
+      {
+        "type": "related emotion",
+        "distractor": "desire"
+      },
+      {
+        "type": "too close synonym",
+        "distractor": "jealousy"
+      }
+    ]
+  },
+  {
+    "id": 185,
+    "word": "wrath",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5612,
+    "difficulty_score": 0,
+    "short_definition": "Extreme anger; fierce indignation.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "uncontrollable rage",
+      "fiery indignation"
+    ],
+    "distractors": [
+      {
+        "type": "opposite emotion",
+        "distractor": "peace"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "path"
+      },
+      {
+        "type": "related emotion",
+        "distractor": "sadness"
+      },
+      {
+        "type": "similar emotion",
+        "distractor": "anger"
+      },
+      {
+        "type": "opposite emotion",
+        "distractor": "joy"
+      }
+    ]
+  },
+  {
+    "id": 186,
+    "word": "offense",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 5645,
+    "difficulty_score": 0.00562328379666187,
+    "short_definition": "A breach of a law or rule; an illegal act.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "petty misdemeanor",
+      "serious felony"
+    ],
+    "distractors": [
+      {
+        "type": "opposite action",
+        "distractor": "defense"
+      },
+      {
+        "type": "alternate spelling",
+        "distractor": "offence"
+      },
+      {
+        "type": "similar illegal action",
+        "distractor": "crime"
+      },
+      {
+        "type": "unrelated error",
+        "distractor": "mistake"
+      },
+      {
+        "type": "related action",
+        "distractor": "insult"
+      }
+    ]
+  },
+  {
+    "id": 187,
+    "word": "cheat",
+    "pos": "noun",
+    "sense_count": 9,
+    "source_word_id": 5568,
+    "difficulty_score": 0,
+    "short_definition": "A person who acts dishonestly to gain an advantage.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "a deceptive player",
+      "a dishonest gambler"
+    ],
+    "distractors": [
+      {
+        "type": "opposite role",
+        "distractor": "hero"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "treat"
+      },
+      {
+        "type": "similar character",
+        "distractor": "trickster"
+      },
+      {
+        "type": "opposite role",
+        "distractor": "honest person"
+      },
+      {
+        "type": "related role",
+        "distractor": "player"
+      }
+    ]
+  },
+  {
+    "id": 188,
+    "word": "pretense",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 5573,
+    "difficulty_score": 0.116702858510743,
+    "short_definition": "A false display of feelings, intentions, or qualities; insincerity.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "fake compassion",
+      "insincere flattery"
+    ],
+    "distractors": [
+      {
+        "type": "opposite quality",
+        "distractor": "honesty"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "presence"
+      },
+      {
+        "type": "related action",
+        "distractor": "performance"
+      },
+      {
+        "type": "opposite concept",
+        "distractor": "reality"
+      },
+      {
+        "type": "similar behavior",
+        "distractor": "affectation"
+      }
+    ]
+  },
+  {
+    "id": 189,
+    "word": "pose",
+    "pos": "noun",
+    "sense_count": 9,
+    "source_word_id": 5582,
+    "difficulty_score": 0,
+    "short_definition": "A particular way of standing or sitting, often for a picture.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "photogenic posture",
+      "a confident stance"
+    ],
+    "distractors": [
+      {
+        "type": "phonological similarity",
+        "distractor": "pause"
+      },
+      {
+        "type": "similar action",
+        "distractor": "posture"
+      },
+      {
+        "type": "unrelated inquiry",
+        "distractor": "question"
+      },
+      {
+        "type": "similar action",
+        "distractor": "stance"
+      },
+      {
+        "type": "similar action",
+        "distractor": "position"
+      }
+    ]
+  },
+  {
+    "id": 190,
+    "word": "greed",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5605,
+    "difficulty_score": 0,
+    "short_definition": "Intense and selfish desire for something, especially wealth or power.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "insatiable avarice",
+      "hoarding resources"
+    ],
+    "distractors": [
+      {
+        "type": "opposite quality",
+        "distractor": "generosity"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "grief"
+      },
+      {
+        "type": "related lack",
+        "distractor": "need"
+      },
+      {
+        "type": "similar desire",
+        "distractor": "avarice"
+      },
+      {
+        "type": "opposite quality",
+        "distractor": "contentment"
+      }
+    ]
+  },
+  {
+    "id": 191,
+    "word": "offence",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 5646,
+    "difficulty_score": 0.387793832368785,
+    "short_definition": "A breach of a law or rule; an illegal act.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "traffic violation",
+      "criminal act"
+    ],
+    "distractors": [
+      {
+        "type": "opposite action",
+        "distractor": "defence"
+      },
+      {
+        "type": "alternate spelling",
+        "distractor": "offense"
+      },
+      {
+        "type": "similar illegal action",
+        "distractor": "crime"
+      },
+      {
+        "type": "unrelated error",
+        "distractor": "mistake"
+      },
+      {
+        "type": "related action",
+        "distractor": "insult"
+      }
+    ]
+  },
+  {
+    "id": 192,
+    "word": "crime",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5647,
+    "difficulty_score": 0,
+    "short_definition": "An action or omission that constitutes an offense punishable by law.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "armed robbery",
+      "fraudulent activity"
+    ],
+    "distractors": [
+      {
+        "type": "related punishment",
+        "distractor": "fine"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "time"
+      },
+      {
+        "type": "related immoral act",
+        "distractor": "sin"
+      },
+      {
+        "type": "opposite concept",
+        "distractor": "virtue"
+      },
+      {
+        "type": "similar illegal act",
+        "distractor": "misdemeanor"
+      }
+    ]
+  },
+  {
+    "id": 193,
+    "word": "battery",
+    "pos": "noun",
+    "sense_count": 7,
+    "source_word_id": 5654,
+    "difficulty_score": 0,
+    "short_definition": "The intentional and unlawful physical contact with another person.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "physical assault",
+      "unlawful touching"
+    ],
+    "distractors": [
+      {
+        "type": "related crime",
+        "distractor": "assault"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "flattery"
+      },
+      {
+        "type": "related concept",
+        "distractor": "energy"
+      },
+      {
+        "type": "unintentional harm",
+        "distractor": "accident"
+      },
+      {
+        "type": "related concept",
+        "distractor": "power"
+      }
+    ]
+  },
+  {
+    "id": 194,
+    "word": "foul",
+    "pos": "noun",
+    "sense_count": 16,
+    "source_word_id": 5669,
+    "difficulty_score": 0,
+    "short_definition": "An unfair or invalid act or play, especially in sports.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "illegal tackle",
+      "unfair play"
+    ],
+    "distractors": [
+      {
+        "type": "opposite concept",
+        "distractor": "fair"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "fowl"
+      },
+      {
+        "type": "similar quality",
+        "distractor": "foulness"
+      },
+      {
+        "type": "related mistake",
+        "distractor": "error"
+      },
+      {
+        "type": "similar transgression",
+        "distractor": "violation"
+      }
+    ]
+  },
+  {
+    "id": 195,
+    "word": "sedition",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 5686,
+    "difficulty_score": 0.278806553559525,
+    "short_definition": "Conduct or speech inciting people to rebel against the authority of a state.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "inciting rebellion",
+      "subversive propaganda"
+    ],
+    "distractors": [
+      {
+        "type": "opposite concept",
+        "distractor": "obedience"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "addition"
+      },
+      {
+        "type": "similar crime",
+        "distractor": "treason"
+      },
+      {
+        "type": "similar action",
+        "distractor": "rebellion"
+      },
+      {
+        "type": "similar action",
+        "distractor": "insurrection"
+      }
+    ]
+  },
+  {
+    "id": 196,
+    "word": "kidnapping",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 5705,
+    "difficulty_score": 0,
+    "short_definition": "The unlawful seizure and detention of a person against their will.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "abducting a victim",
+      "unlawful confinement"
+    ],
+    "distractors": [
+      {
+        "type": "opposite action",
+        "distractor": "freeing"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "napping"
+      },
+      {
+        "type": "unrelated crime",
+        "distractor": "robbery"
+      },
+      {
+        "type": "similar crime",
+        "distractor": "abduction"
+      },
+      {
+        "type": "related confinement",
+        "distractor": "detention"
+      }
+    ]
+  },
+  {
+    "id": 197,
+    "word": "assault",
+    "pos": "noun",
+    "sense_count": 7,
+    "source_word_id": 5652,
+    "difficulty_score": 0,
+    "short_definition": "A threat or attempt to inflict offensive physical contact or harm.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "threatening gestures",
+      "attempted violence"
+    ],
+    "distractors": [
+      {
+        "type": "opposite action",
+        "distractor": "defense"
+      },
+      {
+        "type": "similar verbal abuse",
+        "distractor": "insult"
+      },
+      {
+        "type": "related crime",
+        "distractor": "battery"
+      },
+      {
+        "type": "possible result",
+        "distractor": "injury"
+      },
+      {
+        "type": "similar action",
+        "distractor": "attack"
+      }
+    ]
+  },
+  {
+    "id": 198,
+    "word": "technical",
+    "pos": "noun",
+    "sense_count": 9,
+    "source_word_id": 5672,
+    "difficulty_score": 0,
+    "short_definition": "A point of detail, especially in a law or set of rules.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "legal loophole",
+      "contractual clause"
+    ],
+    "distractors": [
+      {
+        "type": "opposite quality",
+        "distractor": "general"
+      },
+      {
+        "type": "similar quality",
+        "distractor": "typical"
+      },
+      {
+        "type": "related method",
+        "distractor": "technique"
+      },
+      {
+        "type": "related aspect",
+        "distractor": "detail"
+      },
+      {
+        "type": "similar quality",
+        "distractor": "specific"
+      }
+    ]
+  },
+  {
+    "id": 199,
+    "word": "bribery",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 5710,
+    "difficulty_score": 0.111111584266108,
+    "short_definition": "The giving or accepting a bribe; offering something to influence conduct.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "corrupt payments",
+      "influenced decisions"
+    ],
+    "distractors": [
+      {
+        "type": "opposite action",
+        "distractor": "charity"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "liberty"
+      },
+      {
+        "type": "related concept",
+        "distractor": "corruption"
+      },
+      {
+        "type": "similar action",
+        "distractor": "graft"
+      },
+      {
+        "type": "similar act",
+        "distractor": "donation"
+      }
+    ]
+  },
+  {
+    "id": 200,
+    "word": "con",
+    "pos": "noun",
+    "sense_count": 6,
+    "source_word_id": 5735,
+    "difficulty_score": 0.00307951306884297,
+    "short_definition": "A confidence trick; a swindle.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:24:28.432Z",
+    "owad_phrase": [
+      "a pyramid scheme",
+      "a romance scam"
+    ],
+    "distractors": [
+      {
+        "type": "opposite concept",
+        "distractor": "pro"
+      },
+      {
+        "type": "related quality",
+        "distractor": "confidence"
+      },
+      {
+        "type": "similar action",
+        "distractor": "scam"
+      },
+      {
+        "type": "opposite outcome",
+        "distractor": "success"
+      },
+      {
+        "type": "similar action",
+        "distractor": "trick"
+      }
+    ]
+  }
+]

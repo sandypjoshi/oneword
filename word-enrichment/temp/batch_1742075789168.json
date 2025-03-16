@@ -1,0 +1,172 @@
+[
+  {
+    "id": 5064,
+    "word": "one",
+    "pos": "noun",
+    "shortDefinition": "The number after zero; a single thing.",
+    "definition_updated_at": "2025-03-15T21:56:25.460Z",
+    "definition_source": "gemini",
+    "owad_phrase": [
+      "a single entity",
+      "a lonely number"
+    ],
+    "distractors": [
+      {
+        "type": "co-hyponym",
+        "distractor": "zero"
+      },
+      {
+        "type": "frequency-based",
+        "distractor": "few"
+      },
+      {
+        "type": "hypernym",
+        "distractor": "digit"
+      },
+      {
+        "type": "domain-related",
+        "distractor": "unit"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "number"
+      }
+    ]
+  },
+  {
+    "id": 12394,
+    "word": "can",
+    "pos": "noun",
+    "shortDefinition": "A metal container for food or drink.",
+    "definition_updated_at": "2025-03-15T21:56:25.460Z",
+    "definition_source": "gemini",
+    "owad_phrase": [
+      "a metal cylinder",
+      "a tin container"
+    ],
+    "distractors": [
+      {
+        "type": "co-hyponym",
+        "distractor": "jar"
+      },
+      {
+        "type": "orthographic",
+        "distractor": "tin"
+      },
+      {
+        "type": "hypernym",
+        "distractor": "container"
+      },
+      {
+        "type": "common misconception",
+        "distractor": "plan"
+      },
+      {
+        "type": "meronym",
+        "distractor": "lid"
+      }
+    ]
+  },
+  {
+    "id": 2418,
+    "word": "time",
+    "pos": "noun",
+    "shortDefinition": "What clocks measure; when things happen.",
+    "definition_updated_at": "2025-03-15T21:56:25.460Z",
+    "definition_source": "gemini",
+    "owad_phrase": [
+      "a fleeting moment",
+      "a measured duration"
+    ],
+    "distractors": [
+      {
+        "type": "semantic-domain",
+        "distractor": "space"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "era"
+      },
+      {
+        "type": "hypernym",
+        "distractor": "duration"
+      },
+      {
+        "type": "phonological",
+        "distractor": "rhyme"
+      },
+      {
+        "type": "hyponym",
+        "distractor": "moment"
+      }
+    ]
+  },
+  {
+    "id": 7681,
+    "word": "also",
+    "pos": "adverb",
+    "shortDefinition": "In addition; as well; too.",
+    "definition_updated_at": "2025-03-15T21:56:25.460Z",
+    "definition_source": "gemini",
+    "owad_phrase": [
+      "additionally, too",
+      "besides, likewise"
+    ],
+    "distractors": [
+      {
+        "type": "semantic-domain",
+        "distractor": "however"
+      },
+      {
+        "type": "semantic-domain",
+        "distractor": "instead"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "too"
+      },
+      {
+        "type": "frequency-based",
+        "distractor": "always"
+      },
+      {
+        "type": "semantic-domain",
+        "distractor": "seldom"
+      }
+    ]
+  },
+  {
+    "id": 61876,
+    "word": "who",
+    "pos": "noun",
+    "shortDefinition": "The person that did something.",
+    "definition_updated_at": "2025-03-15T21:56:25.460Z",
+    "definition_source": "gemini",
+    "owad_phrase": [
+      "a certain person",
+      "an unknown agent"
+    ],
+    "distractors": [
+      {
+        "type": "co-hyponym",
+        "distractor": "what"
+      },
+      {
+        "type": "orthographic",
+        "distractor": "whom"
+      },
+      {
+        "type": "hypernym",
+        "distractor": "person"
+      },
+      {
+        "type": "frequency-based",
+        "distractor": "they"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "which"
+      }
+    ]
+  }
+]

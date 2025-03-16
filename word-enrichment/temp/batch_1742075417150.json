@@ -1,0 +1,70 @@
+[
+  {
+    "id": 2418,
+    "word": "time",
+    "pos": "noun",
+    "shortDefinition": "Minutes, hours, days, when things happen.",
+    "definition_updated_at": "2025-03-15T21:50:13.471Z",
+    "definition_source": "gemini",
+    "owad_phrase": [
+      "a fleeting moment",
+      "a ticking clock"
+    ],
+    "distractors": [
+      {
+        "type": "co-hyponym",
+        "distractor": "date"
+      },
+      {
+        "type": "phonological",
+        "distractor": "thyme"
+      },
+      {
+        "type": "hypernym",
+        "distractor": "era"
+      },
+      {
+        "type": "hyponym",
+        "distractor": "moment"
+      },
+      {
+        "type": "semantic",
+        "distractor": "duration"
+      }
+    ]
+  },
+  {
+    "id": 52405,
+    "word": "some",
+    "pos": "adjective satellite",
+    "shortDefinition": "A few things, but not a lot.",
+    "definition_updated_at": "2025-03-15T21:50:13.471Z",
+    "definition_source": "gemini",
+    "owad_phrase": [
+      "several unspecified",
+      "a few selected"
+    ],
+    "distractors": [
+      {
+        "type": "co-hyponym",
+        "distractor": "several"
+      },
+      {
+        "type": "phonological",
+        "distractor": "same"
+      },
+      {
+        "type": "semantic",
+        "distractor": "many"
+      },
+      {
+        "type": "antonym",
+        "distractor": "few"
+      },
+      {
+        "type": "common misconception",
+        "distractor": "any"
+      }
+    ]
+  }
+]

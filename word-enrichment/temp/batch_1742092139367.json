@@ -1,0 +1,1482 @@
+[
+  {
+    "id": 481,
+    "word": "piping",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 647,
+    "difficulty_score": 0,
+    "short_definition": "A system of pipes used to convey fluids or gases.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "a plumbing network",
+      "an oil pipeline"
+    ],
+    "distractors": [
+      {
+        "type": "compound adjective",
+        "distractor": "piping hot"
+      },
+      {
+        "type": "related system",
+        "distractor": "plumbing"
+      },
+      {
+        "type": "building component",
+        "distractor": "siding"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "pining"
+      },
+      {
+        "type": "related system",
+        "distractor": "wiring"
+      }
+    ]
+  },
+  {
+    "id": 482,
+    "word": "mechanization",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 653,
+    "difficulty_score": 0.439728452208139,
+    "short_definition": "The process of changing from manual to machine operation.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "automated factory production",
+      "tractor-driven agriculture"
+    ],
+    "distractors": [
+      {
+        "type": "related process",
+        "distractor": "automation"
+      },
+      {
+        "type": "similar societal change",
+        "distractor": "modernization"
+      },
+      {
+        "type": "opposite effect",
+        "distractor": "humanization"
+      },
+      {
+        "type": "related process",
+        "distractor": "standardization"
+      },
+      {
+        "type": "similar societal change",
+        "distractor": "mobilization"
+      }
+    ]
+  },
+  {
+    "id": 483,
+    "word": "mechanisation",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 654,
+    "difficulty_score": 0.55,
+    "short_definition": "The process of changing from manual to machine operation.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "automated factory production",
+      "tractor-driven agriculture"
+    ],
+    "distractors": [
+      {
+        "type": "related process",
+        "distractor": "automation"
+      },
+      {
+        "type": "similar societal change",
+        "distractor": "modernisation"
+      },
+      {
+        "type": "opposite effect",
+        "distractor": "humanisation"
+      },
+      {
+        "type": "related process",
+        "distractor": "standardisation"
+      },
+      {
+        "type": "similar societal change",
+        "distractor": "mobilisation"
+      }
+    ]
+  },
+  {
+    "id": 484,
+    "word": "launching",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 659,
+    "difficulty_score": 0,
+    "short_definition": "The act of setting something in motion or afloat.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "a rocket's liftoff",
+      "a ship's maiden voyage"
+    ],
+    "distractors": [
+      {
+        "type": "opposite action",
+        "distractor": "landing"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "lurching"
+      },
+      {
+        "type": "process of draining",
+        "distractor": "leaching"
+      },
+      {
+        "type": "providing accommodation",
+        "distractor": "lodging"
+      },
+      {
+        "type": "related noun",
+        "distractor": "launch"
+      }
+    ]
+  },
+  {
+    "id": 485,
+    "word": "launch",
+    "pos": "noun",
+    "sense_count": 8,
+    "source_word_id": 660,
+    "difficulty_score": 0,
+    "short_definition": "A boat used for transportation, especially on a harbor.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "a harbor taxi",
+      "a ferry shuttle"
+    ],
+    "distractors": [
+      {
+        "type": "related vessel",
+        "distractor": "yacht"
+      },
+      {
+        "type": "opposite action",
+        "distractor": "land"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "lunch"
+      },
+      {
+        "type": "sudden movement",
+        "distractor": "leap"
+      },
+      {
+        "type": "specific type of launching",
+        "distractor": "liftoff"
+      }
+    ]
+  },
+  {
+    "id": 486,
+    "word": "impulse",
+    "pos": "noun",
+    "sense_count": 6,
+    "source_word_id": 670,
+    "difficulty_score": 0,
+    "short_definition": "A sudden strong urge or desire to act.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "a sudden shopping urge",
+      "an immediate emotional reaction"
+    ],
+    "distractors": [
+      {
+        "type": "related physical term",
+        "distractor": "impact"
+      },
+      {
+        "type": "opposite force",
+        "distractor": "repulsion"
+      },
+      {
+        "type": "motivation",
+        "distractor": "incentive"
+      },
+      {
+        "type": "similar internal drive",
+        "distractor": "instinct"
+      },
+      {
+        "type": "similar driving force",
+        "distractor": "impetus"
+      }
+    ]
+  },
+  {
+    "id": 487,
+    "word": "leaning",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 382,
+    "difficulty_score": 0.00796810510514846,
+    "short_definition": "A tendency towards a particular opinion or course of action.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "a political inclination",
+      "a philosophical bias"
+    ],
+    "distractors": [
+      {
+        "type": "similar position",
+        "distractor": "lying"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "lesson"
+      },
+      {
+        "type": "opposite feeling",
+        "distractor": "loathing"
+      },
+      {
+        "type": "making horizontal",
+        "distractor": "leveling"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "inclination"
+      }
+    ]
+  },
+  {
+    "id": 488,
+    "word": "impulsion",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 671,
+    "difficulty_score": 0.480678195542864,
+    "short_definition": "The act of driving forward with force or motivation.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "a forceful motivation",
+      "a driven momentum"
+    ],
+    "distractors": [
+      {
+        "type": "opposite force",
+        "distractor": "repulsion"
+      },
+      {
+        "type": "related psychological term",
+        "distractor": "compulsion"
+      },
+      {
+        "type": "related personality trait",
+        "distractor": "impulsivity"
+      },
+      {
+        "type": "process of reasoning",
+        "distractor": "induction"
+      },
+      {
+        "type": "opposite concept",
+        "distractor": "inertia"
+      }
+    ]
+  },
+  {
+    "id": 489,
+    "word": "impetus",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 672,
+    "difficulty_score": 0.415066079181972,
+    "short_definition": "A force or influence that makes something happen faster.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "a catalyst for change",
+      "a driving force"
+    ],
+    "distractors": [
+      {
+        "type": "opposite effect",
+        "distractor": "impediment"
+      },
+      {
+        "type": "opposite state",
+        "distractor": "inertia"
+      },
+      {
+        "type": "related concept",
+        "distractor": "impulse"
+      },
+      {
+        "type": "similar motivation",
+        "distractor": "incentive"
+      },
+      {
+        "type": "exemption",
+        "distractor": "immunity"
+      }
+    ]
+  },
+  {
+    "id": 490,
+    "word": "firewall",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 669,
+    "difficulty_score": 0.224991297991215,
+    "short_definition": "A security system blocking unauthorized network access.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "a network security barrier",
+      "a digital shield"
+    ],
+    "distractors": [
+      {
+        "type": "related destructive event",
+        "distractor": "firestorm"
+      },
+      {
+        "type": "physical barrier",
+        "distractor": "floodwall"
+      },
+      {
+        "type": "safety barrier",
+        "distractor": "firebreak"
+      },
+      {
+        "type": "related security measure",
+        "distractor": "filter"
+      },
+      {
+        "type": "network component",
+        "distractor": "gateway"
+      }
+    ]
+  },
+  {
+    "id": 491,
+    "word": "roll",
+    "pos": "noun",
+    "sense_count": 33,
+    "source_word_id": 673,
+    "difficulty_score": 0,
+    "short_definition": "A cylindrical mass formed by winding or folding material.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "a carpet tube",
+      "a bandage coil"
+    ],
+    "distractors": [
+      {
+        "type": "related object",
+        "distractor": "scroll"
+      },
+      {
+        "type": "opposite state",
+        "distractor": "stillness"
+      },
+      {
+        "type": "similar deformation",
+        "distractor": "wrinkle"
+      },
+      {
+        "type": "increase",
+        "distractor": "rise"
+      },
+      {
+        "type": "phonological similarity",
+        "distractor": "role"
+      }
+    ]
+  },
+  {
+    "id": 492,
+    "word": "smear",
+    "pos": "noun",
+    "sense_count": 8,
+    "source_word_id": 394,
+    "difficulty_score": 0,
+    "short_definition": "A mark or streak of a greasy or sticky substance.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "a lipstick stain",
+      "a greasy fingerprint"
+    ],
+    "distractors": [
+      {
+        "type": "opposite action",
+        "distractor": "shine"
+      },
+      {
+        "type": "similar mark",
+        "distractor": "spot"
+      },
+      {
+        "type": "related sense",
+        "distractor": "smell"
+      },
+      {
+        "type": "make even",
+        "distractor": "smooth"
+      },
+      {
+        "type": "similar mark",
+        "distractor": "streak"
+      }
+    ]
+  },
+  {
+    "id": 493,
+    "word": "hurl",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 679,
+    "difficulty_score": 0.00669240573464878,
+    "short_definition": "A forceful throw of an object.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "a fastball pitch",
+      "a javelin throw"
+    ],
+    "distractors": [
+      {
+        "type": "opposite action",
+        "distractor": "hold"
+      },
+      {
+        "type": "act of embrace",
+        "distractor": "hug"
+      },
+      {
+        "type": "obstacle",
+        "distractor": "hurdle"
+      },
+      {
+        "type": "similar action",
+        "distractor": "heave"
+      },
+      {
+        "type": "silence",
+        "distractor": "hush"
+      }
+    ]
+  },
+  {
+    "id": 494,
+    "word": "toss",
+    "pos": "noun",
+    "sense_count": 9,
+    "source_word_id": 682,
+    "difficulty_score": 0,
+    "short_definition": "A light or casual throw.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "a casual coin flip",
+      "a gentle salad mixing"
+    ],
+    "distractors": [
+      {
+        "type": "opposite action",
+        "distractor": "catch"
+      },
+      {
+        "type": "rotate",
+        "distractor": "twist"
+      },
+      {
+        "type": "light touch",
+        "distractor": "tap"
+      },
+      {
+        "type": "discard",
+        "distractor": "trash"
+      },
+      {
+        "type": "examination",
+        "distractor": "test"
+      }
+    ]
+  },
+  {
+    "id": 495,
+    "word": "fumble",
+    "pos": "noun",
+    "sense_count": 6,
+    "source_word_id": 435,
+    "difficulty_score": 0,
+    "short_definition": "An awkward or clumsy handling of something.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "a dropped pass",
+      "a butterfingers mistake"
+    ],
+    "distractors": [
+      {
+        "type": "opposite action",
+        "distractor": "find"
+      },
+      {
+        "type": "repair",
+        "distractor": "fix"
+      },
+      {
+        "type": "struggle",
+        "distractor": "flounder"
+      },
+      {
+        "type": "accomplishment",
+        "distractor": "feat"
+      },
+      {
+        "type": "pretend",
+        "distractor": "feign"
+      }
+    ]
+  },
+  {
+    "id": 496,
+    "word": "fling",
+    "pos": "noun",
+    "sense_count": 7,
+    "source_word_id": 676,
+    "difficulty_score": 0,
+    "short_definition": "A throw with great force or energy.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "a discus throw",
+      "a frisbee cast"
+    ],
+    "distractors": [
+      {
+        "type": "opposite action",
+        "distractor": "catch"
+      },
+      {
+        "type": "light object",
+        "distractor": "feather"
+      },
+      {
+        "type": "secure",
+        "distractor": "fasten"
+      },
+      {
+        "type": "hesitate",
+        "distractor": "falter"
+      },
+      {
+        "type": "achievement",
+        "distractor": "feat"
+      }
+    ]
+  },
+  {
+    "id": 497,
+    "word": "heaving",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 678,
+    "difficulty_score": 0.0374855814656668,
+    "short_definition": "The act of lifting or raising with great effort.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "lifting heavy boxes",
+      "struggling to breathe"
+    ],
+    "distractors": [
+      {
+        "type": "dividing in two",
+        "distractor": "halving"
+      },
+      {
+        "type": "remaining in place",
+        "distractor": "hovering"
+      },
+      {
+        "type": "concealing",
+        "distractor": "hiding"
+      },
+      {
+        "type": "grasping",
+        "distractor": "holding"
+      },
+      {
+        "type": "making a sound",
+        "distractor": "humming"
+      }
+    ]
+  },
+  {
+    "id": 498,
+    "word": "fastball",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 702,
+    "difficulty_score": 0.363914585090747,
+    "short_definition": "A baseball pitch thrown at maximum speed.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "a blazing pitch",
+      "a high-velocity throw"
+    ],
+    "distractors": [
+      {
+        "type": "different pitch",
+        "distractor": "curveball"
+      },
+      {
+        "type": "different pitch",
+        "distractor": "slider"
+      },
+      {
+        "type": "opposite speed",
+        "distractor": "slowball"
+      },
+      {
+        "type": "ball hit into the air",
+        "distractor": "flyball"
+      },
+      {
+        "type": "illegally hit ball",
+        "distractor": "foul ball"
+      }
+    ]
+  },
+  {
+    "id": 499,
+    "word": "heater",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 703,
+    "difficulty_score": 0,
+    "short_definition": "A device for warming a room or building.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "a space warming device",
+      "a furnace blower"
+    ],
+    "distractors": [
+      {
+        "type": "opposite device",
+        "distractor": "cooler"
+      },
+      {
+        "type": "related device",
+        "distractor": "humidifier"
+      },
+      {
+        "type": "related device",
+        "distractor": "hair dryer"
+      },
+      {
+        "type": "container",
+        "distractor": "holder"
+      },
+      {
+        "type": "similar device",
+        "distractor": "radiator"
+      }
+    ]
+  },
+  {
+    "id": 500,
+    "word": "jog",
+    "pos": "noun",
+    "sense_count": 9,
+    "source_word_id": 749,
+    "difficulty_score": 0,
+    "short_definition": "A slow, steady run, especially for exercise.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "a morning exercise routine",
+      "a light run"
+    ],
+    "distractors": [
+      {
+        "type": "opposite pace",
+        "distractor": "sprint"
+      },
+      {
+        "type": "cross street illegally",
+        "distractor": "jaywalk"
+      },
+      {
+        "type": "employment",
+        "distractor": "job"
+      },
+      {
+        "type": "fast plane",
+        "distractor": "jet"
+      },
+      {
+        "type": "sudden jerk",
+        "distractor": "jolt"
+      }
+    ]
+  },
+  {
+    "id": 501,
+    "word": "massage",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 4843,
+    "difficulty_score": 0,
+    "short_definition": "The rubbing and kneading of muscles and joints.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "a deep tissue rubdown",
+      "a therapeutic kneading"
+    ],
+    "distractors": [
+      {
+        "type": "treatment",
+        "distractor": "medication"
+      },
+      {
+        "type": "pregnancy loss",
+        "distractor": "miscarriage"
+      },
+      {
+        "type": "handling",
+        "distractor": "manipulation"
+      },
+      {
+        "type": "poor handling",
+        "distractor": "mismanagement"
+      },
+      {
+        "type": "cosmetic",
+        "distractor": "mascara"
+      }
+    ]
+  },
+  {
+    "id": 502,
+    "word": "therapy",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 4853,
+    "difficulty_score": 0,
+    "short_definition": "Treatment intended to relieve or heal a disorder.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "physical rehabilitation sessions",
+      "cognitive behavioral treatment"
+    ],
+    "distractors": [
+      {
+        "type": "cause for therapy",
+        "distractor": "trauma"
+      },
+      {
+        "type": "infliction of pain",
+        "distractor": "torture"
+      },
+      {
+        "type": "study of religion",
+        "distractor": "theology"
+      },
+      {
+        "type": "state of calm",
+        "distractor": "tranquility"
+      },
+      {
+        "type": "medical procedure",
+        "distractor": "surgery"
+      }
+    ]
+  },
+  {
+    "id": 503,
+    "word": "nourishment",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 4879,
+    "difficulty_score": 0.0724477220914469,
+    "short_definition": "The food or other substances necessary for growth, health.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "essential dietary intake",
+      "vital sustenance"
+    ],
+    "distractors": [
+      {
+        "type": "lack of care",
+        "distractor": "negligence"
+      },
+      {
+        "type": "annoyance",
+        "distractor": "nuisance"
+      },
+      {
+        "type": "caring",
+        "distractor": "nurturing"
+      },
+      {
+        "type": "sickness",
+        "distractor": "nausea"
+      },
+      {
+        "type": "loss of feeling",
+        "distractor": "numbing"
+      }
+    ]
+  },
+  {
+    "id": 504,
+    "word": "bungle",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 420,
+    "difficulty_score": 0.25608701268835,
+    "short_definition": "A mistake or failure, usually due to clumsiness.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "a clumsy repair job",
+      "a botched surgery"
+    ],
+    "distractors": [
+      {
+        "type": "package",
+        "distractor": "bundle"
+      },
+      {
+        "type": "benefit",
+        "distractor": "boon"
+      },
+      {
+        "type": "dance",
+        "distractor": "boogie"
+      },
+      {
+        "type": "equilibrium",
+        "distractor": "balance"
+      },
+      {
+        "type": "mistake",
+        "distractor": "blunder"
+      }
+    ]
+  },
+  {
+    "id": 505,
+    "word": "balk",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 689,
+    "difficulty_score": 0.116092741613267,
+    "short_definition": "An illegal motion by a baseball pitcher.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "an illegal baseball pitch",
+      "a pitcher's deception"
+    ],
+    "distractors": [
+      {
+        "type": "sound",
+        "distractor": "bark"
+      },
+      {
+        "type": "rescue",
+        "distractor": "bail"
+      },
+      {
+        "type": "obstruction",
+        "distractor": "block"
+      },
+      {
+        "type": "increase",
+        "distractor": "boost"
+      },
+      {
+        "type": "mass",
+        "distractor": "bulk"
+      }
+    ]
+  },
+  {
+    "id": 506,
+    "word": "bender",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 700,
+    "difficulty_score": 0.245828982025659,
+    "short_definition": "A drinking spree; a period of heavy alcohol consumption.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "a weekend drinking binge",
+      "a prolonged inebriation"
+    ],
+    "distractors": [
+      {
+        "type": "fastening device",
+        "distractor": "binder"
+      },
+      {
+        "type": "kitchen appliance",
+        "distractor": "blender"
+      },
+      {
+        "type": "interrupter",
+        "distractor": "breaker"
+      },
+      {
+        "type": "heavy drinker",
+        "distractor": "boozer"
+      },
+      {
+        "type": "playful talk",
+        "distractor": "banter"
+      }
+    ]
+  },
+  {
+    "id": 507,
+    "word": "bullet",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 706,
+    "difficulty_score": 0,
+    "short_definition": "A projectile fired from a firearm.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "a firearm projectile",
+      "a cartridge component"
+    ],
+    "distractors": [
+      {
+        "type": "dance",
+        "distractor": "ballet"
+      },
+      {
+        "type": "song",
+        "distractor": "ballad"
+      },
+      {
+        "type": "fastener",
+        "distractor": "buckle"
+      },
+      {
+        "type": "obstacle",
+        "distractor": "barrier"
+      },
+      {
+        "type": "fastener",
+        "distractor": "bolt"
+      }
+    ]
+  },
+  {
+    "id": 508,
+    "word": "screwball",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 711,
+    "difficulty_score": 0.0448985838674451,
+    "short_definition": "A baseball pitch that curves in an unexpected direction.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "a deceptive baseball pitch",
+      "a curveball variation"
+    ],
+    "distractors": [
+      {
+        "type": "different pitch",
+        "distractor": "knuckleball"
+      },
+      {
+        "type": "opposite speed",
+        "distractor": "slowball"
+      },
+      {
+        "type": "deceptive talk",
+        "distractor": "sweet talk"
+      },
+      {
+        "type": "dummy",
+        "distractor": "scarecrow"
+      },
+      {
+        "type": "unpredictable ball",
+        "distractor": "scatterball"
+      }
+    ]
+  },
+  {
+    "id": 509,
+    "word": "pulling",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 760,
+    "difficulty_score": 0,
+    "short_definition": "The act of exerting force to draw something towards oneself.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "tugging on ropes",
+      "extracting stubborn nails"
+    ],
+    "distractors": [
+      {
+        "type": "opposite action",
+        "distractor": "pushing"
+      },
+      {
+        "type": "formation of balls",
+        "distractor": "pilling"
+      },
+      {
+        "type": "taking a vote",
+        "distractor": "polling"
+      },
+      {
+        "type": "positioning",
+        "distractor": "placing"
+      },
+      {
+        "type": "cleansing",
+        "distractor": "purging"
+      }
+    ]
+  },
+  {
+    "id": 510,
+    "word": "jumper",
+    "pos": "noun",
+    "sense_count": 8,
+    "source_word_id": 735,
+    "difficulty_score": 0,
+    "short_definition": "A sleeveless dress worn over a blouse or sweater.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "a schoolgirl pinafore",
+      "a sleeveless dress"
+    ],
+    "distractors": [
+      {
+        "type": "device that interferes",
+        "distractor": "jammer"
+      },
+      {
+        "type": "person who jogs",
+        "distractor": "jogger"
+      },
+      {
+        "type": "person who makes jewelry",
+        "distractor": "jeweler"
+      },
+      {
+        "type": "kitchen appliance",
+        "distractor": "juicer"
+      },
+      {
+        "type": "clown",
+        "distractor": "jester"
+      }
+    ]
+  },
+  {
+    "id": 511,
+    "word": "shape",
+    "pos": "noun",
+    "sense_count": 11,
+    "source_word_id": 60,
+    "difficulty_score": 0,
+    "short_definition": "The external form or outline of something.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "a geometric figure",
+      "a sculpted form"
+    ],
+    "distractors": [
+      {
+        "type": "area of darkness",
+        "distractor": "shade"
+      },
+      {
+        "type": "acuteness",
+        "distractor": "sharpness"
+      },
+      {
+        "type": "deception",
+        "distractor": "sham"
+      },
+      {
+        "type": "covering",
+        "distractor": "sheath"
+      },
+      {
+        "type": "thin material",
+        "distractor": "sheet"
+      }
+    ]
+  },
+  {
+    "id": 512,
+    "word": "pushing",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 744,
+    "difficulty_score": 0,
+    "short_definition": "The act of exerting force to move something away.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "shoving a stalled car",
+      "propelling a shopping cart"
+    ],
+    "distractors": [
+      {
+        "type": "opposite action",
+        "distractor": "pulling"
+      },
+      {
+        "type": "complimenting",
+        "distractor": "praising"
+      },
+      {
+        "type": "cushioning",
+        "distractor": "padding"
+      },
+      {
+        "type": "throwing",
+        "distractor": "pitching"
+      },
+      {
+        "type": "resting",
+        "distractor": "perching"
+      }
+    ]
+  },
+  {
+    "id": 513,
+    "word": "nudge",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 748,
+    "difficulty_score": 0.0136550864343192,
+    "short_definition": "A gentle push, typically with the elbow.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "a gentle elbow prod",
+      "a subtle encouragement"
+    ],
+    "distractors": [
+      {
+        "type": "indentation",
+        "distractor": "notch"
+      },
+      {
+        "type": "bother",
+        "distractor": "nag"
+      },
+      {
+        "type": "healthcare professional",
+        "distractor": "nurse"
+      },
+      {
+        "type": "home",
+        "distractor": "nest"
+      },
+      {
+        "type": "indentation",
+        "distractor": "notch"
+      }
+    ]
+  },
+  {
+    "id": 514,
+    "word": "pressing",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 752,
+    "difficulty_score": 0,
+    "short_definition": "The exertion of steady force or weight.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "ironing clothes smooth",
+      "squeezing juice from oranges"
+    ],
+    "distractors": [
+      {
+        "type": "complimenting",
+        "distractor": "praising"
+      },
+      {
+        "type": "giving a sermon",
+        "distractor": "preaching"
+      },
+      {
+        "type": "owning",
+        "distractor": "possessing"
+      },
+      {
+        "type": "suggesting",
+        "distractor": "proposing"
+      },
+      {
+        "type": "going by",
+        "distractor": "passing"
+      }
+    ]
+  },
+  {
+    "id": 515,
+    "word": "bundling",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 755,
+    "difficulty_score": 0,
+    "short_definition": "The practice of wrapping something up securely.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "wrapping Christmas presents",
+      "packaging fragile items"
+    ],
+    "distractors": [
+      {
+        "type": "festive decorations",
+        "distractor": "bunting"
+      },
+      {
+        "type": "making a bubbling sound",
+        "distractor": "burbling"
+      },
+      {
+        "type": "fighting",
+        "distractor": "brawling"
+      },
+      {
+        "type": "mixing",
+        "distractor": "blending"
+      },
+      {
+        "type": "overwhelming",
+        "distractor": "boggling"
+      }
+    ]
+  },
+  {
+    "id": 516,
+    "word": "shove",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 754,
+    "difficulty_score": 0,
+    "short_definition": "A forceful push.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "a forceful push",
+      "a sudden displacement"
+    ],
+    "distractors": [
+      {
+        "type": "place on a shelf",
+        "distractor": "shelve"
+      },
+      {
+        "type": "coastline",
+        "distractor": "shore"
+      },
+      {
+        "type": "area of darkness",
+        "distractor": "shade"
+      },
+      {
+        "type": "divide",
+        "distractor": "share"
+      },
+      {
+        "type": "calm",
+        "distractor": "soothe"
+      }
+    ]
+  },
+  {
+    "id": 517,
+    "word": "jostle",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 756,
+    "difficulty_score": 0.269429541324324,
+    "short_definition": "A rough pushing or bumping.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "a crowded subway ride",
+      "a mosh pit scrum"
+    ],
+    "distractors": [
+      {
+        "type": "sound of bells",
+        "distractor": "jingle"
+      },
+      {
+        "type": "shake",
+        "distractor": "joggle"
+      },
+      {
+        "type": "fairness",
+        "distractor": "justice"
+      },
+      {
+        "type": "endanger",
+        "distractor": "jeopardize"
+      },
+      {
+        "type": "joke",
+        "distractor": "jest"
+      }
+    ]
+  },
+  {
+    "id": 518,
+    "word": "elbowing",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 758,
+    "difficulty_score": 0.293810126524599,
+    "short_definition": "The act of pushing or nudging with one's elbow.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "navigating dense crowds",
+      "aggressively making space"
+    ],
+    "distractors": [
+      {
+        "type": "supporting",
+        "distractor": "endorsing"
+      },
+      {
+        "type": "fluent speech",
+        "distractor": "eloquence"
+      },
+      {
+        "type": "hugging",
+        "distractor": "embracing"
+      },
+      {
+        "type": "avoiding",
+        "distractor": "evading"
+      },
+      {
+        "type": "lengthening",
+        "distractor": "elongating"
+      }
+    ]
+  },
+  {
+    "id": 519,
+    "word": "haulage",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 764,
+    "difficulty_score": 0.554379773912039,
+    "short_definition": "The commercial transport of goods or materials.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "truck freight transport",
+      "rail cargo delivery"
+    ],
+    "distractors": [
+      {
+        "type": "collection",
+        "distractor": "assemblage"
+      },
+      {
+        "type": "area of land",
+        "distractor": "acreage"
+      },
+      {
+        "type": "amount spilled",
+        "distractor": "spillage"
+      },
+      {
+        "type": "degree of sliding",
+        "distractor": "slippage"
+      },
+      {
+        "type": "stems of plants",
+        "distractor": "haulm"
+      }
+    ]
+  },
+  {
+    "id": 520,
+    "word": "form",
+    "pos": "noun",
+    "sense_count": 23,
+    "source_word_id": 61,
+    "difficulty_score": 0,
+    "short_definition": "The visible shape of something.",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:28:37.981Z",
+    "owad_phrase": [
+      "a geometric shape",
+      "a cloud's silhouette"
+    ],
+    "distractors": [
+      {
+        "type": "mathematical rule",
+        "distractor": "formula"
+      },
+      {
+        "type": "agricultural land",
+        "distractor": "farm"
+      },
+      {
+        "type": "solid",
+        "distractor": "firm"
+      },
+      {
+        "type": "defect",
+        "distractor": "flaw"
+      },
+      {
+        "type": "structure",
+        "distractor": "frame"
+      }
+    ]
+  }
+]

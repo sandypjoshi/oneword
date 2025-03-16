@@ -1,0 +1,67 @@
+[
+  {
+    "id": 51249,
+    "word": "said",
+    "pos": null,
+    "shortDefinition": null,
+    "definition_updated_at": null,
+    "definition_source": null,
+    "owad_phrase": [
+      "thus narrated",
+      "previously stated"
+    ],
+    "distractors": null
+  },
+  {
+    "id": 164796,
+    "word": "said",
+    "pos": null,
+    "shortDefinition": null,
+    "definition_updated_at": null,
+    "definition_source": null,
+    "owad_phrase": [
+      "thus narrated",
+      "previously stated"
+    ],
+    "distractors": null
+  },
+  {
+    "id": 240806,
+    "word": "said",
+    "pos": null,
+    "shortDefinition": null,
+    "definition_updated_at": null,
+    "definition_source": null,
+    "owad_phrase": [
+      "thus narrated",
+      "previously stated"
+    ],
+    "distractors": null
+  },
+  {
+    "id": 58834,
+    "word": "under",
+    "pos": "adjective satellite",
+    "shortDefinition": "Lower in rank or importance than another thing.",
+    "definition_updated_at": "2025-03-15T21:56:38.080Z",
+    "definition_source": "gemini",
+    "owad_phrase": [
+      "beneath shadow",
+      "subjected below"
+    ],
+    "distractors": null
+  },
+  {
+    "id": 139,
+    "word": "first",
+    "pos": "noun",
+    "shortDefinition": "The thing that comes before all others.",
+    "definition_updated_at": "2025-03-15T21:56:38.081Z",
+    "definition_source": "gemini",
+    "owad_phrase": [
+      "a maiden voyage",
+      "an initial step"
+    ],
+    "distractors": null
+  }
+]

@@ -1,0 +1,1442 @@
+[
+  {
+    "id": 121,
+    "word": "rubbing",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 5231,
+    "short_definition": "The act of applying pressure and friction to a surface",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "a gentle massage",
+      "a smooth polish"
+    ],
+    "distractors": [
+      {
+        "type": "related action",
+        "distractor": "polishing"
+      },
+      {
+        "type": "functionally related",
+        "distractor": "friction"
+      },
+      {
+        "type": "distinct surface application",
+        "distractor": "painting"
+      },
+      {
+        "type": "similar physical contact",
+        "distractor": "caressing"
+      },
+      {
+        "type": "hyponym (specific type of rubbing)",
+        "distractor": "scrubbing"
+      }
+    ]
+  },
+  {
+    "id": 122,
+    "word": "covering",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 5233,
+    "short_definition": "Something placed over or on top of something else",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "a protective layer",
+      "a hidden spot"
+    ],
+    "distractors": [
+      {
+        "type": "related protection",
+        "distractor": "shield"
+      },
+      {
+        "type": "related action",
+        "distractor": "concealment"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "blanket"
+      },
+      {
+        "type": "function",
+        "distractor": "shelter"
+      },
+      {
+        "type": "orthographic",
+        "distractor": "shelving"
+      }
+    ]
+  },
+  {
+    "id": 123,
+    "word": "loading",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 5242,
+    "short_definition": "The act of placing a load onto something",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "a heavy burden",
+      "the filled space"
+    ],
+    "distractors": [
+      {
+        "type": "tech-related action",
+        "distractor": "uploading"
+      },
+      {
+        "type": "transportation related action",
+        "distractor": "hauling"
+      },
+      {
+        "type": "result of loading",
+        "distractor": "burden"
+      },
+      {
+        "type": "antonym",
+        "distractor": "unloading"
+      },
+      {
+        "type": "phonological",
+        "distractor": "lording"
+      }
+    ]
+  },
+  {
+    "id": 124,
+    "word": "radiation",
+    "pos": "noun",
+    "sense_count": 7,
+    "source_word_id": 5174,
+    "short_definition": "The emission of energy as electromagnetic waves or particles",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "energy emission",
+      "dangerous rays"
+    ],
+    "distractors": [
+      {
+        "type": "related process",
+        "distractor": "emission"
+      },
+      {
+        "type": "related concept",
+        "distractor": "irradiation"
+      },
+      {
+        "type": "related medical process",
+        "distractor": "exposure"
+      },
+      {
+        "type": "related light",
+        "distractor": "radiance"
+      },
+      {
+        "type": "orthographic/phonological",
+        "distractor": "radian"
+      }
+    ]
+  },
+  {
+    "id": 125,
+    "word": "ect",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 5187,
+    "short_definition": "Abbreviation for et cetera, meaning 'and other things'",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "other similar things",
+      "and so forth"
+    ],
+    "distractors": [
+      {
+        "type": "full phrase",
+        "distractor": "etcetera"
+      },
+      {
+        "type": "part of the phrase",
+        "distractor": "et"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "text"
+      },
+      {
+        "type": "commonly confused word",
+        "distractor": "effect"
+      },
+      {
+        "type": "phonological",
+        "distractor": "accept"
+      }
+    ]
+  },
+  {
+    "id": 126,
+    "word": "acupuncture",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 5210,
+    "short_definition": "A therapy involving thin needles inserted into the body",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "needle therapy",
+      "pain relief"
+    ],
+    "distractors": [
+      {
+        "type": "similar therapy",
+        "distractor": "acupressure"
+      },
+      {
+        "type": "broader category",
+        "distractor": "therapy"
+      },
+      {
+        "type": "related medical procedure",
+        "distractor": "injection"
+      },
+      {
+        "type": "related action",
+        "distractor": "puncture"
+      },
+      {
+        "type": "person who performs it",
+        "distractor": "acupuncturist"
+      }
+    ]
+  },
+  {
+    "id": 127,
+    "word": "predation",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5228,
+    "short_definition": "The act of one organism killing another for food",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "animal hunting",
+      "exploitative action"
+    ],
+    "distractors": [
+      {
+        "type": "related action",
+        "distractor": "hunting"
+      },
+      {
+        "type": "target of predation",
+        "distractor": "prey"
+      },
+      {
+        "type": "agent of predation",
+        "distractor": "carnivore"
+      },
+      {
+        "type": "opposite concept",
+        "distractor": "preservation"
+      },
+      {
+        "type": "phonological",
+        "distractor": "medication"
+      }
+    ]
+  },
+  {
+    "id": 128,
+    "word": "friction",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 5229,
+    "short_definition": "The resistance encountered when one surface moves against another",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "surface resistance",
+      "heated argument"
+    ],
+    "distractors": [
+      {
+        "type": "similar concept",
+        "distractor": "resistance"
+      },
+      {
+        "type": "related action",
+        "distractor": "rubbing"
+      },
+      {
+        "type": "related property",
+        "distractor": "traction"
+      },
+      {
+        "type": "phonological",
+        "distractor": "faction"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "affliction"
+      }
+    ]
+  },
+  {
+    "id": 129,
+    "word": "coating",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 5232,
+    "short_definition": "A layer of a substance covering a surface",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "a thin layer",
+      "protective finish"
+    ],
+    "distractors": [
+      {
+        "type": "similar concept",
+        "distractor": "layer"
+      },
+      {
+        "type": "specific type",
+        "distractor": "lacquer"
+      },
+      {
+        "type": "specific type",
+        "distractor": "icing"
+      },
+      {
+        "type": "functionally related",
+        "distractor": "cover"
+      },
+      {
+        "type": "phonological",
+        "distractor": "plotting"
+      }
+    ]
+  },
+  {
+    "id": 130,
+    "word": "unloading",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 5243,
+    "short_definition": "The act of removing a load from something",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "removal of cargo",
+      "emptying process"
+    ],
+    "distractors": [
+      {
+        "type": "related action",
+        "distractor": "discharge"
+      },
+      {
+        "type": "related action",
+        "distractor": "dumping"
+      },
+      {
+        "type": "related action",
+        "distractor": "emptying"
+      },
+      {
+        "type": "antonym",
+        "distractor": "loading"
+      },
+      {
+        "type": "orthographic",
+        "distractor": "unfolding"
+      }
+    ]
+  },
+  {
+    "id": 131,
+    "word": "taking",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5246,
+    "short_definition": "The act of gaining possession or control",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "the act seizing",
+      "a profit gain"
+    ],
+    "distractors": [
+      {
+        "type": "related action",
+        "distractor": "seizing"
+      },
+      {
+        "type": "related action",
+        "distractor": "grabbing"
+      },
+      {
+        "type": "antonym",
+        "distractor": "giving"
+      },
+      {
+        "type": "phonological",
+        "distractor": "aking"
+      },
+      {
+        "type": "unrelated action",
+        "distractor": "teaching"
+      }
+    ]
+  },
+  {
+    "id": 132,
+    "word": "plating",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5276,
+    "short_definition": "A metal coating applied to a surface",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "metal coating",
+      "protective layer"
+    ],
+    "distractors": [
+      {
+        "type": "similar concept",
+        "distractor": "coating"
+      },
+      {
+        "type": "related action",
+        "distractor": "plating"
+      },
+      {
+        "type": "orthographic",
+        "distractor": "planing"
+      },
+      {
+        "type": "removing",
+        "distractor": "displating"
+      },
+      {
+        "type": "synonym",
+        "distractor": "plating"
+      }
+    ]
+  },
+  {
+    "id": 133,
+    "word": "duty",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 5280,
+    "short_definition": "A moral or legal obligation or responsibility",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "moral obligation",
+      "assigned task"
+    ],
+    "distractors": [
+      {
+        "type": "similar concept",
+        "distractor": "obligation"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "responsibility"
+      },
+      {
+        "type": "type of duty",
+        "distractor": "chore"
+      },
+      {
+        "type": "rhyming word",
+        "distractor": "beauty"
+      },
+      {
+        "type": "related concept",
+        "distractor": "utility"
+      }
+    ]
+  },
+  {
+    "id": 134,
+    "word": "function",
+    "pos": "noun",
+    "sense_count": 10,
+    "source_word_id": 5287,
+    "short_definition": "The purpose for which something is designed or exists",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "intended purpose",
+      "useful role"
+    ],
+    "distractors": [
+      {
+        "type": "similar concept",
+        "distractor": "purpose"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "role"
+      },
+      {
+        "type": "antonym",
+        "distractor": "dysfunction"
+      },
+      {
+        "type": "phonological",
+        "distractor": "fiction"
+      },
+      {
+        "type": "related structure",
+        "distractor": "foundation"
+      }
+    ]
+  },
+  {
+    "id": 135,
+    "word": "forward",
+    "pos": "noun",
+    "sense_count": 12,
+    "source_word_id": 5315,
+    "short_definition": "The front part or direction",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "attacking player",
+      "sent message"
+    ],
+    "distractors": [
+      {
+        "type": "similar concept",
+        "distractor": "ahead"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "onward"
+      },
+      {
+        "type": "antonym",
+        "distractor": "backward"
+      },
+      {
+        "type": "orthographic",
+        "distractor": "foreword"
+      },
+      {
+        "type": "related anatomy",
+        "distractor": "forehead"
+      }
+    ]
+  },
+  {
+    "id": 136,
+    "word": "task",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 5281,
+    "short_definition": "A piece of work to be done",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "assigned job",
+      "specific duty"
+    ],
+    "distractors": [
+      {
+        "type": "similar concept",
+        "distractor": "assignment"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "job"
+      },
+      {
+        "type": "related concept",
+        "distractor": "duty"
+      },
+      {
+        "type": "phonological",
+        "distractor": "tusk"
+      },
+      {
+        "type": "minimal pair",
+        "distractor": "ask"
+      }
+    ]
+  },
+  {
+    "id": 137,
+    "word": "capacity",
+    "pos": "noun",
+    "sense_count": 9,
+    "source_word_id": 5290,
+    "short_definition": "The maximum amount that something can contain",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "maximum amount",
+      "holding ability"
+    ],
+    "distractors": [
+      {
+        "type": "similar concept",
+        "distractor": "volume"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "size"
+      },
+      {
+        "type": "related concept",
+        "distractor": "capability"
+      },
+      {
+        "type": "orthographic",
+        "distractor": "captivity"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "cupidity"
+      }
+    ]
+  },
+  {
+    "id": 138,
+    "word": "hat",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 5291,
+    "short_definition": "A covering for the head, typically with a brim",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "head covering",
+      "stylish headwear"
+    ],
+    "distractors": [
+      {
+        "type": "co-hyponym",
+        "distractor": "cap"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "helmet"
+      },
+      {
+        "type": "co-hyponym",
+        "distractor": "beret"
+      },
+      {
+        "type": "rhyming word",
+        "distractor": "rat"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "habit"
+      }
+    ]
+  },
+  {
+    "id": 139,
+    "word": "first",
+    "pos": "noun",
+    "sense_count": 16,
+    "source_word_id": 5301,
+    "short_definition": "The person or thing that is ahead of others",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "the initial spot",
+      "the top rank"
+    ],
+    "distractors": [
+      {
+        "type": "similar concept",
+        "distractor": "initial"
+      },
+      {
+        "type": "antonym",
+        "distractor": "last"
+      },
+      {
+        "type": "sequential",
+        "distractor": "second"
+      },
+      {
+        "type": "rhyming word",
+        "distractor": "thirst"
+      },
+      {
+        "type": "orthographic",
+        "distractor": "wurst"
+      }
+    ]
+  },
+  {
+    "id": 140,
+    "word": "steal",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 5314,
+    "short_definition": "An act of taking something dishonestly or illegally",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "bargain price",
+      "ill-gotten gain"
+    ],
+    "distractors": [
+      {
+        "type": "similar concept",
+        "distractor": "theft"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "robbery"
+      },
+      {
+        "type": "antonym",
+        "distractor": "loan"
+      },
+      {
+        "type": "homophone",
+        "distractor": "steel"
+      },
+      {
+        "type": "rhyming word",
+        "distractor": "deal"
+      }
+    ]
+  },
+  {
+    "id": 141,
+    "word": "example",
+    "pos": "noun",
+    "sense_count": 6,
+    "source_word_id": 5343,
+    "short_definition": "A representative instance used to illustrate a concept",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "a clear model",
+      "a helpful sample"
+    ],
+    "distractors": [
+      {
+        "type": "similar concept",
+        "distractor": "instance"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "illustration"
+      },
+      {
+        "type": "specific type",
+        "distractor": "sample"
+      },
+      {
+        "type": "related activity",
+        "distractor": "exam"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "exasperation"
+      }
+    ]
+  },
+  {
+    "id": 142,
+    "word": "charge",
+    "pos": "noun",
+    "sense_count": 40,
+    "source_word_id": 5355,
+    "short_definition": "A price asked for goods or services",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "price demanded",
+      "official accusation"
+    ],
+    "distractors": [
+      {
+        "type": "similar concept",
+        "distractor": "fee"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "price"
+      },
+      {
+        "type": "related action",
+        "distractor": "discharge"
+      },
+      {
+        "type": "task",
+        "distractor": "chore"
+      },
+      {
+        "type": "phonological",
+        "distractor": "charade"
+      }
+    ]
+  },
+  {
+    "id": 143,
+    "word": "commission",
+    "pos": "noun",
+    "sense_count": 12,
+    "source_word_id": 5356,
+    "short_definition": "An instruction, command, or duty given to a person",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "sales percentage",
+      "official group"
+    ],
+    "distractors": [
+      {
+        "type": "similar concept",
+        "distractor": "instruction"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "order"
+      },
+      {
+        "type": "related concept",
+        "distractor": "mission"
+      },
+      {
+        "type": "condition for commission",
+        "distractor": "permission"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "condemnation"
+      }
+    ]
+  },
+  {
+    "id": 144,
+    "word": "tort",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 5378,
+    "short_definition": "A civil wrong causing someone to suffer loss or harm",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "civil wrong",
+      "legal claim"
+    ],
+    "distractors": [
+      {
+        "type": "similar concept",
+        "distractor": "wrong"
+      },
+      {
+        "type": "result of tort",
+        "distractor": "injury"
+      },
+      {
+        "type": "related legal concept",
+        "distractor": "contract"
+      },
+      {
+        "type": "homophone",
+        "distractor": "taut"
+      },
+      {
+        "type": "rhyming word",
+        "distractor": "sort"
+      }
+    ]
+  },
+  {
+    "id": 145,
+    "word": "mischief",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5393,
+    "short_definition": "Playful misbehavior or troublemaking",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "playful trouble",
+      "minor misdeed"
+    ],
+    "distractors": [
+      {
+        "type": "similar concept",
+        "distractor": "trouble"
+      },
+      {
+        "type": "related action",
+        "distractor": "prank"
+      },
+      {
+        "type": "opposite concept",
+        "distractor": "joy"
+      },
+      {
+        "type": "orthographic",
+        "distractor": "myself"
+      },
+      {
+        "type": "orthographic",
+        "distractor": "misschief"
+      }
+    ]
+  },
+  {
+    "id": 146,
+    "word": "blaze",
+    "pos": "noun",
+    "sense_count": 10,
+    "source_word_id": 5404,
+    "short_definition": "A large, fiercely burning fire",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "intense fire",
+      "bright flame"
+    ],
+    "distractors": [
+      {
+        "type": "similar concept",
+        "distractor": "fire"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "flame"
+      },
+      {
+        "type": "result of blaze",
+        "distractor": "ash"
+      },
+      {
+        "type": "phonological",
+        "distractor": "bales"
+      },
+      {
+        "type": "related concept",
+        "distractor": "abrasé"
+      }
+    ]
+  },
+  {
+    "id": 147,
+    "word": "fatigue",
+    "pos": "noun",
+    "sense_count": 6,
+    "source_word_id": 5350,
+    "short_definition": "Extreme tiredness resulting from mental or physical exertion",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "extreme tiredness",
+      "weary feeling"
+    ],
+    "distractors": [
+      {
+        "type": "similar concept",
+        "distractor": "exhaustion"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "weariness"
+      },
+      {
+        "type": "antonym",
+        "distractor": "energy"
+      },
+      {
+        "type": "orthographic",
+        "distractor": "fateague"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "cottage"
+      }
+    ]
+  },
+  {
+    "id": 148,
+    "word": "errand",
+    "pos": "noun",
+    "sense_count": 1,
+    "source_word_id": 5362,
+    "short_definition": "A short journey to complete a specific task",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "short trip",
+      "quick task"
+    ],
+    "distractors": [
+      {
+        "type": "similar concept",
+        "distractor": "chore"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "task"
+      },
+      {
+        "type": "related concept",
+        "distractor": "journey"
+      },
+      {
+        "type": "orthographic",
+        "distractor": "arrant"
+      },
+      {
+        "type": "phonological",
+        "distractor": "serenade"
+      }
+    ]
+  },
+  {
+    "id": 149,
+    "word": "delinquency",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 5391,
+    "short_definition": "Minor crime, especially committed by young people",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "minor crime",
+      "youthful offense"
+    ],
+    "distractors": [
+      {
+        "type": "similar concept",
+        "distractor": "crime"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "misconduct"
+      },
+      {
+        "type": "antonym",
+        "distractor": "obedience"
+      },
+      {
+        "type": "orthographic",
+        "distractor": "relinquency"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "frequency"
+      }
+    ]
+  },
+  {
+    "id": 150,
+    "word": "hell",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 5403,
+    "short_definition": "A place of great suffering or torment",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "fiery underworld",
+      "terrible place"
+    ],
+    "distractors": [
+      {
+        "type": "similar concept",
+        "distractor": "underworld"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "torment"
+      },
+      {
+        "type": "antonym",
+        "distractor": "heaven"
+      },
+      {
+        "type": "homophone",
+        "distractor": "heal"
+      },
+      {
+        "type": "minimal pair",
+        "distractor": "cell"
+      }
+    ]
+  },
+  {
+    "id": 151,
+    "word": "abnormality",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 5411,
+    "short_definition": "An irregular or unusual condition or feature",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "strange condition",
+      "unusual trait"
+    ],
+    "distractors": [
+      {
+        "type": "similar concept",
+        "distractor": "irregularity"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "deviation"
+      },
+      {
+        "type": "antonym",
+        "distractor": "normality"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "formality"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "ability"
+      }
+    ]
+  },
+  {
+    "id": 152,
+    "word": "deviance",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5413,
+    "short_definition": "The action or fact of diverging from usual standards",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "odd behavior",
+      "different act"
+    ],
+    "distractors": [
+      {
+        "type": "similar concept",
+        "distractor": "aberration"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "nonconformity"
+      },
+      {
+        "type": "antonym",
+        "distractor": "conformity"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "defiance"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "distance"
+      }
+    ]
+  },
+  {
+    "id": 153,
+    "word": "negligence",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5431,
+    "short_definition": "Failure to take proper care in doing something",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "careless act",
+      "failure care"
+    ],
+    "distractors": [
+      {
+        "type": "similar concept",
+        "distractor": "carelessness"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "neglect"
+      },
+      {
+        "type": "antonym",
+        "distractor": "diligence"
+      },
+      {
+        "type": "adjective form",
+        "distractor": "negligent"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "negligee"
+      }
+    ]
+  },
+  {
+    "id": 154,
+    "word": "familiarity",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 5407,
+    "short_definition": "Close acquaintance with or knowledge of something",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "close acquaintance",
+      "known feeling"
+    ],
+    "distractors": [
+      {
+        "type": "similar concept",
+        "distractor": "acquaintance"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "knowledge"
+      },
+      {
+        "type": "antonym",
+        "distractor": "strangeness"
+      },
+      {
+        "type": "related concept",
+        "distractor": "similarity"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "fertility"
+      }
+    ]
+  },
+  {
+    "id": 155,
+    "word": "liberty",
+    "pos": "noun",
+    "sense_count": 5,
+    "source_word_id": 5410,
+    "short_definition": "The state of being free within society",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "personal freedom",
+      "given permission"
+    ],
+    "distractors": [
+      {
+        "type": "similar concept",
+        "distractor": "freedom"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "autonomy"
+      },
+      {
+        "type": "antonym",
+        "distractor": "captivity"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "liability"
+      },
+      {
+        "type": "synonym",
+        "distractor": "liberty"
+      }
+    ]
+  },
+  {
+    "id": 156,
+    "word": "irregularity",
+    "pos": "noun",
+    "sense_count": 4,
+    "source_word_id": 5412,
+    "short_definition": "The state of not being regular or even",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "odd occurrence",
+      "unusual event"
+    ],
+    "distractors": [
+      {
+        "type": "similar concept",
+        "distractor": "anomaly"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "unpredictability"
+      },
+      {
+        "type": "antonym",
+        "distractor": "regularity"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "irrigation"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "integrity"
+      }
+    ]
+  },
+  {
+    "id": 157,
+    "word": "obscenity",
+    "pos": "noun",
+    "sense_count": 3,
+    "source_word_id": 5425,
+    "short_definition": "Offensive or disgusting language or behavior",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "offensive language",
+      "crude expression"
+    ],
+    "distractors": [
+      {
+        "type": "similar concept",
+        "distractor": "indecency"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "vulgarity"
+      },
+      {
+        "type": "antonym",
+        "distractor": "decency"
+      },
+      {
+        "type": "orthographic",
+        "distractor": "obesity"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "obsolescence"
+      }
+    ]
+  },
+  {
+    "id": 158,
+    "word": "carelessness",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5432,
+    "short_definition": "Failure to give sufficient attention to avoid harm",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "lack caution",
+      "negligent action"
+    ],
+    "distractors": [
+      {
+        "type": "similar concept",
+        "distractor": "negligence"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "inattention"
+      },
+      {
+        "type": "antonym",
+        "distractor": "care"
+      },
+      {
+        "type": "orthographic",
+        "distractor": "cheerfulness"
+      },
+      {
+        "type": "related characteristic",
+        "distractor": "colorlessness"
+      }
+    ]
+  },
+  {
+    "id": 159,
+    "word": "malpractice",
+    "pos": "noun",
+    "sense_count": 2,
+    "source_word_id": 5452,
+    "short_definition": "Improper, illegal, or negligent professional activity or treatment",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "professional error",
+      "negligent treatment"
+    ],
+    "distractors": [
+      {
+        "type": "similar concept",
+        "distractor": "misconduct"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "negligence"
+      },
+      {
+        "type": "antonym",
+        "distractor": "expertise"
+      },
+      {
+        "type": "orthographic",
+        "distractor": "mapleplace"
+      },
+      {
+        "type": "unrelated concept",
+        "distractor": "maltose"
+      }
+    ]
+  },
+  {
+    "id": 160,
+    "word": "waste",
+    "pos": "noun",
+    "sense_count": 16,
+    "source_word_id": 5454,
+    "short_definition": "Unwanted or unusable materials",
+    "definition_source": "gemini",
+    "definition_updated_at": "2025-03-16T02:03:42.745Z",
+    "owad_phrase": [
+      "unused material",
+      "useless stuff"
+    ],
+    "distractors": [
+      {
+        "type": "similar concept",
+        "distractor": "refuse"
+      },
+      {
+        "type": "similar concept",
+        "distractor": "debris"
+      },
+      {
+        "type": "antonym",
+        "distractor": "resource"
+      },
+      {
+        "type": "homophone",
+        "distractor": "waist"
+      },
+      {
+        "type": "verb form",
+        "distractor": "wasted"
+      }
+    ]
+  }
+]
