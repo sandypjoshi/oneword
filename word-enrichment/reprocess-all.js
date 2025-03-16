@@ -40,6 +40,9 @@ const stats = {
   currentBatch: 0
 };
 
+// Add checkpoint file path
+const CHECKPOINT_FILE = path.join(__dirname, 'checkpoint.json');
+
 // Save stats to file
 function saveStats() {
   const statsPath = path.join(statsDir, `reprocess-stats-${Date.now()}.json`);
@@ -49,6 +52,35 @@ function saveStats() {
   
   fs.writeFileSync(statsPath, JSON.stringify(stats, null, 2));
   logger.info(`Stats saved to ${statsPath}`);
+}
+
+// Add function to save checkpoint
+function saveCheckpoint(offset) {
+  const checkpoint = {
+    offset,
+    timestamp: new Date().toISOString(),
+    stats: { ...stats }
+  };
+  fs.writeFileSync(CHECKPOINT_FILE, JSON.stringify(checkpoint, null, 2));
+  logger.info(`Checkpoint saved: offset ${offset}`);
+}
+
+// Add function to load checkpoint
+function loadCheckpoint() {
+  if (fs.existsSync(CHECKPOINT_FILE)) {
+    try {
+      const checkpoint = JSON.parse(fs.readFileSync(CHECKPOINT_FILE, 'utf8'));
+      logger.info(`Checkpoint found: offset ${checkpoint.offset} from ${checkpoint.timestamp}`);
+      
+      // Return the offset from the checkpoint
+      return checkpoint;
+    } catch (error) {
+      logger.error(`Error loading checkpoint: ${error.message}`);
+    }
+  }
+  
+  logger.info('No checkpoint found, starting from the beginning');
+  return { offset: 0, stats: null };
 }
 
 /**
@@ -222,60 +254,123 @@ async function processBatch(words) {
 /**
  * Main function to reprocess all words
  */
-async function reprocessAllWords() {
-  logger.info('=== STARTING REPROCESSING OF ALL WORDS ===');
-  
+async function main() {
   try {
-    // Count total words
-    stats.totalWords = await countWords();
-    logger.info(`Found ${stats.totalWords} total words to process`);
+    logger.info('=== STARTING REPROCESSING OF ALL WORDS ===');
     
-    // Process in batches
-    const BATCH_SIZE = config.BATCH_SIZE || 50;
+    // Get total word count
+    const totalWordCount = await countWords();
+    stats.totalWords = totalWordCount;
+    logger.info(`Found ${totalWordCount} total words to process`);
     
-    for (let offset = 0; offset < stats.totalWords; offset += BATCH_SIZE) {
-      // Fetch batch
-      const words = await fetchWords(BATCH_SIZE, offset);
+    // Load checkpoint if exists
+    const checkpoint = loadCheckpoint();
+    let currentOffset = checkpoint.offset;
+    
+    // Restore stats if available
+    if (checkpoint.stats) {
+      stats.processedWords = checkpoint.stats.processedWords || 0;
+      stats.definitionsUpdated = checkpoint.stats.definitionsUpdated || 0;
+      stats.owadPhrasesUpdated = checkpoint.stats.owadPhrasesUpdated || 0;
+      stats.distractorsUpdated = checkpoint.stats.distractorsUpdated || 0;
+      stats.errors = checkpoint.stats.errors || 0;
+      stats.errorWords = checkpoint.stats.errorWords || [];
+      stats.batches = checkpoint.stats.batches || [];
+      stats.currentBatch = checkpoint.stats.currentBatch || 0;
       
-      // Process batch
-      await processBatch(words);
-      
-      // Save stats periodically
-      if (stats.currentBatch % 5 === 0) {
-        saveStats();
-      }
-      
-      // Log overall progress
-      const elapsedMin = Math.round((Date.now() - stats.startTime) / 60000);
-      const wordsPerMinute = Math.round(stats.processedWords / elapsedMin);
-      const remainingWords = stats.totalWords - stats.processedWords;
-      const estimatedMinRemaining = Math.round(remainingWords / wordsPerMinute);
-      
-      logger.info(`Progress: ${stats.processedWords}/${stats.totalWords} words (${Math.round(stats.processedWords/stats.totalWords*100)}%)`);
-      logger.info(`Speed: ${wordsPerMinute} words/minute, Est. time remaining: ${estimatedMinRemaining} minutes`);
-      logger.info('-------------------------------------');
+      logger.info(`Restored stats from checkpoint: ${stats.processedWords} words processed`);
     }
     
-    // Final stats
+    // Process in batches
+    const BATCH_SIZE = 40;
+    
+    // Continue until all words are processed
+    while (currentOffset < totalWordCount) {
+      try {
+        // Fetch next batch of words
+        const words = await fetchWords(BATCH_SIZE, currentOffset);
+        
+        // Process the batch
+        await processBatch(words);
+        
+        // Update offset
+        currentOffset += words.length;
+        
+        // Save checkpoint after each batch
+        saveCheckpoint(currentOffset);
+        
+        // Calculate processing speed and estimated time remaining
+        const elapsedMinutes = (Date.now() - stats.startTime) / 60000;
+        const wordsPerMinute = Math.round(stats.processedWords / elapsedMinutes);
+        const remainingWords = totalWordCount - currentOffset;
+        const estimatedMinRemaining = Math.round(remainingWords / wordsPerMinute);
+        
+        logger.info(`Speed: ${wordsPerMinute} words/minute, Est. time remaining: ${estimatedMinRemaining} minutes`);
+        logger.info(`Progress: ${stats.processedWords}/${totalWordCount} words (${Math.round(stats.processedWords/totalWordCount*100)}%)`);
+        logger.info('-------------------------------------');
+        
+        // Save stats periodically
+        saveStats();
+      } catch (error) {
+        logger.error(`Error processing batch at offset ${currentOffset}: ${error.message}`);
+        
+        // Save checkpoint so we can resume
+        saveCheckpoint(currentOffset);
+        
+        // Save stats
+        saveStats();
+        
+        // Wait before retry
+        logger.info(`Waiting 30 seconds before retrying...`);
+        await new Promise(resolve => setTimeout(resolve, 30000));
+      }
+    }
+    
     logger.info('=== REPROCESSING COMPLETE ===');
-    logger.info(`Processed ${stats.processedWords}/${stats.totalWords} words`);
+    logger.info(`Processed ${stats.processedWords} words total`);
     logger.info(`Updated ${stats.definitionsUpdated} definitions, ${stats.owadPhrasesUpdated} OWAD phrases, ${stats.distractorsUpdated} distractors`);
     logger.info(`Encountered ${stats.errors} errors`);
     
     // Save final stats
     saveStats();
     
+    // Remove checkpoint file since processing is complete
+    if (fs.existsSync(CHECKPOINT_FILE)) {
+      fs.unlinkSync(CHECKPOINT_FILE);
+      logger.info('Checkpoint file removed');
+    }
+    
   } catch (error) {
-    logger.error(`Reprocessing failed: ${error.message}`);
+    logger.error(`Fatal error: ${error.message}`);
     saveStats();
     process.exit(1);
   }
 }
 
+// Add error handlers at the process level to catch unexpected terminations
+process.on('SIGINT', () => {
+  logger.info('Process interrupted, saving checkpoint before exit');
+  saveStats();
+  process.exit(0);
+});
+
+process.on('SIGTERM', () => {
+  logger.info('Process terminated, saving checkpoint before exit');
+  saveStats();
+  process.exit(0);
+});
+
+process.on('uncaughtException', (error) => {
+  logger.error(`Uncaught exception: ${error.message}`);
+  logger.error(error.stack);
+  saveStats();
+  process.exit(1);
+});
+
 // Run the reprocessing
-reprocessAllWords()
+main()
   .catch(err => {
     logger.error(`Script failed: ${err.message}`);
     saveStats();
     process.exit(1);
-  }); 
+  });

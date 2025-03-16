@@ -1,0 +1,74 @@
+[32m[INFO][0m === STARTING REPROCESSING OF ALL WORDS ===
+(node:65119) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[32m[INFO][0m Found 68760 total words to process
+[32m[INFO][0m No checkpoint found, starting from the beginning
+[32m[INFO][0m Fetching 40 words with offset 0...
+[32m[INFO][0m Fetched 40 words
+[32m[INFO][0m Processing batch of 40 words...
+[32m[INFO][0m Sending batch request for 40 words to definition generator...
+[32m[INFO][0m Generating definitions for 40 words...
+[32m[INFO][0m API Request successful using key AIzaSy...UFvM. Total requests: 1
+[32m[INFO][0m Sending batch request for 40 words to OWAD generator...
+[32m[INFO][0m Generating OWAD phrases for 40 words...
+[32m[INFO][0m API Request successful using key AIzaSy...UFvM. Total requests: 1
+[32m[INFO][0m Sending batch request for 40 words to distractor generator...
+[32m[INFO][0m Generating distractors for 40 words...
+[32m[INFO][0m API Request successful using key AIzaSy...UFvM. Total requests: 1
+[32m[INFO][0m Processing results for word 1/40: down (noun)
+[32m[INFO][0m Progress: 1/68760 words processed (0%)
+[32m[INFO][0m Processing results for word 2/40: nightcap (noun)
+[32m[INFO][0m Processing results for word 3/40: chinaman (noun)
+[32m[INFO][0m Processing results for word 4/40: squash (noun)
+[32m[INFO][0m Processing results for word 5/40: manhood (noun)
+[32m[INFO][0m Processing results for word 6/40: bat (noun)
+[32m[INFO][0m Processing results for word 7/40: frame (noun)
+[32m[INFO][0m Processing results for word 8/40: bowls (noun)
+[32m[INFO][0m Processing results for word 9/40: goalkeeper (noun)
+[32m[INFO][0m Processing results for word 10/40: golf (noun)
+[32m[INFO][0m Processing results for word 11/40: quoits (noun)
+[32m[INFO][0m Progress: 11/68760 words processed (0%)
+[32m[INFO][0m Processing results for word 12/40: dribble (noun)
+[32m[INFO][0m Processing results for word 13/40: contract (noun)
+[32m[INFO][0m Processing results for word 14/40: monte (noun)
+[32m[INFO][0m Processing results for word 15/40: chicago (noun)
+[32m[INFO][0m Processing results for word 16/40: canasta (noun)
+[32m[INFO][0m Processing results for word 17/40: bridge (noun)
+[32m[INFO][0m Processing results for word 18/40: michigan (noun)
+[32m[INFO][0m Processing results for word 19/40: rum (noun)
+[32m[INFO][0m Processing results for word 20/40: klondike (noun)
+[32m[INFO][0m Processing results for word 21/40: hearts (noun)
+[32m[INFO][0m Progress: 21/68760 words processed (0%)
+[32m[INFO][0m Processing results for word 22/40: samba (noun)
+[32m[INFO][0m Processing results for word 23/40: stud (noun)
+[32m[INFO][0m Processing results for word 24/40: nim (noun)
+[32m[INFO][0m Processing results for word 25/40: ticktacktoe (noun)
+[32m[INFO][0m Processing results for word 26/40: craps (noun)
+[32m[INFO][0m Processing results for word 27/40: cannon (noun)
+[32m[INFO][0m Processing results for word 28/40: pool (noun)
+[32m[INFO][0m Processing results for word 29/40: checkers (noun)
+[32m[INFO][0m Processing results for word 30/40: chess (noun)
+[32m[INFO][0m Processing results for word 31/40: roulette (noun)
+[32m[INFO][0m Progress: 31/68760 words processed (0%)
+[32m[INFO][0m Processing results for word 32/40: rag (noun)
+[32m[INFO][0m Processing results for word 33/40: festival (noun)
+[32m[INFO][0m Processing results for word 34/40: demonstration (noun)
+[32m[INFO][0m Processing results for word 35/40: fair (noun)
+[32m[INFO][0m Processing results for word 36/40: show (noun)
+[32m[INFO][0m Processing results for word 37/40: production (noun)
+[32m[INFO][0m Processing results for word 38/40: strip (noun)
+[32m[INFO][0m Processing results for word 39/40: charleston (noun)
+[32m[INFO][0m Processing results for word 40/40: waltz (noun)
+[32m[INFO][0m Progress: 40/68760 words processed (0%)
+[32m[INFO][0m Batch 1 completed in 0.7 minutes
+[32m[INFO][0m Batch results: 17 definitions, 40 OWAD phrases, 40 distractors updated
+[32m[INFO][0m Checkpoint saved: offset 40
+[32m[INFO][0m Speed: 59 words/minute, Est. time remaining: 1165 minutes
+[32m[INFO][0m Progress: 40/68760 words (0%)
+[32m[INFO][0m -------------------------------------
+[32m[INFO][0m Stats saved to /Users/sandeep.joshi/Documents/vibecoding/oneword/word-enrichment/stats/reprocess-stats-1742105958773.json
+[32m[INFO][0m Fetching 40 words with offset 40...
+[32m[INFO][0m Fetched 40 words
+[32m[INFO][0m Processing batch of 40 words...
+[32m[INFO][0m Sending batch request for 40 words to definition generator...
+[32m[INFO][0m Generating definitions for 40 words...

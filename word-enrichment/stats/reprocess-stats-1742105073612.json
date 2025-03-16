@@ -1,0 +1,76 @@
+{
+  "totalWords": 68760,
+  "processedWords": 200,
+  "definitionsUpdated": 116,
+  "owadPhrasesUpdated": 193,
+  "distractorsUpdated": 200,
+  "errors": 0,
+  "errorWords": [],
+  "startTime": 1742104867913,
+  "batches": [
+    {
+      "batchNumber": 1,
+      "wordCount": 40,
+      "definitionsUpdated": 21,
+      "owadPhrasesUpdated": 40,
+      "distractorsUpdated": 40,
+      "errors": 0,
+      "startTime": 1742104868558,
+      "endTime": 1742104910155,
+      "elapsedTimeMs": 41597,
+      "elapsedTimeMin": 0.7
+    },
+    {
+      "batchNumber": 2,
+      "wordCount": 40,
+      "definitionsUpdated": 20,
+      "owadPhrasesUpdated": 37,
+      "distractorsUpdated": 40,
+      "errors": 0,
+      "startTime": 1742104910416,
+      "endTime": 1742104950001,
+      "elapsedTimeMs": 39585,
+      "elapsedTimeMin": 0.7
+    },
+    {
+      "batchNumber": 3,
+      "wordCount": 40,
+      "definitionsUpdated": 17,
+      "owadPhrasesUpdated": 39,
+      "distractorsUpdated": 40,
+      "errors": 0,
+      "startTime": 1742104950246,
+      "endTime": 1742104991677,
+      "elapsedTimeMs": 41431,
+      "elapsedTimeMin": 0.7
+    },
+    {
+      "batchNumber": 4,
+      "wordCount": 40,
+      "definitionsUpdated": 18,
+      "owadPhrasesUpdated": 38,
+      "distractorsUpdated": 40,
+      "errors": 0,
+      "startTime": 1742104991973,
+      "endTime": 1742105032627,
+      "elapsedTimeMs": 40654,
+      "elapsedTimeMin": 0.7
+    },
+    {
+      "batchNumber": 5,
+      "wordCount": 40,
+      "definitionsUpdated": 40,
+      "owadPhrasesUpdated": 39,
+      "distractorsUpdated": 40,
+      "errors": 0,
+      "startTime": 1742105032880,
+      "endTime": 1742105073603,
+      "elapsedTimeMs": 40723,
+      "elapsedTimeMin": 0.7
+    }
+  ],
+  "currentBatch": 5,
+  "endTime": 1742105073612,
+  "totalTimeMs": 205699,
+  "totalTimeMin": 3
+}

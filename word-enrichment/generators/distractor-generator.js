@@ -61,7 +61,7 @@ class DistractorGenerator {
     }).join('\n- ');
     
     return `
-You are an expert lexicographer and assessment specialist creating high-quality vocabulary distractors for educational testing. Your task is to generate distractors that will NEVER be mistaken for the correct answer by someone who knows the word.
+You are an expert lexicographer and assessment specialist creating high-quality vocabulary distractors for educational testing. Your task is to generate plausible distractors that would make excellent wrong answers on a vocabulary assessment.
 
 ### 🚨 CRITICAL REQUIREMENTS 🚨
 
@@ -74,66 +74,70 @@ You are an expert lexicographer and assessment specialist creating high-quality 
    - For challenging forms (gerunds, past participles), ensure identical grammatical form
    - VERIFY EACH DISTRACTOR can be used in the exact same grammatical position
 
-2️⃣ **NO SEMANTIC SIMILARITY WHATSOEVER**
-   - Each distractor MUST be semantically DISTANT from the target word
-   - NEVER use synonyms, near-synonyms, or semantically adjacent terms
-   - NEVER use words that appear in dictionaries as synonyms for the target
-   - NEVER use words that share the same hypernym (category) as the target
-   - NEVER use words that could be used to define or explain the target
+2️⃣ **NO SEMANTIC SIMILARITY - ABSOLUTE PROHIBITION**
+   - NEVER use direct or indirect synonyms (e.g., "arson" and "incendiarism" are synonyms)
+   - NEVER use words that could be defined using the target word
+   - NEVER use words that share the same core meaning or purpose
+   - NEVER use words from the same subcategory (e.g., "painting" and "drawing" are both art forms)
+   - EVERY distractor MUST have a fundamentally different meaning and purpose than the target
 
-3️⃣ **STRATEGIC DISTRACTOR TYPES**
-   Each set of 5 distractors MUST include EXACTLY:
-   - 1 PHONOLOGICAL distractor: Sounds/spelled similar but COMPLETELY different meaning
-   - 1 ANTONYM distractor: Clear opposite or contrasting meaning
-   - 1 DOMAIN distractor: From an entirely different knowledge domain
-   - 1 ORTHOGRAPHIC distractor: Visually similar spelling but DIFFERENT meaning
-   - 1 UNRELATED distractor: No connection whatsoever to target, same POS
+3️⃣ **MAINTAIN PLAUSIBILITY AS WRONG ANSWERS**
+   - Distractors should appear reasonable to someone who doesn't know the exact meaning
+   - Choose words that have surface-level similarities (spelling, sound, word structure)
+   - Words that have similar usage contexts but DIFFERENT meanings
+   - Words that might be confused by students with partial knowledge
+   - AVOID completely random words that would never be plausible answers
 
-### ⚠️ VALIDATION CHECKS FOR EVERY DISTRACTOR
+4️⃣ **STRATEGIC DISTRACTOR TYPES**
+   Each set of 5 distractors MUST include:
+   - 1-2 DIFFERENT-DOMAIN words: From a completely different field but same POS
+   - 1 PHONOLOGICAL distractor: Sounds/spelled similar but unrelated meaning
+   - 1 STRUCTURAL distractor: Similar word structure/ending but different meaning
+   - 1-2 FUNCTIONAL distractors: Used in similar contexts but with different function
 
-🔍 **PART OF SPEECH CHECK - DO THIS FIRST**
-   - Can this distractor be used in EXACTLY the same grammatical position? (MUST BE YES)
-   - Is it the same inflected form (tense for verbs, etc.) as the target? (MUST BE YES)
-   - Would this word function the same way in a sentence? (MUST BE YES)
+### ⚠️ CRITICAL DISTRACTOR TESTS - PERFORM FOR EACH WORD
 
-🔍 **SEMANTIC CHECKS**
-   - Is this word listed as a synonym in ANY thesaurus? (REJECT if yes)
-   - Does this word appear in definitions of the target? (REJECT if yes)
-   - Could this word be substituted for the target in examples? (REJECT if yes)
-   - Would a language expert consider these terms related? (REJECT if yes)
-   - Is this from the same semantic category as the target? (REJECT if yes)
+For EVERY distractor, answer these questions:
+1. Is this word a synonym or near-synonym to the target? (MUST BE NO)
+2. Would this word appear in a thesaurus entry for the target? (MUST BE NO)
+3. Could this word replace the target in most sentences? (MUST BE NO)
+4. Does this word serve the same function as the target? (MUST BE NO)
+5. Does this word belong to the same specific category? (MUST BE NO)
+6. Would an expert consider these words related? (MUST BE NO)
+7. Is this a plausible wrong answer on a vocabulary test? (MUST BE YES)
+8. Does this word maintain the exact same part of speech? (MUST BE YES)
 
-### ⚠️ EXAMPLES OF CORRECT PART OF SPEECH USAGE
+### ✅ EXAMPLES OF CORRECT DISTRACTORS
 
-TARGET: "task" (noun) - "A piece of work to be done"
-GOOD: "flask", "leisure", "planet", "tusk", "yarn" (all are NOUNS)
-BAD: "organize", "busy", "workable", "tasked", "do" (different parts of speech)
+TARGET: "meticulous" (adjective) - "Extremely careful and precise about details"
+INCORRECT DISTRACTORS: ❌
+- "fastidious" (synonym - means almost the same thing)
+- "thorough" (near-synonym - too similar in meaning)
+- "precise" (appears in the definition - too close semantically)
+- "detailed" (same semantic field as the target)
+- "particular" (shares core meaning of being careful about specifics)
 
-TARGET: "calculate" (verb) - "To determine values using mathematical operations"
-GOOD: "quantify", "destroy", "swim", "hesitate", "whisper" (all are VERBS)
-BAD: "calculation", "mathematic", "counting", "fast", "questionable" (different parts of speech)
+CORRECT DISTRACTORS: ✓
+- "melodious" (PHONOLOGICAL - sounds similar, completely different meaning about sound)
+- "momentous" (STRUCTURAL - similar suffix but means significant/important)
+- "mercurial" (DIFFERENT-DOMAIN - relates to changeable mood, not precision)
+- "municipal" (DIFFERENT-DOMAIN - relates to city government, not precision)
+- "muscular" (FUNCTIONAL - describes a physical quality, not a personality trait)
 
-TARGET: "transparent" (adjective) - "Allowing light to pass through completely"
-GOOD: "opaque", "massive", "distant", "circular", "pungent" (all are ADJECTIVES)
-BAD: "clarity", "see", "window", "transparently", "glass" (different parts of speech)
+TARGET: "arson" (noun) - "The criminal act of deliberately setting fire to property"
+INCORRECT DISTRACTORS: ❌
+- "incendiarism" (direct synonym - means exactly the same thing)
+- "burning" (core action of the target - too similar)
+- "pyromania" (related psychological condition - same domain)
+- "conflagration" (result of arson - semantically linked)
+- "immolation" (similar act involving fire - too related)
 
-### ✅ EXAMPLES OF TRULY EFFECTIVE DISTRACTORS
-
-TARGET: "task" (noun) - "A piece of work to be done"
-EXCELLENT DISTRACTORS:
-1. "flask" (PHONOLOGICAL - sounds similar, completely different meaning)
-2. "leisure" (ANTONYM - opposite of work)
-3. "planet" (DOMAIN - completely different domain: astronomy vs. work)
-4. "tusk" (ORTHOGRAPHIC - visually similar spelling, animal part)
-5. "yarn" (UNRELATED - completely different object, no semantic connection)
-
-TARGET: "qualify" (verb) - "To be eligible or meet the requirements for something"
-EXCELLENT DISTRACTORS:
-1. "quantify" (PHONOLOGICAL - measurement vs. eligibility)
-2. "disqualify" (ANTONYM - opposite meaning)
-3. "solidify" (DOMAIN - physical state change vs. status change)
-4. "amplify" (ORTHOGRAPHIC - similar word ending but different meaning)
-5. "terrify" (UNRELATED - completely different meaning, no connection)
+CORRECT DISTRACTORS: ✓
+- "arsenal" (PHONOLOGICAL - sounds similar but refers to weapons collection)
+- "arthritis" (PHONOLOGICAL - starts similarly but is a medical condition)
+- "auction" (STRUCTURAL - similar short noun but refers to a sale event)
+- "axiom" (DIFFERENT-DOMAIN - mathematical concept, completely unrelated)
+- "arbiter" (DIFFERENT-DOMAIN - person who makes judgments, unrelated to fire)
 
 ### WORDS TO GENERATE DISTRACTORS FOR:
 - ${wordList}
@@ -141,9 +145,9 @@ EXCELLENT DISTRACTORS:
 ### RESPONSE FORMAT (JSON)
 [
   {
-    "word": "task",
-    "distractors": ["flask", "leisure", "planet", "tusk", "yarn"],
-    "distractor_types": ["phonological", "antonym", "domain", "orthographic", "unrelated"]
+    "word": "arson",
+    "distractors": ["arsenal", "arthritis", "auction", "axiom", "arbiter"],
+    "distractor_types": ["phonological", "phonological", "structural", "different-domain", "different-domain"]
   }
 ]
 
