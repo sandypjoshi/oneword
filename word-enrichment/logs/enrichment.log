@@ -9281,3 +9281,1322 @@ Note: This is a heuristic check and may include false positives.
 2025-03-16T04:11:38.923Z [INFO] API Request successful using key AIzaSy...vOb8. Total requests: 70
 2025-03-16T04:11:38.924Z [INFO] Sending batch request for 40 words to OWAD generator...
 2025-03-16T04:11:38.924Z [INFO] Generating OWAD phrases for 40 words...
+2025-03-16T04:11:47.429Z [INFO] API Request successful using key AIzaSy...dHDo. Total requests: 69
+2025-03-16T04:11:47.429Z [INFO] Sending batch request for 40 words to distractor generator...
+2025-03-16T04:11:47.430Z [INFO] Generating distractors for 40 words...
+2025-03-16T04:11:59.493Z [INFO] API Request successful using key AIzaSy...GDm4. Total requests: 68
+2025-03-16T04:11:59.494Z [INFO] Processing results for word 1/40: pulverization (noun)
+2025-03-16T04:12:00.394Z [INFO] Progress: 2681/68760 words processed (4%)
+2025-03-16T04:12:00.395Z [INFO] Processing results for word 2/40: ransom (noun)
+2025-03-16T04:12:00.641Z [INFO] Processing results for word 3/40: deception (noun)
+2025-03-16T04:12:00.887Z [INFO] Processing results for word 4/40: jump (noun)
+2025-03-16T04:12:01.132Z [INFO] Processing results for word 5/40: concatenation (noun)
+2025-03-16T04:12:01.377Z [INFO] Processing results for word 6/40: slug (noun)
+2025-03-16T04:12:01.621Z [INFO] Processing results for word 7/40: fingering (noun)
+2025-03-16T04:12:01.865Z [INFO] Processing results for word 8/40: force (noun)
+2025-03-16T04:12:02.114Z [INFO] Processing results for word 9/40: single (noun)
+2025-03-16T04:12:02.357Z [INFO] Processing results for word 10/40: whip (noun)
+2025-03-16T04:12:02.650Z [INFO] Processing results for word 11/40: snatch (noun)
+2025-03-16T04:12:02.986Z [INFO] Progress: 2691/68760 words processed (4%)
+2025-03-16T04:12:02.987Z [INFO] Processing results for word 12/40: voice (noun)
+2025-03-16T04:12:03.294Z [INFO] Processing results for word 13/40: striking (noun)
+2025-03-16T04:12:03.599Z [INFO] Processing results for word 14/40: twist (noun)
+2025-03-16T04:12:04.000Z [INFO] Processing results for word 15/40: change (noun)
+2025-03-16T04:12:04.236Z [INFO] Processing results for word 16/40: abnegation (noun)
+2025-03-16T04:12:04.485Z [INFO] Processing results for word 17/40: spare (noun)
+2025-03-16T04:12:04.736Z [INFO] Processing results for word 18/40: inhibition (noun)
+2025-03-16T04:12:05.035Z [INFO] Processing results for word 19/40: resistance (noun)
+2025-03-16T04:12:05.294Z [INFO] Processing results for word 20/40: suspension (noun)
+2025-03-16T04:12:05.543Z [INFO] Processing results for word 21/40: reaction (noun)
+2025-03-16T04:12:05.777Z [INFO] Progress: 2701/68760 words processed (4%)
+2025-03-16T04:12:05.777Z [INFO] Processing results for word 22/40: apostasy (noun)
+2025-03-16T04:12:06.058Z [INFO] Processing results for word 23/40: nonacceptance (noun)
+2025-03-16T04:12:06.365Z [INFO] Processing results for word 24/40: ending (noun)
+2025-03-16T04:12:06.608Z [INFO] Processing results for word 25/40: bolt (noun)
+2025-03-16T04:12:06.878Z [INFO] Processing results for word 26/40: deportation (noun)
+2025-03-16T04:12:07.186Z [INFO] Processing results for word 27/40: exile (noun)
+2025-03-16T04:12:07.488Z [INFO] Processing results for word 28/40: hibernation (noun)
+2025-03-16T04:12:07.722Z [INFO] Processing results for word 29/40: extradition (noun)
+2025-03-16T04:12:08.004Z [INFO] Processing results for word 30/40: blast (noun)
+2025-03-16T04:12:08.313Z [INFO] Processing results for word 31/40: finish (noun)
+2025-03-16T04:12:08.619Z [INFO] Progress: 2711/68760 words processed (4%)
+2025-03-16T04:12:08.619Z [INFO] Processing results for word 32/40: finale (noun)
+2025-03-16T04:12:08.864Z [INFO] Processing results for word 33/40: waiver (noun)
+2025-03-16T04:12:09.109Z [INFO] Processing results for word 34/40: review (noun)
+2025-03-16T04:12:09.435Z [INFO] Processing results for word 35/40: espionage (noun)
+2025-03-16T04:12:09.746Z [INFO] Processing results for word 36/40: closing (noun)
+2025-03-16T04:12:10.051Z [INFO] Processing results for word 37/40: incubation (noun)
+2025-03-16T04:12:10.360Z [INFO] Processing results for word 38/40: brush (noun)
+2025-03-16T04:12:10.664Z [INFO] Processing results for word 39/40: death (noun)
+2025-03-16T04:12:10.974Z [INFO] Processing results for word 40/40: fratricide (noun)
+2025-03-16T04:12:11.218Z [INFO] Progress: 2720/68760 words processed (4%)
+2025-03-16T04:12:11.219Z [INFO] Batch 70 completed in 0.7 minutes
+2025-03-16T04:12:11.220Z [INFO] Batch results: 40 definitions, 40 OWAD phrases, 40 distractors updated
+2025-03-16T04:12:11.221Z [INFO] Stats saved to /Users/sandeep.joshi/Documents/vibecoding/oneword/word-enrichment/stats/reprocess-stats-1742098331220.json
+2025-03-16T04:12:11.221Z [INFO] Progress: 2720/68760 words (4%)
+2025-03-16T04:12:11.221Z [INFO] Speed: 57 words/minute, Est. time remaining: 1159 minutes
+2025-03-16T04:12:11.221Z [INFO] -------------------------------------
+2025-03-16T04:12:11.221Z [INFO] Fetching 40 words with offset 2800...
+2025-03-16T04:12:11.457Z [INFO] Fetched 40 words
+2025-03-16T04:12:11.457Z [INFO] Processing batch of 40 words...
+2025-03-16T04:12:11.457Z [INFO] Sending batch request for 40 words to definition generator...
+2025-03-16T04:12:11.457Z [INFO] Generating definitions for 40 words...
+2025-03-16T04:12:20.088Z [INFO] API Request successful using key AIzaSy...UFvM. Total requests: 71
+2025-03-16T04:12:20.090Z [INFO] Sending batch request for 40 words to OWAD generator...
+2025-03-16T04:12:20.090Z [INFO] Generating OWAD phrases for 40 words...
+2025-03-16T04:12:28.593Z [INFO] API Request successful using key AIzaSy...vOb8. Total requests: 70
+2025-03-16T04:12:28.595Z [INFO] Sending batch request for 40 words to distractor generator...
+2025-03-16T04:12:28.596Z [INFO] Generating distractors for 40 words...
+2025-03-16T04:12:40.673Z [INFO] API Request successful using key AIzaSy...dHDo. Total requests: 69
+2025-03-16T04:12:40.675Z [INFO] Processing results for word 1/40: elimination (noun)
+2025-03-16T04:12:41.870Z [INFO] Progress: 2721/68760 words processed (4%)
+2025-03-16T04:12:41.871Z [INFO] Processing results for word 2/40: strangulation (noun)
+2025-03-16T04:12:42.206Z [INFO] Processing results for word 3/40: retch (noun)
+2025-03-16T04:12:42.515Z [INFO] Processing results for word 4/40: settlement (noun)
+2025-03-16T04:12:42.766Z [INFO] Processing results for word 5/40: neutralisation (noun)
+2025-03-16T04:12:43.032Z [INFO] Processing results for word 6/40: regression (noun)
+2025-03-16T04:12:43.269Z [INFO] Processing results for word 7/40: flurry (noun)
+2025-03-16T04:12:43.536Z [INFO] Processing results for word 8/40: fuss (noun)
+2025-03-16T04:12:43.779Z [INFO] Processing results for word 9/40: stumble (noun)
+2025-03-16T04:12:44.051Z [INFO] Processing results for word 10/40: misstep (noun)
+2025-03-16T04:12:44.299Z [INFO] Processing results for word 11/40: score (noun)
+2025-03-16T04:12:44.560Z [INFO] Progress: 2731/68760 words processed (4%)
+2025-03-16T04:12:44.560Z [INFO] Processing results for word 12/40: parricide (noun)
+2025-03-16T04:12:44.861Z [INFO] Processing results for word 13/40: mariticide (noun)
+2025-03-16T04:12:45.177Z [INFO] Processing results for word 14/40: fell (noun)
+2025-03-16T04:12:45.479Z [INFO] Processing results for word 15/40: harakiri (noun)
+2025-03-16T04:12:45.713Z [INFO] Processing results for word 16/40: asphyxiation (noun)
+2025-03-16T04:12:45.969Z [INFO] Processing results for word 17/40: pick (noun)
+2025-03-16T04:12:46.303Z [INFO] Processing results for word 18/40: step (noun)
+2025-03-16T04:12:46.611Z [INFO] Processing results for word 19/40: vote (noun)
+2025-03-16T04:12:46.855Z [INFO] Processing results for word 20/40: uncovering (noun)
+2025-03-16T04:12:47.121Z [INFO] Processing results for word 21/40: emersion (noun)
+2025-03-16T04:12:47.366Z [INFO] Progress: 2741/68760 words processed (4%)
+2025-03-16T04:12:47.369Z [INFO] Processing results for word 22/40: evacuation (noun)
+2025-03-16T04:12:47.609Z [INFO] Processing results for word 23/40: hejira (noun)
+2025-03-16T04:12:47.939Z [INFO] Processing results for word 24/40: spot (noun)
+2025-03-16T04:12:48.248Z [INFO] Processing results for word 25/40: gaucherie (noun)
+2025-03-16T04:12:48.555Z [INFO] Processing results for word 26/40: shift (noun)
+2025-03-16T04:12:48.861Z [INFO] Processing results for word 27/40: squeeze (noun)
+2025-03-16T04:12:49.167Z [INFO] Processing results for word 28/40: cardiospasm (noun)
+2025-03-16T04:12:49.474Z [INFO] Processing results for word 29/40: closure (noun)
+2025-03-16T04:12:49.785Z [INFO] Processing results for word 30/40: extinction (noun)
+2025-03-16T04:12:50.090Z [INFO] Processing results for word 31/40: fade (noun)
+2025-03-16T04:12:50.398Z [INFO] Progress: 2751/68760 words processed (4%)
+2025-03-16T04:12:50.399Z [INFO] Processing results for word 32/40: derogation (noun)
+2025-03-16T04:12:50.706Z [INFO] Processing results for word 33/40: attack (noun)
+2025-03-16T04:12:51.020Z [INFO] Processing results for word 34/40: establishment (noun)
+2025-03-16T04:12:51.320Z [INFO] Processing results for word 35/40: formation (noun)
+2025-03-16T04:12:51.624Z [INFO] Processing results for word 36/40: creation (noun)
+2025-03-16T04:12:51.864Z [INFO] Processing results for word 37/40: darning (noun)
+2025-03-16T04:12:52.140Z [INFO] Processing results for word 38/40: wash (noun)
+2025-03-16T04:12:52.445Z [INFO] Processing results for word 39/40: soak (noun)
+2025-03-16T04:12:52.757Z [INFO] Processing results for word 40/40: teasing (noun)
+2025-03-16T04:12:53.061Z [INFO] Progress: 2760/68760 words processed (4%)
+2025-03-16T04:12:53.062Z [INFO] Batch 71 completed in 0.7 minutes
+2025-03-16T04:12:53.063Z [INFO] Batch results: 40 definitions, 40 OWAD phrases, 40 distractors updated
+2025-03-16T04:12:53.063Z [INFO] Progress: 2760/68760 words (4%)
+2025-03-16T04:12:53.063Z [INFO] Speed: 58 words/minute, Est. time remaining: 1138 minutes
+2025-03-16T04:12:53.063Z [INFO] -------------------------------------
+2025-03-16T04:12:53.063Z [INFO] Fetching 40 words with offset 2840...
+2025-03-16T04:12:53.370Z [INFO] Fetched 40 words
+2025-03-16T04:12:53.371Z [INFO] Processing batch of 40 words...
+2025-03-16T04:12:53.371Z [INFO] Sending batch request for 40 words to definition generator...
+2025-03-16T04:12:53.372Z [INFO] Generating definitions for 40 words...
+2025-03-16T04:13:02.004Z [INFO] API Request successful using key AIzaSy...yMPs. Total requests: 72
+2025-03-16T04:13:02.006Z [INFO] Sending batch request for 40 words to OWAD generator...
+2025-03-16T04:13:02.006Z [INFO] Generating OWAD phrases for 40 words...
+2025-03-16T04:13:10.341Z [INFO] API Request successful using key AIzaSy...UFvM. Total requests: 71
+2025-03-16T04:13:10.342Z [INFO] Sending batch request for 40 words to distractor generator...
+2025-03-16T04:13:10.342Z [INFO] Generating distractors for 40 words...
+2025-03-16T04:13:22.452Z [INFO] API Request successful using key AIzaSy...vOb8. Total requests: 70
+2025-03-16T04:13:22.454Z [INFO] Processing results for word 1/40: writing (noun)
+2025-03-16T04:13:22.760Z [INFO] Progress: 2761/68760 words processed (4%)
+2025-03-16T04:13:22.761Z [INFO] Processing results for word 2/40: handwriting (noun)
+2025-03-16T04:13:23.015Z [INFO] Processing results for word 3/40: notation (noun)
+2025-03-16T04:13:23.270Z [INFO] Processing results for word 4/40: subscription (noun)
+2025-03-16T04:13:23.521Z [INFO] Processing results for word 5/40: decoding (noun)
+2025-03-16T04:13:23.778Z [INFO] Processing results for word 6/40: accounting (noun)
+2025-03-16T04:13:24.086Z [INFO] Processing results for word 7/40: whole (noun)
+2025-03-16T04:13:24.340Z [INFO] Processing results for word 8/40: amble (noun)
+2025-03-16T04:13:24.601Z [INFO] Processing results for word 9/40: perambulation (noun)
+2025-03-16T04:13:24.845Z [INFO] Processing results for word 10/40: constitutional (noun)
+2025-03-16T04:13:25.117Z [INFO] Processing results for word 11/40: pas (noun)
+2025-03-16T04:13:25.367Z [INFO] Progress: 2771/68760 words processed (4%)
+2025-03-16T04:13:25.368Z [INFO] Processing results for word 12/40: hitch (noun)
+2025-03-16T04:13:25.614Z [INFO] Processing results for word 13/40: play (noun)
+2025-03-16T04:13:25.860Z [INFO] Processing results for word 14/40: traverse (noun)
+2025-03-16T04:13:26.139Z [INFO] Processing results for word 15/40: diligence (noun)
+2025-03-16T04:13:26.443Z [INFO] Processing results for word 16/40: strike (noun)
+2025-03-16T04:13:26.703Z [INFO] Processing results for word 17/40: investigation (noun)
+2025-03-16T04:13:27.056Z [INFO] Processing results for word 18/40: record (noun)
+2025-03-16T04:13:27.304Z [INFO] Processing results for word 19/40: circumnavigation (noun)
+2025-03-16T04:13:27.553Z [INFO] Processing results for word 20/40: crossing (noun)
+2025-03-16T04:13:27.877Z [INFO] Processing results for word 21/40: riding (noun)
+2025-03-16T04:13:28.184Z [INFO] Progress: 2781/68760 words processed (4%)
+2025-03-16T04:13:28.185Z [INFO] Processing results for word 22/40: passing (noun)
+2025-03-16T04:13:28.437Z [INFO] Processing results for word 23/40: takeoff (noun)
+2025-03-16T04:13:28.799Z [INFO] Processing results for word 24/40: stage (noun)
+2025-03-16T04:13:29.105Z [INFO] Processing results for word 25/40: odyssey (noun)
+2025-03-16T04:13:29.415Z [INFO] Processing results for word 26/40: assumption (noun)
+2025-03-16T04:13:29.661Z [INFO] Processing results for word 27/40: analysis (noun)
+2025-03-16T04:13:29.908Z [INFO] Processing results for word 28/40: transit (noun)
+2025-03-16T04:13:30.232Z [INFO] Processing results for word 29/40: position (noun)
+2025-03-16T04:13:30.539Z [INFO] Processing results for word 30/40: grant (noun)
+2025-03-16T04:13:30.846Z [INFO] Processing results for word 31/40: lockage (noun)
+2025-03-16T04:13:31.156Z [INFO] Progress: 2791/68760 words processed (4%)
+2025-03-16T04:13:31.157Z [INFO] Processing results for word 32/40: experimentation (noun)
+2025-03-16T04:13:31.409Z [INFO] Processing results for word 33/40: conveyance (noun)
+2025-03-16T04:13:31.667Z [INFO] Processing results for word 34/40: probe (noun)
+2025-03-16T04:13:31.975Z [INFO] Processing results for word 35/40: transposition (noun)
+2025-03-16T04:13:32.222Z [INFO] Processing results for word 36/40: stalking (noun)
+2025-03-16T04:13:32.486Z [INFO] Processing results for word 37/40: pitch (noun)
+2025-03-16T04:13:32.789Z [INFO] Processing results for word 38/40: curve (noun)
+2025-03-16T04:13:33.099Z [INFO] Processing results for word 39/40: push (noun)
+2025-03-16T04:13:33.350Z [INFO] Processing results for word 40/40: depression (noun)
+2025-03-16T04:13:33.609Z [INFO] Progress: 2800/68760 words processed (4%)
+2025-03-16T04:13:33.609Z [INFO] Batch 72 completed in 0.7 minutes
+2025-03-16T04:13:33.609Z [INFO] Batch results: 40 definitions, 40 OWAD phrases, 40 distractors updated
+2025-03-16T04:13:33.609Z [INFO] Progress: 2800/68760 words (4%)
+2025-03-16T04:13:33.609Z [INFO] Speed: 57 words/minute, Est. time remaining: 1157 minutes
+2025-03-16T04:13:33.610Z [INFO] -------------------------------------
+2025-03-16T04:13:33.610Z [INFO] Fetching 40 words with offset 2880...
+2025-03-16T04:13:33.921Z [INFO] Fetched 40 words
+2025-03-16T04:13:33.923Z [INFO] Processing batch of 40 words...
+2025-03-16T04:13:33.923Z [INFO] Sending batch request for 40 words to definition generator...
+2025-03-16T04:13:33.923Z [INFO] Generating definitions for 40 words...
+2025-03-16T04:13:42.522Z [INFO] API Request successful using key AIzaSy...GDm4. Total requests: 73
+2025-03-16T04:13:42.525Z [INFO] Sending batch request for 40 words to OWAD generator...
+2025-03-16T04:13:42.525Z [INFO] Generating OWAD phrases for 40 words...
+2025-03-16T04:13:50.918Z [INFO] API Request successful using key AIzaSy...yMPs. Total requests: 72
+2025-03-16T04:13:50.920Z [INFO] Sending batch request for 40 words to distractor generator...
+2025-03-16T04:13:50.920Z [INFO] Generating distractors for 40 words...
+2025-03-16T04:14:02.562Z [INFO] API Request successful using key AIzaSy...UFvM. Total requests: 71
+2025-03-16T04:14:02.563Z [INFO] Processing results for word 1/40: chase (noun)
+2025-03-16T04:14:06.388Z [INFO] Progress: 2801/68760 words processed (4%)
+2025-03-16T04:14:06.388Z [INFO] Processing results for word 2/40: tracking (noun)
+2025-03-16T04:14:06.653Z [INFO] Processing results for word 3/40: modality (noun)
+2025-03-16T04:14:06.902Z [INFO] Processing results for word 4/40: chemotherapy (noun)
+2025-03-16T04:14:07.151Z [INFO] Processing results for word 5/40: batting (noun)
+2025-03-16T04:14:07.399Z [INFO] Processing results for word 6/40: fly (noun)
+2025-03-16T04:14:07.639Z [INFO] Processing results for word 7/40: swoop (noun)
+2025-03-16T04:14:07.889Z [INFO] Processing results for word 8/40: belt (noun)
+2025-03-16T04:14:08.156Z [INFO] Processing results for word 9/40: kiss (noun)
+2025-03-16T04:14:08.428Z [INFO] Processing results for word 10/40: transplant (noun)
+2025-03-16T04:14:08.677Z [INFO] Processing results for word 11/40: collapse (noun)
+2025-03-16T04:14:08.926Z [INFO] Progress: 2811/68760 words processed (4%)
+2025-03-16T04:14:08.927Z [INFO] Processing results for word 12/40: slide (noun)
+2025-03-16T04:14:09.191Z [INFO] Processing results for word 13/40: poke (noun)
+2025-03-16T04:14:09.437Z [INFO] Processing results for word 14/40: stream (noun)
+2025-03-16T04:14:09.690Z [INFO] Processing results for word 15/40: check (noun)
+2025-03-16T04:14:10.065Z [INFO] Processing results for word 16/40: translation (noun)
+2025-03-16T04:14:10.374Z [INFO] Processing results for word 17/40: abduction (noun)
+2025-03-16T04:14:10.681Z [INFO] Processing results for word 18/40: drive (noun)
+2025-03-16T04:14:10.936Z [INFO] Processing results for word 19/40: cast (noun)
+2025-03-16T04:14:11.181Z [INFO] Processing results for word 20/40: flip (noun)
+2025-03-16T04:14:11.421Z [INFO] Processing results for word 21/40: incorporation (noun)
+2025-03-16T04:14:11.671Z [INFO] Progress: 2821/68760 words processed (4%)
+2025-03-16T04:14:11.672Z [INFO] Processing results for word 22/40: stretch (noun)
+2025-03-16T04:14:11.913Z [INFO] Processing results for word 23/40: spiral (noun)
+2025-03-16T04:14:12.167Z [INFO] Processing results for word 24/40: nursing (noun)
+2025-03-16T04:14:12.424Z [INFO] Processing results for word 25/40: hook (noun)
+2025-03-16T04:14:12.676Z [INFO] Processing results for word 26/40: draw (noun)
+2025-03-16T04:14:12.925Z [INFO] Processing results for word 27/40: towage (noun)
+2025-03-16T04:14:13.174Z [INFO] Processing results for word 28/40: amputation (noun)
+2025-03-16T04:14:13.425Z [INFO] Processing results for word 29/40: wave (noun)
+2025-03-16T04:14:13.751Z [INFO] Processing results for word 30/40: haul (noun)
+2025-03-16T04:14:14.061Z [INFO] Processing results for word 31/40: spit (noun)
+2025-03-16T04:14:14.368Z [INFO] Progress: 2831/68760 words processed (4%)
+2025-03-16T04:14:14.370Z [INFO] Processing results for word 32/40: expectoration (noun)
+2025-03-16T04:14:14.669Z [INFO] Processing results for word 33/40: rock (noun)
+2025-03-16T04:14:14.983Z [INFO] Processing results for word 34/40: standing (noun)
+2025-03-16T04:14:15.282Z [INFO] Processing results for word 35/40: bounce (noun)
+2025-03-16T04:14:15.528Z [INFO] Processing results for word 36/40: crash (noun)
+2025-03-16T04:14:15.778Z [INFO] Processing results for word 37/40: chopper (noun)
+2025-03-16T04:14:16.111Z [INFO] Processing results for word 38/40: angioplasty (noun)
+2025-03-16T04:14:16.367Z [INFO] Processing results for word 39/40: bound (noun)
+2025-03-16T04:14:16.618Z [INFO] Processing results for word 40/40: tap (noun)
+2025-03-16T04:14:16.873Z [INFO] Progress: 2840/68760 words processed (4%)
+2025-03-16T04:14:16.874Z [INFO] Batch 73 completed in 0.7 minutes
+2025-03-16T04:14:16.874Z [INFO] Batch results: 36 definitions, 39 OWAD phrases, 40 distractors updated
+2025-03-16T04:14:16.875Z [INFO] Progress: 2840/68760 words (4%)
+2025-03-16T04:14:16.875Z [INFO] Speed: 57 words/minute, Est. time remaining: 1156 minutes
+2025-03-16T04:14:16.875Z [INFO] -------------------------------------
+2025-03-16T04:14:16.875Z [INFO] Fetching 40 words with offset 2920...
+2025-03-16T04:14:17.130Z [INFO] Fetched 40 words
+2025-03-16T04:14:17.131Z [INFO] Processing batch of 40 words...
+2025-03-16T04:14:17.132Z [INFO] Sending batch request for 40 words to definition generator...
+2025-03-16T04:14:17.132Z [INFO] Generating definitions for 40 words...
+2025-03-16T04:14:25.598Z [INFO] API Request successful using key AIzaSy...dHDo. Total requests: 74
+2025-03-16T04:14:25.598Z [INFO] Sending batch request for 40 words to OWAD generator...
+2025-03-16T04:14:25.598Z [INFO] Generating OWAD phrases for 40 words...
+2025-03-16T04:14:33.928Z [INFO] API Request successful using key AIzaSy...GDm4. Total requests: 73
+2025-03-16T04:14:33.929Z [INFO] Sending batch request for 40 words to distractor generator...
+2025-03-16T04:14:33.929Z [INFO] Generating distractors for 40 words...
+2025-03-16T04:14:45.912Z [INFO] API Request successful using key AIzaSy...yMPs. Total requests: 72
+2025-03-16T04:14:45.913Z [INFO] Processing results for word 1/40: walk (noun)
+2025-03-16T04:14:46.216Z [INFO] Progress: 2841/68760 words processed (4%)
+2025-03-16T04:14:46.217Z [INFO] Processing results for word 2/40: out (noun)
+2025-03-16T04:14:46.520Z [INFO] Processing results for word 3/40: moderation (noun)
+2025-03-16T04:14:46.828Z [INFO] Processing results for word 4/40: double (noun)
+2025-03-16T04:14:47.076Z [INFO] Processing results for word 5/40: haymaker (noun)
+2025-03-16T04:14:47.342Z [INFO] Processing results for word 6/40: followup (noun)
+2025-03-16T04:14:47.644Z [INFO] Processing results for word 7/40: stroke (noun)
+2025-03-16T04:14:47.881Z [INFO] Processing results for word 8/40: tag (noun)
+2025-03-16T04:14:48.160Z [INFO] Processing results for word 9/40: laxation (noun)
+2025-03-16T04:14:48.469Z [INFO] Processing results for word 10/40: ligature (noun)
+2025-03-16T04:14:48.774Z [INFO] Processing results for word 11/40: use (noun)
+2025-03-16T04:14:49.021Z [INFO] Progress: 2851/68760 words processed (4%)
+2025-03-16T04:14:49.022Z [INFO] Processing results for word 12/40: concentration (noun)
+2025-03-16T04:14:49.265Z [INFO] Processing results for word 13/40: fix (noun)
+2025-03-16T04:14:49.590Z [INFO] Processing results for word 14/40: bite (noun)
+2025-03-16T04:14:49.900Z [INFO] Processing results for word 15/40: ruin (noun)
+2025-03-16T04:14:50.151Z [INFO] Processing results for word 16/40: wrecking (noun)
+2025-03-16T04:14:50.385Z [INFO] Processing results for word 17/40: euthanasia (noun)
+2025-03-16T04:14:50.719Z [INFO] Processing results for word 18/40: casting (noun)
+2025-03-16T04:14:50.963Z [INFO] Processing results for word 19/40: recognition (noun)
+2025-03-16T04:14:51.208Z [INFO] Processing results for word 20/40: fake (noun)
+2025-03-16T04:14:51.537Z [INFO] Processing results for word 21/40: way (noun)
+2025-03-16T04:14:51.846Z [INFO] Progress: 2861/68760 words processed (4%)
+2025-03-16T04:14:51.848Z [INFO] Processing results for word 22/40: filicide (noun)
+2025-03-16T04:14:52.129Z [INFO] Processing results for word 23/40: sheepshearing (noun)
+2025-03-16T04:14:52.461Z [INFO] Processing results for word 24/40: bank (noun)
+2025-03-16T04:14:52.768Z [INFO] Processing results for word 25/40: dilution (noun)
+2025-03-16T04:14:53.074Z [INFO] Processing results for word 26/40: depreciation (noun)
+2025-03-16T04:14:53.380Z [INFO] Processing results for word 27/40: surge (noun)
+2025-03-16T04:14:53.616Z [INFO] Processing results for word 28/40: scatter (noun)
+2025-03-16T04:14:53.894Z [INFO] Processing results for word 29/40: strewing (noun)
+2025-03-16T04:14:54.201Z [INFO] Processing results for word 30/40: diversification (noun)
+2025-03-16T04:14:54.443Z [INFO] Processing results for word 31/40: replacement (noun)
+2025-03-16T04:14:54.710Z [INFO] Progress: 2871/68760 words processed (4%)
+2025-03-16T04:14:54.711Z [INFO] Processing results for word 32/40: tetanus (noun)
+2025-03-16T04:14:54.952Z [INFO] Processing results for word 33/40: elevation (noun)
+2025-03-16T04:14:55.197Z [INFO] Processing results for word 34/40: mixing (noun)
+2025-03-16T04:14:55.443Z [INFO] Processing results for word 35/40: excommunication (noun)
+2025-03-16T04:14:55.690Z [INFO] Processing results for word 36/40: kill (noun)
+2025-03-16T04:14:55.939Z [INFO] Processing results for word 37/40: slaughter (noun)
+2025-03-16T04:14:56.182Z [INFO] Processing results for word 38/40: decapitation (noun)
+2025-03-16T04:14:56.421Z [INFO] Processing results for word 39/40: burst (noun)
+2025-03-16T04:14:56.663Z [INFO] Processing results for word 40/40: combination (noun)
+2025-03-16T04:14:56.907Z [INFO] Progress: 2880/68760 words processed (4%)
+2025-03-16T04:14:56.908Z [INFO] Batch 74 completed in 0.7 minutes
+2025-03-16T04:14:56.908Z [INFO] Batch results: 40 definitions, 40 OWAD phrases, 40 distractors updated
+2025-03-16T04:14:56.909Z [INFO] Progress: 2880/68760 words (4%)
+2025-03-16T04:14:56.911Z [INFO] Speed: 58 words/minute, Est. time remaining: 1136 minutes
+2025-03-16T04:14:56.911Z [INFO] -------------------------------------
+2025-03-16T04:14:56.911Z [INFO] Fetching 40 words with offset 2960...
+2025-03-16T04:14:57.159Z [INFO] Fetched 40 words
+2025-03-16T04:14:57.160Z [INFO] Processing batch of 40 words...
+2025-03-16T04:14:57.160Z [INFO] Sending batch request for 40 words to definition generator...
+2025-03-16T04:14:57.160Z [INFO] Generating definitions for 40 words...
+2025-03-16T04:15:05.720Z [INFO] API Request successful using key AIzaSy...vOb8. Total requests: 75
+2025-03-16T04:15:05.721Z [INFO] Sending batch request for 40 words to OWAD generator...
+2025-03-16T04:15:05.721Z [INFO] Generating OWAD phrases for 40 words...
+2025-03-16T04:15:14.384Z [INFO] API Request successful using key AIzaSy...dHDo. Total requests: 74
+2025-03-16T04:15:14.384Z [INFO] Sending batch request for 40 words to distractor generator...
+2025-03-16T04:15:14.384Z [INFO] Generating distractors for 40 words...
+2025-03-16T04:15:26.767Z [INFO] API Request successful using key AIzaSy...GDm4. Total requests: 73
+2025-03-16T04:15:26.768Z [INFO] Processing results for word 1/40: deactivation (noun)
+2025-03-16T04:15:30.249Z [INFO] Progress: 2881/68760 words processed (4%)
+2025-03-16T04:15:30.250Z [INFO] Processing results for word 2/40: regress (noun)
+2025-03-16T04:15:30.528Z [INFO] Processing results for word 3/40: combining (noun)
+2025-03-16T04:15:30.862Z [INFO] Processing results for word 4/40: butchery (noun)
+2025-03-16T04:15:31.170Z [INFO] Processing results for word 5/40: burning (noun)
+2025-03-16T04:15:31.412Z [INFO] Processing results for word 6/40: annulment (noun)
+2025-03-16T04:15:31.651Z [INFO] Processing results for word 7/40: neutralization (noun)
+2025-03-16T04:15:31.898Z [INFO] Processing results for word 8/40: beginning (noun)
+2025-03-16T04:15:32.194Z [INFO] Processing results for word 9/40: start (noun)
+2025-03-16T04:15:32.445Z [INFO] Processing results for word 10/40: accession (noun)
+2025-03-16T04:15:32.707Z [INFO] Processing results for word 11/40: organization (noun)
+2025-03-16T04:15:33.014Z [INFO] Progress: 2891/68760 words processed (4%)
+2025-03-16T04:15:33.014Z [INFO] Processing results for word 12/40: opening (noun)
+2025-03-16T04:15:33.287Z [INFO] Processing results for word 13/40: foundation (noun)
+2025-03-16T04:15:33.622Z [INFO] Processing results for word 14/40: inaugural (noun)
+2025-03-16T04:15:33.933Z [INFO] Processing results for word 15/40: blend (noun)
+2025-03-16T04:15:34.240Z [INFO] Processing results for word 16/40: sweetening (noun)
+2025-03-16T04:15:34.485Z [INFO] Processing results for word 17/40: progress (noun)
+2025-03-16T04:15:34.749Z [INFO] Processing results for word 18/40: scrub (noun)
+2025-03-16T04:15:35.065Z [INFO] Processing results for word 19/40: swabbing (noun)
+2025-03-16T04:15:35.346Z [INFO] Processing results for word 20/40: purging (noun)
+2025-03-16T04:15:35.671Z [INFO] Processing results for word 21/40: katharsis (noun)
+2025-03-16T04:15:35.981Z [INFO] Progress: 2901/68760 words processed (4%)
+2025-03-16T04:15:35.982Z [INFO] Processing results for word 22/40: conglutination (noun)
+2025-03-16T04:15:36.224Z [INFO] Processing results for word 23/40: detribalization (noun)
+2025-03-16T04:15:36.473Z [INFO] Processing results for word 24/40: separation (noun)
+2025-03-16T04:15:36.798Z [INFO] Processing results for word 25/40: sanitization (noun)
+2025-03-16T04:15:37.108Z [INFO] Processing results for word 26/40: sanitisation (noun)
+2025-03-16T04:15:37.414Z [INFO] Processing results for word 27/40: epilation (noun)
+2025-03-16T04:15:37.719Z [INFO] Processing results for word 28/40: development (noun)
+2025-03-16T04:15:38.029Z [INFO] Processing results for word 29/40: scrubbing (noun)
+2025-03-16T04:15:38.336Z [INFO] Processing results for word 30/40: mopping (noun)
+2025-03-16T04:15:38.643Z [INFO] Processing results for word 31/40: sweeping (noun)
+2025-03-16T04:15:38.952Z [INFO] Progress: 2911/68760 words processed (4%)
+2025-03-16T04:15:38.952Z [INFO] Processing results for word 32/40: catharsis (noun)
+2025-03-16T04:15:39.257Z [INFO] Processing results for word 33/40: abreaction (noun)
+2025-03-16T04:15:39.509Z [INFO] Processing results for word 34/40: disruption (noun)
+2025-03-16T04:15:39.747Z [INFO] Processing results for word 35/40: avulsion (noun)
+2025-03-16T04:15:40.076Z [INFO] Processing results for word 36/40: dissociation (noun)
+2025-03-16T04:15:40.384Z [INFO] Processing results for word 37/40: secession (noun)
+2025-03-16T04:15:40.634Z [INFO] Processing results for word 38/40: flex (noun)
+2025-03-16T04:15:41.004Z [INFO] Processing results for word 39/40: indentation (noun)
+2025-03-16T04:15:41.306Z [INFO] Processing results for word 40/40: pattern (noun)
+2025-03-16T04:15:41.609Z [INFO] Progress: 2920/68760 words processed (4%)
+2025-03-16T04:15:41.610Z [INFO] Batch 75 completed in 0.7 minutes
+2025-03-16T04:15:41.610Z [INFO] Batch results: 40 definitions, 40 OWAD phrases, 40 distractors updated
+2025-03-16T04:15:41.611Z [INFO] Stats saved to /Users/sandeep.joshi/Documents/vibecoding/oneword/word-enrichment/stats/reprocess-stats-1742098541610.json
+2025-03-16T04:15:41.611Z [INFO] Progress: 2920/68760 words (4%)
+2025-03-16T04:15:41.611Z [INFO] Speed: 57 words/minute, Est. time remaining: 1155 minutes
+2025-03-16T04:15:41.611Z [INFO] -------------------------------------
+2025-03-16T04:15:41.611Z [INFO] Fetching 40 words with offset 3000...
+2025-03-16T04:15:41.923Z [INFO] Fetched 40 words
+2025-03-16T04:15:41.923Z [INFO] Processing batch of 40 words...
+2025-03-16T04:15:41.923Z [INFO] Sending batch request for 40 words to definition generator...
+2025-03-16T04:15:41.923Z [INFO] Generating definitions for 40 words...
+2025-03-16T04:15:49.805Z [INFO] API Request successful using key AIzaSy...UFvM. Total requests: 76
+2025-03-16T04:15:49.805Z [INFO] Sending batch request for 40 words to OWAD generator...
+2025-03-16T04:15:49.806Z [INFO] Generating OWAD phrases for 40 words...
+2025-03-16T04:15:58.408Z [INFO] API Request successful using key AIzaSy...vOb8. Total requests: 75
+2025-03-16T04:15:58.410Z [INFO] Sending batch request for 40 words to distractor generator...
+2025-03-16T04:15:58.410Z [INFO] Generating distractors for 40 words...
+2025-03-16T04:16:10.601Z [INFO] API Request successful using key AIzaSy...dHDo. Total requests: 74
+2025-03-16T04:16:10.603Z [INFO] Processing results for word 1/40: featherbedding (noun)
+2025-03-16T04:16:11.263Z [INFO] Progress: 2921/68760 words processed (4%)
+2025-03-16T04:16:11.264Z [INFO] Processing results for word 2/40: hadith (noun)
+2025-03-16T04:16:11.510Z [INFO] Processing results for word 3/40: repression (noun)
+2025-03-16T04:16:11.769Z [INFO] Processing results for word 4/40: torture (noun)
+2025-03-16T04:16:12.004Z [INFO] Processing results for word 5/40: bastinado (noun)
+2025-03-16T04:16:12.259Z [INFO] Processing results for word 6/40: exasperation (noun)
+2025-03-16T04:16:12.510Z [INFO] Processing results for word 7/40: antic (noun)
+2025-03-16T04:16:12.769Z [INFO] Processing results for word 8/40: entertainment (noun)
+2025-03-16T04:16:13.020Z [INFO] Processing results for word 9/40: formalism (noun)
+2025-03-16T04:16:13.274Z [INFO] Processing results for word 10/40: americanism (noun)
+2025-03-16T04:16:13.561Z [INFO] Processing results for word 11/40: round (noun)
+2025-03-16T04:16:13.805Z [INFO] Progress: 2931/68760 words processed (4%)
+2025-03-16T04:16:13.806Z [INFO] Processing results for word 12/40: slavery (noun)
+2025-03-16T04:16:14.075Z [INFO] Processing results for word 13/40: mccarthyism (noun)
+2025-03-16T04:16:14.382Z [INFO] Processing results for word 14/40: joke (noun)
+2025-03-16T04:16:14.685Z [INFO] Processing results for word 15/40: jest (noun)
+2025-03-16T04:16:14.929Z [INFO] Processing results for word 16/40: fireman (noun)
+2025-03-16T04:16:15.203Z [INFO] Processing results for word 17/40: cartwheel (noun)
+2025-03-16T04:16:15.447Z [INFO] Processing results for word 18/40: stir (noun)
+2025-03-16T04:16:15.687Z [INFO] Processing results for word 19/40: interest (noun)
+2025-03-16T04:16:15.931Z [INFO] Processing results for word 20/40: bag (noun)
+2025-03-16T04:16:16.198Z [INFO] Processing results for word 21/40: upstart (noun)
+2025-03-16T04:16:16.538Z [INFO] Progress: 2941/68760 words processed (4%)
+2025-03-16T04:16:16.539Z [INFO] Processing results for word 22/40: scissors (noun)
+2025-03-16T04:16:16.788Z [INFO] Processing results for word 23/40: plunge (noun)
+2025-03-16T04:16:17.048Z [INFO] Processing results for word 24/40: fisticuffs (noun)
+2025-03-16T04:16:17.292Z [INFO] Processing results for word 25/40: sparring (noun)
+2025-03-16T04:16:17.555Z [INFO] Processing results for word 26/40: hunting (noun)
+2025-03-16T04:16:17.798Z [INFO] Processing results for word 27/40: haste (noun)
+2025-03-16T04:16:18.047Z [INFO] Processing results for word 28/40: jackknife (noun)
+2025-03-16T04:16:18.374Z [INFO] Processing results for word 29/40: spar (noun)
+2025-03-16T04:16:18.683Z [INFO] Processing results for word 30/40: racing (noun)
+2025-03-16T04:16:18.989Z [INFO] Processing results for word 31/40: cockfighting (noun)
+2025-03-16T04:16:19.297Z [INFO] Progress: 2951/68760 words processed (4%)
+2025-03-16T04:16:19.298Z [INFO] Processing results for word 32/40: counterattack (noun)
+2025-03-16T04:16:19.602Z [INFO] Processing results for word 33/40: hurry (noun)
+2025-03-16T04:16:19.910Z [INFO] Processing results for word 34/40: rush (noun)
+2025-03-16T04:16:20.221Z [INFO] Processing results for word 35/40: rushing (noun)
+2025-03-16T04:16:20.526Z [INFO] Processing results for word 36/40: scramble (noun)
+2025-03-16T04:16:20.833Z [INFO] Processing results for word 37/40: hockey (noun)
+2025-03-16T04:16:21.071Z [INFO] Processing results for word 38/40: paintball (noun)
+2025-03-16T04:16:21.322Z [INFO] Processing results for word 39/40: cricket (noun)
+2025-03-16T04:16:21.651Z [INFO] Processing results for word 40/40: polo (noun)
+2025-03-16T04:16:21.960Z [INFO] Progress: 2960/68760 words processed (4%)
+2025-03-16T04:16:21.961Z [INFO] Batch 76 completed in 0.7 minutes
+2025-03-16T04:16:21.962Z [INFO] Batch results: 38 definitions, 40 OWAD phrases, 40 distractors updated
+2025-03-16T04:16:21.962Z [INFO] Progress: 2960/68760 words (4%)
+2025-03-16T04:16:21.962Z [INFO] Speed: 57 words/minute, Est. time remaining: 1154 minutes
+2025-03-16T04:16:21.962Z [INFO] -------------------------------------
+2025-03-16T04:16:21.962Z [INFO] Fetching 40 words with offset 3040...
+2025-03-16T04:16:22.269Z [INFO] Fetched 40 words
+2025-03-16T04:16:22.270Z [INFO] Processing batch of 40 words...
+2025-03-16T04:16:22.270Z [INFO] Sending batch request for 40 words to definition generator...
+2025-03-16T04:16:22.271Z [INFO] Generating definitions for 40 words...
+2025-03-16T04:16:31.183Z [INFO] API Request successful using key AIzaSy...yMPs. Total requests: 77
+2025-03-16T04:16:31.185Z [INFO] Sending batch request for 40 words to OWAD generator...
+2025-03-16T04:16:31.185Z [INFO] Generating OWAD phrases for 40 words...
+2025-03-16T04:16:39.474Z [INFO] API Request successful using key AIzaSy...UFvM. Total requests: 76
+2025-03-16T04:16:39.477Z [INFO] Sending batch request for 40 words to distractor generator...
+2025-03-16T04:16:39.477Z [INFO] Generating distractors for 40 words...
+2025-03-16T04:16:51.552Z [INFO] API Request successful using key AIzaSy...vOb8. Total requests: 75
+2025-03-16T04:16:51.552Z [INFO] Processing results for word 1/40: hoops (noun)
+2025-03-16T04:16:52.068Z [INFO] Progress: 2961/68760 words processed (4%)
+2025-03-16T04:16:52.069Z [INFO] Processing results for word 2/40: equalizer (noun)
+2025-03-16T04:16:52.322Z [INFO] Processing results for word 3/40: baccarat (noun)
+2025-03-16T04:16:52.608Z [INFO] Processing results for word 4/40: blackjack (noun)
+2025-03-16T04:16:52.885Z [INFO] Processing results for word 5/40: ludo (noun)
+2025-03-16T04:16:53.178Z [INFO] Processing results for word 6/40: circus (noun)
+2025-03-16T04:16:53.500Z [INFO] Processing results for word 7/40: parade (noun)
+2025-03-16T04:16:53.752Z [INFO] Processing results for word 8/40: display (noun)
+2025-03-16T04:16:54.113Z [INFO] Processing results for word 9/40: exhibit (noun)
+2025-03-16T04:16:54.422Z [INFO] Processing results for word 10/40: showing (noun)
+2025-03-16T04:16:54.724Z [INFO] Processing results for word 11/40: presentation (noun)
+2025-03-16T04:16:55.040Z [INFO] Progress: 2971/68760 words processed (4%)
+2025-03-16T04:16:55.043Z [INFO] Processing results for word 12/40: portrayal (noun)
+2025-03-16T04:16:55.342Z [INFO] Processing results for word 13/40: characterization (noun)
+2025-03-16T04:16:55.577Z [INFO] Processing results for word 14/40: parody (noun)
+2025-03-16T04:16:55.825Z [INFO] Processing results for word 15/40: mime (noun)
+2025-03-16T04:16:56.161Z [INFO] Processing results for word 16/40: business (noun)
+2025-03-16T04:16:56.469Z [INFO] Processing results for word 17/40: butterfly (noun)
+2025-03-16T04:16:56.718Z [INFO] Processing results for word 18/40: animation (noun)
+2025-03-16T04:16:56.981Z [INFO] Processing results for word 19/40: disorganization (noun)
+2025-03-16T04:16:57.288Z [INFO] Processing results for word 20/40: perturbation (noun)
+2025-03-16T04:16:57.592Z [INFO] Processing results for word 21/40: dislocation (noun)
+2025-03-16T04:16:57.901Z [INFO] Progress: 2981/68760 words processed (4%)
+2025-03-16T04:16:57.902Z [INFO] Processing results for word 22/40: breakdown (noun)
+2025-03-16T04:16:58.209Z [INFO] Processing results for word 23/40: surprise (noun)
+2025-03-16T04:16:58.520Z [INFO] Processing results for word 24/40: commotion (noun)
+2025-03-16T04:16:58.769Z [INFO] Processing results for word 25/40: din (noun)
+2025-03-16T04:16:59.031Z [INFO] Processing results for word 26/40: excitement (noun)
+2025-03-16T04:16:59.280Z [INFO] Processing results for word 27/40: upheaval (noun)
+2025-03-16T04:16:59.541Z [INFO] Processing results for word 28/40: outburst (noun)
+2025-03-16T04:16:59.846Z [INFO] Processing results for word 29/40: assist (noun)
+2025-03-16T04:17:00.156Z [INFO] Processing results for word 30/40: aerial (noun)
+2025-03-16T04:17:00.463Z [INFO] Processing results for word 31/40: lateral (noun)
+2025-03-16T04:17:00.704Z [INFO] Progress: 2991/68760 words processed (4%)
+2025-03-16T04:17:00.706Z [INFO] Processing results for word 32/40: tackle (noun)
+2025-03-16T04:17:00.974Z [INFO] Processing results for word 33/40: obstruction (noun)
+2025-03-16T04:17:01.279Z [INFO] Processing results for word 34/40: slice (noun)
+2025-03-16T04:17:01.578Z [INFO] Processing results for word 35/40: get (noun)
+2025-03-16T04:17:01.893Z [INFO] Processing results for word 36/40: serve (noun)
+2025-03-16T04:17:02.140Z [INFO] Processing results for word 37/40: ace (noun)
+2025-03-16T04:17:02.387Z [INFO] Processing results for word 38/40: let (noun)
+2025-03-16T04:17:02.629Z [INFO] Processing results for word 39/40: overhead (noun)
+2025-03-16T04:17:02.869Z [INFO] Processing results for word 40/40: volley (noun)
+2025-03-16T04:17:03.227Z [INFO] Progress: 3000/68760 words processed (4%)
+2025-03-16T04:17:03.228Z [INFO] Batch 77 completed in 0.7 minutes
+2025-03-16T04:17:03.228Z [INFO] Batch results: 40 definitions, 40 OWAD phrases, 40 distractors updated
+2025-03-16T04:17:03.229Z [INFO] Progress: 3000/68760 words (4%)
+2025-03-16T04:17:03.229Z [INFO] Speed: 57 words/minute, Est. time remaining: 1154 minutes
+2025-03-16T04:17:03.229Z [INFO] -------------------------------------
+2025-03-16T04:17:03.229Z [INFO] Fetching 40 words with offset 3080...
+2025-03-16T04:17:03.536Z [INFO] Fetched 40 words
+2025-03-16T04:17:03.537Z [INFO] Processing batch of 40 words...
+2025-03-16T04:17:03.537Z [INFO] Sending batch request for 40 words to definition generator...
+2025-03-16T04:17:03.538Z [INFO] Generating definitions for 40 words...
+2025-03-16T04:17:12.156Z [INFO] API Request successful using key AIzaSy...GDm4. Total requests: 78
+2025-03-16T04:17:12.157Z [INFO] Sending batch request for 40 words to OWAD generator...
+2025-03-16T04:17:12.157Z [INFO] Generating OWAD phrases for 40 words...
+2025-03-16T04:17:20.231Z [INFO] API Request successful using key AIzaSy...yMPs. Total requests: 77
+2025-03-16T04:17:20.232Z [INFO] Sending batch request for 40 words to distractor generator...
+2025-03-16T04:17:20.232Z [INFO] Generating distractors for 40 words...
+2025-03-16T04:17:32.336Z [INFO] API Request successful using key AIzaSy...UFvM. Total requests: 76
+2025-03-16T04:17:32.338Z [INFO] Processing results for word 1/40: job (noun)
+2025-03-16T04:17:32.613Z [INFO] Progress: 3001/68760 words processed (4%)
+2025-03-16T04:17:32.614Z [INFO] Processing results for word 2/40: procedure (noun)
+2025-03-16T04:17:32.863Z [INFO] Processing results for word 3/40: works (noun)
+2025-03-16T04:17:33.125Z [INFO] Processing results for word 4/40: deeds (noun)
+2025-03-16T04:17:33.367Z [INFO] Processing results for word 5/40: facility (noun)
+2025-03-16T04:17:33.637Z [INFO] Processing results for word 6/40: shining (noun)
+2025-03-16T04:17:33.951Z [INFO] Processing results for word 7/40: polishing (noun)
+2025-03-16T04:17:34.254Z [INFO] Processing results for word 8/40: scan (noun)
+2025-03-16T04:17:34.502Z [INFO] Processing results for word 9/40: specialization (noun)
+2025-03-16T04:17:34.763Z [INFO] Processing results for word 10/40: specialty (noun)
+2025-03-16T04:17:35.073Z [INFO] Processing results for word 11/40: employment (noun)
+2025-03-16T04:17:35.323Z [INFO] Progress: 3011/68760 words processed (4%)
+2025-03-16T04:17:35.324Z [INFO] Processing results for word 12/40: services (noun)
+2025-03-16T04:17:35.571Z [INFO] Processing results for word 13/40: minister (noun)
+2025-03-16T04:17:35.810Z [INFO] Processing results for word 14/40: berth (noun)
+2025-03-16T04:17:36.059Z [INFO] Processing results for word 15/40: hysterectomy (noun)
+2025-03-16T04:17:36.309Z [INFO] Processing results for word 16/40: drafting (noun)
+2025-03-16T04:17:36.548Z [INFO] Processing results for word 17/40: painting (noun)
+2025-03-16T04:17:36.815Z [INFO] Processing results for word 18/40: profession (noun)
+2025-03-16T04:17:37.122Z [INFO] Processing results for word 19/40: literature (noun)
+2025-03-16T04:17:37.383Z [INFO] Processing results for word 20/40: architecture (noun)
+2025-03-16T04:17:37.632Z [INFO] Processing results for word 21/40: law (noun)
+2025-03-16T04:17:37.942Z [INFO] Progress: 3021/68760 words processed (4%)
+2025-03-16T04:17:37.942Z [INFO] Processing results for word 22/40: toil (noun)
+2025-03-16T04:17:38.247Z [INFO] Processing results for word 23/40: exertion (noun)
+2025-03-16T04:17:38.552Z [INFO] Processing results for word 24/40: travail (noun)
+2025-03-16T04:17:38.863Z [INFO] Processing results for word 25/40: sweat (noun)
+2025-03-16T04:17:39.167Z [INFO] Processing results for word 26/40: difficulty (noun)
+2025-03-16T04:17:39.479Z [INFO] Processing results for word 27/40: straining (noun)
+2025-03-16T04:17:39.781Z [INFO] Processing results for word 28/40: exercising (noun)
+2025-03-16T04:17:40.089Z [INFO] Processing results for word 29/40: workout (noun)
+2025-03-16T04:17:40.399Z [INFO] Processing results for word 30/40: counting (noun)
+2025-03-16T04:17:40.662Z [INFO] Processing results for word 31/40: enumeration (noun)
+2025-03-16T04:17:40.910Z [INFO] Progress: 3031/68760 words processed (4%)
+2025-03-16T04:17:40.911Z [INFO] Processing results for word 32/40: reckoning (noun)
+2025-03-16T04:17:41.217Z [INFO] Processing results for word 33/40: detecting (noun)
+2025-03-16T04:17:41.526Z [INFO] Processing results for word 34/40: examination (noun)
+2025-03-16T04:17:41.766Z [INFO] Processing results for word 35/40: testing (noun)
+2025-03-16T04:17:42.037Z [INFO] Processing results for word 36/40: inquiry (noun)
+2025-03-16T04:17:42.344Z [INFO] Processing results for word 37/40: enquiry (noun)
+2025-03-16T04:17:42.651Z [INFO] Processing results for word 38/40: research (noun)
+2025-03-16T04:17:42.958Z [INFO] Processing results for word 39/40: experiment (noun)
+2025-03-16T04:17:43.214Z [INFO] Processing results for word 40/40: screening (noun)
+2025-03-16T04:17:43.463Z [INFO] Progress: 3040/68760 words processed (4%)
+2025-03-16T04:17:43.464Z [INFO] Batch 78 completed in 0.7 minutes
+2025-03-16T04:17:43.464Z [INFO] Batch results: 40 definitions, 40 OWAD phrases, 40 distractors updated
+2025-03-16T04:17:43.464Z [INFO] Progress: 3040/68760 words (4%)
+2025-03-16T04:17:43.464Z [INFO] Speed: 57 words/minute, Est. time remaining: 1153 minutes
+2025-03-16T04:17:43.464Z [INFO] -------------------------------------
+2025-03-16T04:17:43.464Z [INFO] Fetching 40 words with offset 3120...
+2025-03-16T04:17:43.778Z [INFO] Fetched 40 words
+2025-03-16T04:17:43.778Z [INFO] Processing batch of 40 words...
+2025-03-16T04:17:43.779Z [INFO] Sending batch request for 40 words to definition generator...
+2025-03-16T04:17:43.779Z [INFO] Generating definitions for 40 words...
+2025-03-16T04:17:52.172Z [INFO] API Request successful using key AIzaSy...dHDo. Total requests: 79
+2025-03-16T04:17:52.173Z [INFO] Sending batch request for 40 words to OWAD generator...
+2025-03-16T04:17:52.173Z [INFO] Generating OWAD phrases for 40 words...
+2025-03-16T04:18:00.367Z [INFO] API Request successful using key AIzaSy...GDm4. Total requests: 78
+2025-03-16T04:18:00.369Z [INFO] Sending batch request for 40 words to distractor generator...
+2025-03-16T04:18:00.370Z [INFO] Generating distractors for 40 words...
+2025-03-16T04:18:12.431Z [INFO] API Request successful using key AIzaSy...yMPs. Total requests: 77
+2025-03-16T04:18:12.433Z [INFO] Processing results for word 1/40: anatomy (noun)
+2025-03-16T04:18:13.080Z [INFO] Progress: 3041/68760 words processed (4%)
+2025-03-16T04:18:13.081Z [INFO] Processing results for word 2/40: analogy (noun)
+2025-03-16T04:18:13.340Z [INFO] Processing results for word 3/40: confrontation (noun)
+2025-03-16T04:18:13.597Z [INFO] Processing results for word 4/40: contrast (noun)
+2025-03-16T04:18:13.844Z [INFO] Processing results for word 5/40: visitation (noun)
+2025-03-16T04:18:14.192Z [INFO] Processing results for word 6/40: census (noun)
+2025-03-16T04:18:14.472Z [INFO] Processing results for word 7/40: poll (noun)
+2025-03-16T04:18:14.721Z [INFO] Processing results for word 8/40: recount (noun)
+2025-03-16T04:18:15.017Z [INFO] Processing results for word 9/40: attention (noun)
+2025-03-16T04:18:15.265Z [INFO] Processing results for word 10/40: singing (noun)
+2025-03-16T04:18:15.512Z [INFO] Processing results for word 11/40: performing (noun)
+2025-03-16T04:18:15.754Z [INFO] Progress: 3051/68760 words processed (4%)
+2025-03-16T04:18:15.755Z [INFO] Processing results for word 12/40: mockery (noun)
+2025-03-16T04:18:16.038Z [INFO] Processing results for word 13/40: method (noun)
+2025-03-16T04:18:16.294Z [INFO] Processing results for word 14/40: part (noun)
+2025-03-16T04:18:16.545Z [INFO] Processing results for word 15/40: role (noun)
+2025-03-16T04:18:16.786Z [INFO] Processing results for word 16/40: portfolio (noun)
+2025-03-16T04:18:17.031Z [INFO] Processing results for word 17/40: lieu (noun)
+2025-03-16T04:18:17.369Z [INFO] Processing results for word 18/40: behalf (noun)
+2025-03-16T04:18:17.613Z [INFO] Processing results for word 19/40: pitcher (noun)
+2025-03-16T04:18:17.878Z [INFO] Processing results for word 20/40: mound (noun)
+2025-03-16T04:18:18.186Z [INFO] Processing results for word 21/40: second (noun)
+2025-03-16T04:18:18.489Z [INFO] Progress: 3061/68760 words processed (4%)
+2025-03-16T04:18:18.490Z [INFO] Processing results for word 22/40: short (noun)
+2025-03-16T04:18:18.800Z [INFO] Processing results for word 23/40: third (noun)
+2025-03-16T04:18:19.106Z [INFO] Processing results for word 24/40: end (noun)
+2025-03-16T04:18:19.416Z [INFO] Processing results for word 25/40: center (noun)
+2025-03-16T04:18:19.678Z [INFO] Processing results for word 26/40: guard (noun)
+2025-03-16T04:18:19.930Z [INFO] Processing results for word 27/40: back (noun)
+2025-03-16T04:18:20.174Z [INFO] Processing results for word 28/40: lesson (noun)
+2025-03-16T04:18:20.440Z [INFO] Processing results for word 29/40: mission (noun)
+2025-03-16T04:18:20.690Z [INFO] Processing results for word 30/40: misconduct (noun)
+2025-03-16T04:18:20.950Z [INFO] Processing results for word 31/40: trespass (noun)
+2025-03-16T04:18:21.192Z [INFO] Progress: 3071/68760 words processed (4%)
+2025-03-16T04:18:21.193Z [INFO] Processing results for word 32/40: violation (noun)
+2025-03-16T04:18:21.448Z [INFO] Processing results for word 33/40: dissipation (noun)
+2025-03-16T04:18:21.766Z [INFO] Processing results for word 34/40: extravagance (noun)
+2025-03-16T04:18:22.076Z [INFO] Processing results for word 35/40: transgression (noun)
+2025-03-16T04:18:22.327Z [INFO] Processing results for word 36/40: evil (noun)
+2025-03-16T04:18:22.589Z [INFO] Processing results for word 37/40: immorality (noun)
+2025-03-16T04:18:22.895Z [INFO] Processing results for word 38/40: attitude (noun)
+2025-03-16T04:18:23.202Z [INFO] Processing results for word 39/40: bluff (noun)
+2025-03-16T04:18:23.508Z [INFO] Processing results for word 40/40: sin (noun)
+2025-03-16T04:18:23.756Z [INFO] Progress: 3080/68760 words processed (4%)
+2025-03-16T04:18:23.756Z [INFO] Batch 79 completed in 0.7 minutes
+2025-03-16T04:18:23.756Z [INFO] Batch results: 40 definitions, 40 OWAD phrases, 40 distractors updated
+2025-03-16T04:18:23.756Z [INFO] Progress: 3080/68760 words (4%)
+2025-03-16T04:18:23.756Z [INFO] Speed: 57 words/minute, Est. time remaining: 1152 minutes
+2025-03-16T04:18:23.756Z [INFO] -------------------------------------
+2025-03-16T04:18:23.756Z [INFO] Fetching 40 words with offset 3160...
+2025-03-16T04:18:24.020Z [INFO] Fetched 40 words
+2025-03-16T04:18:24.020Z [INFO] Processing batch of 40 words...
+2025-03-16T04:18:24.020Z [INFO] Sending batch request for 40 words to definition generator...
+2025-03-16T04:18:24.021Z [INFO] Generating definitions for 40 words...
+2025-03-16T04:18:32.714Z [INFO] API Request successful using key AIzaSy...vOb8. Total requests: 80
+2025-03-16T04:18:32.716Z [INFO] Sending batch request for 40 words to OWAD generator...
+2025-03-16T04:18:32.716Z [INFO] Generating OWAD phrases for 40 words...
+2025-03-16T04:18:40.612Z [INFO] API Request successful using key AIzaSy...dHDo. Total requests: 79
+2025-03-16T04:18:40.613Z [INFO] Sending batch request for 40 words to distractor generator...
+2025-03-16T04:18:40.614Z [INFO] Generating distractors for 40 words...
+2025-03-16T04:18:52.593Z [INFO] API Request successful using key AIzaSy...GDm4. Total requests: 78
+2025-03-16T04:18:52.595Z [INFO] Processing results for word 1/40: pride (noun)
+2025-03-16T04:18:52.901Z [INFO] Progress: 3081/68760 words processed (4%)
+2025-03-16T04:18:52.902Z [INFO] Processing results for word 2/40: laziness (noun)
+2025-03-16T04:18:53.151Z [INFO] Processing results for word 3/40: anger (noun)
+2025-03-16T04:18:53.413Z [INFO] Processing results for word 4/40: terror (noun)
+2025-03-16T04:18:53.657Z [INFO] Processing results for word 5/40: rape (noun)
+2025-03-16T04:18:53.924Z [INFO] Processing results for word 6/40: attempt (noun)
+2025-03-16T04:18:54.232Z [INFO] Processing results for word 7/40: racket (noun)
+2025-03-16T04:18:54.539Z [INFO] Processing results for word 8/40: raid (noun)
+2025-03-16T04:18:54.775Z [INFO] Processing results for word 9/40: tribute (noun)
+2025-03-16T04:18:55.050Z [INFO] Processing results for word 10/40: endeavor (noun)
+2025-03-16T04:18:55.347Z [INFO] Processing results for word 11/40: endeavour (noun)
+2025-03-16T04:18:55.660Z [INFO] Progress: 3091/68760 words processed (4%)
+2025-03-16T04:18:55.661Z [INFO] Processing results for word 12/40: bid (noun)
+2025-03-16T04:18:55.910Z [INFO] Processing results for word 13/40: essay (noun)
+2025-03-16T04:18:56.176Z [INFO] Processing results for word 14/40: trial (noun)
+2025-03-16T04:18:56.486Z [INFO] Processing results for word 15/40: fitting (noun)
+2025-03-16T04:18:56.733Z [INFO] Processing results for word 16/40: undertaking (noun)
+2025-03-16T04:18:56.980Z [INFO] Processing results for word 17/40: project (noun)
+2025-03-16T04:18:57.223Z [INFO] Processing results for word 18/40: adventure (noun)
+2025-03-16T04:18:57.508Z [INFO] Processing results for word 19/40: sally (noun)
+2025-03-16T04:18:57.752Z [INFO] Processing results for word 20/40: risk (noun)
+2025-03-16T04:18:58.024Z [INFO] Processing results for word 21/40: peril (noun)
+2025-03-16T04:18:58.554Z [INFO] Progress: 3101/68760 words processed (5%)
+2025-03-16T04:18:58.555Z [INFO] Processing results for word 22/40: danger (noun)
+2025-03-16T04:18:58.835Z [INFO] Processing results for word 23/40: chance (noun)
+2025-03-16T04:18:59.361Z [INFO] Processing results for word 24/40: gamble (noun)
+2025-03-16T04:18:59.605Z [INFO] Processing results for word 25/40: doubling (noun)
+2025-03-16T04:18:59.884Z [INFO] Processing results for word 26/40: control (noun)
+2025-03-16T04:19:00.171Z [INFO] Processing results for word 27/40: imperialism (noun)
+2025-03-16T04:19:00.422Z [INFO] Processing results for word 28/40: regulation (noun)
+2025-03-16T04:19:00.692Z [INFO] Processing results for word 29/40: regulating (noun)
+2025-03-16T04:19:00.943Z [INFO] Processing results for word 30/40: deregulation (noun)
+2025-03-16T04:19:01.191Z [INFO] Processing results for word 31/40: timing (noun)
+2025-03-16T04:19:01.452Z [INFO] Progress: 3111/68760 words processed (5%)
+2025-03-16T04:19:01.453Z [INFO] Processing results for word 32/40: coordination (noun)
+2025-03-16T04:19:01.703Z [INFO] Processing results for word 33/40: synchronization (noun)
+2025-03-16T04:19:01.970Z [INFO] Processing results for word 34/40: limitation (noun)
+2025-03-16T04:19:02.323Z [INFO] Processing results for word 35/40: restriction (noun)
+2025-03-16T04:19:02.580Z [INFO] Processing results for word 36/40: freeze (noun)
+2025-03-16T04:19:02.938Z [INFO] Processing results for word 37/40: hire (noun)
+2025-03-16T04:19:03.183Z [INFO] Processing results for word 38/40: ownership (noun)
+2025-03-16T04:19:03.447Z [INFO] Processing results for word 39/40: retention (noun)
+2025-03-16T04:19:03.686Z [INFO] Processing results for word 40/40: keeping (noun)
+2025-03-16T04:19:03.957Z [INFO] Progress: 3120/68760 words processed (5%)
+2025-03-16T04:19:03.958Z [INFO] Batch 80 completed in 0.7 minutes
+2025-03-16T04:19:03.958Z [INFO] Batch results: 39 definitions, 40 OWAD phrases, 40 distractors updated
+2025-03-16T04:19:03.961Z [INFO] Stats saved to /Users/sandeep.joshi/Documents/vibecoding/oneword/word-enrichment/stats/reprocess-stats-1742098743959.json
+2025-03-16T04:19:03.961Z [INFO] Progress: 3120/68760 words (5%)
+2025-03-16T04:19:03.961Z [INFO] Speed: 57 words/minute, Est. time remaining: 1152 minutes
+2025-03-16T04:19:03.961Z [INFO] -------------------------------------
+2025-03-16T04:19:03.961Z [INFO] Fetching 40 words with offset 3200...
+2025-03-16T04:19:04.213Z [INFO] Fetched 40 words
+2025-03-16T04:19:04.214Z [INFO] Processing batch of 40 words...
+2025-03-16T04:19:04.214Z [INFO] Sending batch request for 40 words to definition generator...
+2025-03-16T04:19:04.214Z [INFO] Generating definitions for 40 words...
+2025-03-16T04:19:12.844Z [INFO] API Request successful using key AIzaSy...UFvM. Total requests: 81
+2025-03-16T04:19:12.845Z [INFO] Sending batch request for 40 words to OWAD generator...
+2025-03-16T04:19:12.846Z [INFO] Generating OWAD phrases for 40 words...
+2025-03-16T04:19:21.367Z [INFO] API Request successful using key AIzaSy...vOb8. Total requests: 80
+2025-03-16T04:19:21.368Z [INFO] Sending batch request for 40 words to distractor generator...
+2025-03-16T04:19:21.369Z [INFO] Generating distractors for 40 words...
+2025-03-16T04:19:33.457Z [INFO] API Request successful using key AIzaSy...dHDo. Total requests: 79
+2025-03-16T04:19:33.460Z [INFO] Processing results for word 1/40: holding (noun)
+2025-03-16T04:19:35.380Z [INFO] Progress: 3121/68760 words processed (5%)
+2025-03-16T04:19:35.380Z [INFO] Processing results for word 2/40: filing (noun)
+2025-03-16T04:19:35.646Z [INFO] Processing results for word 3/40: grasping (noun)
+2025-03-16T04:19:35.895Z [INFO] Processing results for word 4/40: seizing (noun)
+2025-03-16T04:19:36.216Z [INFO] Processing results for word 5/40: clasp (noun)
+2025-03-16T04:19:36.522Z [INFO] Processing results for word 6/40: clutch (noun)
+2025-03-16T04:19:36.829Z [INFO] Processing results for word 7/40: clutches (noun)
+2025-03-16T04:19:37.136Z [INFO] Processing results for word 8/40: grasp (noun)
+2025-03-16T04:19:37.443Z [INFO] Processing results for word 9/40: grip (noun)
+2025-03-16T04:19:37.694Z [INFO] Processing results for word 10/40: hold (noun)
+2025-03-16T04:19:37.958Z [INFO] Processing results for word 11/40: nelson (noun)
+2025-03-16T04:19:38.263Z [INFO] Progress: 3131/68760 words processed (5%)
+2025-03-16T04:19:38.264Z [INFO] Processing results for word 12/40: lock (noun)
+2025-03-16T04:19:38.512Z [INFO] Processing results for word 13/40: steering (noun)
+2025-03-16T04:19:38.774Z [INFO] Processing results for word 14/40: guidance (noun)
+2025-03-16T04:19:39.018Z [INFO] Processing results for word 15/40: direction (noun)
+2025-03-16T04:19:39.287Z [INFO] Processing results for word 16/40: aim (noun)
+2025-03-16T04:19:39.591Z [INFO] Processing results for word 17/40: shielding (noun)
+2025-03-16T04:19:39.898Z [INFO] Processing results for word 18/40: guardianship (noun)
+2025-03-16T04:19:40.205Z [INFO] Processing results for word 19/40: hands (noun)
+2025-03-16T04:19:40.457Z [INFO] Processing results for word 20/40: custody (noun)
+2025-03-16T04:19:40.703Z [INFO] Processing results for word 21/40: preservation (noun)
+2025-03-16T04:19:41.029Z [INFO] Progress: 3141/68760 words processed (5%)
+2025-03-16T04:19:41.031Z [INFO] Processing results for word 22/40: conservation (noun)
+2025-03-16T04:19:41.278Z [INFO] Processing results for word 23/40: reservation (noun)
+2025-03-16T04:19:41.531Z [INFO] Processing results for word 24/40: precaution (noun)
+2025-03-16T04:19:41.845Z [INFO] Processing results for word 25/40: safeguard (noun)
+2025-03-16T04:19:42.157Z [INFO] Processing results for word 26/40: security (noun)
+2025-03-16T04:19:42.408Z [INFO] Processing results for word 27/40: defense (noun)
+2025-03-16T04:19:42.769Z [INFO] Processing results for word 28/40: defence (noun)
+2025-03-16T04:19:43.077Z [INFO] Processing results for word 29/40: inoculation (noun)
+2025-03-16T04:19:43.382Z [INFO] Processing results for word 30/40: vaccination (noun)
+2025-03-16T04:19:43.686Z [INFO] Processing results for word 31/40: patrol (noun)
+2025-03-16T04:19:43.998Z [INFO] Progress: 3151/68760 words processed (5%)
+2025-03-16T04:19:43.999Z [INFO] Processing results for word 32/40: insulation (noun)
+2025-03-16T04:19:44.301Z [INFO] Processing results for word 33/40: lining (noun)
+2025-03-16T04:19:44.548Z [INFO] Processing results for word 34/40: facing (noun)
+2025-03-16T04:19:44.813Z [INFO] Processing results for word 35/40: locking (noun)
+2025-03-16T04:19:45.125Z [INFO] Processing results for word 36/40: escort (noun)
+2025-03-16T04:19:45.430Z [INFO] Processing results for word 37/40: accompaniment (noun)
+2025-03-16T04:19:45.734Z [INFO] Processing results for word 38/40: convoy (noun)
+2025-03-16T04:19:46.047Z [INFO] Processing results for word 39/40: grooming (noun)
+2025-03-16T04:19:46.353Z [INFO] Processing results for word 40/40: toilet (noun)
+2025-03-16T04:19:46.659Z [INFO] Progress: 3160/68760 words processed (5%)
+2025-03-16T04:19:46.660Z [INFO] Batch 81 completed in 0.7 minutes
+2025-03-16T04:19:46.661Z [INFO] Batch results: 40 definitions, 40 OWAD phrases, 40 distractors updated
+2025-03-16T04:19:46.661Z [INFO] Progress: 3160/68760 words (5%)
+2025-03-16T04:19:46.661Z [INFO] Speed: 57 words/minute, Est. time remaining: 1151 minutes
+2025-03-16T04:19:46.661Z [INFO] -------------------------------------
+2025-03-16T04:19:46.661Z [INFO] Fetching 40 words with offset 3240...
+2025-03-16T04:19:46.969Z [INFO] Fetched 40 words
+2025-03-16T04:19:46.970Z [INFO] Processing batch of 40 words...
+2025-03-16T04:19:46.971Z [INFO] Sending batch request for 40 words to definition generator...
+2025-03-16T04:19:46.971Z [INFO] Generating definitions for 40 words...
+2025-03-16T04:19:55.622Z [INFO] API Request successful using key AIzaSy...yMPs. Total requests: 82
+2025-03-16T04:19:55.623Z [INFO] Sending batch request for 40 words to OWAD generator...
+2025-03-16T04:19:55.624Z [INFO] Generating OWAD phrases for 40 words...
+2025-03-16T04:20:03.758Z [INFO] API Request successful using key AIzaSy...UFvM. Total requests: 81
+2025-03-16T04:20:03.758Z [INFO] Sending batch request for 40 words to distractor generator...
+2025-03-16T04:20:03.758Z [INFO] Generating distractors for 40 words...
+2025-03-16T04:20:15.680Z [INFO] API Request successful using key AIzaSy...vOb8. Total requests: 80
+2025-03-16T04:20:15.682Z [INFO] Processing results for word 1/40: immunization (noun)
+2025-03-16T04:20:16.246Z [INFO] Progress: 3161/68760 words processed (5%)
+2025-03-16T04:20:16.247Z [INFO] Processing results for word 2/40: sensitization (noun)
+2025-03-16T04:20:16.488Z [INFO] Processing results for word 3/40: sealing (noun)
+2025-03-16T04:20:16.734Z [INFO] Processing results for word 4/40: wear (noun)
+2025-03-16T04:20:16.981Z [INFO] Processing results for word 5/40: wearing (noun)
+2025-03-16T04:20:17.221Z [INFO] Processing results for word 6/40: respiration (noun)
+2025-03-16T04:20:17.585Z [INFO] Processing results for word 7/40: breathing (noun)
+2025-03-16T04:20:17.856Z [INFO] Processing results for word 8/40: echocardiography (noun)
+2025-03-16T04:20:18.094Z [INFO] Processing results for word 9/40: cpr (noun)
+2025-03-16T04:20:18.403Z [INFO] Processing results for word 10/40: panting (noun)
+2025-03-16T04:20:18.712Z [INFO] Processing results for word 11/40: smoking (noun)
+2025-03-16T04:20:18.955Z [INFO] Progress: 3171/68760 words processed (5%)
+2025-03-16T04:20:18.955Z [INFO] Processing results for word 12/40: breath (noun)
+2025-03-16T04:20:19.230Z [INFO] Processing results for word 13/40: expiration (noun)
+2025-03-16T04:20:19.481Z [INFO] Processing results for word 14/40: blow (noun)
+2025-03-16T04:20:19.726Z [INFO] Processing results for word 15/40: puff (noun)
+2025-03-16T04:20:19.962Z [INFO] Processing results for word 16/40: inhalation (noun)
+2025-03-16T04:20:20.247Z [INFO] Processing results for word 17/40: inspiration (noun)
+2025-03-16T04:20:20.557Z [INFO] Processing results for word 18/40: aspiration (noun)
+2025-03-16T04:20:20.802Z [INFO] Processing results for word 19/40: intake (noun)
+2025-03-16T04:20:21.066Z [INFO] Processing results for word 20/40: gasp (noun)
+2025-03-16T04:20:21.373Z [INFO] Processing results for word 21/40: ingestion (noun)
+2025-03-16T04:20:21.678Z [INFO] Progress: 3181/68760 words processed (5%)
+2025-03-16T04:20:21.678Z [INFO] Processing results for word 22/40: uptake (noun)
+2025-03-16T04:20:21.991Z [INFO] Processing results for word 23/40: eating (noun)
+2025-03-16T04:20:22.295Z [INFO] Processing results for word 24/40: feeding (noun)
+2025-03-16T04:20:22.604Z [INFO] Processing results for word 25/40: browse (noun)
+2025-03-16T04:20:22.910Z [INFO] Processing results for word 26/40: browsing (noun)
+2025-03-16T04:20:23.216Z [INFO] Processing results for word 27/40: shock (noun)
+2025-03-16T04:20:23.523Z [INFO] Processing results for word 28/40: swallow (noun)
+2025-03-16T04:20:23.828Z [INFO] Processing results for word 29/40: dining (noun)
+2025-03-16T04:20:24.138Z [INFO] Processing results for word 30/40: tasting (noun)
+2025-03-16T04:20:24.445Z [INFO] Processing results for word 31/40: sucking (noun)
+2025-03-16T04:20:24.696Z [INFO] Progress: 3191/68760 words processed (5%)
+2025-03-16T04:20:24.698Z [INFO] Processing results for word 32/40: suck (noun)
+2025-03-16T04:20:24.956Z [INFO] Processing results for word 33/40: suction (noun)
+2025-03-16T04:20:25.206Z [INFO] Processing results for word 34/40: lactation (noun)
+2025-03-16T04:20:25.452Z [INFO] Processing results for word 35/40: sip (noun)
+2025-03-16T04:20:25.774Z [INFO] Processing results for word 36/40: bondage (noun)
+2025-03-16T04:20:26.086Z [INFO] Processing results for word 37/40: sex (noun)
+2025-03-16T04:20:26.391Z [INFO] Processing results for word 38/40: conception (noun)
+2025-03-16T04:20:26.698Z [INFO] Processing results for word 39/40: intercourse (noun)
+2025-03-16T04:20:27.010Z [INFO] Processing results for word 40/40: fuck (noun)
+2025-03-16T04:20:27.310Z [INFO] Progress: 3200/68760 words processed (5%)
+2025-03-16T04:20:27.311Z [INFO] Batch 82 completed in 0.7 minutes
+2025-03-16T04:20:27.312Z [INFO] Batch results: 40 definitions, 40 OWAD phrases, 40 distractors updated
+2025-03-16T04:20:27.312Z [INFO] Progress: 3200/68760 words (5%)
+2025-03-16T04:20:27.312Z [INFO] Speed: 57 words/minute, Est. time remaining: 1150 minutes
+2025-03-16T04:20:27.312Z [INFO] -------------------------------------
+2025-03-16T04:20:27.312Z [INFO] Fetching 40 words with offset 3280...
+2025-03-16T04:20:27.565Z [INFO] Fetched 40 words
+2025-03-16T04:20:27.566Z [INFO] Processing batch of 40 words...
+2025-03-16T04:20:27.566Z [INFO] Sending batch request for 40 words to definition generator...
+2025-03-16T04:20:27.566Z [INFO] Generating definitions for 40 words...
+2025-03-16T04:20:36.123Z [INFO] API Request successful using key AIzaSy...GDm4. Total requests: 83
+2025-03-16T04:20:36.124Z [INFO] Sending batch request for 40 words to OWAD generator...
+2025-03-16T04:20:36.124Z [INFO] Generating OWAD phrases for 40 words...
+2025-03-16T04:20:44.314Z [INFO] API Request successful using key AIzaSy...yMPs. Total requests: 82
+2025-03-16T04:20:44.315Z [INFO] Sending batch request for 40 words to distractor generator...
+2025-03-16T04:20:44.315Z [INFO] Generating distractors for 40 words...
+2025-03-16T04:20:56.399Z [INFO] API Request successful using key AIzaSy...UFvM. Total requests: 81
+2025-03-16T04:20:56.403Z [INFO] Processing results for word 1/40: fucking (noun)
+2025-03-16T04:20:56.945Z [INFO] Progress: 3201/68760 words processed (5%)
+2025-03-16T04:20:56.946Z [INFO] Processing results for word 2/40: screw (noun)
+2025-03-16T04:20:57.189Z [INFO] Processing results for word 3/40: ass (noun)
+2025-03-16T04:20:57.433Z [INFO] Processing results for word 4/40: pleasure (noun)
+2025-03-16T04:20:57.676Z [INFO] Processing results for word 5/40: love (noun)
+2025-03-16T04:20:57.915Z [INFO] Processing results for word 6/40: coupling (noun)
+2025-03-16T04:20:58.239Z [INFO] Processing results for word 7/40: mating (noun)
+2025-03-16T04:20:58.488Z [INFO] Processing results for word 8/40: adultery (noun)
+2025-03-16T04:20:58.751Z [INFO] Processing results for word 9/40: incest (noun)
+2025-03-16T04:20:58.999Z [INFO] Processing results for word 10/40: reproduction (noun)
+2025-03-16T04:20:59.248Z [INFO] Processing results for word 11/40: procreation (noun)
+2025-03-16T04:20:59.490Z [INFO] Progress: 3211/68760 words processed (5%)
+2025-03-16T04:20:59.491Z [INFO] Processing results for word 12/40: breeding (noun)
+2025-03-16T04:20:59.731Z [INFO] Processing results for word 13/40: generation (noun)
+2025-03-16T04:20:59.972Z [INFO] Processing results for word 14/40: multiplication (noun)
+2025-03-16T04:21:00.236Z [INFO] Processing results for word 15/40: propagation (noun)
+2025-03-16T04:21:00.484Z [INFO] Processing results for word 16/40: hybridization (noun)
+2025-03-16T04:21:00.719Z [INFO] Processing results for word 17/40: cross (noun)
+2025-03-16T04:21:01.006Z [INFO] Processing results for word 18/40: reciprocal (noun)
+2025-03-16T04:21:01.309Z [INFO] Processing results for word 19/40: contraception (noun)
+2025-03-16T04:21:01.561Z [INFO] Processing results for word 20/40: rhythm (noun)
+2025-03-16T04:21:01.803Z [INFO] Processing results for word 21/40: servicing (noun)
+2025-03-16T04:21:02.121Z [INFO] Progress: 3221/68760 words processed (5%)
+2025-03-16T04:21:02.122Z [INFO] Processing results for word 22/40: stimulation (noun)
+2025-03-16T04:21:02.366Z [INFO] Processing results for word 23/40: hugging (noun)
+2025-03-16T04:21:02.641Z [INFO] Processing results for word 24/40: kissing (noun)
+2025-03-16T04:21:02.938Z [INFO] Processing results for word 25/40: feel (noun)
+2025-03-16T04:21:03.182Z [INFO] Processing results for word 26/40: head (noun)
+2025-03-16T04:21:03.458Z [INFO] Processing results for word 27/40: masturbation (noun)
+2025-03-16T04:21:03.702Z [INFO] Processing results for word 28/40: homosexuality (noun)
+2025-03-16T04:21:03.974Z [INFO] Processing results for word 29/40: sleeping (noun)
+2025-03-16T04:21:04.278Z [INFO] Processing results for word 30/40: response (noun)
+2025-03-16T04:21:04.538Z [INFO] Processing results for word 31/40: reflex (noun)
+2025-03-16T04:21:04.789Z [INFO] Progress: 3231/68760 words processed (5%)
+2025-03-16T04:21:04.790Z [INFO] Processing results for word 32/40: tremble (noun)
+2025-03-16T04:21:05.100Z [INFO] Processing results for word 33/40: shiver (noun)
+2025-03-16T04:21:05.338Z [INFO] Processing results for word 34/40: crying (noun)
+2025-03-16T04:21:05.585Z [INFO] Processing results for word 35/40: weeping (noun)
+2025-03-16T04:21:05.916Z [INFO] Processing results for word 36/40: tears (noun)
+2025-03-16T04:21:06.162Z [INFO] Processing results for word 37/40: sob (noun)
+2025-03-16T04:21:06.400Z [INFO] Processing results for word 38/40: sobbing (noun)
+2025-03-16T04:21:06.736Z [INFO] Processing results for word 39/40: wailing (noun)
+2025-03-16T04:21:06.988Z [INFO] Processing results for word 40/40: calculation (noun)
+2025-03-16T04:21:07.224Z [INFO] Progress: 3240/68760 words processed (5%)
+2025-03-16T04:21:07.225Z [INFO] Batch 83 completed in 0.7 minutes
+2025-03-16T04:21:07.225Z [INFO] Batch results: 38 definitions, 40 OWAD phrases, 40 distractors updated
+2025-03-16T04:21:07.226Z [INFO] Progress: 3240/68760 words (5%)
+2025-03-16T04:21:07.226Z [INFO] Speed: 57 words/minute, Est. time remaining: 1149 minutes
+2025-03-16T04:21:07.226Z [INFO] -------------------------------------
+2025-03-16T04:21:07.226Z [INFO] Fetching 40 words with offset 3320...
+2025-03-16T04:21:07.555Z [INFO] Fetched 40 words
+2025-03-16T04:21:07.555Z [INFO] Processing batch of 40 words...
+2025-03-16T04:21:07.555Z [INFO] Sending batch request for 40 words to definition generator...
+2025-03-16T04:21:07.555Z [INFO] Generating definitions for 40 words...
+2025-03-16T04:21:16.313Z [INFO] API Request successful using key AIzaSy...dHDo. Total requests: 84
+2025-03-16T04:21:16.314Z [INFO] Sending batch request for 40 words to OWAD generator...
+2025-03-16T04:21:16.314Z [INFO] Generating OWAD phrases for 40 words...
+2025-03-16T04:21:24.964Z [INFO] API Request successful using key AIzaSy...GDm4. Total requests: 83
+2025-03-16T04:21:24.964Z [INFO] Sending batch request for 40 words to distractor generator...
+2025-03-16T04:21:24.965Z [INFO] Generating distractors for 40 words...
+2025-03-16T04:21:37.390Z [INFO] API Request successful using key AIzaSy...yMPs. Total requests: 82
+2025-03-16T04:21:37.393Z [INFO] Processing results for word 1/40: computation (noun)
+2025-03-16T04:21:37.706Z [INFO] Progress: 3241/68760 words processed (5%)
+2025-03-16T04:21:37.706Z [INFO] Processing results for word 2/40: computing (noun)
+2025-03-16T04:21:38.071Z [INFO] Processing results for word 3/40: differentiation (noun)
+2025-03-16T04:21:38.327Z [INFO] Processing results for word 4/40: integration (noun)
+2025-03-16T04:21:38.570Z [INFO] Processing results for word 5/40: times (noun)
+2025-03-16T04:21:38.820Z [INFO] Processing results for word 6/40: minus (noun)
+2025-03-16T04:21:39.096Z [INFO] Processing results for word 7/40: summation (noun)
+2025-03-16T04:21:39.352Z [INFO] Processing results for word 8/40: plus (noun)
+2025-03-16T04:21:39.604Z [INFO] Processing results for word 9/40: construction (noun)
+2025-03-16T04:21:39.848Z [INFO] Processing results for word 10/40: judgment (noun)
+2025-03-16T04:21:40.120Z [INFO] Processing results for word 11/40: judgement (noun)
+2025-03-16T04:21:40.426Z [INFO] Progress: 3251/68760 words processed (5%)
+2025-03-16T04:21:40.428Z [INFO] Processing results for word 12/40: assessment (noun)
+2025-03-16T04:21:40.677Z [INFO] Processing results for word 13/40: adjudication (noun)
+2025-03-16T04:21:40.939Z [INFO] Processing results for word 14/40: disapproval (noun)
+2025-03-16T04:21:41.245Z [INFO] Processing results for word 15/40: evaluation (noun)
+2025-03-16T04:21:41.553Z [INFO] Processing results for word 16/40: rating (noun)
+2025-03-16T04:21:41.860Z [INFO] Processing results for word 17/40: grading (noun)
+2025-03-16T04:21:42.168Z [INFO] Processing results for word 18/40: scoring (noun)
+2025-03-16T04:21:42.413Z [INFO] Processing results for word 19/40: estimate (noun)
+2025-03-16T04:21:42.680Z [INFO] Processing results for word 20/40: estimation (noun)
+2025-03-16T04:21:42.987Z [INFO] Processing results for word 21/40: appraisal (noun)
+2025-03-16T04:21:43.235Z [INFO] Progress: 3261/68760 words processed (5%)
+2025-03-16T04:21:43.236Z [INFO] Processing results for word 22/40: sensing (noun)
+2025-03-16T04:21:43.599Z [INFO] Processing results for word 23/40: perception (noun)
+2025-03-16T04:21:43.840Z [INFO] Processing results for word 24/40: look (noun)
+2025-03-16T04:21:44.114Z [INFO] Processing results for word 25/40: looking (noun)
+2025-03-16T04:21:44.421Z [INFO] Processing results for word 26/40: glance (noun)
+2025-03-16T04:21:44.727Z [INFO] Processing results for word 27/40: glimpse (noun)
+2025-03-16T04:21:45.034Z [INFO] Processing results for word 28/40: peek (noun)
+2025-03-16T04:21:45.342Z [INFO] Processing results for word 29/40: peep (noun)
+2025-03-16T04:21:45.653Z [INFO] Processing results for word 30/40: stare (noun)
+2025-03-16T04:21:45.957Z [INFO] Processing results for word 31/40: gaze (noun)
+2025-03-16T04:21:46.263Z [INFO] Progress: 3271/68760 words processed (5%)
+2025-03-16T04:21:46.264Z [INFO] Processing results for word 32/40: regard (noun)
+2025-03-16T04:21:46.568Z [INFO] Processing results for word 33/40: glare (noun)
+2025-03-16T04:21:46.817Z [INFO] Processing results for word 34/40: contemplation (noun)
+2025-03-16T04:21:47.083Z [INFO] Processing results for word 35/40: inspection (noun)
+2025-03-16T04:21:47.392Z [INFO] Processing results for word 36/40: observation (noun)
+2025-03-16T04:21:47.695Z [INFO] Processing results for word 37/40: observance (noun)
+2025-03-16T04:21:48.007Z [INFO] Processing results for word 38/40: watching (noun)
+2025-03-16T04:21:48.312Z [INFO] Processing results for word 39/40: monitoring (noun)
+2025-03-16T04:21:48.616Z [INFO] Processing results for word 40/40: watch (noun)
+2025-03-16T04:21:48.928Z [INFO] Progress: 3280/68760 words processed (5%)
+2025-03-16T04:21:48.929Z [INFO] Batch 84 completed in 0.7 minutes
+2025-03-16T04:21:48.929Z [INFO] Batch results: 40 definitions, 40 OWAD phrases, 40 distractors updated
+2025-03-16T04:21:48.929Z [INFO] Progress: 3280/68760 words (5%)
+2025-03-16T04:21:48.929Z [INFO] Speed: 58 words/minute, Est. time remaining: 1129 minutes
+2025-03-16T04:21:48.930Z [INFO] -------------------------------------
+2025-03-16T04:21:48.930Z [INFO] Fetching 40 words with offset 3360...
+2025-03-16T04:21:49.234Z [INFO] Fetched 40 words
+2025-03-16T04:21:49.235Z [INFO] Processing batch of 40 words...
+2025-03-16T04:21:49.235Z [INFO] Sending batch request for 40 words to definition generator...
+2025-03-16T04:21:49.235Z [INFO] Generating definitions for 40 words...
+2025-03-16T04:21:57.987Z [INFO] API Request successful using key AIzaSy...vOb8. Total requests: 85
+2025-03-16T04:21:57.988Z [INFO] Sending batch request for 40 words to OWAD generator...
+2025-03-16T04:21:57.989Z [INFO] Generating OWAD phrases for 40 words...
+2025-03-16T04:22:06.336Z [INFO] API Request successful using key AIzaSy...dHDo. Total requests: 84
+2025-03-16T04:22:06.338Z [INFO] Sending batch request for 40 words to distractor generator...
+2025-03-16T04:22:06.338Z [INFO] Generating distractors for 40 words...
+2025-03-16T04:22:18.524Z [INFO] API Request successful using key AIzaSy...GDm4. Total requests: 83
+2025-03-16T04:22:18.525Z [INFO] Processing results for word 1/40: vigil (noun)
+2025-03-16T04:22:19.240Z [INFO] Progress: 3281/68760 words processed (5%)
+2025-03-16T04:22:19.241Z [INFO] Processing results for word 2/40: lookout (noun)
+2025-03-16T04:22:19.508Z [INFO] Processing results for word 3/40: outlook (noun)
+2025-03-16T04:22:19.755Z [INFO] Processing results for word 4/40: view (noun)
+2025-03-16T04:22:20.059Z [INFO] Processing results for word 5/40: sight (noun)
+2025-03-16T04:22:20.364Z [INFO] Processing results for word 6/40: listening (noun)
+2025-03-16T04:22:20.631Z [INFO] Processing results for word 7/40: hearing (noun)
+2025-03-16T04:22:20.978Z [INFO] Processing results for word 8/40: taste (noun)
+2025-03-16T04:22:21.284Z [INFO] Processing results for word 9/40: smell (noun)
+2025-03-16T04:22:21.593Z [INFO] Processing results for word 10/40: smelling (noun)
+2025-03-16T04:22:21.840Z [INFO] Processing results for word 11/40: instruction (noun)
+2025-03-16T04:22:22.102Z [INFO] Progress: 3291/68760 words processed (5%)
+2025-03-16T04:22:22.102Z [INFO] Processing results for word 12/40: teaching (noun)
+2025-03-16T04:22:22.411Z [INFO] Processing results for word 13/40: pedagogy (noun)
+2025-03-16T04:22:22.672Z [INFO] Processing results for word 14/40: class (noun)
+2025-03-16T04:22:23.026Z [INFO] Processing results for word 15/40: schooling (noun)
+2025-03-16T04:22:23.268Z [INFO] Processing results for word 16/40: indoctrination (noun)
+2025-03-16T04:22:23.528Z [INFO] Processing results for word 17/40: tuition (noun)
+2025-03-16T04:22:23.844Z [INFO] Processing results for word 18/40: elective (noun)
+2025-03-16T04:22:24.142Z [INFO] Processing results for word 19/40: orientation (noun)
+2025-03-16T04:22:24.387Z [INFO] Processing results for word 20/40: seminar (noun)
+2025-03-16T04:22:24.661Z [INFO] Processing results for word 21/40: shop (noun)
+2025-03-16T04:22:24.969Z [INFO] Progress: 3301/68760 words processed (5%)
+2025-03-16T04:22:24.969Z [INFO] Processing results for word 22/40: workshop (noun)
+2025-03-16T04:22:25.214Z [INFO] Processing results for word 23/40: lecture (noun)
+2025-03-16T04:22:25.463Z [INFO] Processing results for word 24/40: lecturing (noun)
+2025-03-16T04:22:25.788Z [INFO] Processing results for word 25/40: talk (noun)
+2025-03-16T04:22:26.098Z [INFO] Processing results for word 26/40: discipline (noun)
+2025-03-16T04:22:26.405Z [INFO] Processing results for word 27/40: training (noun)
+2025-03-16T04:22:26.712Z [INFO] Processing results for word 28/40: drill (noun)
+2025-03-16T04:22:27.019Z [INFO] Processing results for word 29/40: recitation (noun)
+2025-03-16T04:22:27.326Z [INFO] Processing results for word 30/40: manual (noun)
+2025-03-16T04:22:27.634Z [INFO] Processing results for word 31/40: rehearsal (noun)
+2025-03-16T04:22:27.873Z [INFO] Progress: 3311/68760 words processed (5%)
+2025-03-16T04:22:27.874Z [INFO] Processing results for word 32/40: representation (noun)
+2025-03-16T04:22:28.148Z [INFO] Processing results for word 33/40: model (noun)
+2025-03-16T04:22:28.400Z [INFO] Processing results for word 34/40: modelling (noun)
+2025-03-16T04:22:28.658Z [INFO] Processing results for word 35/40: modeling (noun)
+2025-03-16T04:22:28.966Z [INFO] Processing results for word 36/40: pageant (noun)
+2025-03-16T04:22:29.272Z [INFO] Processing results for word 37/40: depiction (noun)
+2025-03-16T04:22:29.578Z [INFO] Processing results for word 38/40: delineation (noun)
+2025-03-16T04:22:29.988Z [INFO] Processing results for word 39/40: imaging (noun)
+2025-03-16T04:22:30.235Z [INFO] Processing results for word 40/40: tomography (noun)
+2025-03-16T04:22:30.486Z [INFO] Progress: 3320/68760 words processed (5%)
+2025-03-16T04:22:30.487Z [INFO] Batch 85 completed in 0.7 minutes
+2025-03-16T04:22:30.488Z [INFO] Batch results: 40 definitions, 40 OWAD phrases, 40 distractors updated
+2025-03-16T04:22:30.490Z [INFO] Stats saved to /Users/sandeep.joshi/Documents/vibecoding/oneword/word-enrichment/stats/reprocess-stats-1742098950488.json
+2025-03-16T04:22:30.490Z [INFO] Progress: 3320/68760 words (5%)
+2025-03-16T04:22:30.490Z [INFO] Speed: 57 words/minute, Est. time remaining: 1148 minutes
+2025-03-16T04:22:30.490Z [INFO] -------------------------------------
+2025-03-16T04:22:30.490Z [INFO] Fetching 40 words with offset 3400...
+2025-03-16T04:22:30.811Z [INFO] Fetched 40 words
+2025-03-16T04:22:30.812Z [INFO] Processing batch of 40 words...
+2025-03-16T04:22:30.812Z [INFO] Sending batch request for 40 words to definition generator...
+2025-03-16T04:22:30.812Z [INFO] Generating definitions for 40 words...
+2025-03-16T04:22:39.233Z [INFO] API Request successful using key AIzaSy...UFvM. Total requests: 86
+2025-03-16T04:22:39.234Z [INFO] Sending batch request for 40 words to OWAD generator...
+2025-03-16T04:22:39.235Z [INFO] Generating OWAD phrases for 40 words...
+2025-03-16T04:22:48.117Z [INFO] API Request successful using key AIzaSy...vOb8. Total requests: 85
+2025-03-16T04:22:48.119Z [INFO] Sending batch request for 40 words to distractor generator...
+2025-03-16T04:22:48.119Z [INFO] Generating distractors for 40 words...
+2025-03-16T04:23:00.402Z [INFO] API Request successful using key AIzaSy...dHDo. Total requests: 84
+2025-03-16T04:23:00.405Z [INFO] Processing results for word 1/40: cat (noun)
+2025-03-16T04:23:00.705Z [INFO] Progress: 3321/68760 words processed (5%)
+2025-03-16T04:23:00.706Z [INFO] Processing results for word 2/40: ultrasonography (noun)
+2025-03-16T04:23:01.021Z [INFO] Processing results for word 3/40: ultrasound (noun)
+2025-03-16T04:23:01.266Z [INFO] Processing results for word 4/40: pet (noun)
+2025-03-16T04:23:01.514Z [INFO] Processing results for word 5/40: mri (noun)
+2025-03-16T04:23:01.760Z [INFO] Processing results for word 6/40: radiology (noun)
+2025-03-16T04:23:02.039Z [INFO] Processing results for word 7/40: radiography (noun)
+2025-03-16T04:23:02.347Z [INFO] Processing results for word 8/40: angiography (noun)
+2025-03-16T04:23:02.592Z [INFO] Processing results for word 9/40: filming (noun)
+2025-03-16T04:23:02.841Z [INFO] Processing results for word 10/40: take (noun)
+2025-03-16T04:23:03.167Z [INFO] Processing results for word 11/40: spinning (noun)
+2025-03-16T04:23:03.474Z [INFO] Progress: 3331/68760 words processed (5%)
+2025-03-16T04:23:03.475Z [INFO] Processing results for word 12/40: weaving (noun)
+2025-03-16T04:23:03.722Z [INFO] Processing results for word 13/40: netting (noun)
+2025-03-16T04:23:03.984Z [INFO] Processing results for word 14/40: knitting (noun)
+2025-03-16T04:23:04.293Z [INFO] Processing results for word 15/40: molding (noun)
+2025-03-16T04:23:04.604Z [INFO] Processing results for word 16/40: recording (noun)
+2025-03-16T04:23:04.905Z [INFO] Processing results for word 17/40: transcription (noun)
+2025-03-16T04:23:05.215Z [INFO] Processing results for word 18/40: mastering (noun)
+2025-03-16T04:23:05.472Z [INFO] Processing results for word 19/40: building (noun)
+2025-03-16T04:23:05.828Z [INFO] Processing results for word 20/40: erection (noun)
+2025-03-16T04:23:06.139Z [INFO] Processing results for word 21/40: assembly (noun)
+2025-03-16T04:23:06.441Z [INFO] Progress: 3341/68760 words processed (5%)
+2025-03-16T04:23:06.441Z [INFO] Processing results for word 22/40: dismantling (noun)
+2025-03-16T04:23:06.751Z [INFO] Processing results for word 23/40: shipbuilding (noun)
+2025-03-16T04:23:07.058Z [INFO] Processing results for word 24/40: overrun (noun)
+2025-03-16T04:23:07.365Z [INFO] Processing results for word 25/40: output (noun)
+2025-03-16T04:23:07.619Z [INFO] Processing results for word 26/40: yield (noun)
+2025-03-16T04:23:07.879Z [INFO] Processing results for word 27/40: brewing (noun)
+2025-03-16T04:23:08.184Z [INFO] Processing results for word 28/40: cultivation (noun)
+2025-03-16T04:23:08.427Z [INFO] Processing results for word 29/40: aquaculture (noun)
+2025-03-16T04:23:08.676Z [INFO] Processing results for word 30/40: agriculture (noun)
+2025-03-16T04:23:09.005Z [INFO] Processing results for word 31/40: husbandry (noun)
+2025-03-16T04:23:09.312Z [INFO] Progress: 3351/68760 words processed (5%)
+2025-03-16T04:23:09.314Z [INFO] Processing results for word 32/40: culture (noun)
+2025-03-16T04:23:09.617Z [INFO] Processing results for word 33/40: gardening (noun)
+2025-03-16T04:23:09.925Z [INFO] Processing results for word 34/40: ploughing (noun)
+2025-03-16T04:23:10.233Z [INFO] Processing results for word 35/40: planting (noun)
+2025-03-16T04:23:10.479Z [INFO] Processing results for word 36/40: stratification (noun)
+2025-03-16T04:23:10.729Z [INFO] Processing results for word 37/40: starter (noun)
+2025-03-16T04:23:11.054Z [INFO] Processing results for word 38/40: harvest (noun)
+2025-03-16T04:23:11.313Z [INFO] Processing results for word 39/40: mining (noun)
+2025-03-16T04:23:11.564Z [INFO] Processing results for word 40/40: excavation (noun)
+2025-03-16T04:23:11.807Z [INFO] Progress: 3360/68760 words processed (5%)
+2025-03-16T04:23:11.807Z [INFO] Batch 86 completed in 0.7 minutes
+2025-03-16T04:23:11.807Z [INFO] Batch results: 40 definitions, 40 OWAD phrases, 40 distractors updated
+2025-03-16T04:23:11.807Z [INFO] Progress: 3360/68760 words (5%)
+2025-03-16T04:23:11.807Z [INFO] Speed: 57 words/minute, Est. time remaining: 1147 minutes
+2025-03-16T04:23:11.807Z [INFO] -------------------------------------
+2025-03-16T04:23:11.807Z [INFO] Fetching 40 words with offset 3440...
+2025-03-16T04:23:12.061Z [INFO] Fetched 40 words
+2025-03-16T04:23:12.062Z [INFO] Processing batch of 40 words...
+2025-03-16T04:23:12.063Z [INFO] Sending batch request for 40 words to definition generator...
+2025-03-16T04:23:12.063Z [INFO] Generating definitions for 40 words...
+2025-03-16T04:23:19.554Z [INFO] API Request successful using key AIzaSy...yMPs. Total requests: 87
+2025-03-16T04:23:19.555Z [INFO] Sending batch request for 40 words to OWAD generator...
+2025-03-16T04:23:19.556Z [INFO] Generating OWAD phrases for 40 words...
+2025-03-16T04:23:28.667Z [INFO] API Request successful using key AIzaSy...UFvM. Total requests: 86
+2025-03-16T04:23:28.670Z [INFO] Sending batch request for 40 words to distractor generator...
+2025-03-16T04:23:28.670Z [INFO] Generating distractors for 40 words...
+2025-03-16T04:23:40.759Z [INFO] API Request successful using key AIzaSy...vOb8. Total requests: 85
+2025-03-16T04:23:40.761Z [INFO] Processing results for word 1/40: boring (noun)
+2025-03-16T04:23:44.297Z [INFO] Progress: 3361/68760 words processed (5%)
+2025-03-16T04:23:44.298Z [INFO] Processing results for word 2/40: drilling (noun)
+2025-03-16T04:23:44.640Z [INFO] Processing results for word 3/40: industry (noun)
+2025-03-16T04:23:44.944Z [INFO] Processing results for word 4/40: manufacture (noun)
+2025-03-16T04:23:45.192Z [INFO] Processing results for word 5/40: industrialization (noun)
+2025-03-16T04:23:45.437Z [INFO] Processing results for word 6/40: industrialisation (noun)
+2025-03-16T04:23:45.678Z [INFO] Processing results for word 7/40: devising (noun)
+2025-03-16T04:23:45.918Z [INFO] Processing results for word 8/40: making (noun)
+2025-03-16T04:23:46.281Z [INFO] Processing results for word 9/40: manufacturing (noun)
+2025-03-16T04:23:46.596Z [INFO] Processing results for word 10/40: shaping (noun)
+2025-03-16T04:23:46.894Z [INFO] Processing results for word 11/40: forging (noun)
+2025-03-16T04:23:47.190Z [INFO] Progress: 3371/68760 words processed (5%)
+2025-03-16T04:23:47.191Z [INFO] Processing results for word 12/40: design (noun)
+2025-03-16T04:23:47.450Z [INFO] Processing results for word 13/40: designing (noun)
+2025-03-16T04:23:47.718Z [INFO] Processing results for word 14/40: planning (noun)
+2025-03-16T04:23:47.972Z [INFO] Processing results for word 15/40: zoning (noun)
+2025-03-16T04:23:48.222Z [INFO] Processing results for word 16/40: programming (noun)
+2025-03-16T04:23:48.540Z [INFO] Processing results for word 17/40: composition (noun)
+2025-03-16T04:23:48.874Z [INFO] Processing results for word 18/40: historiography (noun)
+2025-03-16T04:23:49.163Z [INFO] Processing results for word 19/40: embodiment (noun)
+2025-03-16T04:23:49.456Z [INFO] Processing results for word 20/40: personification (noun)
+2025-03-16T04:23:49.771Z [INFO] Processing results for word 21/40: incarnation (noun)
+2025-03-16T04:23:50.070Z [INFO] Progress: 3381/68760 words processed (5%)
+2025-03-16T04:23:50.070Z [INFO] Processing results for word 22/40: art (noun)
+2025-03-16T04:23:50.383Z [INFO] Processing results for word 23/40: ceramics (noun)
+2025-03-16T04:23:50.685Z [INFO] Processing results for word 24/40: sculpture (noun)
+2025-03-16T04:23:50.992Z [INFO] Processing results for word 25/40: carving (noun)
+2025-03-16T04:23:51.305Z [INFO] Processing results for word 26/40: moulding (noun)
+2025-03-16T04:23:51.651Z [INFO] Processing results for word 27/40: engraving (noun)
+2025-03-16T04:23:51.901Z [INFO] Processing results for word 28/40: etching (noun)
+2025-03-16T04:23:52.139Z [INFO] Processing results for word 29/40: composing (noun)
+2025-03-16T04:23:52.432Z [INFO] Processing results for word 30/40: arrangement (noun)
+2025-03-16T04:23:52.725Z [INFO] Processing results for word 31/40: arranging (noun)
+2025-03-16T04:23:53.023Z [INFO] Progress: 3391/68760 words processed (5%)
+2025-03-16T04:23:53.024Z [INFO] Processing results for word 32/40: invention (noun)
+2025-03-16T04:23:53.332Z [INFO] Processing results for word 33/40: coinage (noun)
+2025-03-16T04:23:53.615Z [INFO] Processing results for word 34/40: conceptualization (noun)
+2025-03-16T04:23:53.863Z [INFO] Processing results for word 35/40: formulation (noun)
+2025-03-16T04:23:54.275Z [INFO] Processing results for word 36/40: framing (noun)
+2025-03-16T04:23:54.580Z [INFO] Processing results for word 37/40: avenue (noun)
+2025-03-16T04:23:54.827Z [INFO] Processing results for word 38/40: digging (noun)
+2025-03-16T04:23:55.186Z [INFO] Processing results for word 39/40: puncture (noun)
+2025-03-16T04:23:55.494Z [INFO] Processing results for word 40/40: perforation (noun)
+2025-03-16T04:23:55.799Z [INFO] Progress: 3400/68760 words processed (5%)
+2025-03-16T04:23:55.800Z [INFO] Batch 87 completed in 0.7 minutes
+2025-03-16T04:23:55.800Z [INFO] Batch results: 40 definitions, 40 OWAD phrases, 40 distractors updated
+2025-03-16T04:23:55.800Z [INFO] Progress: 3400/68760 words (5%)
+2025-03-16T04:23:55.800Z [INFO] Speed: 58 words/minute, Est. time remaining: 1127 minutes
+2025-03-16T04:23:55.800Z [INFO] -------------------------------------
+2025-03-16T04:23:55.800Z [INFO] Fetching 40 words with offset 3480...
+2025-03-16T04:23:56.111Z [INFO] Fetched 40 words
+2025-03-16T04:23:56.112Z [INFO] Processing batch of 40 words...
+2025-03-16T04:23:56.113Z [INFO] Sending batch request for 40 words to definition generator...
+2025-03-16T04:23:56.113Z [INFO] Generating definitions for 40 words...
+2025-03-16T04:24:03.789Z [INFO] API Request successful using key AIzaSy...GDm4. Total requests: 88
+2025-03-16T04:24:03.791Z [INFO] Sending batch request for 40 words to OWAD generator...
+2025-03-16T04:24:03.791Z [INFO] Generating OWAD phrases for 40 words...
+2025-03-16T04:24:12.774Z [INFO] API Request successful using key AIzaSy...yMPs. Total requests: 87
+2025-03-16T04:24:12.776Z [INFO] Sending batch request for 40 words to distractor generator...
+2025-03-16T04:24:12.776Z [INFO] Generating distractors for 40 words...
+2025-03-16T04:24:24.882Z [INFO] API Request successful using key AIzaSy...UFvM. Total requests: 86
+2025-03-16T04:24:24.882Z [INFO] Processing results for word 1/40: prick (noun)
+2025-03-16T04:24:25.462Z [INFO] Progress: 3401/68760 words processed (5%)
+2025-03-16T04:24:25.463Z [INFO] Processing results for word 2/40: foraging (noun)
+2025-03-16T04:24:25.804Z [INFO] Processing results for word 3/40: forage (noun)
+2025-03-16T04:24:26.055Z [INFO] Processing results for word 4/40: quest (noun)
+2025-03-16T04:24:26.306Z [INFO] Processing results for word 5/40: utilization (noun)
+2025-03-16T04:24:26.626Z [INFO] Processing results for word 6/40: utilisation (noun)
+2025-03-16T04:24:26.907Z [INFO] Processing results for word 7/40: misuse (noun)
+2025-03-16T04:24:27.156Z [INFO] Processing results for word 8/40: recycling (noun)
+2025-03-16T04:24:27.443Z [INFO] Processing results for word 9/40: technology (noun)
+2025-03-16T04:24:27.688Z [INFO] Processing results for word 10/40: engineering (noun)
+2025-03-16T04:24:27.953Z [INFO] Processing results for word 11/40: commercialization (noun)
+2025-03-16T04:24:28.191Z [INFO] Progress: 3411/68760 words processed (5%)
+2025-03-16T04:24:28.192Z [INFO] Processing results for word 12/40: conflict (noun)
+2025-03-16T04:24:28.468Z [INFO] Processing results for word 13/40: blockade (noun)
+2025-03-16T04:24:28.707Z [INFO] Processing results for word 14/40: clash (noun)
+2025-03-16T04:24:28.957Z [INFO] Processing results for word 15/40: stand (noun)
+2025-03-16T04:24:29.207Z [INFO] Processing results for word 16/40: repulsion (noun)
+2025-03-16T04:24:29.445Z [INFO] Processing results for word 17/40: rebellion (noun)
+2025-03-16T04:24:29.725Z [INFO] Processing results for word 18/40: insurrection (noun)
+2025-03-16T04:24:29.982Z [INFO] Processing results for word 19/40: revolt (noun)
+2025-03-16T04:24:30.220Z [INFO] Processing results for word 20/40: rising (noun)
+2025-03-16T04:24:30.472Z [INFO] Processing results for word 21/40: uprising (noun)
+2025-03-16T04:24:30.720Z [INFO] Progress: 3421/68760 words processed (5%)
+2025-03-16T04:24:30.721Z [INFO] Processing results for word 22/40: revolution (noun)
+2025-03-16T04:24:31.053Z [INFO] Processing results for word 23/40: insurgency (noun)
+2025-03-16T04:24:31.323Z [INFO] Processing results for word 24/40: mutiny (noun)
+2025-03-16T04:24:31.398Z [INFO] Hourly quota reset for key AIzaSy...UFvM. Previous hour used: 18/900 requests
+2025-03-16T04:24:31.399Z [INFO] Hourly quota reset for key AIzaSy...yMPs. Previous hour used: 18/900 requests
+2025-03-16T04:24:31.400Z [INFO] Hourly quota reset for key AIzaSy...GDm4. Previous hour used: 18/900 requests
+2025-03-16T04:24:31.400Z [INFO] Hourly quota reset for key AIzaSy...dHDo. Previous hour used: 17/900 requests
+2025-03-16T04:24:31.400Z [INFO] Hourly quota reset for key AIzaSy...vOb8. Previous hour used: 17/900 requests
+2025-03-16T04:24:31.401Z [INFO] Hourly quota reset for key AIzaSy...UFvM. Previous hour used: 18/900 requests
+2025-03-16T04:24:31.402Z [INFO] Hourly quota reset for key AIzaSy...yMPs. Previous hour used: 18/900 requests
+2025-03-16T04:24:31.402Z [INFO] Hourly quota reset for key AIzaSy...GDm4. Previous hour used: 17/900 requests
+2025-03-16T04:24:31.402Z [INFO] Hourly quota reset for key AIzaSy...dHDo. Previous hour used: 17/900 requests
+2025-03-16T04:24:31.403Z [INFO] Hourly quota reset for key AIzaSy...vOb8. Previous hour used: 17/900 requests
+2025-03-16T04:24:31.403Z [INFO] Hourly quota reset for key AIzaSy...UFvM. Previous hour used: 18/900 requests
+2025-03-16T04:24:31.403Z [INFO] Hourly quota reset for key AIzaSy...yMPs. Previous hour used: 17/900 requests
+2025-03-16T04:24:31.403Z [INFO] Hourly quota reset for key AIzaSy...GDm4. Previous hour used: 17/900 requests
+2025-03-16T04:24:31.403Z [INFO] Hourly quota reset for key AIzaSy...dHDo. Previous hour used: 17/900 requests
+2025-03-16T04:24:31.403Z [INFO] Hourly quota reset for key AIzaSy...vOb8. Previous hour used: 17/900 requests
+2025-03-16T04:24:31.642Z [INFO] Processing results for word 25/40: combat (noun)
+2025-03-16T04:24:31.881Z [INFO] Processing results for word 26/40: aggression (noun)
+2025-03-16T04:24:32.155Z [INFO] Processing results for word 27/40: hostility (noun)
+2025-03-16T04:24:32.406Z [INFO] Processing results for word 28/40: hostilities (noun)
+2025-03-16T04:24:32.666Z [INFO] Processing results for word 29/40: violence (noun)
+2025-03-16T04:24:32.971Z [INFO] Processing results for word 30/40: rustling (noun)
+2025-03-16T04:24:33.279Z [INFO] Processing results for word 31/40: looting (noun)
+2025-03-16T04:24:33.527Z [INFO] Progress: 3431/68760 words processed (5%)
+2025-03-16T04:24:33.527Z [INFO] Processing results for word 32/40: spoil (noun)
+2025-03-16T04:24:33.789Z [INFO] Processing results for word 33/40: reinforcement (noun)
+2025-03-16T04:24:34.099Z [INFO] Processing results for word 34/40: onslaught (noun)
+2025-03-16T04:24:34.404Z [INFO] Processing results for word 35/40: onset (noun)
+2025-03-16T04:24:34.765Z [INFO] Processing results for word 36/40: warfare (noun)
+2025-03-16T04:24:35.125Z [INFO] Processing results for word 37/40: storm (noun)
+2025-03-16T04:24:35.428Z [INFO] Processing results for word 38/40: invasion (noun)
+2025-03-16T04:24:35.741Z [INFO] Processing results for word 39/40: infiltration (noun)
+2025-03-16T04:24:36.038Z [INFO] Processing results for word 40/40: bombing (noun)
+2025-03-16T04:24:36.282Z [INFO] Progress: 3440/68760 words processed (5%)
+2025-03-16T04:24:36.282Z [INFO] Batch 88 completed in 0.7 minutes
+2025-03-16T04:24:36.282Z [INFO] Batch results: 40 definitions, 40 OWAD phrases, 40 distractors updated
+2025-03-16T04:24:36.283Z [INFO] Progress: 3440/68760 words (5%)
+2025-03-16T04:24:36.283Z [INFO] Speed: 57 words/minute, Est. time remaining: 1146 minutes
+2025-03-16T04:24:36.283Z [INFO] -------------------------------------
+2025-03-16T04:24:36.283Z [INFO] Fetching 40 words with offset 3520...
+2025-03-16T04:24:36.536Z [INFO] Fetched 40 words
+2025-03-16T04:24:36.537Z [INFO] Processing batch of 40 words...
+2025-03-16T04:24:36.537Z [INFO] Sending batch request for 40 words to definition generator...
+2025-03-16T04:24:36.537Z [INFO] Generating definitions for 40 words...
+2025-03-16T04:24:44.497Z [INFO] API Request successful using key AIzaSy...dHDo. Total requests: 89
+2025-03-16T04:24:44.498Z [INFO] Sending batch request for 40 words to OWAD generator...
+2025-03-16T04:24:44.498Z [INFO] Generating OWAD phrases for 40 words...
+2025-03-16T04:24:53.045Z [INFO] API Request successful using key AIzaSy...GDm4. Total requests: 88
+2025-03-16T04:24:53.047Z [INFO] Sending batch request for 40 words to distractor generator...
+2025-03-16T04:24:53.047Z [INFO] Generating distractors for 40 words...
+2025-03-16T04:25:05.231Z [INFO] API Request successful using key AIzaSy...yMPs. Total requests: 87
+2025-03-16T04:25:05.232Z [INFO] Processing results for word 1/40: bombardment (noun)
+2025-03-16T04:25:08.755Z [INFO] Progress: 3441/68760 words processed (5%)
+2025-03-16T04:25:08.756Z [INFO] Processing results for word 2/40: offensive (noun)
+2025-03-16T04:25:09.020Z [INFO] Processing results for word 3/40: peacekeeping (noun)
+2025-03-16T04:25:09.267Z [INFO] Processing results for word 4/40: intelligence (noun)
+2025-03-16T04:25:09.530Z [INFO] Processing results for word 5/40: reconnaissance (noun)
+2025-03-16T04:25:09.837Z [INFO] Processing results for word 6/40: scouting (noun)
+2025-03-16T04:25:10.080Z [INFO] Processing results for word 7/40: fire (noun)
+2025-03-16T04:25:10.322Z [INFO] Processing results for word 8/40: barrage (noun)
+2025-03-16T04:25:10.570Z [INFO] Processing results for word 9/40: cover (noun)
+2025-03-16T04:25:10.862Z [INFO] Processing results for word 10/40: dating (noun)
+2025-03-16T04:25:11.106Z [INFO] Processing results for word 11/40: jihad (noun)
+2025-03-16T04:25:11.349Z [INFO] Progress: 3451/68760 words processed (5%)
+2025-03-16T04:25:11.349Z [INFO] Processing results for word 12/40: measurement (noun)
+2025-03-16T04:25:11.590Z [INFO] Processing results for word 13/40: measuring (noun)
+2025-03-16T04:25:11.828Z [INFO] Processing results for word 14/40: calibration (noun)
+2025-03-16T04:25:12.071Z [INFO] Processing results for word 15/40: standardization (noun)
+2025-03-16T04:25:12.317Z [INFO] Processing results for word 16/40: tuning (noun)
+2025-03-16T04:25:12.558Z [INFO] Processing results for word 17/40: alignment (noun)
+2025-03-16T04:25:12.808Z [INFO] Processing results for word 18/40: temperament (noun)
+2025-03-16T04:25:13.057Z [INFO] Processing results for word 19/40: tune (noun)
+2025-03-16T04:25:13.304Z [INFO] Processing results for word 20/40: quantification (noun)
+2025-03-16T04:25:13.550Z [INFO] Processing results for word 21/40: shading (noun)
+2025-03-16T04:25:13.798Z [INFO] Progress: 3461/68760 words processed (5%)
+2025-03-16T04:25:13.798Z [INFO] Processing results for word 22/40: divergence (noun)
+2025-03-16T04:25:14.040Z [INFO] Processing results for word 23/40: reading (noun)
+2025-03-16T04:25:14.281Z [INFO] Processing results for word 24/40: sounding (noun)
+2025-03-16T04:25:14.551Z [INFO] Processing results for word 25/40: surveying (noun)
+2025-03-16T04:25:14.857Z [INFO] Processing results for word 26/40: rorschach (noun)
+2025-03-16T04:25:15.163Z [INFO] Processing results for word 27/40: tat (noun)
+2025-03-16T04:25:15.444Z [INFO] Processing results for word 28/40: rationalization (noun)
+2025-03-16T04:25:15.690Z [INFO] Processing results for word 29/40: order (noun)
+2025-03-16T04:25:15.935Z [INFO] Processing results for word 30/40: ordering (noun)
+2025-03-16T04:25:16.182Z [INFO] Processing results for word 31/40: sequence (noun)
+2025-03-16T04:25:16.498Z [INFO] Progress: 3471/68760 words processed (5%)
+2025-03-16T04:25:16.498Z [INFO] Processing results for word 32/40: alternation (noun)
+2025-03-16T04:25:16.748Z [INFO] Processing results for word 33/40: layout (noun)
+2025-03-16T04:25:16.994Z [INFO] Processing results for word 34/40: listing (noun)
+2025-03-16T04:25:17.232Z [INFO] Processing results for word 35/40: inventory (noun)
+2025-03-16T04:25:17.521Z [INFO] Processing results for word 36/40: phrasing (noun)
+2025-03-16T04:25:17.776Z [INFO] Processing results for word 37/40: categorization (noun)
+2025-03-16T04:25:18.027Z [INFO] Processing results for word 38/40: classification (noun)
+2025-03-16T04:25:18.276Z [INFO] Processing results for word 39/40: assortment (noun)
+2025-03-16T04:25:18.541Z [INFO] Processing results for word 40/40: indexing (noun)
+2025-03-16T04:25:18.848Z [INFO] Progress: 3480/68760 words processed (5%)
+2025-03-16T04:25:18.849Z [INFO] Batch 89 completed in 0.7 minutes
+2025-03-16T04:25:18.849Z [INFO] Batch results: 40 definitions, 39 OWAD phrases, 40 distractors updated
+2025-03-16T04:25:18.850Z [INFO] Progress: 3480/68760 words (5%)
+2025-03-16T04:25:18.850Z [INFO] Speed: 57 words/minute, Est. time remaining: 1145 minutes
+2025-03-16T04:25:18.850Z [INFO] -------------------------------------
+2025-03-16T04:25:18.850Z [INFO] Fetching 40 words with offset 3560...
+2025-03-16T04:25:19.104Z [INFO] Fetched 40 words
+2025-03-16T04:25:19.106Z [INFO] Processing batch of 40 words...
+2025-03-16T04:25:19.106Z [INFO] Sending batch request for 40 words to definition generator...
+2025-03-16T04:25:19.106Z [INFO] Generating definitions for 40 words...
+2025-03-16T04:25:26.518Z [INFO] API Request successful using key AIzaSy...vOb8. Total requests: 90
+2025-03-16T04:25:26.520Z [INFO] Sending batch request for 40 words to OWAD generator...
+2025-03-16T04:25:26.521Z [INFO] Generating OWAD phrases for 40 words...
+2025-03-16T04:25:35.025Z [INFO] API Request successful using key AIzaSy...dHDo. Total requests: 89
+2025-03-16T04:25:35.026Z [INFO] Sending batch request for 40 words to distractor generator...
+2025-03-16T04:25:35.026Z [INFO] Generating distractors for 40 words...
+2025-03-16T04:25:47.528Z [INFO] API Request successful using key AIzaSy...GDm4. Total requests: 88
+2025-03-16T04:25:47.530Z [INFO] Processing results for word 1/40: taxonomy (noun)
+2025-03-16T04:25:47.828Z [INFO] Progress: 3481/68760 words processed (5%)
+2025-03-16T04:25:47.828Z [INFO] Processing results for word 2/40: typology (noun)
+2025-03-16T04:25:48.134Z [INFO] Processing results for word 3/40: collection (noun)
+2025-03-16T04:25:48.441Z [INFO] Processing results for word 4/40: collecting (noun)
+2025-03-16T04:25:48.703Z [INFO] Processing results for word 5/40: assembling (noun)
+2025-03-16T04:25:49.055Z [INFO] Processing results for word 6/40: aggregation (noun)
+2025-03-16T04:25:49.362Z [INFO] Processing results for word 7/40: compilation (noun)
+2025-03-16T04:25:49.614Z [INFO] Processing results for word 8/40: compiling (noun)
+2025-03-16T04:25:49.873Z [INFO] Processing results for word 9/40: gather (noun)
+2025-03-16T04:25:50.117Z [INFO] Processing results for word 10/40: gathering (noun)
+2025-03-16T04:25:50.386Z [INFO] Processing results for word 11/40: centralization (noun)
+2025-03-16T04:25:50.694Z [INFO] Progress: 3491/68760 words processed (5%)
+2025-03-16T04:25:50.694Z [INFO] Processing results for word 12/40: harvesting (noun)
+2025-03-16T04:25:51.004Z [INFO] Processing results for word 13/40: sorting (noun)
+2025-03-16T04:25:51.249Z [INFO] Processing results for word 14/40: supporting (noun)
+2025-03-16T04:25:51.515Z [INFO] Processing results for word 15/40: dangling (noun)
+2025-03-16T04:25:51.770Z [INFO] Processing results for word 16/40: hanging (noun)
+2025-03-16T04:25:52.024Z [INFO] Processing results for word 17/40: continuance (noun)
+2025-03-16T04:25:52.277Z [INFO] Processing results for word 18/40: continuation (noun)
+2025-03-16T04:25:52.533Z [INFO] Processing results for word 19/40: prolongation (noun)
+2025-03-16T04:25:52.778Z [INFO] Processing results for word 20/40: lengthening (noun)
+2025-03-16T04:25:53.022Z [INFO] Processing results for word 21/40: repetition (noun)
+2025-03-16T04:25:53.355Z [INFO] Progress: 3501/68760 words processed (5%)
+2025-03-16T04:25:53.355Z [INFO] Processing results for word 22/40: repeating (noun)
+2025-03-16T04:25:53.662Z [INFO] Processing results for word 23/40: iteration (noun)
+2025-03-16T04:25:53.969Z [INFO] Processing results for word 24/40: redundancy (noun)
+2025-03-16T04:25:54.280Z [INFO] Processing results for word 25/40: copying (noun)
+2025-03-16T04:25:54.587Z [INFO] Processing results for word 26/40: duplication (noun)
+2025-03-16T04:25:54.831Z [INFO] Processing results for word 27/40: replication (noun)
+2025-03-16T04:25:55.078Z [INFO] Processing results for word 28/40: playback (noun)
+2025-03-16T04:25:55.332Z [INFO] Processing results for word 29/40: imitation (noun)
+2025-03-16T04:25:55.593Z [INFO] Processing results for word 30/40: echo (noun)
+2025-03-16T04:25:55.831Z [INFO] Processing results for word 31/40: emulation (noun)
+2025-03-16T04:25:56.079Z [INFO] Progress: 3511/68760 words processed (5%)
+2025-03-16T04:25:56.079Z [INFO] Processing results for word 32/40: perseverance (noun)
+2025-03-16T04:25:56.325Z [INFO] Processing results for word 33/40: persistence (noun)
+2025-03-16T04:25:56.574Z [INFO] Processing results for word 34/40: prosecution (noun)
+2025-03-16T04:25:56.831Z [INFO] Processing results for word 35/40: survival (noun)
+2025-03-16T04:25:57.147Z [INFO] Processing results for word 36/40: mapping (noun)
+2025-03-16T04:25:57.399Z [INFO] Processing results for word 37/40: objection (noun)
+2025-03-16T04:25:57.761Z [INFO] Processing results for word 38/40: routine (noun)
+2025-03-16T04:25:58.065Z [INFO] Processing results for word 39/40: groove (noun)
+2025-03-16T04:25:58.311Z [INFO] Processing results for word 40/40: ceremony (noun)
+2025-03-16T04:25:58.551Z [INFO] Progress: 3520/68760 words processed (5%)
+2025-03-16T04:25:58.552Z [INFO] Batch 90 completed in 0.7 minutes
+2025-03-16T04:25:58.552Z [INFO] Batch results: 40 definitions, 40 OWAD phrases, 40 distractors updated
+2025-03-16T04:25:58.554Z [INFO] Stats saved to /Users/sandeep.joshi/Documents/vibecoding/oneword/word-enrichment/stats/reprocess-stats-1742099158552.json
+2025-03-16T04:25:58.554Z [INFO] Progress: 3520/68760 words (5%)
+2025-03-16T04:25:58.554Z [INFO] Speed: 58 words/minute, Est. time remaining: 1125 minutes
+2025-03-16T04:25:58.554Z [INFO] -------------------------------------
+2025-03-16T04:25:58.554Z [INFO] Fetching 40 words with offset 3600...
+2025-03-16T04:25:58.810Z [INFO] Fetched 40 words
+2025-03-16T04:25:58.811Z [INFO] Processing batch of 40 words...
+2025-03-16T04:25:58.811Z [INFO] Sending batch request for 40 words to definition generator...
+2025-03-16T04:25:58.811Z [INFO] Generating definitions for 40 words...
