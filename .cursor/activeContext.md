@@ -1,9 +1,18 @@
 # OneWord - Active Context
 
 ## Current Focus
-UI development and component structure improvement, focusing on implementing the Today tab with Word of the Day feature.
+UI enhancements, improving user experience, and ensuring smooth transitions between app screens.
 
 ## Recent Changes
+- **March 17, 2025 (Evening)**: Enhanced UI components and navigation
+  - Implemented FlatList-based word card carousel with pagination indicators
+  - Fixed theme system to properly respond to system dark/light mode changes
+  - Added Stack navigator with proper slide animations between main screens
+  - Created dedicated EmptyWordCard component for improved separation of concerns
+  - Added reset onboarding functionality for easier development and testing
+  - Fixed visual glitches when switching between tabs
+  - Added clear documentation to prevent ordering issues
+
 - **March 17, 2025**: Project Structure Cleanup
   - Standardized on src/ directory organization
   - Migrated assets to src/assets/images and updated references
@@ -37,20 +46,20 @@ UI development and component structure improvement, focusing on implementing the
   - Improved error handling for API responses
   - Added detailed statistics and progress tracking
 
-- **March 15, 2025**: Implemented multi-key rotation system 
-  - Added support for 5 API keys with rotation
-  - Created configuration for optimal API usage respecting rate limits
-  - Implemented batch processing with optimized settings
-
 ## Current Status
+- Successfully implemented a horizontal FlatList-based carousel for word cards
+- Fixed system theme change detection and handling
+- Added proper navigation transitions between major screens
+- Created a more maintainable file structure with better component organization
+- Added development tools for easier testing (reset onboarding button)
+- Fixed visual glitches when switching between tabs
+- Enhanced theme context with proper updates when app returns to foreground
 - Successfully cleaned up project structure with standardized organization
 - Migrated all assets to src/assets with proper references
 - Enhanced components with theme integration
 - Successfully implemented the Today tab with interactive Word of the Day feature
 - Created reusable components for date selection and word card display
-- Implemented gesture-based navigation between daily words
 - Established a mock data service that can be replaced with Supabase integration
-- Successfully cleaned up the UI components and improved the component structure
 - Established consistent styling patterns across the application
 - Enhanced theme management with safety checks and loading indicators
 - Successfully completed enrichment of all 68,759 words
@@ -60,19 +69,29 @@ UI development and component structure improvement, focusing on implementing the
 ## Next Steps
 1. **Supabase Integration**: Connect the Word of Day UI with data from Supabase
 2. **User Interactions**: Add features like saving favorite words and sharing
-3. **Animation Refinement**: Enhance transitions and visual feedback
-4. **Featured Words**: Implement a system to feature specific words on the Today page
-5. **Quality Review**: Review a sample of generated content for quality control
-6. **Content Refinement**: Make any necessary adjustments to generators for improved content quality
+3. **Challenge Screen Development**: Implement the challenges/practice exercises UI
+4. **Profile Screen Development**: Complete the profile screen with user settings and statistics
+5. **Content Filtering**: Add ability to filter words by difficulty or category
+6. **User Progress Tracking**: Implement mechanism to track words viewed and exercises completed
+7. **Animation Refinement**: Further enhance transitions and visual feedback
+8. **Featured Words**: Implement a system to feature specific words on the Today page
+9. **Quality Review**: Review a sample of generated content for quality control
+10. **Content Refinement**: Make any necessary adjustments to generators for improved content quality
 
 ## Current Challenges
-- Designing an intuitive and engaging Word of the Day UI
+- Optimizing performance for the word carousel with many items
+- Balancing rich UI animations with performance on lower-end devices
+- Ensuring consistent behavior across iOS and Android platforms
 - Efficiently integrating backend data with the frontend
 - Ensuring consistent UI across different devices and screen sizes
 - Ensuring consistent quality across large volumes of generated content
 - Optimizing frontend performance with the large dataset
 
 ## Technical Decisions
+- Using FlatList for the word carousel instead of custom gesture-based solutions for better performance
+- Adding clear documentation in code for critical components to prevent future regressions
+- Implementing a root Stack navigator for proper screen transitions
+- Using AppState tracking to properly handle system theme changes
 - Implementing a useThemeReady hook for consistent theme loading
 - Using consistent styling patterns across screens
 - Enhancing theme context with safety checks and default values

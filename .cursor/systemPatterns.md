@@ -1,5 +1,9 @@
 # OneWord - System Patterns
 
+## Overview
+
+This document outlines the key architectural patterns and design decisions for the OneWord app, providing a reference for future development.
+
 ## Architectural Patterns
 
 ### Batch Processing Pattern
@@ -89,6 +93,40 @@ Benefits:
 - Works in any terminal environment
 - Low resource usage
 - Clear visual hierarchy
+
+### Carousel Pattern for Word Cards
+The app uses a FlatList-based carousel for horizontal swiping between word cards:
+
+```typescript
+// app/(tabs)/index.tsx
+<FlatList
+  ref={flatListRef}
+  data={words}
+  renderItem={renderItem}
+  keyExtractor={(item) => item.id}
+  horizontal
+  pagingEnabled
+  showsHorizontalScrollIndicator={false}
+  onViewableItemsChanged={onViewableItemsChanged}
+  viewabilityConfig={viewabilityConfig}
+  initialNumToRender={3}
+  maxToRenderPerBatch={3}
+  windowSize={5}
+  getItemLayout={getItemLayout}
+  contentContainerStyle={styles.carouselContent}
+  initialScrollIndex={words.length - 1}
+  maintainVisibleContentPosition={{
+    minIndexForVisible: 0,
+  }}
+/>
+```
+
+This pattern:
+- Provides smooth horizontal swiping between word cards
+- Uses pagination indicators to show current position
+- Optimizes rendering with virtualization techniques
+- Ensures consistent card ordering (oldest→newest, left→right)
+- Automatically scrolls to today's word (rightmost) on load
 
 ## Data Access Patterns
 
@@ -263,6 +301,49 @@ export const useTheme = () => {
 
 This ensures that even if the theme context is not available, components won't break due to undefined theme properties.
 
+### AppState Theme Tracking Pattern
+The application uses AppState tracking to update the theme when the app returns to the foreground:
+
+```typescript
+// src/theme/ThemeProvider.tsx
+export const ThemeProvider: React.FC<ThemeProviderProps> = ({
+  children,
+  defaultTheme = 'system',
+}) => {
+  // Get device color scheme
+  const deviceColorScheme = useColorScheme();
+  const [mode, setMode] = useState<ThemeMode>(defaultTheme);
+  const [appState, setAppState] = useState<AppStateStatus>(AppState.currentState);
+  
+  // Listen for app state changes to detect theme changes
+  useEffect(() => {
+    const subscription = AppState.addEventListener('change', nextAppState => {
+      setAppState(nextAppState);
+    });
+
+    return () => {
+      subscription.remove();
+    };
+  }, []);
+  
+  // Update when device color scheme changes or when app comes to foreground
+  useEffect(() => {
+    // Force re-render when app comes back to active state
+    if (appState === 'active' && mode === 'system') {
+      // Re-apply the current mode to force context update
+      setMode(current => current);
+    }
+  }, [deviceColorScheme, appState, mode]);
+  
+  // ... rest of the provider
+}
+```
+
+This pattern:
+- Detects system theme changes while the app is in the background
+- Updates the theme when the app returns to the foreground
+- Ensures the app always reflects the current system theme preference
+
 ## Gesture-Based Navigation
 
 ### SwipeableWordCard Pattern
@@ -434,4 +515,36 @@ Assets are organized by type:
 2. **Fonts**: Typography assets
 3. **Icons**: SVG icons for UI elements
 
-All assets are referenced from their location in the src/assets directory, ensuring consistency across the application. 
+All assets are referenced from their location in the src/assets directory, ensuring consistency across the application.
+
+## Navigation Patterns
+
+### Root Stack Navigator Pattern
+The app uses Expo Router with a Stack navigator at the root level for smooth transitions between major screens:
+
+```typescript
+// app/_layout.tsx
+return (
+  <ThemeProvider defaultTheme="system">
+    <View style={{ flex: 1 }}>
+      <StatusBar style="auto" />
+      
+      {/* Stack for animated transitions */}
+      <Stack
+        screenOptions={{
+          headerShown: false,
+          animation: 'slide_from_right',
+          animationDuration: 300,
+        }}
+      >
+        <Slot />
+      </Stack>
+    </View>
+  </ThemeProvider>
+);
+```
+
+This pattern:
+- Provides smooth slide animations between major screens
+- Maintains navigation state during transitions
+- Allows animation customization through parameters
