@@ -7,9 +7,11 @@
  * The client is configured to persist sessions in AsyncStorage
  */
 
+// Polyfills must be imported first
+import 'react-native-url-polyfill/auto';
+
 import { createClient } from '@supabase/supabase-js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import 'react-native-url-polyfill/auto';
 
 // Supabase project credentials
 const supabaseUrl = 'https://ipljgsggnbdwaomjfuok.supabase.co';
@@ -22,15 +24,29 @@ const AsyncStorageAdapter = {
   removeItem: (key: string) => AsyncStorage.removeItem(key),
 };
 
-// Initialize the Supabase client with custom storage
-export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
-  auth: {
-    storage: AsyncStorageAdapter,
-    autoRefreshToken: true,
-    persistSession: true,
-    detectSessionInUrl: false,
-  },
-});
+// Wrap client creation in a try-catch to prevent crashes
+let supabase: any;
+try {
+  // Initialize the Supabase client with custom storage
+  supabase = createClient(supabaseUrl, supabaseAnonKey, {
+    auth: {
+      storage: AsyncStorageAdapter,
+      autoRefreshToken: true,
+      persistSession: true,
+      detectSessionInUrl: false,
+    },
+  });
+} catch (error) {
+  console.error('Supabase client initialization error:', error);
+  // Provide a mock client to prevent app crashes
+  supabase = {
+    auth: {
+      onAuthStateChange: () => ({ data: null, error: null }),
+      getSession: () => Promise.resolve({ data: { session: null }, error: null }),
+    },
+    // Add other API methods as needed
+  };
+}
 
 /**
  * Helper function to generate a unique device ID
@@ -49,4 +65,5 @@ export const getDeviceId = async (): Promise<string> => {
   return deviceId;
 };
 
+export { supabase };
 export default supabase; 

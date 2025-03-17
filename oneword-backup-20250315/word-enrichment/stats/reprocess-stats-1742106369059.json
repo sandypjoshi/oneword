@@ -1,0 +1,52 @@
+{
+  "totalWords": 68760,
+  "processedWords": 120,
+  "definitionsUpdated": 46,
+  "owadPhrasesUpdated": 118,
+  "distractorsUpdated": 120,
+  "errors": 0,
+  "errorWords": [],
+  "startTime": 1742106287435,
+  "batches": [
+    {
+      "batchNumber": 1,
+      "wordCount": 40,
+      "definitionsUpdated": 17,
+      "owadPhrasesUpdated": 40,
+      "distractorsUpdated": 40,
+      "errors": 0,
+      "startTime": 1742105919329,
+      "endTime": 1742105958772,
+      "elapsedTimeMs": 39443,
+      "elapsedTimeMin": 0.7
+    },
+    {
+      "batchNumber": 2,
+      "wordCount": 40,
+      "definitionsUpdated": 13,
+      "owadPhrasesUpdated": 38,
+      "distractorsUpdated": 40,
+      "errors": 0,
+      "startTime": 1742106288699,
+      "endTime": 1742106328290,
+      "elapsedTimeMs": 39591,
+      "elapsedTimeMin": 0.7
+    },
+    {
+      "batchNumber": 3,
+      "wordCount": 40,
+      "definitionsUpdated": 16,
+      "owadPhrasesUpdated": 40,
+      "distractorsUpdated": 40,
+      "errors": 0,
+      "startTime": 1742106328538,
+      "endTime": 1742106369059,
+      "elapsedTimeMs": 40521,
+      "elapsedTimeMin": 0.7
+    }
+  ],
+  "currentBatch": 3,
+  "endTime": 1742106369059,
+  "totalTimeMs": 81624,
+  "totalTimeMin": 1
+}

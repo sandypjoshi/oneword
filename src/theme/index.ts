@@ -6,12 +6,13 @@ import colors from './colors';
 import spacing from './spacing';
 import typography from './typography';
 
-// Combine all theme elements
-const theme = {
-  colors,
-  spacing,
-  typography,
+export type Theme = {
+  colors: typeof colors.light | typeof colors.dark;
+  spacing: typeof spacing;
+  typography: typeof typography;
 };
 
 export { colors, spacing, typography };
-export default theme; 
+
+// Note: ThemeProvider and useTheme are exported directly from ThemeProvider.tsx
+// to avoid circular dependencies 

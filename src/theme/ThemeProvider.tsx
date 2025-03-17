@@ -5,7 +5,9 @@
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useColorScheme } from 'react-native';
-import theme, { colors } from './index';
+import colors from './colors';
+import spacing from './spacing';
+import typography from './typography';
 
 // Theme types
 type ThemeMode = 'light' | 'dark' | 'system';
@@ -13,23 +15,36 @@ type ThemeContextType = {
   mode: ThemeMode;
   isDark: boolean;
   colors: typeof colors.light | typeof colors.dark;
-  spacing: typeof theme.spacing;
-  typography: typeof theme.typography;
+  spacing: typeof spacing;
+  typography: typeof typography;
   setMode: (mode: ThemeMode) => void;
 };
 
-// Create theme context with defaults
-const ThemeContext = createContext<ThemeContextType>({
-  mode: 'system',
+// Default theme values
+const defaultThemeValues = {
+  mode: 'system' as ThemeMode,
   isDark: false,
   colors: colors.light,
-  spacing: theme.spacing,
-  typography: theme.typography,
+  spacing: spacing,
+  typography: typography,
   setMode: () => {},
-});
+};
 
-// Hook for using theme throughout the app
-export const useTheme = () => useContext(ThemeContext);
+// Create theme context with defaults
+const ThemeContext = createContext<ThemeContextType>(defaultThemeValues);
+
+// Hook for using theme throughout the app with safety check
+export const useTheme = () => {
+  const theme = useContext(ThemeContext);
+  
+  // If theme is undefined, return default values to avoid crashes
+  if (!theme) {
+    console.warn('useTheme must be used within a ThemeProvider');
+    return defaultThemeValues;
+  }
+  
+  return theme;
+};
 
 interface ThemeProviderProps {
   children: React.ReactNode;
@@ -56,16 +71,15 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     mode,
     isDark,
     colors: activeColors,
-    spacing: theme.spacing,
-    typography: theme.typography,
+    spacing: spacing,
+    typography: typography,
     setMode,
   };
   
   // Update when device color scheme changes
   useEffect(() => {
-    if (mode === 'system') {
-      // No need to update state, just let the isDark calculation handle it
-    }
+    // No explicit state update needed, the isDark calculation handles it
+    // This useEffect ensures we re-render when device color scheme changes
   }, [deviceColorScheme, mode]);
   
   return (

@@ -1,6 +1,6 @@
 ---
-description: Rules to follow when working with React Native Code
-globs: 
+description: 
+globs: **/*.tsx, **/*.ts, **/*.jsx, **/*.js, **/components/**/*, **/screens/**/*, app/**/*, src/**/*
 alwaysApply: false
 ---
 
