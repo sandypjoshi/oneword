@@ -1,18 +1,28 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, ActivityIndicator } from 'react-native';
 import { Box } from '../src/components/layout';
-import { Text } from '../src/components/ui';
+import { Text, Button } from '../src/components/ui';
 import { useThemeReady } from '../src/hooks';
 import { useRouter } from 'expo-router';
-import { setOnboardingComplete } from '../src/utils/onboarding';
+import { setOnboardingComplete, setDifficultyLevel } from '../src/utils/onboarding';
 import { wordOfDayService } from '../src/services/wordOfDayService';
+import { DifficultySelector } from '../src/components/onboarding';
+import { DIFFICULTY_LEVELS } from '../src/constants';
 import colors from '../src/theme/colors';
 import { useColorScheme } from 'react-native';
+
+// Onboarding steps
+enum OnboardingStep {
+  WELCOME = 0,
+  DIFFICULTY = 1,
+}
 
 export default function OnboardingScreen() {
   const { isReady, theme } = useThemeReady();
   const router = useRouter();
   const [isNavigating, setIsNavigating] = useState(false);
+  const [currentStep, setCurrentStep] = useState<OnboardingStep>(OnboardingStep.WELCOME);
+  const [selectedDifficulty, setSelectedDifficulty] = useState(DIFFICULTY_LEVELS.INTERMEDIATE);
   const colorScheme = useColorScheme();
   const isDark = colorScheme === 'dark';
   const fallbackColors = isDark ? colors.dark : colors.light;
@@ -30,6 +40,14 @@ export default function OnboardingScreen() {
 
   const { spacing, colors: themeColors } = theme;
 
+  const handleNext = () => {
+    setCurrentStep(OnboardingStep.DIFFICULTY);
+  };
+
+  const handleDifficultySelect = (level: string) => {
+    setSelectedDifficulty(level);
+  };
+
   const handleGetStarted = async () => {
     // Prevent double tap
     if (isNavigating) return;
@@ -38,6 +56,9 @@ export default function OnboardingScreen() {
     setIsNavigating(true);
     
     try {
+      // Save the selected difficulty level
+      await setDifficultyLevel(selectedDifficulty);
+      
       // Mark onboarding as complete
       await setOnboardingComplete();
       
@@ -63,56 +84,86 @@ export default function OnboardingScreen() {
     }
   };
 
+  // Welcome step content
+  const renderWelcomeStep = () => {
+    return (
+      <Box flex={1} padding="xl" style={styles.screenContainer}>
+        <Box flex={1} justify="center" align="center">
+          <Text 
+            variant="h1" 
+            color={themeColors.primary} 
+            style={{ marginBottom: spacing.lg }}
+          >
+            OneWord
+          </Text>
+          
+          <Text 
+            variant="h2" 
+            color={themeColors.text.primary} 
+            align="center"
+            style={{ marginBottom: spacing.lg }}
+          >
+            Expand Your Vocabulary
+          </Text>
+          
+          <Text 
+            variant="body1" 
+            color={themeColors.text.secondary} 
+            align="center"
+            style={{ marginBottom: spacing.xl }}
+          >
+            Learn one new word every day. Build your vocabulary systematically with our curated selection of words.
+          </Text>
+        </Box>
+        
+        <Box width="100%" style={styles.buttonContainer}>
+          <Button
+            title="Next"
+            variant="primary"
+            fullWidth
+            onPress={handleNext}
+          />
+        </Box>
+      </Box>
+    );
+  };
+
+  // Difficulty selection step content
+  const renderDifficultyStep = () => {
+    return (
+      <Box flex={1} padding="xl" style={styles.screenContainer}>
+        <Box flex={1} justify="center" align="center">
+          <DifficultySelector 
+            selectedLevel={selectedDifficulty}
+            onSelectLevel={handleDifficultySelect}
+          />
+        </Box>
+        
+        <Box width="100%" style={styles.buttonContainer}>
+          <Button
+            title={isNavigating ? "Loading..." : "Get Started"}
+            variant="primary"
+            fullWidth
+            onPress={handleGetStarted}
+            disabled={isNavigating}
+          />
+          
+          {isNavigating && (
+            <ActivityIndicator 
+              size="small" 
+              color={themeColors.primary}
+              style={{ marginTop: spacing.md }}
+            />
+          )}
+        </Box>
+      </Box>
+    );
+  };
+
   return (
     <View style={[styles.container, { backgroundColor: themeColors.background.primary }]}>
-      <Box flex={1} justify="center" align="center" padding="xl">
-        <Text 
-          variant="h1" 
-          color={themeColors.primary} 
-          style={{ marginBottom: spacing.lg }}
-        >
-          OneWord
-        </Text>
-        
-        <Text 
-          variant="h2" 
-          color={themeColors.text.primary} 
-          align="center"
-          style={{ marginBottom: spacing.lg }}
-        >
-          Expand Your Vocabulary
-        </Text>
-        
-        <Text 
-          variant="body1" 
-          color={themeColors.text.secondary} 
-          align="center"
-          style={{ marginBottom: spacing.xl }}
-        >
-          Learn one new word every day. Build your vocabulary systematically with our curated selection of words.
-        </Text>
-        
-        <TouchableOpacity
-          style={[
-            styles.button,
-            { 
-              backgroundColor: isNavigating ? themeColors.border.light : themeColors.primary,
-              padding: spacing.md,
-              marginTop: spacing.lg
-            }
-          ]}
-          onPress={handleGetStarted}
-          disabled={isNavigating}
-        >
-          {isNavigating ? (
-            <ActivityIndicator size="small" color={themeColors.primary} />
-          ) : (
-            <Text variant="button" color={themeColors.background.primary}>
-              Get Started
-            </Text>
-          )}
-        </TouchableOpacity>
-      </Box>
+      {currentStep === OnboardingStep.WELCOME && renderWelcomeStep()}
+      {currentStep === OnboardingStep.DIFFICULTY && renderDifficultyStep()}
     </View>
   );
 }
@@ -121,14 +172,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  screenContainer: {
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  buttonContainer: {
+    paddingBottom: 20,
+  },
   loadingContainer: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-  },
-  button: {
-    borderRadius: 8,
-    minWidth: 200,
     alignItems: 'center',
   },
 }); 

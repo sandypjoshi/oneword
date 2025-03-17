@@ -1,59 +1,108 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet, TouchableOpacityProps } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, TouchableOpacityProps, ActivityIndicator } from 'react-native';
+import { useTheme } from '../../theme/ThemeProvider';
 
 interface ButtonProps extends TouchableOpacityProps {
   title: string;
   variant?: 'primary' | 'secondary' | 'outline';
+  loading?: boolean;
+  fullWidth?: boolean;
 }
 
 const Button = ({ 
   title, 
   variant = 'primary', 
   style, 
+  loading = false,
+  fullWidth = false,
+  disabled = false,
   ...props 
 }: ButtonProps) => {
+  const { colors } = useTheme();
+  
+  // Generate button styles based on variant and theme
+  const buttonStyles = {
+    primary: {
+      backgroundColor: colors.primary,
+      borderColor: colors.primary,
+    },
+    secondary: {
+      backgroundColor: colors.primaryLight,
+      borderColor: colors.primaryLight,
+    },
+    outline: {
+      backgroundColor: 'transparent',
+      borderWidth: 1,
+      borderColor: colors.primary,
+    },
+  };
+  
+  // Generate text styles based on variant and theme
+  const textStyles = {
+    primary: {
+      color: colors.text.inverse,
+    },
+    secondary: {
+      color: colors.text.inverse,
+    },
+    outline: {
+      color: colors.primary,
+    },
+  };
+
   return (
     <TouchableOpacity 
       style={[
-        styles.button, 
-        styles[variant], 
+        styles.button,
+        buttonStyles[variant],
+        fullWidth && styles.fullWidth,
+        disabled && styles.disabled,
         style
       ]} 
+      disabled={disabled || loading}
       {...props}
     >
-      <Text style={[styles.text, variant === 'outline' && styles.outlineText]}>
-        {title}
-      </Text>
+      {loading ? (
+        <ActivityIndicator 
+          size="small" 
+          color={variant === 'outline' ? colors.primary : colors.text.inverse} 
+        />
+      ) : (
+        <Text style={[styles.text, textStyles[variant], disabled && styles.disabledText]}>
+          {title}
+        </Text>
+      )}
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   button: {
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    borderRadius: 8,
+    paddingVertical: 16,
+    paddingHorizontal: 32,
+    borderRadius: 100, // Pill shape
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  primary: {
-    backgroundColor: '#3498db',
-  },
-  secondary: {
-    backgroundColor: '#2ecc71',
-  },
-  outline: {
-    backgroundColor: 'transparent',
-    borderWidth: 1,
-    borderColor: '#3498db',
+    minWidth: 200,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
   },
   text: {
-    color: 'white',
     fontWeight: '600',
     fontSize: 16,
+    textAlign: 'center',
   },
-  outlineText: {
-    color: '#3498db',
+  fullWidth: {
+    width: '100%',
+  },
+  disabled: {
+    opacity: 0.5,
+  },
+  disabledText: {
+    opacity: 0.8,
   },
 });
 

@@ -31,4 +31,21 @@ export const STORAGE_KEYS = {
   USER_TOKEN: '@oneword_user_token',
   USER_PREFERENCES: '@oneword_user_preferences',
   DEVICE_ID: '@oneword_device_id',
+  DIFFICULTY_LEVEL: '@oneword_difficulty_level',
+};
+
+// Difficulty levels
+export const DIFFICULTY_LEVELS = {
+  BEGINNER: 'beginner',
+  INTERMEDIATE: 'intermediate',
+  ADVANCED: 'advanced',
+  ALL: 'all',
+};
+
+// Difficulty level descriptions
+export const DIFFICULTY_DESCRIPTIONS = {
+  [DIFFICULTY_LEVELS.BEGINNER]: 'Common everyday words to build a solid foundation.',
+  [DIFFICULTY_LEVELS.INTERMEDIATE]: 'Expand your vocabulary with moderately challenging words.',
+  [DIFFICULTY_LEVELS.ADVANCED]: 'Sophisticated vocabulary for academic and professional contexts.',
+  [DIFFICULTY_LEVELS.ALL]: 'Full range of vocabulary from basic to advanced.',
 }; 
