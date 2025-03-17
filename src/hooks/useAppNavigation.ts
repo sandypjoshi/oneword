@@ -10,7 +10,13 @@ export function useAppNavigation() {
   
   return {
     // Navigate to main tabs
-    goToHome: () => router.replace(ROUTES.HOME),
+    goToHome: () => router.replace({
+      pathname: ROUTES.HOME,
+      params: {
+        // Add animation transition parameter
+        animation: 'slide_from_right',
+      }
+    }),
     goToPractice: () => router.push(ROUTES.PRACTICE),
     goToProfile: () => router.push(ROUTES.PROFILE),
     

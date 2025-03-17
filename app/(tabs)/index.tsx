@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useMemo, useCallback } from 'react';
 import { 
   StyleSheet, 
   View, 
@@ -6,10 +6,10 @@ import {
   FlatList, 
   useWindowDimensions,
   ViewToken,
-  I18nManager,
   TouchableOpacity,
   Text
 } from 'react-native';
+import { useNavigation } from 'expo-router';
 import { WordCard } from '../../src/components/today';
 import { useThemeReady } from '../../src/hooks';
 import { WordOfDay } from '../../src/types/wordOfDay';
@@ -23,56 +23,44 @@ export default function HomeScreen() {
   const flatListRef = useRef<FlatList>(null);
   const isProgrammaticScrollRef = useRef(false);
   const { width } = useWindowDimensions();
+  const navigation = useNavigation();
   
-  // Load words for the last 14 days
-  useEffect(() => {
-    setIsLoading(true);
+  // Extract date number from ISO date string - moved to useCallback
+  const getDateFromWord = useCallback((word: WordOfDay): number => {
+    if (!word?.date) return 0;
+    const date = new Date(word.date);
+    return date.getDate();
+  }, []);
+  
+  // Format the date nicely for the header title
+  const formatDateForHeader = useCallback((word: WordOfDay | null): string => {
+    if (!word?.date) return 'Today'; // Default fallback
+
+    const wordDate = new Date(word.date);
+    const today = new Date();
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
     
-    try {
-      // Get words for the past 14 days
-      const recentWords = wordOfDayService.getWordsForPastDays(14);
-      
-      // Reverse the array so the most recent word (today) is at the end (rightmost position)
-      // This is because FlatList renders from left to right
-      const reversedWords = [...recentWords].reverse();
-      setWords(reversedWords);
-      
-      // Start with today's word (now at the last index after reversing)
-      setActiveIndex(reversedWords.length - 1);
-      
-      // Scroll to the end (today's word) after render
-      setTimeout(() => {
-        if (flatListRef.current && reversedWords.length > 0) {
-          isProgrammaticScrollRef.current = true;
-          flatListRef.current.scrollToIndex({
-            index: reversedWords.length - 1,
-            animated: false
-          });
-          // Reset flag after a short delay to account for scroll completion
-          setTimeout(() => {
-            isProgrammaticScrollRef.current = false;
-          }, 100);
-        }
-      }, 100);
-    } catch (error) {
-      console.error('Error loading words:', error);
-    } finally {
-      setIsLoading(false);
+    // Format dates for comparison (strip time portion)
+    const wordDateStr = wordDate.toDateString();
+    const todayStr = today.toDateString();
+    const yesterdayStr = yesterday.toDateString();
+    
+    if (wordDateStr === todayStr) {
+      return 'Today';
+    } else if (wordDateStr === yesterdayStr) {
+      return 'Yesterday';
+    } else {
+      // Format as "Mar 15" for older dates
+      return wordDate.toLocaleDateString('en-US', { 
+        month: 'short', 
+        day: 'numeric' 
+      });
     }
   }, []);
   
-  // Handle viewable items change to update the active index
-  const onViewableItemsChanged = useRef(({ viewableItems }: { viewableItems: ViewToken[] }) => {
-    // Ignore viewability changes if we're in the middle of a programmatic scroll
-    if (isProgrammaticScrollRef.current) return;
-    
-    if (viewableItems.length > 0) {
-      setActiveIndex(viewableItems[0].index || 0);
-    }
-  }).current;
-  
   // Scroll to a specific index when a pagination dot is tapped
-  const scrollToIndex = (index: number) => {
+  const scrollToIndex = useCallback((index: number) => {
     // Set the flag to indicate we're doing a programmatic scroll
     isProgrammaticScrollRef.current = true;
     
@@ -90,28 +78,13 @@ export default function HomeScreen() {
         isProgrammaticScrollRef.current = false;
       }, 300); // Slightly longer than animation duration
     }
-  };
-  
-  // Show loading state while theme is loading or words are loading
-  if (!isReady || isLoading) {
-    return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#0000ff" />
-      </View>
-    );
-  }
-  
-  const { colors } = theme;
-  
-  // Extract date number from ISO date string
-  const getDateFromWord = (word: WordOfDay): number => {
-    if (!word || !word.date) return 0;
-    const date = new Date(word.date);
-    return date.getDate();
-  };
+  }, []);
   
   // Render pagination indicators
-  const renderPaginationDots = () => {
+  const renderPaginationDots = useCallback(() => {
+    if (!theme || !words.length) return null;
+    
+    const { colors } = theme;
     return (
       <View style={styles.paginationContainer}>
         {words.map((word, index) => {
@@ -131,9 +104,10 @@ export default function HomeScreen() {
                   {
                     backgroundColor: isActive 
                       ? colors.primary 
-                      : colors.border.light,
+                      : colors.text.secondary,
                     width: isActive ? 20 : 8,
                     height: isActive ? 20 : 8,
+                    opacity: isActive ? 1 : 0.6,
                   },
                 ]}
               >
@@ -148,16 +122,102 @@ export default function HomeScreen() {
         })}
       </View>
     );
-  };
+  }, [words, activeIndex, theme, getDateFromWord, scrollToIndex]);
   
   // Render a word card item
-  const renderItem = ({ item }: { item: WordOfDay }) => {
+  const renderItem = useCallback(({ item }: { item: WordOfDay }) => {
     return (
       <View style={[styles.cardContainer, { width }]}>
         <WordCard wordData={item} style={styles.wordCard} />
       </View>
     );
-  };
+  }, [width]);
+  
+  // Memoize getItemLayout for better FlatList performance
+  const getItemLayout = useCallback((
+    _: any, 
+    index: number
+  ) => ({
+    length: width,
+    offset: width * index,
+    index,
+  }), [width]);
+  
+  // Memoize viewability config to prevent recreating it on every render
+  const viewabilityConfig = useMemo(() => ({
+    itemVisiblePercentThreshold: 50,
+  }), []);
+  
+  // Handle viewable items change to update the active index
+  const onViewableItemsChanged = useRef(({ viewableItems }: { viewableItems: ViewToken[] }) => {
+    // Ignore viewability changes if we're in the middle of a programmatic scroll
+    if (isProgrammaticScrollRef.current) return;
+    
+    if (viewableItems.length > 0) {
+      setActiveIndex(viewableItems[0].index || 0);
+    }
+  }).current;
+  
+  // Update the header title when the active word changes
+  useEffect(() => {
+    if (words.length > 0 && activeIndex >= 0 && activeIndex < words.length) {
+      const currentWord = words[activeIndex];
+      const title = formatDateForHeader(currentWord);
+      navigation.setOptions({ title });
+    }
+  }, [activeIndex, words, navigation, formatDateForHeader]);
+  
+  // Load words for the last 14 days
+  useEffect(() => {
+    const loadWords = async () => {
+      setIsLoading(true);
+      
+      try {
+        // Get words for the past 14 days
+        const recentWords = wordOfDayService.getWordsForPastDays(14);
+        
+        // Reverse the array so the most recent word (today) is at the end (rightmost position)
+        const reversedWords = [...recentWords].reverse();
+        setWords(reversedWords);
+        
+        // Start with today's word (now at the last index after reversing)
+        const lastIndex = reversedWords.length - 1;
+        setActiveIndex(lastIndex);
+        
+        // Scroll to the end (today's word) after render
+        setTimeout(() => {
+          if (flatListRef.current && reversedWords.length > 0) {
+            isProgrammaticScrollRef.current = true;
+            flatListRef.current.scrollToIndex({
+              index: lastIndex,
+              animated: false
+            });
+            // Reset flag after a short delay to account for scroll completion
+            setTimeout(() => {
+              isProgrammaticScrollRef.current = false;
+            }, 100);
+          }
+        }, 100);
+      } catch (error) {
+        console.error('Error loading words:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    
+    loadWords();
+  }, []);
+  
+  // Show loading state while theme is loading or words are loading
+  if (!isReady || isLoading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
+  
+  const { colors } = theme;
   
   return (
     <View style={[styles.container, { backgroundColor: colors.background.primary }]}>
@@ -174,21 +234,13 @@ export default function HomeScreen() {
         pagingEnabled
         showsHorizontalScrollIndicator={false}
         onViewableItemsChanged={onViewableItemsChanged}
-        viewabilityConfig={{
-          itemVisiblePercentThreshold: 50,
-        }}
+        viewabilityConfig={viewabilityConfig}
         initialNumToRender={3}
         maxToRenderPerBatch={3}
         windowSize={5}
-        getItemLayout={(_, index) => ({
-          length: width,
-          offset: width * index,
-          index,
-        })}
+        getItemLayout={getItemLayout}
         contentContainerStyle={styles.carouselContent}
-        // Disable initial scroll to start
         initialScrollIndex={words.length - 1}
-        // This prevents a warning about initialScrollIndex
         maintainVisibleContentPosition={{
           minIndexForVisible: 0,
         }}

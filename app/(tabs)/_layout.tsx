@@ -1,11 +1,12 @@
 import React from 'react';
 import { Text, View, ActivityIndicator } from 'react-native';
-import { Tabs } from 'expo-router';
+import { Tabs, useLocalSearchParams } from 'expo-router';
 import { useThemeReady } from '../../src/hooks';
 import { Icon } from '../../src/components/ui';
 
 export default function TabLayout() {
   const { isReady, theme } = useThemeReady();
+  const { animation } = useLocalSearchParams();
   
   if (!isReady) {
     return (
@@ -29,6 +30,7 @@ export default function TabLayout() {
           backgroundColor: colors.background.primary,
         },
         headerTintColor: colors.text.primary,
+        animation: 'fade',
       }}
     >
       <Tabs.Screen

@@ -3,12 +3,12 @@ import { StyleSheet, View, ActivityIndicator, TouchableOpacity } from 'react-nat
 import { Box } from '../src/components/layout';
 import { Text } from '../src/components/ui';
 import { useThemeReady } from '../src/hooks';
-import { useAppNavigation } from '../src/hooks';
+import { useRouter } from 'expo-router';
 import { setOnboardingComplete } from '../src/utils/onboarding';
 
 export default function OnboardingScreen() {
   const { isReady, theme } = useThemeReady();
-  const navigation = useAppNavigation();
+  const router = useRouter();
 
   if (!isReady) {
     return (
@@ -23,8 +23,8 @@ export default function OnboardingScreen() {
   const handleGetStarted = async () => {
     // Mark onboarding as complete
     await setOnboardingComplete();
-    // Navigate to home screen
-    navigation.goToHome();
+    // Navigate to home screen - animation is handled by Stack navigator
+    router.replace('/(tabs)');
   };
 
   return (

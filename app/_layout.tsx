@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Slot, useRouter, SplashScreen } from 'expo-router';
+import { Stack, useRouter, SplashScreen } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { View, ActivityIndicator } from 'react-native';
 import { ThemeProvider } from '../src/theme/ThemeProvider';
@@ -54,7 +54,12 @@ export default function RootLayout() {
     <ThemeProvider>
       <View style={{ flex: 1 }}>
         <StatusBar style="auto" />
-        <Slot />
+        <Stack
+          screenOptions={{
+            headerShown: false,
+            animation: 'slide_from_right',
+          }}
+        />
       </View>
     </ThemeProvider>
   );
