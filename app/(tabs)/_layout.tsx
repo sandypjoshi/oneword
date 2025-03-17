@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, ActivityIndicator } from 'react-native';
 import { Tabs } from 'expo-router';
 import { useThemeReady } from '../../src/hooks';
+import { Icon } from '../../src/components/ui';
 
 export default function TabLayout() {
   const { isReady, theme } = useThemeReady();
@@ -36,7 +37,7 @@ export default function TabLayout() {
           title: 'Today',
           tabBarLabel: 'Today',
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="calendar" color={color} />
+            <Icon name="calendar" color={color} size={24} />
           ),
         }}
       />
@@ -46,7 +47,7 @@ export default function TabLayout() {
           title: 'Practice',
           tabBarLabel: 'Practice',
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="book" color={color} />
+            <Icon name="book" color={color} size={24} />
           ),
         }}
       />
@@ -56,18 +57,10 @@ export default function TabLayout() {
           title: 'Profile',
           tabBarLabel: 'Profile',
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="user" color={color} />
+            <Icon name="user" color={color} size={24} />
           ),
         }}
       />
     </Tabs>
-  );
-}
-
-// Placeholder for tab bar icons
-function TabBarIcon({ name, color }: { name: string; color: string }) {
-  // In a real app, you would use a proper icon library like @expo/vector-icons
-  return (
-    <Text style={{ color }}>●</Text>
   );
 } 

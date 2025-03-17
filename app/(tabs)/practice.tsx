@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, ActivityIndicator } from 'react-native';
 import { Box } from '../../src/components/layout';
 import { Text } from '../../src/components/ui';
 import { useThemeReady } from '../../src/hooks';
@@ -15,59 +15,22 @@ export default function PracticeScreen() {
     );
   }
 
-  const { spacing, colors } = theme;
+  const { colors } = theme;
 
   return (
-    <ScrollView style={styles.container}>
-      <Box padding="lg">
-        <Text variant="h1" style={{ marginBottom: spacing.md }}>Practice</Text>
-        <Text variant="body1" style={{ marginBottom: spacing.lg }}>Strengthen your vocabulary with these exercises</Text>
-        
-        <Box 
-          style={[
-            styles.card, 
-            { 
-              marginBottom: spacing.md,
-              backgroundColor: colors.background.secondary,
-              padding: spacing.lg,
-              borderRadius: 8
-            }
-          ]}
+    <View style={[styles.container, { backgroundColor: colors.background.primary }]}>
+      <Box padding="lg" flex={1} align="center" justify="center">
+        <Text variant="h2">Practice</Text>
+        <Text 
+          variant="body1" 
+          color={colors.text.secondary}
+          align="center"
+          style={styles.subtitle}
         >
-          <Text variant="h2" style={{ marginBottom: spacing.sm }}>Word Quiz</Text>
-          <Text variant="body1">Test your knowledge of recent words</Text>
-        </Box>
-        
-        <Box 
-          style={[
-            styles.card, 
-            { 
-              marginBottom: spacing.md,
-              backgroundColor: colors.background.secondary,
-              padding: spacing.lg,
-              borderRadius: 8
-            }
-          ]}
-        >
-          <Text variant="h2" style={{ marginBottom: spacing.sm }}>Word Match</Text>
-          <Text variant="body1">Match words with their definitions</Text>
-        </Box>
-        
-        <Box 
-          style={[
-            styles.card, 
-            { 
-              backgroundColor: colors.background.secondary,
-              padding: spacing.lg,
-              borderRadius: 8
-            }
-          ]}
-        >
-          <Text variant="h2" style={{ marginBottom: spacing.sm }}>Flash Cards</Text>
-          <Text variant="body1">Review words with digital flash cards</Text>
-        </Box>
+          Coming Soon
+        </Text>
       </Box>
-    </ScrollView>
+    </View>
   );
 }
 
@@ -80,11 +43,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  card: {
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
+  subtitle: {
+    marginTop: 8,
   },
 }); 
