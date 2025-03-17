@@ -36,69 +36,76 @@ const WordCardComponent: React.FC<WordCardProps> = ({
         },
         style
       ]}
-      // Disable pointer events for child elements to prevent interference with swipe gesture
-      pointerEvents="box-only"
     >
       <Box padding="lg">
-        <Text 
-          style={[
-            styles.word,
-            { color: colors.text.primary }
-          ]}
-        >
-          {word}
-        </Text>
-        
-        <Text
-          style={[
-            styles.pronunciation,
-            { color: colors.text.secondary }
-          ]}
-        >
-          {pronunciation}
-        </Text>
-        
-        <View 
-          style={[
-            styles.partOfSpeech,
-            { backgroundColor: colors.primaryLight }
-          ]}
-        >
+        {/* Word and pronunciation */}
+        <View style={styles.headerSection}>
           <Text 
             style={[
-              styles.partOfSpeechText,
-              { color: colors.text.inverse }
+              styles.word,
+              { color: colors.text.primary }
+            ]}
+            numberOfLines={1}
+            adjustsFontSizeToFit
+          >
+            {word}
+          </Text>
+          
+          <Text
+            style={[
+              styles.pronunciation,
+              { color: colors.text.secondary }
             ]}
           >
-            {partOfSpeech}
+            {pronunciation}
           </Text>
         </View>
         
-        <Text
-          style={[
-            styles.definition,
-            { 
-              color: colors.text.primary,
-              marginTop: spacing.md 
-            }
-          ]}
-        >
-          {definition}
-        </Text>
-        
-        {example && (
-          <Text
+        {/* Part of speech badge */}
+        <View style={styles.badgeContainer}>
+          <View 
             style={[
-              styles.example,
-              { 
-                color: colors.text.secondary,
-                marginTop: spacing.sm 
-              }
+              styles.partOfSpeech,
+              { backgroundColor: colors.primaryLight }
             ]}
           >
-            "{example}"
+            <Text 
+              style={[
+                styles.partOfSpeechText,
+                { color: colors.text.inverse }
+              ]}
+            >
+              {partOfSpeech}
+            </Text>
+          </View>
+        </View>
+        
+        {/* Definition */}
+        <View style={[styles.contentSection, { marginTop: spacing.md }]}>
+          <Text
+            style={[
+              styles.definition,
+              { color: colors.text.primary }
+            ]}
+          >
+            {definition}
           </Text>
-        )}
+          
+          {/* Example usage */}
+          {example && (
+            <Text
+              style={[
+                styles.example,
+                { 
+                  color: colors.text.secondary,
+                  marginTop: spacing.sm 
+                }
+              ]}
+            >
+              "{example}"
+            </Text>
+          )}
+        </View>
       </Box>
     </View>
   );
@@ -106,43 +113,6 @@ const WordCardComponent: React.FC<WordCardProps> = ({
 
 // Apply memo to the component
 const WordCard = memo(WordCardComponent);
-
-// Empty state component
-const EmptyWordCardComponent: React.FC<{ style?: ViewStyle }> = ({ style }) => {
-  const { colors, spacing } = useTheme();
-  
-  return (
-    <View 
-      style={[
-        styles.container,
-        { 
-          backgroundColor: colors.background.card,
-          borderColor: colors.border.light,
-          justifyContent: 'center',
-          alignItems: 'center',
-          paddingVertical: spacing.xl
-        },
-        style
-      ]}
-      // Disable pointer events for child elements to prevent interference with swipe gesture
-      pointerEvents="box-only"
-    >
-      <Box padding="lg" align="center" justify="center">
-        <Text 
-          style={[
-            styles.emptyStateText,
-            { color: colors.text.secondary }
-          ]}
-        >
-          No word available for this date
-        </Text>
-      </Box>
-    </View>
-  );
-};
-
-// Apply memo to the empty state component
-const EmptyWordCard = memo(EmptyWordCardComponent);
 
 const styles = StyleSheet.create({
   container: {
@@ -154,37 +124,50 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 2,
     overflow: 'hidden',
-    // Disable user selection to improve swipe experience
-    userSelect: 'none',
+    minHeight: 280,
+  },
+  headerSection: {
+    alignItems: 'center',
+    marginBottom: 8,
   },
   word: {
-    fontSize: 36,
+    fontSize: 38,
     fontFamily: 'serif',
     textAlign: 'center',
-    fontWeight: '400',
+    fontWeight: '600',
     textTransform: 'lowercase',
+    letterSpacing: 0.5,
   },
   pronunciation: {
     fontSize: 16,
     textAlign: 'center',
     marginTop: 4,
     fontWeight: '400',
+    letterSpacing: 0.25,
+  },
+  badgeContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginVertical: 12,
   },
   partOfSpeech: {
-    alignSelf: 'center',
-    paddingHorizontal: 12,
-    paddingVertical: 4,
-    borderRadius: 12,
-    marginTop: 16,
+    paddingHorizontal: 16,
+    paddingVertical: 6,
+    borderRadius: 16,
   },
   partOfSpeechText: {
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: '600',
+    textTransform: 'lowercase',
+  },
+  contentSection: {
+    alignItems: 'center',
   },
   definition: {
     fontSize: 18,
-    lineHeight: 24,
+    lineHeight: 26,
     textAlign: 'center',
+    fontWeight: '400',
   },
   example: {
     fontSize: 16,
@@ -192,15 +175,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 22,
   },
-  emptyStateText: {
-    fontSize: 18,
-    textAlign: 'center',
-  },
 });
 
-// Set display names for better debugging
+// Set display name for better debugging
 WordCard.displayName = 'WordCard';
-EmptyWordCard.displayName = 'EmptyWordCard';
 
-export { EmptyWordCard };
 export default WordCard; 

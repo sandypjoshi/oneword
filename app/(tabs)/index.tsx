@@ -11,15 +11,20 @@ import {
   useColorScheme
 } from 'react-native';
 import { useNavigation } from 'expo-router';
-import { WordCard } from '../../src/components/today';
+import { WordCard, EmptyWordCard } from '../../src/components/today';
 import { useThemeReady } from '../../src/hooks';
 import { WordOfDay } from '../../src/types/wordOfDay';
 import { wordOfDayService } from '../../src/services/wordOfDayService';
 import colorThemes from '../../src/theme/colors';
 
+// Extended WordOfDay type to include placeholder flag
+interface ExtendedWordOfDay extends WordOfDay {
+  isPlaceholder?: boolean;
+}
+
 export default function HomeScreen() {
   const { isReady, theme } = useThemeReady();
-  const [words, setWords] = useState<WordOfDay[]>([]);
+  const [words, setWords] = useState<ExtendedWordOfDay[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const flatListRef = useRef<FlatList>(null);
@@ -30,7 +35,7 @@ export default function HomeScreen() {
   const systemColorScheme = useColorScheme();
   
   // Format the date nicely for the header title
-  const formatDateForHeader = useCallback((word: WordOfDay | null): string => {
+  const formatDateForHeader = useCallback((word: ExtendedWordOfDay | null): string => {
     if (!word?.date) return 'Today'; // Default fallback
 
     const wordDate = new Date(word.date);
@@ -57,13 +62,13 @@ export default function HomeScreen() {
   }, []);
   
   // Extract date number from ISO date string
-  const getDateFromWord = useCallback((word: WordOfDay): number => {
+  const getDateFromWord = useCallback((word: ExtendedWordOfDay): number => {
     if (!word?.date) return 0;
     const date = new Date(word.date);
     return date.getDate();
   }, []);
   
-  // Load words for the last 14 days
+  // Load words for the last 14 days and ensure there's an entry for each day
   useEffect(() => {
     // Skip if we're not ready for rendering yet
     if (!isReady || loadAttempted.current) return;
@@ -77,17 +82,54 @@ export default function HomeScreen() {
         // Get words for the past 14 days
         const recentWords = wordOfDayService.getWordsForPastDays(14);
         
-        // Reverse the array so the most recent word (today) is at the end (rightmost position)
-        const reversedWords = [...recentWords].reverse();
-        setWords(reversedWords);
+        // Create a complete array of the last 14 days, with placeholders for missing days
+        const today = new Date();
+        const allDays: ExtendedWordOfDay[] = [];
         
-        // Start with today's word (now at the last index after reversing)
-        const lastIndex = reversedWords.length - 1;
+        // Generate dates for the past 14 days
+        // IMPORTANT: This loop generates dates in chronological order (oldest → newest)
+        // The loop starts from the oldest date (i=13, 13 days ago) and ends with today (i=0)
+        // This ensures our FlatList will show past days on the left and today on the right
+        for (let i = 13; i >= 0; i--) {
+          const date = new Date(today);
+          date.setDate(date.getDate() - i);
+          const dateString = date.toISOString().split('T')[0];
+          
+          // Find if we have a word for this date
+          const wordForDate = recentWords.find(word => {
+            const wordDate = new Date(word.date);
+            return wordDate.toISOString().split('T')[0] === dateString;
+          });
+          
+          // If word exists, add it, otherwise add placeholder
+          if (wordForDate) {
+            allDays.push(wordForDate);
+          } else {
+            // Create placeholder with date information
+            allDays.push({
+              id: `placeholder-${dateString}`,
+              word: '',
+              pronunciation: '',
+              partOfSpeech: '',
+              definition: '',
+              date: dateString,
+              isPlaceholder: true
+            });
+          }
+        }
+        
+        // ORDERING: Keep this array in chronological order (oldest → newest)
+        // DO NOT REVERSE THIS ARRAY - it's already in the correct order
+        // Left side (index 0) = oldest date, Right side (last index) = today
+        setWords(allDays);
+        
+        // Start with today's word (last index in chronological order)
+        const lastIndex = allDays.length - 1;
         setActiveIndex(lastIndex);
         
         // Scroll to the end (today's word) after render
         setTimeout(() => {
-          if (flatListRef.current && reversedWords.length > 0) {
+          if (flatListRef.current && allDays.length > 0) {
             isProgrammaticScrollRef.current = true;
             flatListRef.current.scrollToIndex({
               index: lastIndex,
@@ -174,6 +216,7 @@ export default function HomeScreen() {
         {words.map((word, index) => {
           const isActive = index === activeIndex;
           const dateNum = getDateFromWord(word);
+          const isPlaceholder = word.isPlaceholder;
           
           return (
             <TouchableOpacity
@@ -188,10 +231,12 @@ export default function HomeScreen() {
                   {
                     backgroundColor: isActive 
                       ? colors.primary 
-                      : colors.text.secondary,
-                    width: isActive ? 20 : 8,
-                    height: isActive ? 20 : 8,
-                    opacity: isActive ? 1 : 0.6,
+                      : isPlaceholder 
+                        ? colors.border.medium
+                        : colors.text.secondary,
+                    width: isActive ? 24 : 8,
+                    height: isActive ? 24 : 8,
+                    opacity: isActive ? 1 : isPlaceholder ? 0.4 : 0.6,
                   },
                 ]}
               >
@@ -209,10 +254,19 @@ export default function HomeScreen() {
   }, [words, activeIndex, theme, getDateFromWord, scrollToIndex]);
   
   // Render a word card item
-  const renderItem = useCallback(({ item }: { item: WordOfDay }) => {
+  const renderItem = useCallback(({ item }: { item: ExtendedWordOfDay }) => {
+    const isPlaceholder = item.isPlaceholder;
+    
     return (
       <View style={[styles.cardContainer, { width }]}>
-        <WordCard wordData={item} style={styles.wordCard} />
+        {isPlaceholder ? (
+          <EmptyWordCard 
+            style={styles.wordCard} 
+            date={item.date}
+          />
+        ) : (
+          <WordCard wordData={item} style={styles.wordCard} />
+        )}
       </View>
     );
   }, [width]);
@@ -246,6 +300,12 @@ export default function HomeScreen() {
       {renderPaginationDots()}
       
       {/* Word cards carousel */}
+      {/* 
+        FlatList displays words in chronological order:
+        - LEFT side = oldest words (past days)
+        - RIGHT side = newest word (today)
+        - initialScrollIndex is set to the last item (today) to start the view from the right
+      */}
       <FlatList
         ref={flatListRef}
         data={words}
@@ -284,6 +344,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: 16,
+    flexWrap: 'wrap',
+    paddingHorizontal: 20,
   },
   dotTouchable: {
     padding: 8, // Increase touch target area
@@ -292,13 +354,13 @@ const styles = StyleSheet.create({
   paginationDot: {
     width: 8,
     height: 8,
-    borderRadius: 10,
+    borderRadius: 12,
     marginHorizontal: 4,
     justifyContent: 'center',
     alignItems: 'center',
   },
   dateNumber: {
-    fontSize: 10,
+    fontSize: 12,
     fontWeight: 'bold',
     textAlign: 'center',
   },
@@ -308,7 +370,7 @@ const styles = StyleSheet.create({
   cardContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 16,
+    paddingHorizontal: 20,
   },
   wordCard: {
     width: '100%',

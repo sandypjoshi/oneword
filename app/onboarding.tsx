@@ -51,7 +51,12 @@ export default function OnboardingScreen() {
       }
       
       // Navigate to home screen
-      router.replace('/(tabs)');
+      router.replace({
+        pathname: '/(tabs)',
+        params: {
+          animation: 'slide_from_right'
+        }
+      });
     } catch (error) {
       console.error('Error during onboarding completion:', error);
       setIsNavigating(false); // Reset state on error

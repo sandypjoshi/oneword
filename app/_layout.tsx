@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Slot, useRouter, SplashScreen, useSegments } from 'expo-router';
+import { Slot, useRouter, SplashScreen, useSegments, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { View, ActivityIndicator, Image, StyleSheet, useColorScheme } from 'react-native';
 import { ThemeProvider } from '../src/theme/ThemeProvider';
@@ -41,9 +41,19 @@ export default function RootLayout() {
         
         // Navigate to the appropriate screen after delay
         if (!hasOnboarded && segments[0] !== 'onboarding') {
-          router.replace('/onboarding');
+          router.replace({
+            pathname: '/onboarding',
+            params: {
+              animation: 'slide_from_right'
+            }
+          });
         } else if (hasOnboarded && !segments[0]) {
-          router.replace('/(tabs)');
+          router.replace({
+            pathname: '/(tabs)',
+            params: {
+              animation: 'slide_from_right'
+            }
+          });
         }
         
         // Mark initialization as complete
@@ -56,7 +66,12 @@ export default function RootLayout() {
         
         // Navigate to onboarding as fallback
         if (segments[0] !== 'onboarding') {
-          router.replace('/onboarding');
+          router.replace({
+            pathname: '/onboarding',
+            params: {
+              animation: 'slide_from_right'
+            }
+          });
         }
         
         setInitializing(false);
@@ -76,8 +91,17 @@ export default function RootLayout() {
       <View style={{ flex: 1 }}>
         <StatusBar style="auto" />
         
-        {/* Always render a navigator (Slot) to avoid the error */}
-        <Slot />
+        {/* Use Stack for animated transitions */}
+        <Stack
+          screenOptions={{
+            headerShown: false,
+            animation: 'slide_from_right',
+            animationDuration: 300,
+          }}
+        >
+          {/* Always render a navigator (Slot) to avoid the error */}
+          <Slot />
+        </Stack>
         
         {/* Overlay our custom splash screen while initializing */}
         {initializing && (
