@@ -25,8 +25,6 @@ export default function RootLayout() {
   const router = useRouter();
   const segments = useSegments();
   const colorScheme = useColorScheme();
-  const isDark = colorScheme === 'dark';
-  const themeColors = isDark ? colors.dark : colors.light;
   
   // Initialize app and handle navigation
   useEffect(() => {
@@ -68,11 +66,15 @@ export default function RootLayout() {
     initialize();
   }, [router, segments]);
 
+  // Get appropriate colors for splash screen
+  const isDark = colorScheme === 'dark';
+  const themeColors = isDark ? colors.dark : colors.light;
+
   // Render the app with proper navigation structure
   return (
-    <ThemeProvider defaultTheme={isDark ? 'dark' : 'light'}>
-      <View style={{ flex: 1, backgroundColor: themeColors.background.primary }}>
-        <StatusBar style={isDark ? 'light' : 'dark'} />
+    <ThemeProvider defaultTheme="system">
+      <View style={{ flex: 1 }}>
+        <StatusBar style="auto" />
         
         {/* Always render a navigator (Slot) to avoid the error */}
         <Slot />
