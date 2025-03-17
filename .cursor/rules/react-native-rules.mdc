@@ -1,44 +1,62 @@
 ---
-description: 
-globs: **/*.tsx, **/*.ts, **/*.jsx, **/*.js, **/components/**/*, **/screens/**/*, app/**/*, src/**/*
+description: Rules to follow when working with React Native Code
+globs: ["**/*.tsx", "**/*.ts", "**/*.jsx", "**/*.js", "**/components/**/*", "**/screens/**/*", "app/**/*", "src/**/*"]
 alwaysApply: false
 ---
 
   You are an expert in TypeScript, React Native, Expo, and Mobile App Development.
 
-  Please refer latets documentations for React Native and Expo
+  Please refer to the latest documentation for React Native and Expo, especially focusing on the New Architecture (available from React Native 0.76+)
+  
+  New Architecture Fundamentals:
+  - Leverage the Bridgeless architecture for direct communication between JavaScript and native layers
+  - Use Fabric Renderer for improved UI performance and concurrent rendering capabilities
+  - Take advantage of TurboModules for efficient native module loading
+  - Consider the new threading model for smoother animations and interactions
+  - Utilize React 18 features now fully supported: Suspense, Transitions, automatic batching, and useLayoutEffect
   
   Code Style and Structure:
-  - Write concise, type-safe TypeScript code.
-  - Use functional components and hooks over class components.
-  - Ensure components are modular, reusable, and maintainable.
-  - Organize files by feature, grouping related components, hooks, and styles.
+  - Write concise, type-safe TypeScript code
+  - Use functional components and hooks over class components
+  - Ensure components are modular, reusable, and maintainable
+  - Organize files by feature, grouping related components, hooks, and styles
+  - Consider component tree structure to optimize for concurrent rendering
   
   Naming Conventions:
-  - Use camelCase for variable and function names (e.g., `isFetchingData`, `handleUserInput`).
-  - Use PascalCase for component names (e.g., `UserProfile`, `ChatScreen`).
-  - Directory names should be lowercase and hyphenated (e.g., `user-profile`, `chat-screen`).
+  - Use camelCase for variable and function names (e.g., `isFetchingData`, `handleUserInput`)
+  - Use PascalCase for component names (e.g., `UserProfile`, `ChatScreen`)
+  - Directory names should be lowercase and hyphenated (e.g., `user-profile`, `chat-screen`)
   
   TypeScript Usage:
-  - Use TypeScript for all components, favoring interfaces for props and state.
-  - Enable strict typing in `tsconfig.json`.
-  - Avoid using `any`; strive for precise types.
-  - Utilize `React.FC` for defining functional components with props.
+  - Use TypeScript for all components, favoring interfaces for props and state
+  - Enable strict typing in `tsconfig.json`
+  - Avoid using `any`; strive for precise types
+  - Utilize type-safe patterns for component definitions, considering JSI integration
+  - Use typed event handlers to improve code reliability
   
   Performance Optimization:
-  - Minimize `useEffect`, `useState`, and heavy computations inside render methods.
-  - Use `React.memo()` for components with static props to prevent unnecessary re-renders.
-  - Optimize FlatLists with props like `removeClippedSubviews`, `maxToRenderPerBatch`, and `windowSize`.
-  - Use `getItemLayout` for FlatLists when items have a consistent size to improve performance.
-  - Avoid anonymous functions in `renderItem` or event handlers to prevent re-renders.
+  - Minimize `useEffect`, `useState`, and heavy computations inside render methods
+  - Use `React.memo()` for components with static props to prevent unnecessary re-renders
+  - Optimize FlatLists with props like `removeClippedSubviews`, `maxToRenderPerBatch`, and `windowSize`
+  - Use `getItemLayout` for FlatLists when items have a consistent size to improve performance
+  - Avoid anonymous functions in `renderItem` or event handlers to prevent re-renders
+  - Leverage concurrent mode and transitions for CPU-intensive updates
+  - Consider using `useDeferredValue` for non-critical UI updates
+  - Use `useTransition` for state transitions that might cause UI delays
   
   UI and Styling:
-  - Use consistent styling, either through `StyleSheet.create()` or Styled Components.
-  - Ensure responsive design by considering different screen sizes and orientations.
-  - Optimize image handling using libraries designed for React Native, like `react-native-fast-image`.
+  - Use consistent styling, either through `StyleSheet.create()` or Styled Components
+  - Ensure responsive design by considering different screen sizes and orientations
+  - Optimize image handling using libraries designed for React Native, like `react-native-fast-image`
+  - Take advantage of Fabric's synchronous layout capabilities for advanced UI effects
+  - Consider using `react-native-reanimated` for complex animations that benefit from the new architecture
   
   Best Practices:
-  - Follow React Native's threading model to ensure smooth UI performance.
-  - Utilize Expo's EAS Build and Updates for continuous deployment and Over-The-Air (OTA) updates.
-  - Use React Navigation for handling navigation and deep linking with best practices.
+  - Follow React Native's new threading model to ensure smooth UI performance
+  - Utilize Expo's EAS Build and Updates for continuous deployment and Over-The-Air (OTA) updates
+  - Use React Navigation for handling navigation and deep linking with best practices
+  - Take advantage of synchronous layout measurements when building custom UI components
+  - Use Error Boundaries with Suspense for better error handling and user experience
+  - Consider code splitting with dynamic imports for improved startup performance
+  - Test UI performance in production mode as development mode has different performance characteristics
       
