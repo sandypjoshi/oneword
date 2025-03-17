@@ -7,13 +7,15 @@ import {
   useWindowDimensions,
   ViewToken,
   TouchableOpacity,
-  Text
+  Text,
+  useColorScheme
 } from 'react-native';
 import { useNavigation } from 'expo-router';
 import { WordCard } from '../../src/components/today';
 import { useThemeReady } from '../../src/hooks';
 import { WordOfDay } from '../../src/types/wordOfDay';
 import { wordOfDayService } from '../../src/services/wordOfDayService';
+import colorThemes from '../../src/theme/colors';
 
 export default function HomeScreen() {
   const { isReady, theme } = useThemeReady();
@@ -22,15 +24,10 @@ export default function HomeScreen() {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const flatListRef = useRef<FlatList>(null);
   const isProgrammaticScrollRef = useRef(false);
+  const loadAttempted = useRef(false);
   const { width } = useWindowDimensions();
   const navigation = useNavigation();
-  
-  // Extract date number from ISO date string - moved to useCallback
-  const getDateFromWord = useCallback((word: WordOfDay): number => {
-    if (!word?.date) return 0;
-    const date = new Date(word.date);
-    return date.getDate();
-  }, []);
+  const systemColorScheme = useColorScheme();
   
   // Format the date nicely for the header title
   const formatDateForHeader = useCallback((word: WordOfDay | null): string => {
@@ -59,6 +56,78 @@ export default function HomeScreen() {
     }
   }, []);
   
+  // Extract date number from ISO date string
+  const getDateFromWord = useCallback((word: WordOfDay): number => {
+    if (!word?.date) return 0;
+    const date = new Date(word.date);
+    return date.getDate();
+  }, []);
+  
+  // Load words for the last 14 days
+  useEffect(() => {
+    // Skip if we're not ready for rendering yet
+    if (!isReady || loadAttempted.current) return;
+    
+    loadAttempted.current = true;
+    
+    const loadWords = async () => {
+      setIsLoading(true);
+      
+      try {
+        // Get words for the past 14 days
+        const recentWords = wordOfDayService.getWordsForPastDays(14);
+        
+        // Reverse the array so the most recent word (today) is at the end (rightmost position)
+        const reversedWords = [...recentWords].reverse();
+        setWords(reversedWords);
+        
+        // Start with today's word (now at the last index after reversing)
+        const lastIndex = reversedWords.length - 1;
+        setActiveIndex(lastIndex);
+        
+        // Scroll to the end (today's word) after render
+        setTimeout(() => {
+          if (flatListRef.current && reversedWords.length > 0) {
+            isProgrammaticScrollRef.current = true;
+            flatListRef.current.scrollToIndex({
+              index: lastIndex,
+              animated: false
+            });
+            // Reset flag after a short delay to account for scroll completion
+            setTimeout(() => {
+              isProgrammaticScrollRef.current = false;
+            }, 100);
+          }
+        }, 100);
+      } catch (error) {
+        console.error('Error loading words:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    
+    loadWords();
+  }, [isReady]);
+  
+  // Update the header title when the active word changes
+  useEffect(() => {
+    if (words.length > 0 && activeIndex >= 0 && activeIndex < words.length) {
+      const currentWord = words[activeIndex];
+      const title = formatDateForHeader(currentWord);
+      navigation.setOptions({ title });
+    }
+  }, [activeIndex, words, navigation, formatDateForHeader]);
+  
+  // Handle viewable items change to update the active index
+  const onViewableItemsChanged = useRef(({ viewableItems }: { viewableItems: ViewToken[] }) => {
+    // Ignore viewability changes if we're in the middle of a programmatic scroll
+    if (isProgrammaticScrollRef.current) return;
+    
+    if (viewableItems.length > 0) {
+      setActiveIndex(viewableItems[0].index || 0);
+    }
+  }).current;
+  
   // Scroll to a specific index when a pagination dot is tapped
   const scrollToIndex = useCallback((index: number) => {
     // Set the flag to indicate we're doing a programmatic scroll
@@ -79,6 +148,21 @@ export default function HomeScreen() {
       }, 300); // Slightly longer than animation duration
     }
   }, []);
+  
+  // Memoize viewability config to prevent recreating it on every render
+  const viewabilityConfig = useMemo(() => ({
+    itemVisiblePercentThreshold: 50,
+  }), []);
+  
+  // Memoize getItemLayout for better FlatList performance
+  const getItemLayout = useCallback((
+    _: any, 
+    index: number
+  ) => ({
+    length: width,
+    offset: width * index,
+    index,
+  }), [width]);
   
   // Render pagination indicators
   const renderPaginationDots = useCallback(() => {
@@ -133,86 +217,23 @@ export default function HomeScreen() {
     );
   }, [width]);
   
-  // Memoize getItemLayout for better FlatList performance
-  const getItemLayout = useCallback((
-    _: any, 
-    index: number
-  ) => ({
-    length: width,
-    offset: width * index,
-    index,
-  }), [width]);
-  
-  // Memoize viewability config to prevent recreating it on every render
-  const viewabilityConfig = useMemo(() => ({
-    itemVisiblePercentThreshold: 50,
-  }), []);
-  
-  // Handle viewable items change to update the active index
-  const onViewableItemsChanged = useRef(({ viewableItems }: { viewableItems: ViewToken[] }) => {
-    // Ignore viewability changes if we're in the middle of a programmatic scroll
-    if (isProgrammaticScrollRef.current) return;
-    
-    if (viewableItems.length > 0) {
-      setActiveIndex(viewableItems[0].index || 0);
-    }
-  }).current;
-  
-  // Update the header title when the active word changes
-  useEffect(() => {
-    if (words.length > 0 && activeIndex >= 0 && activeIndex < words.length) {
-      const currentWord = words[activeIndex];
-      const title = formatDateForHeader(currentWord);
-      navigation.setOptions({ title });
-    }
-  }, [activeIndex, words, navigation, formatDateForHeader]);
-  
-  // Load words for the last 14 days
-  useEffect(() => {
-    const loadWords = async () => {
-      setIsLoading(true);
-      
-      try {
-        // Get words for the past 14 days
-        const recentWords = wordOfDayService.getWordsForPastDays(14);
-        
-        // Reverse the array so the most recent word (today) is at the end (rightmost position)
-        const reversedWords = [...recentWords].reverse();
-        setWords(reversedWords);
-        
-        // Start with today's word (now at the last index after reversing)
-        const lastIndex = reversedWords.length - 1;
-        setActiveIndex(lastIndex);
-        
-        // Scroll to the end (today's word) after render
-        setTimeout(() => {
-          if (flatListRef.current && reversedWords.length > 0) {
-            isProgrammaticScrollRef.current = true;
-            flatListRef.current.scrollToIndex({
-              index: lastIndex,
-              animated: false
-            });
-            // Reset flag after a short delay to account for scroll completion
-            setTimeout(() => {
-              isProgrammaticScrollRef.current = false;
-            }, 100);
-          }
-        }, 100);
-      } catch (error) {
-        console.error('Error loading words:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    
-    loadWords();
-  }, []);
-  
-  // Show loading state while theme is loading or words are loading
+  // Show loading UI that matches theme colors
   if (!isReady || isLoading) {
+    const isDark = systemColorScheme === 'dark';
+    const fallbackColors = isDark ? colorThemes.dark : colorThemes.light;
+    
+    // Use theme colors if available, otherwise fallback to system colors
+    const themeColors = theme?.colors || fallbackColors;
+    
     return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#0000ff" />
+      <View style={[
+        styles.loadingContainer, 
+        { backgroundColor: themeColors.background.primary }
+      ]}>
+        <ActivityIndicator 
+          size="large" 
+          color={themeColors.primary}
+        />
       </View>
     );
   }
