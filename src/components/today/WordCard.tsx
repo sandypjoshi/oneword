@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { StyleSheet, View, Text, ViewStyle } from 'react-native';
 import { WordOfDay } from '../../types/wordOfDay';
 import { useTheme } from '../../theme/ThemeProvider';
@@ -19,7 +19,7 @@ interface WordCardProps {
 /**
  * Card component that displays a word of the day
  */
-const WordCard: React.FC<WordCardProps> = ({ 
+const WordCardComponent: React.FC<WordCardProps> = ({ 
   wordData,
   style 
 }) => {
@@ -36,6 +36,8 @@ const WordCard: React.FC<WordCardProps> = ({
         },
         style
       ]}
+      // Disable pointer events for child elements to prevent interference with swipe gesture
+      pointerEvents="box-only"
     >
       <Box padding="lg">
         <Text 
@@ -102,8 +104,11 @@ const WordCard: React.FC<WordCardProps> = ({
   );
 };
 
-// Empty state component when no word data is available
-export const EmptyWordCard: React.FC<{ style?: ViewStyle }> = ({ style }) => {
+// Apply memo to the component
+const WordCard = memo(WordCardComponent);
+
+// Empty state component
+const EmptyWordCardComponent: React.FC<{ style?: ViewStyle }> = ({ style }) => {
   const { colors, spacing } = useTheme();
   
   return (
@@ -119,6 +124,8 @@ export const EmptyWordCard: React.FC<{ style?: ViewStyle }> = ({ style }) => {
         },
         style
       ]}
+      // Disable pointer events for child elements to prevent interference with swipe gesture
+      pointerEvents="box-only"
     >
       <Box padding="lg" align="center" justify="center">
         <Text 
@@ -134,6 +141,9 @@ export const EmptyWordCard: React.FC<{ style?: ViewStyle }> = ({ style }) => {
   );
 };
 
+// Apply memo to the empty state component
+const EmptyWordCard = memo(EmptyWordCardComponent);
+
 const styles = StyleSheet.create({
   container: {
     borderRadius: 16,
@@ -144,6 +154,8 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 2,
     overflow: 'hidden',
+    // Disable user selection to improve swipe experience
+    userSelect: 'none',
   },
   word: {
     fontSize: 36,
@@ -186,4 +198,9 @@ const styles = StyleSheet.create({
   },
 });
 
+// Set display names for better debugging
+WordCard.displayName = 'WordCard';
+EmptyWordCard.displayName = 'EmptyWordCard';
+
+export { EmptyWordCard };
 export default WordCard; 

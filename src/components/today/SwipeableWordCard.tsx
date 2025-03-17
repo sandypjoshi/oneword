@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { 
   StyleSheet, 
   Animated, 
@@ -45,10 +45,12 @@ interface SwipeableWordCardProps {
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 // Threshold for triggering a swipe (as proportion of screen width)
-const SWIPE_THRESHOLD = 0.25;
+// Reduced from 0.25 to 0.2 for more comfortable swiping
+const SWIPE_THRESHOLD = 0.2;
 
 // Velocity threshold for triggering a swipe
-const SWIPE_VELOCITY = 0.5;
+// Reduced from 0.5 to 0.3 for more responsive swiping
+const SWIPE_VELOCITY = 0.3;
 
 /**
  * A card component that supports horizontal swiping between words
@@ -64,65 +66,98 @@ const SwipeableWordCard: React.FC<SwipeableWordCardProps> = ({
   // Animation value for the horizontal translation
   const position = useRef(new Animated.Value(0)).current;
   
-  // Reset position after a successful swipe
+  // Track if an animation is in progress to prevent multiple swipes
+  const [isAnimating, setIsAnimating] = useState(false);
+  
+  // Reset position after a successful swipe or cancelled swipe
   const resetPosition = useCallback(() => {
+    setIsAnimating(true);
     Animated.spring(position, {
       toValue: 0,
       useNativeDriver: true,
-      friction: 5
-    }).start();
+      friction: 5,
+      tension: 40, // Added for smoother spring animation
+    }).start(() => {
+      setIsAnimating(false);
+    });
   }, [position]);
   
   // Handle swiping to previous word
   const swipeToPrevious = useCallback(() => {
-    if (!hasPreviousWord) {
+    if (!hasPreviousWord || isAnimating) {
       resetPosition();
       return;
     }
     
+    setIsAnimating(true);
     Animated.timing(position, {
       toValue: SCREEN_WIDTH,
-      duration: 250,
+      duration: 300, // Increased from 250ms for smoother animation
       useNativeDriver: true
     }).start(() => {
       onPrevious();
       position.setValue(0);
+      setIsAnimating(false);
     });
-  }, [hasPreviousWord, onPrevious, position, resetPosition]);
+  }, [hasPreviousWord, onPrevious, position, resetPosition, isAnimating]);
   
   // Handle swiping to next word
   const swipeToNext = useCallback(() => {
-    if (!hasNextWord) {
+    if (!hasNextWord || isAnimating) {
       resetPosition();
       return;
     }
     
+    setIsAnimating(true);
     Animated.timing(position, {
       toValue: -SCREEN_WIDTH,
-      duration: 250,
+      duration: 300, // Increased from 250ms for smoother animation
       useNativeDriver: true
     }).start(() => {
       onNext();
       position.setValue(0);
+      setIsAnimating(false);
     });
-  }, [hasNextWord, onNext, position, resetPosition]);
+  }, [hasNextWord, onNext, position, resetPosition, isAnimating]);
   
   // Set up the pan responder for handling gestures
   const panResponder = useRef(
     PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
+      // Only become responder on horizontal movements
+      onStartShouldSetPanResponder: () => false,
+      onMoveShouldSetPanResponder: (_, gesture) => {
+        // Only handle horizontal movements that are significant (> 10px)
+        return Math.abs(gesture.dx) > 10 && Math.abs(gesture.dx) > Math.abs(gesture.dy);
+      },
+      // Don't allow other responders to steal the gesture
+      onMoveShouldSetPanResponderCapture: (_, gesture) => 
+        Math.abs(gesture.dx) > 10 && Math.abs(gesture.dx) > Math.abs(gesture.dy),
+      
+      onPanResponderGrant: () => {
+        // When touch begins, stop any ongoing animations
+        position.stopAnimation();
+      },
+      
       onPanResponderMove: (_, gesture) => {
+        // Skip if animation is already in progress
+        if (isAnimating) return;
+        
         // Apply resistance when swiping beyond bounds
         let newPosition = gesture.dx;
         
         if ((!hasPreviousWord && gesture.dx > 0) || 
             (!hasNextWord && gesture.dx < 0)) {
-          newPosition = gesture.dx / 3; // Add resistance
+          // More resistance for better rubber-band feel
+          newPosition = gesture.dx / 4;
         }
         
         position.setValue(newPosition);
       },
+      
       onPanResponderRelease: (_, gesture) => {
+        // Skip if animation is already in progress
+        if (isAnimating) return;
+        
         // Check if swipe threshold was exceeded
         if (gesture.dx > SCREEN_WIDTH * SWIPE_THRESHOLD ||
             (gesture.vx > SWIPE_VELOCITY && gesture.dx > 0)) {
@@ -133,6 +168,11 @@ const SwipeableWordCard: React.FC<SwipeableWordCardProps> = ({
         } else {
           resetPosition();
         }
+      },
+      
+      // If another component tries to capture the responder, reset position
+      onPanResponderTerminate: () => {
+        resetPosition();
       }
     })
   ).current;
@@ -158,6 +198,13 @@ const SwipeableWordCard: React.FC<SwipeableWordCardProps> = ({
     extrapolate: 'clamp'
   });
   
+  // Calculate scale effect to provide visual feedback during swipe
+  const scale = position.interpolate({
+    inputRange: [-SCREEN_WIDTH, 0, SCREEN_WIDTH],
+    outputRange: [0.96, 1, 0.96],
+    extrapolate: 'clamp'
+  });
+  
   return (
     <Animated.View
       style={[
@@ -166,7 +213,8 @@ const SwipeableWordCard: React.FC<SwipeableWordCardProps> = ({
         {
           transform: [
             { translateX: position },
-            { rotate }
+            { rotate },
+            { scale }
           ]
         }
       ]}
@@ -201,6 +249,10 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     position: 'relative',
+    // Increased touch area by adding padding
+    paddingHorizontal: 12,
+    // Center the card
+    alignSelf: 'center',
   },
   leftEdge: {
     position: 'absolute',
