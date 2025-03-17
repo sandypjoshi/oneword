@@ -161,3 +161,37 @@ MAX_RETRIES: 3,             // Maximum retry attempts for failed batches
 - **Index files**: Export components from index files for easier imports
 - **Default exports**: Components use default exports for cleaner imports
 - **Type safety**: TypeScript interfaces and types for component props 
+
+## Animation and Gesture Handling
+
+### Animation APIs
+- **Animated API**: Core React Native animation system
+  - Used for smooth transitions and visual feedback
+  - Supports spring, timing, and decay animations
+  - Integrates with gesture handling via Animated.Value
+
+### Gesture Handling
+- **PanResponder**: System for recognizing and responding to touch gestures
+  - Used for swipe-based navigation in Word of Day cards
+  - Handles multi-touch gestures and velocity tracking
+  - Provides granular control over gesture lifecycle
+
+### Animation Techniques
+- **Transform Animations**: Using transform properties for performant animations
+- **Interpolation**: Mapping input ranges to output values for complex animations
+- **Resistance Effects**: Adding non-linear responses to gestures at boundaries
+- **Gesture-Driven Animations**: Connecting pan gestures directly to animated values
+
+## Data Management
+
+### Mock Service Pattern
+- **Service Classes**: Encapsulating data operations in service classes
+- **Singleton Pattern**: Using singleton instances for services
+- **Interface-First Design**: Designing data interfaces before implementation
+- **Data Transformation**: Converting backend data to frontend-friendly structures
+
+### Date Handling
+- **Date Processing**: Converting between Date objects and ISO strings
+- **Relative Dates**: Calculating past dates relative to the current date
+- **Date Formatting**: Formatting dates for display in the UI
+- **Date Comparisons**: Comparing dates for sorting and filtering 

@@ -261,4 +261,177 @@ export const useTheme = () => {
 };
 ```
 
-This ensures that even if the theme context is not available, components won't break due to undefined theme properties. 
+This ensures that even if the theme context is not available, components won't break due to undefined theme properties.
+
+## Gesture-Based Navigation
+
+### SwipeableWordCard Pattern
+The application uses swipe gestures for navigating between content items. This pattern is implemented in the SwipeableWordCard component:
+
+```typescript
+const SwipeableWordCard: React.FC<SwipeableWordCardProps> = ({
+  currentWord,
+  hasPreviousWord,
+  hasNextWord,
+  onPrevious,
+  onNext,
+  style
+}) => {
+  // Animation value for the horizontal translation
+  const position = useRef(new Animated.Value(0)).current;
+  
+  // PanResponder for handling swipe gestures
+  const panResponder = useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onPanResponderMove: (_, gesture) => {
+        // Add resistance when swiping beyond bounds
+        let newPosition = gesture.dx;
+        if ((!hasPreviousWord && gesture.dx > 0) || 
+            (!hasNextWord && gesture.dx < 0)) {
+          newPosition = gesture.dx / 3; // Resistance effect
+        }
+        position.setValue(newPosition);
+      },
+      onPanResponderRelease: (_, gesture) => {
+        // Handle swipe completion based on threshold
+        if (gesture.dx > THRESHOLD) {
+          swipeToPrevious();
+        } else if (gesture.dx < -THRESHOLD) {
+          swipeToNext();
+        } else {
+          resetPosition();
+        }
+      }
+    })
+  ).current;
+  
+  // Render with animation transforms
+  return (
+    <Animated.View
+      style={[
+        styles.container,
+        {
+          transform: [
+            { translateX: position },
+            { rotate }
+          ]
+        }
+      ]}
+      {...panResponder.panHandlers}
+    >
+      {/* Content */}
+    </Animated.View>
+  );
+};
+```
+
+Key aspects of this pattern:
+1. **Gesture Recognition**: Using PanResponder to capture and interpret touch gestures
+2. **Animation Integration**: Connecting gesture data to Animated values
+3. **Boundary Handling**: Adding resistance effect when swiping beyond available content
+4. **Threshold-Based Actions**: Triggering navigation only when gesture exceeds threshold
+5. **Visual Feedback**: Providing subtle rotation and opacity effects during gestures
+
+This pattern can be adapted for various content types that benefit from swipe-based navigation.
+
+## Synchronized Components
+
+### DateSelector and ContentViewer Synchronization
+The application maintains synchronization between selection UI (DateSelector) and content display (SwipeableWordCard):
+
+```typescript
+// Parent component manages shared state
+const [selectedDate, setSelectedDate] = useState('');
+const [currentWord, setCurrentWord] = useState(undefined);
+
+// Selection handler updates the state
+const handleDateSelected = (date) => {
+  setSelectedDate(date);
+};
+
+// Content navigation updates the selection
+const handlePrevious = () => {
+  const currentIndex = availableDates.indexOf(selectedDate);
+  if (currentIndex < availableDates.length - 1) {
+    setSelectedDate(availableDates[currentIndex + 1]);
+  }
+};
+
+return (
+  <>
+    <DateSelector
+      selectedDate={selectedDate}
+      onDateSelected={handleDateSelected}
+    />
+    
+    <SwipeableWordCard
+      currentWord={currentWord}
+      onPrevious={handlePrevious}
+      onNext={handleNext}
+    />
+  </>
+);
+```
+
+This pattern ensures:
+1. **Bidirectional Updates**: Changes in either component reflect in the other
+2. **Single Source of Truth**: The parent component manages the shared state
+3. **Decoupled Components**: Each component manages its specific functionality
+4. **Consistent User Experience**: The UI remains synchronized regardless of interaction method
+
+This pattern is useful whenever multiple UI elements need to reflect the same underlying state.
+
+## Project Structure
+
+### Directory Organization
+The application follows a structured organization pattern:
+
+```
+/src
+  /assets            # Static assets
+    /images          # App icons and images
+    /fonts           # Typography assets
+    /icons           # SVG icons
+  /components        # UI components
+    /ui              # Basic UI elements (Button, Text, Card)
+    /layout          # Layout components (Box, Container)
+    /today           # Feature-specific components
+    /forms           # Form-related components
+    index.ts         # Aggregated exports
+  /features          # Feature modules
+    /word-of-day     # Word of the Day feature
+  /hooks             # Custom React hooks
+  /navigation        # Navigation configuration
+  /services          # Data services
+  /theme             # Theming system
+  /types             # TypeScript type definitions
+  /utils             # Utility functions
+```
+
+This structure provides several benefits:
+1. **Separation of Concerns**: Each directory has a clear purpose
+2. **Discoverability**: Easy to find components and assets
+3. **Scalability**: New features can be added in a consistent way
+4. **Maintainability**: Related code is grouped together
+
+### Component Organization
+Components are organized by type and feature:
+
+1. **UI Components**: Basic building blocks (Button, Text, Card)
+2. **Layout Components**: Structural elements (Box, Container)
+3. **Feature Components**: Components specific to a feature (DateSelector, WordCard)
+
+Each component follows a consistent pattern:
+- Default export for the component
+- Named exports for related utilities
+- Index files for easy imports
+
+### Asset Management
+Assets are organized by type:
+
+1. **Images**: App icons and static images
+2. **Fonts**: Typography assets
+3. **Icons**: SVG icons for UI elements
+
+All assets are referenced from their location in the src/assets directory, ensuring consistency across the application. 

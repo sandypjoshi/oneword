@@ -1,21 +1,44 @@
 import React from 'react';
 import { View, StyleSheet, ViewProps } from 'react-native';
+import { useTheme } from '../../theme/ThemeProvider';
 
 interface CardProps extends ViewProps {
   variant?: 'elevated' | 'outlined' | 'filled';
+  children: React.ReactNode;
 }
 
-const Card = ({ 
+const Card: React.FC<CardProps> = ({ 
   children, 
   variant = 'elevated', 
   style, 
   ...props 
-}: CardProps) => {
+}) => {
+  const { colors } = useTheme();
+  
+  const cardStyles = {
+    elevated: {
+      backgroundColor: colors.background.card,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.1,
+      shadowRadius: 4,
+      elevation: 2,
+    },
+    outlined: {
+      backgroundColor: colors.background.card,
+      borderWidth: 1,
+      borderColor: colors.border.light,
+    },
+    filled: {
+      backgroundColor: colors.background.secondary,
+    },
+  };
+  
   return (
     <View 
       style={[
         styles.card, 
-        styles[variant], 
+        cardStyles[variant], 
         style
       ]} 
       {...props}
@@ -30,22 +53,6 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 16,
     margin: 8,
-  },
-  elevated: {
-    backgroundColor: 'white',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
-  },
-  outlined: {
-    backgroundColor: 'white',
-    borderWidth: 1,
-    borderColor: '#e0e0e0',
-  },
-  filled: {
-    backgroundColor: '#f5f5f5',
   },
 });
 
