@@ -36,18 +36,28 @@ export default function TabLayout() {
         options={{
           title: 'Today',
           tabBarLabel: 'Today',
-          tabBarIcon: ({ color }) => (
-            <Icon name="calendar" color={color} size={24} />
+          tabBarIcon: ({ color, focused }) => (
+            <Icon 
+              name="notes" 
+              color={color} 
+              size={24} 
+              variant={focused ? 'bold' : 'linear'} 
+            />
           ),
         }}
       />
       <Tabs.Screen
         name="practice"
         options={{
-          title: 'Practice',
-          tabBarLabel: 'Practice',
-          tabBarIcon: ({ color }) => (
-            <Icon name="book" color={color} size={24} />
+          title: 'Challenges',
+          tabBarLabel: 'Challenges',
+          tabBarIcon: ({ color, focused }) => (
+            <Icon 
+              name="medalRibbon" 
+              color={color} 
+              size={24} 
+              variant={focused ? 'bold' : 'linear'} 
+            />
           ),
         }}
       />
@@ -56,8 +66,13 @@ export default function TabLayout() {
         options={{
           title: 'Profile',
           tabBarLabel: 'Profile',
-          tabBarIcon: ({ color }) => (
-            <Icon name="user" color={color} size={24} />
+          tabBarIcon: ({ color, focused }) => (
+            <Icon 
+              name="user" 
+              color={color} 
+              size={24} 
+              variant={focused ? 'bold' : 'linear'} 
+            />
           ),
         }}
       />

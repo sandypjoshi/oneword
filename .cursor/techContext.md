@@ -122,3 +122,42 @@ MAX_RETRIES: 3,             // Maximum retry attempts for failed batches
 4. **Process Interruption**: Progress tracking with resumption capability
 5. **Batch Failures**: Adaptive batch size reduction with retry logic
 6. **Memory Management**: Node.js memory optimization for large datasets 
+
+## UI Design and Component Structure
+
+### Theme Management
+- **ThemeProvider**: Custom React Context provider for theme values
+- **useTheme**: Hook for accessing theme values in components
+- **useThemeReady**: Hook for safely handling theme loading
+- **Default theme values**: Fallback values for theme properties to prevent errors
+
+### Component Structure
+- **Layout Components**:
+  - `Box`: Flexbox-based layout component with theme integration
+  - `Container`: Container with padding and margin support
+  - `Screen`: Full-screen component with safe areas
+
+- **UI Components**:
+  - `Text`: Typography component with theme and variant support
+  - `Button`: Button component with various styles and states
+  - `Icon`: SVG-based icon component with Linear and Bold variants
+  - `Card`: Container for content blocks with shadow and border radius
+  - `WordOfDayCard`: Specialized card for displaying word of the day
+
+### Navigation
+- **Tab Navigation**: Bottom tab navigation using expo-router
+- **Stack Navigation**: Stack-based navigation for screens
+- **Modals**: Modal screens for focused interactions
+- **useAppNavigation**: Custom hook for type-safe navigation
+
+### Styling Patterns
+- **StyleSheet**: React Native StyleSheet for optimized style objects
+- **Theme integration**: Components use theme values for consistent styling
+- **Dynamic styles**: Style objects that adapt to theme changes
+- **Responsive design**: Flexible layouts that adapt to different screen sizes
+
+### Code Organization
+- **Feature-based**: Code organized by feature rather than type
+- **Index files**: Export components from index files for easier imports
+- **Default exports**: Components use default exports for cleaner imports
+- **Type safety**: TypeScript interfaces and types for component props 

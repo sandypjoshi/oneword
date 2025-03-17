@@ -4,7 +4,7 @@ import { Box } from '../../src/components/layout';
 import { Text } from '../../src/components/ui';
 import { useThemeReady } from '../../src/hooks';
 
-export default function PracticeScreen() {
+export default function ChallengesScreen() {
   const { isReady, theme } = useThemeReady();
 
   if (!isReady) {
@@ -20,7 +20,7 @@ export default function PracticeScreen() {
   return (
     <View style={[styles.container, { backgroundColor: colors.background.primary }]}>
       <Box padding="lg" flex={1} align="center" justify="center">
-        <Text variant="h2">Practice</Text>
+        <Text variant="h2">Challenges</Text>
         <Text 
           variant="body1" 
           color={colors.text.secondary}

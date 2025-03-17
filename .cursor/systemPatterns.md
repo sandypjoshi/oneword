@@ -139,4 +139,126 @@ For handling sensitive credentials and configuration:
 2. **Masked Values**: Display masked versions of keys in logs and console
 3. **Configuration Hierarchy**: Load from environment, then fallback to defaults
 4. **Validation**: Verify required values are present and valid before starting
-5. **Separation**: Keep configuration separate from application code 
+5. **Separation**: Keep configuration separate from application code
+
+## Theme Management
+
+### Theme Provider
+The application uses a custom ThemeProvider that wraps the entire application and provides theme values to all components through React Context.
+
+```typescript
+// ThemeProvider.tsx
+import React, { createContext, useContext } from 'react';
+import { theme } from './theme';
+
+const ThemeContext = createContext(theme);
+
+export const ThemeProvider = ({ children }) => {
+  return (
+    <ThemeContext.Provider value={theme}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
+
+export const useTheme = () => {
+  const theme = useContext(ThemeContext);
+  if (!theme) {
+    throw new Error('useTheme must be used within a ThemeProvider');
+  }
+  return theme;
+};
+```
+
+### Theme Ready Hook
+To handle theme loading and prevent rendering components before the theme is ready, we use a `useThemeReady` hook:
+
+```typescript
+// useThemeReady.ts
+import { useState, useEffect } from 'react';
+import { useTheme } from '../theme';
+
+export default function useThemeReady() {
+  const theme = useTheme();
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    // Add a small delay to ensure all theme properties are available
+    const timer = setTimeout(() => {
+      setIsReady(true);
+    }, 50);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  return { isReady, theme };
+}
+```
+
+This pattern ensures components don't render before the theme is fully loaded, preventing undefined theme property errors.
+
+### Theme Usage in Components
+Components should use the `useThemeReady` hook to access the theme and check if it's ready before rendering:
+
+```typescript
+// ExampleComponent.tsx
+import React from 'react';
+import { View, ActivityIndicator } from 'react-native';
+import { useThemeReady } from '../hooks';
+
+export default function ExampleComponent() {
+  const { isReady, theme } = useThemeReady();
+
+  if (!isReady) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
+
+  const { colors } = theme;
+
+  return (
+    <View style={{ backgroundColor: colors.background.primary }}>
+      {/* Component content */}
+    </View>
+  );
+}
+```
+
+### Theme Safety
+To prevent errors when theme properties are accessed before they're ready, the `useTheme` hook includes safety checks and default values:
+
+```typescript
+export const useTheme = () => {
+  const themeContext = useContext(ThemeContext);
+  
+  // Default theme as fallback
+  const safeTheme = {
+    colors: {
+      background: {
+        primary: '#FFFFFF',
+        secondary: '#F5F5F5',
+      },
+      text: {
+        primary: '#000000',
+        secondary: '#757575',
+      },
+      // Other default values...
+    },
+    spacing: {
+      xs: 4,
+      sm: 8,
+      md: 16,
+      lg: 24,
+      xl: 32,
+    },
+    // Other theme properties...
+  };
+
+  return themeContext || safeTheme;
+};
+```
+
+This ensures that even if the theme context is not available, components won't break due to undefined theme properties. 
