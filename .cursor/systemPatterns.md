@@ -31,6 +31,21 @@ Benefits:
 - Even distribution of load
 - Graceful degradation when keys are exhausted
 
+### Checkpoint and Recovery Pattern
+The system implements a robust checkpoint and recovery system:
+
+1. **Regular Checkpoints**: Save progress after each batch completion
+2. **Stateful Recovery**: Store and restore all accumulated statistics
+3. **Offset Tracking**: Record the exact offset for resuming processing
+4. **Restart Logic**: Detect and load previous checkpoint on startup
+5. **Cleanup**: Remove checkpoint file on successful completion
+
+Benefits:
+- Resilience to unexpected process termination
+- Ability to stop and restart long-running processes
+- No duplicate processing of already completed batches
+- Preservation of statistics across restarts
+
 ### Error Handling Patterns
 
 #### Exponential Backoff
@@ -48,6 +63,15 @@ For persistent API failures:
 2. **Circuit Open**: Temporarily stop requests after threshold
 3. **Half-Open**: Test with single request after cooling period
 4. **Circuit Close**: Resume normal operation if test succeeds
+
+#### Adaptive Batch Sizing
+For handling challenging processing conditions:
+
+1. **Failure Detection**: Monitor batch processing failures
+2. **Size Reduction**: Reduce batch size when failures occur
+3. **Retry Smaller**: Attempt processing with reduced batch size
+4. **Skip Logic**: After multiple failures, log and skip problematic batches
+5. **Continuation**: Ensure processing continues past difficult sections
 
 ## UI Patterns
 
@@ -106,4 +130,13 @@ For process visibility:
 1. **Key Performance Indicators**: Track processing rate, completion percentage
 2. **Resource Usage**: Monitor API call distribution and rate limits
 3. **Quality Metrics**: Track error rates and content quality indicators
-4. **Time Estimates**: Calculate and display progress projections 
+4. **Time Estimates**: Calculate and display progress projections
+
+### Secure Configuration Pattern
+For handling sensitive credentials and configuration:
+
+1. **Environment Variables**: Store sensitive values in environment variables
+2. **Masked Values**: Display masked versions of keys in logs and console
+3. **Configuration Hierarchy**: Load from environment, then fallback to defaults
+4. **Validation**: Verify required values are present and valid before starting
+5. **Separation**: Keep configuration separate from application code 
