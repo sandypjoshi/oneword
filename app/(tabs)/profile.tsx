@@ -1,10 +1,75 @@
-import React from 'react';
-import { StyleSheet, View, ActivityIndicator, TouchableOpacity, Alert } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, ActivityIndicator, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import { Box } from '../../src/components/layout';
-import { Text } from '../../src/components/ui';
+import { Text, Button } from '../../src/components/ui';
 import { useThemeReady } from '../../src/hooks';
 import { resetOnboardingStatus } from '../../src/utils/onboarding';
-import { useRouter } from 'expo-router';
+import { useRouter, Link } from 'expo-router';
+import { useTheme } from '../../src/theme/ThemeProvider';
+import Icon from '../../src/components/ui/Icon';
+
+// Simple theme selector component for development
+const DevThemeSelector = () => {
+  const { themeName, setThemeName, colorMode, setColorMode, colors, spacing } = useTheme();
+
+  const themes = [
+    { value: 'default', label: 'Default Theme' },
+    { value: 'quill', label: 'Quill Theme' },
+    { value: 'aura', label: 'Aura Theme' },
+  ];
+
+  const colorModes = [
+    { value: 'light', label: 'Light Mode' },
+    { value: 'dark', label: 'Dark Mode' },
+    { value: 'system', label: 'System Default' },
+  ];
+
+  return (
+    <View style={{ width: '100%', marginTop: spacing.lg }}>
+      <Text variant="h3" style={{ marginBottom: spacing.md }}>Theme Settings (Dev)</Text>
+      
+      {/* Theme Selection */}
+      <Text variant="h4" style={{ marginTop: spacing.md, marginBottom: spacing.sm }}>Theme Style</Text>
+      <View style={{ gap: spacing.sm }}>
+        {themes.map((theme) => (
+          <TouchableOpacity
+            key={theme.value}
+            style={[
+              styles.themeButton,
+              {
+                backgroundColor: themeName === theme.value ? colors.primary + '20' : colors.background.secondary,
+                borderColor: themeName === theme.value ? colors.primary : colors.border.light,
+              }
+            ]}
+            onPress={() => setThemeName(theme.value as any)}
+          >
+            <Text>{theme.label}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+      
+      {/* Color Mode Selection */}
+      <Text variant="h4" style={{ marginTop: spacing.lg, marginBottom: spacing.sm }}>Appearance</Text>
+      <View style={{ gap: spacing.sm }}>
+        {colorModes.map((mode) => (
+          <TouchableOpacity
+            key={mode.value}
+            style={[
+              styles.themeButton,
+              {
+                backgroundColor: colorMode === mode.value ? colors.primary + '20' : colors.background.secondary,
+                borderColor: colorMode === mode.value ? colors.primary : colors.border.light,
+              }
+            ]}
+            onPress={() => setColorMode(mode.value as any)}
+          >
+            <Text>{mode.label}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+    </View>
+  );
+};
 
 export default function ProfileScreen() {
   const { isReady, theme } = useThemeReady();
@@ -12,8 +77,8 @@ export default function ProfileScreen() {
 
   if (!isReady) {
     return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#0000ff" />
+      <View style={[styles.loadingContainer, { backgroundColor: theme?.colors?.background?.primary }]}>
+        <ActivityIndicator size="large" color={theme?.colors?.primary || "#0000ff"} />
       </View>
     );
   }
@@ -35,8 +100,8 @@ export default function ProfileScreen() {
   };
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.background.primary }]}>
-      <Box padding="lg" flex={1} align="center" justify="center">
+    <ScrollView style={[styles.container, { backgroundColor: colors.background.primary }]}>
+      <Box padding="lg" align="center">
         <Text variant="h2">Profile</Text>
         <Text 
           variant="body1" 
@@ -47,8 +112,28 @@ export default function ProfileScreen() {
           Coming Soon
         </Text>
         
+        {/* Link to Theme Settings */}
+        <Box marginTop="lg" width="100%">
+          <Link href="/theme-settings" asChild>
+            <TouchableOpacity
+              style={[
+                styles.settingsLink,
+                { 
+                  backgroundColor: colors.background.secondary,
+                  borderColor: colors.border.light,
+                }
+              ]}
+            >
+              <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                <Text>Theme Settings</Text>
+                <Icon name="altArrowRightLinear" size={18} color={colors.text.secondary} variant="linear" />
+              </View>
+            </TouchableOpacity>
+          </Link>
+        </Box>
+        
         {/* Development/Testing button */}
-        <Box marginTop="xl">
+        <Box marginTop="xl" width="100%">
           <TouchableOpacity
             style={[
               styles.resetButton,
@@ -64,7 +149,7 @@ export default function ProfileScreen() {
           </TouchableOpacity>
         </Box>
       </Box>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -81,6 +166,18 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   resetButton: {
+    padding: 12,
+    borderRadius: 8,
+    borderWidth: 1,
+    alignItems: 'center',
+  },
+  settingsLink: {
+    padding: 14,
+    borderRadius: 8,
+    borderWidth: 1,
+    width: '100%',
+  },
+  themeButton: {
     padding: 12,
     borderRadius: 8,
     borderWidth: 1,

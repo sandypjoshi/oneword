@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Slot, useRouter, SplashScreen, useSegments, Stack } from 'expo-router';
+import { Stack, useRouter, SplashScreen, useSegments } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { View, ActivityIndicator, Image, StyleSheet, useColorScheme } from 'react-native';
-import { ThemeProvider } from '../src/theme/ThemeProvider';
+import { View, ActivityIndicator, Image, StyleSheet, Animated } from 'react-native';
+import { ThemeProvider, useTheme } from '../src/theme/ThemeProvider';
 import { ensurePolyfills } from '../src/utils/supabaseSetup';
 import { checkOnboardingStatus } from '../src/utils/onboarding';
-import colors from '../src/theme/colors';
 
 // Import logo image
 const logoImage = require('../src/assets/images/logo.png');
@@ -19,12 +18,13 @@ SplashScreen.preventAutoHideAsync();
 // Set minimum splash screen duration in milliseconds
 const MIN_SPLASH_DURATION = 2500;
 
-// Root layout
-export default function RootLayout() {
+// Main content component that uses the theme
+const MainContent = () => {
   const [initializing, setInitializing] = useState(true);
+  const [fadeAnim] = useState(new Animated.Value(1));
   const router = useRouter();
   const segments = useSegments();
-  const colorScheme = useColorScheme();
+  const { colors, isDark, spacing } = useTheme();
   
   // Initialize app and handle navigation
   useEffect(() => {
@@ -36,92 +36,106 @@ export default function RootLayout() {
         // Hide the native splash screen
         await SplashScreen.hideAsync();
         
+        // First navigate to the initial screen WITHOUT animation
+        if (!hasOnboarded && segments[0] !== 'onboarding') {
+          router.replace('/onboarding');
+        } else if (hasOnboarded && !segments[0]) {
+          router.replace('/(tabs)');
+        }
+        
         // Wait for minimum duration (our custom splash screen will be visible during this time)
         await new Promise(resolve => setTimeout(resolve, MIN_SPLASH_DURATION));
         
-        // Navigate to the appropriate screen after delay
-        if (!hasOnboarded && segments[0] !== 'onboarding') {
-          router.replace({
-            pathname: '/onboarding',
-            params: {
-              animation: 'slide_from_right'
-            }
-          });
-        } else if (hasOnboarded && !segments[0]) {
-          router.replace({
-            pathname: '/(tabs)',
-            params: {
-              animation: 'slide_from_right'
-            }
-          });
-        }
+        // Fade out splash screen smoothly
+        Animated.timing(fadeAnim, {
+          toValue: 0,
+          duration: 300,
+          useNativeDriver: true,
+        }).start(() => {
+          // Mark initialization as complete after fade completes
+          setInitializing(false);
+        });
         
-        // Mark initialization as complete
-        setInitializing(false);
       } catch (e) {
         console.warn('Error during app initialization:', e);
         
         // Wait for minimum splash duration even on error
         await new Promise(resolve => setTimeout(resolve, MIN_SPLASH_DURATION));
         
-        // Navigate to onboarding as fallback
+        // Navigate to onboarding as fallback WITHOUT animation
         if (segments[0] !== 'onboarding') {
-          router.replace({
-            pathname: '/onboarding',
-            params: {
-              animation: 'slide_from_right'
-            }
-          });
+          router.replace('/onboarding');
         }
         
-        setInitializing(false);
+        // Fade out splash screen smoothly
+        Animated.timing(fadeAnim, {
+          toValue: 0,
+          duration: 300,
+          useNativeDriver: true,
+        }).start(() => {
+          // Mark initialization as complete after fade completes
+          setInitializing(false);
+        });
       }
     }
 
     initialize();
-  }, [router, segments]);
+  }, [router, segments, fadeAnim, colors]);
 
-  // Get appropriate colors for splash screen
-  const isDark = colorScheme === 'dark';
-  const themeColors = isDark ? colors.dark : colors.light;
-
-  // Render the app with proper navigation structure
   return (
-    <ThemeProvider defaultTheme="system">
-      <View style={{ flex: 1 }}>
-        <StatusBar style="auto" />
-        
-        {/* Use Stack for animated transitions */}
-        <Stack
-          screenOptions={{
-            headerShown: false,
-            animation: 'slide_from_right',
-            animationDuration: 300,
-          }}
-        >
-          {/* Always render a navigator (Slot) to avoid the error */}
-          <Slot />
-        </Stack>
-        
-        {/* Overlay our custom splash screen while initializing */}
-        {initializing && (
-          <View style={[
-            layoutStyles.splashOverlay, 
-            { backgroundColor: themeColors.background.primary }
-          ]}>
-            <Image 
-              source={logoImage} 
-              style={layoutStyles.logo} 
-              resizeMode="contain"
-            />
-            <ActivityIndicator 
-              size="large" 
-              color={themeColors.primary} 
-              style={layoutStyles.loader}
-            />
-          </View>
-        )}
-      </View>
+    <View style={{ flex: 1, backgroundColor: colors.background.primary }}>
+      <StatusBar style={isDark ? 'light' : 'dark'} />
+      
+      {/* Properly implemented Stack navigator for animations */}
+      <Stack
+        screenOptions={{
+          headerShown: false,
+          animation: 'slide_from_right',
+          animationDuration: 300,
+          presentation: 'card',
+          contentStyle: { 
+            backgroundColor: colors.background.primary
+          },
+          // Add animation settings to prevent flashing
+          animationTypeForReplace: 'push',
+        }}
+      />
+      
+      {/* Overlay our custom splash screen while initializing - now with fade animation */}
+      {initializing && (
+        <Animated.View style={[
+          layoutStyles.splashOverlay, 
+          { 
+            backgroundColor: colors.background.primary,
+            opacity: fadeAnim 
+          }
+        ]}>
+          <Image 
+            source={logoImage} 
+            style={[
+              layoutStyles.logo,
+              { marginBottom: spacing.lg }
+            ]} 
+            resizeMode="contain"
+          />
+          <ActivityIndicator 
+            size="large" 
+            color={colors.primary} 
+            style={{ marginTop: spacing.md }}
+          />
+        </Animated.View>
+      )}
+    </View>
+  );
+};
+
+// Root layout
+export default function RootLayout() {
+  // Wrap the entire application with ThemeProvider, using default values that will be
+  // overridden by any saved preferences from AsyncStorage
+  return (
+    <ThemeProvider defaultColorMode="system" defaultThemeName="default">
+      <MainContent />
     </ThemeProvider>
   );
 }
@@ -136,9 +150,5 @@ const layoutStyles = StyleSheet.create({
   logo: {
     width: 180,
     height: 180,
-    marginBottom: 24,
   },
-  loader: {
-    marginTop: 16,
-  }
 }); 

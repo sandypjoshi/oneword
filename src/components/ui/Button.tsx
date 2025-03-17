@@ -1,12 +1,14 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet, TouchableOpacityProps, ActivityIndicator } from 'react-native';
+import { TouchableOpacity, StyleSheet, TouchableOpacityProps, ActivityIndicator, View } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
+import Text from './Text';
 
 interface ButtonProps extends TouchableOpacityProps {
   title: string;
   variant?: 'primary' | 'secondary' | 'outline';
   loading?: boolean;
   fullWidth?: boolean;
+  size?: 'small' | 'medium' | 'large';
 }
 
 const Button = ({ 
@@ -16,9 +18,10 @@ const Button = ({
   loading = false,
   fullWidth = false,
   disabled = false,
+  size = 'medium',
   ...props 
 }: ButtonProps) => {
-  const { colors } = useTheme();
+  const { colors, spacing } = useTheme();
   
   // Generate button styles based on variant and theme
   const buttonStyles = {
@@ -49,6 +52,25 @@ const Button = ({
       color: colors.primary,
     },
   };
+  
+  // Text variant based on button size
+  const textVariant = size === 'small' ? 'buttonSmall' : 'button';
+  
+  // Padding based on button size
+  const buttonPadding = {
+    small: {
+      paddingVertical: spacing.xs,
+      paddingHorizontal: spacing.md,
+    },
+    medium: {
+      paddingVertical: spacing.md,
+      paddingHorizontal: spacing.lg,
+    },
+    large: {
+      paddingVertical: spacing.lg,
+      paddingHorizontal: spacing.xl,
+    },
+  };
 
   return (
     <TouchableOpacity 
@@ -57,43 +79,42 @@ const Button = ({
         buttonStyles[variant],
         fullWidth && styles.fullWidth,
         disabled && styles.disabled,
+        buttonPadding[size],
         style
-      ]} 
+      ]}
       disabled={disabled || loading}
       {...props}
     >
-      {loading ? (
-        <ActivityIndicator 
-          size="small" 
-          color={variant === 'outline' ? colors.primary : colors.text.inverse} 
-        />
-      ) : (
-        <Text style={[styles.text, textStyles[variant], disabled && styles.disabledText]}>
-          {title}
-        </Text>
-      )}
+      <View style={styles.contentContainer}>
+        {loading ? (
+          <ActivityIndicator 
+            size="small" 
+            color={variant === 'outline' ? colors.primary : '#fff'} 
+          />
+        ) : (
+          <Text 
+            variant={textVariant}
+            style={[textStyles[variant]]}
+          >
+            {title}
+          </Text>
+        )}
+      </View>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   button: {
-    paddingVertical: 16,
-    paddingHorizontal: 32,
-    borderRadius: 100, // Pill shape
+    borderRadius: 100, // Pill shape as in original
     alignItems: 'center',
     justifyContent: 'center',
-    minWidth: 200,
+    minWidth: 200, // Restore original minimum width
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 2,
-  },
-  text: {
-    fontWeight: '600',
-    fontSize: 16,
-    textAlign: 'center',
   },
   fullWidth: {
     width: '100%',
@@ -101,9 +122,11 @@ const styles = StyleSheet.create({
   disabled: {
     opacity: 0.5,
   },
-  disabledText: {
-    opacity: 0.8,
-  },
+  contentContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
 });
 
 export default Button; 

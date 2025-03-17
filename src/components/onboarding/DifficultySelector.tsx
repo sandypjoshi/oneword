@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Text, ButtonGroup } from '../ui';
 import { Box } from '../layout';
 import { useTheme } from '../../theme/ThemeProvider';
-import { DIFFICULTY_LEVELS, DIFFICULTY_DESCRIPTIONS } from '../../constants';
+import { DIFFICULTY_LEVELS } from '../../constants';
 import type { ButtonGroupOption } from '../ui/ButtonGroup';
 
 interface DifficultySelectorProps {
@@ -39,7 +39,11 @@ const DifficultySelector: React.FC<DifficultySelectorProps> = ({
         variant="h2" 
         color={colors.text.primary} 
         align="center" 
-        style={{ marginBottom: spacing.xl }}
+        style={{ 
+          marginBottom: spacing.xl,
+          fontSize: 28,
+          fontWeight: '700',
+        }}
       >
         What's your vocabulary level?
       </Text>

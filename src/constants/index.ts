@@ -44,8 +44,8 @@ export const DIFFICULTY_LEVELS = {
 
 // Difficulty level descriptions
 export const DIFFICULTY_DESCRIPTIONS = {
-  [DIFFICULTY_LEVELS.BEGINNER]: 'Common everyday words to build a solid foundation.',
-  [DIFFICULTY_LEVELS.INTERMEDIATE]: 'Expand your vocabulary with moderately challenging words.',
-  [DIFFICULTY_LEVELS.ADVANCED]: 'Sophisticated vocabulary for academic and professional contexts.',
-  [DIFFICULTY_LEVELS.ALL]: 'Full range of vocabulary from basic to advanced.',
+  [DIFFICULTY_LEVELS.BEGINNER]: 'Common everyday words that form the foundation of English vocabulary. Perfect for those building confidence with the language.',
+  [DIFFICULTY_LEVELS.INTERMEDIATE]: 'Expand your vocabulary with moderately challenging words used in professional settings, literature, and educated conversation.',
+  [DIFFICULTY_LEVELS.ADVANCED]: 'Sophisticated vocabulary for academic, literary, and specialized contexts. Challenge yourself with nuanced and precise language.',
+  [DIFFICULTY_LEVELS.ALL]: 'Full range of vocabulary from basic to advanced, offering a comprehensive learning experience.',
 }; 

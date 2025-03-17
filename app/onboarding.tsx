@@ -8,8 +8,9 @@ import { setOnboardingComplete, setDifficultyLevel } from '../src/utils/onboardi
 import { wordOfDayService } from '../src/services/wordOfDayService';
 import { DifficultySelector } from '../src/components/onboarding';
 import { DIFFICULTY_LEVELS } from '../src/constants';
-import colors from '../src/theme/colors';
+import themes from '../src/theme/colors';
 import { useColorScheme } from 'react-native';
+import { useTheme } from '../src/theme/ThemeProvider';
 
 // Onboarding steps
 enum OnboardingStep {
@@ -25,7 +26,7 @@ export default function OnboardingScreen() {
   const [selectedDifficulty, setSelectedDifficulty] = useState(DIFFICULTY_LEVELS.INTERMEDIATE);
   const colorScheme = useColorScheme();
   const isDark = colorScheme === 'dark';
-  const fallbackColors = isDark ? colors.dark : colors.light;
+  const fallbackColors = isDark ? themes.default.dark : themes.default.light;
 
   if (!isReady) {
     return (
@@ -92,16 +93,24 @@ export default function OnboardingScreen() {
           <Text 
             variant="h1" 
             color={themeColors.primary} 
-            style={{ marginBottom: spacing.lg }}
+            style={{ 
+              marginBottom: spacing.lg,
+              fontSize: 52,
+              fontWeight: '700',
+            }}
           >
             OneWord
           </Text>
           
           <Text 
-            variant="h2" 
+            variant="h3" 
             color={themeColors.text.primary} 
             align="center"
-            style={{ marginBottom: spacing.lg }}
+            style={{ 
+              marginBottom: spacing.lg,
+              fontSize: 24,
+              fontWeight: '600',
+            }}
           >
             Expand Your Vocabulary
           </Text>
@@ -110,7 +119,11 @@ export default function OnboardingScreen() {
             variant="body1" 
             color={themeColors.text.secondary} 
             align="center"
-            style={{ marginBottom: spacing.xl }}
+            style={{ 
+              marginBottom: spacing.xl,
+              fontSize: 18,
+              lineHeight: 27,
+            }}
           >
             Learn one new word every day. Build your vocabulary systematically with our curated selection of words.
           </Text>

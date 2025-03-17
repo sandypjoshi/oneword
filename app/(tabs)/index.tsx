@@ -15,7 +15,7 @@ import { WordCard, EmptyWordCard } from '../../src/components/today';
 import { useThemeReady } from '../../src/hooks';
 import { WordOfDay } from '../../src/types/wordOfDay';
 import { wordOfDayService } from '../../src/services/wordOfDayService';
-import colorThemes from '../../src/theme/colors';
+import themes from '../../src/theme/colors';
 
 // Extended WordOfDay type to include placeholder flag
 interface ExtendedWordOfDay extends WordOfDay {
@@ -274,7 +274,7 @@ export default function HomeScreen() {
   // Show loading UI that matches theme colors
   if (!isReady || isLoading) {
     const isDark = systemColorScheme === 'dark';
-    const fallbackColors = isDark ? colorThemes.dark : colorThemes.light;
+    const fallbackColors = isDark ? themes.default.dark : themes.default.light;
     
     // Use theme colors if available, otherwise fallback to system colors
     const themeColors = theme?.colors || fallbackColors;

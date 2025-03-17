@@ -31,6 +31,16 @@ interface BoxProps extends ViewProps {
   radius?: number;
 }
 
+// Default spacing values as fallback
+const DEFAULT_SPACING = {
+  xs: 4,
+  sm: 8, 
+  md: 16,
+  lg: 24,
+  xl: 32,
+  xxl: 48
+};
+
 const Box = ({
   children,
   style,
@@ -60,43 +70,67 @@ const Box = ({
   radius,
   ...rest
 }: BoxProps) => {
-  const { spacing } = useTheme();
+  const theme = useTheme();
+  const spacing = theme?.spacing || DEFAULT_SPACING;
 
-  const getSpacingValue = (value: SpacingKey | number | undefined) => {
+  const getSpacingValue = (value: SpacingKey | number | undefined): number | undefined => {
     if (value === undefined) return undefined;
-    return typeof value === 'number' ? value : spacing[value];
+    
+    if (typeof value === 'number') {
+      return value;
+    }
+    
+    // Safely access spacing with fallback
+    return spacing[value] !== undefined ? spacing[value] : DEFAULT_SPACING[value];
   };
 
   // Use useMemo to prevent recreating styles on every render
   const boxStyles = useMemo(() => {
-    return StyleSheet.create({
-      box: {
-        padding: getSpacingValue(padding),
-        paddingTop: getSpacingValue(paddingTop),
-        paddingBottom: getSpacingValue(paddingBottom),
-        paddingLeft: getSpacingValue(paddingLeft),
-        paddingRight: getSpacingValue(paddingRight),
-        paddingVertical: getSpacingValue(paddingVertical),
-        paddingHorizontal: getSpacingValue(paddingHorizontal),
-        margin: getSpacingValue(margin),
-        marginTop: getSpacingValue(marginTop),
-        marginBottom: getSpacingValue(marginBottom),
-        marginLeft: getSpacingValue(marginLeft),
-        marginRight: getSpacingValue(marginRight),
-        marginVertical: getSpacingValue(marginVertical),
-        marginHorizontal: getSpacingValue(marginHorizontal),
-        backgroundColor: bg,
-        flex: flex,
-        width: width as DimensionValue,
-        height: height as DimensionValue,
-        alignItems: align,
-        justifyContent: justify,
-        flexDirection: direction,
-        flexWrap: wrap,
-        gap: getSpacingValue(gap),
-        borderRadius: radius,
-      },
-    });
+    try {
+      // Create a safe style object
+      const safeStyles: Record<string, any> = {};
+      
+      // Only add defined values to the style object
+      const addStyleIfDefined = (key: string, value: any) => {
+        if (value !== undefined) {
+          safeStyles[key] = value;
+        }
+      };
+      
+      // Add all the spacing properties safely
+      addStyleIfDefined('padding', getSpacingValue(padding));
+      addStyleIfDefined('paddingTop', getSpacingValue(paddingTop));
+      addStyleIfDefined('paddingBottom', getSpacingValue(paddingBottom));
+      addStyleIfDefined('paddingLeft', getSpacingValue(paddingLeft));
+      addStyleIfDefined('paddingRight', getSpacingValue(paddingRight));
+      addStyleIfDefined('paddingVertical', getSpacingValue(paddingVertical));
+      addStyleIfDefined('paddingHorizontal', getSpacingValue(paddingHorizontal));
+      addStyleIfDefined('margin', getSpacingValue(margin));
+      addStyleIfDefined('marginTop', getSpacingValue(marginTop));
+      addStyleIfDefined('marginBottom', getSpacingValue(marginBottom));
+      addStyleIfDefined('marginLeft', getSpacingValue(marginLeft));
+      addStyleIfDefined('marginRight', getSpacingValue(marginRight));
+      addStyleIfDefined('marginVertical', getSpacingValue(marginVertical));
+      addStyleIfDefined('marginHorizontal', getSpacingValue(marginHorizontal));
+      addStyleIfDefined('gap', getSpacingValue(gap));
+      
+      // Add other style properties
+      addStyleIfDefined('backgroundColor', bg);
+      addStyleIfDefined('flex', flex);
+      addStyleIfDefined('width', width);
+      addStyleIfDefined('height', height);
+      addStyleIfDefined('alignItems', align);
+      addStyleIfDefined('justifyContent', justify);
+      addStyleIfDefined('flexDirection', direction);
+      addStyleIfDefined('flexWrap', wrap);
+      addStyleIfDefined('borderRadius', radius);
+      
+      return StyleSheet.create({ box: safeStyles });
+    } catch (error) {
+      console.warn('Error creating Box styles:', error);
+      // Return empty styles as fallback
+      return StyleSheet.create({ box: {} });
+    }
   }, [
     spacing, padding, paddingTop, paddingBottom, paddingLeft, paddingRight,
     paddingVertical, paddingHorizontal, margin, marginTop, marginBottom,
