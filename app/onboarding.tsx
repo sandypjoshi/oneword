@@ -1,5 +1,11 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, ActivityIndicator } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { 
+  StyleSheet, 
+  View, 
+  ActivityIndicator, 
+  Animated, 
+  Dimensions 
+} from 'react-native';
 import { Box } from '../src/components/layout';
 import { Text, Button } from '../src/components/ui';
 import { useThemeReady } from '../src/hooks';
@@ -23,10 +29,15 @@ export default function OnboardingScreen() {
   const router = useRouter();
   const [isNavigating, setIsNavigating] = useState(false);
   const [currentStep, setCurrentStep] = useState<OnboardingStep>(OnboardingStep.WELCOME);
-  const [selectedDifficulty, setSelectedDifficulty] = useState(DIFFICULTY_LEVELS.INTERMEDIATE);
+  const [selectedDifficulty, setSelectedDifficulty] = useState<string | null>(null);
   const colorScheme = useColorScheme();
   const isDark = colorScheme === 'dark';
   const fallbackColors = isDark ? themes.default.dark : themes.default.light;
+  
+  // Animation values
+  const { width } = Dimensions.get('window');
+  const welcomePosition = useRef(new Animated.Value(0)).current;
+  const difficultyPosition = useRef(new Animated.Value(width)).current;
 
   if (!isReady) {
     return (
@@ -42,7 +53,22 @@ export default function OnboardingScreen() {
   const { spacing, colors: themeColors } = theme;
 
   const handleNext = () => {
-    setCurrentStep(OnboardingStep.DIFFICULTY);
+    // Animate the transition
+    Animated.parallel([
+      Animated.timing(welcomePosition, {
+        toValue: -width,
+        duration: 300,
+        useNativeDriver: true,
+      }),
+      Animated.timing(difficultyPosition, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: true,
+      })
+    ]).start(() => {
+      // Update step after animation completes
+      setCurrentStep(OnboardingStep.DIFFICULTY);
+    });
   };
 
   const handleDifficultySelect = (level: string) => {
@@ -52,6 +78,9 @@ export default function OnboardingScreen() {
   const handleGetStarted = async () => {
     // Prevent double tap
     if (isNavigating) return;
+    
+    // Check if we have a selected difficulty
+    if (!selectedDifficulty) return;
     
     // Set state to show we're processing
     setIsNavigating(true);
@@ -88,7 +117,12 @@ export default function OnboardingScreen() {
   // Welcome step content
   const renderWelcomeStep = () => {
     return (
-      <Box flex={1} style={styles.screenContainer}>
+      <Animated.View 
+        style={[
+          styles.screenContainer, 
+          { transform: [{ translateX: welcomePosition }] }
+        ]}
+      >
         {/* Image placeholder - upper half */}
         <Box style={styles.imageContainer}>
           {/* You will add the image here later */}
@@ -125,29 +159,49 @@ export default function OnboardingScreen() {
             />
           </Box>
         </Box>
-      </Box>
+      </Animated.View>
     );
   };
 
   // Difficulty selection step content
   const renderDifficultyStep = () => {
+    const hasSelection = selectedDifficulty !== null;
+    
     return (
-      <Box flex={1} padding="xl" style={styles.screenContainer}>
-        <Box flex={1} justify="center" align="center">
+      <Animated.View 
+        style={[
+          styles.screenContainer, 
+          styles.absolutePosition,
+          { transform: [{ translateX: difficultyPosition }] }
+        ]}
+      >
+        <Box 
+          flex={1} 
+          justify="center" 
+          align="center" 
+          padding="lg"
+          paddingTop="xl"
+          paddingBottom="xl"
+        >
           <DifficultySelector 
             selectedLevel={selectedDifficulty}
             onSelectLevel={handleDifficultySelect}
+            hasSelection={hasSelection}
           />
         </Box>
         
-        <Box width="100%" style={styles.buttonContainer}>
-          <Button
-            title={isNavigating ? "Loading..." : "Get Started"}
-            variant="primary"
-            fullWidth
-            onPress={handleGetStarted}
-            disabled={isNavigating}
-          />
+        <Box width="100%" style={styles.buttonContainer} padding="lg">
+          {hasSelection ? (
+            <Button
+              title={isNavigating ? "Loading..." : "Continue"}
+              variant="primary"
+              fullWidth
+              onPress={handleGetStarted}
+              disabled={isNavigating}
+            />
+          ) : (
+            <View style={styles.buttonPlaceholder} />
+          )}
           
           {isNavigating && (
             <ActivityIndicator 
@@ -157,14 +211,14 @@ export default function OnboardingScreen() {
             />
           )}
         </Box>
-      </Box>
+      </Animated.View>
     );
   };
 
   return (
     <View style={[styles.container, { backgroundColor: themeColors.background.primary }]}>
-      {currentStep === OnboardingStep.WELCOME && renderWelcomeStep()}
-      {currentStep === OnboardingStep.DIFFICULTY && renderDifficultyStep()}
+      {renderWelcomeStep()}
+      {renderDifficultyStep()}
     </View>
   );
 }
@@ -172,9 +226,18 @@ export default function OnboardingScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    position: 'relative',
   },
   screenContainer: {
     flex: 1,
+    width: '100%',
+  },
+  absolutePosition: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
   imageContainer: {
     flex: 1.5,
@@ -204,6 +267,9 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     paddingBottom: 20,
+  },
+  buttonPlaceholder: {
+    height: 56, // Same height as the Button component
   },
   loadingContainer: {
     flex: 1,
