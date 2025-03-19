@@ -30,6 +30,7 @@
     "web": {
       "bundler": "metro",
       "favicon": "./src/assets/images/favicon.png"
-    }
+    },
+    "newArchEnabled": true
   }
 } 
