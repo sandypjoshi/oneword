@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback, useMemo } from 'react';
 import { 
   StyleSheet, 
   View, 
@@ -43,6 +43,13 @@ export default function OnboardingScreen() {
   const welcomePosition = useRef(new Animated.Value(0)).current;
   const difficultyPosition = useRef(new Animated.Value(width)).current;
 
+  // Memoized animation configuration
+  const animationConfig = useMemo(() => ({
+    duration: 300,
+    useNativeDriver: true,
+    width,
+  }), [width]);
+
   if (!isReady) {
     return (
       <View style={[
@@ -56,30 +63,31 @@ export default function OnboardingScreen() {
 
   const { spacing, colors: themeColors } = theme;
 
-  const handleNext = () => {
+  // Memoize the navigation handlers
+  const handleNext = useCallback(() => {
     // Animate the transition
     Animated.parallel([
       Animated.timing(welcomePosition, {
-        toValue: -width,
-        duration: 300,
-        useNativeDriver: true,
+        toValue: -animationConfig.width,
+        duration: animationConfig.duration,
+        useNativeDriver: animationConfig.useNativeDriver,
       }),
       Animated.timing(difficultyPosition, {
         toValue: 0,
-        duration: 300,
-        useNativeDriver: true,
+        duration: animationConfig.duration,
+        useNativeDriver: animationConfig.useNativeDriver,
       })
     ]).start(() => {
       // Update step after animation completes
       setCurrentStep(OnboardingStep.DIFFICULTY);
     });
-  };
+  }, [welcomePosition, difficultyPosition, animationConfig]);
 
-  const handleDifficultySelect = (level: string) => {
+  const handleDifficultySelect = useCallback((level: string) => {
     setSelectedDifficulty(level);
-  };
+  }, []);
 
-  const handleGetStarted = async () => {
+  const handleGetStarted = useCallback(async () => {
     // Prevent double tap
     if (isNavigating) return;
     
@@ -116,10 +124,10 @@ export default function OnboardingScreen() {
       console.error('Error during onboarding completion:', error);
       setIsNavigating(false); // Reset state on error
     }
-  };
+  }, [isNavigating, selectedDifficulty, router]);
 
-  // Welcome step content
-  const renderWelcomeStep = () => {
+  // Memoize the render functions
+  const renderWelcomeStep = useCallback(() => {
     return (
       <Animated.View 
         style={[
@@ -172,10 +180,10 @@ export default function OnboardingScreen() {
         </Box>
       </Animated.View>
     );
-  };
+  }, [welcomePosition, themeColors, handleNext]);
 
   // Difficulty selection step content
-  const renderDifficultyStep = () => {
+  const renderDifficultyStep = useCallback(() => {
     const hasSelection = selectedDifficulty !== null;
     
     return (
@@ -224,7 +232,15 @@ export default function OnboardingScreen() {
         </Box>
       </Animated.View>
     );
-  };
+  }, [
+    difficultyPosition, 
+    selectedDifficulty, 
+    themeColors, 
+    spacing, 
+    handleDifficultySelect, 
+    handleGetStarted, 
+    isNavigating
+  ]);
 
   return (
     <View style={[styles.container, { backgroundColor: themeColors.background.primary }]}>

@@ -122,6 +122,12 @@ export default function HomeScreen() {
     };
   }, [theme]);
   
+  // Memoize card dimensions to avoid unnecessary renders
+  const cardDimensions = useMemo(() => ({
+    width,
+    containerPadding: theme?.spacing.md
+  }), [width, theme?.spacing.md]);
+  
   // Format the date nicely for the header title
   const formatDateForHeader = useCallback((word: ExtendedWordOfDay | null): string => {
     if (!word?.date) return 'Today'; // Default fallback
@@ -365,7 +371,7 @@ export default function HomeScreen() {
     const isPlaceholder = item.isPlaceholder;
     
     return (
-      <View style={[themeStyles.cardContainer, { width }]}>
+      <View style={[themeStyles.cardContainer, { width: cardDimensions.width }]}>
         <View style={themeStyles.cardWrapper}>
           {isPlaceholder ? (
             <EmptyWordCard 
@@ -378,7 +384,7 @@ export default function HomeScreen() {
         </View>
       </View>
     );
-  }, [width, themeStyles]);
+  }, [cardDimensions.width, themeStyles.cardContainer, themeStyles.cardWrapper, themeStyles.wordCard]);
   
   // Show loading UI that matches theme colors
   if (!isReady || isLoading) {
