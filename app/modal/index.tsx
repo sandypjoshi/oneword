@@ -12,14 +12,9 @@ export default function ModalScreen() {
   return (
     <View style={[styles.container, { backgroundColor: colors.background.primary }]}>
       <Box padding="lg" flex={1} align="center" justify="center">
-        <Text variant="h2">Modal</Text>
-        <Text 
-          variant="body1" 
-          color={colors.text.secondary}
-          align="center"
-          style={styles.subtitle}
-        >
-          This is a modal screen example
+        <Text variant="headingMedium">Modal</Text>
+        <Text variant="bodyMedium">
+          This is a modal screen.
         </Text>
         
         <Box marginTop="xl">

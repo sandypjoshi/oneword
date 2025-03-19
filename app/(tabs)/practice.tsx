@@ -20,14 +20,13 @@ export default function ChallengesScreen() {
   return (
     <View style={[styles.container, { backgroundColor: colors.background.primary }]}>
       <Box padding="lg" flex={1} align="center" justify="center">
-        <Text variant="h2">Challenges</Text>
+        <Text variant="headingMedium">Challenges</Text>
         <Text 
-          variant="body1" 
+          variant="bodyMedium"
           color={colors.text.secondary}
           align="center"
-          style={styles.subtitle}
         >
-          Coming Soon
+          Practice section coming soon...
         </Text>
       </Box>
     </View>

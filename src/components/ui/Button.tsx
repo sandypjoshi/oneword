@@ -1,124 +1,238 @@
 import React from 'react';
-import { TouchableOpacity, StyleSheet, TouchableOpacityProps, ActivityIndicator, View } from 'react-native';
+import { 
+  TouchableOpacity, 
+  StyleSheet, 
+  ViewStyle,
+  ActivityIndicator, 
+  View, 
+  AccessibilityState,
+} from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
+import { radius, elevation, components } from '../../theme/styleUtils';
+import spacing from '../../theme/spacing';
 import Text from './Text';
+import typography from '../../theme/typography';
 
-interface ButtonProps extends TouchableOpacityProps {
-  title: string;
-  variant?: 'primary' | 'secondary' | 'outline';
-  loading?: boolean;
+// Button variants
+type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost';
+
+// Button sizes
+type ButtonSize = 'small' | 'medium' | 'large';
+
+// Component props
+interface ButtonProps {
+  // Content
+  title?: string;
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
+  
+  // Appearance
+  variant?: ButtonVariant;
+  size?: ButtonSize;
   fullWidth?: boolean;
-  size?: 'small' | 'medium' | 'large';
+  
+  // State
+  disabled?: boolean;
+  loading?: boolean;
+  
+  // Event handlers
+  onPress?: () => void;
+  onPressIn?: () => void;
+  onPressOut?: () => void;
+  onLongPress?: () => void;
+  
+  // Additional styles
+  style?: ViewStyle;
+  contentStyle?: ViewStyle;
+  
+  // Accessibility
+  accessibilityLabel?: string;
+  accessibilityHint?: string;
+  accessibilityRole?: 'button' | 'link' | 'header' | 'none';
 }
 
-const Button = ({ 
-  title, 
-  variant = 'primary', 
-  style, 
-  loading = false,
-  fullWidth = false,
-  disabled = false,
+/**
+ * Button component
+ * 
+ * A versatile button component that supports various visual styles,
+ * states, and accessibility features.
+ */
+export default function Button({
+  // Content
+  title,
+  leftIcon,
+  rightIcon,
+  
+  // Appearance
+  variant = 'primary',
   size = 'medium',
-  ...props 
-}: ButtonProps) => {
-  const { colors, spacing } = useTheme();
+  fullWidth = false,
   
-  // Generate button styles based on variant and theme
-  const buttonStyles = {
-    primary: {
-      backgroundColor: colors.primary,
-      borderColor: colors.primary,
-    },
-    secondary: {
-      backgroundColor: colors.primaryLight,
-      borderColor: colors.primaryLight,
-    },
-    outline: {
-      backgroundColor: 'transparent',
-      borderWidth: 1,
-      borderColor: colors.primary,
-    },
-  };
+  // State
+  disabled = false,
+  loading = false,
   
-  // Generate text styles based on variant and theme
-  const textStyles = {
-    primary: {
-      color: colors.text.inverse,
-    },
-    secondary: {
-      color: colors.text.inverse,
-    },
-    outline: {
-      color: colors.primary,
-    },
-  };
+  // Event handlers
+  onPress,
+  onPressIn,
+  onPressOut,
+  onLongPress,
   
-  // Text variant based on button size
+  // Additional styles
+  style,
+  contentStyle,
+  
+  // Accessibility
+  accessibilityLabel,
+  accessibilityHint,
+  accessibilityRole = 'button',
+}: ButtonProps) {
+  // Access theme context
+  const { colors } = useTheme();
+  
+  // Get component tokens
+  const buttonTokens = components.button;
+  
+  // Get text variant based on button size
   const textVariant = size === 'small' ? 'buttonSmall' : 'button';
   
-  // Padding based on button size
-  const buttonPadding = {
-    small: {
-      paddingVertical: spacing.xs,
-      paddingHorizontal: spacing.md,
-    },
-    medium: {
-      paddingVertical: spacing.md,
-      paddingHorizontal: spacing.lg,
-    },
-    large: {
-      paddingVertical: spacing.lg,
-      paddingHorizontal: spacing.xl,
-    },
+  // Generate accessibility state
+  const accessibilityState: AccessibilityState = {
+    disabled: disabled || loading,
+    busy: loading,
   };
-
-  return (
-    <TouchableOpacity 
-      style={[
-        styles.button,
-        buttonStyles[variant],
-        fullWidth && styles.fullWidth,
-        disabled && styles.disabled,
-        buttonPadding[size],
-        style
-      ]}
-      disabled={disabled || loading}
-      {...props}
-    >
-      <View style={styles.contentContainer}>
-        {loading ? (
-          <ActivityIndicator 
-            size="small" 
-            color={variant === 'outline' ? colors.primary : '#fff'} 
-          />
-        ) : (
-          <Text 
+  
+  // Generate styles based on props
+  const getContainerStyle = (): ViewStyle => {
+    // Base styles for all variants
+    const baseStyle: ViewStyle = {
+      borderRadius: radius.pill,
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: buttonTokens.height[size],
+      minWidth: buttonTokens.minWidth[size],
+      paddingHorizontal: buttonTokens.padding[size].x,
+      paddingVertical: 0, // Remove vertical padding to use fixed height
+      ...elevation.sm,
+    };
+    
+    // Width styles
+    if (fullWidth) {
+      baseStyle.width = '100%';
+    }
+    
+    // Variant-specific styles
+    switch (variant) {
+      case 'primary':
+        return {
+          ...baseStyle,
+          backgroundColor: colors.primary,
+          borderColor: colors.primary,
+        };
+        
+      case 'secondary':
+        return {
+          ...baseStyle,
+          backgroundColor: colors.primaryLight,
+          borderColor: colors.primaryLight,
+        };
+        
+      case 'outline':
+        return {
+          ...baseStyle,
+          backgroundColor: 'transparent',
+          borderWidth: 1,
+          borderColor: colors.primary,
+          ...elevation.none,
+        };
+        
+      case 'ghost':
+        return {
+          ...baseStyle,
+          backgroundColor: 'transparent',
+          ...elevation.none,
+        };
+        
+      default:
+        return baseStyle;
+    }
+  };
+  
+  // Get text color based on variant
+  const getTextColor = (): string => {
+    switch (variant) {
+      case 'primary':
+      case 'secondary':
+        return colors.text.inverse;
+      case 'outline':
+      case 'ghost':
+        return colors.primary;
+      default:
+        return colors.text.inverse;
+    }
+  };
+  
+  // Render loading indicator
+  const renderLoadingIndicator = () => (
+    <ActivityIndicator 
+      size="small" 
+      color={['outline', 'ghost'].includes(variant) ? colors.primary : colors.text.inverse} 
+    />
+  );
+  
+  // Render button content
+  const renderContent = () => {
+    if (loading) {
+      return renderLoadingIndicator();
+    }
+    
+    return (
+      <View style={[styles.contentContainer, contentStyle]}>
+        {leftIcon && <View style={styles.iconLeft}>{leftIcon}</View>}
+        
+        {title && (
+          <Text
             variant={textVariant}
-            style={[textStyles[variant]]}
+            style={{
+              textAlign: 'center',
+            }}
+            color={getTextColor()}
+            numberOfLines={1}
+            ellipsizeMode="tail"
           >
             {title}
           </Text>
         )}
+        
+        {rightIcon && <View style={styles.iconRight}>{rightIcon}</View>}
       </View>
+    );
+  };
+  
+  return (
+    <TouchableOpacity
+      style={[
+        getContainerStyle(),
+        (disabled && !loading) && styles.disabled,
+        style,
+      ]}
+      disabled={disabled || loading}
+      activeOpacity={0.7}
+      onPress={onPress}
+      onPressIn={onPressIn}
+      onPressOut={onPressOut}
+      onLongPress={onLongPress}
+      accessibilityLabel={accessibilityLabel || title}
+      accessibilityHint={accessibilityHint}
+      accessibilityRole={accessibilityRole}
+      accessibilityState={accessibilityState}
+    >
+      {renderContent()}
     </TouchableOpacity>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  button: {
-    borderRadius: 100, // Pill shape as in original
-    alignItems: 'center',
-    justifyContent: 'center',
-    minWidth: 200, // Restore original minimum width
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
-  },
-  fullWidth: {
-    width: '100%',
-  },
   disabled: {
     opacity: 0.5,
   },
@@ -126,7 +240,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-  }
-});
-
-export default Button; 
+    width: '100%',
+  },
+  iconLeft: {
+    marginRight: spacing.xs,
+  },
+  iconRight: {
+    marginLeft: spacing.xs,
+  },
+}); 

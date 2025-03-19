@@ -88,54 +88,42 @@ export default function OnboardingScreen() {
   // Welcome step content
   const renderWelcomeStep = () => {
     return (
-      <Box flex={1} padding="xl" style={styles.screenContainer}>
-        <Box flex={1} justify="center" align="center">
-          <Text 
-            variant="h1" 
-            color={themeColors.primary} 
-            style={{ 
-              marginBottom: spacing.lg,
-              fontSize: 52,
-              fontWeight: '700',
-            }}
-          >
-            OneWord
-          </Text>
-          
-          <Text 
-            variant="h3" 
-            color={themeColors.text.primary} 
-            align="center"
-            style={{ 
-              marginBottom: spacing.lg,
-              fontSize: 24,
-              fontWeight: '600',
-            }}
-          >
-            Expand Your Vocabulary
-          </Text>
-          
-          <Text 
-            variant="body1" 
-            color={themeColors.text.secondary} 
-            align="center"
-            style={{ 
-              marginBottom: spacing.xl,
-              fontSize: 18,
-              lineHeight: 27,
-            }}
-          >
-            Learn one new word every day. Build your vocabulary systematically with our curated selection of words.
-          </Text>
+      <Box flex={1} style={styles.screenContainer}>
+        {/* Image placeholder - upper half */}
+        <Box style={styles.imageContainer}>
+          {/* You will add the image here later */}
         </Box>
         
-        <Box width="100%" style={styles.buttonContainer}>
-          <Button
-            title="Next"
-            variant="primary"
-            fullWidth
-            onPress={handleNext}
-          />
+        {/* Content - lower half */}
+        <Box style={styles.contentContainer}>
+          <Box style={styles.textContainer}>
+            <Text 
+              variant="displayLarge" 
+              color={themeColors.text.primary}
+              align="center" 
+              style={styles.title}
+            >
+              Master a New Word Every Day
+            </Text>
+            
+            <Text 
+              variant="bodyLarge" 
+              color={themeColors.text.secondary} 
+              align="center"
+              style={styles.subtitle}
+            >
+              Expand your vocabulary with a daily word in just 1 minute
+            </Text>
+          </Box>
+          
+          <Box width="100%" style={styles.buttonContainer}>
+            <Button
+              title="Get Started"
+              variant="primary"
+              fullWidth
+              onPress={handleNext}
+            />
+          </Box>
         </Box>
       </Box>
     );
@@ -187,7 +175,32 @@ const styles = StyleSheet.create({
   },
   screenContainer: {
     flex: 1,
+  },
+  imageContainer: {
+    flex: 1.5,
+    backgroundColor: '#F5F5F5', // Placeholder color
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  contentContainer: {
+    flex: 1,
+    paddingHorizontal: 24,
+    paddingBottom: 32,
     justifyContent: 'space-between',
+  },
+  textContainer: {
+    paddingTop: 32,
+  },
+  title: {
+    fontSize: 32,
+    lineHeight: 40,
+    marginBottom: 16,
+    fontWeight: '700',
+  },
+  subtitle: {
+    fontSize: 18,
+    lineHeight: 26,
+    paddingHorizontal: 8,
   },
   buttonContainer: {
     paddingBottom: 20,

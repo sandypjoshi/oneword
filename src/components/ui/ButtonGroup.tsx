@@ -20,13 +20,13 @@ export interface ButtonGroupOption {
 
 interface ButtonGroupProps {
   options: ButtonGroupOption[];
-  selectedValues: string | string[];
-  onChange: (value: string | string[]) => void;
-  mode?: 'single' | 'multiple';
-  layout?: 'horizontal' | 'vertical' | 'grid';
+  selectedValue?: string;
+  onSelect: (value: string) => void;
+  variant?: 'vertical' | 'horizontal' | 'grid';
+  containerStyle?: StyleProp<ViewStyle>;
   buttonStyle?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
-  containerStyle?: StyleProp<ViewStyle>;
+  disabled?: boolean;
 }
 
 /**
@@ -34,46 +34,29 @@ interface ButtonGroupProps {
  */
 const ButtonGroup: React.FC<ButtonGroupProps> = ({
   options,
-  selectedValues,
-  onChange,
-  mode = 'single',
-  layout = 'vertical',
+  selectedValue,
+  onSelect,
+  variant = 'vertical',
+  containerStyle,
   buttonStyle,
   textStyle,
-  containerStyle,
+  disabled = false,
 }) => {
-  const { colors, spacing } = useTheme();
-  const [internalSelected, setInternalSelected] = useState<string[]>(
-    Array.isArray(selectedValues) ? selectedValues : [selectedValues]
-  );
+  const { colors } = useTheme();
+  const [selected, setSelected] = useState<string | undefined>(selectedValue);
 
-  // Update internal state when prop changes
   useEffect(() => {
-    setInternalSelected(Array.isArray(selectedValues) ? selectedValues : [selectedValues]);
-  }, [selectedValues]);
+    setSelected(selectedValue);
+  }, [selectedValue]);
 
   const handleSelect = (value: string) => {
-    let newSelected: string[];
-    
-    if (mode === 'single') {
-      newSelected = [value];
-    } else {
-      if (internalSelected.includes(value)) {
-        newSelected = internalSelected.filter(v => v !== value);
-      } else {
-        newSelected = [...internalSelected, value];
-      }
-    }
-    
-    setInternalSelected(newSelected);
-    onChange(mode === 'single' ? newSelected[0] : newSelected);
+    if (disabled) return;
+    setSelected(value);
+    onSelect(value);
   };
 
-  const isSelected = (value: string) => internalSelected.includes(value);
-  
-  // Determine layout container style
   const getContainerStyle = () => {
-    switch (layout) {
+    switch (variant) {
       case 'horizontal':
         return styles.horizontalContainer;
       case 'grid':
@@ -83,71 +66,67 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({
     }
   };
 
+  const getButtonStyle = (isSelected: boolean) => {
+    return [
+      styles.button,
+      {
+        borderColor: isSelected ? colors.primary : colors.border.light,
+        backgroundColor: isSelected ? colors.primaryLight : colors.background.card,
+      },
+      buttonStyle,
+    ];
+  };
+
+  const renderButton = (option: ButtonGroupOption) => {
+    const isSelected = selected === option.value;
+    
+    return (
+      <TouchableOpacity
+        key={option.value}
+        style={getButtonStyle(isSelected)}
+        onPress={() => handleSelect(option.value)}
+        disabled={disabled}
+      >
+        {option.icon && (
+          <View style={styles.iconContainer}>
+            {typeof option.icon === 'string' ? (
+              <Icon 
+                name={option.icon} 
+                size={24} 
+                color={isSelected ? colors.primary : colors.text.secondary} 
+              />
+            ) : (
+              option.icon
+            )}
+          </View>
+        )}
+        
+        <View style={styles.textContainer}>
+          <Text
+            variant="label"
+            color={isSelected ? colors.primary : colors.text.primary}
+            style={textStyle}
+          >
+            {option.label}
+          </Text>
+          
+          {option.description && (
+            <Text
+              variant="bodySmall"
+              color={isSelected ? colors.primary : colors.text.secondary}
+              style={[{ marginTop: 4 }, textStyle]}
+            >
+              {option.description}
+            </Text>
+          )}
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <View style={[getContainerStyle(), containerStyle]}>
-      {options.map((option, index) => {
-        const selected = isSelected(option.value);
-        return (
-          <TouchableOpacity
-            key={option.value}
-            style={[
-              styles.button,
-              {
-                backgroundColor: 'transparent',
-                borderColor: selected ? colors.primary : colors.border.medium,
-                borderWidth: selected ? 2.5 : 1.5,
-                ...(layout === 'vertical' ? { width: '100%' } : {}),
-                ...(layout === 'grid' ? { width: '48%' } : {}),
-              },
-              buttonStyle
-            ]}
-            activeOpacity={0.7}
-            onPress={() => handleSelect(option.value)}
-            accessibilityRole={mode === 'single' ? 'radio' : 'checkbox'}
-            accessibilityState={{ checked: selected }}
-          >
-            <View style={styles.iconContainer}>
-              {selected ? (
-                <Icon 
-                  name="checkCircleBold" 
-                  size={22} 
-                  color={colors.primary}
-                />
-              ) : (
-                <Icon 
-                  name="circleOutline" 
-                  size={22} 
-                  color={colors.text.secondary}
-                />
-              )}
-            </View>
-            
-            <View style={styles.textContainer}>
-              <Text
-                style={[
-                  styles.label,
-                  { color: colors.text.primary },
-                  textStyle
-                ]}
-              >
-                {option.label}
-              </Text>
-              
-              {option.description && (
-                <Text
-                  style={[
-                    styles.description,
-                    { color: colors.text.secondary },
-                  ]}
-                  numberOfLines={2}
-                >
-                  {option.description}
-                </Text>
-              )}
-            </View>
-          </TouchableOpacity>
-        );
-      })}
+      {options.map(renderButton)}
     </View>
   );
 };
@@ -185,14 +164,6 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     flex: 1,
-  },
-  label: {
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  description: {
-    fontSize: 14,
-    marginTop: 4,
   },
 });
 

@@ -28,7 +28,12 @@ const ThemeSelector = () => {
   return (
     <View style={{ width: '100%' }}>
       {/* Theme Selection */}
-      <Text variant="h4" style={{ marginTop: spacing.md, marginBottom: spacing.sm }}>Theme Style</Text>
+      <Text 
+        variant="headingSmall" 
+        style={{ marginTop: spacing.md, marginBottom: spacing.sm }}
+      >
+        Theme Style
+      </Text>
       <View style={{ gap: spacing.sm }}>
         {themes.map((theme) => (
           <TouchableOpacity
@@ -58,7 +63,12 @@ const ThemeSelector = () => {
       </View>
       
       {/* Color Mode Selection */}
-      <Text variant="h4" style={{ marginTop: spacing.lg, marginBottom: spacing.sm }}>Appearance</Text>
+      <Text 
+        variant="headingSmall" 
+        style={{ marginTop: spacing.lg, marginBottom: spacing.sm }}
+      >
+        Appearance
+      </Text>
       <View style={{ gap: spacing.sm }}>
         {colorModes.map((mode) => (
           <TouchableOpacity
@@ -136,12 +146,16 @@ export default function ThemeSettingsScreen() {
         }}
       >
         <Box padding="lg">
-          <Text variant="h2" align="center" style={{ marginBottom: spacing.md }}>Theme Settings</Text>
           <Text 
-            variant="body1" 
-            color={colors.text.secondary}
+            variant="headingLarge" 
+            align="center" 
+            style={{ marginBottom: spacing.md }}
+          >
+            Theme Settings
+          </Text>
+          <Text 
+            variant="bodyMedium"
             align="center"
-            style={{ marginBottom: spacing.xl }}
           >
             Customize the appearance of your app
           </Text>
@@ -149,11 +163,7 @@ export default function ThemeSettingsScreen() {
           {/* Theme Selector */}
           <ThemeSelector />
           
-          <Text 
-            variant="caption" 
-            style={{ marginTop: spacing.xl, textAlign: 'center' }}
-            color={colors.text.hint}
-          >
+          <Text variant="caption">
             Theme settings are saved automatically
           </Text>
         </Box>

@@ -8,7 +8,8 @@ import {
   ViewToken,
   TouchableOpacity,
   Text,
-  useColorScheme
+  useColorScheme,
+  ScrollView
 } from 'react-native';
 import { useNavigation } from 'expo-router';
 import { WordCard, EmptyWordCard } from '../../src/components/today';
@@ -16,6 +17,7 @@ import { useThemeReady } from '../../src/hooks';
 import { WordOfDay } from '../../src/types/wordOfDay';
 import { wordOfDayService } from '../../src/services/wordOfDayService';
 import themes from '../../src/theme/colors';
+import { Text as CustomText } from '../../src/components/ui';
 
 // Extended WordOfDay type to include placeholder flag
 interface ExtendedWordOfDay extends WordOfDay {
@@ -28,11 +30,13 @@ export default function HomeScreen() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const flatListRef = useRef<FlatList>(null);
+  const scrollViewRef = useRef<ScrollView>(null);
   const isProgrammaticScrollRef = useRef(false);
   const loadAttempted = useRef(false);
   const { width } = useWindowDimensions();
   const navigation = useNavigation();
   const systemColorScheme = useColorScheme();
+  const DOT_WIDTH = 36; // 28px dot + 8px gap
   
   // Format the date nicely for the header title
   const formatDateForHeader = useCallback((word: ExtendedWordOfDay | null): string => {
@@ -178,6 +182,15 @@ export default function HomeScreen() {
     // Immediately update the active index for a smooth visual transition
     setActiveIndex(index);
     
+    // Center the selected indicator in the ScrollView
+    if (scrollViewRef.current) {
+      const offset = index * DOT_WIDTH - (width / 2) + (DOT_WIDTH / 2);
+      scrollViewRef.current.scrollTo({
+        x: Math.max(0, offset),
+        animated: true
+      });
+    }
+
     if (flatListRef.current) {
       flatListRef.current.scrollToIndex({
         index,
@@ -187,9 +200,20 @@ export default function HomeScreen() {
       // Reset flag after animation completes
       setTimeout(() => {
         isProgrammaticScrollRef.current = false;
-      }, 300); // Slightly longer than animation duration
+      }, 300);
     }
-  }, []);
+  }, [width]);
+  
+  // Update ScrollView position when active index changes from FlatList scroll
+  useEffect(() => {
+    if (!isProgrammaticScrollRef.current && scrollViewRef.current) {
+      const offset = activeIndex * DOT_WIDTH - (width / 2) + (DOT_WIDTH / 2);
+      scrollViewRef.current.scrollTo({
+        x: Math.max(0, offset),
+        animated: true
+      });
+    }
+  }, [activeIndex, width]);
   
   // Memoize viewability config to prevent recreating it on every render
   const viewabilityConfig = useMemo(() => ({
@@ -212,46 +236,58 @@ export default function HomeScreen() {
     
     const { colors } = theme;
     return (
-      <View style={styles.paginationContainer}>
-        {words.map((word, index) => {
-          const isActive = index === activeIndex;
-          const dateNum = getDateFromWord(word);
-          const isPlaceholder = word.isPlaceholder;
-          
-          return (
-            <TouchableOpacity
-              key={index}
-              onPress={() => scrollToIndex(index)}
-              activeOpacity={0.6}
-              style={styles.dotTouchable}
-            >
-              <View
-                style={[
-                  styles.paginationDot,
-                  {
-                    backgroundColor: isActive 
-                      ? colors.primary 
-                      : isPlaceholder 
-                        ? colors.border.medium
-                        : colors.text.secondary,
-                    width: isActive ? 24 : 8,
-                    height: isActive ? 24 : 8,
-                    opacity: isActive ? 1 : isPlaceholder ? 0.4 : 0.6,
-                  },
-                ]}
+      <View style={styles.paginationOuterContainer}>
+        <ScrollView 
+          ref={scrollViewRef}
+          horizontal 
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.paginationContainer}
+          style={styles.scrollView}
+        >
+          {words.map((word, index) => {
+            const isActive = index === activeIndex;
+            const dateNum = getDateFromWord(word);
+            
+            return (
+              <TouchableOpacity
+                key={index}
+                style={styles.dotTouchable}
+                onPress={() => scrollToIndex(index)}
               >
-                {isActive && (
-                  <Text style={[styles.dateNumber, { color: colors.text.inverse }]}>
+                <View
+                  style={[
+                    styles.paginationDot,
+                    {
+                      backgroundColor: isActive
+                        ? colors.primary
+                        : colors.background.secondary,
+                    },
+                  ]}
+                >
+                  <CustomText
+                    variant="buttonSmall"
+                    color={isActive ? colors.text.inverse : colors.text.secondary}
+                    align="center"
+                  >
                     {dateNum}
-                  </Text>
-                )}
-              </View>
-            </TouchableOpacity>
-          );
-        })}
+                  </CustomText>
+                </View>
+              </TouchableOpacity>
+            );
+          })}
+        </ScrollView>
       </View>
     );
   }, [words, activeIndex, theme, getDateFromWord, scrollToIndex]);
+  
+  // Scroll indicators to end on mount
+  useEffect(() => {
+    if (words.length > 0 && scrollViewRef.current) {
+      setTimeout(() => {
+        scrollViewRef.current?.scrollToEnd({ animated: false });
+      }, 100);
+    }
+  }, [words.length]);
   
   // Render a word card item
   const renderItem = useCallback(({ item }: { item: ExtendedWordOfDay }) => {
@@ -339,25 +375,35 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  paginationOuterContainer: {
+    paddingVertical: 16,
+    alignItems: 'flex-end',
+  },
+  scrollView: {
+    maxWidth: '100%',
+  },
   paginationContainer: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 16,
-    flexWrap: 'wrap',
     paddingHorizontal: 20,
+    gap: 8,
   },
   dotTouchable: {
-    padding: 8, // Increase touch target area
-    marginHorizontal: -4, // Compensate for padding to keep dots visually spaced correctly
+    padding: 4,
   },
   paginationDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 12,
-    marginHorizontal: 4,
+    width: 28,
+    height: 28,
+    borderRadius: 14,
     justifyContent: 'center',
     alignItems: 'center',
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.15,
+    shadowRadius: 2,
   },
   dateNumber: {
     fontSize: 12,

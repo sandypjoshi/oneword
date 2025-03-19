@@ -5,6 +5,7 @@ alwaysApply: true
 ---
 - Always check the project before adding new files to avoid duplicates & redundancy
 - Follow the user's prompt **exactly**—no assumptions, extra features, or deviations.  
+- Always make sure UI you code follow the design system and use tokens and themes correctly.
 - Ask for clarification if unsure about requirements—never guess.  
 - Outline a plan in pseudocode or natural language, confirm with the user, then execute.  
 - Use plain language—avoid jargon or overly complex phrasing.  

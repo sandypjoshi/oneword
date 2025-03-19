@@ -1,8 +1,9 @@
 import React, { memo } from 'react';
-import { StyleSheet, View, Text, ViewStyle } from 'react-native';
+import { StyleSheet, View, ViewStyle } from 'react-native';
 import { WordOfDay } from '../../types/wordOfDay';
 import { useTheme } from '../../theme/ThemeProvider';
 import { Box } from '../layout';
+import { Text } from '../ui';
 
 interface WordCardProps {
   /**
@@ -41,10 +42,10 @@ const WordCardComponent: React.FC<WordCardProps> = ({
         {/* Word and pronunciation */}
         <View style={styles.headerSection}>
           <Text 
-            style={[
-              styles.word,
-              { color: colors.text.primary }
-            ]}
+            variant="displaySmall"
+            color={colors.text.primary}
+            align="center"
+            style={styles.wordText}
             numberOfLines={1}
             adjustsFontSizeToFit
           >
@@ -52,10 +53,10 @@ const WordCardComponent: React.FC<WordCardProps> = ({
           </Text>
           
           <Text
-            style={[
-              styles.pronunciation,
-              { color: colors.text.secondary }
-            ]}
+            variant="bodySmall"
+            color={colors.text.secondary}
+            align="center"
+            style={styles.pronunciationText}
           >
             {pronunciation}
           </Text>
@@ -70,10 +71,9 @@ const WordCardComponent: React.FC<WordCardProps> = ({
             ]}
           >
             <Text 
-              style={[
-                styles.partOfSpeechText,
-                { color: colors.text.inverse }
-              ]}
+              variant="label"
+              color={colors.text.inverse}
+              style={styles.partOfSpeechText}
             >
               {partOfSpeech}
             </Text>
@@ -83,10 +83,9 @@ const WordCardComponent: React.FC<WordCardProps> = ({
         {/* Definition */}
         <View style={[styles.contentSection, { marginTop: spacing.md }]}>
           <Text
-            style={[
-              styles.definition,
-              { color: colors.text.primary }
-            ]}
+            variant="bodyMedium"
+            color={colors.text.primary}
+            align="center"
           >
             {definition}
           </Text>
@@ -94,13 +93,10 @@ const WordCardComponent: React.FC<WordCardProps> = ({
           {/* Example usage */}
           {example && (
             <Text
-              style={[
-                styles.example,
-                { 
-                  color: colors.text.secondary,
-                  marginTop: spacing.sm 
-                }
-              ]}
+              variant="bodySmall"
+              color={colors.text.secondary}
+              align="center"
+              style={styles.exampleText}
             >
               "{example}"
             </Text>
@@ -130,20 +126,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 8,
   },
-  word: {
-    fontSize: 38,
+  wordText: {
     fontFamily: 'serif',
-    textAlign: 'center',
-    fontWeight: '600',
     textTransform: 'lowercase',
-    letterSpacing: 0.5,
   },
-  pronunciation: {
-    fontSize: 16,
-    textAlign: 'center',
+  pronunciationText: {
     marginTop: 4,
-    fontWeight: '400',
-    letterSpacing: 0.25,
   },
   badgeContainer: {
     flexDirection: 'row',
@@ -156,24 +144,14 @@ const styles = StyleSheet.create({
     borderRadius: 16,
   },
   partOfSpeechText: {
-    fontSize: 15,
-    fontWeight: '600',
     textTransform: 'lowercase',
   },
   contentSection: {
     alignItems: 'center',
   },
-  definition: {
-    fontSize: 18,
-    lineHeight: 26,
-    textAlign: 'center',
-    fontWeight: '400',
-  },
-  example: {
-    fontSize: 16,
+  exampleText: {
     fontStyle: 'italic',
-    textAlign: 'center',
-    lineHeight: 22,
+    marginTop: 8,
   },
 });
 

@@ -1,7 +1,8 @@
 import React, { memo } from 'react';
-import { StyleSheet, View, Text, ViewStyle } from 'react-native';
+import { StyleSheet, View, ViewStyle } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
 import { Box } from '../layout';
+import { Text } from '../ui';
 
 interface EmptyWordCardProps {
   /**
@@ -46,16 +47,18 @@ const EmptyWordCardComponent: React.FC<EmptyWordCardProps> = ({
     >
       <Box padding="lg" align="center" justify="center">
         <View style={styles.iconContainer}>
-          <Text style={[styles.iconText, { color: colors.text.secondary }]}>
+          <Text 
+            variant="displayMedium" 
+            color={colors.text.secondary}
+          >
             {"📖"}
           </Text>
         </View>
         
         <Text 
-          style={[
-            styles.emptyStateText,
-            { color: colors.text.secondary }
-          ]}
+          variant="bodyMedium"
+          color={colors.text.secondary}
+          align="center"
         >
           {message || defaultMessage}
         </Text>
@@ -82,14 +85,6 @@ const styles = StyleSheet.create({
   },
   iconContainer: {
     marginBottom: 16,
-  },
-  iconText: {
-    fontSize: 48,
-  },
-  emptyStateText: {
-    fontSize: 18,
-    textAlign: 'center',
-    lineHeight: 24,
   },
 });
 

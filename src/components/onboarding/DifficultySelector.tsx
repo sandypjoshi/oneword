@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Text, ButtonGroup } from '../ui';
 import { Box } from '../layout';
-import { useTheme } from '../../theme/ThemeProvider';
+import { Text } from '../ui';
+import { ButtonGroup } from '../ui';
 import { DIFFICULTY_LEVELS } from '../../constants';
-import type { ButtonGroupOption } from '../ui/ButtonGroup';
+import { useTheme } from '../../theme/ThemeProvider';
 
 interface DifficultySelectorProps {
   selectedLevel: string;
@@ -16,44 +16,40 @@ const DifficultySelector: React.FC<DifficultySelectorProps> = ({
   onSelectLevel,
 }) => {
   const { colors, spacing } = useTheme();
-  
-  // Array of difficulty levels for rendering (excluding ALL)
-  const options: ButtonGroupOption[] = [
+
+  const options = [
     {
       value: DIFFICULTY_LEVELS.BEGINNER,
       label: 'Beginner',
+      description: 'Common words used in everyday conversations',
     },
     {
       value: DIFFICULTY_LEVELS.INTERMEDIATE,
       label: 'Intermediate',
+      description: 'More advanced vocabulary for fluent communication',
     },
     {
       value: DIFFICULTY_LEVELS.ADVANCED,
       label: 'Advanced',
+      description: 'Sophisticated words to enhance your expression',
     },
   ];
-  
+
   return (
-    <Box width="100%">
-      <Text 
-        variant="h2" 
-        color={colors.text.primary} 
-        align="center" 
-        style={{ 
-          marginBottom: spacing.xl,
-          fontSize: 28,
-          fontWeight: '700',
-        }}
+    <Box padding="lg" align="center">
+      <Text
+        variant="headingMedium"
+        color={colors.text.primary}
+        align="center"
+        style={styles.title}
       >
-        What's your vocabulary level?
+        Choose Your Level
       </Text>
-      
+
       <ButtonGroup
         options={options}
-        selectedValues={selectedLevel}
-        onChange={(value) => onSelectLevel(value as string)}
-        mode="single"
-        layout="vertical"
+        selectedValue={selectedLevel}
+        onSelect={onSelectLevel}
         containerStyle={styles.buttonGroup}
       />
     </Box>
@@ -63,7 +59,11 @@ const DifficultySelector: React.FC<DifficultySelectorProps> = ({
 const styles = StyleSheet.create({
   buttonGroup: {
     width: '100%',
+    maxWidth: 400,
   },
+  title: {
+    marginBottom: 32,
+  }
 });
 
 export default DifficultySelector; 

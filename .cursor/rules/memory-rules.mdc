@@ -1,5 +1,5 @@
 ---
-description: 
+description: Rules for maintaining memory bank, contenxt, logs, project memo
 globs: 
 alwaysApply: false
 ---

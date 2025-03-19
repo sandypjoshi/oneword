@@ -15,8 +15,8 @@ const FONT_FAMILIES = {
     default: undefined, // Using undefined allows React Native to pick platform default
   }),
   serif: Platform.select({
-    ios: 'Times New Roman',
-    android: 'serif',
+    ios: 'New York',
+    android: 'Roboto Serif',
     default: 'serif',
   }),
 };
@@ -36,7 +36,7 @@ const FONT_SIZES = {
   xs: 14,      // Small captions, footnotes
   sm: 16,      // Secondary text, labels
   md: 18,      // Body text
-  lg: 20,      // Large body text, small headings
+  lg: 21,      // Large body text, small headings
   xl: 24,      // Subheadings
   xxl: 28,     // Headings
   xxxl: 36,    // Large headings
@@ -46,10 +46,10 @@ const FONT_SIZES = {
 
 // Line heights (multiplier based on font size)
 const LINE_HEIGHTS = {
-  tight: 1.2,      // Tighter for headings
-  normal: 1.5,     // Standard for body text
-  relaxed: 1.75,   // More space for readability
-  loose: 2.0,      // Very loose for emphasized text
+  tight: 1.25,    // Tighter for headings
+  normal: 1.5,    // Standard for body text
+  relaxed: 1.75,  // More space for readability
+  loose: 2.0,     // Very loose for emphasized text
 };
 
 // Letter spacing for different text types
@@ -62,85 +62,91 @@ const LETTER_SPACING = {
 };
 
 // Base text styles that don't include the font family
-// This avoids any potential issues with undefined values
+// Using semantic naming conventions for better clarity
 const BASE_TEXT_STYLES = {
   // Display headings for major features
-  display1: {
+  displayLarge: {
     fontSize: FONT_SIZES.huge,
     fontWeight: FONT_WEIGHTS.bold,
     lineHeight: FONT_SIZES.huge * LINE_HEIGHTS.tight,
     letterSpacing: LETTER_SPACING.tighter,
   },
-  display2: {
+  displayMedium: {
     fontSize: FONT_SIZES.display, 
     fontWeight: FONT_WEIGHTS.bold,
     lineHeight: FONT_SIZES.display * LINE_HEIGHTS.tight,
     letterSpacing: LETTER_SPACING.tighter,
   },
-  
-  // Heading styles - Enhanced with more distinction
-  h1: {
+  displaySmall: {
     fontSize: FONT_SIZES.xxxl,
     fontWeight: FONT_WEIGHTS.bold,
     lineHeight: FONT_SIZES.xxxl * LINE_HEIGHTS.tight,
     letterSpacing: LETTER_SPACING.tight,
   },
-  h2: {
+  
+  // Heading styles - Enhanced with more distinction
+  headingLarge: {
+    fontSize: FONT_SIZES.xxxl,
+    fontWeight: FONT_WEIGHTS.bold,
+    lineHeight: FONT_SIZES.xxxl * LINE_HEIGHTS.tight,
+    letterSpacing: LETTER_SPACING.tight,
+  },
+  headingMedium: {
     fontSize: FONT_SIZES.xxl,
     fontWeight: FONT_WEIGHTS.bold,
     lineHeight: FONT_SIZES.xxl * LINE_HEIGHTS.tight,
     letterSpacing: LETTER_SPACING.tight,
   },
-  h3: {
+  headingSmall: {
     fontSize: FONT_SIZES.xl,
     fontWeight: FONT_WEIGHTS.semibold,
     lineHeight: FONT_SIZES.xl * LINE_HEIGHTS.tight,
     letterSpacing: LETTER_SPACING.normal,
   },
-  h4: {
+  subheading: {
     fontSize: FONT_SIZES.lg,
     fontWeight: FONT_WEIGHTS.semibold,
     lineHeight: FONT_SIZES.lg * LINE_HEIGHTS.tight,
     letterSpacing: LETTER_SPACING.normal,
   },
   
-  // Body text styles - More variations
-  body1: {
-    fontSize: FONT_SIZES.md,
-    fontWeight: FONT_WEIGHTS.regular,
-    lineHeight: FONT_SIZES.md * LINE_HEIGHTS.normal,
-    letterSpacing: LETTER_SPACING.normal,
-  },
-  body2: {
-    fontSize: FONT_SIZES.sm,
-    fontWeight: FONT_WEIGHTS.regular,
-    lineHeight: FONT_SIZES.sm * LINE_HEIGHTS.normal,
-    letterSpacing: LETTER_SPACING.normal,
-  },
+  // Body text styles - With semantic naming
   bodyLarge: {
     fontSize: FONT_SIZES.lg,
     fontWeight: FONT_WEIGHTS.regular,
     lineHeight: FONT_SIZES.lg * LINE_HEIGHTS.normal,
     letterSpacing: LETTER_SPACING.normal,
   },
-  bodyEmphasis: {
+  bodyMedium: {
+    fontSize: FONT_SIZES.md,
+    fontWeight: FONT_WEIGHTS.regular,
+    lineHeight: FONT_SIZES.md * LINE_HEIGHTS.normal,
+    letterSpacing: LETTER_SPACING.normal,
+  },
+  bodySmall: {
+    fontSize: FONT_SIZES.sm,
+    fontWeight: FONT_WEIGHTS.regular,
+    lineHeight: FONT_SIZES.sm * LINE_HEIGHTS.normal,
+    letterSpacing: LETTER_SPACING.normal,
+  },
+  bodyEmphasized: {
     fontSize: FONT_SIZES.md,
     fontWeight: FONT_WEIGHTS.medium,
     lineHeight: FONT_SIZES.md * LINE_HEIGHTS.normal,
     letterSpacing: LETTER_SPACING.normal,
   },
   
-  // Utility text styles
+  // Utility text styles with semantic names
   button: {
-    fontSize: FONT_SIZES.md,
-    fontWeight: FONT_WEIGHTS.medium,
-    lineHeight: FONT_SIZES.md * LINE_HEIGHTS.tight,
+    fontSize: FONT_SIZES.lg,
+    fontWeight: FONT_WEIGHTS.semibold,
+    lineHeight: FONT_SIZES.lg * LINE_HEIGHTS.tight,
     letterSpacing: LETTER_SPACING.wide,
   },
   buttonSmall: {
-    fontSize: FONT_SIZES.sm,
-    fontWeight: FONT_WEIGHTS.medium,
-    lineHeight: FONT_SIZES.sm * LINE_HEIGHTS.tight,
+    fontSize: FONT_SIZES.md,
+    fontWeight: FONT_WEIGHTS.semibold,
+    lineHeight: FONT_SIZES.md * LINE_HEIGHTS.tight,
     letterSpacing: LETTER_SPACING.wide,
   },
   caption: {
@@ -161,6 +167,12 @@ const BASE_TEXT_STYLES = {
     lineHeight: FONT_SIZES.xs * LINE_HEIGHTS.normal,
     letterSpacing: LETTER_SPACING.wider,
     textTransform: 'uppercase' as const,
+  },
+  note: {
+    fontSize: FONT_SIZES.xxs,
+    fontWeight: FONT_WEIGHTS.regular,
+    lineHeight: FONT_SIZES.xxs * LINE_HEIGHTS.normal,
+    letterSpacing: LETTER_SPACING.normal,
   },
   subtitle: {
     fontSize: FONT_SIZES.lg,
@@ -212,20 +224,21 @@ function createTextStyles(themeName: ThemeName = 'default'): Record<string, Text
   // Create styles with theme-specific fonts
   const styles = {
     // Display styles
-    display1: addFontFamily(BASE_TEXT_STYLES.display1, themeFonts.primary),
-    display2: addFontFamily(BASE_TEXT_STYLES.display2, themeFonts.primary),
+    displayLarge: addFontFamily(BASE_TEXT_STYLES.displayLarge, themeFonts.primary),
+    displayMedium: addFontFamily(BASE_TEXT_STYLES.displayMedium, themeFonts.primary),
+    displaySmall: addFontFamily(BASE_TEXT_STYLES.displaySmall, themeFonts.primary),
     
     // Heading styles
-    h1: addFontFamily(BASE_TEXT_STYLES.h1, themeFonts.primary),
-    h2: addFontFamily(BASE_TEXT_STYLES.h2, themeFonts.primary),
-    h3: addFontFamily(BASE_TEXT_STYLES.h3, themeFonts.primary),
-    h4: addFontFamily(BASE_TEXT_STYLES.h4, themeFonts.primary),
+    headingLarge: addFontFamily(BASE_TEXT_STYLES.headingLarge, themeFonts.primary),
+    headingMedium: addFontFamily(BASE_TEXT_STYLES.headingMedium, themeFonts.primary),
+    headingSmall: addFontFamily(BASE_TEXT_STYLES.headingSmall, themeFonts.primary),
+    subheading: addFontFamily(BASE_TEXT_STYLES.subheading, themeFonts.primary),
     
     // Body styles
-    body1: addFontFamily(BASE_TEXT_STYLES.body1, themeFonts.secondary),
-    body2: addFontFamily(BASE_TEXT_STYLES.body2, themeFonts.secondary),
     bodyLarge: addFontFamily(BASE_TEXT_STYLES.bodyLarge, themeFonts.secondary),
-    bodyEmphasis: addFontFamily(BASE_TEXT_STYLES.bodyEmphasis, themeFonts.secondary),
+    bodyMedium: addFontFamily(BASE_TEXT_STYLES.bodyMedium, themeFonts.secondary),
+    bodySmall: addFontFamily(BASE_TEXT_STYLES.bodySmall, themeFonts.secondary),
+    bodyEmphasized: addFontFamily(BASE_TEXT_STYLES.bodyEmphasized, themeFonts.secondary),
     
     // Utility styles
     button: addFontFamily(BASE_TEXT_STYLES.button, themeFonts.secondary),
@@ -233,6 +246,7 @@ function createTextStyles(themeName: ThemeName = 'default'): Record<string, Text
     caption: addFontFamily(BASE_TEXT_STYLES.caption, themeFonts.secondary),
     label: addFontFamily(BASE_TEXT_STYLES.label, themeFonts.secondary),
     overline: addFontFamily(BASE_TEXT_STYLES.overline, themeFonts.secondary),
+    note: addFontFamily(BASE_TEXT_STYLES.note, themeFonts.secondary),
     subtitle: addFontFamily(BASE_TEXT_STYLES.subtitle, themeFonts.secondary),
   };
   
@@ -241,10 +255,10 @@ function createTextStyles(themeName: ThemeName = 'default'): Record<string, Text
     return {
       ...styles,
       // Serif fonts often need different letter spacing
-      h1: addFontFamily({ ...BASE_TEXT_STYLES.h1, letterSpacing: LETTER_SPACING.tighter }, themeFonts.primary),
-      h2: addFontFamily({ ...BASE_TEXT_STYLES.h2, letterSpacing: LETTER_SPACING.tighter }, themeFonts.primary),
-      display1: addFontFamily({ ...BASE_TEXT_STYLES.display1, letterSpacing: LETTER_SPACING.tighter }, themeFonts.primary),
-      display2: addFontFamily({ ...BASE_TEXT_STYLES.display2, letterSpacing: LETTER_SPACING.tighter }, themeFonts.primary),
+      headingLarge: addFontFamily({ ...BASE_TEXT_STYLES.headingLarge, letterSpacing: LETTER_SPACING.tighter }, themeFonts.primary),
+      headingMedium: addFontFamily({ ...BASE_TEXT_STYLES.headingMedium, letterSpacing: LETTER_SPACING.tighter }, themeFonts.primary),
+      displayLarge: addFontFamily({ ...BASE_TEXT_STYLES.displayLarge, letterSpacing: LETTER_SPACING.tighter }, themeFonts.primary),
+      displayMedium: addFontFamily({ ...BASE_TEXT_STYLES.displayMedium, letterSpacing: LETTER_SPACING.tighter }, themeFonts.primary),
     };
   }
   

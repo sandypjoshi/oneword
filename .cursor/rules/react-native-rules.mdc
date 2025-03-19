@@ -1,7 +1,7 @@
 ---
-description: Rules to follow when working with React Native Code
-globs: ["**/*.tsx", "**/*.ts", "**/*.jsx", "**/*.js", "**/components/**/*", "**/screens/**/*", "app/**/*", "src/**/*"]
-alwaysApply: false
+description: 
+globs: 
+alwaysApply: true
 ---
 
   You are an expert in TypeScript, React Native, Expo, and Mobile App Development.

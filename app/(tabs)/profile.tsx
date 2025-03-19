@@ -26,10 +26,10 @@ const DevThemeSelector = () => {
 
   return (
     <View style={{ width: '100%', marginTop: spacing.lg }}>
-      <Text variant="h3" style={{ marginBottom: spacing.md }}>Theme Settings (Dev)</Text>
+      <Text variant="headingSmall">Theme Settings (Dev)</Text>
       
       {/* Theme Selection */}
-      <Text variant="h4" style={{ marginTop: spacing.md, marginBottom: spacing.sm }}>Theme Style</Text>
+      <Text variant="headingSmall" style={{ marginTop: spacing.md, marginBottom: spacing.sm }}>Theme Style</Text>
       <View style={{ gap: spacing.sm }}>
         {themes.map((theme) => (
           <TouchableOpacity
@@ -49,7 +49,7 @@ const DevThemeSelector = () => {
       </View>
       
       {/* Color Mode Selection */}
-      <Text variant="h4" style={{ marginTop: spacing.lg, marginBottom: spacing.sm }}>Appearance</Text>
+      <Text variant="headingSmall" style={{ marginTop: spacing.lg, marginBottom: spacing.sm }}>Appearance</Text>
       <View style={{ gap: spacing.sm }}>
         {colorModes.map((mode) => (
           <TouchableOpacity
@@ -102,14 +102,13 @@ export default function ProfileScreen() {
   return (
     <ScrollView style={[styles.container, { backgroundColor: colors.background.primary }]}>
       <Box padding="lg" align="center">
-        <Text variant="h2">Profile</Text>
+        <Text variant="headingMedium">Profile</Text>
         <Text 
-          variant="body1" 
+          variant="bodyMedium"
           color={colors.text.secondary}
           align="center"
-          style={styles.subtitle}
         >
-          Coming Soon
+          Profile section coming soon...
         </Text>
         
         {/* Link to Theme Settings */}
@@ -161,9 +160,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  subtitle: {
-    marginTop: 8,
   },
   resetButton: {
     padding: 12,

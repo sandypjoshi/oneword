@@ -12,9 +12,9 @@ export default function LoginScreen() {
   return (
     <View style={[styles.container, { backgroundColor: colors.background.primary }]}>
       <Box padding="lg" flex={1} align="center" justify="center">
-        <Text variant="h1" align="center">Login</Text>
+        <Text variant="displayLarge" align="center">Login</Text>
         <Text 
-          variant="body1" 
+          variant="bodyMedium"
           color={colors.text.secondary}
           align="center"
           style={{ marginBottom: spacing.xl, marginTop: spacing.md }}

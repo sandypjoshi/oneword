@@ -1,24 +1,26 @@
 import React from 'react';
-import { Text as RNText, TextProps as RNTextProps, TextStyle, StyleSheet } from 'react-native';
+import { Text as RNText, TextProps as RNTextProps, TextStyle, StyleProp } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
 
 // Use all the typography variants that are now defined
 type TypographyVariant = 
-  | 'display1' 
-  | 'display2' 
-  | 'h1' 
-  | 'h2' 
-  | 'h3' 
-  | 'h4' 
-  | 'body1' 
-  | 'body2'
+  | 'displayLarge' 
+  | 'displayMedium' 
+  | 'displaySmall' 
+  | 'headingLarge' 
+  | 'headingMedium' 
+  | 'headingSmall' 
+  | 'subheading' 
   | 'bodyLarge'
-  | 'bodyEmphasis'
+  | 'bodyMedium'
+  | 'bodySmall'
+  | 'bodyEmphasized'
   | 'button'
   | 'buttonSmall'
   | 'caption'
   | 'label'
   | 'overline'
+  | 'note'
   | 'subtitle';
 
 interface TextProps extends RNTextProps {
@@ -29,94 +31,13 @@ interface TextProps extends RNTextProps {
 }
 
 /**
- * Safe style creator that prevents undefined values
- * Ensures we never pass undefined to React Native style system
+ * Text component that uses the typography system
+ * All text in the app should use this component
  */
-const createSafeStyles = (
-  props: {
-    typography: any;
-    colors: any;
-    variant: TypographyVariant;
-    color?: string;
-    align?: TextProps['align'];
-    weight?: TextProps['weight'];
-  }
-) => {
-  // Create an empty style object that's safe to spread
-  const safeStyle: Record<string, any> = {};
-  
-  try {
-    // Safely extract base typography style
-    const typographyStyle = props.typography?.styles || {};
-    const variantStyle = typographyStyle[props.variant] || {};
-    
-    // Safely extract font size
-    if (typeof variantStyle.fontSize === 'number') {
-      safeStyle.fontSize = variantStyle.fontSize;
-    }
-    
-    // Safely extract font weight
-    if (variantStyle.fontWeight) {
-      safeStyle.fontWeight = variantStyle.fontWeight;
-    }
-    
-    // Safely extract line height
-    if (typeof variantStyle.lineHeight === 'number') {
-      safeStyle.lineHeight = variantStyle.lineHeight;
-    }
-    
-    // Safely extract letter spacing
-    if (typeof variantStyle.letterSpacing === 'number') {
-      safeStyle.letterSpacing = variantStyle.letterSpacing;
-    }
-    
-    // Safely extract font family
-    if (variantStyle.fontFamily) {
-      safeStyle.fontFamily = variantStyle.fontFamily;
-    }
-    
-    // Safely extract text transform
-    if (variantStyle.textTransform) {
-      safeStyle.textTransform = variantStyle.textTransform;
-    }
-    
-    // Safely extract font style
-    if (variantStyle.fontStyle) {
-      safeStyle.fontStyle = variantStyle.fontStyle;
-    }
-    
-    // Apply color override or default
-    if (props.color) {
-      safeStyle.color = props.color;
-    } else if (props.colors?.text?.primary) {
-      safeStyle.color = props.colors.text.primary;
-    }
-    
-    // Apply text alignment if specified
-    if (props.align) {
-      safeStyle.textAlign = props.align;
-    }
-    
-    // Apply font weight override if specified
-    if (props.weight) {
-      safeStyle.fontWeight = props.weight;
-    }
-  } catch (error) {
-    // Fallback to defaults if anything goes wrong
-    console.warn('Error creating text styles:', error);
-    
-    // Apply minimal safe defaults
-    safeStyle.fontSize = 16;
-    safeStyle.color = '#000000';
-  }
-  
-  return StyleSheet.create({ text: safeStyle }).text;
-};
-
 const Text: React.FC<TextProps> = ({
   children,
   style,
-  variant = 'body1',
+  variant = 'bodyMedium',
   color,
   align,
   weight,
@@ -124,24 +45,45 @@ const Text: React.FC<TextProps> = ({
 }) => {
   // Get theme safely with defaults
   const theme = useTheme();
-  const typography = theme?.typography || {};
+  const typographyStyles = theme?.typography || {};
   const colors = theme?.colors || {};
   
-  // Create styles with maximum safety
-  const safeTextStyle = React.useMemo(() => {
-    return createSafeStyles({
-      typography,
-      colors,
-      variant,
-      color,
-      align,
-      weight,
-    });
-  }, [typography, colors, variant, color, align, weight]);
+  // Get the variant style
+  const variantStyle = typographyStyles[variant] || {};
+  
+  // Build the style object in the correct order of specificity
+  const baseStyle: TextStyle = {
+    ...variantStyle,
+  };
+  
+  // Set text color
+  if (color) {
+    baseStyle.color = color;
+  } else if (colors?.text?.primary) {
+    baseStyle.color = colors.text.primary;
+  }
+  
+  // Set text alignment
+  if (align) {
+    baseStyle.textAlign = align;
+  }
+  
+  // Override font weight if specified
+  if (weight) {
+    baseStyle.fontWeight = weight;
+  }
+
+  // Force a style array to help React Native properly apply all styles
+  const finalStyle: StyleProp<TextStyle> = [baseStyle];
+  
+  // Add any custom styles with higher priority
+  if (style) {
+    finalStyle.push(style);
+  }
 
   return (
     <RNText 
-      style={[safeTextStyle, style]} 
+      style={finalStyle}
       {...rest}
     >
       {children}
