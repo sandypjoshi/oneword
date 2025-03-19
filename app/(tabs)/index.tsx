@@ -3,7 +3,6 @@ import {
   StyleSheet, 
   View, 
   ActivityIndicator, 
-  FlatList, 
   useWindowDimensions,
   ViewToken,
   TouchableOpacity,
@@ -11,6 +10,7 @@ import {
   useColorScheme,
   ScrollView
 } from 'react-native';
+import { FlashList } from '@shopify/flash-list';
 import { useNavigation } from 'expo-router';
 import { WordCard, EmptyWordCard } from '../../src/components/today';
 import { useThemeReady } from '../../src/hooks';
@@ -35,7 +35,8 @@ export default function HomeScreen() {
   const [words, setWords] = useState<ExtendedWordOfDay[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [activeIndex, setActiveIndex] = useState<number>(0);
-  const flatListRef = useRef<FlatList>(null);
+  
+  const flashListRef = useRef<FlashList<ExtendedWordOfDay>>(null);
   const scrollViewRef = useRef<ScrollView>(null);
   const isProgrammaticScrollRef = useRef(false);
   const loadAttempted = useRef(false);
@@ -52,7 +53,8 @@ export default function HomeScreen() {
     return {
       container: {
         flex: 1,
-        backgroundColor: colors.background.primary
+        backgroundColor: colors.background.primary,
+        paddingBottom: spacing.xl,
       } as const,
       loadingContainer: {
         flex: 1,
@@ -98,11 +100,14 @@ export default function HomeScreen() {
       } as const,
       carouselContent: {
         alignItems: 'center',
+        paddingBottom: spacing.md,
       } as const,
       cardContainer: {
         justifyContent: 'center',
         alignItems: 'center',
         height: '100%',
+        paddingBottom: spacing.xl,
+        paddingTop: spacing.md,
       } as any, // Type assertion for dimensions
       cardWrapper: {
         width: '90%',
@@ -172,7 +177,7 @@ export default function HomeScreen() {
         // Generate dates for the past 14 days
         // IMPORTANT: This loop generates dates in chronological order (oldest → newest)
         // The loop starts from the oldest date (i=13, 13 days ago) and ends with today (i=0)
-        // This ensures our FlatList will show past days on the left and today on the right
+        // This ensures our FlashList will show past days on the left and today on the right
         for (let i = 13; i >= 0; i--) {
           const date = new Date(today);
           date.setDate(date.getDate() - i);
@@ -212,9 +217,9 @@ export default function HomeScreen() {
         
         // Scroll to the end (today's word) after render
         setTimeout(() => {
-          if (flatListRef.current && allDays.length > 0) {
+          if (flashListRef.current && allDays.length > 0) {
             isProgrammaticScrollRef.current = true;
-            flatListRef.current.scrollToIndex({
+            flashListRef.current.scrollToIndex({
               index: lastIndex,
               animated: false
             });
@@ -270,8 +275,8 @@ export default function HomeScreen() {
       });
     }
 
-    if (flatListRef.current) {
-      flatListRef.current.scrollToIndex({
+    if (flashListRef.current) {
+      flashListRef.current.scrollToIndex({
         index,
         animated: true
       });
@@ -283,7 +288,7 @@ export default function HomeScreen() {
     }
   }, [width]);
   
-  // Update ScrollView position when active index changes from FlatList scroll
+  // Update ScrollView position when active index changes from FlashList scroll
   useEffect(() => {
     if (!isProgrammaticScrollRef.current && scrollViewRef.current) {
       const offset = activeIndex * DOT_WIDTH - (width / 2) + (DOT_WIDTH / 2);
@@ -298,16 +303,6 @@ export default function HomeScreen() {
   const viewabilityConfig = useMemo(() => ({
     itemVisiblePercentThreshold: 50,
   }), []);
-  
-  // Memoize getItemLayout for better FlatList performance
-  const getItemLayout = useCallback((
-    _: any, 
-    index: number
-  ) => ({
-    length: width,
-    offset: width * index,
-    index,
-  }), [width]);
   
   // Render pagination indicators
   const renderPaginationDots = useCallback(() => {
@@ -412,13 +407,13 @@ export default function HomeScreen() {
       
       {/* Word cards carousel */}
       {/* 
-        FlatList displays words in chronological order:
+        FlashList displays words in chronological order:
         - LEFT side = oldest words (past days)
         - RIGHT side = newest word (today)
         - initialScrollIndex is set to the last item (today) to start the view from the right
       */}
-      <FlatList
-        ref={flatListRef}
+      <FlashList
+        ref={flashListRef}
         data={words}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
@@ -427,15 +422,18 @@ export default function HomeScreen() {
         showsHorizontalScrollIndicator={false}
         onViewableItemsChanged={onViewableItemsChanged}
         viewabilityConfig={viewabilityConfig}
-        initialNumToRender={3}
-        maxToRenderPerBatch={3}
-        windowSize={5}
-        getItemLayout={getItemLayout}
-        contentContainerStyle={themeStyles.carouselContent}
+        estimatedItemSize={width}
         initialScrollIndex={words.length - 1}
         maintainVisibleContentPosition={{
           minIndexForVisible: 0,
         }}
+        contentInsetAdjustmentBehavior="automatic"
+        disableScrollViewPanResponder={true}
+        drawDistance={width * 3}
+        scrollEnabled={true}
+        ListEmptyComponent={<View style={{ height: 200 }} />}
+        decelerationRate="normal"
+        bounces={true}
       />
     </View>
   );
