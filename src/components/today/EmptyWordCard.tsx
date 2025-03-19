@@ -3,6 +3,7 @@ import { StyleSheet, View, ViewStyle } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
 import { Box } from '../layout';
 import { Text } from '../ui';
+import { radius, elevation } from '../../theme/styleUtils';
 
 interface EmptyWordCardProps {
   /**
@@ -41,11 +42,12 @@ const EmptyWordCardComponent: React.FC<EmptyWordCardProps> = ({
         { 
           backgroundColor: colors.background.card,
           borderColor: colors.border.light,
+          borderRadius: radius.xl,
         },
         style
       ]}
     >
-      <Box padding="lg" align="center" justify="center">
+      <Box padding="lg" align="center" justify="center" style={{ flex: 1 }}>
         <View style={styles.iconContainer}>
           <Text 
             variant="displayMedium" 
@@ -72,16 +74,11 @@ const EmptyWordCard = memo(EmptyWordCardComponent);
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius: 16,
     borderWidth: 1,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
+    ...elevation.sm,
     overflow: 'hidden',
-    minHeight: 280,
-    justifyContent: 'center',
+    flex: 1,
+    display: 'flex',
   },
   iconContainer: {
     marginBottom: 16,

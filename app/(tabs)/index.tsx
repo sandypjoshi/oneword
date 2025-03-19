@@ -18,6 +18,7 @@ import { WordOfDay } from '../../src/types/wordOfDay';
 import { wordOfDayService } from '../../src/services/wordOfDayService';
 import themes from '../../src/theme/colors';
 import { Text as CustomText } from '../../src/components/ui';
+import { radius } from '../../src/theme/styleUtils';
 
 // Constants
 const DOT_SIZE = 32; // Size of each indicator dot
@@ -330,14 +331,16 @@ export default function HomeScreen() {
     
     return (
       <View style={[styles.cardContainer, { width }]}>
-        {isPlaceholder ? (
-          <EmptyWordCard 
-            style={styles.wordCard} 
-            date={item.date}
-          />
-        ) : (
-          <WordCard wordData={item} style={styles.wordCard} />
-        )}
+        <View style={styles.cardWrapper}>
+          {isPlaceholder ? (
+            <EmptyWordCard 
+              style={styles.wordCard} 
+              date={item.date}
+            />
+          ) : (
+            <WordCard wordData={item} style={styles.wordCard} />
+          )}
+        </View>
       </View>
     );
   }, [width]);
@@ -423,7 +426,7 @@ const styles = StyleSheet.create({
   paginationDot: {
     width: DOT_SIZE,
     height: DOT_SIZE,
-    borderRadius: DOT_SIZE / 2,
+    borderRadius: radius.circular,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -433,9 +436,16 @@ const styles = StyleSheet.create({
   cardContainer: {
     justifyContent: 'center',
     alignItems: 'center',
+    height: '100%',
+  },
+  cardWrapper: {
+    width: '90%',
+    maxWidth: 500,
+    flex: 1,
+    paddingVertical: 20,
   },
   wordCard: {
     width: '100%',
-    maxWidth: 500,
+    flex: 1,
   },
 }); 

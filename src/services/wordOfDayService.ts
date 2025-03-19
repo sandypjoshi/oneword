@@ -1,122 +1,129 @@
 import { WordOfDay } from '../types/wordOfDay';
 
-// Mock data for words of the day
+// Get today's and yesterday's dates in ISO format
+const today = new Date();
+const yesterday = new Date();
+yesterday.setDate(today.getDate() - 1);
+const todayStr = today.toISOString().split('T')[0];
+const yesterdayStr = yesterday.toISOString().split('T')[0];
+
+// Mock data for words of the day with correct dates
 const mockWords: WordOfDay[] = [
   {
     id: '1',
+    word: 'ineffable',
+    pronunciation: '/ɪnˈɛfəb(ə)l/',
+    partOfSpeech: 'adjective',
+    definition: 'Too great or extreme to be expressed or described in words',
+    example: 'The ineffable beauty of the night sky',
+    date: todayStr // Today's actual date
+  },
+  {
+    id: '2',
     word: 'serendipity',
     pronunciation: '/ˌsɛrənˈdɪpɪti/',
     partOfSpeech: 'noun',
     definition: 'The occurrence and development of events by chance in a happy or beneficial way',
-    example: 'A fortunate happenstance or pleasant surprise',
-    date: '2025-03-17' // Today
+    example: 'A fortunate happenstance of meeting an old friend',
+    date: yesterdayStr // Yesterday's actual date
   },
   {
-    id: '2',
+    id: '3',
     word: 'ephemeral',
     pronunciation: '/ɪˈfɛm(ə)rəl/',
     partOfSpeech: 'adjective',
     definition: 'Lasting for a very short time',
-    example: 'Fashions are ephemeral',
-    date: '2025-03-16'
-  },
-  {
-    id: '3',
-    word: 'ubiquitous',
-    pronunciation: '/juːˈbɪkwɪtəs/',
-    partOfSpeech: 'adjective',
-    definition: 'Present, appearing, or found everywhere',
-    example: 'Ubiquitous computing',
+    example: 'The ephemeral nature of fashion trends',
     date: '2025-03-15'
   },
   {
     id: '4',
-    word: 'mellifluous',
-    pronunciation: '/məˈlɪfluəs/',
+    word: 'ubiquitous',
+    pronunciation: '/juːˈbɪkwɪtəs/',
     partOfSpeech: 'adjective',
-    definition: 'Sweet or musical; pleasant to hear',
-    example: "The singer's mellifluous voice",
+    definition: 'Present, appearing, or found everywhere',
+    example: 'Smartphones have become ubiquitous in modern life',
     date: '2025-03-14'
   },
   {
     id: '5',
-    word: 'eloquent',
-    pronunciation: '/ˈɛləkwənt/',
+    word: 'mellifluous',
+    pronunciation: '/məˈlɪfluəs/',
     partOfSpeech: 'adjective',
-    definition: 'Fluent or persuasive in speaking or writing',
-    example: 'An eloquent speech',
+    definition: 'Sweet or musical; pleasant to hear',
+    example: "The singer's mellifluous voice captivated the audience",
     date: '2025-03-13'
   },
   {
     id: '6',
-    word: 'resilience',
-    pronunciation: '/rɪˈzɪlɪəns/',
-    partOfSpeech: 'noun',
-    definition: 'The capacity to recover quickly from difficulties; toughness',
-    example: 'The resilience of the human spirit',
+    word: 'eloquent',
+    pronunciation: '/ˈɛləkwənt/',
+    partOfSpeech: 'adjective',
+    definition: 'Fluent or persuasive in speaking or writing',
+    example: 'Her eloquent speech moved everyone to tears',
     date: '2025-03-12'
   },
   {
     id: '7',
-    word: 'meticulous',
-    pronunciation: '/məˈtɪkjʊləs/',
-    partOfSpeech: 'adjective',
-    definition: 'Showing great attention to detail; very careful and precise',
-    example: 'Meticulous research',
+    word: 'resilience',
+    pronunciation: '/rɪˈzɪlɪəns/',
+    partOfSpeech: 'noun',
+    definition: 'The capacity to recover quickly from difficulties; toughness',
+    example: 'He showed remarkable resilience in the face of adversity',
     date: '2025-03-11'
   },
   {
     id: '8',
-    word: 'pernicious',
-    pronunciation: '/pərˈnɪʃəs/',
+    word: 'meticulous',
+    pronunciation: '/məˈtɪkjʊləs/',
     partOfSpeech: 'adjective',
-    definition: 'Having a harmful effect, especially in a gradual or subtle way',
-    example: 'The pernicious effects of corruption',
+    definition: 'Showing great attention to detail; very careful and precise',
+    example: 'His meticulous research uncovered new evidence',
     date: '2025-03-10'
   },
   {
     id: '9',
-    word: 'sycophant',
-    pronunciation: '/ˈsɪkəfənt/',
-    partOfSpeech: 'noun',
-    definition: 'A person who acts obsequiously toward someone important in order to gain advantage',
-    example: 'Political sycophants',
+    word: 'perspicacious',
+    pronunciation: '/ˌpəːspɪˈkeɪʃəs/',
+    partOfSpeech: 'adjective',
+    definition: 'Having a ready insight into and understanding of things',
+    example: 'Her perspicacious comments revealed the truth of the situation',
     date: '2025-03-09'
   },
   {
     id: '10',
-    word: 'cacophony',
-    pronunciation: '/kəˈkɒfəni/',
+    word: 'sycophant',
+    pronunciation: '/ˈsɪkəfənt/',
     partOfSpeech: 'noun',
-    definition: 'A harsh, discordant mixture of sounds',
-    example: 'A cacophony of voices',
+    definition: 'A person who acts obsequiously toward someone important in order to gain advantage',
+    example: 'The CEO was surrounded by sycophants who agreed with everything he said',
     date: '2025-03-08'
   },
   {
     id: '11',
-    word: 'quintessential',
-    pronunciation: '/ˌkwɪntɪˈsɛnʃ(ə)l/',
-    partOfSpeech: 'adjective',
-    definition: 'Representing the most perfect or typical example of a quality or class',
-    example: 'The quintessential New York experience',
+    word: 'cacophony',
+    pronunciation: '/kəˈkɒfəni/',
+    partOfSpeech: 'noun',
+    definition: 'A harsh, discordant mixture of sounds',
+    example: 'The cacophony of the busy market made conversation difficult',
     date: '2025-03-07'
   },
   {
     id: '12',
-    word: 'juxtaposition',
-    pronunciation: '/ˌdʒʌkstəpəˈzɪʃ(ə)n/',
-    partOfSpeech: 'noun',
-    definition: 'The fact of two things being seen or placed close together with contrasting effect',
-    example: 'The juxtaposition of the old and new buildings',
+    word: 'quintessential',
+    pronunciation: '/ˌkwɪntɪˈsɛnʃ(ə)l/',
+    partOfSpeech: 'adjective',
+    definition: 'Representing the most perfect or typical example of a quality or class',
+    example: 'The quintessential New York experience includes a walk through Central Park',
     date: '2025-03-06'
   },
   {
     id: '13',
-    word: 'perfidious',
-    pronunciation: '/pəˈfɪdɪəs/',
-    partOfSpeech: 'adjective',
-    definition: 'Deceitful and untrustworthy',
-    example: 'Perfidious behavior',
+    word: 'juxtaposition',
+    pronunciation: '/ˌdʒʌkstəpəˈzɪʃ(ə)n/',
+    partOfSpeech: 'noun',
+    definition: 'The fact of two things being seen or placed close together with contrasting effect',
+    example: 'The juxtaposition of ancient and modern architecture created a unique cityscape',
     date: '2025-03-05'
   },
   {
@@ -125,7 +132,7 @@ const mockWords: WordOfDay[] = [
     pronunciation: '/bəˈnɛvələnt/',
     partOfSpeech: 'adjective',
     definition: 'Well meaning and kindly',
-    example: 'A benevolent gesture',
+    example: 'The benevolent donor gave generously to the charity',
     date: '2025-03-04'
   },
 ];

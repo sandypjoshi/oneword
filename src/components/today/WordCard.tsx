@@ -4,6 +4,7 @@ import { WordOfDay } from '../../types/wordOfDay';
 import { useTheme } from '../../theme/ThemeProvider';
 import { Box } from '../layout';
 import { Text } from '../ui';
+import { radius, elevation } from '../../theme/styleUtils';
 
 interface WordCardProps {
   /**
@@ -34,11 +35,12 @@ const WordCardComponent: React.FC<WordCardProps> = ({
         { 
           backgroundColor: colors.background.card,
           borderColor: colors.border.light,
+          borderRadius: radius.xl,
         },
         style
       ]}
     >
-      <Box padding="lg">
+      <Box padding="lg" style={{ flex: 1, justifyContent: 'center' }}>
         {/* Word and pronunciation */}
         <View style={styles.headerSection}>
           <Text 
@@ -112,15 +114,11 @@ const WordCard = memo(WordCardComponent);
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius: 16,
     borderWidth: 1,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
+    ...elevation.sm,
     overflow: 'hidden',
-    minHeight: 280,
+    flex: 1,
+    display: 'flex',
   },
   headerSection: {
     alignItems: 'center',
@@ -141,7 +139,7 @@ const styles = StyleSheet.create({
   partOfSpeech: {
     paddingHorizontal: 16,
     paddingVertical: 6,
-    borderRadius: 16,
+    borderRadius: radius.pill,
   },
   partOfSpeechText: {
     textTransform: 'lowercase',
