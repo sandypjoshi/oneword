@@ -19,6 +19,11 @@ import { wordOfDayService } from '../../src/services/wordOfDayService';
 import themes from '../../src/theme/colors';
 import { Text as CustomText } from '../../src/components/ui';
 
+// Constants
+const DOT_SIZE = 32; // Size of each indicator dot
+const DOT_GAP = 8;   // Gap between dots
+const DOT_WIDTH = DOT_SIZE + DOT_GAP; // Total width including gap
+
 // Extended WordOfDay type to include placeholder flag
 interface ExtendedWordOfDay extends WordOfDay {
   isPlaceholder?: boolean;
@@ -36,7 +41,40 @@ export default function HomeScreen() {
   const { width } = useWindowDimensions();
   const navigation = useNavigation();
   const systemColorScheme = useColorScheme();
-  const DOT_WIDTH = 36; // 28px dot + 8px gap
+  
+  // Create theme-dependent styles
+  const themeStyles = useMemo(() => {
+    if (!theme) return {};
+    
+    const { colors, spacing } = theme;
+    
+    return {
+      paginationOuterContainer: {
+        paddingVertical: spacing.md,
+      },
+      paginationContainer: {
+        paddingHorizontal: spacing.lg,
+        gap: spacing.sm,
+      },
+      dotTouchable: {
+        padding: spacing.xs,
+      },
+      activeDot: {
+        backgroundColor: colors.primary,
+        shadowColor: colors.text.primary,
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.1,
+        shadowRadius: 2,
+        elevation: 1,
+      },
+      inactiveDot: {
+        backgroundColor: colors.background.secondary,
+        borderWidth: 1,
+        borderColor: colors.border.light,
+        opacity: 0.9,
+      },
+    };
+  }, [theme]);
   
   // Format the date nicely for the header title
   const formatDateForHeader = useCallback((word: ExtendedWordOfDay | null): string => {
@@ -236,13 +274,13 @@ export default function HomeScreen() {
     
     const { colors } = theme;
     return (
-      <View style={styles.paginationOuterContainer}>
+      <View style={[styles.paginationOuterContainer, themeStyles.paginationOuterContainer]}>
         <ScrollView 
           ref={scrollViewRef}
           horizontal 
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.paginationContainer}
-          style={styles.scrollView}
+          contentContainerStyle={[styles.paginationContainer, themeStyles.paginationContainer]}
+          style={styles.paginationScrollView}
         >
           {words.map((word, index) => {
             const isActive = index === activeIndex;
@@ -251,23 +289,20 @@ export default function HomeScreen() {
             return (
               <TouchableOpacity
                 key={index}
-                style={styles.dotTouchable}
+                style={[styles.dotTouchable, themeStyles.dotTouchable]}
                 onPress={() => scrollToIndex(index)}
               >
                 <View
                   style={[
                     styles.paginationDot,
-                    {
-                      backgroundColor: isActive
-                        ? colors.primary
-                        : colors.background.secondary,
-                    },
+                    isActive ? themeStyles.activeDot : themeStyles.inactiveDot,
                   ]}
                 >
                   <CustomText
-                    variant="buttonSmall"
+                    variant="note"
                     color={isActive ? colors.text.inverse : colors.text.secondary}
                     align="center"
+                    weight={isActive ? "600" : "400"}
                   >
                     {dateNum}
                   </CustomText>
@@ -278,7 +313,7 @@ export default function HomeScreen() {
         </ScrollView>
       </View>
     );
-  }, [words, activeIndex, theme, getDateFromWord, scrollToIndex]);
+  }, [words, activeIndex, theme, getDateFromWord, scrollToIndex, themeStyles]);
   
   // Scroll indicators to end on mount
   useEffect(() => {
@@ -376,39 +411,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   paginationOuterContainer: {
-    paddingVertical: 16,
     alignItems: 'flex-end',
   },
-  scrollView: {
+  paginationScrollView: {
     maxWidth: '100%',
   },
   paginationContainer: {
     flexDirection: 'row',
-    paddingHorizontal: 20,
-    gap: 8,
   },
-  dotTouchable: {
-    padding: 4,
-  },
+  dotTouchable: {},
   paginationDot: {
-    width: 28,
-    height: 28,
-    borderRadius: 14,
+    width: DOT_SIZE,
+    height: DOT_SIZE,
+    borderRadius: DOT_SIZE / 2,
     justifyContent: 'center',
     alignItems: 'center',
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.15,
-    shadowRadius: 2,
-  },
-  dateNumber: {
-    fontSize: 12,
-    fontWeight: 'bold',
-    textAlign: 'center',
   },
   carouselContent: {
     alignItems: 'center',
@@ -416,7 +433,6 @@ const styles = StyleSheet.create({
   cardContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 20,
   },
   wordCard: {
     width: '100%',

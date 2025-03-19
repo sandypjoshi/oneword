@@ -1,6 +1,7 @@
 import React from 'react';
-import { Text as RNText, TextProps as RNTextProps, TextStyle, StyleProp } from 'react-native';
+import { Text as RNText, TextProps as RNTextProps, TextStyle, StyleProp, StyleSheet } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
+import { View } from 'react-native';
 
 // Use all the typography variants that are now defined
 type TypographyVariant = 
@@ -90,5 +91,18 @@ const Text: React.FC<TextProps> = ({
     </RNText>
   );
 };
+
+const styles = StyleSheet.create({
+  paginationDot: {
+    width: 28,
+    height: 28,
+    borderRadius: 14,
+    justifyContent: 'center',
+    alignItems: 'center',
+    // Remove shadow styles for unselected state
+    // Add subtle border
+    borderWidth: 1,
+  },
+});
 
 export default Text; 
