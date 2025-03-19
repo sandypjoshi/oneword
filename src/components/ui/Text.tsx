@@ -1,7 +1,7 @@
 import React from 'react';
-import { Text as RNText, TextProps as RNTextProps, TextStyle, StyleProp, StyleSheet } from 'react-native';
+import { Text as RNText, TextProps as RNTextProps, TextStyle, StyleProp } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
-import { View } from 'react-native';
+import { FontCategory } from '../../theme/typography';
 
 // Use all the typography variants that are now defined
 type TypographyVariant = 
@@ -29,6 +29,8 @@ interface TextProps extends RNTextProps {
   color?: string;
   align?: 'auto' | 'left' | 'right' | 'center' | 'justify';
   weight?: 'normal' | 'bold' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
+  fontCategory?: FontCategory;
+  serif?: boolean; // Shorthand for setting fontCategory to 'display' or 'heading'
 }
 
 /**
@@ -42,12 +44,15 @@ const Text: React.FC<TextProps> = ({
   color,
   align,
   weight,
+  fontCategory,
+  serif,
   ...rest
 }) => {
   // Get theme safely with defaults
   const theme = useTheme();
-  const typographyStyles = theme?.typography || {};
+  const typographyStyles = theme?.typography?.styles || {};
   const colors = theme?.colors || {};
+  const fonts = theme?.typography?.fonts || {};
   
   // Get the variant style
   const variantStyle = typographyStyles[variant] || {};
@@ -73,6 +78,28 @@ const Text: React.FC<TextProps> = ({
   if (weight) {
     baseStyle.fontWeight = weight;
   }
+  
+  // Add serif font when requested
+  // We'll use the appropriate serif variant based on text size
+  if (serif) {
+    // Add the serif font to the text based on text size
+    const typographyObj = theme.typography as any;
+    
+    if (typographyObj?.fonts) {
+      // For display variants, use serif display
+      if (variant.startsWith('display')) {
+        baseStyle.fontFamily = typographyObj.fonts.serifDisplay;
+      } 
+      // For small text, use serif small
+      else if (variant === 'caption' || variant === 'note' || variant === 'overline') {
+        baseStyle.fontFamily = typographyObj.fonts.serifSmall;
+      }
+      // For everything else, use standard serif
+      else {
+        baseStyle.fontFamily = typographyObj.fonts.serif;
+      }
+    }
+  }
 
   // Force a style array to help React Native properly apply all styles
   const finalStyle: StyleProp<TextStyle> = [baseStyle];
@@ -91,18 +118,5 @@ const Text: React.FC<TextProps> = ({
     </RNText>
   );
 };
-
-const styles = StyleSheet.create({
-  paginationDot: {
-    width: 28,
-    height: 28,
-    borderRadius: 14,
-    justifyContent: 'center',
-    alignItems: 'center',
-    // Remove shadow styles for unselected state
-    // Add subtle border
-    borderWidth: 1,
-  },
-});
 
 export default Text; 

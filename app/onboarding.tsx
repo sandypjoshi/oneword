@@ -4,7 +4,8 @@ import {
   View, 
   ActivityIndicator, 
   Animated, 
-  Dimensions 
+  Dimensions,
+  Image 
 } from 'react-native';
 import { Box } from '../src/components/layout';
 import { Text, Button } from '../src/components/ui';
@@ -17,6 +18,9 @@ import { DIFFICULTY_LEVELS } from '../src/constants';
 import themes from '../src/theme/colors';
 import { useColorScheme } from 'react-native';
 import { useTheme } from '../src/theme/ThemeProvider';
+
+// Import logo image
+const logoImage = require('../src/assets/images/logo.png');
 
 // Onboarding steps
 enum OnboardingStep {
@@ -124,8 +128,15 @@ export default function OnboardingScreen() {
         ]}
       >
         {/* Image placeholder - upper half */}
-        <Box style={styles.imageContainer}>
-          {/* You will add the image here later */}
+        <Box style={[
+          styles.imageContainer, 
+          { backgroundColor: themeColors.background.primary }
+        ]}>
+          <Image 
+            source={logoImage}
+            style={styles.welcomeImage}
+            resizeMode="contain"
+          />
         </Box>
         
         {/* Content - lower half */}
@@ -241,9 +252,14 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     flex: 1.5,
-    backgroundColor: '#F5F5F5', // Placeholder color
     justifyContent: 'center',
     alignItems: 'center',
+    paddingHorizontal: 32,
+  },
+  welcomeImage: {
+    width: '100%',
+    height: '100%',
+    maxHeight: 250,
   },
   contentContainer: {
     flex: 1,

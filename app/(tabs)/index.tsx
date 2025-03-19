@@ -50,16 +50,38 @@ export default function HomeScreen() {
     const { colors, spacing } = theme;
     
     return {
+      container: {
+        flex: 1,
+        backgroundColor: colors.background.primary
+      } as const,
+      loadingContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: colors.background.primary
+      } as const,
       paginationOuterContainer: {
-        paddingVertical: spacing.md,
-      },
+        paddingVertical: spacing.sm,
+        alignItems: 'flex-end',
+      } as const,
+      paginationScrollView: {
+        maxWidth: '100%',
+      } as const,
       paginationContainer: {
+        flexDirection: 'row',
         paddingHorizontal: spacing.lg,
         gap: spacing.sm,
-      },
+      } as const,
       dotTouchable: {
         padding: spacing.xs,
-      },
+      } as const,
+      paginationDot: {
+        width: DOT_SIZE,
+        height: DOT_SIZE,
+        borderRadius: radius.circular,
+        justifyContent: 'center',
+        alignItems: 'center',
+      } as const,
       activeDot: {
         backgroundColor: colors.primary,
         shadowColor: colors.text.primary,
@@ -67,13 +89,31 @@ export default function HomeScreen() {
         shadowOpacity: 0.1,
         shadowRadius: 2,
         elevation: 1,
-      },
+      } as const,
       inactiveDot: {
         backgroundColor: colors.background.secondary,
         borderWidth: 1,
         borderColor: colors.border.light,
         opacity: 0.9,
-      },
+      } as const,
+      carouselContent: {
+        alignItems: 'center',
+      } as const,
+      cardContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100%',
+      } as any, // Type assertion for dimensions
+      cardWrapper: {
+        width: '90%',
+        maxWidth: 500,
+        flex: 1,
+        paddingVertical: spacing.md,
+      } as any, // Type assertion for dimensions
+      wordCard: {
+        width: '100%',
+        flex: 1,
+      } as any, // Type assertion for dimensions
     };
   }, [theme]);
   
@@ -275,13 +315,13 @@ export default function HomeScreen() {
     
     const { colors } = theme;
     return (
-      <View style={[styles.paginationOuterContainer, themeStyles.paginationOuterContainer]}>
+      <View style={themeStyles.paginationOuterContainer}>
         <ScrollView 
           ref={scrollViewRef}
           horizontal 
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={[styles.paginationContainer, themeStyles.paginationContainer]}
-          style={styles.paginationScrollView}
+          contentContainerStyle={themeStyles.paginationContainer}
+          style={themeStyles.paginationScrollView}
         >
           {words.map((word, index) => {
             const isActive = index === activeIndex;
@@ -290,17 +330,17 @@ export default function HomeScreen() {
             return (
               <TouchableOpacity
                 key={index}
-                style={[styles.dotTouchable, themeStyles.dotTouchable]}
+                style={themeStyles.dotTouchable}
                 onPress={() => scrollToIndex(index)}
               >
                 <View
                   style={[
-                    styles.paginationDot,
+                    themeStyles.paginationDot,
                     isActive ? themeStyles.activeDot : themeStyles.inactiveDot,
                   ]}
                 >
                   <CustomText
-                    variant="note"
+                    variant="caption"
                     color={isActive ? colors.text.inverse : colors.text.secondary}
                     align="center"
                     weight={isActive ? "600" : "400"}
@@ -330,20 +370,20 @@ export default function HomeScreen() {
     const isPlaceholder = item.isPlaceholder;
     
     return (
-      <View style={[styles.cardContainer, { width }]}>
-        <View style={styles.cardWrapper}>
+      <View style={[themeStyles.cardContainer, { width }]}>
+        <View style={themeStyles.cardWrapper}>
           {isPlaceholder ? (
             <EmptyWordCard 
-              style={styles.wordCard} 
+              style={themeStyles.wordCard} 
               date={item.date}
             />
           ) : (
-            <WordCard wordData={item} style={styles.wordCard} />
+            <WordCard wordData={item} style={themeStyles.wordCard} />
           )}
         </View>
       </View>
     );
-  }, [width]);
+  }, [width, themeStyles]);
   
   // Show loading UI that matches theme colors
   if (!isReady || isLoading) {
@@ -354,10 +394,7 @@ export default function HomeScreen() {
     const themeColors = theme?.colors || fallbackColors;
     
     return (
-      <View style={[
-        styles.loadingContainer, 
-        { backgroundColor: themeColors.background.primary }
-      ]}>
+      <View style={themeStyles.loadingContainer}>
         <ActivityIndicator 
           size="large" 
           color={themeColors.primary}
@@ -369,7 +406,7 @@ export default function HomeScreen() {
   const { colors } = theme;
   
   return (
-    <View style={[styles.container, { backgroundColor: colors.background.primary }]}>
+    <View style={themeStyles.container}>
       {/* Pagination indicators */}
       {renderPaginationDots()}
       
@@ -394,7 +431,7 @@ export default function HomeScreen() {
         maxToRenderPerBatch={3}
         windowSize={5}
         getItemLayout={getItemLayout}
-        contentContainerStyle={styles.carouselContent}
+        contentContainerStyle={themeStyles.carouselContent}
         initialScrollIndex={words.length - 1}
         maintainVisibleContentPosition={{
           minIndexForVisible: 0,
@@ -404,48 +441,4 @@ export default function HomeScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  paginationOuterContainer: {
-    alignItems: 'flex-end',
-  },
-  paginationScrollView: {
-    maxWidth: '100%',
-  },
-  paginationContainer: {
-    flexDirection: 'row',
-  },
-  dotTouchable: {},
-  paginationDot: {
-    width: DOT_SIZE,
-    height: DOT_SIZE,
-    borderRadius: radius.circular,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  carouselContent: {
-    alignItems: 'center',
-  },
-  cardContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
-  },
-  cardWrapper: {
-    width: '90%',
-    maxWidth: 500,
-    flex: 1,
-    paddingVertical: 20,
-  },
-  wordCard: {
-    width: '100%',
-    flex: 1,
-  },
-}); 
+// Static styles have been replaced with theme-based styles 

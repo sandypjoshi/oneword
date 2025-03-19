@@ -47,6 +47,7 @@ const WordCardComponent: React.FC<WordCardProps> = ({
             variant="displaySmall"
             color={colors.text.primary}
             align="center"
+            serif={true}
             style={styles.wordText}
             numberOfLines={1}
             adjustsFontSizeToFit
@@ -125,7 +126,6 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   wordText: {
-    fontFamily: 'serif',
     textTransform: 'lowercase',
   },
   pronunciationText: {

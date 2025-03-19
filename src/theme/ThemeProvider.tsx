@@ -22,7 +22,11 @@ type ThemeContextType = {
   isDark: boolean;
   colors: typeof themes.default.light | typeof themes.default.dark;
   spacing: typeof spacing;
-  typography: typeof typography.styles;
+  typography: {
+    styles: typeof typography.styles;
+    fonts: typeof typography.fonts;
+    createTextStyles: typeof typography.createTextStyles;
+  };
   setColorMode: (mode: ColorMode) => void;
   setThemeName: (name: ThemeName) => void;
 };
@@ -40,7 +44,11 @@ const defaultThemeValues: ThemeContextType = {
   isDark: false,
   colors: themes.default.light,
   spacing: spacing,
-  typography: typography.styles,
+  typography: {
+    styles: typography.styles,
+    fonts: typography.fonts,
+    createTextStyles: typography.createTextStyles,
+  },
   setColorMode: () => {},
   setThemeName: () => {},
 };
@@ -164,7 +172,11 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     isDark,
     colors: activeColors,
     spacing: spacing,
-    typography: themeTypography,
+    typography: {
+      styles: themeTypography,
+      fonts: typography.fonts,
+      createTextStyles: typography.createTextStyles,
+    },
     setColorMode: handleSetColorMode,
     setThemeName: handleSetThemeName,
   };
