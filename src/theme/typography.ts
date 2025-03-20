@@ -76,7 +76,6 @@ const FONT_FAMILIES = {
 const FONT_WEIGHTS: Record<string, FontWeight> = {
   regular: '400',
   medium: '500',
-  semibold: '600',
   bold: '700',
   black: '900',
 };
@@ -92,7 +91,8 @@ const FONT_SIZES = {
   xxl: 28,     // Headings
   xxxl: 36,    // Large headings
   display: 40, // Display headings
-  huge: 48,    // Huge display text
+  big: 48,     // Big display text
+  huge: 56,    // Huge display text
 };
 
 // Line heights (multiplier based on font size)
@@ -117,9 +117,9 @@ const LETTER_SPACING = {
 const BASE_TEXT_STYLES = {
   // Display headings for major features
   displayLarge: {
-    fontSize: FONT_SIZES.huge,
+    fontSize: FONT_SIZES.big,
     fontWeight: FONT_WEIGHTS.bold,
-    lineHeight: FONT_SIZES.huge * LINE_HEIGHTS.tight,
+    lineHeight: FONT_SIZES.big * LINE_HEIGHTS.tight,
     letterSpacing: LETTER_SPACING.tighter,
     category: 'display' as FontCategory,
   },
@@ -140,9 +140,9 @@ const BASE_TEXT_STYLES = {
   
   // Serif Text variants at large sizes
   serifTextLarge: {
-    fontSize: FONT_SIZES.huge,
+    fontSize: FONT_SIZES.big,
     fontWeight: FONT_WEIGHTS.regular, // Serif Text only comes in regular weight
-    lineHeight: FONT_SIZES.huge * LINE_HEIGHTS.tight,
+    lineHeight: FONT_SIZES.big * LINE_HEIGHTS.tight,
     letterSpacing: LETTER_SPACING.tighter,
     category: 'display' as FontCategory,
   },
@@ -178,14 +178,14 @@ const BASE_TEXT_STYLES = {
   },
   headingSmall: {
     fontSize: FONT_SIZES.xl,
-    fontWeight: FONT_WEIGHTS.semibold,
+    fontWeight: FONT_WEIGHTS.bold,
     lineHeight: FONT_SIZES.xl * LINE_HEIGHTS.tight,
     letterSpacing: LETTER_SPACING.normal,
     category: 'heading' as FontCategory,
   },
   subheading: {
     fontSize: FONT_SIZES.lg,
-    fontWeight: FONT_WEIGHTS.semibold,
+    fontWeight: FONT_WEIGHTS.bold,
     lineHeight: FONT_SIZES.lg * LINE_HEIGHTS.tight,
     letterSpacing: LETTER_SPACING.normal,
     category: 'heading' as FontCategory,
@@ -224,16 +224,16 @@ const BASE_TEXT_STYLES = {
   // Utility text styles with semantic names
   button: {
     fontSize: FONT_SIZES.lg,
-    fontWeight: FONT_WEIGHTS.semibold,
+    fontWeight: FONT_WEIGHTS.bold,
     lineHeight: FONT_SIZES.lg * LINE_HEIGHTS.tight,
-    letterSpacing: LETTER_SPACING.wide,
+    letterSpacing: LETTER_SPACING.tight,
     category: 'utility' as FontCategory,
   },
   buttonSmall: {
     fontSize: FONT_SIZES.md,
-    fontWeight: FONT_WEIGHTS.semibold,
+    fontWeight: FONT_WEIGHTS.bold,
     lineHeight: FONT_SIZES.md * LINE_HEIGHTS.tight,
-    letterSpacing: LETTER_SPACING.wide,
+    letterSpacing: LETTER_SPACING.tight,
     category: 'utility' as FontCategory,
   },
   caption: {

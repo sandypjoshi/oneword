@@ -118,7 +118,7 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
           )}
           
           <Text 
-            variant="serifTextMedium"
+            variant="serifTextLarge"
             color={colors.text.primary}
             align="center"
             style={{ 

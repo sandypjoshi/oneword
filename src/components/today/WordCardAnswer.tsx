@@ -95,10 +95,9 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
           )}
           
           <Text 
-            variant="displaySmall"
+            variant="serifTextLarge"
             color={colors.text.primary}
             align="center"
-            serif={true}
             style={styles.wordText}
           >
             {word}

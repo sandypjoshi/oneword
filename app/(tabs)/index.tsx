@@ -63,7 +63,7 @@ export default function HomeScreen() {
         backgroundColor: colors.background.primary
       } as const,
       paginationOuterContainer: {
-        paddingVertical: spacing.sm,
+        paddingVertical: spacing.xs,
         alignItems: 'flex-end',
       } as const,
       paginationScrollView: {
@@ -107,7 +107,7 @@ export default function HomeScreen() {
         alignItems: 'center',
         height: '100%',
         paddingBottom: spacing.xl,
-        paddingTop: spacing.md,
+        paddingTop: spacing.xs,
       } as any, // Type assertion for dimensions
       cardWrapper: {
         width: '90%',

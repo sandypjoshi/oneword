@@ -103,8 +103,7 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
           marginBottom: spacing.sm,
           width: '100%',
           backgroundColor: getBackgroundColor(),
-          borderColor: getBorderColor(),
-          borderWidth: state !== 'default' ? 1 : 0,
+          borderWidth: 0,
         },
         style
       ]}
