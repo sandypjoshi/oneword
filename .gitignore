@@ -2,7 +2,8 @@ node_modules
 .env
 .env.local
 .env
-
+.cursor
+.cursorrules
 # Logs
 *.log
 !word-enrichment/logs/.gitkeep
