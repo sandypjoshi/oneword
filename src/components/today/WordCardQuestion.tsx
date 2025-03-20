@@ -1,4 +1,4 @@
-import React, { memo, useState, useCallback } from 'react';
+import React, { memo, useState, useCallback, useEffect } from 'react';
 import { View, StyleSheet, ViewStyle, StyleProp } from 'react-native';
 import { WordOfDay, WordOption } from '../../types/wordOfDay';
 import { useTheme } from '../../theme/ThemeProvider';
@@ -8,6 +8,8 @@ import OptionButton from './OptionButton';
 import { OptionState } from './OptionButton';
 import { radius, elevation } from '../../theme/styleUtils';
 import { Platform } from 'react-native';
+import AnimatedChip from '../ui/AnimatedChip';
+import { speak, isSpeaking } from '../../utils/tts';
 
 interface WordCardQuestionProps {
   /**
@@ -40,6 +42,29 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
   // Local state to track selected option
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [optionStates, setOptionStates] = useState<Record<string, OptionState>>({});
+  const [speaking, setSpeaking] = useState(false);
+  const [speakingDuration, setSpeakingDuration] = useState(1500);
+  
+  // Handle pronounciation
+  const handlePronunciation = async () => {
+    const duration = await speak(word);
+    setSpeakingDuration(duration);
+    setSpeaking(true);
+  };
+  
+  // Check speaking state
+  useEffect(() => {
+    if (speaking) {
+      const checkInterval = setInterval(() => {
+        if (!isSpeaking()) {
+          setSpeaking(false);
+          clearInterval(checkInterval);
+        }
+      }, 100);
+      
+      return () => clearInterval(checkInterval);
+    }
+  }, [speaking]);
   
   // Handle option selection
   const handleOptionSelect = useCallback((option: WordOption) => {
@@ -110,7 +135,7 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
               style={{ 
                 textAlign: 'center',
                 textTransform: 'lowercase',
-                marginBottom: spacing.xxs
+                marginBottom: -4
               }}
             >
               {partOfSpeech}
@@ -123,21 +148,22 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
             align="center"
             style={{ 
               textTransform: 'lowercase', 
-              marginVertical: spacing.sm
+              marginTop: -2,
+              marginBottom: spacing.sm
             }}
           >
             {word}
           </Text>
           
           {pronunciation && (
-            <Text
-              variant="bodySmall"
-              color={colors.text.secondary}
-              align="center"
-              style={{ marginTop: spacing.xs }}
-            >
-              {pronunciation}
-            </Text>
+            <AnimatedChip 
+              label={pronunciation}
+              iconLeft="volumeLoud"
+              size="small"
+              onPress={handlePronunciation}
+              isAnimating={speaking}
+              animationDuration={speakingDuration}
+            />
           )}
         </View>
         

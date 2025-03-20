@@ -40,12 +40,36 @@ export const borderWidth = {
 // Opacity values
 export const opacity = {
   none: '00',
-  light: '15',   // 8% opacity
-  medium: '40',  // 25% opacity 
-  high: '80',    // 50% opacity
+  lightest: '20',  // 12.5% opacity
+  light: '15',     // 8% opacity
+  medium: '40',    // 25% opacity 
+  high: '50',      // 31% opacity
+  higher: '80',    // 50% opacity
   subtle: {
     light: 'rgba(255, 255, 255, 0.08)',
     dark: 'rgba(0, 0, 0, 0.08)'
+  }
+} as const;
+
+// Animation timing durations (in milliseconds)
+export const animation = {
+  duration: {
+    shortest: 150,
+    shorter: 200,
+    short: 300,
+    standard: 400,
+    medium: 500,
+    long: 700,
+    longer: 800,
+    longest: 1000
+  },
+  easing: {
+    // Common easing functions
+    standard: [0.4, 0.0, 0.2, 1], // Material Design standard easing
+    accelerate: [0.4, 0.0, 1, 1],  // Quick acceleration, linear end
+    decelerate: [0.0, 0.0, 0.2, 1], // Linear start, gentle stop
+    sharp: [0.25, 0.1, 0.25, 1],    // Quick start, quick end
+    gentle: [0.25, 0.5, 0.5, 1]     // Gentle in and out
   }
 } as const;
 

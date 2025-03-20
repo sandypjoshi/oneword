@@ -1,10 +1,12 @@
-import React, { memo } from 'react';
+import React, { memo, useState, useEffect } from 'react';
 import { View, StyleSheet, ViewStyle, StyleProp, TouchableOpacity } from 'react-native';
 import { WordOfDay } from '../../types/wordOfDay';
 import { useTheme } from '../../theme/ThemeProvider';
 import { Box } from '../layout';
 import { Text, Icon } from '../ui';
 import { radius, elevation } from '../../theme/styleUtils';
+import AnimatedChip from '../ui/AnimatedChip';
+import { speak, isSpeaking } from '../../utils/tts';
 
 interface WordCardAnswerProps {
   /**
@@ -40,6 +42,30 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
     definition,
     userAttempts = 0
   } = wordData;
+  
+  const [speaking, setSpeaking] = useState(false);
+  const [speakingDuration, setSpeakingDuration] = useState(1500);
+  
+  // Handle pronounciation
+  const handlePronunciation = async () => {
+    const duration = await speak(word);
+    setSpeakingDuration(duration);
+    setSpeaking(true);
+  };
+  
+  // Check speaking state
+  useEffect(() => {
+    if (speaking) {
+      const checkInterval = setInterval(() => {
+        if (!isSpeaking()) {
+          setSpeaking(false);
+          clearInterval(checkInterval);
+        }
+      }, 100);
+      
+      return () => clearInterval(checkInterval);
+    }
+  }, [speaking]);
   
   // Format attempt message
   const getAttemptMessage = () => {
@@ -87,7 +113,7 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
               style={{ 
                 textAlign: 'center',
                 textTransform: 'lowercase',
-                marginBottom: 8
+                marginBottom: -4
               }}
             >
               {partOfSpeech}
@@ -98,20 +124,20 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
             variant="serifTextLarge"
             color={colors.text.primary}
             align="center"
-            style={styles.wordText}
+            style={[styles.wordText, { marginTop: -2 }]}
           >
             {word}
           </Text>
           
           {pronunciation && (
-            <Text
-              variant="bodySmall"
-              color={colors.text.secondary}
-              align="center"
-              style={styles.pronunciationText}
-            >
-              {pronunciation}
-            </Text>
+            <AnimatedChip 
+              label={pronunciation}
+              iconLeft="volumeLoud"
+              size="small"
+              onPress={handlePronunciation}
+              isAnimating={speaking}
+              animationDuration={speakingDuration}
+            />
           )}
         </View>
         
@@ -183,7 +209,7 @@ const styles = StyleSheet.create({
   },
   wordText: {
     textTransform: 'lowercase',
-    marginVertical: 8
+    marginBottom: 8
   },
   pronunciationText: {
     marginTop: 4,
