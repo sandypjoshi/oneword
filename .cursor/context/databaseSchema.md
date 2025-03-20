@@ -1,6 +1,6 @@
 # OneWord Database Schema Documentation
 
-## Last Updated: March 15, 2025
+## Last Updated: March 19, 2025
 
 This document provides a comprehensive overview of the OneWord application's database schema, including tables, relationships, and key fields.
 
@@ -12,6 +12,7 @@ This document provides a comprehensive overview of the OneWord application's dat
 | `app_words` | Application-facing table with difficulty scores | `word` | ~212,460 |
 | `word_definitions` | Definitions for words | (`word`, `synset_id`) | ~220,483 |
 | `word_examples` | Example usages for words | `id` | ~103,084 |
+| `word_relationships` | Semantic relationships between words | `id` | ~425,350 |
 
 ## Table Schemas
 
@@ -26,6 +27,9 @@ The core table containing all words and their properties.
 | `frequency_score` | numeric | Word frequency score (lower is more common) |
 | `length_score` | numeric | Score based on word length |
 | `complexity_score` | numeric | Combined complexity score |
+| `short_definition` | text | Concise definition generated for the app |
+| `owad_phrase` | jsonb | JSON array of OWAD-style phrase pairs |
+| `distractors` | jsonb | JSON object with different types of distractors |
 | `updated_at` | timestamp | Last update timestamp |
 
 ### app_words
@@ -36,6 +40,8 @@ Application-facing table with a subset of words used in the application.
 |--------|------|-------------|
 | `word` | text | Primary key, references words.word |
 | `difficulty_level` | integer | Difficulty level used in the app (1-10) |
+| `is_featured` | boolean | Whether the word is featured in the app |
+| `daily_word_date` | date | Date when word was selected as a daily word |
 | `updated_at` | timestamp | Last update timestamp |
 
 ### word_definitions
@@ -65,6 +71,18 @@ Contains example usages for words.
 | `source` | text | Source of the example |
 | `created_at` | timestamp | Creation timestamp |
 
+### word_relationships
+
+Contains semantic relationships between words.
+
+| Column | Type | Description |
+|--------|------|-------------|
+| `id` | integer | Primary key |
+| `word` | text | The source word |
+| `related_word` | text | The related word |
+| `relationship_type` | text | Type of relationship (synonym, antonym, hypernym, etc.) |
+| `strength` | numeric | Semantic strength of the relationship (0-1) |
+
 ## Relationships
 
 | Relationship | Type | Description |
@@ -72,6 +90,7 @@ Contains example usages for words.
 | `words.word` → `app_words.word` | One-to-One | Each word in `words` has a corresponding entry in `app_words` |
 | `words.word` → `word_definitions.word` | One-to-Many | Each word can have multiple definitions |
 | `words.word` → `word_examples.word` | One-to-Many | Each word can have multiple examples |
+| `words.word` → `word_relationships.word` | One-to-Many | Each word can have multiple semantic relationships |
 | (`word_definitions.word`, `word_definitions.synset_id`) → `word_examples` | One-to-Many | Each definition (word+synset combination) can have multiple examples |
 
 ## Synchronization Mechanism
@@ -95,6 +114,7 @@ Exact timestamp matching between corresponding records in both tables suggests a
 2. **Word Coverage**: Complete overlap between `words` and `app_words`
 3. **Definition Coverage**: Many words have multiple definitions
 4. **Example Coverage**: Fewer examples than definitions, not all words have examples
+5. **Relationship Coverage**: Extensive semantic relationships for most common words
 
 ## Database Usage Patterns
 
@@ -107,5 +127,12 @@ Exact timestamp matching between corresponding records in both tables suggests a
 The application connects to the database using Supabase, with client configuration stored in environment variables:
 - `SUPABASE_URL`
 - `SUPABASE_SERVICE_KEY`
-- `NEXT_PUBLIC_SUPABASE_URL`
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY` 
+- `SUPABASE_ANON_KEY`
+
+## Recent Optimizations
+
+1. **Consolidated Views**: Multiple relationship views (synonyms, antonyms, etc.) consolidated into a single flexible `word_relationships` view
+2. **Improved Indexing**: Added indexes on frequently queried columns for better performance
+3. **JSON Storage**: Using JSONB data type for complex structured data like distractors
+4. **Schema Simplification**: Removed unused tables and redundant columns
+5. **Query Optimization**: Improved query patterns for daily word retrieval 

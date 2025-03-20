@@ -4,6 +4,22 @@
 UI enhancements, improving user experience, and ensuring smooth transitions between app screens.
 
 ## Recent Changes
+- **March 19, 2025**: Onboarding Flow Enhancements
+  - Enhanced onboarding UI components
+  - Implemented proper slide animations in onboarding flow
+  - Added reset onboarding functionality for development testing
+  - Fixed navigation issues between onboarding and main app
+
+- **March 19, 2025**: Project Structure Updates
+  - Continued standardization of src/ directory organization
+  - Migrated more components to follow consistent patterns
+  - Enhanced theming system across components
+
+- **March 18, 2025**: Theme System Improvements
+  - Enhanced theme-settings functionality
+  - Fixed theme system to properly respond to system dark/light mode changes
+  - Updated theme context with safety checks and default values
+
 - **March 17, 2025 (Evening)**: Enhanced UI components and navigation
   - Implemented FlatList-based word card carousel with pagination indicators
   - Fixed theme system to properly respond to system dark/light mode changes
@@ -28,30 +44,6 @@ UI enhancements, improving user experience, and ensuring smooth transitions betw
   - Developed SwipeableWordCard with gesture handling and animations
   - Integrated components in the Today screen with synchronized behavior
   - Added interactive features like date selection and card swiping
-
-- **March 17, 2025**: UI improvements and component cleanup
-  - Added medal ribbon icon to the Icon component
-  - Renamed "Practice" tab to "Challenges" with the medal ribbon icon
-  - Updated PracticeScreen component to ChallengesScreen for consistency
-  - Cleaned up the Today page by removing placeholder Word of the Day UI
-  - Set up consistent styling patterns across screens
-  - Created useThemeReady hook for consistent theme loading
-  - Fixed circular dependencies in theme files
-  - Enhanced theme context with safety checks and default values
-
-- **March 16, 2025**: Created a new reliable dashboard and optimized word enrichment process
-  - Rewritten dashboard.js from scratch using ANSI colors instead of blessed/blessed-contrib
-  - Modified database queries to only process words that need enrichment
-  - Optimized API key rotation to efficiently use 5 keys in parallel
-  - Improved error handling for API responses
-  - Added detailed statistics and progress tracking
-
-- **March 21, 2025**: Performance Optimization
-  - Replaced FlatList with FlashList in the word carousel for better performance
-  - Optimized rendering for large datasets (68k+ words) with improved cell recycling
-  - Adjusted API usage to match FlashList requirements
-  - Maintained existing interaction patterns while improving performance
-  - Added detailed task log documenting the implementation
 
 ## Current Status
 - Successfully implemented a horizontal FlashList-based carousel for word cards with proper performance optimizations

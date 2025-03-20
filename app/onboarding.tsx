@@ -50,18 +50,9 @@ export default function OnboardingScreen() {
     width,
   }), [width]);
 
-  if (!isReady) {
-    return (
-      <View style={[
-        styles.loadingContainer, 
-        { backgroundColor: fallbackColors.background.primary }
-      ]}>
-        <ActivityIndicator size="large" color={fallbackColors.primary} />
-      </View>
-    );
-  }
-
-  const { spacing, colors: themeColors } = theme;
+  // Define all hooks at the top level - regardless of isReady
+  const themeColors = isReady ? theme.colors : fallbackColors;
+  const spacing = isReady ? theme.spacing : { md: 8 }; // Default spacing value if theme isn't ready
 
   // Memoize the navigation handlers
   const handleNext = useCallback(() => {
@@ -241,6 +232,17 @@ export default function OnboardingScreen() {
     handleGetStarted, 
     isNavigating
   ]);
+
+  if (!isReady) {
+    return (
+      <View style={[
+        styles.loadingContainer, 
+        { backgroundColor: fallbackColors.background.primary }
+      ]}>
+        <ActivityIndicator size="large" color={fallbackColors.primary} />
+      </View>
+    );
+  }
 
   return (
     <View style={[styles.container, { backgroundColor: themeColors.background.primary }]}>

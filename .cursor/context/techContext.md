@@ -11,6 +11,7 @@
 - **UI Components**: Custom component library
 - **Animation**: React Native Animated
 - **Haptics**: Expo Haptics
+- **List Virtualization**: FlashList for optimized rendering
 
 ### Backend
 - **Platform**: Supabase
@@ -22,7 +23,7 @@
 
 ### External Services
 - **Linguistic Data**: WordNet database
-- **Word Enrichment**: Datamuse API
+- **Word Enrichment**: Datamuse API, Google Gemini API
 - **Monitoring**: Supabase monitoring tools
 
 ## Development Environment
@@ -41,8 +42,8 @@ SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsI
 SUPABASE_SERVICE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlwbGpnc2dnbmJkd2FvbWpmdW9rIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0MTA4MDEwNiwiZXhwIjoyMDU2NjU2MTA2fQ.qkwn-imaZVnK6IGFgG75eFcFEQySgzIN_gvUJbbDFWE
 JWT = kldi+d+garOKZjohqVTw4dXjGHbdzAWzqapBmlii5cpaIBWwe943KeVIFjBcGR/9NRafh2O0/mSw/w0C5Pnibg==
 DATAMUSE_API_URL=https://api.datamuse.com
+GEMINI_API_KEY=AIzaSyDBpCwbZZHBrvC-2hyX3KY7b0c8feHUFvM
 ```
-Gemini_API_Key: AIzaSyDBpCwbZZHBrvC-2hyX3KY7b0c8feHUFvM
 
 ### Development Workflow
 1. Local development with Expo Go
@@ -54,6 +55,7 @@ Gemini_API_Key: AIzaSyDBpCwbZZHBrvC-2hyX3KY7b0c8feHUFvM
 - **update-database.js**: Updates word difficulty scores using configurable thresholds
 - **update-thresholds.js**: CLI tool for adjusting difficulty threshold configuration
 - **create-difficulty-config.sql**: SQL script to create and initialize difficulty configuration table
+- **word-enrichment-dashboard.js**: Terminal-based dashboard for word enrichment process
 
 ## Technical Constraints
 
@@ -63,12 +65,13 @@ Gemini_API_Key: AIzaSyDBpCwbZZHBrvC-2hyX3KY7b0c8feHUFvM
 - API response time < 500ms
 - Offline functionality for core features
 - Minimal battery usage
+- Smooth scrolling with FlashList (60fps)
 
 ### Device Support
 - iOS 14+ (iPhone 8 and newer)
 - Android API level 26+ (Android 8.0 and newer)
 - Minimum screen size: 320x568
-- Target screen sizes: iPhone 13/14, Samsung Galaxy S21/S22
+- Target screen sizes: iPhone 13/14/15, Samsung Galaxy S21/S22/S23
 
 ### Network Considerations
 - Graceful handling of poor connectivity
@@ -100,7 +103,8 @@ Gemini_API_Key: AIzaSyDBpCwbZZHBrvC-2hyX3KY7b0c8feHUFvM
     "expo-system-ui": "~2.4.0",
     "react-native-reanimated": "~3.3.0",
     "react-native-safe-area-context": "4.6.3",
-    "react-native-screens": "~3.22.0"
+    "react-native-screens": "~3.22.0",
+    "@shopify/flash-list": "^1.4.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
@@ -129,6 +133,12 @@ Gemini_API_Key: AIzaSyDBpCwbZZHBrvC-2hyX3KY7b0c8feHUFvM
 - Related words (synonyms, antonyms)
 - Rate limited to 100,000 requests per day
 
+### Google Gemini API
+- Definition generation
+- OWAD phrase generation
+- Distractor generation
+- Rate limited to 60 queries per minute per key
+
 ### WordNet Integration
 - Synset relationships
 - Word definitions and examples
@@ -146,6 +156,7 @@ Gemini_API_Key: AIzaSyDBpCwbZZHBrvC-2hyX3KY7b0c8feHUFvM
 - Supabase RLS policies for data access control
 - API key rotation schedule
 - Rate limiting for public endpoints
+- Environment variables for API keys
 
 ### Compliance
 - COPPA compliance for educational app
@@ -170,6 +181,7 @@ Gemini_API_Key: AIzaSyDBpCwbZZHBrvC-2hyX3KY7b0c8feHUFvM
 - Startup time measurement
 - Memory usage monitoring
 - Battery consumption testing
+- Frame rate monitoring for list scrolling
 
 ## Deployment Pipeline
 
@@ -185,22 +197,6 @@ Gemini_API_Key: AIzaSyDBpCwbZZHBrvC-2hyX3KY7b0c8feHUFvM
 - App Store and Google Play releases
 - Phased rollout strategy
 - Monitoring and analytics 
-
-
-# OneWord - Technical Context
-
-## Technologies & Dependencies
-
-### Backend 
-- **Node.js**: Server-side JavaScript runtime
-- **Supabase**: PostgreSQL database with real-time functionality
-- **Gemini API**: Google's AI model for content generation
-- **ANSI Colors**: Terminal styling for dashboard UI
-- **dotenv**: Environment variable management for secure configuration
-
-### Frontend
-- **React**: UI library for component-based development
-- **React Native**: Cross-platform mobile development
 
 ## System Architecture
 
@@ -238,149 +234,18 @@ Terminal-based dashboard for monitoring and control:
 3. **Key Controls**: Keyboard shortcuts for start/stop/restart functions
 4. **API Monitoring**: Tracks usage per key with rate limit detection
 
-## Data Models
+## Performance Optimization Strategies
 
-### Word Data Structure
-```javascript
-{
-  id: Number,            // Unique identifier
-  word: String,          // The word itself
-  pos: String,           // Part of speech
-  short_definition: String, // Generated definition
-  owad_phrase: Array,    // Generated OWAD-style phrases
-  distractors: Object,   // Generated distractors by type
-  definition_source: String, // Source of definition (e.g., "gemini")
-  definition_updated_at: Date // When definition was last updated
-}
-```
+### React Optimization Patterns
+1. **Memoization**: Using React.memo, useCallback, and useMemo to prevent unnecessary rerenders
+2. **Dependency Arrays**: Carefully managing dependency arrays in hooks
+3. **Object Stability**: Creating stable object references for dependencies
+4. **Primitive Props**: Using primitive props when possible instead of objects
+5. **Callback References**: Using refs to avoid recreating callback functions
 
-## Configuration
-
-### Environment Variables
-```
-# Supabase Configuration
-SUPABASE_URL=https://example.supabase.co
-SUPABASE_KEY=your-supabase-key
-
-# API Keys (Gemini)
-GEMINI_API_KEY_1=your-api-key-1
-GEMINI_API_KEY_2=your-api-key-2
-GEMINI_API_KEY_3=your-api-key-3
-GEMINI_API_KEY_4=your-api-key-4
-GEMINI_API_KEY_5=your-api-key-5
-
-# Processing Configuration
-BATCH_SIZE=40
-BATCH_PROCESSING_DELAY=1000
-```
-
-### Process Configuration
-```javascript
-// Key configuration parameters
-BATCH_SIZE: process.env.BATCH_SIZE || 40,             // Words per batch
-BATCH_PROCESSING_DELAY: process.env.BATCH_PROCESSING_DELAY || 1000, // Delay between batches (ms)
-REQUESTS_PER_MINUTE: 16,    // Max requests per minute per key
-HOURLY_QUOTA: 900,          // Max requests per hour per key
-DAILY_QUOTA: 1800,          // Max requests per day per key
-ENABLE_KEY_ROTATION: true,  // Whether to rotate between keys
-MAX_RETRIES: 3,             // Maximum retry attempts for failed batches
-```
-
-### Dashboard Options
-```javascript
-// Main dashboard capabilities
-- Process start/stop/restart (keyboard controls)
-- Auto-refresh toggle
-- Progress visualization
-- API key usage statistics
-- Current word tracking
-- Process output display
-```
-
-## Development Tools
-
-- **VS Code**: Primary IDE for development
-- **Git**: Version control
-- **Cursor**: AI-assisted coding platform
-
-## Error Handling Strategy
-
-1. **Rate Limit Handling**: Automatic detection and key rotation
-2. **JSON Parsing Errors**: Robust parsing with fallback mechanisms
-3. **Connectivity Issues**: Automatic retry with exponential backoff
-4. **Process Interruption**: Progress tracking with resumption capability
-5. **Batch Failures**: Adaptive batch size reduction with retry logic
-6. **Memory Management**: Node.js memory optimization for large datasets 
-
-## UI Design and Component Structure
-
-### Theme Management
-- **ThemeProvider**: Custom React Context provider for theme values
-- **useTheme**: Hook for accessing theme values in components
-- **useThemeReady**: Hook for safely handling theme loading
-- **Default theme values**: Fallback values for theme properties to prevent errors
-
-### Component Structure
-- **Layout Components**:
-  - `Box`: Flexbox-based layout component with theme integration
-  - `Container`: Container with padding and margin support
-  - `Screen`: Full-screen component with safe areas
-
-- **UI Components**:
-  - `Text`: Typography component with theme and variant support
-  - `Button`: Button component with various styles and states
-  - `Icon`: SVG-based icon component with Linear and Bold variants
-  - `Card`: Container for content blocks with shadow and border radius
-  - `WordOfDayCard`: Specialized card for displaying word of the day
-
-### Navigation
-- **Tab Navigation**: Bottom tab navigation using expo-router
-- **Stack Navigation**: Stack-based navigation for screens
-- **Modals**: Modal screens for focused interactions
-- **useAppNavigation**: Custom hook for type-safe navigation
-
-### Styling Patterns
-- **StyleSheet**: React Native StyleSheet for optimized style objects
-- **Theme integration**: Components use theme values for consistent styling
-- **Dynamic styles**: Style objects that adapt to theme changes
-- **Responsive design**: Flexible layouts that adapt to different screen sizes
-
-### Code Organization
-- **Feature-based**: Code organized by feature rather than type
-- **Index files**: Export components from index files for easier imports
-- **Default exports**: Components use default exports for cleaner imports
-- **Type safety**: TypeScript interfaces and types for component props 
-
-## Animation and Gesture Handling
-
-### Animation APIs
-- **Animated API**: Core React Native animation system
-  - Used for smooth transitions and visual feedback
-  - Supports spring, timing, and decay animations
-  - Integrates with gesture handling via Animated.Value
-
-### Gesture Handling
-- **PanResponder**: System for recognizing and responding to touch gestures
-  - Used for swipe-based navigation in Word of Day cards
-  - Handles multi-touch gestures and velocity tracking
-  - Provides granular control over gesture lifecycle
-
-### Animation Techniques
-- **Transform Animations**: Using transform properties for performant animations
-- **Interpolation**: Mapping input ranges to output values for complex animations
-- **Resistance Effects**: Adding non-linear responses to gestures at boundaries
-- **Gesture-Driven Animations**: Connecting pan gestures directly to animated values
-
-## Data Management
-
-### Mock Service Pattern
-- **Service Classes**: Encapsulating data operations in service classes
-- **Singleton Pattern**: Using singleton instances for services
-- **Interface-First Design**: Designing data interfaces before implementation
-- **Data Transformation**: Converting backend data to frontend-friendly structures
-
-### Date Handling
-- **Date Processing**: Converting between Date objects and ISO strings
-- **Relative Dates**: Calculating past dates relative to the current date
-- **Date Formatting**: Formatting dates for display in the UI
-- **Date Comparisons**: Comparing dates for sorting and filtering 
+### UI Rendering Optimization
+1. **FlashList Implementation**: Replacing FlatList with FlashList for better list performance
+2. **Cell Recycling**: Maximizing component reuse during scrolling
+3. **Interaction Throttling**: Debouncing frequent user interactions
+4. **Lazy Loading**: Loading components only when needed
+5. **Offscreen Rendering Optimization**: Managing what renders off-screen 
