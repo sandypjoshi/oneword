@@ -8,32 +8,67 @@ type FontWeight = TextStyle['fontWeight'];
 type ThemeName = 'default' | 'quill' | 'aura';
 export type FontCategory = 'display' | 'heading' | 'body' | 'utility';
 
-// Platform-specific font families - Keep it simple and stable
+// Platform-specific font families - Using DM Sans and DM Serif
 const FONT_FAMILIES = {
   // Sans-serif options
   system: Platform.select({
-    ios: 'System',  // System font (San Francisco) on iOS
-    android: 'Roboto',
-    default: undefined, // Using undefined allows React Native to pick platform default
+    ios: 'DMSans_400Regular',  // DM Sans for iOS
+    android: 'DMSans_400Regular', // DM Sans for Android
+    default: 'DMSans_400Regular', // DM Sans as default
   }),
   // Serif options
   serif: Platform.select({
-    // Proper naming for New York font on iOS with scaling support
-    ios: 'New York Medium',  // Medium weight for primary content
-    android: 'Noto Serif, serif', // Try Noto Serif first, fall back to generic serif
-    default: 'serif',
+    ios: 'DMSerifText_400Regular',  // DM Serif Text for body text
+    android: 'DMSerifText_400Regular',
+    default: 'DMSerifText_400Regular',
   }),
   // Serif display (for larger headlines)
   serifDisplay: Platform.select({
-    ios: 'New York Large', // Optimized for display sizes
-    android: 'Noto Serif, serif',
-    default: 'serif',
+    ios: 'DMSerifDisplay_400Regular', // DM Serif Display for headlines
+    android: 'DMSerifDisplay_400Regular',
+    default: 'DMSerifDisplay_400Regular',
   }),
-  // Serif small (for smaller text)
-  serifSmall: Platform.select({
-    ios: 'New York Small', // Optimized for smaller sizes
-    android: 'Noto Serif, serif',
-    default: 'serif',
+  // Sans-serif italics
+  systemItalic: Platform.select({
+    ios: 'DMSans_400Regular_Italic',
+    android: 'DMSans_400Regular_Italic',
+    default: 'DMSans_400Regular_Italic',
+  }),
+  // Serif italics
+  serifItalic: Platform.select({
+    ios: 'DMSerifText_400Regular_Italic',
+    android: 'DMSerifText_400Regular_Italic',
+    default: 'DMSerifText_400Regular_Italic',
+  }),
+  // Serif display italics
+  serifDisplayItalic: Platform.select({
+    ios: 'DMSerifDisplay_400Regular_Italic',
+    android: 'DMSerifDisplay_400Regular_Italic',
+    default: 'DMSerifDisplay_400Regular_Italic',
+  }),
+  // Sans-serif medium
+  systemMedium: Platform.select({
+    ios: 'DMSans_500Medium',
+    android: 'DMSans_500Medium',
+    default: 'DMSans_500Medium',
+  }),
+  // Sans-serif medium italic
+  systemMediumItalic: Platform.select({
+    ios: 'DMSans_500Medium_Italic',
+    android: 'DMSans_500Medium_Italic',
+    default: 'DMSans_500Medium_Italic',
+  }),
+  // Sans-serif bold
+  systemBold: Platform.select({
+    ios: 'DMSans_700Bold',
+    android: 'DMSans_700Bold',
+    default: 'DMSans_700Bold',
+  }),
+  // Sans-serif bold italic
+  systemBoldItalic: Platform.select({
+    ios: 'DMSans_700Bold_Italic',
+    android: 'DMSans_700Bold_Italic',
+    default: 'DMSans_700Bold_Italic',
   }),
 };
 

@@ -31,6 +31,7 @@ interface TextProps extends RNTextProps {
   weight?: 'normal' | 'bold' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
   fontCategory?: FontCategory;
   serif?: boolean; // Shorthand for setting fontCategory to 'display' or 'heading'
+  italic?: boolean; // Shorthand for setting fontStyle to 'italic'
 }
 
 /**
@@ -46,6 +47,7 @@ const Text: React.FC<TextProps> = ({
   weight,
   fontCategory,
   serif,
+  italic,
   ...rest
 }) => {
   // Get theme safely with defaults
@@ -74,29 +76,44 @@ const Text: React.FC<TextProps> = ({
     baseStyle.textAlign = align;
   }
   
-  // Override font weight if specified
-  if (weight) {
-    baseStyle.fontWeight = weight;
-  }
-  
-  // Add serif font when requested
-  // We'll use the appropriate serif variant based on text size
-  if (serif) {
-    // Add the serif font to the text based on text size
-    const typographyObj = theme.typography as any;
-    
-    if (typographyObj?.fonts) {
-      // For display variants, use serif display
+  // Set italic text if specified
+  if (italic) {
+    // Use the proper italic font family instead of just fontStyle
+    if (serif) {
       if (variant.startsWith('display')) {
-        baseStyle.fontFamily = typographyObj.fonts.serifDisplay;
-      } 
-      // For small text, use serif small
-      else if (variant === 'caption' || variant === 'note' || variant === 'overline') {
-        baseStyle.fontFamily = typographyObj.fonts.serifSmall;
+        baseStyle.fontFamily = theme.typography.fonts.serifDisplayItalic;
+      } else {
+        baseStyle.fontFamily = theme.typography.fonts.serifItalic;
       }
-      // For everything else, use standard serif
-      else {
-        baseStyle.fontFamily = typographyObj.fonts.serif;
+    } else {
+      // Handle different weights for sans-serif
+      if (weight === 'bold' || weight === '700') {
+        baseStyle.fontFamily = theme.typography.fonts.systemBoldItalic;
+      } else if (weight === '500') {
+        baseStyle.fontFamily = theme.typography.fonts.systemMediumItalic;
+      } else {
+        baseStyle.fontFamily = theme.typography.fonts.systemItalic;
+      }
+    }
+  } else {
+    // Add serif font when requested
+    // We'll use the appropriate serif variant based on text size
+    if (serif) {
+      // Add the serif font to the text based on text size
+      if (variant.startsWith('display')) {
+        baseStyle.fontFamily = theme.typography.fonts.serifDisplay;
+      } else {
+        baseStyle.fontFamily = theme.typography.fonts.serif;
+      }
+    } else {
+      // Handle different weights for sans-serif
+      if (weight === 'bold' || weight === '700') {
+        baseStyle.fontFamily = theme.typography.fonts.systemBold;
+      } else if (weight === '500') {
+        baseStyle.fontFamily = theme.typography.fonts.systemMedium;
+      } else {
+        // Regular weight
+        baseStyle.fontFamily = theme.typography.fonts.system;
       }
     }
   }

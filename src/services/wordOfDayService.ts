@@ -14,25 +14,37 @@ const mockWords: WordOfDay[] = [
     word: 'ineffable',
     pronunciation: '/ɪnˈɛfəb(ə)l/',
     partOfSpeech: 'adjective',
-    definition: 'Too great or extreme to be expressed or described in words',
+    definition: 'Too great to express',
     example: 'The ineffable beauty of the night sky',
-    date: todayStr // Today's actual date
+    date: todayStr, // Today's actual date
+    options: [
+      { value: 'Too great to express', isCorrect: true },
+      { value: 'Causing great fear', isCorrect: false },
+      { value: 'Pleasant smelling', isCorrect: false },
+      { value: 'Happening by chance', isCorrect: false }
+    ]
   },
   {
     id: '2',
     word: 'serendipity',
     pronunciation: '/ˌsɛrənˈdɪpɪti/',
     partOfSpeech: 'noun',
-    definition: 'The occurrence and development of events by chance in a happy or beneficial way',
+    definition: 'Happy accidental discovery',
     example: 'A fortunate happenstance of meeting an old friend',
-    date: yesterdayStr // Yesterday's actual date
+    date: yesterdayStr, // Yesterday's actual date
+    options: [
+      { value: 'Happy accidental discovery', isCorrect: true },
+      { value: 'Peace and tranquility', isCorrect: false },
+      { value: 'Unusual vision ability', isCorrect: false },
+      { value: 'Extended joy period', isCorrect: false }
+    ]
   },
   {
     id: '3',
     word: 'ephemeral',
     pronunciation: '/ɪˈfɛm(ə)rəl/',
     partOfSpeech: 'adjective',
-    definition: 'Lasting for a very short time',
+    definition: 'Very short-lived',
     example: 'The ephemeral nature of fashion trends',
     date: '2025-03-15'
   },
@@ -41,7 +53,7 @@ const mockWords: WordOfDay[] = [
     word: 'ubiquitous',
     pronunciation: '/juːˈbɪkwɪtəs/',
     partOfSpeech: 'adjective',
-    definition: 'Present, appearing, or found everywhere',
+    definition: 'Found everywhere',
     example: 'Smartphones have become ubiquitous in modern life',
     date: '2025-03-14'
   },
@@ -50,7 +62,7 @@ const mockWords: WordOfDay[] = [
     word: 'mellifluous',
     pronunciation: '/məˈlɪfluəs/',
     partOfSpeech: 'adjective',
-    definition: 'Sweet or musical; pleasant to hear',
+    definition: 'Sweetly sounding',
     example: "The singer's mellifluous voice captivated the audience",
     date: '2025-03-13'
   },
@@ -59,7 +71,7 @@ const mockWords: WordOfDay[] = [
     word: 'eloquent',
     pronunciation: '/ˈɛləkwənt/',
     partOfSpeech: 'adjective',
-    definition: 'Fluent or persuasive in speaking or writing',
+    definition: 'Fluent and persuasive',
     example: 'Her eloquent speech moved everyone to tears',
     date: '2025-03-12'
   },
@@ -68,7 +80,7 @@ const mockWords: WordOfDay[] = [
     word: 'resilience',
     pronunciation: '/rɪˈzɪlɪəns/',
     partOfSpeech: 'noun',
-    definition: 'The capacity to recover quickly from difficulties; toughness',
+    definition: 'Quick recovery ability',
     example: 'He showed remarkable resilience in the face of adversity',
     date: '2025-03-11'
   },
@@ -77,7 +89,7 @@ const mockWords: WordOfDay[] = [
     word: 'meticulous',
     pronunciation: '/məˈtɪkjʊləs/',
     partOfSpeech: 'adjective',
-    definition: 'Showing great attention to detail; very careful and precise',
+    definition: 'Extremely careful',
     example: 'His meticulous research uncovered new evidence',
     date: '2025-03-10'
   },
@@ -86,7 +98,7 @@ const mockWords: WordOfDay[] = [
     word: 'perspicacious',
     pronunciation: '/ˌpəːspɪˈkeɪʃəs/',
     partOfSpeech: 'adjective',
-    definition: 'Having a ready insight into and understanding of things',
+    definition: 'Insightful understanding',
     example: 'Her perspicacious comments revealed the truth of the situation',
     date: '2025-03-09'
   },
@@ -95,7 +107,7 @@ const mockWords: WordOfDay[] = [
     word: 'sycophant',
     pronunciation: '/ˈsɪkəfənt/',
     partOfSpeech: 'noun',
-    definition: 'A person who acts obsequiously toward someone important in order to gain advantage',
+    definition: 'Servile flatterer',
     example: 'The CEO was surrounded by sycophants who agreed with everything he said',
     date: '2025-03-08'
   },
@@ -104,7 +116,7 @@ const mockWords: WordOfDay[] = [
     word: 'cacophony',
     pronunciation: '/kəˈkɒfəni/',
     partOfSpeech: 'noun',
-    definition: 'A harsh, discordant mixture of sounds',
+    definition: 'Harsh sound mixture',
     example: 'The cacophony of the busy market made conversation difficult',
     date: '2025-03-07'
   },
@@ -113,7 +125,7 @@ const mockWords: WordOfDay[] = [
     word: 'quintessential',
     pronunciation: '/ˌkwɪntɪˈsɛnʃ(ə)l/',
     partOfSpeech: 'adjective',
-    definition: 'Representing the most perfect or typical example of a quality or class',
+    definition: 'Perfect typical example',
     example: 'The quintessential New York experience includes a walk through Central Park',
     date: '2025-03-06'
   },
@@ -122,7 +134,7 @@ const mockWords: WordOfDay[] = [
     word: 'juxtaposition',
     pronunciation: '/ˌdʒʌkstəpəˈzɪʃ(ə)n/',
     partOfSpeech: 'noun',
-    definition: 'The fact of two things being seen or placed close together with contrasting effect',
+    definition: 'Side-by-side contrast',
     example: 'The juxtaposition of ancient and modern architecture created a unique cityscape',
     date: '2025-03-05'
   },
@@ -131,7 +143,7 @@ const mockWords: WordOfDay[] = [
     word: 'benevolent',
     pronunciation: '/bəˈnɛvələnt/',
     partOfSpeech: 'adjective',
-    definition: 'Well meaning and kindly',
+    definition: 'Kind and generous',
     example: 'The benevolent donor gave generously to the charity',
     date: '2025-03-04'
   },
@@ -143,12 +155,37 @@ const mockWords: WordOfDay[] = [
  */
 class WordOfDayService {
   /**
+   * Generate options for a word if they don't exist
+   * @param word The word to generate options for
+   * @returns Word with options added
+   */
+  private ensureOptions(word: WordOfDay): WordOfDay {
+    if (word.options && word.options.length > 0) {
+      return word; // Already has options
+    }
+    
+    // Create options with the correct definition and 3 made-up ones
+    const options = [
+      { value: word.definition, isCorrect: true },
+      { value: `Opposite of ${word.word}`, isCorrect: false },
+      { value: `Related to ancient ${word.partOfSpeech === 'noun' ? 'rituals' : 'practices'}`, isCorrect: false },
+      { value: `Unusual ${word.partOfSpeech === 'noun' ? 'object' : 'quality'}`, isCorrect: false }
+    ];
+    
+    return {
+      ...word,
+      options
+    };
+  }
+
+  /**
    * Get word of the day for a specific date
    * @param date Date in ISO format (YYYY-MM-DD)
    * @returns WordOfDay object or undefined if not found
    */
   getWordByDate(date: string): WordOfDay | undefined {
-    return mockWords.find(word => word.date === date);
+    const word = mockWords.find(word => word.date === date);
+    return word ? this.ensureOptions(word) : undefined;
   }
 
   /**
@@ -158,9 +195,10 @@ class WordOfDayService {
    * @returns Array of WordOfDay objects
    */
   getWordsByDateRange(startDate: string, endDate: string): WordOfDay[] {
-    return mockWords.filter(word => 
-      word.date >= startDate && word.date <= endDate
-    ).sort((a, b) => b.date.localeCompare(a.date)); // Descending order
+    return mockWords
+      .filter(word => word.date >= startDate && word.date <= endDate)
+      .map(word => this.ensureOptions(word))
+      .sort((a, b) => b.date.localeCompare(a.date)); // Descending order
   }
 
   /**
@@ -168,7 +206,9 @@ class WordOfDayService {
    * @returns Array of all WordOfDay objects
    */
   getAllWords(): WordOfDay[] {
-    return [...mockWords].sort((a, b) => b.date.localeCompare(a.date)); // Descending order
+    return [...mockWords]
+      .map(word => this.ensureOptions(word))
+      .sort((a, b) => b.date.localeCompare(a.date)); // Descending order
   }
 
   /**

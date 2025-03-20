@@ -3,6 +3,14 @@
  */
 
 /**
+ * Distractor option with a value and whether it's correct
+ */
+export interface WordOption {
+  value: string;
+  isCorrect: boolean;
+}
+
+/**
  * Word of Day data model
  */
 export interface WordOfDay {
@@ -13,6 +21,12 @@ export interface WordOfDay {
   definition: string;
   example?: string;
   date: string; // ISO format YYYY-MM-DD
+  
+  // New fields for quiz functionality
+  options?: WordOption[];
+  isRevealed?: boolean;
+  userAttempts?: number;
+  selectedOption?: string;
 }
 
 /**

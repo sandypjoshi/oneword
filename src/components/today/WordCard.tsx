@@ -1,10 +1,8 @@
-import React, { memo } from 'react';
-import { StyleSheet, View, ViewStyle } from 'react-native';
+import React, { memo, useState, useCallback } from 'react';
+import { StyleProp, ViewStyle } from 'react-native';
 import { WordOfDay } from '../../types/wordOfDay';
-import { useTheme } from '../../theme/ThemeProvider';
-import { Box } from '../layout';
-import { Text } from '../ui';
-import { radius, elevation } from '../../theme/styleUtils';
+import WordCardQuestion from './WordCardQuestion';
+import WordCardAnswer from './WordCardAnswer';
 
 interface WordCardProps {
   /**
@@ -15,143 +13,74 @@ interface WordCardProps {
   /**
    * Additional styles for the container
    */
-  style?: ViewStyle;
+  style?: StyleProp<ViewStyle>;
+  
+  /**
+   * Function called when the details button is pressed
+   */
+  onViewDetails?: () => void;
+  
+  /**
+   * Function called when the word is revealed (answer is shown)
+   */
+  onReveal?: (wordId: string, attempts: number) => void;
 }
 
 /**
- * Card component that displays a word of the day
+ * Card component that displays a word of the day in either question or answer state
  */
 const WordCardComponent: React.FC<WordCardProps> = ({ 
-  wordData,
-  style 
+  wordData: initialWordData,
+  style,
+  onViewDetails,
+  onReveal
 }) => {
-  const { colors, spacing } = useTheme();
-  const { word, pronunciation, partOfSpeech, definition, example } = wordData;
+  // Local state to track word data including user interactions
+  const [wordData, setWordData] = useState<WordOfDay>(initialWordData);
+  
+  // Handle option selection in question mode
+  const handleOptionSelect = useCallback((option: string, isCorrect: boolean) => {
+    // Calculate attempts (increment if incorrect)
+    const attempts = wordData.userAttempts ? wordData.userAttempts + (isCorrect ? 0 : 1) : 1;
+    
+    // Update word data
+    const updatedWordData = {
+      ...wordData,
+      selectedOption: option,
+      userAttempts: attempts,
+      isRevealed: isCorrect
+    };
+    
+    setWordData(updatedWordData);
+    
+    // If correct, call onReveal callback
+    if (isCorrect && onReveal) {
+      onReveal(wordData.id, attempts);
+    }
+  }, [wordData, onReveal]);
+  
+  // Render appropriate card based on state
+  if (wordData.isRevealed) {
+    return (
+      <WordCardAnswer
+        wordData={wordData}
+        style={style}
+        onViewDetails={onViewDetails}
+      />
+    );
+  }
   
   return (
-    <View 
-      style={[
-        styles.container,
-        { 
-          backgroundColor: colors.background.card,
-          borderColor: colors.border.light,
-          borderRadius: radius.xl,
-        },
-        style
-      ]}
-    >
-      <Box padding="lg" style={{ flex: 1, justifyContent: 'center' }}>
-        {/* Word and pronunciation */}
-        <View style={styles.headerSection}>
-          <Text 
-            variant="displaySmall"
-            color={colors.text.primary}
-            align="center"
-            serif={true}
-            style={styles.wordText}
-            numberOfLines={1}
-            adjustsFontSizeToFit
-          >
-            {word}
-          </Text>
-          
-          <Text
-            variant="bodySmall"
-            color={colors.text.secondary}
-            align="center"
-            style={styles.pronunciationText}
-          >
-            {pronunciation}
-          </Text>
-        </View>
-        
-        {/* Part of speech badge */}
-        <View style={styles.badgeContainer}>
-          <View 
-            style={[
-              styles.partOfSpeech,
-              { backgroundColor: colors.primaryLight }
-            ]}
-          >
-            <Text 
-              variant="label"
-              color={colors.text.inverse}
-              style={styles.partOfSpeechText}
-            >
-              {partOfSpeech}
-            </Text>
-          </View>
-        </View>
-        
-        {/* Definition */}
-        <View style={[styles.contentSection, { marginTop: spacing.md }]}>
-          <Text
-            variant="bodyMedium"
-            color={colors.text.primary}
-            align="center"
-          >
-            {definition}
-          </Text>
-          
-          {/* Example usage */}
-          {example && (
-            <Text
-              variant="bodySmall"
-              color={colors.text.secondary}
-              align="center"
-              style={styles.exampleText}
-            >
-              "{example}"
-            </Text>
-          )}
-        </View>
-      </Box>
-    </View>
+    <WordCardQuestion
+      wordData={wordData}
+      style={style}
+      onOptionSelect={handleOptionSelect}
+    />
   );
 };
 
 // Apply memo to the component
 const WordCard = memo(WordCardComponent);
-
-const styles = StyleSheet.create({
-  container: {
-    borderWidth: 1,
-    ...elevation.sm,
-    overflow: 'hidden',
-    flex: 1,
-    display: 'flex',
-  },
-  headerSection: {
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  wordText: {
-    textTransform: 'lowercase',
-  },
-  pronunciationText: {
-    marginTop: 4,
-  },
-  badgeContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginVertical: 12,
-  },
-  partOfSpeech: {
-    paddingHorizontal: 16,
-    paddingVertical: 6,
-    borderRadius: radius.pill,
-  },
-  partOfSpeechText: {
-    textTransform: 'lowercase',
-  },
-  contentSection: {
-    alignItems: 'center',
-  },
-  exampleText: {
-    fontStyle: 'italic',
-    marginTop: 8,
-  },
-});
 
 // Set display name for better debugging
 WordCard.displayName = 'WordCard';

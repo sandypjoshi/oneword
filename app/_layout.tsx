@@ -5,6 +5,23 @@ import { View, ActivityIndicator, Image, StyleSheet, Animated } from 'react-nati
 import { ThemeProvider, useTheme } from '../src/theme/ThemeProvider';
 import { ensurePolyfills } from '../src/utils/supabaseSetup';
 import { checkOnboardingStatus } from '../src/utils/onboarding';
+import { useFonts } from 'expo-font';
+import {
+  DMSans_400Regular,
+  DMSans_400Regular_Italic,
+  DMSans_500Medium,
+  DMSans_500Medium_Italic,
+  DMSans_700Bold,
+  DMSans_700Bold_Italic
+} from '@expo-google-fonts/dm-sans';
+import {
+  DMSerifDisplay_400Regular,
+  DMSerifDisplay_400Regular_Italic
+} from '@expo-google-fonts/dm-serif-display';
+import {
+  DMSerifText_400Regular,
+  DMSerifText_400Regular_Italic
+} from '@expo-google-fonts/dm-serif-text';
 
 // Import logo image
 const logoImage = require('../src/assets/images/logo.png');
@@ -26,12 +43,32 @@ const MainContent = () => {
   const segments = useSegments();
   const { colors, isDark, spacing } = useTheme();
   
+  // Load the fonts
+  const [fontsLoaded] = useFonts({
+    DMSans_400Regular,
+    DMSans_400Regular_Italic,
+    DMSans_500Medium,
+    DMSans_500Medium_Italic,
+    DMSans_700Bold,
+    DMSans_700Bold_Italic,
+    DMSerifDisplay_400Regular,
+    DMSerifDisplay_400Regular_Italic,
+    DMSerifText_400Regular,
+    DMSerifText_400Regular_Italic
+  });
+  
   // Initialize app and handle navigation
   useEffect(() => {
     async function initialize() {
       try {
         // Check if user has completed onboarding
         const hasOnboarded = await checkOnboardingStatus();
+
+        // Wait for fonts to load
+        if (!fontsLoaded) {
+          // Don't continue until fonts are loaded
+          return;
+        }
 
         // Hide the native splash screen
         await SplashScreen.hideAsync();
@@ -80,7 +117,7 @@ const MainContent = () => {
     }
 
     initialize();
-  }, [router, segments, fadeAnim, colors]);
+  }, [router, segments, fadeAnim, colors, fontsLoaded]);
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.background.primary }}>
