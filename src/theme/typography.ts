@@ -91,13 +91,13 @@ const FONT_SIZES = {
   xl: 24,      // Subheadings
   xxl: 28,     // Headings
   xxxl: 36,    // Large headings
-  display: 44, // Display headings
+  display: 40, // Display headings
   huge: 48,    // Huge display text
 };
 
 // Line heights (multiplier based on font size)
 const LINE_HEIGHTS = {
-  tight: 1.25,    // Tighter for headings
+  tight: 1.20,    // Tighter for headings
   normal: 1.5,    // Standard for body text
   relaxed: 1.75,  // More space for readability
   loose: 2.0,     // Very loose for emphasized text

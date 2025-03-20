@@ -9,13 +9,13 @@ import {
 } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
 import Text from './Text';
-import Icon from './Icon';
+import Icon, { IconName } from './Icon';
 
 export interface ButtonGroupOption {
   value: string;
   label: string;
   description?: string;
-  icon?: React.ReactNode;
+  icon?: IconName | React.ReactNode;
 }
 
 interface ButtonGroupProps {
@@ -42,7 +42,7 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({
   textStyle,
   disabled = false,
 }) => {
-  const { colors } = useTheme();
+  const { colors, spacing } = useTheme();
   const [selected, setSelected] = useState<string | undefined>(selectedValue);
 
   useEffect(() => {
@@ -58,7 +58,10 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({
   const getContainerStyle = () => {
     switch (variant) {
       case 'horizontal':
-        return styles.horizontalContainer;
+        return [
+          styles.horizontalContainer,
+          { gap: spacing.md }
+        ];
       case 'grid':
         return styles.gridContainer;
       default:
@@ -71,7 +74,12 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({
       styles.button,
       {
         borderColor: isSelected ? colors.primary : colors.border.light,
-        backgroundColor: isSelected ? colors.primaryLight : colors.background.card,
+        backgroundColor: isSelected ? colors.background.secondary : 'transparent',
+        borderRadius: spacing.md,
+        borderWidth: 2,
+        paddingVertical: spacing.md,
+        paddingHorizontal: spacing.md + spacing.xs,
+        marginVertical: spacing.sm,
       },
       buttonStyle,
     ];
@@ -87,38 +95,23 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({
         onPress={() => handleSelect(option.value)}
         disabled={disabled}
       >
-        {option.icon && (
-          <View style={styles.iconContainer}>
-            {typeof option.icon === 'string' ? (
-              <Icon 
-                name={option.icon} 
-                size={24} 
-                color={isSelected ? colors.primary : colors.text.secondary} 
-              />
-            ) : (
-              option.icon
-            )}
-          </View>
-        )}
-        
         <View style={styles.textContainer}>
           <Text
-            variant="label"
-            color={isSelected ? colors.primary : colors.text.primary}
+            variant="bodyLarge"
+            color={colors.text.primary}
             style={textStyle}
           >
             {option.label}
           </Text>
-          
-          {option.description && (
-            <Text
-              variant="bodySmall"
-              color={isSelected ? colors.primary : colors.text.secondary}
-              style={[{ marginTop: 4 }, textStyle]}
-            >
-              {option.description}
-            </Text>
-          )}
+        </View>
+        
+        <View style={styles.iconContainer}>
+          <Icon 
+            name={isSelected ? "checkCircleBold" : "circleOutline"} 
+            size={24} 
+            color={isSelected ? colors.primary : colors.text.secondary} 
+            variant={isSelected ? "bold" : "linear"}
+          />
         </View>
       </TouchableOpacity>
     );
@@ -139,7 +132,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    gap: 10,
   },
   gridContainer: {
     flexDirection: 'row',
@@ -147,23 +139,19 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   button: {
-    borderWidth: 2,
-    borderRadius: 16,
-    paddingVertical: 16,
-    paddingHorizontal: 20,
-    marginVertical: 6,
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
   },
   iconContainer: {
-    width: 24,
-    height: 24,
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: 12,
+    width: 24,
+    height: 24,
   },
   textContainer: {
     flex: 1,
+    marginRight: 16,
   },
 });
 

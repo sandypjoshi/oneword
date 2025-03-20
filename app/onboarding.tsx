@@ -148,7 +148,7 @@ export default function OnboardingScreen() {
         ]}>
           <Box style={[styles.textContainer, { paddingTop: themeSpacing.xl }]}>
             <Text 
-              variant="displayLarge" 
+              variant="displayMedium" 
               color={themeColors.text.primary}
               align="center" 
               style={{ marginBottom: themeSpacing.md }}

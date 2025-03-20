@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, ActivityIndicator, ScrollView, TouchableOpacity } from 'react-native';
 import { Stack, useNavigation, useRouter } from 'expo-router';
 import { Box } from '../src/components/layout';
-import { Text } from '../src/components/ui';
+import { Text, ButtonGroup } from '../src/components/ui';
 import Icon from '../src/components/ui/Icon';
 import { useThemeReady } from '../src/hooks';
 import { useTheme } from '../src/theme/ThemeProvider';
@@ -13,16 +13,16 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 const ThemeSelector = () => {
   const { themeName, setThemeName, colorMode, setColorMode, colors, spacing } = useTheme();
 
-  const themes = [
-    { value: 'default', label: 'Default Theme' },
-    { value: 'quill', label: 'Quill Theme (Dictionary Style)' },
-    { value: 'aura', label: 'Aura Theme' },
+  const themeOptions = [
+    { value: 'default', label: 'Default Theme', description: 'Clean and modern design' },
+    { value: 'quill', label: 'Quill Theme', description: 'Dictionary style with serif typography' },
+    { value: 'aura', label: 'Aura Theme', description: 'Vibrant and energetic colors' },
   ];
 
-  const colorModes = [
-    { value: 'light', label: 'Light Mode' },
-    { value: 'dark', label: 'Dark Mode' },
-    { value: 'system', label: 'System Default' },
+  const colorModeOptions = [
+    { value: 'light', label: 'Light Mode', description: 'Bright and clear interface' },
+    { value: 'dark', label: 'Dark Mode', description: 'Easy on the eyes at night' },
+    { value: 'system', label: 'System Default', description: 'Follow device settings' },
   ];
 
   return (
@@ -35,33 +35,12 @@ const ThemeSelector = () => {
       >
         Theme Style
       </Text>
-      <View style={{ gap: spacing.sm }}>
-        {themes.map((theme) => (
-          <TouchableOpacity
-            key={theme.value}
-            style={[
-              styles.themeButton,
-              {
-                backgroundColor: themeName === theme.value ? colors.primary + '20' : colors.background.secondary,
-                borderColor: themeName === theme.value ? colors.primary : colors.border.light,
-                padding: spacing.md,
-              }
-            ]}
-            onPress={() => setThemeName(theme.value as any)}
-          >
-            <Text>{theme.label}</Text>
-            
-            {themeName === theme.value && (
-              <Icon 
-                name="checkCircleBold" 
-                color={colors.primary} 
-                size={18} 
-                variant="bold" 
-              />
-            )}
-          </TouchableOpacity>
-        ))}
-      </View>
+      
+      <ButtonGroup
+        options={themeOptions}
+        selectedValue={themeName}
+        onSelect={(value) => setThemeName(value as any)}
+      />
       
       {/* Color Mode Selection */}
       <Text 
@@ -71,33 +50,12 @@ const ThemeSelector = () => {
       >
         Appearance
       </Text>
-      <View style={{ gap: spacing.sm }}>
-        {colorModes.map((mode) => (
-          <TouchableOpacity
-            key={mode.value}
-            style={[
-              styles.themeButton,
-              {
-                backgroundColor: colorMode === mode.value ? colors.primary + '20' : colors.background.secondary,
-                borderColor: colorMode === mode.value ? colors.primary : colors.border.light,
-                padding: spacing.md,
-              }
-            ]}
-            onPress={() => setColorMode(mode.value as any)}
-          >
-            <Text>{mode.label}</Text>
-            
-            {colorMode === mode.value && (
-              <Icon 
-                name="checkCircleBold" 
-                color={colors.primary} 
-                size={18} 
-                variant="bold" 
-              />
-            )}
-          </TouchableOpacity>
-        ))}
-      </View>
+      
+      <ButtonGroup
+        options={colorModeOptions}
+        selectedValue={colorMode}
+        onSelect={(value) => setColorMode(value as any)}
+      />
     </View>
   );
 };

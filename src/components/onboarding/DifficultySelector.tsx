@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Box } from '../layout';
-import { Text, Icon } from '../ui';
+import { Text, ButtonGroup } from '../ui';
 import { DIFFICULTY_LEVELS } from '../../constants';
 import { useTheme } from '../../theme/ThemeProvider';
 
@@ -40,10 +40,6 @@ const DifficultySelector: React.FC<DifficultySelectorProps> = ({
     },
   ];
 
-  const handleSelect = (level: string) => {
-    onSelectLevel(level);
-  };
-
   return (
     <Box width="100%" align="center">
       <Text
@@ -64,72 +60,14 @@ const DifficultySelector: React.FC<DifficultySelectorProps> = ({
         Select an option to continue
       </Text>
 
-      <View style={{ width: '100%', gap: spacing.md }}>
-        {difficultyOptions.map((option) => {
-          const isSelected = selectedLevel === option.value;
-          
-          return (
-            <TouchableOpacity
-              key={option.value}
-              style={[
-                styles.optionButton,
-                {
-                  borderColor: isSelected ? colors.primary : colors.border.light,
-                  backgroundColor: isSelected ? colors.background.card : colors.background.primary,
-                  padding: spacing.lg,
-                  borderRadius: 16,
-                },
-              ]}
-              onPress={() => handleSelect(option.value)}
-              activeOpacity={0.7}
-            >
-              <View style={{ flex: 1, marginRight: spacing.md }}>
-                <Text
-                  variant="label"
-                  color={colors.text.primary}
-                >
-                  {option.label}
-                </Text>
-              </View>
-              
-              <View style={styles.radioContainer}>
-                {isSelected ? (
-                  <Icon
-                    name="checkCircleBold"
-                    size={24}
-                    color={colors.primary}
-                    variant="bold"
-                  />
-                ) : (
-                  <Icon
-                    name="circleOutline"
-                    size={24}
-                    color={colors.border.medium}
-                  />
-                )}
-              </View>
-            </TouchableOpacity>
-          );
-        })}
-      </View>
+      <ButtonGroup
+        options={difficultyOptions}
+        selectedValue={selectedLevel || undefined}
+        onSelect={onSelectLevel}
+        variant="vertical"
+      />
     </Box>
   );
 };
-
-const styles = StyleSheet.create({
-  optionButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    borderWidth: 2,
-    width: '100%',
-  },
-  radioContainer: {
-    width: 24,
-    height: 24,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 export default DifficultySelector; 
