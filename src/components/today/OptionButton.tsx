@@ -117,7 +117,10 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
         weight={state !== 'default' ? "600" : "400"}
         color={getTextColor()}
         align="center"
-        style={{ textTransform: 'lowercase' }}
+        style={{ 
+          textTransform: 'lowercase',
+          paddingVertical: spacing.xs 
+        }}
       >
         {label}
       </Text>

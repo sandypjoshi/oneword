@@ -138,6 +138,29 @@ const BASE_TEXT_STYLES = {
     category: 'display' as FontCategory,
   },
   
+  // Serif Text variants at large sizes
+  serifTextLarge: {
+    fontSize: FONT_SIZES.huge,
+    fontWeight: FONT_WEIGHTS.regular, // Serif Text only comes in regular weight
+    lineHeight: FONT_SIZES.huge * LINE_HEIGHTS.tight,
+    letterSpacing: LETTER_SPACING.tighter,
+    category: 'display' as FontCategory,
+  },
+  serifTextMedium: {
+    fontSize: FONT_SIZES.display, 
+    fontWeight: FONT_WEIGHTS.regular,
+    lineHeight: FONT_SIZES.display * LINE_HEIGHTS.tight,
+    letterSpacing: LETTER_SPACING.tighter,
+    category: 'display' as FontCategory,
+  },
+  serifTextSmall: {
+    fontSize: FONT_SIZES.xxxl,
+    fontWeight: FONT_WEIGHTS.regular,
+    lineHeight: FONT_SIZES.xxxl * LINE_HEIGHTS.tight,
+    letterSpacing: LETTER_SPACING.tight,
+    category: 'display' as FontCategory,
+  },
+  
   // Heading styles - Enhanced with more distinction
   headingLarge: {
     fontSize: FONT_SIZES.xxxl,
@@ -222,14 +245,14 @@ const BASE_TEXT_STYLES = {
   },
   label: {
     fontSize: FONT_SIZES.sm,
-    fontWeight: FONT_WEIGHTS.medium,
+    fontWeight: FONT_WEIGHTS.regular,
     lineHeight: FONT_SIZES.sm * LINE_HEIGHTS.normal,
     letterSpacing: LETTER_SPACING.normal,
     category: 'utility' as FontCategory,
   },
   overline: {
     fontSize: FONT_SIZES.xs,
-    fontWeight: FONT_WEIGHTS.medium,
+    fontWeight: FONT_WEIGHTS.regular,
     lineHeight: FONT_SIZES.xs * LINE_HEIGHTS.normal,
     letterSpacing: LETTER_SPACING.wider,
     textTransform: 'uppercase' as const,

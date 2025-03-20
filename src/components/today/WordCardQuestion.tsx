@@ -7,6 +7,7 @@ import { Text } from '../ui';
 import OptionButton from './OptionButton';
 import { OptionState } from './OptionButton';
 import { radius, elevation } from '../../theme/styleUtils';
+import { Platform } from 'react-native';
 
 interface WordCardQuestionProps {
   /**
@@ -109,7 +110,7 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
               style={{ 
                 textAlign: 'center',
                 textTransform: 'lowercase',
-                marginBottom: spacing.sm
+                marginBottom: spacing.xxs
               }}
             >
               {partOfSpeech}
@@ -117,11 +118,13 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
           )}
           
           <Text 
-            variant="displaySmall"
+            variant="serifTextMedium"
             color={colors.text.primary}
             align="center"
-            serif={true}
-            style={{ textTransform: 'lowercase', marginVertical: spacing.sm }}
+            style={{ 
+              textTransform: 'lowercase', 
+              marginVertical: spacing.sm
+            }}
           >
             {word}
           </Text>
@@ -140,8 +143,8 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
         
         {/* Options section */}
         <View style={{ paddingTop: spacing.lg }}>
-          <Text
-            variant="bodyLarge"
+          <Text 
+            variant="label" 
             color={colors.text.secondary}
             align="center"
             style={{ marginBottom: spacing.md }}
@@ -155,7 +158,7 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
               label={option.value}
               state={optionStates[option.value] || 'default'}
               onPress={() => handleOptionSelect(option)}
-              style={{ marginBottom: spacing.sm }}
+              style={{ marginBottom: spacing.md }}
             />
           ))}
         </View>

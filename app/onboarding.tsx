@@ -144,14 +144,14 @@ export default function OnboardingScreen() {
         {/* Content - lower half */}
         <Box style={[
           styles.contentContainer,
-          { paddingHorizontal: themeSpacing.xl, paddingBottom: themeSpacing.xl }
+          { paddingHorizontal: themeSpacing.xl }
         ]}>
           <Box style={[styles.textContainer, { paddingTop: themeSpacing.xl }]}>
             <Text 
               variant="displayLarge" 
               color={themeColors.text.primary}
               align="center" 
-              style={[styles.title, { marginBottom: themeSpacing.md }]}
+              style={{ marginBottom: themeSpacing.md }}
             >
               Master a New Word Every Day
             </Text>
@@ -160,13 +160,13 @@ export default function OnboardingScreen() {
               variant="bodyLarge" 
               color={themeColors.text.secondary} 
               align="center"
-              style={[styles.subtitle, { paddingHorizontal: themeSpacing.sm }]}
+              style={{ paddingHorizontal: themeSpacing.sm }}
             >
               Expand your vocabulary with a daily word in just 1 minute
             </Text>
           </Box>
           
-          <Box width="100%" style={[styles.buttonContainer, { paddingBottom: themeSpacing.md }]}>
+          <Box style={{ paddingBottom: themeSpacing.xl }}>
             <Button
               title="Get Started"
               variant="primary"
@@ -191,41 +191,40 @@ export default function OnboardingScreen() {
           { transform: [{ translateX: difficultyPosition }] }
         ]}
       >
-        <Box 
-          flex={1} 
-          justify="center" 
-          align="center" 
-          padding="lg"
-          paddingTop="xl"
-          paddingBottom="xl"
-        >
-          <DifficultySelector 
-            selectedLevel={selectedDifficulty}
-            onSelectLevel={handleDifficultySelect}
-            hasSelection={hasSelection}
-          />
-        </Box>
-        
-        <Box width="100%" style={styles.buttonContainer} padding="lg">
-          {hasSelection ? (
-            <Button
-              title={isNavigating ? "Loading..." : "Continue"}
-              variant="primary"
-              fullWidth
-              onPress={handleGetStarted}
-              disabled={isNavigating}
+        {/* Main content */}
+        <Box style={[
+          styles.contentContainer,
+          { paddingHorizontal: themeSpacing.xl }
+        ]}>
+          <Box flex={1} justify="center" align="center">
+            <DifficultySelector 
+              selectedLevel={selectedDifficulty}
+              onSelectLevel={handleDifficultySelect}
+              hasSelection={hasSelection}
             />
-          ) : (
-            <View style={styles.buttonPlaceholder} />
-          )}
+          </Box>
           
-          {isNavigating && (
-            <ActivityIndicator 
-              size="small" 
-              color={themeColors.primary}
-              style={{ marginTop: themeSpacing.md }}
-            />
-          )}
+          <Box style={{ paddingBottom: themeSpacing.xl }}>
+            {hasSelection ? (
+              <Button
+                title={isNavigating ? "Loading..." : "Continue"}
+                variant="primary"
+                fullWidth
+                onPress={handleGetStarted}
+                disabled={isNavigating}
+              />
+            ) : (
+              <View style={styles.buttonPlaceholder} />
+            )}
+            
+            {isNavigating && (
+              <ActivityIndicator 
+                size="small" 
+                color={themeColors.primary}
+                style={{ marginTop: themeSpacing.md }}
+              />
+            )}
+          </Box>
         </Box>
       </Animated.View>
     );
@@ -289,12 +288,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   textContainer: {
-  },
-  title: {
-  },
-  subtitle: {
-  },
-  buttonContainer: {
   },
   buttonPlaceholder: {
     height: 56, // Same height as the Button component

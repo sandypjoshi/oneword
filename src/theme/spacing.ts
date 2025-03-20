@@ -4,6 +4,7 @@
 
 const spacing = {
   // Base scale
+  xxs: 2,     // Tiny spacing
   xs: 4,
   sm: 8,
   md: 16,

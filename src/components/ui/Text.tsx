@@ -8,6 +8,9 @@ type TypographyVariant =
   | 'displayLarge' 
   | 'displayMedium' 
   | 'displaySmall' 
+  | 'serifTextLarge'
+  | 'serifTextMedium'
+  | 'serifTextSmall'
   | 'headingLarge' 
   | 'headingMedium' 
   | 'headingSmall' 
@@ -84,9 +87,13 @@ const Text: React.FC<TextProps> = ({
   // Check if this is a display variant
   const isDisplayVariant = variant.startsWith('display');
   const isHeadingVariant = variant.startsWith('heading');
+  const isSerifTextVariant = variant.startsWith('serifText');
   
   // Handle font family based on variant and serif prop
-  if (serif || isDisplayVariant || isHeadingVariant) {
+  if (isSerifTextVariant) {
+    // Serif text variants use DM Serif Text font but at larger sizes
+    baseStyle.fontFamily = italic ? fonts.serifItalic : fonts.serif;
+  } else if (serif || isDisplayVariant || isHeadingVariant) {
     if (isDisplayVariant) {
       // Display variants should use DM Serif Display font
       baseStyle.fontFamily = italic ? fonts.serifDisplayItalic : fonts.serifDisplay;
