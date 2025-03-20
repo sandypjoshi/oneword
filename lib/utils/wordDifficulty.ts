@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-import fetch from 'node-fetch';
+import axios from 'axios';
 import * as dotenv from 'dotenv';
 
 // Configure dotenv
@@ -38,8 +38,8 @@ async function rateLimitedFetch(url: string) {
   }
   
   lastRequestTime = Date.now();
-  const response = await fetch(url);
-  return response.json();
+  const response = await axios.get(url);
+  return response.data;
 }
 
 /**

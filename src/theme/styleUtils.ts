@@ -86,7 +86,7 @@ export const components = {
         y: spacing.xs,
       },
       medium: {
-        x: spacing.lg,
+        x: spacing.xl,
         y: spacing.sm,
       },
       large: {

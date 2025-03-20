@@ -31,6 +31,7 @@ const ThemeSelector = () => {
       <Text 
         variant="headingSmall" 
         style={{ marginTop: spacing.md, marginBottom: spacing.sm }}
+        serif={true}
       >
         Theme Style
       </Text>
@@ -66,6 +67,7 @@ const ThemeSelector = () => {
       <Text 
         variant="headingSmall" 
         style={{ marginTop: spacing.lg, marginBottom: spacing.sm }}
+        serif={true}
       >
         Appearance
       </Text>
@@ -150,6 +152,7 @@ export default function ThemeSettingsScreen() {
             variant="headingLarge" 
             align="center" 
             style={{ marginBottom: spacing.md }}
+            serif={true}
           >
             Theme Settings
           </Text>

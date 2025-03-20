@@ -50,7 +50,7 @@ const DifficultySelector: React.FC<DifficultySelectorProps> = ({
         variant="displaySmall"
         color={colors.text.primary}
         align="center"
-        style={styles.title}
+        style={{ marginBottom: spacing.md }}
       >
         What's your vocabulary level?
       </Text>
@@ -59,12 +59,12 @@ const DifficultySelector: React.FC<DifficultySelectorProps> = ({
         variant="bodyMedium"
         color={colors.text.secondary}
         align="center"
-        style={styles.subtitle}
+        style={{ marginBottom: spacing.xxl }}
       >
         Select an option to continue
       </Text>
 
-      <View style={styles.optionsContainer}>
+      <View style={{ width: '100%', gap: spacing.md }}>
         {difficultyOptions.map((option) => {
           const isSelected = selectedLevel === option.value;
           
@@ -76,12 +76,14 @@ const DifficultySelector: React.FC<DifficultySelectorProps> = ({
                 {
                   borderColor: isSelected ? colors.primary : colors.border.light,
                   backgroundColor: isSelected ? colors.background.card : colors.background.primary,
+                  padding: spacing.lg,
+                  borderRadius: 16,
                 },
               ]}
               onPress={() => handleSelect(option.value)}
               activeOpacity={0.7}
             >
-              <View style={styles.optionContent}>
+              <View style={{ flex: 1, marginRight: spacing.md }}>
                 <Text
                   variant="label"
                   color={colors.text.primary}
@@ -115,28 +117,12 @@ const DifficultySelector: React.FC<DifficultySelectorProps> = ({
 };
 
 const styles = StyleSheet.create({
-  title: {
-    marginBottom: 16,
-  },
-  subtitle: {
-    marginBottom: 48,
-  },
-  optionsContainer: {
-    width: '100%',
-    gap: 16,
-  },
   optionButton: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 20,
-    borderRadius: 16,
     borderWidth: 2,
     width: '100%',
-  },
-  optionContent: {
-    flex: 1,
-    marginRight: 16,
   },
   radioContainer: {
     width: 24,

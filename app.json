@@ -43,6 +43,48 @@
     "plugins": [
       "expo-router",
       "expo-font"
+    ],
+    "fonts": [
+      {
+        "asset": "./src/assets/fonts/DMSans_400Regular.ttf",
+        "family": "DMSans_400Regular"
+      },
+      {
+        "asset": "./src/assets/fonts/DMSans_400Regular_Italic.ttf",
+        "family": "DMSans_400Regular_Italic"
+      },
+      {
+        "asset": "./src/assets/fonts/DMSans_500Medium.ttf",
+        "family": "DMSans_500Medium"
+      },
+      {
+        "asset": "./src/assets/fonts/DMSans_500Medium_Italic.ttf",
+        "family": "DMSans_500Medium_Italic"
+      },
+      {
+        "asset": "./src/assets/fonts/DMSans_700Bold.ttf",
+        "family": "DMSans_700Bold"
+      },
+      {
+        "asset": "./src/assets/fonts/DMSans_700Bold_Italic.ttf",
+        "family": "DMSans_700Bold_Italic"
+      },
+      {
+        "asset": "./src/assets/fonts/DMSerifDisplay_400Regular.ttf",
+        "family": "DMSerifDisplay_400Regular"
+      },
+      {
+        "asset": "./src/assets/fonts/DMSerifDisplay_400Regular_Italic.ttf",
+        "family": "DMSerifDisplay_400Regular_Italic"
+      },
+      {
+        "asset": "./src/assets/fonts/DMSerifText_400Regular.ttf",
+        "family": "DMSerifText_400Regular"
+      },
+      {
+        "asset": "./src/assets/fonts/DMSerifText_400Regular_Italic.ttf",
+        "family": "DMSerifText_400Regular_Italic"
+      }
     ]
   }
 }

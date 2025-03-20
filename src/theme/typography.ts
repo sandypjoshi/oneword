@@ -92,7 +92,7 @@ const FONT_SIZES = {
   xxl: 28,     // Headings
   xxxl: 36,    // Large headings
   display: 44, // Display headings
-  huge: 52,    // Huge display text
+  huge: 48,    // Huge display text
 };
 
 // Line heights (multiplier based on font size)
@@ -105,10 +105,10 @@ const LINE_HEIGHTS = {
 
 // Letter spacing for different text types
 const LETTER_SPACING = {
-  tighter: -0.5,   // Tight for headings
-  tight: -0.25,    // Slightly tighter
+  tighter: -0.8,   // Tight for headings
+  tight: -0.3,    // Slightly tighter
   normal: 0,       // Normal spacing
-  wide: 0.25,      // Slightly wider  
+  wide: 0.3,      // Slightly wider  
   wider: 0.5,      // Wider for emphasis
 };
 
@@ -263,19 +263,19 @@ interface FontPairing {
 // Define font pairings for each theme
 const THEME_FONTS: Record<ThemeName, FontPairing> = {
   default: {
-    display: FONT_FAMILIES.system,
+    display: FONT_FAMILIES.serifDisplay, // Use DM Serif Display for display text even in default theme
     heading: FONT_FAMILIES.system,
     body: FONT_FAMILIES.system,
     utility: FONT_FAMILIES.system,
   },
   quill: {
-    display: FONT_FAMILIES.serifDisplay, // Large variant for display text
-    heading: FONT_FAMILIES.serif,        // Medium variant for headings
-    body: FONT_FAMILIES.system,
-    utility: FONT_FAMILIES.system,
+    display: FONT_FAMILIES.serifDisplay, // Use DM Serif Display for display text
+    heading: FONT_FAMILIES.serifDisplay, // Use DM Serif Display for headings
+    body: FONT_FAMILIES.serif,           // Use DM Serif Text for body
+    utility: FONT_FAMILIES.system,       // Keep system font for utility text
   },
   aura: {
-    display: FONT_FAMILIES.serifDisplay, // Large variant for display text
+    display: FONT_FAMILIES.serifDisplay, // Use DM Serif Display for display text
     heading: FONT_FAMILIES.system,
     body: FONT_FAMILIES.system,
     utility: FONT_FAMILIES.system,

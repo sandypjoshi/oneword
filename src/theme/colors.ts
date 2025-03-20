@@ -127,7 +127,8 @@ const defaultTheme = {
     // Semantic colors
     background: {
       primary: palettes.gray[50],
-      secondary: '#ffffff',
+      secondary: '#f8fafc',
+      tertiary: '#f1f5f9',
       card: '#ffffff',
     },
     text: {
@@ -157,7 +158,8 @@ const defaultTheme = {
     // Semantic colors
     background: {
       primary: palettes.gray[900],
-      secondary: palettes.gray[800],
+      secondary: '#303030',
+      tertiary: '#383838',
       card: palettes.gray[800],
     },
     text: {
@@ -190,24 +192,25 @@ const quillTheme = {
   light: {
     // Semantic colors
     background: {
-      primary: '#fff8ea', // Cream/beige background from image
-      secondary: '#ffffff',
+      primary: '#fff8ea',
+      secondary: '#fffaf0',
+      tertiary: '#fff5e6',
       card: '#ffffff',
     },
     text: {
-      primary: '#010D25', // Dark brown for text
-      secondary: '#5f4d36', // Medium brown for secondary text
-      hint: '#9a7c55', // Light brown for hint text
+      primary: '#010D25',
+      secondary: '#5f4d36',
+      hint: '#9a7c55',
       inverse: '#ffffff',
     },
     border: {
-      light: '#f3e3cc', // Light border color
-      medium: '#e8d0ae', // Medium border color
-      dark: '#c9aa7c', // Dark brown border
+      light: '#f3e3cc',
+      medium: '#e8d0ae',
+      dark: '#c9aa7c',
     },
     
     // Brand colors
-    primary: palettes.orange[600], // Orange primary color as requested
+    primary: palettes.orange[600],
     primaryLight: palettes.orange[500],
     primaryDark: palettes.orange[700],
     
@@ -220,24 +223,25 @@ const quillTheme = {
   dark: {
     // Semantic colors
     background: {
-      primary: '#010D25', // Very dark background from image
-      secondary: '#031334', // Slightly lighter dark
+      primary: '#010D25',
+      secondary: '#071a45',
+      tertiary: '#0d2456',
       card: '#031334',
     },
     text: {
-      primary: '#fff8ea', // White text
-      secondary: '#B3B3B3', // Light gray for secondary text
-      hint: '#81858F', // Medium gray for hint text
+      primary: '#fff8ea',
+      secondary: '#B3B3B3',
+      hint: '#81858F',
       inverse: '#121212',
     },
     border: {
-      light: '#192D55', // Light border in dark mode
-      medium: '#424242', // Medium border in dark mode
-      dark: '#616161', // Dark border in dark mode
+      light: '#192D55',
+      medium: '#424242',
+      dark: '#616161',
     },
     
     // Brand colors
-    primary: palettes.orange[600], // Orange primary color as requested
+    primary: palettes.orange[600],
     primaryLight: palettes.orange[500],
     primaryDark: palettes.orange[700],
     
@@ -255,7 +259,8 @@ const auraTheme = {
     // Semantic colors
     background: {
       primary: '#f5f9f7',
-      secondary: '#ffffff',
+      secondary: '#f0f5f1',
+      tertiary: '#e6f0e8',
       card: '#ffffff',
     },
     text: {
@@ -285,7 +290,8 @@ const auraTheme = {
     // Semantic colors
     background: {
       primary: '#1e2b1e',
-      secondary: '#283828',
+      secondary: '#243024',
+      tertiary: '#2c3c2c',
       card: '#283828',
     },
     text: {

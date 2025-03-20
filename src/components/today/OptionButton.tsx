@@ -61,7 +61,7 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
       case 'incorrect':
         return colors.error + '15'; // Using opacity for error background
       default:
-        return colors.background.primary;
+        return colors.background.tertiary;
     }
   };
   
@@ -96,8 +96,12 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
   return (
     <TouchableOpacity
       style={[
-        styles.container,
         {
+          paddingHorizontal: spacing.md,
+          paddingVertical: spacing.sm,
+          borderRadius: radius.pill,
+          marginBottom: spacing.sm,
+          width: '100%',
           backgroundColor: getBackgroundColor(),
           borderColor: getBorderColor(),
           borderWidth: state !== 'default' ? 1 : 0,
@@ -113,7 +117,7 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
         weight={state !== 'default' ? "600" : "400"}
         color={getTextColor()}
         align="center"
-        style={styles.label}
+        style={{ textTransform: 'lowercase' }}
       >
         {label}
       </Text>
@@ -123,19 +127,6 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
 
 // Apply memo to prevent unnecessary re-renders
 const OptionButton = memo(OptionButtonComponent);
-
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderRadius: radius.pill,
-    marginBottom: 12,
-    width: '100%',
-  },
-  label: {
-    textTransform: 'lowercase'
-  }
-});
 
 // Set display name for better debugging
 OptionButton.displayName = 'OptionButton';

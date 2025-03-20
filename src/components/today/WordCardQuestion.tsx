@@ -85,8 +85,12 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
   return (
     <View 
       style={[
-        styles.container,
-        { 
+        {
+          borderWidth: 1,
+          ...elevation.sm,
+          overflow: 'hidden',
+          flex: 1,
+          display: 'flex',
           backgroundColor: colors.background.card,
           borderColor: colors.border.light,
           borderRadius: radius.xl,
@@ -96,7 +100,7 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
     >
       <Box padding="lg" style={{ flex: 1, justifyContent: 'space-between' }}>
         {/* Word section */}
-        <View style={styles.wordSection}>
+        <View style={{ alignItems: 'center', marginVertical: spacing.lg }}>
           {partOfSpeech && (
             <Text
               variant="caption"
@@ -105,7 +109,7 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
               style={{ 
                 textAlign: 'center',
                 textTransform: 'lowercase',
-                marginBottom: 8
+                marginBottom: spacing.sm
               }}
             >
               {partOfSpeech}
@@ -117,7 +121,7 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
             color={colors.text.primary}
             align="center"
             serif={true}
-            style={styles.wordText}
+            style={{ textTransform: 'lowercase', marginVertical: spacing.sm }}
           >
             {word}
           </Text>
@@ -127,7 +131,7 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
               variant="bodySmall"
               color={colors.text.secondary}
               align="center"
-              style={styles.pronunciationText}
+              style={{ marginTop: spacing.xs }}
             >
               {pronunciation}
             </Text>
@@ -135,12 +139,12 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
         </View>
         
         {/* Options section */}
-        <View style={styles.optionsContainer}>
+        <View style={{ paddingTop: spacing.lg }}>
           <Text
             variant="bodyLarge"
             color={colors.text.secondary}
             align="center"
-            style={styles.selectText}
+            style={{ marginBottom: spacing.md }}
           >
             Select the correct definition
           </Text>
@@ -151,7 +155,7 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
               label={option.value}
               state={optionStates[option.value] || 'default'}
               onPress={() => handleOptionSelect(option)}
-              style={styles.optionButton}
+              style={{ marginBottom: spacing.sm }}
             />
           ))}
         </View>
@@ -162,41 +166,6 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
 
 // Apply memo to prevent unnecessary re-renders
 const WordCardQuestion = memo(WordCardQuestionComponent);
-
-const styles = StyleSheet.create({
-  container: {
-    borderWidth: 1,
-    ...elevation.sm,
-    overflow: 'hidden',
-    flex: 1,
-    display: 'flex',
-  },
-  wordSection: {
-    alignItems: 'center',
-    marginVertical: 24,
-  },
-  wordText: {
-    textTransform: 'lowercase',
-    marginVertical: 8
-  },
-  pronunciationText: {
-    marginTop: 4,
-  },
-  partOfSpeechText: {
-    textTransform: 'lowercase',
-    marginBottom: 8,
-    textAlign: 'center'
-  },
-  optionsContainer: {
-    paddingTop: 24,
-  },
-  selectText: {
-    marginBottom: 16,
-  },
-  optionButton: {
-    marginBottom: 12,
-  }
-});
 
 // Set display name for better debugging
 WordCardQuestion.displayName = 'WordCardQuestion';

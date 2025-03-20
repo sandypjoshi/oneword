@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text as RNText, TextProps as RNTextProps, TextStyle, StyleProp } from 'react-native';
+import { Text as RNText, TextProps as RNTextProps, TextStyle, StyleProp, StyleSheet } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
 import { FontCategory } from '../../theme/typography';
 
@@ -46,7 +46,7 @@ const Text: React.FC<TextProps> = ({
   align,
   weight,
   fontCategory,
-  serif,
+  serif = false,
   italic,
   ...rest
 }) => {
@@ -59,7 +59,7 @@ const Text: React.FC<TextProps> = ({
   // Get the variant style
   const variantStyle = typographyStyles[variant] || {};
   
-  // Build the style object in the correct order of specificity
+  // Build the style object with the correct font styles
   const baseStyle: TextStyle = {
     ...variantStyle,
   };
@@ -76,52 +76,44 @@ const Text: React.FC<TextProps> = ({
     baseStyle.textAlign = align;
   }
   
-  // Set italic text if specified
-  if (italic) {
-    // Use the proper italic font family instead of just fontStyle
-    if (serif) {
-      if (variant.startsWith('display')) {
-        baseStyle.fontFamily = theme.typography.fonts.serifDisplayItalic;
-      } else {
-        baseStyle.fontFamily = theme.typography.fonts.serifItalic;
-      }
+  // Set explicit weight if provided
+  if (weight) {
+    baseStyle.fontWeight = weight;
+  }
+  
+  // Check if this is a display variant
+  const isDisplayVariant = variant.startsWith('display');
+  const isHeadingVariant = variant.startsWith('heading');
+  
+  // Handle font family based on variant and serif prop
+  if (serif || isDisplayVariant || isHeadingVariant) {
+    if (isDisplayVariant) {
+      // Display variants should use DM Serif Display font
+      baseStyle.fontFamily = italic ? fonts.serifDisplayItalic : fonts.serifDisplay;
+      
+      // Ensure display variants are bold
+      baseStyle.fontWeight = '700';
     } else {
-      // Handle different weights for sans-serif
-      if (weight === 'bold' || weight === '700') {
-        baseStyle.fontFamily = theme.typography.fonts.systemBoldItalic;
-      } else if (weight === '500') {
-        baseStyle.fontFamily = theme.typography.fonts.systemMediumItalic;
-      } else {
-        baseStyle.fontFamily = theme.typography.fonts.systemItalic;
-      }
+      // Heading variants or serif prop use DM Serif Text
+      baseStyle.fontFamily = italic ? fonts.serifItalic : fonts.serif;
     }
   } else {
-    // Add serif font when requested
-    // We'll use the appropriate serif variant based on text size
-    if (serif) {
-      // Add the serif font to the text based on text size
-      if (variant.startsWith('display')) {
-        baseStyle.fontFamily = theme.typography.fonts.serifDisplay;
-      } else {
-        baseStyle.fontFamily = theme.typography.fonts.serif;
-      }
+    // Handle different weights for sans-serif fonts
+    const fontWeight = baseStyle.fontWeight;
+    
+    if (fontWeight === 'bold' || fontWeight === '700') {
+      baseStyle.fontFamily = italic ? fonts.systemBoldItalic : fonts.systemBold;
+    } else if (fontWeight === '500') {
+      baseStyle.fontFamily = italic ? fonts.systemMediumItalic : fonts.systemMedium;
     } else {
-      // Handle different weights for sans-serif
-      if (weight === 'bold' || weight === '700') {
-        baseStyle.fontFamily = theme.typography.fonts.systemBold;
-      } else if (weight === '500') {
-        baseStyle.fontFamily = theme.typography.fonts.systemMedium;
-      } else {
-        // Regular weight
-        baseStyle.fontFamily = theme.typography.fonts.system;
-      }
+      baseStyle.fontFamily = italic ? fonts.systemItalic : fonts.system;
     }
   }
 
-  // Force a style array to help React Native properly apply all styles
+  // Create final style array with proper specificity order
   const finalStyle: StyleProp<TextStyle> = [baseStyle];
   
-  // Add any custom styles with higher priority
+  // Add custom styles with higher priority
   if (style) {
     finalStyle.push(style);
   }

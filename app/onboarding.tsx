@@ -52,7 +52,10 @@ export default function OnboardingScreen() {
 
   // Define all hooks at the top level - regardless of isReady
   const themeColors = isReady ? theme.colors : fallbackColors;
-  const spacing = isReady ? theme.spacing : { md: 8 }; // Default spacing value if theme isn't ready
+  // Ensure we have default values for spacing if theme isn't ready
+  const themeSpacing = isReady ? theme.spacing : { 
+    xs: 4, sm: 8, md: 16, lg: 24, xl: 32, xxl: 48 
+  };
 
   // Memoize the navigation handlers
   const handleNext = useCallback(() => {
@@ -139,13 +142,16 @@ export default function OnboardingScreen() {
         </Box>
         
         {/* Content - lower half */}
-        <Box style={styles.contentContainer}>
-          <Box style={styles.textContainer}>
+        <Box style={[
+          styles.contentContainer,
+          { paddingHorizontal: themeSpacing.xl, paddingBottom: themeSpacing.xl }
+        ]}>
+          <Box style={[styles.textContainer, { paddingTop: themeSpacing.xl }]}>
             <Text 
               variant="displayLarge" 
               color={themeColors.text.primary}
               align="center" 
-              style={styles.title}
+              style={[styles.title, { marginBottom: themeSpacing.md }]}
             >
               Master a New Word Every Day
             </Text>
@@ -154,13 +160,13 @@ export default function OnboardingScreen() {
               variant="bodyLarge" 
               color={themeColors.text.secondary} 
               align="center"
-              style={styles.subtitle}
+              style={[styles.subtitle, { paddingHorizontal: themeSpacing.sm }]}
             >
               Expand your vocabulary with a daily word in just 1 minute
             </Text>
           </Box>
           
-          <Box width="100%" style={styles.buttonContainer}>
+          <Box width="100%" style={[styles.buttonContainer, { paddingBottom: themeSpacing.md }]}>
             <Button
               title="Get Started"
               variant="primary"
@@ -171,7 +177,7 @@ export default function OnboardingScreen() {
         </Box>
       </Animated.View>
     );
-  }, [welcomePosition, themeColors, handleNext]);
+  }, [welcomePosition, themeColors, handleNext, themeSpacing]);
 
   // Difficulty selection step content
   const renderDifficultyStep = useCallback(() => {
@@ -217,7 +223,7 @@ export default function OnboardingScreen() {
             <ActivityIndicator 
               size="small" 
               color={themeColors.primary}
-              style={{ marginTop: spacing.md }}
+              style={{ marginTop: themeSpacing.md }}
             />
           )}
         </Box>
@@ -227,7 +233,7 @@ export default function OnboardingScreen() {
     difficultyPosition, 
     selectedDifficulty, 
     themeColors, 
-    spacing, 
+    themeSpacing, 
     handleDifficultySelect, 
     handleGetStarted, 
     isNavigating
@@ -269,38 +275,26 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   imageContainer: {
-    flex: 1.5,
+    flex: 1.3,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 32,
   },
   welcomeImage: {
     width: '100%',
     height: '100%',
-    maxHeight: 250,
+    maxHeight: 240,
   },
   contentContainer: {
-    flex: 1,
-    paddingHorizontal: 24,
-    paddingBottom: 32,
+    flex: 1.2,
     justifyContent: 'space-between',
   },
   textContainer: {
-    paddingTop: 32,
   },
   title: {
-    fontSize: 32,
-    lineHeight: 40,
-    marginBottom: 16,
-    fontWeight: '700',
   },
   subtitle: {
-    fontSize: 18,
-    lineHeight: 26,
-    paddingHorizontal: 8,
   },
   buttonContainer: {
-    paddingBottom: 20,
   },
   buttonPlaceholder: {
     height: 56, // Same height as the Button component
