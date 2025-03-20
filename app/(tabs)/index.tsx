@@ -344,7 +344,7 @@ export default function HomeScreen() {
                     variant="caption"
                     color={isActive ? colors.text.inverse : colors.text.secondary}
                     align="center"
-                    weight={isActive ? "600" : "400"}
+                    weight={isActive ? "700" : "400"}
                   >
                     {dateNum}
                   </CustomText>

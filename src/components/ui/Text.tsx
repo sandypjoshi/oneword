@@ -31,7 +31,7 @@ interface TextProps extends RNTextProps {
   variant?: TypographyVariant;
   color?: string;
   align?: 'auto' | 'left' | 'right' | 'center' | 'justify';
-  weight?: 'normal' | 'bold' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
+  weight?: 'normal' | 'bold' | '400' | '500' | '700';
   fontCategory?: FontCategory;
   serif?: boolean; // Shorthand for setting fontCategory to 'display' or 'heading'
   italic?: boolean; // Shorthand for setting fontStyle to 'italic'

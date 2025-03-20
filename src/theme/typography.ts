@@ -77,7 +77,6 @@ const FONT_WEIGHTS: Record<string, FontWeight> = {
   regular: '400',
   medium: '500',
   bold: '700',
-  black: '900',
 };
 
 // Font sizes - Adjusted to avoid tiny text 
@@ -105,10 +104,10 @@ const LINE_HEIGHTS = {
 
 // Letter spacing for different text types
 const LETTER_SPACING = {
-  tighter: -0.8,   // Tight for headings
-  tight: -0.3,    // Slightly tighter
+  tighter: -0.5,   // Tight for headings
+  tight: -0.25,    // Slightly tighter
   normal: 0,       // Normal spacing
-  wide: 0.3,      // Slightly wider  
+  wide: 0.25,      // Slightly wider  
   wider: 0.5,      // Wider for emphasis
 };
 
@@ -142,15 +141,15 @@ const BASE_TEXT_STYLES = {
   serifTextLarge: {
     fontSize: FONT_SIZES.big,
     fontWeight: FONT_WEIGHTS.regular, // Serif Text only comes in regular weight
-    lineHeight: FONT_SIZES.big * LINE_HEIGHTS.tight,
-    letterSpacing: LETTER_SPACING.tighter,
+    lineHeight: FONT_SIZES.big * LINE_HEIGHTS.normal,
+    letterSpacing: LETTER_SPACING.tight,
     category: 'display' as FontCategory,
   },
   serifTextMedium: {
     fontSize: FONT_SIZES.display, 
     fontWeight: FONT_WEIGHTS.regular,
     lineHeight: FONT_SIZES.display * LINE_HEIGHTS.tight,
-    letterSpacing: LETTER_SPACING.tighter,
+    letterSpacing: LETTER_SPACING.tight,
     category: 'display' as FontCategory,
   },
   serifTextSmall: {

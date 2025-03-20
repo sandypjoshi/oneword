@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
 import { Text } from '../ui';
-import { radius } from '../../theme/styleUtils';
+import { radius, borderWidth, opacity } from '../../theme/styleUtils';
 
 export type OptionState = 'default' | 'selected' | 'correct' | 'incorrect';
 
@@ -55,11 +55,11 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
   const getBackgroundColor = () => {
     switch (state) {
       case 'selected':
-        return colors.primary + '15'; // Using opacity for selected state
+        return colors.primary + opacity.light;
       case 'correct':
-        return colors.success + '15'; // Using opacity for success background
+        return colors.success + opacity.light;
       case 'incorrect':
-        return colors.error + '15'; // Using opacity for error background
+        return colors.error + opacity.light;
       default:
         return colors.background.tertiary;
     }
@@ -75,7 +75,7 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
       case 'incorrect':
         return colors.error;
       default:
-        return isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.08)';
+        return isDark ? opacity.subtle.light : opacity.subtle.dark;
     }
   };
   
@@ -103,7 +103,8 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
           marginBottom: spacing.sm,
           width: '100%',
           backgroundColor: getBackgroundColor(),
-          borderWidth: 0,
+          borderColor: getBorderColor(),
+          borderWidth: state !== 'default' ? borderWidth.hairline : borderWidth.none,
         },
         style
       ]}
@@ -113,7 +114,7 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
     >
       <Text
         variant="bodyMedium"
-        weight={state !== 'default' ? "600" : "400"}
+        weight={state !== 'default' ? "700" : "400"}
         color={getTextColor()}
         align="center"
         style={{ 

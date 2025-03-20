@@ -28,6 +28,27 @@ export const radius = {
   circular: 9999,
 } as const;
 
+// Border width scale
+export const borderWidth = {
+  none: 0,
+  hairline: 0.25,
+  thin: 0.5,
+  base: 1,
+  thick: 2,
+} as const;
+
+// Opacity values
+export const opacity = {
+  none: '00',
+  light: '15',   // 8% opacity
+  medium: '40',  // 25% opacity 
+  high: '80',    // 50% opacity
+  subtle: {
+    light: 'rgba(255, 255, 255, 0.08)',
+    dark: 'rgba(0, 0, 0, 0.08)'
+  }
+} as const;
+
 // Elevation/Shadow styles
 export const elevation = {
   none: {
