@@ -5,11 +5,11 @@
 import { TextStyle, Platform } from 'react-native';
 
 type FontWeight = TextStyle['fontWeight'];
-type ThemeName = 'default' | 'quill' | 'aura';
+type ThemeName = 'default' | 'quill';
 export type FontCategory = 'display' | 'heading' | 'body' | 'utility';
 
 // Platform-specific font families - Using DM Sans and DM Serif
-const FONT_FAMILIES = {
+export const FONT_FAMILIES = {
   // Sans-serif options
   system: Platform.select({
     ios: 'DMSans_400Regular',  // DM Sans for iOS
@@ -73,14 +73,14 @@ const FONT_FAMILIES = {
 };
 
 // Font weights
-const FONT_WEIGHTS: Record<string, FontWeight> = {
+export const FONT_WEIGHTS: Record<string, FontWeight> = {
   regular: '400',
   medium: '500',
   bold: '700',
 };
 
 // Font sizes - Adjusted to avoid tiny text 
-const FONT_SIZES = {
+export const FONT_SIZES = {
   xxs: 12,     // Very small text
   xs: 14,      // Small captions, footnotes
   sm: 16,      // Secondary text, labels
@@ -95,7 +95,7 @@ const FONT_SIZES = {
 };
 
 // Line heights (multiplier based on font size)
-const LINE_HEIGHTS = {
+export const LINE_HEIGHTS = {
   tight: 1.20,    // Tighter for headings
   normal: 1.5,    // Standard for body text
   relaxed: 1.75,  // More space for readability
@@ -103,7 +103,7 @@ const LINE_HEIGHTS = {
 };
 
 // Letter spacing for different text types
-const LETTER_SPACING = {
+export const LETTER_SPACING = {
   tighter: -0.5,   // Tight for headings
   tight: -0.25,    // Slightly tighter
   normal: 0,       // Normal spacing
@@ -111,9 +111,12 @@ const LETTER_SPACING = {
   wider: 0.5,      // Wider for emphasis
 };
 
+// Export the base text styles type for use in typed contexts
+export type TypographyVariant = keyof typeof BASE_TEXT_STYLES;
+
 // Base text styles that don't include the font family
 // Using semantic naming conventions for better clarity
-const BASE_TEXT_STYLES = {
+export const BASE_TEXT_STYLES = {
   // Display headings for major features
   displayLarge: {
     fontSize: FONT_SIZES.big,
@@ -282,25 +285,19 @@ interface FontPairing {
   utility: string | undefined;
 }
 
-// Define font pairings for each theme
-const THEME_FONTS: Record<ThemeName, FontPairing> = {
+// Font pairings for each theme
+const themeFontPairings: Record<ThemeName, FontPairing> = {
   default: {
-    display: FONT_FAMILIES.serifDisplay, // Use DM Serif Display for display text even in default theme
+    display: FONT_FAMILIES.system,
     heading: FONT_FAMILIES.system,
     body: FONT_FAMILIES.system,
     utility: FONT_FAMILIES.system,
   },
   quill: {
     display: FONT_FAMILIES.serifDisplay, // Use DM Serif Display for display text
-    heading: FONT_FAMILIES.serifDisplay, // Use DM Serif Display for headings
-    body: FONT_FAMILIES.serif,           // Use DM Serif Text for body
-    utility: FONT_FAMILIES.system,       // Keep system font for utility text
-  },
-  aura: {
-    display: FONT_FAMILIES.serifDisplay, // Use DM Serif Display for display text
-    heading: FONT_FAMILIES.system,
-    body: FONT_FAMILIES.system,
-    utility: FONT_FAMILIES.system,
+    heading: FONT_FAMILIES.serif, // Use DM Serif Text for headings
+    body: FONT_FAMILIES.system, // Use DM Sans for body
+    utility: FONT_FAMILIES.system, // Use DM Sans for utility text
   },
 };
 
@@ -325,9 +322,9 @@ function addFontFamily<T extends Record<string, any>>(
 }
 
 // Create the final text styles for a specific theme
-function createTextStyles(themeName: ThemeName = 'default'): Record<string, TextStyle> {
+export function createTextStyles(themeName: ThemeName = 'default'): Record<string, TextStyle> {
   // Get the appropriate font pairing for this theme
-  const fontPairing = THEME_FONTS[themeName] || THEME_FONTS.default;
+  const fontPairing = themeFontPairings[themeName] || themeFontPairings.default;
   
   // Create styles with theme-specific fonts
   const styles = Object.entries(BASE_TEXT_STYLES).reduce((acc, [name, style]) => {
@@ -368,6 +365,8 @@ const typography = {
   fonts: FONT_FAMILIES,
   createTextStyles,
   styles: createTextStyles('default'),
+  // Export BASE_TEXT_STYLES for reference in other parts of the app
+  baseStyles: BASE_TEXT_STYLES,
 };
 
 export default typography; 

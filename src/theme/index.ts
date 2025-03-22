@@ -2,17 +2,26 @@
  * Theme exports for the OneWord app
  */
 
-import themes from './colors';
+import colors from './colors';
 import spacing from './spacing';
 import typography from './typography';
 
+// Reexport the TypographyVariant as a type
+export type { TypographyVariant } from './typography';
+
+// Define the theme type
 export type Theme = {
-  colors: typeof themes.default.light | typeof themes.default.dark;
+  colors: typeof colors.default.light;
   spacing: typeof spacing;
   typography: typeof typography;
 };
 
-export { themes, spacing, typography };
+// Export all theme components
+export { ThemeProvider, useTheme } from './ThemeProvider';
+export type { ThemeContextType } from './ThemeProvider';
+
+// Export theme tokens
+export { colors, spacing, typography };
 
 // Note: ThemeProvider and useTheme are exported directly from ThemeProvider.tsx
 // to avoid circular dependencies 

@@ -135,4 +135,94 @@ To add new theme values:
 
 - Always use the theme system instead of hardcoding colors or styles
 - Create themed variants of any new components you build
-- Test your UI in both light and dark modes 
+- Test your UI in both light and dark modes
+
+## Responsive Typography
+
+The app includes an integrated responsive typography system that automatically scales text based on device screen size. This ensures optimal readability across different devices.
+
+### Accessing Typography
+
+There are two main ways to use typography in the app:
+
+1. **Using the Text component (recommended)**:
+   ```tsx
+   import { Text } from 'components/ui';
+   
+   function MyComponent() {
+     return (
+       <Text variant="headingLarge">
+         This is a heading
+       </Text>
+     );
+   }
+   ```
+
+2. **Using the typography styles directly**:
+   ```tsx
+   import { useTheme } from 'theme';
+   import { Text as RNText } from 'react-native';
+   
+   function MyComponent() {
+     const { responsiveTypography } = useTheme();
+     
+     return (
+       <RNText style={responsiveTypography.headingLarge}>
+         This is a heading
+       </RNText>
+     );
+   }
+   ```
+
+3. **Using the helper hook**:
+   ```tsx
+   import { useResponsiveText } from 'hooks';
+   import { Text as RNText } from 'react-native';
+   
+   function MyComponent() {
+     const headingStyle = useResponsiveText('headingLarge');
+     
+     return (
+       <RNText style={headingStyle}>
+         This is a heading
+       </RNText>
+     );
+   }
+   ```
+
+### Typography Variants
+
+The typography system includes these variants:
+
+- **Display**: `displayLarge`, `displayMedium`, `displaySmall`
+- **Heading**: `headingLarge`, `headingMedium`, `headingSmall`
+- **Serif Text**: `serifTextLarge`, `serifTextMedium`, `serifTextSmall`
+- **Body**: `bodyLarge`, `bodyMedium`, `bodySmall`, `bodyEmphasized`
+- **Functional**: `button`, `buttonSmall`, `caption`, `label`, `overline`, `note`, `subtitle`
+
+## Color System
+
+Colors are organized by semantic role, with light and dark variants automatically selected based on the current color mode.
+
+```tsx
+// Examples of color usage
+colors.background.primary  // Main background color
+colors.text.primary        // Primary text color
+colors.primary.500         // Primary brand color
+colors.error               // Error state color
+```
+
+## Spacing
+
+Spacing follows a consistent scale to ensure proper layout rhythm:
+
+```tsx
+// Examples of spacing usage
+spacing.xs   // Extra small space
+spacing.sm   // Small space
+spacing.md   // Medium space
+spacing.lg   // Large space
+spacing.xl   // Extra large space
+```
+
+For more detailed information about typography specifically, see [typography.md](./typography.md). 

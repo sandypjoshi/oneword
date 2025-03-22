@@ -1,7 +1,8 @@
 import React from 'react';
-import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
+import { TouchableOpacity, StyleSheet, View } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
 import Icon from './Icon';
+import Text from './Text';
 import { speak } from '../../utils/tts';
 import { radius } from '../../theme/styleUtils';
 
@@ -53,11 +54,8 @@ const PronunciationChip: React.FC<PronunciationChipProps> = ({
         />
       </View>
       <Text
-        style={{
-          color: colors.text.secondary,
-          fontSize: 14,
-          fontWeight: '400',
-        }}
+        variant="caption"
+        color={colors.text.secondary}
       >
         {pronunciation}
       </Text>

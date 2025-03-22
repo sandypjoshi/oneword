@@ -36,21 +36,21 @@ const palettes = {
     1000: '#0f172a',
   },
   
-  // Deep Blues - Shifted one position darker (values moving up) for richer dark mode experience
+  // Deep Blues - Further desaturated and inspired by moonlit ocean waters for minimal eye strain
   deepBlue: {
-    10: '#e5eef9',
-    25: '#d1e0f2',
-    50: '#b0cae8',
-    100: '#8ab0dd',
-    200: '#6389cb',
-    300: '#4a68bc',
-    400: '#344eab',
-    500: '#263a94',
-    600: '#1a2b7d',
-    700: '#111c60',
-    800: '#091143',
-    900: '#040828',
-    1000: '#020419',
+    10: '#edf0f5',
+    25: '#dce2ec',
+    50: '#c5ceda',
+    100: '#a7b6c7',
+    200: '#8a99b3',
+    300: '#6c7d9c',
+    400: '#536785',
+    500: '#3d506f',
+    600: '#2b3c59',
+    700: '#1e2c44',
+    800: '#151e30',
+    900: '#0c121f',
+    1000: '#060a12',
   },
   
   // Purples - Enhanced for better vibrancy and transitions
@@ -159,21 +159,21 @@ const palettes = {
     black: '#0a0a0c', // Rich deep near-black with subtle undertones that looks natural
   },
   
-  // Warm neutrals - Refined for more sophistication and professional look
+  // Warm neutrals - True sandy hues with golden amber undertones
   sand: {
-    10: '#fffcf8',
-    25: '#fcf9f2',
-    50: '#f9f1e7',
-    100: '#f5e6d3',
-    200: '#ead4b7',
-    300: '#dfc199',
-    400: '#d2ab7c',
-    500: '#c19560',
-    600: '#ae7f48',
-    700: '#8e6434',
-    800: '#6d4a23',
-    900: '#483015',
-    1000: '#2a1c0d',
+    10: '#fffdf7',
+    25: '#fcf8ed',
+    50: '#f9f1dd',
+    100: '#f5e7c7',
+    200: '#edd8ae',
+    300: '#e4c794',
+    400: '#d8b47b',
+    500: '#c9a062',
+    600: '#b68a4c',
+    700: '#9d743b',
+    800: '#7d5c2f',
+    900: '#5a4121',
+    1000: '#382815',
   },
   
   // Cool neutrals - Refined for subtlety
@@ -193,21 +193,21 @@ const palettes = {
     1000: '#06080f',
   },
   
-  // Oranges - Enhanced for more elegant warmth and professional tone
+  // Oranges - Vibrant amber tones with natural warmth
   orange: {
-    10: '#fff8f4',
-    25: '#fff2e9',
-    50: '#ffebd8',
-    100: '#ffdab3',
-    200: '#ffc78a',
-    300: '#ffb161',
-    400: '#fa9638',
-    500: '#e67f1f',
-    600: '#cc6a12',
-    700: '#a55411',
-    800: '#7e3f10',
-    900: '#522a0c',
-    1000: '#301705',
+    10: '#fff9f5',
+    25: '#fff3ea',
+    50: '#ffe9d8',
+    100: '#ffd9b8',
+    200: '#ffc592',
+    300: '#ffad6d',
+    400: '#f99547',
+    500: '#ee7d28',
+    600: '#dd6a19',
+    700: '#b85615',
+    800: '#8f4211',
+    900: '#612d0e',
+    1000: '#3d1c09',
   },
   
   // Pinks - Improved for richer contrast and softer hues
@@ -322,7 +322,7 @@ const defaultTheme = {
     background: {
       primary: palettes.neutralLight[10],
       secondary: palettes.neutralLight[50],
-      tertiary: palettes.neutralLight[100],
+      tertiary: palettes.neutralLight[25],
       card: palettes.neutralLight[0],
       overlay: `${palettes.neutral.black}${opacity.medium}`,
       
@@ -340,7 +340,7 @@ const defaultTheme = {
       
       // Interactive backgrounds
       hover: palettes.neutralLight[50],
-      active: palettes.neutralLight[100],
+      active: palettes.blue[25],
       selected: palettes.blue[50],
       disabled: palettes.neutralLight[100],
     },
@@ -414,7 +414,7 @@ const defaultTheme = {
   dark: {
     // Semantic colors - Background
     background: {
-      primary: palettes.neutralDark[25],
+      primary: palettes.neutralDark[10],
       secondary: palettes.neutralDark[50],
       tertiary: palettes.neutralDark[100],
       card: palettes.neutralDark[50],
@@ -514,7 +514,7 @@ const quillTheme = {
       primary: palettes.sand[10],
       secondary: palettes.sand[25],
       tertiary: palettes.sand[50],
-      card: palettes.neutralLight[0],
+      card: palettes.sand[25],
       overlay: `${palettes.neutral.black}${opacity.medium}`,
       
       // Status backgrounds
@@ -530,9 +530,9 @@ const quillTheme = {
       discoveryHeavy: palettes.purple[50],
       
       // Interactive backgrounds
-      hover: palettes.sand[25],
-      active: palettes.sand[50],
-      selected: palettes.orange[25],
+      hover: palettes.sand[50],
+      active: palettes.sand[100],
+      selected: palettes.orange[50],
       disabled: palettes.sand[50],
     },
     
@@ -542,19 +542,19 @@ const quillTheme = {
       secondary: palettes.sand[800],
       tertiary: palettes.sand[700],
       hint: palettes.sand[600],
-      inverse: palettes.neutral.white,
+      inverse: palettes.sand[10],
       
       // Status text - Improved readability
       success: palettes.teal[700],
       error: palettes.red[700],
-      warning: palettes.orange[700],
+      warning: palettes.orange[800],
       info: palettes.deepBlue[700],
       discovery: palettes.purple[700],
       
       // Interactive text - Better contrast
       disabled: palettes.sand[500],
-      link: palettes.orange[600],
-      linkHover: palettes.orange[700],
+      link: palettes.orange[700],
+      linkHover: palettes.orange[800],
     },
     
     // Semantic colors - Border - More refined edges
@@ -697,202 +697,10 @@ const quillTheme = {
   }
 };
 
-// 3. Aura Theme - Fresh and natural with green accents
-const auraTheme = {
-  light: {
-    // Semantic colors - Background
-    background: {
-      primary: palettes.green[10],
-      secondary: palettes.green[25],
-      tertiary: palettes.green[50],
-      card: palettes.neutralLight[0],
-      overlay: `${palettes.neutral.black}${opacity.medium}`,
-      
-      // Status backgrounds
-      success: palettes.green[50],
-      successHeavy: palettes.green[100],
-      error: palettes.red[50],
-      errorHeavy: palettes.red[100],
-      warning: palettes.orange[50],
-      warningHeavy: palettes.orange[100],
-      info: palettes.cyan[50],
-      infoHeavy: palettes.cyan[100],
-      discovery: palettes.teal[50],
-      discoveryHeavy: palettes.teal[100],
-      
-      // Interactive backgrounds
-      hover: palettes.green[25],
-      active: palettes.green[50],
-      selected: palettes.green[100],
-      disabled: palettes.neutralLight[100],
-    },
-    
-    // Semantic colors - Text
-    text: {
-      primary: palettes.green[900],
-      secondary: palettes.green[800],
-      tertiary: palettes.green[700],
-      hint: palettes.green[600],
-      inverse: palettes.neutralLight[0],
-      
-      // Status text
-      success: palettes.green[700],
-      error: palettes.red[700],
-      warning: palettes.orange[700],
-      info: palettes.cyan[700],
-      discovery: palettes.teal[700],
-      
-      // Interactive text
-      disabled: palettes.neutralLight[400],
-      link: palettes.green[600],
-      linkHover: palettes.green[700],
-    },
-    
-    // Semantic colors - Border
-    border: {
-      light: palettes.green[100],
-      medium: palettes.green[200],
-      dark: palettes.green[300],
-      focus: palettes.green[500],
-      
-      // Status borders
-      success: palettes.green[500],
-      error: palettes.red[500],
-      warning: palettes.orange[500],
-      info: palettes.cyan[500],
-      discovery: palettes.teal[500],
-      
-      // Interactive borders
-      disabled: palettes.neutralLight[300],
-    },
-    
-    // Brand colors
-    primary: palettes.green[600],
-    primaryLight: palettes.green[400],
-    primaryDark: palettes.green[800],
-    
-    // Status colors
-    success: palettes.green[600],
-    successLight: palettes.green[400],
-    successDark: palettes.green[800],
-    
-    error: palettes.red[600],
-    errorLight: palettes.red[400],
-    errorDark: palettes.red[800],
-    
-    warning: palettes.orange[600],
-    warningLight: palettes.orange[400],
-    warningDark: palettes.orange[800],
-    
-    info: palettes.cyan[600],
-    infoLight: palettes.cyan[400],
-    infoDark: palettes.cyan[800],
-    
-    discovery: palettes.teal[600],
-    discoveryLight: palettes.teal[400],
-    discoveryDark: palettes.teal[800],
-  },
-  
-  dark: {
-    // Semantic colors - Background
-    background: {
-      primary: palettes.green[900],
-      secondary: palettes.green[800],
-      tertiary: palettes.green[700],
-      card: palettes.green[800],
-      overlay: `${palettes.neutral.black}${opacity.heavy}`,
-      
-      // Status backgrounds
-      success: palettes.green[900],
-      successHeavy: palettes.green[800],
-      error: palettes.red[900],
-      errorHeavy: palettes.red[800],
-      warning: palettes.orange[900],
-      warningHeavy: palettes.orange[800],
-      info: palettes.cyan[900],
-      infoHeavy: palettes.cyan[800],
-      discovery: palettes.teal[900],
-      discoveryHeavy: palettes.teal[800],
-      
-      // Interactive backgrounds
-      hover: palettes.green[800],
-      active: palettes.green[700],
-      selected: palettes.green[600],
-      disabled: palettes.neutralDark[200],
-    },
-    
-    // Semantic colors - Text
-    text: {
-      primary: palettes.green[100],
-      secondary: palettes.green[200],
-      tertiary: palettes.green[300],
-      hint: palettes.green[400],
-      inverse: palettes.green[900],
-      
-      // Status text
-      success: palettes.green[300],
-      error: palettes.red[300],
-      warning: palettes.orange[300],
-      info: palettes.cyan[300],
-      discovery: palettes.teal[300],
-      
-      // Interactive text
-      disabled: palettes.neutralDark[400],
-      link: palettes.green[400],
-      linkHover: palettes.green[300],
-    },
-    
-    // Semantic colors - Border
-    border: {
-      light: palettes.green[700],
-      medium: palettes.green[600],
-      dark: palettes.green[500],
-      focus: palettes.green[500],
-      
-      // Status borders
-      success: palettes.green[500],
-      error: palettes.red[500],
-      warning: palettes.orange[500],
-      info: palettes.cyan[500],
-      discovery: palettes.teal[500],
-      
-      // Interactive borders
-      disabled: palettes.neutralDark[300],
-    },
-    
-    // Brand colors
-    primary: palettes.green[400],
-    primaryLight: palettes.green[300],
-    primaryDark: palettes.green[600],
-    
-    // Status colors
-    success: palettes.green[400],
-    successLight: palettes.green[300],
-    successDark: palettes.green[600],
-    
-    error: palettes.red[400],
-    errorLight: palettes.red[300],
-    errorDark: palettes.red[600],
-    
-    warning: palettes.orange[400],
-    warningLight: palettes.orange[300],
-    warningDark: palettes.orange[600],
-    
-    info: palettes.cyan[400],
-    infoLight: palettes.cyan[300],
-    infoDark: palettes.cyan[600],
-    
-    discovery: palettes.teal[400],
-    discoveryLight: palettes.teal[300],
-    discoveryDark: palettes.teal[600],
-  }
-};
-
 // Export all themes
 const themes = {
   default: defaultTheme,
   quill: quillTheme,
-  aura: auraTheme,
 };
 
 export default themes;

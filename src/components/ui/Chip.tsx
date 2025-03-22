@@ -1,9 +1,10 @@
 import React, { ReactNode } from 'react';
-import { TouchableOpacity, StyleSheet, Text, View, StyleProp, ViewStyle, TextStyle } from 'react-native';
+import { TouchableOpacity, StyleSheet, View, StyleProp, ViewStyle, TextStyle } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
 import { radius } from '../../theme/styleUtils';
 import { IconName } from './Icon';
 import Icon from './Icon';
+import Text from './Text';
 
 export type ChipSize = 'small' | 'medium' | 'large';
 export type ChipVariant = 'default' | 'outlined' | 'filled';
@@ -191,14 +192,9 @@ const Chip: React.FC<ChipProps> = ({
       )}
       
       <Text
-        style={[
-          {
-            fontSize: sizeStyles.fontSize,
-            color: variantStyles.textColor,
-            fontWeight: '400',
-          },
-          textStyle,
-        ]}
+        variant={size === 'small' ? 'caption' : size === 'large' ? 'bodyLarge' : 'bodyMedium'}
+        color={variantStyles.textColor}
+        style={textStyle}
         numberOfLines={1}
       >
         {label}

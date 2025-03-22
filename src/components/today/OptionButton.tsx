@@ -3,11 +3,13 @@ import {
   TouchableOpacity, 
   StyleSheet, 
   ViewStyle,
-  StyleProp 
+  StyleProp,
+  Platform
 } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
 import { Text } from '../ui';
 import { radius, borderWidth } from '../../theme/styleUtils';
+import { useColorScheme } from 'react-native';
 
 export type OptionState = 'default' | 'selected' | 'correct' | 'incorrect' | 'disabled';
 
@@ -45,7 +47,8 @@ interface OptionButtonProps {
 /**
  * Get background color based on state
  */
-const getBackgroundColor = (state: OptionState, colors: any, isDark: boolean) => {
+const getBackgroundColor = (state: OptionState, colors: any, colorScheme: 'light' | 'dark') => {
+  const isDark = colorScheme === 'dark';
   switch (state) {
     case 'selected':
       return colors.background.selected;
@@ -56,14 +59,17 @@ const getBackgroundColor = (state: OptionState, colors: any, isDark: boolean) =>
     case 'disabled':
       return colors.background.disabled;
     default:
-      return colors.background.tertiary;
+      // For default state, use a slightly darker color than tertiary
+      // to increase contrast against the background
+      return isDark ? colors.background.tertiary : colors.background.active;
   }
 };
 
 /**
  * Get border color based on state
  */
-const getBorderColor = (state: OptionState, colors: any, isDark: boolean) => {
+const getBorderColor = (state: OptionState, colors: any, colorScheme: 'light' | 'dark') => {
+  const isDark = colorScheme === 'dark';
   switch (state) {
     case 'selected':
       return colors.border.focus;
@@ -74,6 +80,7 @@ const getBorderColor = (state: OptionState, colors: any, isDark: boolean) => {
     case 'disabled':
       return colors.border.disabled;
     default:
+      // Use a lighter border for default state
       return colors.border.light;
   }
 };
@@ -81,7 +88,8 @@ const getBorderColor = (state: OptionState, colors: any, isDark: boolean) => {
 /**
  * Get text color based on state
  */
-const getTextColor = (state: OptionState, colors: any, isDark: boolean) => {
+const getTextColor = (state: OptionState, colors: any, colorScheme: 'light' | 'dark') => {
+  const isDark = colorScheme === 'dark';
   switch (state) {
     case 'selected':
       return colors.text.info;
@@ -92,7 +100,8 @@ const getTextColor = (state: OptionState, colors: any, isDark: boolean) => {
     case 'disabled':
       return colors.text.disabled;
     default:
-      return colors.text.primary;
+      // Use secondary text color for better contrast on darker background
+      return isDark ? colors.text.primary : colors.text.secondary;
   }
 };
 
@@ -106,7 +115,9 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
   onPress,
   style
 }) => {
-  const { colors, spacing, isDark } = useTheme();
+  const { colors, spacing } = useTheme();
+  const colorScheme = useColorScheme() || 'light';
+  const isDark = colorScheme === 'dark';
   
   // Determine effective state (if disabled but not in a result state, use 'disabled' state)
   const state = disabled && !['correct', 'incorrect'].includes(propState) 
@@ -114,7 +125,7 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
     : propState;
   
   // Determine if button should have border
-  const hasBorder = BORDER_STATES.has(state);
+  const hasBorder = BORDER_STATES.has(state) || state === 'default';
   
   // Determine if text should be bold - not for disabled state
   const isBold = BOLD_STATES.has(state);
@@ -127,15 +138,15 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
       borderRadius: radius.pill,
       marginBottom: spacing.sm,
       width: '100%' as const,
-      backgroundColor: getBackgroundColor(state, colors, isDark),
-      borderColor: getBorderColor(state, colors, isDark),
-      borderWidth: hasBorder ? borderWidth.hairline : borderWidth.none,
+      backgroundColor: getBackgroundColor(state, colors, colorScheme),
+      borderColor: getBorderColor(state, colors, colorScheme),
+      borderWidth: hasBorder ? (state === 'default' ? borderWidth.hairline : borderWidth.hairline) : borderWidth.none,
     },
     text: {
       textTransform: 'lowercase' as const,
       paddingVertical: spacing.xs,
     }
-  }), [state, colors, spacing, isDark, hasBorder]);
+  }), [state, colors, spacing, colorScheme, hasBorder]);
   
   // Use callback for press handler to prevent unnecessary function recreation
   const handlePress = useCallback(() => {
@@ -152,7 +163,7 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
       <Text
         variant="bodyMedium"
         weight={isBold ? "700" : "400"}
-        color={getTextColor(state, colors, isDark)}
+        color={getTextColor(state, colors, colorScheme)}
         align="center"
         style={buttonStyles.text}
       >
