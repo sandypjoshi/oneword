@@ -10,6 +10,7 @@ import { radius, elevation } from '../../theme/styleUtils';
 import { Platform } from 'react-native';
 import AnimatedChip from '../ui/AnimatedChip';
 import { speak, isSpeaking } from '../../utils/tts';
+import * as Haptics from 'expo-haptics';
 
 interface WordCardQuestionProps {
   /**
@@ -40,12 +41,16 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
   const { word, pronunciation, partOfSpeech, options = [] } = wordData;
   
   // Local state to track selected option
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [selectedOption, setSelectedOption] = useState<string | null>(wordData.selectedOption || null);
   const [optionStates, setOptionStates] = useState<Record<string, OptionState>>({});
+  const [correctOption, setCorrectOption] = useState<string | null>(null);
+  const [disableOptions, setDisableOptions] = useState<boolean>(false);
   const [speaking, setSpeaking] = useState(false);
   const [speakingDuration, setSpeakingDuration] = useState(1500);
+  // Track all incorrect attempts separately
+  const [attemptedOptions, setAttemptedOptions] = useState<string[]>([]);
   
-  // Handle pronounciation
+  // Handle pronunciation
   const handlePronunciation = async () => {
     const duration = await speak(word);
     setSpeakingDuration(duration);
@@ -66,47 +71,83 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
     }
   }, [speaking]);
   
+  // Initialize states from wordData
+  useEffect(() => {
+    // Reset all states when word changes
+    setSelectedOption(wordData.selectedOption || null);
+    setOptionStates({});
+    setAttemptedOptions([]);
+    setDisableOptions(false);
+    
+    // Find the correct option for reference
+    const correct = options.find(opt => opt.isCorrect);
+    if (correct) {
+      setCorrectOption(correct.value);
+    }
+    
+    // If this word has been previously answered
+    if (wordData.selectedOption) {
+      // Find if the selection was correct
+      const selectedOptionObj = options.find(opt => opt.value === wordData.selectedOption);
+      
+      if (selectedOptionObj) {
+        if (selectedOptionObj.isCorrect) {
+          // Mark correct selection and disable options
+          setOptionStates({ [wordData.selectedOption]: 'correct' });
+          setDisableOptions(true);
+        } else {
+          // Mark incorrect selection
+          setOptionStates({ [wordData.selectedOption]: 'incorrect' });
+          setAttemptedOptions([wordData.selectedOption]);
+        }
+      }
+    }
+  }, [wordData.id, options]);
+  
   // Handle option selection
   const handleOptionSelect = useCallback((option: WordOption) => {
-    // If already selected or options revealed, do nothing
-    if (selectedOption !== null && Object.values(optionStates).some(state => 
-      state === 'correct' || state === 'incorrect')) {
-      return;
-    }
+    // Trigger haptic feedback
+    Haptics.notificationAsync(
+      option.isCorrect 
+        ? Haptics.NotificationFeedbackType.Success 
+        : Haptics.NotificationFeedbackType.Error
+    );
     
-    // Update the selected option
+    // Update selected option
     setSelectedOption(option.value);
     
-    // First, mark the selected option
-    const newOptionStates: Record<string, OptionState> = {
-      [option.value]: 'selected'
-    };
-    
-    // If correct, mark it correct after a short delay
-    if (option.isCorrect) {
-      setTimeout(() => {
-        setOptionStates({
-          [option.value]: 'correct'
-        });
-        onOptionSelect(option.value, true);
-      }, 500);
-    } else {
-      // If incorrect, mark it incorrect after a short delay
-      setTimeout(() => {
-        // Find the correct option
-        const correctOption = options.find(opt => opt.isCorrect);
-        
-        setOptionStates({
-          [option.value]: 'incorrect',
-          ...(correctOption ? { [correctOption.value]: 'correct' } : {})
-        });
-        
-        onOptionSelect(option.value, false);
-      }, 500);
+    // If incorrect, add to attempted options
+    if (!option.isCorrect) {
+      setAttemptedOptions(prev => {
+        if (prev.includes(option.value)) return prev;
+        return [...prev, option.value];
+      });
     }
     
+    // Build new option states object from scratch
+    const newOptionStates: Record<string, OptionState> = {};
+    
+    // Apply state for current selection
+    newOptionStates[option.value] = option.isCorrect ? 'correct' : 'incorrect';
+    
+    // Preserve state for previous attempts
+    attemptedOptions.forEach(attemptedOption => {
+      if (attemptedOption !== option.value) { // Don't duplicate current selection
+        newOptionStates[attemptedOption] = 'incorrect';
+      }
+    });
+    
+    // Update option states
     setOptionStates(newOptionStates);
-  }, [selectedOption, optionStates, options, onOptionSelect]);
+    
+    // If correct, disable all options
+    if (option.isCorrect) {
+      setDisableOptions(true);
+    }
+    
+    // Notify parent component
+    onOptionSelect(option.value, option.isCorrect);
+  }, [attemptedOptions, onOptionSelect]);
   
   return (
     <View 
@@ -178,12 +219,13 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
             Select the correct definition
           </Text>
           
-          {options.map((option, index) => (
+          {options.map((option) => (
             <OptionButton
-              key={`option-${index}`}
+              key={option.value} // Use option value as stable key
               label={option.value}
               state={optionStates[option.value] || 'default'}
               onPress={() => handleOptionSelect(option)}
+              disabled={disableOptions && option.value !== correctOption}
               style={{ marginBottom: spacing.md }}
             />
           ))}

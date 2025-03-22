@@ -1,8 +1,12 @@
 /**
  * Export components for the today screen
  */
-export { default as WordCard } from './WordCard';
-export { default as EmptyWordCard } from './EmptyWordCard';
-export { default as WordCardQuestion } from './WordCardQuestion';
-export { default as WordCardAnswer } from './WordCardAnswer';
+import WordCard from './WordCard';
+import WordCardQuestion from './WordCardQuestion';
+import WordCardAnswer from './WordCardAnswer';
+import EmptyWordCard from './EmptyWordCard';
+import WordDetailsBottomSheet from './WordDetailsBottomSheet';
+
+export { WordCard, WordCardQuestion, WordCardAnswer, EmptyWordCard, WordDetailsBottomSheet };
+
 export { default as OptionButton } from './OptionButton'; 

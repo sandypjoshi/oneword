@@ -45,6 +45,7 @@ export const opacity = {
   medium: '40',    // 25% opacity 
   high: '50',      // 31% opacity
   higher: '80',    // 50% opacity
+  disabled: 0.7,   // 70% opacity for disabled elements
   subtle: {
     light: 'rgba(255, 255, 255, 0.08)',
     dark: 'rgba(0, 0, 0, 0.08)'

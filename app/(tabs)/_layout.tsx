@@ -3,105 +3,103 @@ import { StyleSheet, View, ActivityIndicator } from 'react-native';
 import { Tabs, useLocalSearchParams } from 'expo-router';
 import { useThemeReady } from '../../src/hooks';
 import { Icon } from '../../src/components/ui';
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 
 export default function TabLayout() {
   const { isReady, theme } = useThemeReady();
   const { animation } = useLocalSearchParams();
   
   if (!isReady) {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <ActivityIndicator size="large" color="#0000ff" />
-      </View>
-    );
+    return null;
   }
   
   const { colors } = theme;
   
   return (
-    <View style={styles.container}>
-      <Tabs
-        screenOptions={{
-          tabBarActiveTintColor: colors.primary,
-          tabBarInactiveTintColor: colors.text.secondary,
-          tabBarStyle: {
-            backgroundColor: colors.background.primary,
-            borderTopColor: colors.border.light,
-          },
-          headerStyle: {
-            backgroundColor: colors.background.primary,
-            shadowOpacity: 0, // iOS
-            elevation: 0, // Android
-            borderBottomWidth: 0,
-          },
-          headerTintColor: colors.text.primary,
-          
-          // Remove fade animation that causes flashing
-          animation: 'none',
-          
-          // Prevent keyboard issues
-          tabBarHideOnKeyboard: true,
-          
-          // Properly maintain state between tabs
-          freezeOnBlur: true,
-          
-          // Prevent tab flicker
-          lazy: false,
-        }}
-      >
-        <Tabs.Screen
-          name="index"
-          options={{
-            title: 'Today',
-            tabBarLabel: 'Today',
-            tabBarIcon: ({ color, focused }) => (
-              <Icon 
-                name="notes" 
-                color={color} 
-                size={24} 
-                variant={focused ? 'bold' : 'linear'} 
-              />
-            ),
+    <BottomSheetModalProvider>
+      <View style={styles.container}>
+        <Tabs
+          screenOptions={{
+            tabBarActiveTintColor: colors.primary,
+            tabBarInactiveTintColor: colors.text.secondary,
+            tabBarStyle: {
+              backgroundColor: colors.background.primary,
+              borderTopColor: colors.border.light,
+            },
+            headerStyle: {
+              backgroundColor: colors.background.primary,
+              shadowOpacity: 0, // iOS
+              elevation: 0, // Android
+              borderBottomWidth: 0,
+            },
+            headerTintColor: colors.text.primary,
+            
+            // Remove fade animation that causes flashing
+            animation: 'none',
+            
+            // Prevent keyboard issues
+            tabBarHideOnKeyboard: true,
+            
+            // Properly maintain state between tabs
+            freezeOnBlur: true,
+            
+            // Prevent tab flicker
+            lazy: false,
           }}
-        />
-        <Tabs.Screen
-          name="practice"
-          options={{
-            title: 'Challenges',
-            tabBarLabel: 'Challenges',
-            tabBarIcon: ({ color, focused }) => (
-              <Icon 
-                name="medalRibbon" 
-                color={color} 
-                size={24} 
-                variant={focused ? 'bold' : 'linear'} 
-              />
-            ),
-          }}
-        />
-        <Tabs.Screen
-          name="profile"
-          options={{
-            title: 'Profile',
-            tabBarLabel: 'Profile',
-            tabBarIcon: ({ color, focused }) => (
-              <Icon 
-                name="user" 
-                color={color} 
-                size={24} 
-                variant={focused ? 'bold' : 'linear'} 
-              />
-            ),
-          }}
-        />
-      </Tabs>
-    </View>
+        >
+          <Tabs.Screen
+            name="index"
+            options={{
+              title: 'Today',
+              tabBarLabel: 'Today',
+              tabBarIcon: ({ color, focused }) => (
+                <Icon 
+                  name="notes" 
+                  color={color} 
+                  size={24} 
+                  variant={focused ? 'bold' : 'linear'} 
+                />
+              ),
+            }}
+          />
+          <Tabs.Screen
+            name="practice"
+            options={{
+              title: 'Challenges',
+              tabBarLabel: 'Challenges',
+              tabBarIcon: ({ color, focused }) => (
+                <Icon 
+                  name="medalRibbon" 
+                  color={color} 
+                  size={24} 
+                  variant={focused ? 'bold' : 'linear'} 
+                />
+              ),
+            }}
+          />
+          <Tabs.Screen
+            name="profile"
+            options={{
+              title: 'Profile',
+              tabBarLabel: 'Profile',
+              tabBarIcon: ({ color, focused }) => (
+                <Icon 
+                  name="user" 
+                  color={color} 
+                  size={24} 
+                  variant={focused ? 'bold' : 'linear'} 
+                />
+              ),
+            }}
+          />
+        </Tabs>
+      </View>
+    </BottomSheetModalProvider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'transparent',
-  }
+  },
 }); 

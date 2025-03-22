@@ -6,6 +6,7 @@ import { ThemeProvider, useTheme } from '../src/theme/ThemeProvider';
 import { ensurePolyfills } from '../src/utils/supabaseSetup';
 import { checkOnboardingStatus } from '../src/utils/onboarding';
 import { useFonts } from 'expo-font';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import {
   DMSans_400Regular,
   DMSans_400Regular_Italic,
@@ -166,14 +167,14 @@ const MainContent = () => {
   );
 };
 
-// Root layout
+// Main layout component
 export default function RootLayout() {
-  // Wrap the entire application with ThemeProvider, using default values that will be
-  // overridden by any saved preferences from AsyncStorage
   return (
-    <ThemeProvider defaultColorMode="system" defaultThemeName="default">
-      <MainContent />
-    </ThemeProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <ThemeProvider defaultColorMode="system" defaultThemeName="default">
+        <MainContent />
+      </ThemeProvider>
+    </GestureHandlerRootView>
   );
 }
 

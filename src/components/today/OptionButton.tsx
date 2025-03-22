@@ -2,7 +2,6 @@ import React, { memo } from 'react';
 import { 
   TouchableOpacity, 
   StyleSheet, 
-  View, 
   ViewStyle,
   StyleProp 
 } from 'react-native';
@@ -10,7 +9,7 @@ import { useTheme } from '../../theme/ThemeProvider';
 import { Text } from '../ui';
 import { radius, borderWidth, opacity } from '../../theme/styleUtils';
 
-export type OptionState = 'default' | 'selected' | 'correct' | 'incorrect';
+export type OptionState = 'default' | 'selected' | 'correct' | 'incorrect' | 'disabled';
 
 interface OptionButtonProps {
   /**
@@ -44,14 +43,25 @@ interface OptionButtonProps {
  */
 const OptionButtonComponent: React.FC<OptionButtonProps> = ({
   label,
-  state = 'default',
+  state: propState = 'default',
   disabled = false,
   onPress,
   style
 }) => {
   const { colors, spacing, isDark } = useTheme();
   
-  // Determine background color based on state
+  // Determine effective state (if disabled but not in a result state, use 'disabled' state)
+  const state = disabled && !['correct', 'incorrect'].includes(propState) 
+    ? 'disabled' 
+    : propState;
+  
+  // Determine if button should have border
+  const hasBorder = state !== 'default';
+  
+  // Determine if text should be bold - not for disabled state
+  const isBold = state !== 'default' && state !== 'disabled';
+  
+  // Get background color based on state
   const getBackgroundColor = () => {
     switch (state) {
       case 'selected':
@@ -60,6 +70,11 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
         return colors.success + opacity.light;
       case 'incorrect':
         return colors.error + opacity.light;
+      case 'disabled':
+        // More distinct background for disabled state, especially in dark mode
+        return isDark 
+          ? `${colors.text.secondary}${opacity.light}` // Slightly darker in dark mode for better contrast
+          : colors.background.tertiary + opacity.light;
       default:
         return colors.background.tertiary;
     }
@@ -74,12 +89,14 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
         return colors.success;
       case 'incorrect':
         return colors.error;
+      case 'disabled':
+        return isDark ? colors.border.light + opacity.medium : colors.border.light;
       default:
         return isDark ? opacity.subtle.light : opacity.subtle.dark;
     }
   };
   
-  // Determine text color based on state
+  // Get text color - make disabled state more subtle
   const getTextColor = () => {
     switch (state) {
       case 'selected':
@@ -88,10 +105,18 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
         return colors.success;
       case 'incorrect':
         return colors.error;
+      case 'disabled':
+        // Make text lighter for disabled state
+        return isDark
+          ? `${colors.text.hint}${opacity.higher}` // Lighter text in dark mode
+          : colors.text.hint; // Use hint text which is lighter than secondary
       default:
         return colors.text.primary;
     }
   };
+  
+  // We don't need to reduce opacity since we're handling subtlety with color opacity tokens
+  const shouldReduceOpacity = false;
   
   return (
     <TouchableOpacity
@@ -104,17 +129,18 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
           width: '100%',
           backgroundColor: getBackgroundColor(),
           borderColor: getBorderColor(),
-          borderWidth: state !== 'default' ? borderWidth.hairline : borderWidth.none,
+          borderWidth: hasBorder ? borderWidth.hairline : borderWidth.none,
+          opacity: shouldReduceOpacity ? opacity.disabled : 1,
         },
         style
       ]}
       onPress={onPress}
-      disabled={disabled || state === 'correct' || state === 'incorrect'}
-      activeOpacity={0.7}
+      disabled={disabled || ['correct', 'incorrect'].includes(state)}
+      activeOpacity={opacity.disabled}
     >
       <Text
         variant="bodyMedium"
-        weight={state !== 'default' ? "700" : "400"}
+        weight={isBold ? "700" : "400"}
         color={getTextColor()}
         align="center"
         style={{ 

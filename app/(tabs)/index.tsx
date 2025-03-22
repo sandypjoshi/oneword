@@ -13,6 +13,7 @@ import {
 import { FlashList } from '@shopify/flash-list';
 import { useNavigation } from 'expo-router';
 import { WordCard, EmptyWordCard } from '../../src/components/today';
+import WordDetailsBottomSheet, { WordDetailsBottomSheetRef } from '../../src/components/today/WordDetailsBottomSheet';
 import { useThemeReady } from '../../src/hooks';
 import { WordOfDay } from '../../src/types/wordOfDay';
 import { wordOfDayService } from '../../src/services/wordOfDayService';
@@ -35,9 +36,11 @@ export default function HomeScreen() {
   const [words, setWords] = useState<ExtendedWordOfDay[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [selectedWord, setSelectedWord] = useState<WordOfDay | null>(null);
   
   const flashListRef = useRef<FlashList<ExtendedWordOfDay>>(null);
   const scrollViewRef = useRef<ScrollView>(null);
+  const bottomSheetRef = useRef<WordDetailsBottomSheetRef>(null);
   const isProgrammaticScrollRef = useRef(false);
   const loadAttempted = useRef(false);
   const { width } = useWindowDimensions();
@@ -366,6 +369,23 @@ export default function HomeScreen() {
     }
   }, [words.length]);
   
+  // Handle word reveal event from a card
+  const handleWordReveal = useCallback((wordId: string, attempts: number, wordData: WordOfDay) => {
+    // Update the selected word data for later use
+    setSelectedWord({
+      ...wordData,
+      userAttempts: attempts
+    });
+    
+    // Note: We no longer automatically open the bottom sheet here
+    // The bottom sheet will be used later for another purpose
+  }, []);
+  
+  // Handle bottom sheet dismiss
+  const handleBottomSheetDismiss = useCallback(() => {
+    // Any cleanup needed after closing the sheet
+  }, []);
+  
   // Render a word card item
   const renderItem = useCallback(({ item }: { item: ExtendedWordOfDay }) => {
     const isPlaceholder = item.isPlaceholder;
@@ -379,12 +399,16 @@ export default function HomeScreen() {
               date={item.date}
             />
           ) : (
-            <WordCard wordData={item} style={themeStyles.wordCard} />
+            <WordCard 
+              wordData={item} 
+              style={themeStyles.wordCard} 
+              onReveal={(wordId, attempts) => handleWordReveal(wordId, attempts, item)}
+            />
           )}
         </View>
       </View>
     );
-  }, [cardDimensions.width, themeStyles.cardContainer, themeStyles.cardWrapper, themeStyles.wordCard]);
+  }, [cardDimensions.width, themeStyles.cardContainer, themeStyles.cardWrapper, themeStyles.wordCard, handleWordReveal]);
   
   // Show loading UI that matches theme colors
   if (!isReady || isLoading) {
@@ -441,6 +465,15 @@ export default function HomeScreen() {
         decelerationRate="normal"
         bounces={true}
       />
+      
+      {/* Word details bottom sheet (screen-level) */}
+      {selectedWord && (
+        <WordDetailsBottomSheet
+          ref={bottomSheetRef}
+          wordData={selectedWord}
+          onDismiss={handleBottomSheetDismiss}
+        />
+      )}
     </View>
   );
 }
