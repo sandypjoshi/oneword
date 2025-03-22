@@ -248,4 +248,39 @@ Terminal-based dashboard for monitoring and control:
 2. **Cell Recycling**: Maximizing component reuse during scrolling
 3. **Interaction Throttling**: Debouncing frequent user interactions
 4. **Lazy Loading**: Loading components only when needed
-5. **Offscreen Rendering Optimization**: Managing what renders off-screen 
+5. **Offscreen Rendering Optimization**: Managing what renders off-screen
+
+## Theme System and Semantic Color Tokens
+
+### Theme Architecture
+1. **Streamlined Theme System**: The application now uses two themes - Default and Quill
+   - Each theme supports light and dark mode variants
+   - Themes are managed through the ThemeProvider context
+   - Persistent theme preferences stored using AsyncStorage
+
+2. **Semantic Token Structure**:
+   - **Background**: `primary`, `secondary`, `tertiary`, `card`, etc.
+   - **Text**: `primary`, `secondary`, `tertiary`, `hint`, `inverse`, etc.
+   - **Border**: `light`, `medium`, `dark`, `focus`, etc.
+   - **Interactive States**: `hover`, `active`, `selected`, `disabled`, etc.
+   - **Status Indicators**: `success`, `error`, `warning`, `info`, etc.
+
+3. **Theme Safety Mechanisms**:
+   - Fallback values when theme context is unavailable
+   - Consistent token naming across themes
+   - Type-safe access patterns
+
+### Theme Implementation
+1. **ThemeProvider**: Central component that manages:
+   - Current theme name (Default/Quill)
+   - Current color mode (light/dark/system)
+   - System color scheme detection
+   - Theme switching functionality
+   - AsyncStorage persistence
+
+2. **Theme Usage Pattern**:
+   - Components access theme via `useTheme()` hook
+   - Semantic tokens used instead of direct color values
+   - Responsive design adapting to both themes and color modes
+   - Proper fontScale handling for accessibility
+## Include information about removing the Aura theme and the two-theme system 

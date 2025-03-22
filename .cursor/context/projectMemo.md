@@ -24,11 +24,18 @@ OneWord is a vocabulary learning application that helps users expand their vocab
 - Design token system as single source of truth
 - Theme-based styling with light/dark mode support
 - Responsive layout using flexbox patterns
+- Semantic color tokens for consistent theming
+- Two theme options: Default and Quill, each with light/dark modes
 
 ### Animation Patterns
 - Declarative animations using Animated API
 - Consistent timing and easing functions via tokens
 - Progressive feedback for user interactions
+
+## Current Focus
+- Improving UI component contrast and accessibility
+- Ensuring consistent use of semantic color tokens
+- Refining typography system implementation
 
 ## Code Conventions
 - Typescript for type safety
