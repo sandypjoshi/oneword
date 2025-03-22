@@ -13,7 +13,7 @@ export type OptionState = 'default' | 'selected' | 'correct' | 'incorrect' | 'di
 
 // State lookup sets for easier maintenance
 const BORDER_STATES = new Set(['selected', 'correct', 'incorrect', 'disabled']);
-const BOLD_STATES = new Set(['selected', 'correct', 'incorrect']);
+const BOLD_STATES = new Set(['selected', 'correct']);
 
 interface OptionButtonProps {
   /**
