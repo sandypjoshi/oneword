@@ -4,6 +4,7 @@
  */
 
 import { Platform } from 'react-native';
+import { palettes } from './colors';
 
 // Spacing scale (in pixels)
 export const spacing = {
@@ -84,32 +85,76 @@ export const elevation = {
     elevation: 0,
   },
   xs: {
-    shadowColor: '#000',
+    shadowColor: palettes.neutral.black,
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.05,
     shadowRadius: 2,
     elevation: 1,
   },
   sm: {
-    shadowColor: '#000',
+    shadowColor: palettes.neutral.black,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 2,
   },
   md: {
-    shadowColor: '#000',
+    shadowColor: palettes.neutral.black,
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.15,
     shadowRadius: 6,
     elevation: 3,
   },
   lg: {
-    shadowColor: '#000',
+    shadowColor: palettes.neutral.black,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 8,
     elevation: 4,
+  },
+} as const;
+
+// Shadow styles
+export const shadows = {
+  small: {
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    shadowColor: palettes.neutral.black,
+    elevation: 2,
+  },
+  medium: {
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    shadowColor: palettes.neutral.black,
+    elevation: 4,
+  },
+  large: {
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+    shadowColor: palettes.neutral.black,
+    elevation: 8,
+  },
+  extraLarge: {
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    shadowOpacity: 0.44,
+    shadowRadius: 10.32,
+    shadowColor: palettes.neutral.black,
+    elevation: 16,
   },
 } as const;
 

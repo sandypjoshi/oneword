@@ -1,12 +1,15 @@
-import React, { memo, useState, useEffect } from 'react';
-import { View, StyleSheet, ViewStyle, StyleProp, TouchableOpacity } from 'react-native';
-import { WordOfDay } from '../../types/wordOfDay';
+import React, { useState, useCallback } from 'react';
+import { View, StyleSheet, TouchableOpacity, StyleProp, ViewStyle } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
-import { Box } from '../layout';
-import { Text, Icon } from '../ui';
-import { radius, elevation } from '../../theme/styleUtils';
+import { Text } from '../ui';
 import AnimatedChip from '../ui/AnimatedChip';
-import { speak, isSpeaking } from '../../utils/tts';
+import { WordOfDay } from '../../types/wordOfDay';
+import { radius, elevation } from '../../theme/styleUtils';
+import Box from '../layout/Box';
+import * as Speech from 'expo-speech';
+
+// Maximum time to animate pronunciation button (in ms)
+const MAX_SPEAKING_DURATION = 5000;
 
 interface WordCardAnswerProps {
   /**
@@ -26,8 +29,7 @@ interface WordCardAnswerProps {
 }
 
 /**
- * Card component that displays a word with its definition
- * and user attempt information
+ * Displays the answer card with word, definition, and performance metrics
  */
 const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({ 
   wordData,
@@ -35,57 +37,59 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
   style 
 }) => {
   const { colors, spacing } = useTheme();
+  const [speaking, setSpeaking] = useState(false);
+  const [speakingDuration, setSpeakingDuration] = useState(3000);
+  
+  // Destructure the word data
   const { 
     word, 
+    definition, 
     pronunciation, 
-    partOfSpeech, 
-    definition,
-    userAttempts = 0
+    partOfSpeech,
+    userAttempts = 0,
   } = wordData;
   
-  const [speaking, setSpeaking] = useState(false);
-  const [speakingDuration, setSpeakingDuration] = useState(1500);
-  
-  // Handle pronounciation
+  // Function to handle pronunciation
   const handlePronunciation = async () => {
-    const duration = await speak(word);
-    setSpeakingDuration(duration);
-    setSpeaking(true);
+    if (!pronunciation || speaking) return;
+    
+    try {
+      setSpeaking(true);
+      
+      // Calculate an approximate speaking duration based on word length
+      const duration = Math.min(MAX_SPEAKING_DURATION, word.length * 250);
+      setSpeakingDuration(duration);
+      
+      await Speech.speak(word, {
+        language: 'en',
+        onDone: () => setSpeaking(false),
+        onError: () => setSpeaking(false),
+      });
+    } catch (error) {
+      console.error('Error with pronunciation:', error);
+      setSpeaking(false);
+    }
   };
   
-  // Check speaking state
-  useEffect(() => {
-    if (speaking) {
-      const checkInterval = setInterval(() => {
-        if (!isSpeaking()) {
-          setSpeaking(false);
-          clearInterval(checkInterval);
-        }
-      }, 100);
-      
-      return () => clearInterval(checkInterval);
-    }
-  }, [speaking]);
-  
-  // Format attempt message
+  // Get attempt message based on user performance
   const getAttemptMessage = () => {
     if (userAttempts === 0) {
-      return 'Not attempted yet';
+      return 'No attempts yet';
     } else if (userAttempts === 1) {
-      return 'Correct on first attempt!';
+      return 'Correct on first try!';
     } else {
-      return `Correct on attempt #${userAttempts}`;
+      return `Correct in ${userAttempts} attempts`;
     }
   };
   
-  // Get attempt color
+  // Get attempt color based on user performance
   const getAttemptColor = () => {
     if (userAttempts === 0) {
       return colors.text.secondary;
     } else if (userAttempts === 1) {
-      return colors.success;
+      return colors.text.success;
     } else {
-      return colors.primary;
+      return colors.text.info;
     }
   };
   
@@ -167,23 +171,22 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
             <TouchableOpacity 
               style={[
                 styles.detailsButton,
-                { backgroundColor: colors.primary + '15' }
+                { backgroundColor: colors.background.info }
               ]}
               onPress={onViewDetails}
             >
               <Text
                 variant="button"
-                color={colors.primary}
+                color={colors.text.info}
                 align="center"
                 style={{ marginRight: 6 }}
               >
                 View Details
               </Text>
-              <Icon 
-                name="altArrowRightLinear" 
-                size={16} 
-                color={colors.primary} 
-              />
+              <View style={styles.arrowIcon}>
+                {/* Arrow Icon */}
+                <View style={[styles.arrow, { borderColor: colors.text.info }]} />
+              </View>
             </TouchableOpacity>
           )}
         </View>
@@ -192,38 +195,27 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
   );
 };
 
-// Apply memo to prevent unnecessary re-renders
-const WordCardAnswer = memo(WordCardAnswerComponent);
-
+// Create component styles
 const styles = StyleSheet.create({
   container: {
+    width: '100%',
+    minHeight: 380,
     borderWidth: 1,
-    ...elevation.sm,
     overflow: 'hidden',
-    flex: 1,
-    display: 'flex',
+    ...elevation.md,
   },
   wordSection: {
     alignItems: 'center',
-    marginVertical: 24,
+    marginBottom: 16,
   },
   wordText: {
-    textTransform: 'lowercase',
-    marginBottom: 8
-  },
-  pronunciationText: {
-    marginTop: 4,
-  },
-  partOfSpeechText: {
-    textTransform: 'lowercase',
-    fontStyle: 'italic',
     marginBottom: 8,
-    textAlign: 'center'
   },
   definitionContainer: {
-    paddingVertical: 24,
+    marginVertical: 16,
   },
   performanceContainer: {
+    marginTop: 16,
     alignItems: 'center',
   },
   attemptText: {
@@ -232,14 +224,27 @@ const styles = StyleSheet.create({
   detailsButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    paddingVertical: 8,
     paddingHorizontal: 16,
-    paddingVertical: 10,
-    borderRadius: radius.lg,
+    borderRadius: radius.pill,
+  },
+  arrowIcon: {
+    width: 16,
+    height: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  arrow: {
+    width: 8,
+    height: 8,
+    borderWidth: 1.5,
+    borderLeftWidth: 0,
+    borderBottomWidth: 0,
+    transform: [{ rotate: '45deg' }],
   }
 });
 
-// Set display name for better debugging
-WordCardAnswer.displayName = 'WordCardAnswer';
+// Use memo to prevent unnecessary re-renders
+const WordCardAnswer = React.memo(WordCardAnswerComponent);
 
 export default WordCardAnswer; 

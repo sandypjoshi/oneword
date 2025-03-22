@@ -142,7 +142,7 @@ export default function Button({
           ...baseStyle,
           backgroundColor: 'transparent',
           borderWidth: 1,
-          borderColor: colors.primary,
+          borderColor: colors.border.focus,
           ...elevation.none,
         };
         

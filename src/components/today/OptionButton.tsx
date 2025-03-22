@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
 import { Text } from '../ui';
-import { radius, borderWidth, opacity } from '../../theme/styleUtils';
+import { radius, borderWidth } from '../../theme/styleUtils';
 
 export type OptionState = 'default' | 'selected' | 'correct' | 'incorrect' | 'disabled';
 
@@ -48,16 +48,13 @@ interface OptionButtonProps {
 const getBackgroundColor = (state: OptionState, colors: any, isDark: boolean) => {
   switch (state) {
     case 'selected':
-      return colors.primary + opacity.light;
+      return colors.background.selected;
     case 'correct':
-      return colors.success + opacity.light;
+      return colors.background.success;
     case 'incorrect':
-      return colors.error + opacity.light;
+      return colors.background.error;
     case 'disabled':
-      // More distinct background for disabled state, especially in dark mode
-      return isDark 
-        ? `${colors.text.secondary}${opacity.light}` // Slightly darker in dark mode for better contrast
-        : colors.background.tertiary + opacity.light;
+      return colors.background.disabled;
     default:
       return colors.background.tertiary;
   }
@@ -69,15 +66,15 @@ const getBackgroundColor = (state: OptionState, colors: any, isDark: boolean) =>
 const getBorderColor = (state: OptionState, colors: any, isDark: boolean) => {
   switch (state) {
     case 'selected':
-      return colors.primary;
+      return colors.border.focus;
     case 'correct':
-      return colors.success;
+      return colors.border.success;
     case 'incorrect':
-      return colors.error;
+      return colors.border.error;
     case 'disabled':
-      return isDark ? colors.border.light + opacity.medium : colors.border.light;
+      return colors.border.disabled;
     default:
-      return isDark ? opacity.subtle.light : opacity.subtle.dark;
+      return colors.border.light;
   }
 };
 
@@ -87,16 +84,13 @@ const getBorderColor = (state: OptionState, colors: any, isDark: boolean) => {
 const getTextColor = (state: OptionState, colors: any, isDark: boolean) => {
   switch (state) {
     case 'selected':
-      return colors.primary;
+      return colors.text.info;
     case 'correct':
-      return colors.success;
+      return colors.text.success;
     case 'incorrect':
-      return colors.error;
+      return colors.text.error;
     case 'disabled':
-      // Make text lighter for disabled state
-      return isDark
-        ? `${colors.text.hint}${opacity.higher}` // Lighter text in dark mode
-        : colors.text.hint; // Use hint text which is lighter than secondary
+      return colors.text.disabled;
     default:
       return colors.text.primary;
   }
@@ -125,9 +119,6 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
   // Determine if text should be bold - not for disabled state
   const isBold = BOLD_STATES.has(state);
   
-  // We don't need to reduce opacity since we're handling subtlety with color opacity tokens
-  const shouldReduceOpacity = false;
-  
   // Memoize the styles to prevent recalculation on every render
   const buttonStyles = useMemo(() => ({
     container: {
@@ -139,7 +130,6 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
       backgroundColor: getBackgroundColor(state, colors, isDark),
       borderColor: getBorderColor(state, colors, isDark),
       borderWidth: hasBorder ? borderWidth.hairline : borderWidth.none,
-      opacity: shouldReduceOpacity ? opacity.disabled : 1,
     },
     text: {
       textTransform: 'lowercase' as const,
@@ -157,7 +147,7 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
       style={[buttonStyles.container, style]}
       onPress={handlePress}
       disabled={disabled || ['correct', 'incorrect'].includes(state)}
-      activeOpacity={opacity.disabled}
+      activeOpacity={0.7}
     >
       <Text
         variant="bodyMedium"
