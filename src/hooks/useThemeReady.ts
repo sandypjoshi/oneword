@@ -18,7 +18,7 @@ export function useThemeReady() {
     colors: theme?.colors || {
       // Semantic background colors
       background: { 
-        primary: palettes.neutralLight[10], 
+        primary: palettes.neutralLight[0], 
         secondary: palettes.neutralLight[50],
         tertiary: palettes.neutralLight[100],
         card: palettes.neutralLight[0],
@@ -35,7 +35,7 @@ export function useThemeReady() {
       },
       // Semantic text colors
       text: { 
-        primary: palettes.neutral[900], 
+        primary: palettes.neutral[1000], 
         secondary: palettes.neutral[700], 
         tertiary: palettes.neutral[600],
         hint: palettes.neutral[500],

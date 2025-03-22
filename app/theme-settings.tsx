@@ -8,6 +8,7 @@ import { useThemeReady } from '../src/hooks';
 import { useTheme } from '../src/theme/ThemeProvider';
 import { StatusBar } from 'expo-status-bar';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { applyElevation } from '../src/theme/styleUtils';
 
 // Theme selector component
 const ThemeSelector = () => {
@@ -84,9 +85,9 @@ export default function ThemeSettingsScreen() {
         options={{
           headerTitle: "Theme Settings",
           headerShown: true,
-          headerShadowVisible: false,
           headerStyle: {
             backgroundColor: colors.background.primary,
+            ...applyElevation('none'),
           },
           headerTintColor: colors.text.primary,
         }} 

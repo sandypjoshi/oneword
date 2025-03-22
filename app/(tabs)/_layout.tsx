@@ -4,6 +4,8 @@ import { Tabs, useLocalSearchParams } from 'expo-router';
 import { useThemeReady } from '../../src/hooks';
 import { Icon } from '../../src/components/ui';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import { useTheme } from '../../src/theme/ThemeProvider';
+import { applyElevation } from '../../src/theme/styleUtils';
 
 export default function TabLayout() {
   const { isReady, theme } = useThemeReady();
@@ -28,9 +30,8 @@ export default function TabLayout() {
             },
             headerStyle: {
               backgroundColor: colors.background.primary,
-              shadowOpacity: 0, // iOS
-              elevation: 0, // Android
               borderBottomWidth: 0,
+              ...applyElevation('none'),
             },
             headerTintColor: colors.text.primary,
             

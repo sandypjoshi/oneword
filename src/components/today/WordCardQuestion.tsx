@@ -6,7 +6,7 @@ import { Box } from '../layout';
 import { Text } from '../ui';
 import OptionButton from './OptionButton';
 import { OptionState } from './OptionButton';
-import { radius, elevation } from '../../theme/styleUtils';
+import { radius, elevation, applyElevation } from '../../theme/styleUtils';
 import { Platform } from 'react-native';
 import AnimatedChip from '../ui/AnimatedChip';
 import { speak, isSpeaking } from '../../utils/tts';
@@ -154,7 +154,7 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
       style={[
         {
           borderWidth: 1,
-          ...elevation.sm,
+          ...applyElevation('sm', colors.text.primary),
           overflow: 'hidden',
           flex: 1,
           display: 'flex',

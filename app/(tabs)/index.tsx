@@ -19,7 +19,7 @@ import { WordOfDay } from '../../src/types/wordOfDay';
 import { wordOfDayService } from '../../src/services/wordOfDayService';
 import themes from '../../src/theme/colors';
 import { Text as CustomText } from '../../src/components/ui';
-import { radius } from '../../src/theme/styleUtils';
+import { radius, applyElevation } from '../../src/theme/styleUtils';
 
 // Constants
 const DOT_SIZE = 32; // Size of each indicator dot
@@ -89,11 +89,7 @@ export default function HomeScreen() {
       } as const,
       activeDot: {
         backgroundColor: colors.primary,
-        shadowColor: colors.text.primary,
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.1,
-        shadowRadius: 2,
-        elevation: 1,
+        ...applyElevation('xs', colors.text.primary),
       } as const,
       inactiveDot: {
         backgroundColor: colors.background.secondary,

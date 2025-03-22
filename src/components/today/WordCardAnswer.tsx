@@ -4,7 +4,7 @@ import { useTheme } from '../../theme/ThemeProvider';
 import { Text } from '../ui';
 import AnimatedChip from '../ui/AnimatedChip';
 import { WordOfDay } from '../../types/wordOfDay';
-import { radius, elevation } from '../../theme/styleUtils';
+import { radius, applyElevation } from '../../theme/styleUtils';
 import Box from '../layout/Box';
 import * as Speech from 'expo-speech';
 
@@ -94,17 +94,16 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
   };
   
   return (
-    <View 
-      style={[
-        styles.container,
-        { 
-          backgroundColor: colors.background.card,
-          borderColor: colors.border.light,
-          borderRadius: radius.xl,
-        },
-        style
-      ]}
-    >
+    <View style={[
+      styles.container, 
+      {
+        backgroundColor: colors.background.card,
+        borderColor: colors.border.light,
+        borderRadius: radius.xl,
+        ...applyElevation('md', colors.text.primary)
+      },
+      style
+    ]}>
       <Box padding="lg" style={{ flex: 1, justifyContent: 'space-between' }}>
         {/* Word section */}
         <View style={styles.wordSection}>
@@ -202,7 +201,6 @@ const styles = StyleSheet.create({
     minHeight: 380,
     borderWidth: 1,
     overflow: 'hidden',
-    ...elevation.md,
   },
   wordSection: {
     alignItems: 'center',

@@ -3,7 +3,7 @@ import { StyleSheet, View, ViewStyle } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
 import { Box } from '../layout';
 import { Text } from '../ui';
-import { radius, elevation } from '../../theme/styleUtils';
+import { radius, applyElevation } from '../../theme/styleUtils';
 
 interface EmptyWordCardProps {
   /**
@@ -43,6 +43,7 @@ const EmptyWordCardComponent: React.FC<EmptyWordCardProps> = ({
           backgroundColor: colors.background.card,
           borderColor: colors.border.light,
           borderRadius: radius.xl,
+          ...applyElevation('sm', colors.text.primary)
         },
         style
       ]}
@@ -75,7 +76,6 @@ const EmptyWordCard = memo(EmptyWordCardComponent);
 const styles = StyleSheet.create({
   container: {
     borderWidth: 1,
-    ...elevation.sm,
     overflow: 'hidden',
     flex: 1,
     display: 'flex',

@@ -38,18 +38,23 @@ export const borderWidth = {
   thick: 2,
 } as const;
 
-// Opacity values
-export const opacity = {
+// Opacity values as hex strings
+const opacityValues = {
   none: '00',
   lightest: '20',  // 12.5% opacity
   light: '15',     // 8% opacity
   medium: '40',    // 25% opacity 
   high: '50',      // 31% opacity
   higher: '80',    // 50% opacity
+} as const;
+
+// Opacity values for export
+export const opacity = {
+  ...opacityValues,
   disabled: 0.7,   // 70% opacity for disabled elements
   subtle: {
-    light: 'rgba(255, 255, 255, 0.08)',
-    dark: 'rgba(0, 0, 0, 0.08)'
+    light: `${palettes.neutral.white}${opacityValues.lightest}`,
+    dark: `${palettes.neutral.black}${opacityValues.lightest}`
   }
 } as const;
 
@@ -75,8 +80,11 @@ export const animation = {
   }
 } as const;
 
-// Elevation/Shadow styles
-export const elevation = {
+// Elevation/Shadow styles - Enhanced to support theming
+export type ElevationLevel = 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+
+// Factory function to create elevation styles that respect theme
+export const createElevation = (textColor = palettes.neutral.black) => ({
   none: {
     shadowColor: 'transparent',
     shadowOffset: { width: 0, height: 0 },
@@ -85,78 +93,58 @@ export const elevation = {
     elevation: 0,
   },
   xs: {
-    shadowColor: palettes.neutral.black,
+    shadowColor: textColor,
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.05,
     shadowRadius: 2,
     elevation: 1,
   },
   sm: {
-    shadowColor: palettes.neutral.black,
+    shadowColor: textColor,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 2,
   },
   md: {
-    shadowColor: palettes.neutral.black,
+    shadowColor: textColor,
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.15,
     shadowRadius: 6,
     elevation: 3,
   },
   lg: {
-    shadowColor: palettes.neutral.black,
+    shadowColor: textColor,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 8,
     elevation: 4,
   },
-} as const;
+  xl: {
+    shadowColor: textColor,
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.25,
+    shadowRadius: 12,
+    elevation: 5,
+  },
+});
 
-// Shadow styles
-export const shadows = {
-  small: {
-    shadowOffset: {
-      width: 0,
-      height: 1,
+// Default elevation with neutral black color
+export const elevation = createElevation();
+
+// Helper for applying elevation with platform-specific adjustments
+export const applyElevation = (level: ElevationLevel, textColor?: string): object => {
+  const elevationStyles = textColor ? createElevation(textColor) : elevation;
+  
+  return Platform.select({
+    ios: elevationStyles[level],
+    android: {
+      ...elevationStyles[level],
+      // Android specific adjustments if needed
     },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-    shadowColor: palettes.neutral.black,
-    elevation: 2,
-  },
-  medium: {
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.23,
-    shadowRadius: 2.62,
-    shadowColor: palettes.neutral.black,
-    elevation: 4,
-  },
-  large: {
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 4.65,
-    shadowColor: palettes.neutral.black,
-    elevation: 8,
-  },
-  extraLarge: {
-    shadowOffset: {
-      width: 0,
-      height: 8,
-    },
-    shadowOpacity: 0.44,
-    shadowRadius: 10.32,
-    shadowColor: palettes.neutral.black,
-    elevation: 16,
-  },
-} as const;
+    default: elevationStyles[level],
+  });
+};
 
 // Component-specific tokens
 export const components = {

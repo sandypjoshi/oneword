@@ -8,7 +8,7 @@ import {
   AccessibilityState,
 } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
-import { radius, elevation, components } from '../../theme/styleUtils';
+import { radius, applyElevation, components } from '../../theme/styleUtils';
 import spacing from '../../theme/spacing';
 import Text from './Text';
 import typography from '../../theme/typography';
@@ -113,7 +113,7 @@ export default function Button({
       minWidth: buttonTokens.minWidth[size],
       paddingHorizontal: buttonTokens.padding[size].x,
       paddingVertical: 0, // Remove vertical padding to use fixed height
-      ...elevation.sm,
+      ...applyElevation('sm', colors.text.primary),
     };
     
     // Width styles
@@ -143,14 +143,14 @@ export default function Button({
           backgroundColor: 'transparent',
           borderWidth: 1,
           borderColor: colors.border.focus,
-          ...elevation.none,
+          ...applyElevation('none'),
         };
         
       case 'ghost':
         return {
           ...baseStyle,
           backgroundColor: 'transparent',
-          ...elevation.none,
+          ...applyElevation('none'),
         };
         
       default:
