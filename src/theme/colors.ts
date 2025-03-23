@@ -266,9 +266,9 @@ const quillTheme = {
     
     // Semantic colors - Text - Enhanced contrast
     text: {
-      primary: palettes.neutral[900],
-      secondary: palettes.sand[800],
-      tertiary: palettes.sand[700],
+      primary: palettes.sand[1000],
+      secondary: palettes.sand[900],
+      tertiary: palettes.sand[800],
       hint: palettes.sand[600],
       inverse: palettes.sand[10],
       
@@ -287,10 +287,10 @@ const quillTheme = {
     
     // Semantic colors - Border - More refined edges
     border: {
-      light: palettes.sand[100],
+      light: palettes.sand[200],
       medium: palettes.sand[200],
       dark: palettes.sand[400],
-      focus: palettes.orange[500],
+      focus: palettes.orange[400],
       
       // Status borders - Enhanced professional look
       success: palettes.teal[500],

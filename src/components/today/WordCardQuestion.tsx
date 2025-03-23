@@ -220,11 +220,11 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
         <View style={{ paddingTop: spacing.lg }}>
           <Text 
             variant="label" 
-            color={colors.text.secondary}
+            color={colors.text.tertiary}
             align="center"
             style={{ marginBottom: spacing.md }}
           >
-            Select the correct definition
+            Guess the correct definition
           </Text>
           
           {options.map((option) => (

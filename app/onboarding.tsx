@@ -157,7 +157,7 @@ export default function OnboardingScreen() {
             </Text>
             
             <Text 
-              variant="bodyLarge" 
+              variant="bodyMedium" 
               color={themeColors.text.secondary} 
               align="center"
               style={{ paddingHorizontal: themeSpacing.sm }}
