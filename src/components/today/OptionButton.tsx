@@ -1,12 +1,14 @@
-import React, { memo, useMemo, useCallback } from 'react';
+import React, { memo, useMemo, useCallback, useRef, useState, useEffect } from 'react';
 import { 
   TouchableOpacity, 
   StyleSheet, 
   ViewStyle,
   StyleProp,
-  Platform
+  Platform,
+  PanResponder,
+  View
 } from 'react-native';
-import { useTheme } from '../../theme/ThemeProvider';
+import { useTheme } from '../../theme';
 import { Text } from '../ui';
 import { radius, borderWidth } from '../../theme/styleUtils';
 import { useColorScheme } from 'react-native';
@@ -16,6 +18,10 @@ export type OptionState = 'default' | 'selected' | 'correct' | 'incorrect' | 'di
 // State lookup sets for easier maintenance
 const BORDER_STATES = new Set(['selected', 'correct', 'incorrect', 'disabled']);
 const BOLD_STATES = new Set(['selected', 'correct']);
+
+// Configuration for swipe detection
+const SWIPE_THRESHOLD = 10; // Minimum distance to be considered a swipe
+const PRESS_DELAY = 100; // Small delay to distinguish between taps and swipes (in ms)
 
 interface OptionButtonProps {
   /**
@@ -59,9 +65,8 @@ const getBackgroundColor = (state: OptionState, colors: any, colorScheme: 'light
     case 'disabled':
       return colors.background.disabled;
     default:
-      // For default state, use a slightly darker color than tertiary
-      // to increase contrast against the background
-      return isDark ? colors.background.tertiary : colors.background.active;
+      // Use active background for better consistency and contrast in both modes
+      return colors.background.active;
   }
 };
 
@@ -130,6 +135,69 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
   // Determine if text should be bold - not for disabled state
   const isBold = BOLD_STATES.has(state);
   
+  // Refs for touch handling
+  const isMovingRef = useRef(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [isPressed, setIsPressed] = useState(false);
+  
+  // Create PanResponder for touch handling
+  const panResponder = useMemo(() => PanResponder.create({
+    onStartShouldSetPanResponder: () => true,
+    onMoveShouldSetPanResponder: () => true,
+    onPanResponderGrant: () => {
+      isMovingRef.current = false;
+      setIsPressed(true);
+      
+      // Clear any existing timeout
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
+    },
+    onPanResponderMove: (_, gestureState) => {
+      // If moved more than threshold in any direction, flag as moving
+      if (Math.abs(gestureState.dx) > SWIPE_THRESHOLD || 
+          Math.abs(gestureState.dy) > SWIPE_THRESHOLD) {
+        isMovingRef.current = true;
+        setIsPressed(false);
+      }
+    },
+    onPanResponderRelease: () => {
+      // Only trigger press if it wasn't a swipe
+      if (!isMovingRef.current && onPress && !disabled && 
+          !['correct', 'incorrect'].includes(state)) {
+        // Add a small delay before executing press
+        timeoutRef.current = setTimeout(() => {
+          onPress();
+        }, PRESS_DELAY);
+      }
+      
+      // Reset flag
+      isMovingRef.current = false;
+      setIsPressed(false);
+    },
+    onPanResponderTerminate: () => {
+      isMovingRef.current = false;
+      setIsPressed(false);
+      
+      // Clear timeout if interaction is terminated
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
+    }
+  }), [onPress, disabled, state]);
+  
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
+    };
+  }, []);
+
   // Memoize the styles to prevent recalculation on every render
   const buttonStyles = useMemo(() => ({
     container: {
@@ -141,35 +209,30 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
       backgroundColor: getBackgroundColor(state, colors, colorScheme),
       borderColor: getBorderColor(state, colors, colorScheme),
       borderWidth: hasBorder ? (state === 'default' ? borderWidth.hairline : borderWidth.hairline) : borderWidth.none,
+      opacity: isPressed ? 0.7 : 1,
     },
     text: {
       textTransform: 'lowercase' as const,
       paddingVertical: spacing.xs,
     }
-  }), [state, colors, spacing, colorScheme, hasBorder]);
-  
-  // Use callback for press handler to prevent unnecessary function recreation
-  const handlePress = useCallback(() => {
-    if (onPress) onPress();
-  }, [onPress]);
+  }), [state, colors, spacing, colorScheme, hasBorder, isPressed]);
   
   return (
-    <TouchableOpacity
-      style={[buttonStyles.container, style]}
-      onPress={handlePress}
-      disabled={disabled || ['correct', 'incorrect'].includes(state)}
-      activeOpacity={0.7}
-    >
-      <Text
-        variant="bodyMedium"
-        weight={isBold ? "700" : "400"}
-        color={getTextColor(state, colors, colorScheme)}
-        align="center"
-        style={buttonStyles.text}
+    <View {...panResponder.panHandlers}>
+      <View
+        style={[buttonStyles.container, style]}
       >
-        {label}
-      </Text>
-    </TouchableOpacity>
+        <Text
+          variant="bodyMedium"
+          weight={isBold ? "700" : "400"}
+          color={getTextColor(state, colors, colorScheme)}
+          align="center"
+          style={buttonStyles.text}
+        >
+          {label}
+        </Text>
+      </View>
+    </View>
   );
 };
 

@@ -1,7 +1,7 @@
-import React, { memo, useState, useCallback, useEffect } from 'react';
+import React, { memo, useState, useCallback, useEffect, useRef } from 'react';
 import { View, StyleSheet, ViewStyle, StyleProp } from 'react-native';
 import { WordOfDay, WordOption } from '../../types/wordOfDay';
-import { useTheme } from '../../theme/ThemeProvider';
+import { useTheme } from '../../theme';
 import { Box } from '../layout';
 import { Text } from '../ui';
 import OptionButton from './OptionButton';

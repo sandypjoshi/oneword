@@ -147,6 +147,82 @@ const mockWords: WordOfDay[] = [
     example: 'The benevolent donor gave generously to the charity',
     date: '2025-03-04'
   },
+  // New mock data for March 17-21, 2025
+  {
+    id: '15',
+    word: 'serendipitous',
+    pronunciation: '/ˌserənˈdɪpɪtəs/',
+    partOfSpeech: 'adjective',
+    definition: 'Occurring by chance in a happy way',
+    example: 'Their serendipitous meeting at the café led to a lifelong friendship',
+    date: '2025-03-17',
+    options: [
+      { value: 'Occurring by chance in a happy way', isCorrect: true },
+      { value: 'Extremely difficult to achieve', isCorrect: false },
+      { value: 'Relating to ancient wisdom', isCorrect: false },
+      { value: 'Painfully obvious to everyone', isCorrect: false }
+    ]
+  },
+  {
+    id: '16',
+    word: 'loquacious',
+    pronunciation: '/ləˈkweɪʃəs/',
+    partOfSpeech: 'adjective',
+    definition: 'Tending to talk a great deal',
+    example: 'The loquacious presenter barely let anyone else speak during the meeting',
+    date: '2025-03-18',
+    options: [
+      { value: 'Tending to talk a great deal', isCorrect: true },
+      { value: 'Extremely quiet and reserved', isCorrect: false },
+      { value: 'Full of clever wordplay', isCorrect: false },
+      { value: 'Prone to telling lies', isCorrect: false }
+    ]
+  },
+  {
+    id: '17',
+    word: 'equanimity',
+    pronunciation: '/ˌekwəˈnɪmɪti/',
+    partOfSpeech: 'noun',
+    definition: 'Mental calmness and composure',
+    example: 'She maintained her equanimity despite the chaotic situation',
+    date: '2025-03-19',
+    options: [
+      { value: 'Mental calmness and composure', isCorrect: true },
+      { value: 'Physical balance and coordination', isCorrect: false },
+      { value: 'Equal distribution of resources', isCorrect: false },
+      { value: 'Fairness in judgment', isCorrect: false }
+    ]
+  },
+  {
+    id: '18',
+    word: 'obfuscate',
+    pronunciation: '/ˈɒbfʌskeɪt/',
+    partOfSpeech: 'verb',
+    definition: 'Make obscure or unclear',
+    example: 'The politician tried to obfuscate the facts with complicated jargon',
+    date: '2025-03-20',
+    options: [
+      { value: 'Make obscure or unclear', isCorrect: true },
+      { value: 'Brighten or illuminate', isCorrect: false },
+      { value: 'Strengthen or fortify', isCorrect: false },
+      { value: 'Simplify or streamline', isCorrect: false }
+    ]
+  },
+  {
+    id: '19',
+    word: 'insouciant',
+    pronunciation: '/ɪnˈsuːsɪənt/',
+    partOfSpeech: 'adjective',
+    definition: 'Showing casual lack of concern',
+    example: 'The insouciant teenager shrugged off his parents\' warnings',
+    date: '2025-03-21',
+    options: [
+      { value: 'Showing casual lack of concern', isCorrect: true },
+      { value: 'Extremely attentive to detail', isCorrect: false },
+      { value: 'Overly worried about everything', isCorrect: false },
+      { value: 'Deeply thoughtful and reflective', isCorrect: false }
+    ]
+  },
 ];
 
 /**
