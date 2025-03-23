@@ -6,12 +6,14 @@ import {
   StyleProp,
   Platform,
   PanResponder,
-  View
+  View,
+  Text as RNText
 } from 'react-native';
 import { useTheme } from '../../theme';
 import { Text } from '../ui';
 import { radius, borderWidth } from '../../theme/styleUtils';
 import { useColorScheme } from 'react-native';
+import { FONT_SIZES } from '../../theme/typography';
 
 export type OptionState = 'default' | 'selected' | 'correct' | 'incorrect' | 'disabled';
 
@@ -22,6 +24,12 @@ const BOLD_STATES = new Set(['selected', 'correct']);
 // Configuration for swipe detection
 const SWIPE_THRESHOLD = 10; // Minimum distance to be considered a swipe
 const PRESS_DELAY = 100; // Small delay to distinguish between taps and swipes (in ms)
+
+// Minimum button height to prevent tiny buttons
+const MIN_BUTTON_HEIGHT = 46;
+
+// Character threshold for font size reduction
+const TEXT_LENGTH_THRESHOLD = 30;
 
 interface OptionButtonProps {
   /**
@@ -48,6 +56,12 @@ interface OptionButtonProps {
    * Additional style for the container
    */
   style?: StyleProp<ViewStyle>;
+
+  /**
+   * Force using small font size regardless of text length
+   * Useful when displaying multiple options to maintain consistent appearance
+   */
+  forceSmallFont?: boolean;
 }
 
 /**
@@ -118,11 +132,16 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
   state: propState = 'default',
   disabled = false,
   onPress,
-  style
+  style,
+  forceSmallFont = false
 }) => {
-  const { colors, spacing } = useTheme();
+  const { colors, spacing, typography } = useTheme();
   const colorScheme = useColorScheme() || 'light';
   const isDark = colorScheme === 'dark';
+  
+  // Get the font size based on typography sizes
+  const normalFontSize = FONT_SIZES.md; // bodyMedium size
+  const minFontSize = FONT_SIZES.sm;    // bodySmall size
   
   // Determine effective state (if disabled but not in a result state, use 'disabled' state)
   const state = disabled && !['correct', 'incorrect'].includes(propState) 
@@ -134,6 +153,9 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
   
   // Determine if text should be bold - not for disabled state
   const isBold = BOLD_STATES.has(state);
+  
+  // Check if text exceeds length threshold or if small font is forced
+  const shouldUseSmallFont = forceSmallFont || label.length > TEXT_LENGTH_THRESHOLD;
   
   // Refs for touch handling
   const isMovingRef = useRef(false);
@@ -206,10 +228,12 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
       borderRadius: radius.pill,
       marginBottom: spacing.sm,
       width: '100%' as const,
+      minHeight: MIN_BUTTON_HEIGHT,
       backgroundColor: getBackgroundColor(state, colors, colorScheme),
       borderColor: getBorderColor(state, colors, colorScheme),
       borderWidth: hasBorder ? (state === 'default' ? borderWidth.hairline : borderWidth.hairline) : borderWidth.none,
       opacity: isPressed ? 0.7 : 1,
+      justifyContent: 'center' as const,
     },
     text: {
       textTransform: 'lowercase' as const,
@@ -217,20 +241,31 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
     }
   }), [state, colors, spacing, colorScheme, hasBorder, isPressed]);
   
+  // Get text color based on state
+  const textColor = getTextColor(state, colors, colorScheme);
+  
   return (
     <View {...panResponder.panHandlers}>
       <View
         style={[buttonStyles.container, style]}
       >
-        <Text
-          variant="bodyMedium"
-          weight={isBold ? "700" : "400"}
-          color={getTextColor(state, colors, colorScheme)}
-          align="center"
-          style={buttonStyles.text}
+        <RNText
+          style={[
+            buttonStyles.text,
+            {
+              color: textColor,
+              fontWeight: isBold ? "700" : "400",
+              fontSize: normalFontSize,
+              fontFamily: isBold ? typography.fonts.systemBold : typography.fonts.system,
+              textAlign: 'center',
+            }
+          ]}
+          numberOfLines={1}
+          adjustsFontSizeToFit={true}
+          minimumFontScale={minFontSize / normalFontSize}
         >
           {label}
-        </Text>
+        </RNText>
       </View>
     </View>
   );

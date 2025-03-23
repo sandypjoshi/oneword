@@ -1,4 +1,4 @@
-import React, { memo, useState, useCallback, useEffect, useRef } from 'react';
+import React, { memo, useState, useCallback, useEffect, useRef, useMemo } from 'react';
 import { View, StyleSheet, ViewStyle, StyleProp } from 'react-native';
 import { WordOfDay, WordOption } from '../../types/wordOfDay';
 import { useTheme } from '../../theme';
@@ -11,6 +11,9 @@ import { Platform } from 'react-native';
 import AnimatedChip from '../ui/AnimatedChip';
 import { speak, isSpeaking } from '../../utils/tts';
 import * as Haptics from 'expo-haptics';
+
+// Character threshold for font size reduction (should match OptionButton's threshold)
+const TEXT_LENGTH_THRESHOLD = 28;
 
 interface WordCardQuestionProps {
   /**
@@ -49,6 +52,11 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
   const [speakingDuration, setSpeakingDuration] = useState(1500);
   // Track all incorrect attempts separately
   const [attemptedOptions, setAttemptedOptions] = useState<string[]>([]);
+  
+  // Check if any option text exceeds the threshold
+  const shouldUseSmallFont = useMemo(() => {
+    return options.some(option => option.value.length > TEXT_LENGTH_THRESHOLD);
+  }, [options]);
   
   // Handle pronunciation
   const handlePronunciation = async () => {
