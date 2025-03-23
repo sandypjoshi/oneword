@@ -7,7 +7,8 @@ import {
   Platform,
   PanResponder,
   View,
-  Text as RNText
+  Text as RNText,
+  Animated
 } from 'react-native';
 import { useTheme } from '../../theme';
 import { Text } from '../ui';
@@ -30,6 +31,11 @@ const MIN_BUTTON_HEIGHT = 46;
 
 // Character threshold for font size reduction
 const TEXT_LENGTH_THRESHOLD = 30;
+
+// Shake animation configuration
+const SHAKE_DURATION = 250; // Shorter total duration for snappier feel
+const SHAKE_COUNT = 4; // Slightly more shakes in less time
+const SHAKE_INTENSITY = 8; // Slightly more intense movement
 
 interface OptionButtonProps {
   /**
@@ -139,6 +145,9 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
   const colorScheme = useColorScheme() || 'light';
   const isDark = colorScheme === 'dark';
   
+  // Animation value for shake effect
+  const shakeAnimation = useRef(new Animated.Value(0)).current;
+  
   // Get the font size based on typography sizes
   const normalFontSize = FONT_SIZES.md; // bodyMedium size
   const minFontSize = FONT_SIZES.sm;    // bodySmall size
@@ -161,6 +170,69 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
   const isMovingRef = useRef(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [isPressed, setIsPressed] = useState(false);
+  
+  // Previous state ref to detect changes
+  const prevStateRef = useRef<OptionState>(propState);
+  
+  // Shake animation function
+  const startShakeAnimation = useCallback(() => {
+    // Reset animation value
+    shakeAnimation.setValue(0);
+    
+    // Create shake sequence with easing
+    Animated.sequence([
+      // First shake is more pronounced
+      Animated.timing(shakeAnimation, {
+        toValue: SHAKE_INTENSITY,
+        duration: SHAKE_DURATION / (SHAKE_COUNT * 2),
+        useNativeDriver: true,
+        easing: (t) => Math.sin(t * Math.PI), // Smoother start and end
+      }),
+      Animated.timing(shakeAnimation, {
+        toValue: -SHAKE_INTENSITY,
+        duration: SHAKE_DURATION / (SHAKE_COUNT * 2),
+        useNativeDriver: true,
+        easing: (t) => Math.sin(t * Math.PI),
+      }),
+      
+      // Subsequent shakes decrease in intensity
+      ...Array(SHAKE_COUNT - 1).fill(0).flatMap((_, i) => {
+        const decayFactor = 1 - ((i + 1) / SHAKE_COUNT);
+        const intensity = SHAKE_INTENSITY * decayFactor;
+        
+        return [
+          Animated.timing(shakeAnimation, {
+            toValue: intensity,
+            duration: SHAKE_DURATION / (SHAKE_COUNT * 2.5),
+            useNativeDriver: true,
+            easing: (t) => Math.sin(t * Math.PI),
+          }),
+          Animated.timing(shakeAnimation, {
+            toValue: -intensity,
+            duration: SHAKE_DURATION / (SHAKE_COUNT * 2.5),
+            useNativeDriver: true,
+            easing: (t) => Math.sin(t * Math.PI),
+          }),
+        ];
+      }),
+      
+      // End at center position with a gentler finish
+      Animated.timing(shakeAnimation, {
+        toValue: 0,
+        duration: SHAKE_DURATION / (SHAKE_COUNT * 3),
+        useNativeDriver: true,
+        easing: (t) => Math.sin(t * Math.PI / 2), // Ease out
+      }),
+    ]).start();
+  }, [shakeAnimation]);
+  
+  // Trigger shake animation when state changes to 'incorrect'
+  useEffect(() => {
+    if (state === 'incorrect' && prevStateRef.current !== 'incorrect') {
+      startShakeAnimation();
+    }
+    prevStateRef.current = state;
+  }, [state, startShakeAnimation]);
   
   // Create PanResponder for touch handling
   const panResponder = useMemo(() => PanResponder.create({
@@ -244,10 +316,15 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
   // Get text color based on state
   const textColor = getTextColor(state, colors, colorScheme);
   
+  // Apply shake animation transform
+  const animatedStyle = {
+    transform: [{ translateX: shakeAnimation }]
+  };
+  
   return (
     <View {...panResponder.panHandlers}>
-      <View
-        style={[buttonStyles.container, style]}
+      <Animated.View
+        style={[buttonStyles.container, animatedStyle, style]}
       >
         <RNText
           style={[
@@ -266,7 +343,7 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
         >
           {label}
         </RNText>
-      </View>
+      </Animated.View>
     </View>
   );
 };

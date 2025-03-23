@@ -75,7 +75,7 @@ const WordCardComponent: React.FC<WordCardProps> = ({
     // If correct, animate the flip to show answer
     if (isCorrect) {
       // Animate flip with Reanimated
-      isFlipped.value = withTiming(1, { duration: 800 });
+      isFlipped.value = withTiming(1, { duration: 500 });
       
       // Still notify parent for tracking purposes
       if (onReveal) {
@@ -89,7 +89,10 @@ const WordCardComponent: React.FC<WordCardProps> = ({
     const rotateValue = interpolate(isFlipped.value, [0, 1], [0, 180]);
     
     return {
-      transform: [{ rotateY: `${rotateValue}deg` }],
+      transform: [
+        { perspective: 1000 },
+        { rotateY: `${rotateValue}deg` }
+      ],
       opacity: isFlipped.value > 0.5 ? 0 : 1, // Hide when past halfway point
     };
   });
@@ -99,32 +102,44 @@ const WordCardComponent: React.FC<WordCardProps> = ({
     const rotateValue = interpolate(isFlipped.value, [0, 1], [180, 360]);
     
     return {
-      transform: [{ rotateY: `${rotateValue}deg` }],
+      transform: [
+        { perspective: 1000 },
+        { rotateY: `${rotateValue}deg` }
+      ],
       opacity: isFlipped.value > 0.5 ? 1 : 0, // Show when past halfway point
     };
   });
   
   return (
-    <View style={styles.container}>
-      <Animated.View style={[styles.cardContainer, frontAnimatedStyle]}>
-        <WordCardQuestion
-          wordData={wordData}
-          style={style}
-          onOptionSelect={handleOptionSelect}
-        />
-      </Animated.View>
-      
-      <Animated.View style={[styles.cardContainer, backAnimatedStyle]}>
-        <WordCardAnswer
-          wordData={wordData}
-          style={style}
-        />
-      </Animated.View>
+    <View style={styles.outerContainer}>
+      <View style={styles.container}>
+        <Animated.View style={[styles.cardContainer, frontAnimatedStyle]}>
+          <WordCardQuestion
+            wordData={wordData}
+            style={style}
+            onOptionSelect={handleOptionSelect}
+          />
+        </Animated.View>
+        
+        <Animated.View style={[styles.cardContainer, backAnimatedStyle]}>
+          <WordCardAnswer
+            wordData={wordData}
+            style={style}
+          />
+        </Animated.View>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  outerContainer: {
+    flex: 1,
+    // Add small margin to prevent clipping
+    marginVertical: 4,
+    // Ensure animations aren't clipped
+    overflow: 'visible',
+  },
   container: {
     flex: 1,
     position: 'relative',
