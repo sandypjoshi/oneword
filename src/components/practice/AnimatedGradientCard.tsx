@@ -43,62 +43,62 @@ interface MeshData {
 // Natural color palettes inspired by real world phenomena
 const GRADIENTS = {
   light: [
-    // Morning Sky
-    ['#E9FAFF', '#FFD6E6', '#FFF5DE'],
+    // Morning Sky - Added deeper blue for dawn transition
+    ['#E9FAFF', '#FFD6E6', '#FFF5DE', '#BCD7FF'],
     // Spring Meadow
     ['#E5F5D5', '#BFECD1', '#EBF9FC'],
-    // Desert Sunrise
-    ['#FFFBD9', '#FFDACF', '#E3D8F0'],
+    // Desert Sunrise - Added deeper orange
+    ['#FFFBD9', '#FFDACF', '#E3D8F0', '#FFBD9E'],
     // Coastal Reef
     ['#D4F8FC', '#D7F2FF', '#E6ECFA'],
-    // Autumn Leaves
-    ['#FFFBD9', '#FFDBAA', '#FFC2AB'],
+    // Autumn Leaves - Added deep amber
+    ['#FFFBD9', '#FFDBAA', '#FFC2AB', '#E6A677'],
     // Cherry Blossom
     ['#FACCE0', '#EACDF2', '#DAEEFF'],
     // Mountain Vista
     ['#F0FAF2', '#D2F0EB', '#E5F099'],
-    // Tropical Lagoon
-    ['#B9E5FF', '#8FDEFF', '#D0F1FF'],
+    // Tropical Lagoon - Added teal
+    ['#B9E5FF', '#8FDEFF', '#D0F1FF', '#8EDBCC'],
     // Lavender Fields
     ['#E2D9F2', '#C8B5E8', '#ECD5F5'],
     // Coral Garden
     ['#FFEBD0', '#FFBFAA', '#C5F0F7'],
     // Misty Morning
     ['#EBF8F7', '#E5F5D5', '#F6FBF2'],
-    // Sunset Beach
-    ['#FFEBD0', '#FFDACF', '#CEEAFF'],
+    // Sunset Beach - Added sunset red
+    ['#FFEBD0', '#FFDACF', '#CEEAFF', '#FFB5AB'],
   ],
   dark: [
-    // Night Sky
-    ['#0D1B2A', '#1B263B', '#363E50'],
-    // Deep Ocean
-    ['#01242F', '#0A3240', '#1A4459'],
-    // Forest Twilight
-    ['#1A1A1D', '#4E4E50', '#2E4057'],
-    // Starry Nebula - Reduced saturation
-    ['#171E4A', '#25164A', '#2D1145'],
-    // Volcanic Rock
-    ['#212121', '#37474F', '#455A64'],
-    // Midnight Forest
-    ['#1B1B24', '#273238', '#1B5E20'],
-    // Northern Lights
-    ['#0E151B', '#0E3746', '#07485B'],
-    // Cosmic Dust - Reduced saturation significantly
-    ['#1A1F35', '#0D2C48', '#193648'],
-    // Ember Glow
-    ['#1A1A1D', '#3C1518', '#69140E'],
-    // Deep Amethyst
-    ['#1A1A2E', '#16213E', '#4A266A'],
-    // Midnight Garden
-    ['#111D13', '#1D3124', '#2D4739'],
-    // Twilight Harbor - More muted
-    ['#10151C', '#1E252F', '#22303B'],
-    // Shadow Lake - New natural palette
-    ['#121619', '#151E24', '#1C2C38'],
-    // Mountain Twilight - New natural palette
-    ['#14151F', '#1F2133', '#2C314A'],
-    // Moonlit Forest - New natural palette
-    ['#0F1A17', '#172A25', '#203B32'],
+    // Night Sky - Enhanced with deeper blues and subtle highlight
+    ['#0D1B2A', '#1B263B', '#2A3240', '#405A7E'],
+    // Deep Ocean - Added teal accent for underwater distinction
+    ['#01242F', '#0A3240', '#143B4F', '#1D5A6B'],
+    // Forest Twilight - More distinct forest greens and blues
+    ['#1A1A1D', '#252837', '#1F3A4C', '#213326'],
+    // Starry Nebula - Clearer distinction between purple tones
+    ['#171E4A', '#251643', '#3A1250', '#0A0920'],
+    // Volcanic Rock - Added subtle ember glow
+    ['#212121', '#2D2A2A', '#393D42', '#4D3A38'],
+    // Midnight Forest - Enhanced contrast between forest tones
+    ['#1B1B24', '#1A2C2F', '#1A4A1D', '#0F2F1A'],
+    // Northern Lights - More vibrant aurora accent
+    ['#0E151B', '#0E3746', '#07485B', '#0B5C4E'],
+    // Cosmic Dust - Added distant star hint
+    ['#1A1F35', '#0D2C48', '#193648', '#2B3359'],
+    // Ember Glow - More distinct ember color separation
+    ['#1A1A1D', '#271316', '#4F100C', '#2D0404'],
+    // Deep Amethyst - Richer, more distinct purples
+    ['#1A1A2E', '#16213E', '#321850', '#100A26'],
+    // Midnight Garden - Added moonlight accent
+    ['#111D13', '#1D3124', '#2D4739', '#243145'],
+    // Twilight Harbor - Added water reflection
+    ['#10151C', '#1E252F', '#22303B', '#2A4250'],
+    // Shadow Lake - More distinct contrast in blues
+    ['#121619', '#151E24', '#1C2C38', '#243243'],
+    // Mountain Twilight - Added distant peak highlight
+    ['#14151F', '#1F2133', '#272B42', '#383D5E'],
+    // Moonlit Forest - Enhanced contrast between foliage and sky
+    ['#0F1A17', '#172A25', '#203B32', '#122536'],
   ]
 };
 
