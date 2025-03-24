@@ -1,16 +1,90 @@
 # AnimatedGradientCard Component
 
-A high-performance React Native component that renders beautiful mesh gradients using Skia. The component creates smooth, organic-looking gradients that adapt to light and dark modes.
+A high-performance React Native component that renders beautiful, natural-looking mesh gradients using Skia. The component creates smooth, organic gradients that adapt to light and dark modes with carefully selected natural color palettes.
 
 ## Features
 
-- Smooth mesh gradients with carefully curated color palettes
+- Smooth, natural mesh gradients inspired by real-world phenomena
+- Curated color palettes based on natural environments
 - Automatic light/dark mode adaptation
 - High-performance Skia-based rendering
 - Interactive gradient changes
-- Responsive design
+- Completely smooth transitions without artifacts or jagged edges
 - Hardware-accelerated graphics
-- Customizable content (title and description)
+
+## Color Palettes
+
+### Light Mode - Natural Phenomena
+- Morning Sky
+- Spring Meadow
+- Desert Sunrise
+- Coastal Reef
+- Autumn Leaves
+- Cherry Blossom
+- Mountain Vista
+
+### Dark Mode - Natural Environments
+- Night Sky
+- Deep Ocean
+- Forest Twilight
+- Starry Nebula
+- Volcanic Rock
+- Midnight Forest
+- Northern Lights
+
+## Technical Implementation
+
+The gradient generation uses a sophisticated approach:
+
+- **Multi-directional Flow Fields**: Creates organic, natural-looking patterns
+- **Smooth Blending**: Advanced color interpolation with gamma correction
+- **Non-linear Gradient Distribution**: Based on noise fields with non-integer frequencies
+- **Optimized for Both Modes**: Different parameters for light and dark ensure perfect results
+- **High Resolution Mesh**: 32×32 grid (1024 vertices) for smooth transitions
+
+## Usage
+
+```tsx
+import AnimatedGradientCard from './components/practice/AnimatedGradientCard';
+
+const MyScreen = () => (
+  <AnimatedGradientCard
+    title="Welcome"
+    description="Experience beautiful gradients"
+  />
+);
+```
+
+## Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| title | string | Main text displayed on the card |
+| description | string | Secondary text displayed below the title |
+
+## Performance Considerations
+
+- Hardware-accelerated using Skia
+- Optimized mesh generation with minimal computational overhead
+- Efficient color blending with gamma correction
+- No runtime animations (static gradients that change on demand)
+- Memory-efficient implementation
+
+## Key Algorithms
+
+- **Control Point Placement**: Strategic positioning for natural flow
+- **Flow-based Influence**: Multiple flow directions create organic patterns
+- **Noise Fields**: Low-frequency noise for subtle variations
+- **Smooth Falloff**: Carefully tuned falloff function prevents artifacts
+- **Gamma-correct Blending**: Perceptually accurate color transitions
+
+## Future Enhancements
+
+- [ ] Add animation support for smooth transitions between gradients
+- [ ] Implement gesture control for interactive exploration of gradients
+- [ ] Custom color palette selection
+- [ ] Export gradients as SVG
+- [ ] Performance optimizations for lower-end devices
 
 ## Technical Details
 
@@ -28,49 +102,6 @@ A high-performance React Native component that renders beautiful mesh gradients 
 - Smooth color interpolation using quadratic falloff
 - Strategic control point placement for natural gradient flow
 - Clean edge handling
-
-## Usage
-
-```tsx
-import AnimatedGradientCard from './components/practice/AnimatedGradientCard';
-
-const MyScreen = () => (
-  <AnimatedGradientCard
-    title="Welcome"
-    description="Experience beautiful gradients"
-  />
-);
-```
-
-### Props
-
-| Prop | Type | Description |
-|------|------|-------------|
-| title | string | Main text displayed on the card |
-| description | string | Secondary text displayed below the title |
-
-### Dimensions
-
-- Width: Screen width - 40px
-- Height: 70% of screen height
-- Padding: 20px
-- Border Radius: 24px
-
-## Color Palettes
-
-### Light Mode
-- Soft pastels
-- Warm neutrals
-- Cool morning
-- Dusty rose
-- Mint cream
-
-### Dark Mode
-- Deep ocean
-- Night sky
-- Forest depths
-- Twilight
-- Dark earth
 
 ## Implementation Notes
 
@@ -93,23 +124,6 @@ The gradient generation uses a combination of:
 - React Native
 - @shopify/react-native-skia
 - React Native Reanimated (optional for future animations)
-
-## Performance Considerations
-
-1. **Memory Usage**
-   - Fixed vertex count (1024 vertices)
-   - Static color arrays
-   - No dynamic memory allocation during rendering
-
-2. **CPU Usage**
-   - Gradient calculation only happens on demand
-   - No per-frame updates
-   - Efficient color interpolation
-
-3. **GPU Usage**
-   - Hardware-accelerated rendering via Skia
-   - Single draw call per frame
-   - Static geometry
 
 ## Known Limitations
 
