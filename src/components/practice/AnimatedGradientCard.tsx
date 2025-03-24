@@ -58,63 +58,7 @@ const smoothstep = (edge0: number, edge1: number, x: number) => {
   return t * t * (3 - 2 * t);
 };
 
-// Helper function to convert hex to RGB
-const hexToRGB = (hex: string) => {
-  const r = parseInt(hex.slice(1, 3), 16) / 255;
-  const g = parseInt(hex.slice(3, 5), 16) / 255;
-  const b = parseInt(hex.slice(5, 7), 16) / 255;
-  return { r, g, b };
-};
-
-// Helper function to convert RGB to hex
-const RGBToHex = (r: number, g: number, b: number) => {
-  const toHex = (n: number) => Math.round(Math.max(0, Math.min(1, n)) * 255).toString(16).padStart(2, '0');
-  return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
-};
-
-// Perceptual color interpolation with gamma correction
-const interpolateColors = (color1: string, color2: string, t: number) => {
-  const c1 = hexToRGB(color1);
-  const c2 = hexToRGB(color2);
-  
-  // Gamma correction (sRGB to linear)
-  const linear1 = {
-    r: Math.pow(c1.r, 2.2),
-    g: Math.pow(c1.g, 2.2),
-    b: Math.pow(c1.b, 2.2)
-  };
-  const linear2 = {
-    r: Math.pow(c2.r, 2.2),
-    g: Math.pow(c2.g, 2.2),
-    b: Math.pow(c2.b, 2.2)
-  };
-  
-  // Interpolate in linear space
-  const r = linear1.r * (1 - t) + linear2.r * t;
-  const g = linear1.g * (1 - t) + linear2.g * t;
-  const b = linear1.b * (1 - t) + linear2.b * t;
-  
-  // Convert back to sRGB space
-  return RGBToHex(
-    Math.pow(r, 1/2.2),
-    Math.pow(g, 1/2.2),
-    Math.pow(b, 1/2.2)
-  );
-};
-
-// Helper function to create curved paths
-const createCurvedPath = (startX: number, startY: number, endX: number, endY: number, curvature: number) => {
-  const midX = (startX + endX) / 2;
-  const midY = (startY + endY) / 2;
-  const angle = Math.atan2(endY - startY, endX - startX);
-  const perpendicular = angle + Math.PI / 2;
-  
-  const controlX = midX + Math.cos(perpendicular) * curvature;
-  const controlY = midY + Math.sin(perpendicular) * curvature;
-  
-  return { controlX, controlY };
-};
-
+// Enhanced mesh creation with smooth gradients
 const createMeshPoints = (isDarkMode = false) => {
   const points = [];
   const colors = [];
@@ -126,98 +70,85 @@ const createMeshPoints = (isDarkMode = false) => {
   const colorSet = isDarkMode ? GRADIENTS.dark : GRADIENTS.light;
   const gradient = colorSet[Math.floor(Math.random() * colorSet.length)];
 
-  // Create organic paths for color regions
-  const colorPaths = [
-    // Primary path
-    {
-      start: { x: 0.1, y: 0.2 + Math.random() * 0.3 },
-      end: { x: 0.9, y: 0.3 + Math.random() * 0.3 },
-      color: gradient[0],
-      curvature: 0.2 + Math.random() * 0.3,
-      influence: 0.4
-    },
-    // Secondary path
-    {
-      start: { x: 0.2, y: 0.8 - Math.random() * 0.3 },
-      end: { x: 0.8, y: 0.7 - Math.random() * 0.3 },
-      color: gradient[1],
-      curvature: -0.2 - Math.random() * 0.3,
-      influence: 0.4
-    },
-    // Accent path
-    {
-      start: { x: 0.5 + Math.random() * 0.3, y: 0.1 },
-      end: { x: 0.6 + Math.random() * 0.3, y: 0.9 },
-      color: gradient[2],
-      curvature: 0.1 + Math.random() * 0.2,
-      influence: 0.35
-    }
-  ];
+  // Create control points for color blending
+  const numPoints = 4 + Math.floor(Math.random() * 3); // 4-6 points
+  const controlPoints = [];
+  
+  // Add main anchor points with strategic positioning
+  controlPoints.push({
+    x: 0.1 + Math.random() * 0.2,
+    y: 0.1 + Math.random() * 0.2,
+    color: gradient[0],
+    influence: 0.6 + Math.random() * 0.2 // Increased influence for smoother transitions
+  });
 
-  // Generate mesh points
+  controlPoints.push({
+    x: 0.8 + Math.random() * 0.2,
+    y: 0.1 + Math.random() * 0.2,
+    color: gradient[1],
+    influence: 0.6 + Math.random() * 0.2
+  });
+
+  controlPoints.push({
+    x: 0.1 + Math.random() * 0.2,
+    y: 0.8 + Math.random() * 0.2,
+    color: gradient[2],
+    influence: 0.6 + Math.random() * 0.2
+  });
+
+  // Add random intermediate points
+  for (let i = 3; i < numPoints; i++) {
+    controlPoints.push({
+      x: 0.2 + Math.random() * 0.6,
+      y: 0.2 + Math.random() * 0.6,
+      color: gradient[Math.floor(Math.random() * gradient.length)],
+      influence: 0.5 + Math.random() * 0.2
+    });
+  }
+
+  // Generate mesh points with smooth color transitions
   for (let y = 0; y < ROWS; y++) {
     for (let x = 0; x < COLS; x++) {
       const nx = x / (COLS - 1);
       const ny = y / (ROWS - 1);
       
+      // Create vertex position (no distortion)
       const finalX = x * cellWidth;
       const finalY = y * cellHeight;
       points.push({ x: finalX, y: finalY });
 
-      // Calculate color influences based on distance to curved paths
-      const influences = colorPaths.map(path => {
-        const curve = createCurvedPath(
-          path.start.x,
-          path.start.y,
-          path.end.x,
-          path.end.y,
-          path.curvature
-        );
-
-        // Calculate distance to curved path
-        const dx = nx - curve.controlX;
-        const dy = ny - curve.controlY;
-        const distanceToCurve = Math.sqrt(dx * dx + dy * dy);
-
-        // Calculate distance to line segment
-        const lineX = path.end.x - path.start.x;
-        const lineY = path.end.y - path.start.y;
-        const projection = ((nx - path.start.x) * lineX + (ny - path.start.y) * lineY) / 
-                         (lineX * lineX + lineY * lineY);
-        const projectionPoint = {
-          x: path.start.x + projection * lineX,
-          y: path.start.y + projection * lineY
-        };
-        const distanceToLine = Math.sqrt(
-          Math.pow(nx - projectionPoint.x, 2) + 
-          Math.pow(ny - projectionPoint.y, 2)
-        );
-
-        // Combine both distances for organic feel
-        const distance = Math.min(distanceToCurve, distanceToLine);
-        const t = Math.max(0, 1 - distance / path.influence);
-        const influence = Math.pow(t, 2) * (3 - 2 * t); // Smoothstep
-
-        return {
-          color: path.color,
-          influence: influence
-        };
+      // Calculate color influences with smoother falloff
+      let totalInfluence = 0;
+      const colorInfluences = controlPoints.map(point => {
+        const dx = nx - point.x;
+        const dy = ny - point.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        // Smoother falloff function
+        const influence = Math.pow(Math.max(0, 1 - (distance / point.influence)), 2);
+        totalInfluence += influence;
+        return { color: point.color, influence };
       });
 
-      // Sort influences by strength
-      influences.sort((a, b) => b.influence - a.influence);
-
-      // Blend between the two strongest influences
-      const totalInfluence = influences[0].influence + influences[1].influence;
-      
+      // Blend colors with improved smoothing
       if (totalInfluence > 0) {
-        const t = influences[1].influence / totalInfluence;
-        const finalColor = interpolateColors(
-          influences[0].color,
-          influences[1].color,
-          smoothstep(0, 1, t)
-        );
-        colors.push(finalColor);
+        const blendedColor = colorInfluences.reduce((acc, { color, influence }) => {
+          const weight = influence / totalInfluence;
+          const rgb = {
+            r: parseInt(color.slice(1, 3), 16),
+            g: parseInt(color.slice(3, 5), 16),
+            b: parseInt(color.slice(5, 7), 16)
+          };
+          acc.r += rgb.r * weight;
+          acc.g += rgb.g * weight;
+          acc.b += rgb.b * weight;
+          return acc;
+        }, { r: 0, g: 0, b: 0 });
+
+        const color = '#' + 
+          Math.round(blendedColor.r).toString(16).padStart(2, '0') +
+          Math.round(blendedColor.g).toString(16).padStart(2, '0') +
+          Math.round(blendedColor.b).toString(16).padStart(2, '0');
+        colors.push(color);
       } else {
         colors.push(gradient[0]);
       }
