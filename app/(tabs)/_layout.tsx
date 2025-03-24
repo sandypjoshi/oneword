@@ -66,11 +66,11 @@ export default function TabLayout() {
           <Tabs.Screen
             name="practice"
             options={{
-              title: 'Challenges',
-              tabBarLabel: 'Challenges',
+              title: 'Practice',
+              tabBarLabel: 'Practice',
               tabBarIcon: ({ color, focused }) => (
                 <Icon 
-                  name="medalRibbon" 
+                  name="academicCap" 
                   color={color} 
                   size={24} 
                   variant={focused ? 'bold' : 'linear'} 

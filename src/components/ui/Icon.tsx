@@ -55,6 +55,10 @@ const extractIconData = (iconName: string, variant: 'linear' | 'bold'): string |
       linear: 'medal-ribbon-linear',
       bold: 'medal-ribbon-bold',
     },
+    academicCap: {
+      linear: 'square-academic-cap-linear',
+      bold: 'square-academic-cap-bold',
+    },
     checkmark: {
       linear: 'check-linear',
       bold: 'check-bold',
@@ -97,6 +101,7 @@ export type IconName =
   | 'notes'
   | 'note'
   | 'medalRibbon'
+  | 'academicCap'
   | 'checkmark'
   | 'radio'
   | 'checkCircleBold'
