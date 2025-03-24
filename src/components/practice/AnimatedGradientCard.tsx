@@ -154,6 +154,41 @@ const createMeshPoints = (isDarkMode = false) => {
   const colorIndex = Math.floor(Math.random() * gradient.length);
   addControlPoint(centerRadius, centerAngle, gradient[colorIndex], 0.4 + Math.random() * 0.2);
 
+  // Add subtle corner control points for smoother corner transitions
+  const cornerInfluence = 0.3;
+  const cornerOffset = 0.05; // Small offset from exact corner
+  
+  // Add very small influence points at each corner to ensure smooth transitions
+  [
+    { x: cornerOffset, y: cornerOffset }, // Top-left
+    { x: 1 - cornerOffset, y: cornerOffset }, // Top-right
+    { x: cornerOffset, y: 1 - cornerOffset }, // Bottom-left
+    { x: 1 - cornerOffset, y: 1 - cornerOffset }, // Bottom-right
+  ].forEach(corner => {
+    // Get the nearest existing control point's color for consistency
+    let nearestPoint = controlPoints[0];
+    let minDistance = 999;
+    
+    controlPoints.forEach(point => {
+      const dx = corner.x - point.x;
+      const dy = corner.y - point.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      
+      if (distance < minDistance) {
+        minDistance = distance;
+        nearestPoint = point;
+      }
+    });
+    
+    // Add a subtle control point at the corner with nearest color
+    controlPoints.push({
+      x: corner.x,
+      y: corner.y,
+      color: nearestPoint.color,
+      influence: cornerInfluence
+    });
+  });
+
   // Generate smoother noise field
   const noiseField: NoisePoint[][] = Array(ROWS).fill(0).map(() => 
     Array(COLS).fill(0).map(() => ({
@@ -203,14 +238,21 @@ const createMeshPoints = (isDarkMode = false) => {
       const blendedColor = { r: 0, g: 0, b: 0 };
       let totalWeight = 0;
       
-      // Calculate weights with gentler flow influence
+      // Check if this point is near a corner for extra smoothing
+      const isCorner = (nx <= 0.1 || nx >= 0.9) && (ny <= 0.1 || ny >= 0.9);
+      
+      // Extra smoothing for corner areas
+      const localSmoothingFactor = isCorner ? smoothingFactor * 1.5 : smoothingFactor;
+      const localFalloffPower = isCorner ? falloffPower * 0.9 : falloffPower;
+      
+      // Calculate weights with corner-aware parameters
       const weights = controlPoints.map(point => {
         const dx = nx - point.x;
         const dy = ny - point.y;
         
-        // Enhanced smooth distance function
+        // Enhanced smooth distance function with corner awareness
         const distanceSquared = dx * dx + dy * dy;
-        const distance = Math.sqrt(distanceSquared + smoothingFactor);
+        const distance = Math.sqrt(distanceSquared + localSmoothingFactor);
         
         // Gentler flow influence
         const flowMix1 = Math.sin(flowValue1 * Math.PI * 1.5 + noise.angle * 0.4) * 0.5 + 0.5;
@@ -224,10 +266,10 @@ const createMeshPoints = (isDarkMode = false) => {
           flowMix3 * 0.3
         ) * noise.strength * noiseStrengthFactor + 0.85; // Increased base influence
         
-        // Smoother falloff function
+        // Smoother falloff function with corner awareness
         const weight = Math.pow(
           Math.max(0, 1 - distance / (point.influence * flowFactor)), 
-          falloffPower
+          localFalloffPower
         );
         
         return weight;
@@ -294,7 +336,7 @@ const AnimatedGradientCard: React.FC<AnimatedGradientCardProps> = ({
   const deviceColorScheme = useColorScheme();
   const isDark = deviceColorScheme === 'dark';
   const [, forceUpdate] = React.useReducer(x => x + 1, 0);
-
+  
   // Update mesh when color scheme changes
   React.useEffect(() => {
     mesh = createMeshPoints(isDark);
@@ -308,6 +350,7 @@ const AnimatedGradientCard: React.FC<AnimatedGradientCardProps> = ({
   return (
     <View style={styles.container}>
       <View style={styles.card}>
+        {/* Canvas for gradient */}
         <Canvas style={styles.canvas}>
           <Group>
             <Vertices
@@ -317,6 +360,14 @@ const AnimatedGradientCard: React.FC<AnimatedGradientCardProps> = ({
             />
           </Group>
         </Canvas>
+        
+        {/* Inner border overlay with blend mode */}
+        <View style={[
+          styles.innerBorder, 
+          { borderColor: isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.075)' }
+        ]} />
+        
+        {/* Content */}
         <View style={styles.content}>
           <Text style={[styles.title, { color: isDark ? '#FFFFFF' : '#000000' }]}>
             {title}
@@ -365,10 +416,23 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
+    position: 'relative',
+  },
+  innerBorder: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    borderWidth: 1,
+    borderRadius: 24,
+    // borderColor set dynamically based on color scheme
+    // For dark mode: rgba(255, 255, 255, 0.3) - brighter white glow
+    // For light mode: rgba(255, 255, 255, 0.4) - soft white highlight
   },
   canvas: {
-    width: CARD_WIDTH,
-    height: CARD_HEIGHT,
+    width: '100%',
+    height: '100%',
     position: 'absolute',
   },
   content: {
