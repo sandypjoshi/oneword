@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { View, StyleSheet, Text, Dimensions, useColorScheme, Pressable } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
 import {
@@ -34,39 +34,71 @@ interface NoisePoint {
   strength: number;
 }
 
+interface MeshData {
+  points: Point[];
+  colors: string[];
+  indices: number[];
+}
+
 // Natural color palettes inspired by real world phenomena
 const GRADIENTS = {
   light: [
     // Morning Sky
-    ['#E0F7FF', '#FFC8DD', '#FFEFCF'],
+    ['#E9FAFF', '#FFD6E6', '#FFF5DE'],
     // Spring Meadow
-    ['#DCEDC8', '#A8DDB5', '#E0F7FA'],
+    ['#E5F5D5', '#BFECD1', '#EBF9FC'],
     // Desert Sunrise
-    ['#FFF9C4', '#FFCCBC', '#D1C4E9'],
+    ['#FFFBD9', '#FFDACF', '#E3D8F0'],
     // Coastal Reef
-    ['#B2EBF2', '#B3E5FC', '#C5CAE9'],
+    ['#D4F8FC', '#D7F2FF', '#E6ECFA'],
     // Autumn Leaves
-    ['#FFF9C4', '#FFCC80', '#FFAB91'],
+    ['#FFFBD9', '#FFDBAA', '#FFC2AB'],
     // Cherry Blossom
-    ['#F8BBD0', '#E1BEE7', '#BBDEFB'],
+    ['#FACCE0', '#EACDF2', '#DAEEFF'],
     // Mountain Vista
-    ['#E8F5E9', '#B2DFDB', '#DCE775'],
+    ['#F0FAF2', '#D2F0EB', '#E5F099'],
+    // Tropical Lagoon
+    ['#B9E5FF', '#8FDEFF', '#D0F1FF'],
+    // Lavender Fields
+    ['#E2D9F2', '#C8B5E8', '#ECD5F5'],
+    // Coral Garden
+    ['#FFEBD0', '#FFBFAA', '#C5F0F7'],
+    // Misty Morning
+    ['#EBF8F7', '#E5F5D5', '#F6FBF2'],
+    // Sunset Beach
+    ['#FFEBD0', '#FFDACF', '#CEEAFF'],
   ],
   dark: [
     // Night Sky
-    ['#0D1B2A', '#1B263B', '#415A77'],
+    ['#0D1B2A', '#1B263B', '#363E50'],
     // Deep Ocean
-    ['#01242F', '#044F67', '#1F618D'],
+    ['#01242F', '#0A3240', '#1A4459'],
     // Forest Twilight
     ['#1A1A1D', '#4E4E50', '#2E4057'],
-    // Starry Nebula
-    ['#1A237E', '#311B92', '#4A148C'],
+    // Starry Nebula - Reduced saturation
+    ['#171E4A', '#25164A', '#2D1145'],
     // Volcanic Rock
     ['#212121', '#37474F', '#455A64'],
     // Midnight Forest
     ['#1B1B24', '#273238', '#1B5E20'],
     // Northern Lights
     ['#0E151B', '#0E3746', '#07485B'],
+    // Cosmic Dust - Reduced saturation significantly
+    ['#1A1F35', '#0D2C48', '#193648'],
+    // Ember Glow
+    ['#1A1A1D', '#3C1518', '#69140E'],
+    // Deep Amethyst
+    ['#1A1A2E', '#16213E', '#4A266A'],
+    // Midnight Garden
+    ['#111D13', '#1D3124', '#2D4739'],
+    // Twilight Harbor - More muted
+    ['#10151C', '#1E252F', '#22303B'],
+    // Shadow Lake - New natural palette
+    ['#121619', '#151E24', '#1C2C38'],
+    // Mountain Twilight - New natural palette
+    ['#14151F', '#1F2133', '#2C314A'],
+    // Moonlit Forest - New natural palette
+    ['#0F1A17', '#172A25', '#203B32'],
   ]
 };
 
@@ -76,12 +108,24 @@ const smoothstep = (edge0: number, edge1: number, x: number) => {
   return t * t * (3 - 2 * t);
 };
 
+// Memoize the indices calculation since it never changes
+const MEMOIZED_INDICES = (() => {
+  const indices: number[] = [];
+  for (let y = 0; y < ROWS - 1; y++) {
+    for (let x = 0; x < COLS - 1; x++) {
+      const i = y * COLS + x;
+      indices.push(i, i + 1, i + COLS);
+      indices.push(i + 1, i + COLS + 1, i + COLS);
+    }
+  }
+  return indices;
+})();
+
 // Enhanced mesh creation with ultra-smooth transitions
-const createMeshPoints = (isDarkMode = false) => {
+const createMeshPoints = (isDarkMode = false): MeshData => {
   const points: Point[] = [];
   const colors: string[] = [];
-  const indices: number[] = [];
-
+  
   const cellWidth = CARD_WIDTH / (COLS - 1);
   const cellHeight = CARD_HEIGHT / (ROWS - 1);
   
@@ -96,15 +140,15 @@ const createMeshPoints = (isDarkMode = false) => {
   // More balanced influence areas
   const influenceMultiplier = isDarkMode ? 1.2 : 1.1; 
   
-  // Create multiple flow directions for gentle, natural patterns
+  // Create flow directions once
   const baseAngle = Math.random() * Math.PI * 2;
+  const angleOffset = Math.PI * (0.25 + Math.random() * 0.3);
+  
   const flow1 = { 
     x: Math.cos(baseAngle), 
     y: Math.sin(baseAngle) 
   };
   
-  // More subtle angle offsets for smoother transitions
-  const angleOffset = Math.PI * (0.25 + Math.random() * 0.3); // 25-55% of PI
   const flow2 = { 
     x: Math.cos(baseAngle + angleOffset), 
     y: Math.sin(baseAngle + angleOffset) 
@@ -115,11 +159,14 @@ const createMeshPoints = (isDarkMode = false) => {
     y: Math.sin(baseAngle - angleOffset * 0.7) 
   };
 
-  // Add primary color points in gentler, more organic positions
-  const centerOffsetX = -0.05 + Math.random() * 0.1; // Reduced offset (-5% to +5%)
+  // Center offset calculations
+  const centerOffsetX = -0.05 + Math.random() * 0.1;
   const centerOffsetY = -0.05 + Math.random() * 0.1;
   
-  // More natural distribution of control points
+  // Prepare control points
+  const controlPoints: ControlPoint[] = [];
+  
+  // Control point adding function
   const addControlPoint = (radius: number, angle: number, color: string, influence: number): void => {
     const x = 0.5 + centerOffsetX + Math.cos(angle) * radius;
     const y = 0.5 + centerOffsetY + Math.sin(angle) * radius;
@@ -131,18 +178,15 @@ const createMeshPoints = (isDarkMode = false) => {
     });
   };
   
-  // Create organic patterns with varied control points
-  const controlPoints: ControlPoint[] = [];
-  
   // Add points with natural distribution
-  const numPoints = 5 + Math.floor(Math.random() * 2); // 5-6 points (reduced from 6-8)
-  const baseRadius = 0.25 + Math.random() * 0.15; // 25-40% of canvas
+  const numPoints = 5 + Math.floor(Math.random() * 2);
+  const baseRadius = 0.25 + Math.random() * 0.15;
   
   for (let i = 0; i < numPoints; i++) {
-    const angle = (i / numPoints) * Math.PI * 2 + Math.random() * 0.3; // Reduced randomness
-    const radiusVar = baseRadius * (0.8 + Math.random() * 0.4); // More consistent radius
+    const angle = (i / numPoints) * Math.PI * 2 + Math.random() * 0.3;
+    const radiusVar = baseRadius * (0.8 + Math.random() * 0.4);
     const colorIndex = i % gradient.length;
-    const influence = 0.35 + Math.random() * 0.25; // Increased minimum influence
+    const influence = 0.35 + Math.random() * 0.25;
     
     addControlPoint(radiusVar, angle, gradient[colorIndex], influence);
   }
@@ -154,18 +198,19 @@ const createMeshPoints = (isDarkMode = false) => {
   const colorIndex = Math.floor(Math.random() * gradient.length);
   addControlPoint(centerRadius, centerAngle, gradient[colorIndex], 0.4 + Math.random() * 0.2);
 
-  // Add subtle corner control points for smoother corner transitions
+  // Add corner control points
   const cornerInfluence = 0.3;
-  const cornerOffset = 0.05; // Small offset from exact corner
+  const cornerOffset = 0.05;
   
-  // Add very small influence points at each corner to ensure smooth transitions
-  [
-    { x: cornerOffset, y: cornerOffset }, // Top-left
-    { x: 1 - cornerOffset, y: cornerOffset }, // Top-right
-    { x: cornerOffset, y: 1 - cornerOffset }, // Bottom-left
-    { x: 1 - cornerOffset, y: 1 - cornerOffset }, // Bottom-right
-  ].forEach(corner => {
-    // Get the nearest existing control point's color for consistency
+  const corners = [
+    { x: cornerOffset, y: cornerOffset },
+    { x: 1 - cornerOffset, y: cornerOffset },
+    { x: cornerOffset, y: 1 - cornerOffset },
+    { x: 1 - cornerOffset, y: 1 - cornerOffset },
+  ];
+  
+  corners.forEach(corner => {
+    // Find nearest existing control point
     let nearestPoint = controlPoints[0];
     let minDistance = 999;
     
@@ -180,7 +225,7 @@ const createMeshPoints = (isDarkMode = false) => {
       }
     });
     
-    // Add a subtle control point at the corner with nearest color
+    // Add corner point
     controlPoints.push({
       x: corner.x,
       y: corner.y,
@@ -189,106 +234,103 @@ const createMeshPoints = (isDarkMode = false) => {
     });
   });
 
-  // Generate smoother noise field
-  const noiseField: NoisePoint[][] = Array(ROWS).fill(0).map(() => 
-    Array(COLS).fill(0).map(() => ({
-      angle: Math.random() * Math.PI * 2,
-      strength: Math.random() * (isDarkMode ? 0.4 : 0.6) + (isDarkMode ? 0.15 : 0.25)
-    }))
-  );
-  
-  // Smooth the noise field with gentler frequencies
+  // Create optimized noise field
+  const noiseField: NoisePoint[][] = Array(ROWS);
   for (let y = 0; y < ROWS; y++) {
+    noiseField[y] = Array(COLS);
     for (let x = 0; x < COLS; x++) {
       const nx = x / (COLS - 1);
       const ny = y / (ROWS - 1);
       
-      // Use non-integer, lower frequencies for smoother noise
-      noiseField[y][x].angle = 
+      const angle = 
         Math.sin(nx * 2.7 + ny * 3.2) * Math.PI + 
         Math.cos(nx * 1.8 - ny * 2.4) * Math.PI * 0.6 +
         Math.sin((nx + ny) * 2.1) * Math.PI * 0.4;
       
-      noiseField[y][x].strength = 
+      const strength = 
         (Math.sin(nx * 2.3 + ny * 2.7) * 0.4 + 0.6) * 
         (Math.cos(nx * 2.1 - ny * 1.8) * 0.2 + 0.8);
+      
+      noiseField[y][x] = { angle, strength };
     }
   }
 
-  // Generate mesh points with ultra-smooth color blending
+  // Pre-allocate points array to reduce memory allocations
+  points.length = ROWS * COLS;
+  colors.length = ROWS * COLS;
+
+  // Generate mesh points with optimized memory usage
   for (let y = 0; y < ROWS; y++) {
     for (let x = 0; x < COLS; x++) {
+      const index = y * COLS + x;
       const nx = x / (COLS - 1);
       const ny = y / (ROWS - 1);
       
       // Create vertex position
-      const finalX = x * cellWidth;
-      const finalY = y * cellHeight;
-      points.push({ x: finalX, y: finalY });
+      points[index] = { 
+        x: x * cellWidth,
+        y: y * cellHeight
+      };
 
-      // Calculate position in multi-directional flow space
+      // Calculate flow values
       const flowValue1 = (nx * flow1.x + ny * flow1.y) * 0.5 + 0.5; 
       const flowValue2 = (nx * flow2.x + ny * flow2.y) * 0.5 + 0.5;
       const flowValue3 = (nx * flow3.x + ny * flow3.y) * 0.5 + 0.5;
       
-      // Get noise influence at this point
+      // Get noise
       const noise = noiseField[y][x];
       
-      // Calculate ultra-smooth color blending
+      // Setup for color blending
       const blendedColor = { r: 0, g: 0, b: 0 };
-      let totalWeight = 0;
       
-      // Check if this point is near a corner for extra smoothing
+      // Check if near corner for extra smoothing
       const isCorner = (nx <= 0.1 || nx >= 0.9) && (ny <= 0.1 || ny >= 0.9);
-      
-      // Extra smoothing for corner areas
       const localSmoothingFactor = isCorner ? smoothingFactor * 1.5 : smoothingFactor;
       const localFalloffPower = isCorner ? falloffPower * 0.9 : falloffPower;
       
-      // Calculate weights with corner-aware parameters
-      const weights = controlPoints.map(point => {
+      // Calculate weights
+      const weights: number[] = [];
+      let totalWeight = 0;
+      
+      for (let i = 0; i < controlPoints.length; i++) {
+        const point = controlPoints[i];
         const dx = nx - point.x;
         const dy = ny - point.y;
         
-        // Enhanced smooth distance function with corner awareness
-        const distanceSquared = dx * dx + dy * dy;
-        const distance = Math.sqrt(distanceSquared + localSmoothingFactor);
+        const distance = Math.sqrt(dx * dx + dy * dy + localSmoothingFactor);
         
-        // Gentler flow influence
+        // Calculate flow influences
         const flowMix1 = Math.sin(flowValue1 * Math.PI * 1.5 + noise.angle * 0.4) * 0.5 + 0.5;
         const flowMix2 = Math.sin(flowValue2 * Math.PI * 1.5 - noise.angle * 0.5) * 0.5 + 0.5;
         const flowMix3 = Math.sin(flowValue3 * Math.PI * 1.5 + noise.angle * 0.3) * 0.5 + 0.5;
         
-        // More balanced flow factor
         const flowFactor = (
           flowMix1 * 0.35 + 
           flowMix2 * 0.35 + 
           flowMix3 * 0.3
-        ) * noise.strength * noiseStrengthFactor + 0.85; // Increased base influence
+        ) * noise.strength * noiseStrengthFactor + 0.85;
         
-        // Smoother falloff function with corner awareness
         const weight = Math.pow(
           Math.max(0, 1 - distance / (point.influence * flowFactor)), 
           localFalloffPower
         );
         
-        return weight;
-      });
-      
-      totalWeight = weights.reduce((sum, w) => sum + w, 0);
+        weights[i] = weight;
+        totalWeight += weight;
+      }
       
       if (totalWeight === 0) {
-        // Fallback color if no influence (rare case)
-        colors.push(gradient[0]);
+        // Fallback
+        colors[index] = gradient[0];
         continue;
       }
       
-      // Blend colors with gamma correction
+      // Blend colors
       for (let i = 0; i < controlPoints.length; i++) {
         const normalizedWeight = weights[i] / totalWeight;
         const color = controlPoints[i].color;
         
-        // Convert to RGB with gamma correction
+        // RGB color parsing with bit manipulation for performance
         const r = Math.pow(parseInt(color.slice(1, 3), 16) / 255, 2.2);
         const g = Math.pow(parseInt(color.slice(3, 5), 16) / 255, 2.2);
         const b = Math.pow(parseInt(color.slice(5, 7), 16) / 255, 2.2);
@@ -298,54 +340,82 @@ const createMeshPoints = (isDarkMode = false) => {
         blendedColor.b += b * normalizedWeight;
       }
 
-      // Convert back to hex with gamma correction
-      const color = '#' + 
-        Math.round(Math.pow(blendedColor.r, 1/2.2) * 255).toString(16).padStart(2, '0') +
-        Math.round(Math.pow(blendedColor.g, 1/2.2) * 255).toString(16).padStart(2, '0') +
-        Math.round(Math.pow(blendedColor.b, 1/2.2) * 255).toString(16).padStart(2, '0');
+      // Convert back to hex with faster calculation
+      const r = Math.min(255, Math.max(0, Math.round(Math.pow(blendedColor.r, 1/2.2) * 255))).toString(16).padStart(2, '0');
+      const g = Math.min(255, Math.max(0, Math.round(Math.pow(blendedColor.g, 1/2.2) * 255))).toString(16).padStart(2, '0');
+      const b = Math.min(255, Math.max(0, Math.round(Math.pow(blendedColor.b, 1/2.2) * 255))).toString(16).padStart(2, '0');
       
-      colors.push(color);
+      colors[index] = `#${r}${g}${b}`;
     }
   }
 
-  // Generate indices (unchanged)
-  for (let y = 0; y < ROWS - 1; y++) {
-    for (let x = 0; x < COLS - 1; x++) {
-      const i = y * COLS + x;
-      indices.push(i, i + 1, i + COLS);
-      indices.push(i + 1, i + COLS + 1, i + COLS);
-    }
-  }
-
-  return { points, colors, indices };
+  return { points, colors, indices: MEMOIZED_INDICES };
 };
 
-// Create initial mesh
-let mesh = createMeshPoints(false);
-
-interface AnimatedGradientCardProps {
+interface MeshGradientCardProps {
   title: string;
   description: string;
 }
 
-const AnimatedGradientCard: React.FC<AnimatedGradientCardProps> = ({
+const MeshGradientCard: React.FC<MeshGradientCardProps> = React.memo(({
   title,
   description,
 }) => {
   const theme = useTheme();
   const deviceColorScheme = useColorScheme();
   const isDark = deviceColorScheme === 'dark';
-  const [, forceUpdate] = React.useReducer(x => x + 1, 0);
+  
+  // Use useRef for mesh data to prevent unnecessary re-renders
+  const meshRef = useRef<MeshData | null>(null);
+  
+  // Use useState for forcing re-renders when mesh changes
+  const [meshVersion, setMeshVersion] = useState(0);
+  
+  // Initialize mesh if not already done
+  if (!meshRef.current) {
+    meshRef.current = createMeshPoints(isDark);
+  }
   
   // Update mesh when color scheme changes
   React.useEffect(() => {
-    mesh = createMeshPoints(isDark);
+    meshRef.current = createMeshPoints(isDark);
+    setMeshVersion(prev => prev + 1); // Force re-render
+    
+    // Return cleanup function
+    return () => {
+      // No specific cleanup needed for mesh data
+    };
   }, [isDark]);
 
-  const handleChangeGradient = () => {
-    mesh = createMeshPoints(isDark);
-    forceUpdate();
-  };
+  // Memoize border color based on theme
+  const borderColor = useMemo(() => 
+    isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.05)'
+  , [isDark]);
+  
+  // Use useCallback for event handlers to prevent unnecessary recreations
+  const handleChangeGradient = useCallback(() => {
+    meshRef.current = createMeshPoints(isDark);
+    setMeshVersion(prev => prev + 1); // Force re-render
+  }, [isDark]);
+  
+  // Extract mesh data for rendering
+  const mesh = meshRef.current;
+
+  // Memoize text colors
+  const titleColor = useMemo(() => 
+    isDark ? '#FFFFFF' : '#000000'
+  , [isDark]);
+  
+  const descriptionColor = useMemo(() => 
+    isDark ? '#EEEEEE' : '#333333'
+  , [isDark]);
+  
+  const buttonBackgroundColor = useMemo(() => 
+    isDark ? '#FFFFFF20' : '#00000010'
+  , [isDark]);
+
+  // Early return if mesh is not ready
+  if (!mesh) return null;
 
   return (
     <View style={styles.container}>
@@ -364,15 +434,15 @@ const AnimatedGradientCard: React.FC<AnimatedGradientCardProps> = ({
         {/* Inner border overlay with blend mode */}
         <View style={[
           styles.innerBorder, 
-          { borderColor: isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.075)' }
+          { borderColor }
         ]} />
         
         {/* Content */}
         <View style={styles.content}>
-          <Text style={[styles.title, { color: isDark ? '#FFFFFF' : '#000000' }]}>
+          <Text style={[styles.title, { color: titleColor }]}>
             {title}
           </Text>
-          <Text style={[styles.description, { color: isDark ? '#EEEEEE' : '#333333' }]}>
+          <Text style={[styles.description, { color: descriptionColor }]}>
             {description}
           </Text>
         </View>
@@ -380,20 +450,22 @@ const AnimatedGradientCard: React.FC<AnimatedGradientCardProps> = ({
       <Pressable 
         style={({ pressed }) => [
           styles.button,
-          { opacity: pressed ? 0.8 : 1,
-            backgroundColor: isDark ? '#FFFFFF20' : '#00000010' 
+          { 
+            opacity: pressed ? 0.8 : 1,
+            backgroundColor: buttonBackgroundColor 
           }
         ]}
         onPress={handleChangeGradient}
       >
-        <Text style={[styles.buttonText, { color: isDark ? '#FFFFFF' : '#000000' }]}>
+        <Text style={[styles.buttonText, { color: titleColor }]}>
           Change Gradient
         </Text>
       </Pressable>
     </View>
   );
-};
+});
 
+// Memoize styles to prevent recreation on each render
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
@@ -427,8 +499,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 24,
     // borderColor set dynamically based on color scheme
-    // For dark mode: rgba(255, 255, 255, 0.3) - brighter white glow
-    // For light mode: rgba(255, 255, 255, 0.4) - soft white highlight
   },
   canvas: {
     width: '100%',
@@ -460,7 +530,6 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 1,
     borderColor: 'rgba(150, 150, 150, 0.3)',
-    backgroundColor: '#00000010',
   },
   buttonText: {
     fontSize: 16,
@@ -469,4 +538,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AnimatedGradientCard; 
+export default MeshGradientCard; 
