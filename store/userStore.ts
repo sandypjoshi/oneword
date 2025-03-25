@@ -6,7 +6,13 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { WordDifficulty } from '../lib/api/wordsAPI';
+
+// Local definition of word difficulty levels
+export enum WordDifficulty {
+  BEGINNER = 'beginner',
+  INTERMEDIATE = 'intermediate',
+  ADVANCED = 'advanced',
+}
 
 interface UserSettings {
   darkMode: 'light' | 'dark' | 'system';

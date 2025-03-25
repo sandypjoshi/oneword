@@ -186,9 +186,9 @@ const WordCardAnswer: React.FC<WordCardAnswerProps> = ({
         ]} />
         
         {/* Content - Word answer and details */}
-        <View style={styles.content}>
+        <View style={[styles.content, { padding: spacing.lg }]}>
           {/* Word section with part of speech above */}
-          <View style={styles.wordSection}>
+          <View style={[styles.wordSection, { marginBottom: spacing.md }]}>
             {partOfSpeech && (
               <Text
                 variant="caption"
@@ -196,7 +196,7 @@ const WordCardAnswer: React.FC<WordCardAnswerProps> = ({
                 style={{ 
                   textAlign: 'center',
                   textTransform: 'lowercase',
-                  marginBottom: -2,
+                  marginBottom: spacing.xxs * -1,
                 }}
               >
                 {partOfSpeech}
@@ -207,7 +207,7 @@ const WordCardAnswer: React.FC<WordCardAnswerProps> = ({
               variant="serifTextLarge"
               color={colors.text.primary}
               align="center"
-              style={[styles.wordText, { marginTop: 0 }]}
+              style={[styles.wordText, { marginVertical: spacing.xxs }]}
             >
               {word}
             </Text>
@@ -220,13 +220,15 @@ const WordCardAnswer: React.FC<WordCardAnswerProps> = ({
                 onPress={handlePronunciation}
                 isAnimating={speaking}
                 animationDuration={speakingDuration}
-                style={styles.pronunciationChip}
+                style={[styles.pronunciationChip, { 
+                  backgroundColor: colors.background.secondary + '33'
+                }]}
               />
             )}
           </View>
           
           {/* Definition section - centered text */}
-          <View style={styles.textSection}>
+          <View style={[styles.textSection, { marginBottom: spacing.md }]}>
             <Text
               variant="bodyMedium"
               color={colors.text.primary}
@@ -238,12 +240,15 @@ const WordCardAnswer: React.FC<WordCardAnswerProps> = ({
           
           {/* Separator line */}
           {example && (
-            <View style={styles.separator} />
+            <View style={[styles.separator, { 
+              backgroundColor: colors.border.light,
+              marginBottom: spacing.md 
+            }]} />
           )}
           
           {/* Example section - styled with highlighted word */}
           {example && (
-            <View style={styles.textSection}>
+            <View style={[styles.textSection, { marginBottom: spacing.md }]}>
               <Text
                 variant="bodyMedium"
                 color={colors.text.primary}
@@ -256,12 +261,17 @@ const WordCardAnswer: React.FC<WordCardAnswerProps> = ({
           )}
           
           {/* Action buttons at bottom */}
-          <View style={styles.actionContainer}>
+          <View style={[styles.actionContainer, { marginTop: spacing.md }]}>
             {/* Learn more button */}
             {onViewDetails && (
               <TouchableOpacity 
                 style={[
                   styles.learnMoreButton,
+                  {
+                    paddingVertical: spacing.xs,
+                    paddingHorizontal: spacing.sm,
+                    backgroundColor: colors.background.tertiary + '1A'
+                  }
                 ]}
                 onPress={onViewDetails}
               >
@@ -366,7 +376,6 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   content: {
-    padding: 32,
     height: '100%',
     justifyContent: 'center',
     display: 'flex',
@@ -375,43 +384,28 @@ const styles = StyleSheet.create({
   },
   wordSection: {
     alignItems: 'center',
-    marginBottom: 24,
   },
   wordText: {
-    marginVertical: 4,
-    fontSize: 42,
-    fontWeight: '600',
   },
   pronunciationChip: {
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
   },
   textSection: {
-    marginBottom: 20,
     width: '100%',
   },
   sectionTitle: {
-    marginBottom: 8,
   },
   selectedPhrase: {
-    padding: 12,
     borderRadius: radius.md,
-    marginTop: 4,
   },
   actionContainer: {
-    marginTop: 24,
     alignItems: 'center',
   },
   learnMoreButton: {
-    paddingVertical: 8,
-    paddingHorizontal: 16,
     borderRadius: radius.pill,
-    backgroundColor: 'rgba(0, 0, 0, 0.1)',
   },
   separator: {
     width: '12%',
     height: 1,
-    backgroundColor: 'rgba(128, 128, 128, 0.3)',
-    marginBottom: 20,
   },
 });
 
