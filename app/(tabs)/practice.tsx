@@ -3,7 +3,7 @@ import { StyleSheet, View, ActivityIndicator } from 'react-native';
 import { Box } from '../../src/components/layout';
 import { Text } from '../../src/components/ui';
 import { useThemeReady } from '../../src/hooks';
-import AnimatedGradientCard from '../../src/components/practice/AnimatedGradientCard';
+import MeshGradientCard from '../../src/components/practice/MeshGradientCard';
 
 export default function PracticeScreen() {
   const { isReady, theme } = useThemeReady();
@@ -22,7 +22,7 @@ export default function PracticeScreen() {
     <View style={[styles.container, { backgroundColor: colors.background.primary }]}>
       <Box padding="lg" flex={1} align="center" justify="center">
         <Text variant="headingMedium" style={{ marginBottom: 24 }}>Practice</Text>
-        <AnimatedGradientCard 
+        <MeshGradientCard 
           title="Welcome to Practice"
           description="Experience the beautiful gradient animations powered by Skia"
         />

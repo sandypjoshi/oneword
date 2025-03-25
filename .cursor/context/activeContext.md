@@ -7,8 +7,39 @@
 - Theme system refinement and UI component contrast improvements
 - Ensuring proper use of semantic color tokens throughout the app
 - Simplifying the theme system by removing unused themes
+- Enhancing UI components with advanced visual effects using Skia
+- Optimizing performance of graphically intensive components
+- Implementing responsive design patterns that adapt to different devices
+- Ensuring consistent appearance in both light and dark modes
+- Creating reusable gradient components for backgrounds and cards
 
 ## Recent Changes
+### MeshGradient Component Enhancement (2024-03-25)
+1. **Component Redesign**: Renamed and enhanced gradient card component
+   - Renamed AnimatedGradientCard to MeshGradientCard for clarity
+   - Implemented elegant inner border with theme-based opacity
+   - Enhanced with nature-inspired color palettes for both modes
+   - Optimized for performance with React.memo and proper hooks usage
+
+2. **Visual Improvements**:
+   - Added subtle inner border with 2px width for better definition
+   - Expanded color palettes from 7 to 12 in light mode and 15 in dark mode
+   - Adjusted lightness of light mode colors for more vibrant appearance
+   - Reduced saturation of dark mode blues to prevent eye strain
+   - Upgraded select palettes to use 4 colors for more complex gradients
+
+3. **Performance Optimizations**:
+   - Wrapped component with React.memo to prevent unnecessary re-renders
+   - Used useRef for mesh data storage to maintain references between renders
+   - Implemented useCallback for event handlers to prevent recreation
+   - Memoized all derived values with useMemo to avoid recalculating
+   - Added proper cleanup in useEffect to prevent memory leaks
+
+4. **iOS Dark Mode Fix**:
+   - Fixed status bar appearance in dark mode on iOS
+   - Updated UIStatusBarStyle in Info.plist to UIStatusBarStyleLightContent
+   - Added StatusBar component to tabs layout for consistent appearance across screens
+
 ### Swipe Crash Fix (2024-03-23)
 1. **Issue Resolved**: Fixed app crashes when swiping between word cards
    - Root cause: Import error and gesture handler conflicts with FlashList
@@ -97,18 +128,29 @@
    - Monitor for any other potential gesture conflicts in the app
    - Verify the swipe fix resolves the crashing issue completely
    - Consider applying similar touch protection to other interactive components
+   - Implement the paper-like noise texture overlay for MeshGradientCard
+   - Create a reusable MeshGradient background component that can be used in any screen
+   - Investigate animation options using Skia for subtle movement in gradients
+   - Develop a strategy for efficient gradient use across the app
 
 2. **Technical Debt**:
    - Audit semantic color token usage in all components
    - Review components for color contrast across all themes
    - Implement responsive design adjustments for better accessibility
    - Review gesture handling throughout the app for potential conflicts
+   - Create a comprehensive suite of UI components with consistent styling
+   - Implement proper React Native Skia typing for all custom components
+   - Document best practices for performance with visual components
+   - Evaluate the impact of gradient components on battery life
 
 3. **Documentation**:
    - Update component documentation with token usage examples
    - Document the new touch handling approach for future reference
    - Add guidelines for managing semantic tokens vs. palette colors
    - Document testing strategy and best practices
+   - Document all available gradient styles and color palettes
+   - Create usage examples for the MeshGradient component
+   - Update the README with information about visual effects
 
 ## Known Issues
 - Some direct palette references exist where semantic tokens would be more appropriate
@@ -116,6 +158,10 @@
 - Mock data services need to be replaced with real API implementations
 - Inconsistent loading state handling across components
 - Need to verify consistent token naming across themes
+- Need to consider performance impact of paper-like noise overlay
+- Animation of mesh gradients may impact performance on lower-end devices
+- Need to establish guidelines for appropriate use of gradient components
+- Text contrast on some gradient combinations may need adjustment
 
 ## Active Context
 

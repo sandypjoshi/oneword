@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, ActivityIndicator, useColorScheme } from 'react-native';
 import { Tabs, useLocalSearchParams } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
 import { useThemeReady } from '../../src/hooks';
 import { Icon } from '../../src/components/ui';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
@@ -10,6 +11,8 @@ import { applyElevation } from '../../src/theme/styleUtils';
 export default function TabLayout() {
   const { isReady, theme } = useThemeReady();
   const { animation } = useLocalSearchParams();
+  const colorScheme = useColorScheme();
+  const isDark = colorScheme === 'dark';
   
   if (!isReady) {
     return null;
@@ -19,6 +22,7 @@ export default function TabLayout() {
   
   return (
     <BottomSheetModalProvider>
+      <StatusBar style={isDark ? 'light' : 'dark'} />
       <View style={styles.container}>
         <Tabs
           screenOptions={{
