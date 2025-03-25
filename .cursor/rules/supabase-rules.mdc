@@ -1,7 +1,7 @@
 ---
 description: Guidelines for working with Supabase
 globs: 
-alwaysApply: true
+alwaysApply: false
 ---
 - DON'T USE placeholder for API Keys, USE keys you have or ask user.
 - User supabase CLI and curl to interact with our database when needed. If it fails, ask user to make changes manually on Supabase dashboard.

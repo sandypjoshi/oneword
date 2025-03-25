@@ -1,3 +1,20 @@
+/**
+ * [ARCHIVED] MeshGradientCard Component
+ * 
+ * This component has been archived in favor of the optimized MeshGradient component 
+ * located at src/components/common/MeshGradient.tsx.
+ * 
+ * The MeshGradient component offers:
+ * - Same visual quality and appearance
+ * - Better performance optimizations
+ * - Configurable resolution and seeds
+ * - Full integration with the design system's gradient primitives
+ * 
+ * This file is kept for reference purposes only.
+ * 
+ * Archive date: 2023-11-20
+ */
+
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { View, StyleSheet, Text, Dimensions, useColorScheme, Pressable } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';

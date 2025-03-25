@@ -12,6 +12,9 @@ const circleOutlineSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="24" hei
 // Custom SVG for volume-loud icon
 const volumeLoudSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M14 14.7582S15 12.915 15 12c0-.9344-1-2.76816-1-2.76816m3.1271 8.2487S18.5 14.4453 18.5 12c0-2.44534-2.3729-5.48144-2.3729-5.48144M2.5 9.5c0-1.10457.89543-2 2-2h1.83791L11 3v18l-4.66209-4.5H4.5c-1.10457 0-2-.8954-2-2z"/></svg>`;
 
+// Custom SVG for userRound icon
+const userRoundSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15c-3.866 0-7 1.79-7 4v1h14v-1c0-2.21-3.134-4-7-4z"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 12a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/></svg>`;
+
 // Extract icon data from the Solar icon set
 const extractIconData = (iconName: string, variant: 'linear' | 'bold'): string | null => {
   // Special case for notes-bold
@@ -27,6 +30,11 @@ const extractIconData = (iconName: string, variant: 'linear' | 'bold'): string |
   // Special case for volume-loud
   if (iconName === 'volumeLoud') {
     return volumeLoudSvg;
+  }
+  
+  // Special case for userRound
+  if (iconName === 'userRound') {
+    return userRoundSvg;
   }
 
   // Map our icon names to Solar icon names
@@ -79,6 +87,10 @@ const extractIconData = (iconName: string, variant: 'linear' | 'bold'): string |
       linear: 'volume-loud-linear',
       bold: 'volume-loud-bold',
     },
+    userRound: {
+      linear: 'user-rounded-linear',
+      bold: 'user-rounded-bold',
+    },
     // circleOutline is handled by the special case above
   };
 
@@ -107,7 +119,8 @@ export type IconName =
   | 'checkCircleBold'
   | 'circleOutline'
   | 'altArrowRightLinear'
-  | 'volumeLoud';
+  | 'volumeLoud'
+  | 'userRound';
 
 export type IconVariant =
   | 'linear'

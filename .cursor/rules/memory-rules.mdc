@@ -1,5 +1,5 @@
 ---
-description: Rules for maintaining memory bank, contenxt, logs, project memo
+description: Rules for maintaining updating memory bank, context, logs, project memo
 globs: 
 alwaysApply: false
 ---
@@ -93,42 +93,5 @@ flowchart TD
 - [ ] Implementation plans match current project direction
 - [ ] Technical context includes all current technologies
 - [ ] System patterns document all architectural decisions 
-
-## Difficulty Scoring System
-
-OneWord uses a multi-factor difficulty calculation algorithm to assign difficulty scores to words. The system:
-
-1. Calculates a raw score from 0-1 based on multiple factors:
-   - Word frequency (55% weight)
-   - Word length (15% weight)
-   - Syllable count (15% weight)
-   - Part of speech complexity (10% weight)
-   - Domain complexity (5% weight)
-
-2. Assigns difficulty levels based on configurable thresholds:
-   - Beginner: score < beginner_threshold (default: 0.33)
-   - Intermediate: beginner_threshold <= score < intermediate_threshold (default: 0.67)
-   - Advanced: score >= intermediate_threshold (default: 0.67)
-
-3. Normalizes related word forms to ensure consistent difficulty levels
-
-### Managing Difficulty Thresholds
-
-The difficulty thresholds are configurable via:
-
-1. The `difficulty_config` database table:
-   - Contains `beginner_threshold` and `intermediate_threshold` values
-   - Updates automatically reflect in word difficulty assignments
-
-2. The `update-thresholds.js` script:
-   ```bash
-   node update-thresholds.js <beginner_threshold> <intermediate_threshold>
-   ```
-   Example: `node update-thresholds.js 0.4 0.75` sets beginner threshold to 0.4 and intermediate to 0.75
-
-3. After updating thresholds, run `update-database.js` to apply them:
-   ```bash
-   node update-database.js
-   ```
 
 This system allows for flexible tuning of difficulty distributions while maintaining consistent scoring logic. 

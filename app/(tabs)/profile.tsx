@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { StyleSheet, View, ActivityIndicator, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import { Box } from '../../src/components/layout';
 import { Text, Button } from '../../src/components/ui';
@@ -7,6 +7,91 @@ import { resetOnboardingStatus } from '../../src/utils/onboarding';
 import { useRouter, Link } from 'expo-router';
 import { useTheme } from '../../src/theme/ThemeProvider';
 import Icon from '../../src/components/ui/Icon';
+import { MeshGradient } from '../../src/components/common';
+import { getGradientIds } from '../../src/theme/primitives/gradients';
+
+// Sample profile card component with gradient background
+interface GradientProfileCardProps {
+  onChangeGradient?: (gradientId: string) => void;
+}
+
+const GradientProfileCard: React.FC<GradientProfileCardProps> = ({ onChangeGradient }) => {
+  const { colors, spacing, colorMode } = useTheme();
+  const [gradientIndex, setGradientIndex] = useState(0);
+  const [seedIndex, setSeedIndex] = useState(0);
+  
+  // Get all gradient IDs for the current theme
+  const gradientIds = useMemo(() => getGradientIds(colorMode), [colorMode]);
+  
+  // Pre-defined seeds for different patterns
+  // These will remain constant regardless of which gradient is selected
+  const seeds = [14245, 67890, 90180, 13579, 99999];
+  
+  const handlePress = () => {
+    // Cycle through gradients on tap
+    const nextIndex = (gradientIndex + 1) % gradientIds.length;
+    setGradientIndex(nextIndex);
+    if (onChangeGradient) onChangeGradient(gradientIds[nextIndex]);
+  };
+  
+  const handleLongPress = () => {
+    // Cycle through seeds (patterns) on long press
+    const nextSeedIndex = (seedIndex + 1) % seeds.length;
+    setSeedIndex(nextSeedIndex);
+  };
+  
+  return (
+    <TouchableOpacity 
+      style={[styles.profileCard, { borderWidth: 1, borderColor: colors.border.light }]}
+      onPress={handlePress}
+      onLongPress={handleLongPress}
+      delayLongPress={300}
+      activeOpacity={0.9}
+    >
+      {/* Using MeshGradient with separate gradient ID and seed */}
+      <MeshGradient 
+        gradientId={gradientIds[gradientIndex]}
+        seed={seeds[seedIndex]}
+        withBorder={true}
+        borderOpacity={0.2}
+        withShadow={false}
+        zIndex={-1}
+      />
+      
+      {/* Profile content */}
+      <View style={styles.profileContent}>
+        <View style={[styles.avatarContainer, { borderColor: colors.background.primary }]}>
+          <View style={[styles.avatar, { backgroundColor: colors.primary + '40' }]}>
+            <Icon name="user" size={32} color={colors.primary} variant="bold" />
+          </View>
+        </View>
+        
+        <Text 
+          variant="headingMedium" 
+          style={{ textAlign: 'center', marginTop: spacing.xs }}
+        >
+          Welcome!
+        </Text>
+        
+        <Text 
+          variant="bodySmall"
+          color={colors.text.secondary}
+          style={{ textAlign: 'center', marginTop: spacing.xs }}
+        >
+          {gradientIds[gradientIndex]}
+        </Text>
+        
+        <Text 
+          variant="bodySmall"
+          color={colors.text.tertiary}
+          style={{ textAlign: 'center', marginTop: spacing.xs, fontSize: 12 }}
+        >
+          Tap to change gradient • Long press to change pattern (Seed: {seeds[seedIndex]})
+        </Text>
+      </View>
+    </TouchableOpacity>
+  );
+};
 
 // Simple theme selector component for development
 const DevThemeSelector = () => {
@@ -74,6 +159,7 @@ const DevThemeSelector = () => {
 export default function ProfileScreen() {
   const { isReady, theme } = useThemeReady();
   const router = useRouter();
+  const [currentGradient, setCurrentGradient] = useState('morning-sky');
 
   if (!isReady) {
     return (
@@ -103,13 +189,21 @@ export default function ProfileScreen() {
     <ScrollView style={[styles.container, { backgroundColor: colors.background.primary }]}>
       <Box padding="lg" align="center">
         <Text variant="headingMedium">Profile</Text>
-        <Text 
-          variant="bodyMedium"
-          color={colors.text.secondary}
-          align="center"
-        >
-          Profile section coming soon...
-        </Text>
+        
+        {/* Add the gradient profile card */}
+        <Box width="100%" marginTop="md">
+          <GradientProfileCard 
+            onChangeGradient={setCurrentGradient}
+          />
+          <Text 
+            variant="bodySmall"
+            color={colors.text.tertiary}
+            align="center"
+            style={{ marginTop: spacing.sm }}
+          >
+            Using MeshGradient component with "{currentGradient}" palette
+          </Text>
+        </Box>
         
         {/* Link to Theme Settings */}
         <Box marginTop="lg" width="100%">
@@ -177,6 +271,36 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 8,
     borderWidth: 1,
+    alignItems: 'center',
+  },
+  profileCard: {
+    width: '100%',
+    borderRadius: 16,
+    height: 480, // Increased from 160
+    overflow: 'hidden',
+    position: 'relative',
+    marginTop: 8,
+    marginBottom: 8,
+  },
+  profileContent: {
+    padding: 20,
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  avatarContainer: {
+    width: 60, // Reduced from 80
+    height: 60, // Reduced from 80
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 3, // Reduced from 4
+  },
+  avatar: {
+    width: 50, // Reduced from 68
+    height: 50, // Reduced from 68
+    borderRadius: 25,
+    justifyContent: 'center',
     alignItems: 'center',
   },
 }); 
