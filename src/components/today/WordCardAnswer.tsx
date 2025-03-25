@@ -234,7 +234,7 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
         <View style={styles.definitionSection}>
           <Text
             variant="bodyMedium"
-            color={colors.text.primary}
+            color={colors.text.secondary}
             align="center"
             style={{ textTransform: 'lowercase' }}
           >
@@ -247,14 +247,14 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
           <>
             {/* Separator with inner shadow effect */}
             <View style={styles.separatorContainer}>
-              <View style={[styles.hairlineSeparator, { backgroundColor: colors.text.success + '40' }]} />
+              <View style={[styles.hairlineSeparator, { backgroundColor: colors.text.secondary + '40' }]} />
               <View style={[styles.hairlineShadow, { backgroundColor: 'rgba(255, 255, 255, 0.25)' }]} />
             </View>
             
             <View style={styles.exampleSection}>
               <Text
-                variant="bodyMedium"
-                color={colors.text.success}
+                variant="bodySmall"
+                color={colors.text.secondary}
                 align="center"
                 style={{ fontStyle: 'italic' }}
               >
@@ -283,7 +283,7 @@ const formatExampleText = (example: string, word: string) => {
     if (part.toLowerCase() === word.toLowerCase()) {
       return <Text 
         key={index} 
-        color="success" 
+        color="secondary" 
         style={{ fontWeight: '500' }}
       >
         {part}

@@ -20,6 +20,8 @@ import { wordOfDayService } from '../../src/services/wordOfDayService';
 import themes from '../../src/theme/colors';
 import { Text as CustomText } from '../../src/components/ui';
 import { radius, applyElevation } from '../../src/theme/styleUtils';
+import { useWordStore } from '../../src/store/wordStore';
+import { useCardStore } from '../../src/store/cardStore';
 
 // Constants
 const DOT_SIZE = 32; // Size of each indicator dot
@@ -46,6 +48,10 @@ export default function HomeScreen() {
   const { width } = useWindowDimensions();
   const navigation = useNavigation();
   const systemColorScheme = useColorScheme();
+  
+  // Add these Zustand store hooks
+  const storedWords = useWordStore(state => state.words);
+  const flipCard = useCardStore(state => state.flipCard);
   
   // Create theme-dependent styles
   const themeStyles = useMemo(() => {
@@ -161,6 +167,21 @@ export default function HomeScreen() {
     return date.getDate();
   }, []);
   
+  // Add this effect to ensure revealed words show the answer card
+  useEffect(() => {
+    // Once words are loaded, check which ones have been revealed
+    if (words.length > 0 && storedWords.length > 0) {
+      // For each word, if it's marked as revealed in the wordStore,
+      // flip its card in the cardStore
+      words.forEach(word => {
+        const storedWord = storedWords.find(w => w.id === word.id);
+        if (storedWord?.isRevealed) {
+          flipCard(word.id, true);
+        }
+      });
+    }
+  }, [words, storedWords, flipCard]);
+  
   // Load words for the last 14 days and ensure there's an entry for each day
   useEffect(() => {
     // Skip if we're not ready for rendering yet
@@ -180,9 +201,7 @@ export default function HomeScreen() {
         const allDays: ExtendedWordOfDay[] = [];
         
         // Generate dates for the past 14 days
-        // IMPORTANT: This loop generates dates in chronological order (oldest → newest)
-        // The loop starts from the oldest date (i=13, 13 days ago) and ends with today (i=0)
-        // This ensures our FlashList will show past days on the left and today on the right
+        // Important: This loop generates dates in chronological order (oldest → newest)
         for (let i = 13; i >= 0; i--) {
           const date = new Date(today);
           date.setDate(date.getDate() - i);
@@ -196,7 +215,25 @@ export default function HomeScreen() {
           
           // If word exists, add it, otherwise add placeholder
           if (wordForDate) {
-            allDays.push(wordForDate);
+            // Check if we have stored data for this word
+            const storedWord = storedWords.find(w => w.id === wordForDate.id);
+            // Merge the stored data (like isRevealed) with the word data
+            if (storedWord) {
+              const wordWithState = {
+                ...wordForDate,
+                isRevealed: storedWord.isRevealed,
+                userAttempts: storedWord.userAttempts
+              };
+              allDays.push(wordWithState);
+              
+              // Ensure the card is flipped if the word is revealed
+              if (storedWord.isRevealed) {
+                // Delay this to ensure store is fully initialized
+                setTimeout(() => flipCard(wordForDate.id, true), 100);
+              }
+            } else {
+              allDays.push(wordForDate);
+            }
           } else {
             // Create placeholder with date information
             allDays.push({
@@ -259,7 +296,18 @@ export default function HomeScreen() {
     if (isProgrammaticScrollRef.current) return;
     
     if (viewableItems.length > 0) {
-      setActiveIndex(viewableItems[0].index || 0);
+      const newIndex = viewableItems[0].index || 0;
+      setActiveIndex(newIndex);
+      
+      // Ensure visible word's card state is synchronized with its revealed state
+      const visibleItem = viewableItems[0].item as ExtendedWordOfDay;
+      if (visibleItem && !visibleItem.isPlaceholder) {
+        const storedWord = storedWords.find(w => w.id === visibleItem.id);
+        if (storedWord?.isRevealed) {
+          // Make sure this card is flipped if it's been revealed
+          flipCard(visibleItem.id, true);
+        }
+      }
     }
   }).current;
   
@@ -365,18 +413,6 @@ export default function HomeScreen() {
     }
   }, [words.length]);
   
-  // Handle word reveal event from a card
-  const handleWordReveal = useCallback((wordId: string, attempts: number, wordData: WordOfDay) => {
-    // Update the selected word data for later use
-    setSelectedWord({
-      ...wordData,
-      userAttempts: attempts
-    });
-    
-    // Note: We no longer automatically open the bottom sheet here
-    // The bottom sheet will be used later for another purpose
-  }, []);
-  
   // Handle bottom sheet dismiss
   const handleBottomSheetDismiss = useCallback(() => {
     // Any cleanup needed after closing the sheet
@@ -398,13 +434,18 @@ export default function HomeScreen() {
             <WordCard 
               wordData={item} 
               style={themeStyles.wordCard} 
-              onReveal={(wordId, attempts) => handleWordReveal(wordId, attempts, item)}
+              onViewDetails={() => {
+                // Set the selected word for the bottom sheet
+                setSelectedWord(item);
+                // Open the bottom sheet
+                bottomSheetRef.current?.open();
+              }}
             />
           )}
         </View>
       </View>
     );
-  }, [cardDimensions.width, themeStyles.cardContainer, themeStyles.cardWrapper, themeStyles.wordCard, handleWordReveal]);
+  }, [cardDimensions.width, themeStyles.cardContainer, themeStyles.cardWrapper, themeStyles.wordCard]);
   
   // Show loading UI that matches theme colors
   if (!isReady || isLoading) {

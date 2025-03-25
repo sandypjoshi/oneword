@@ -13,6 +13,7 @@ import { StyleSheet } from 'react-native';
 import { useCardStore } from '../../store/cardStore';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import spacing from '../../theme/spacing';
+import { useWordStore } from '../../store/wordStore';
 
 // Get screen dimensions to calculate responsive card size
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
@@ -51,8 +52,23 @@ const WordCardComponent: React.FC<WordCardProps> = ({
   const isFlipped = useCardStore(state => state.isCardFlipped(wordData.id));
   const flipCard = useCardStore(state => state.flipCard);
   
+  // Access word store to get the word's revealed state
+  const storedWords = useWordStore(state => state.words);
+  
   // Animation shared value for flip (0 = question, 1 = answer)
   const flipProgress = useSharedValue(isFlipped ? 1 : 0);
+  
+  // Check if this word has been revealed (answered correctly)
+  const isWordRevealed = storedWords.some(w => 
+    w.id === wordData.id && w.isRevealed
+  );
+  
+  // Effect to ensure card is flipped if word is revealed
+  useEffect(() => {
+    if (isWordRevealed && !isFlipped) {
+      flipCard(wordData.id, true);
+    }
+  }, [wordData.id, isWordRevealed, isFlipped, flipCard]);
   
   // Update animation when isFlipped changes
   useEffect(() => {

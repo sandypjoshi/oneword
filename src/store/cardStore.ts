@@ -142,6 +142,8 @@ export const useCardStore = create<CardState>()(
       name: 'card-ui-storage',
       storage: createJSONStorage(() => AsyncStorage),
       partialize: (state) => ({
+        // Persist flipped card IDs to maintain card state between sessions
+        flippedCardIds: state.flippedCardIds,
         // Only persist selection state, not temporary UI states
         selectedOptions: state.selectedOptions,
         // Filter out empty option states to save storage space
