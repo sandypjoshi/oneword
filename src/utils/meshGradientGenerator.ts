@@ -11,7 +11,12 @@ import {
   getMeshGradientParams, 
   MeshGradientMode 
 } from '../theme/primitives/meshGradientParameters';
-import { getRandomGradient, ColorMode } from '../theme/primitives/gradients';
+import { 
+  getRandomGradient, 
+  ColorMode,
+  getGradientIds,
+  getGradientById
+} from '../theme/primitives/gradients';
 
 // Standard grid resolution for mesh gradients
 export const DEFAULT_RESOLUTION = 32;
@@ -142,7 +147,18 @@ export function generateMeshGradient(options: MeshGradientOptions): MeshData {
     gradient = customColors;
   } else {
     const colorMode: ColorMode = isDarkMode ? 'dark' : 'light';
-    gradient = getRandomGradient(colorMode).colors;
+    
+    // If we have a seed, use it to deterministically select a gradient
+    if (seed !== undefined) {
+      const gradientList = getGradientIds(colorMode);
+      const deterministicIndex = seed % gradientList.length;
+      const selectedGradientId = gradientList[deterministicIndex];
+      gradient = getGradientById(selectedGradientId, colorMode)!.colors;
+      console.log(`Using deterministic gradient '${selectedGradientId}' for seed ${seed}`);
+    } else {
+      // Fall back to random selection for unseeded cases
+      gradient = getRandomGradient(colorMode).colors;
+    }
   }
   
   // Get the fine-tuned parameters based on current mode

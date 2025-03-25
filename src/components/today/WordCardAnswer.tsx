@@ -95,7 +95,11 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
   const userAttempts = storeWord?.userAttempts || wordData.userAttempts || 0;
   
   // Generate a consistent seed from the word for same gradient per word
-  const wordSeed = useMemo(() => generateSeedFromString(word), [word]);
+  const wordSeed = useMemo(() => {
+    const seed = generateSeedFromString(word);
+    console.log(`Generated seed for word "${word}": ${seed}`);
+    return seed;
+  }, [word]);
   
   // Handle layout change to get actual container height
   const handleLayout = useCallback((event: LayoutChangeEvent) => {
@@ -107,6 +111,7 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
   
   // Initialize mesh if not already done
   if (!meshRef.current) {
+    console.log(`Initializing mesh for "${word}" with seed ${wordSeed}`);
     meshRef.current = generateMeshGradient({
       width: CARD_WIDTH,
       height: containerHeight,
@@ -117,6 +122,7 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
   
   // Regenerate mesh when relevant props change
   useEffect(() => {
+    console.log(`Regenerating mesh for "${word}" with seed ${wordSeed}`);
     meshRef.current = generateMeshGradient({
       width: CARD_WIDTH,
       height: containerHeight,
@@ -190,19 +196,20 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
       ]} />
       
       {/* Content - Word answer and details */}
-      <Box padding="sm" style={styles.content}>
+      <Box padding="md" style={styles.content}>
         {/* Word section with part of speech above */}
         <View style={styles.wordSection}>
           {partOfSpeech && (
             <Text
               variant="caption"
               color={colors.text.secondary}
+              italic={true}
               style={{ 
                 textAlign: 'center',
                 textTransform: 'lowercase',
               }}
             >
-              {partOfSpeech}
+              [{partOfSpeech}]
             </Text>
           )}
           
@@ -253,7 +260,7 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
             
             <View style={styles.exampleSection}>
               <Text
-                variant="bodySmall"
+                variant="bodyMedium"
                 color={colors.text.secondary}
                 align="center"
                 style={{ fontStyle: 'italic' }}
@@ -338,7 +345,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   definitionSection: {
-    marginBottom: spacing.sm,
+    marginBottom: 0,
   },
   exampleSection: {
     marginBottom: 0,
@@ -346,7 +353,8 @@ const styles = StyleSheet.create({
   separatorContainer: {
     width: '80%',
     alignSelf: 'center',
-    marginVertical: spacing.xs,
+    marginTop: spacing.sm,
+    marginBottom: spacing.sm,
     position: 'relative',
     height: 2,
   },

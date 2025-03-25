@@ -139,7 +139,7 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
                 marginBottom: -4
               }}
             >
-              {partOfSpeech}
+              [{partOfSpeech}]
             </Text>
           )}
           
