@@ -26,7 +26,7 @@ const mockWords: WordOfDay[] = [
   },
   {
     id: '2',
-    word: 'serendipity',
+    word: 'happy',
     pronunciation: '/ˌsɛrənˈdɪpɪti/',
     partOfSpeech: 'noun',
     definition: 'Happy accidental discovery',

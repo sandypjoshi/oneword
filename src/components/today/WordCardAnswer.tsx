@@ -1,15 +1,29 @@
-import React, { useState, useCallback } from 'react';
-import { View, StyleSheet, TouchableOpacity, StyleProp, ViewStyle } from 'react-native';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
+import { View, StyleSheet, TouchableOpacity, StyleProp, ViewStyle, Pressable, useColorScheme, Dimensions } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
 import { Text } from '../ui';
 import AnimatedChip from '../ui/AnimatedChip';
 import { WordOfDay } from '../../types/wordOfDay';
-import { radius, applyElevation } from '../../theme/styleUtils';
-import Box from '../layout/Box';
+import { radius } from '../../theme/styleUtils';
 import * as Speech from 'expo-speech';
+import {
+  Canvas,
+  Vertices,
+  Group,
+} from '@shopify/react-native-skia';
+import { 
+  generateMeshGradient, 
+  MeshData, 
+  getGradientBorderColor,
+  generateSeedFromString
+} from '../../utils/meshGradientGenerator';
 
 // Maximum time to animate pronunciation button (in ms)
 const MAX_SPEAKING_DURATION = 5000;
+
+// Use exact dimensions from original MeshGradientCard
+const { width } = Dimensions.get('window');
+const CARD_WIDTH = width - 40;
 
 interface WordCardAnswerProps {
   /**
@@ -26,19 +40,35 @@ interface WordCardAnswerProps {
    * Additional styles for the container
    */
   style?: StyleProp<ViewStyle>;
+
+  /**
+   * Function called when card is tapped to flip back
+   */
+  onFlipBack?: () => void;
 }
 
 /**
  * Displays the answer card with word, definition, and performance metrics
+ * Using mesh gradients for beautiful backgrounds
  */
-const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({ 
+const WordCardAnswer: React.FC<WordCardAnswerProps> = ({ 
   wordData,
   onViewDetails,
-  style 
+  style,
+  onFlipBack
 }) => {
   const { colors, spacing } = useTheme();
+  const deviceColorScheme = useColorScheme();
+  const isDark = deviceColorScheme === 'dark';
+  
   const [speaking, setSpeaking] = useState(false);
   const [speakingDuration, setSpeakingDuration] = useState(3000);
+  
+  // Use useRef for mesh data to prevent unnecessary re-renders
+  const meshRef = useRef<MeshData | null>(null);
+  
+  // Use useState for forcing re-renders when mesh changes
+  const [meshVersion, setMeshVersion] = useState(0);
   
   // Destructure the word data
   const { 
@@ -47,7 +77,43 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
     pronunciation, 
     partOfSpeech,
     userAttempts = 0,
+    selectedOption = '',
+    example = '',
   } = wordData;
+  
+  // Generate a consistent seed from the word for same gradient per word
+  const wordSeed = useMemo(() => generateSeedFromString(word), [word]);
+  
+  // Initialize mesh if not already done
+  if (!meshRef.current) {
+    // Use the utility function to generate the mesh
+    meshRef.current = generateMeshGradient({
+      width: CARD_WIDTH,
+      height: Dimensions.get('window').height,
+      isDarkMode: isDark,
+      seed: wordSeed
+    });
+  }
+  
+  // Memoize border color based on theme
+  const borderColor = useMemo(() => 
+    getGradientBorderColor(isDark)
+  , [isDark]);
+  
+  // Use useCallback for event handlers to prevent unnecessary recreations
+  const handleChangeGradient = useCallback(() => {
+    // Regenerate the mesh with the same seed
+    meshRef.current = generateMeshGradient({
+      width: CARD_WIDTH,
+      height: Dimensions.get('window').height,
+      isDarkMode: isDark,
+      seed: wordSeed
+    });
+    setMeshVersion(prev => prev + 1); // Force re-render
+  }, [isDark, wordSeed]);
+  
+  // Extract mesh data for rendering
+  const mesh = meshRef.current;
   
   // Function to handle pronunciation
   const handlePronunciation = async () => {
@@ -92,157 +158,261 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
       return colors.text.info;
     }
   };
-  
+
+  // Early return if mesh is not ready
+  if (!mesh) return null;
+
   return (
-    <View style={[
-      styles.container, 
-      {
-        backgroundColor: colors.background.card,
-        borderColor: colors.border.light,
-        borderRadius: radius.xl,
-        ...applyElevation('md', colors.text.primary)
-      },
-      style
-    ]}>
-      <Box padding="lg" style={{ flex: 1, justifyContent: 'space-between' }}>
-        {/* Word section */}
-        <View style={styles.wordSection}>
-          {partOfSpeech && (
-            <Text
-              variant="caption"
-              color={colors.text.secondary}
-              italic={true}
-              weight="bold"
-              style={{ 
-                textAlign: 'center',
-                textTransform: 'lowercase',
-                marginBottom: -4
-              }}
-            >
-              {partOfSpeech}
-            </Text>
-          )}
-          
-          <Text 
-            variant="serifTextLarge"
-            color={colors.text.primary}
-            align="center"
-            style={[styles.wordText, { marginTop: -2 }]}
-          >
-            {word}
-          </Text>
-          
-          {pronunciation && (
-            <AnimatedChip 
-              label={pronunciation}
-              iconLeft="volumeLoud"
-              size="small"
-              onPress={handlePronunciation}
-              isAnimating={speaking}
-              animationDuration={speakingDuration}
+    <Pressable 
+      style={[styles.container, style]}
+      onPress={onFlipBack}
+    >
+      <View style={styles.card}>
+        {/* Canvas for gradient */}
+        <Canvas style={styles.canvas}>
+          <Group>
+            <Vertices
+              vertices={mesh.points}
+              colors={mesh.colors}
+              indices={mesh.indices}
             />
-          )}
-        </View>
+          </Group>
+        </Canvas>
         
-        {/* Definition section */}
-        <View style={styles.definitionContainer}>
-          <Text
-            variant="bodyLarge"
-            color={colors.text.primary}
-            align="center"
-          >
-            {definition}
-          </Text>
-        </View>
+        {/* Inner border overlay with blend mode */}
+        <View style={[
+          styles.innerBorder, 
+          { borderColor }
+        ]} />
         
-        {/* User performance section */}
-        <View style={styles.performanceContainer}>
-          <Text
-            variant="bodyMedium"
-            color={getAttemptColor()}
-            align="center"
-            style={styles.attemptText}
-          >
-            {getAttemptMessage()}
-          </Text>
-          
-          {onViewDetails && (
-            <TouchableOpacity 
-              style={[
-                styles.detailsButton,
-                { backgroundColor: colors.background.info }
-              ]}
-              onPress={onViewDetails}
-            >
+        {/* Content - Word answer and details */}
+        <View style={styles.content}>
+          {/* Word section with part of speech above */}
+          <View style={styles.wordSection}>
+            {partOfSpeech && (
               <Text
-                variant="button"
-                color={colors.text.info}
-                align="center"
-                style={{ marginRight: 6 }}
+                variant="caption"
+                color={colors.text.secondary}
+                style={{ 
+                  textAlign: 'center',
+                  textTransform: 'lowercase',
+                  marginBottom: -2,
+                }}
               >
-                View Details
+                {partOfSpeech}
               </Text>
-              <View style={styles.arrowIcon}>
-                {/* Arrow Icon */}
-                <View style={[styles.arrow, { borderColor: colors.text.info }]} />
-              </View>
-            </TouchableOpacity>
+            )}
+            
+            <Text 
+              variant="serifTextLarge"
+              color={colors.text.primary}
+              align="center"
+              style={[styles.wordText, { marginTop: 0 }]}
+            >
+              {word}
+            </Text>
+            
+            {pronunciation && (
+              <AnimatedChip 
+                label={pronunciation}
+                iconLeft="volumeLoud"
+                size="small"
+                onPress={handlePronunciation}
+                isAnimating={speaking}
+                animationDuration={speakingDuration}
+                style={styles.pronunciationChip}
+              />
+            )}
+          </View>
+          
+          {/* Definition section - centered text */}
+          <View style={styles.textSection}>
+            <Text
+              variant="bodyMedium"
+              color={colors.text.primary}
+              align="center"
+            >
+              {definition}
+            </Text>
+          </View>
+          
+          {/* Separator line */}
+          {example && (
+            <View style={styles.separator} />
           )}
+          
+          {/* Example section - styled with highlighted word */}
+          {example && (
+            <View style={styles.textSection}>
+              <Text
+                variant="bodyMedium"
+                color={colors.text.primary}
+                align="center"
+                italic={true}
+              >
+                {formatExampleWithEmphasis(example, word)}
+              </Text>
+            </View>
+          )}
+          
+          {/* Action buttons at bottom */}
+          <View style={styles.actionContainer}>
+            {/* Learn more button */}
+            {onViewDetails && (
+              <TouchableOpacity 
+                style={[
+                  styles.learnMoreButton,
+                ]}
+                onPress={onViewDetails}
+              >
+                <Text
+                  variant="button"
+                  color={colors.text.secondary}
+                  align="center"
+                >
+                  See more
+                </Text>
+              </TouchableOpacity>
+            )}
+          </View>
         </View>
-      </Box>
-    </View>
+      </View>
+    </Pressable>
   );
 };
 
-// Create component styles
+/* Helper function to format example text with the target word emphasized */
+const formatExampleWithEmphasis = (example: string, word: string) => {
+  // This is a simplistic implementation - a more robust version would use regex with word boundaries
+  // and handle case sensitivity better
+  const lowerExample = example.toLowerCase();
+  const lowerWord = word.toLowerCase();
+  
+  // If word isn't in example (unlikely), just return the example
+  if (!lowerExample.includes(lowerWord)) {
+    return example;
+  }
+  
+  // Split the example at the word to create parts
+  const parts = [];
+  let remaining = example;
+  let lowerRemaining = lowerExample;
+  let indexOfWord;
+  
+  while ((indexOfWord = lowerRemaining.indexOf(lowerWord)) !== -1) {
+    // Add text before the word
+    if (indexOfWord > 0) {
+      parts.push(
+        <Text key={`pre-${parts.length}`} italic={true}>
+          {remaining.substring(0, indexOfWord)}
+        </Text>
+      );
+    }
+    
+    // Add the word with emphasis
+    parts.push(
+      <Text key={`word-${parts.length}`} italic={true} style={{fontWeight: '600'}}>
+        {remaining.substring(indexOfWord, indexOfWord + word.length)}
+      </Text>
+    );
+    
+    // Update remaining text
+    remaining = remaining.substring(indexOfWord + word.length);
+    lowerRemaining = lowerRemaining.substring(indexOfWord + lowerWord.length);
+  }
+  
+  // Add any remaining text after the last occurrence of the word
+  if (remaining.length > 0) {
+    parts.push(
+      <Text key={`post-${parts.length}`} italic={true}>
+        {remaining}
+      </Text>
+    );
+  }
+  
+  return <>{parts}</>;
+};
+
+// Memoize styles to prevent recreation on each render
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    minHeight: 380,
-    borderWidth: 1,
+    flex: 1,
+    padding: 0,
+  },
+  card: {
+    width: '100%',
+    flex: 1,
+    borderRadius: radius.xl,
     overflow: 'hidden',
+    position: 'relative',
+  },
+  innerBorder: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    borderWidth: 1,
+    borderRadius: radius.xl,
+  },
+  canvas: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: '100%',
+    height: '100%',
+  },
+  content: {
+    padding: 32,
+    height: '100%',
+    justifyContent: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   wordSection: {
     alignItems: 'center',
-    marginBottom: 16,
+    marginBottom: 24,
   },
   wordText: {
+    marginVertical: 4,
+    fontSize: 42,
+    fontWeight: '600',
+  },
+  pronunciationChip: {
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+  },
+  textSection: {
+    marginBottom: 20,
+    width: '100%',
+  },
+  sectionTitle: {
     marginBottom: 8,
   },
-  definitionContainer: {
-    marginVertical: 16,
+  selectedPhrase: {
+    padding: 12,
+    borderRadius: radius.md,
+    marginTop: 4,
   },
-  performanceContainer: {
-    marginTop: 16,
+  actionContainer: {
+    marginTop: 24,
     alignItems: 'center',
   },
-  attemptText: {
-    marginBottom: 12,
-  },
-  detailsButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
+  learnMoreButton: {
     paddingVertical: 8,
     paddingHorizontal: 16,
     borderRadius: radius.pill,
+    backgroundColor: 'rgba(0, 0, 0, 0.1)',
   },
-  arrowIcon: {
-    width: 16,
-    height: 16,
-    justifyContent: 'center',
-    alignItems: 'center',
+  separator: {
+    width: '12%',
+    height: 1,
+    backgroundColor: 'rgba(128, 128, 128, 0.3)',
+    marginBottom: 20,
   },
-  arrow: {
-    width: 8,
-    height: 8,
-    borderWidth: 1.5,
-    borderLeftWidth: 0,
-    borderBottomWidth: 0,
-    transform: [{ rotate: '45deg' }],
-  }
 });
-
-// Use memo to prevent unnecessary re-renders
-const WordCardAnswer = React.memo(WordCardAnswerComponent);
 
 export default WordCardAnswer; 

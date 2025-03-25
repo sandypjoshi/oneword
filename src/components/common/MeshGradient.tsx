@@ -235,15 +235,15 @@ export const MeshGradient: React.FC<MeshGradientProps> = ({
     // Use the gradient colors
     const gradient = gradientColors;
   
-    // Enhanced smoothing parameters
+    // Enhanced smoothing parameters - use exact same values as MeshGradientCard
     const smoothingFactor = isDark ? 0.028 : 0.025;
     const falloffPower = isDark ? 2.5 : 2.8;
     const noiseStrengthFactor = 0.35;
     
-    // More balanced influence areas
+    // More balanced influence areas - exact match from MeshGradientCard
     const influenceMultiplier = isDark ? 1.2 : 1.1; 
     
-    // Create flow directions once
+    // Create flow directions once - matching exact values from MeshGradientCard
     const baseAngle = rng() * PI * 2;
     const angleOffset = PI * (0.25 + rng() * 0.3);
     
@@ -262,14 +262,14 @@ export const MeshGradient: React.FC<MeshGradientProps> = ({
       y: sin(baseAngle - angleOffset * 0.7) 
     };
   
-    // Center offset calculations
+    // Center offset calculations - exact match from MeshGradientCard
     const centerOffsetX = -0.05 + rng() * 0.1;
     const centerOffsetY = -0.05 + rng() * 0.1;
     
     // Prepare control points
     const controlPoints: ControlPoint[] = [];
     
-    // Control point adding function
+    // Control point adding function - exact match from MeshGradientCard
     const addControlPoint = (radius: number, angle: number, color: string, influence: number): void => {
       const x = 0.5 + centerOffsetX + cos(angle) * radius;
       const y = 0.5 + centerOffsetY + sin(angle) * radius;
@@ -281,7 +281,7 @@ export const MeshGradient: React.FC<MeshGradientProps> = ({
       });
     };
     
-    // Add points with natural distribution
+    // Add points with natural distribution - exact match from MeshGradientCard
     const numPoints = 5 + floor(rng() * 2);
     const baseRadius = 0.25 + rng() * 0.15;
     
@@ -294,14 +294,14 @@ export const MeshGradient: React.FC<MeshGradientProps> = ({
       addControlPoint(radiusVar, angle, gradient[colorIndex], influence);
     }
     
-    // Add central points for smooth blending
+    // Add central points for smooth blending - exact match from MeshGradientCard
     const centerRadiusRange = isDark ? [0.15, 0.25] : [0.1, 0.2];
     const centerRadius = centerRadiusRange[0] + rng() * (centerRadiusRange[1] - centerRadiusRange[0]);
     const centerAngle = rng() * PI * 2;
     const colorIndex = floor(rng() * gradient.length);
     addControlPoint(centerRadius, centerAngle, gradient[colorIndex], 0.4 + rng() * 0.2);
   
-    // Add corner control points
+    // Add corner control points - exact match from MeshGradientCard
     const cornerInfluence = 0.3;
     const cornerOffset = 0.05;
     
@@ -337,7 +337,7 @@ export const MeshGradient: React.FC<MeshGradientProps> = ({
       });
     });
   
-    // Create optimized noise field
+    // Create optimized noise field - exact match from MeshGradientCard
     const noiseField: NoisePoint[][] = Array(rows);
     for (let y = 0; y < rows; y++) {
       noiseField[y] = Array(cols);
@@ -362,7 +362,7 @@ export const MeshGradient: React.FC<MeshGradientProps> = ({
     points.length = rows * cols;
     colors.length = rows * cols;
   
-    // Generate mesh points
+    // Generate mesh points - exact match from MeshGradientCard
     for (let y = 0; y < rows; y++) {
       for (let x = 0; x < cols; x++) {
         const index = y * cols + x;
@@ -375,7 +375,7 @@ export const MeshGradient: React.FC<MeshGradientProps> = ({
           y: y * cellHeight
         };
   
-        // Calculate flow values
+        // Calculate flow values - exact match from MeshGradientCard
         const flowValue1 = (nx * flow1.x + ny * flow1.y) * 0.5 + 0.5; 
         const flowValue2 = (nx * flow2.x + ny * flow2.y) * 0.5 + 0.5;
         const flowValue3 = (nx * flow3.x + ny * flow3.y) * 0.5 + 0.5;
@@ -386,12 +386,12 @@ export const MeshGradient: React.FC<MeshGradientProps> = ({
         // Setup for color blending
         const blendedColor = { r: 0, g: 0, b: 0 };
         
-        // Check if near corner for extra smoothing
+        // Check if near corner for extra smoothing - exact match from MeshGradientCard
         const isCorner = (nx <= 0.1 || nx >= 0.9) && (ny <= 0.1 || ny >= 0.9);
         const localSmoothingFactor = isCorner ? smoothingFactor * 1.5 : smoothingFactor;
         const localFalloffPower = isCorner ? falloffPower * 0.9 : falloffPower;
         
-        // Calculate weights
+        // Calculate weights - exact match from MeshGradientCard
         const weights: number[] = [];
         let totalWeight = 0;
         
@@ -402,7 +402,7 @@ export const MeshGradient: React.FC<MeshGradientProps> = ({
           
           const distance = sqrt(dx * dx + dy * dy + localSmoothingFactor);
           
-          // Calculate flow influences
+          // Calculate flow influences - exact match from MeshGradientCard
           const flowMix1 = sin(flowValue1 * PI * 1.5 + noise.angle * 0.4) * 0.5 + 0.5;
           const flowMix2 = sin(flowValue2 * PI * 1.5 - noise.angle * 0.5) * 0.5 + 0.5;
           const flowMix3 = sin(flowValue3 * PI * 1.5 + noise.angle * 0.3) * 0.5 + 0.5;
@@ -428,17 +428,22 @@ export const MeshGradient: React.FC<MeshGradientProps> = ({
           continue;
         }
         
-        // Blend colors using cached color parsing for performance
+        // Blend colors - exact match from MeshGradientCard color calculations
         for (let i = 0; i < controlPoints.length; i++) {
           const normalizedWeight = weights[i] / totalWeight;
-          const { r, g, b } = parseColor(controlPoints[i].color);
+          const color = controlPoints[i].color;
+          
+          // RGB color parsing with gamma correction - exact match from MeshGradientCard
+          const r = pow(parseInt(color.slice(1, 3), 16) / 255, 2.2);
+          const g = pow(parseInt(color.slice(3, 5), 16) / 255, 2.2);
+          const b = pow(parseInt(color.slice(5, 7), 16) / 255, 2.2);
           
           blendedColor.r += r * normalizedWeight;
           blendedColor.g += g * normalizedWeight;
           blendedColor.b += b * normalizedWeight;
         }
   
-        // Convert back to hex with gamma correction
+        // Convert back to hex with gamma correction - exact match from MeshGradientCard
         const r = min(255, max(0, round(pow(blendedColor.r, 1/2.2) * 255))).toString(16).padStart(2, '0');
         const g = min(255, max(0, round(pow(blendedColor.g, 1/2.2) * 255))).toString(16).padStart(2, '0');
         const b = min(255, max(0, round(pow(blendedColor.b, 1/2.2) * 255))).toString(16).padStart(2, '0');

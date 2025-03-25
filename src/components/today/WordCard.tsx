@@ -84,6 +84,12 @@ const WordCardComponent: React.FC<WordCardProps> = ({
     }
   }, [wordData, onReveal, isFlipped]);
   
+  // Handle flipping back to question card
+  const handleFlipBack = useCallback(() => {
+    // Animate flip back to question side
+    isFlipped.value = withTiming(0, { duration: 500 });
+  }, [isFlipped]);
+  
   // Front card animated styles (question side)
   const frontAnimatedStyle = useAnimatedStyle(() => {
     const rotateValue = interpolate(isFlipped.value, [0, 1], [0, 180]);
@@ -125,6 +131,8 @@ const WordCardComponent: React.FC<WordCardProps> = ({
           <WordCardAnswer
             wordData={wordData}
             style={style}
+            onViewDetails={onViewDetails}
+            onFlipBack={handleFlipBack}
           />
         </Animated.View>
       </View>
