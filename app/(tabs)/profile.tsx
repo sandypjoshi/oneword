@@ -9,6 +9,10 @@ import { useTheme } from '../../src/theme/ThemeProvider';
 import Icon from '../../src/components/ui/Icon';
 import { MeshGradient } from '../../src/components/common';
 import { getGradientIds } from '../../src/theme/primitives/gradients';
+import { useCardStore } from '../../src/store/cardStore';
+import { useWordStore } from '../../src/store/wordStore';
+import { useProgressStore } from '../../src/store/progressStore';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Sample profile card component with gradient background
 interface GradientProfileCardProps {
@@ -160,6 +164,11 @@ export default function ProfileScreen() {
   const { isReady, theme } = useThemeReady();
   const router = useRouter();
   const [currentGradient, setCurrentGradient] = useState('morning-sky');
+  
+  // Get the reset functions from stores
+  const resetCardStore = useCardStore(state => state.resetCardState);
+  const fetchWords = useWordStore(state => state.fetchWords);
+  const resetStreak = useProgressStore(state => state.resetStreak);
 
   if (!isReady) {
     return (
@@ -183,6 +192,43 @@ export default function ProfileScreen() {
       console.error("Error resetting onboarding:", error);
       Alert.alert("Error", "Failed to reset onboarding status");
     }
+  };
+  
+  const handleResetAllData = async () => {
+    Alert.alert(
+      "Reset All Data",
+      "This will reset all your progress data, words, and cards. This action cannot be undone. Do you want to continue?",
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Reset",
+          style: "destructive",
+          onPress: async () => {
+            try {
+              // Clear all AsyncStorage keys for the stores
+              await AsyncStorage.multiRemove([
+                'card-ui-storage',
+                'word-progress-storage',
+                'user-progress-storage'
+              ]);
+              
+              // Reset in-memory state
+              resetStreak();
+              fetchWords(14, true); // Force refresh words
+              
+              Alert.alert(
+                "Data Reset Complete",
+                "All app data has been reset successfully.",
+                [{ text: "OK" }]
+              );
+            } catch (error) {
+              console.error("Error resetting data:", error);
+              Alert.alert("Error", "Failed to reset app data");
+            }
+          }
+        }
+      ]
+    );
   };
 
   return (
@@ -225,7 +271,7 @@ export default function ProfileScreen() {
           </Link>
         </Box>
         
-        {/* Development/Testing button */}
+        {/* Development/Testing buttons */}
         <Box marginTop="xl" width="100%">
           <TouchableOpacity
             style={[
@@ -233,12 +279,27 @@ export default function ProfileScreen() {
               { 
                 backgroundColor: colors.background.secondary,
                 borderColor: colors.border.medium,
-                marginTop: spacing.xl
+                marginTop: spacing.md
               }
             ]}
             onPress={handleResetOnboarding}
           >
             <Text color={colors.text.secondary}>Reset Onboarding (Dev Only)</Text>
+          </TouchableOpacity>
+          
+          {/* Reset Data Button */}
+          <TouchableOpacity
+            style={[
+              styles.resetButton,
+              { 
+                backgroundColor: colors.error + '20',
+                borderColor: colors.error,
+                marginTop: spacing.md
+              }
+            ]}
+            onPress={handleResetAllData}
+          >
+            <Text color={colors.error}>Reset Data</Text>
           </TouchableOpacity>
         </Box>
       </Box>

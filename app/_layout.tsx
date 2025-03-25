@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Stack, useRouter, SplashScreen, useSegments } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { View, ActivityIndicator, Image, StyleSheet, Animated } from 'react-native';
+import { View, ActivityIndicator, Image, StyleSheet, Animated, useColorScheme } from 'react-native';
 import { ThemeProvider, useTheme } from '../src/theme/ThemeProvider';
-import { ensurePolyfills } from '../src/utils/supabaseSetup';
 import { checkOnboardingStatus } from '../src/utils/onboarding';
 import { useFonts } from 'expo-font';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -27,9 +26,6 @@ import {
 // Import logo image
 const logoImage = require('../src/assets/images/logo.png');
 
-// Initialize polyfills immediately
-ensurePolyfills();
-
 // Keep the splash screen visible while we initialize
 SplashScreen.preventAutoHideAsync();
 
@@ -42,7 +38,9 @@ const MainContent = () => {
   const [fadeAnim] = useState(new Animated.Value(1));
   const router = useRouter();
   const segments = useSegments();
-  const { colors, isDark, spacing } = useTheme();
+  const { colors, spacing } = useTheme();
+  const colorScheme = useColorScheme();
+  const isDark = colorScheme === 'dark';
   
   // Load the fonts
   const [fontsLoaded] = useFonts({

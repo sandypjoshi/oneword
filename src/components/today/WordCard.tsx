@@ -1,5 +1,5 @@
-import React, { memo, useState, useCallback, useEffect } from 'react';
-import { StyleProp, ViewStyle, View } from 'react-native';
+import React, { memo, useCallback, useEffect } from 'react';
+import { StyleProp, ViewStyle, View, Dimensions, Platform } from 'react-native';
 import { WordOfDay } from '../../types/wordOfDay';
 import WordCardQuestion from './WordCardQuestion';
 import WordCardAnswer from './WordCardAnswer';
@@ -10,6 +10,13 @@ import Animated, {
   interpolate,
 } from 'react-native-reanimated';
 import { StyleSheet } from 'react-native';
+import { useCardStore } from '../../store/cardStore';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import spacing from '../../theme/spacing';
+
+// Get screen dimensions to calculate responsive card size
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
+const CARD_WIDTH = Math.min(SCREEN_WIDTH - (spacing.screenPadding * 2), 400); // Max width of 400, respecting screen padding
 
 interface WordCardProps {
   /**
@@ -26,11 +33,6 @@ interface WordCardProps {
    * Function called when the details button is pressed
    */
   onViewDetails?: () => void;
-  
-  /**
-   * Function called when the word is revealed (answer is shown)
-   */
-  onReveal?: (wordId: string, attempts: number) => void;
 }
 
 /**
@@ -38,99 +40,70 @@ interface WordCardProps {
  * and flips to answer mode when correct answer is selected
  */
 const WordCardComponent: React.FC<WordCardProps> = ({ 
-  wordData: initialWordData,
+  wordData,
   style,
-  onViewDetails,
-  onReveal
+  onViewDetails
 }) => {
-  // Local state to track word data including user interactions
-  const [wordData, setWordData] = useState<WordOfDay>(initialWordData);
+  // Get safe area insets to adjust for notches and home indicators
+  const insets = useSafeAreaInsets();
+  
+  // Use Zustand cardStore for flip state
+  const isFlipped = useCardStore(state => state.isCardFlipped(wordData.id));
+  const flipCard = useCardStore(state => state.flipCard);
   
   // Animation shared value for flip (0 = question, 1 = answer)
-  const isFlipped = useSharedValue(0);
+  const flipProgress = useSharedValue(isFlipped ? 1 : 0);
   
-  // When the component updates with new props
+  // Update animation when isFlipped changes
   useEffect(() => {
-    // Update local state if the prop changes
-    if (initialWordData.id !== wordData.id) {
-      setWordData(initialWordData);
-      isFlipped.value = 0; // Reset flip animation
-    }
-  }, [initialWordData, wordData.id, isFlipped]);
+    flipProgress.value = withTiming(isFlipped ? 1 : 0, { duration: 500 });
+  }, [isFlipped, flipProgress]);
   
-  // Handle option selection in question mode
-  const handleOptionSelect = useCallback((option: string, isCorrect: boolean) => {
-    // Calculate attempts (increment if incorrect)
-    const attempts = wordData.userAttempts ? wordData.userAttempts + (isCorrect ? 0 : 1) : 1;
-    
-    // Update word data
-    const updatedWordData = {
-      ...wordData,
-      selectedOption: option,
-      userAttempts: attempts,
-    };
-    
-    setWordData(updatedWordData);
-    
-    // If correct, animate the flip to show answer
-    if (isCorrect) {
-      // Animate flip with Reanimated
-      isFlipped.value = withTiming(1, { duration: 500 });
-      
-      // Still notify parent for tracking purposes
-      if (onReveal) {
-        onReveal(wordData.id, attempts);
-      }
-    }
-  }, [wordData, onReveal, isFlipped]);
-  
-  // Handle flipping back to question card
+  // Handle flip back to question side
   const handleFlipBack = useCallback(() => {
-    // Animate flip back to question side
-    isFlipped.value = withTiming(0, { duration: 500 });
-  }, [isFlipped]);
+    flipCard(wordData.id, false);
+  }, [wordData.id, flipCard]);
   
   // Front card animated styles (question side)
   const frontAnimatedStyle = useAnimatedStyle(() => {
-    const rotateValue = interpolate(isFlipped.value, [0, 1], [0, 180]);
+    const rotateValue = interpolate(flipProgress.value, [0, 1], [0, 180]);
     
     return {
       transform: [
         { perspective: 1000 },
         { rotateY: `${rotateValue}deg` }
       ],
-      opacity: isFlipped.value > 0.5 ? 0 : 1, // Hide when past halfway point
+      opacity: flipProgress.value > 0.5 ? 0 : 1, // Hide when past halfway point
     };
   });
 
   // Back card animated styles (answer side)
   const backAnimatedStyle = useAnimatedStyle(() => {
-    const rotateValue = interpolate(isFlipped.value, [0, 1], [180, 360]);
+    const rotateValue = interpolate(flipProgress.value, [0, 1], [180, 360]);
     
     return {
       transform: [
         { perspective: 1000 },
         { rotateY: `${rotateValue}deg` }
       ],
-      opacity: isFlipped.value > 0.5 ? 1 : 0, // Show when past halfway point
+      opacity: flipProgress.value > 0.5 ? 1 : 0, // Show when past halfway point
     };
   });
   
   return (
-    <View style={styles.outerContainer}>
+    <View style={[styles.outerContainer, style]}>
       <View style={styles.container}>
         <Animated.View style={[styles.cardContainer, frontAnimatedStyle]}>
           <WordCardQuestion
             wordData={wordData}
-            style={style}
-            onOptionSelect={handleOptionSelect}
+            style={styles.cardContent}
           />
         </Animated.View>
         
         <Animated.View style={[styles.cardContainer, backAnimatedStyle]}>
           <WordCardAnswer
             wordData={wordData}
-            style={style}
+            style={styles.cardContent}
             onViewDetails={onViewDetails}
             onFlipBack={handleFlipBack}
           />
@@ -143,14 +116,16 @@ const WordCardComponent: React.FC<WordCardProps> = ({
 const styles = StyleSheet.create({
   outerContainer: {
     flex: 1,
-    // Add small margin to prevent clipping
-    marginVertical: 4,
-    // Ensure animations aren't clipped
-    overflow: 'visible',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical: 0, // Removed margin completely
+    overflow: 'visible', // Ensure animations aren't clipped
   },
   container: {
-    flex: 1,
+    width: CARD_WIDTH,
+    flex: 1, // Use flex to fill available space
     position: 'relative',
+    marginVertical: 0, // Removed margin completely
   },
   cardContainer: {
     backfaceVisibility: 'hidden',
@@ -159,6 +134,12 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
+    width: '100%',
+    height: '100%',
+  },
+  cardContent: {
+    width: '100%',
+    height: '100%',
   }
 });
 
