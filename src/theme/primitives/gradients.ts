@@ -41,99 +41,99 @@ export type GradientTheme = {
  */
 export const gradients: GradientTheme = {
   light: [
-    // Morning Sky - Soft blues and pinks of dawn sky
+    // Morning Sky - Soft blues and pinks of dawn sky - Very Light
     {
       id: 'morning-sky',
       name: 'Morning Sky',
-      colors: ['#E9FAFF', '#FFD6E6', '#FFF5DE', '#BCD7FF'],
+      colors: ['#F2FDFF', '#FFEDF5', '#FFFAEF', '#DEE9FF'],
       description: 'Soft blues and pinks of dawn sky'
     },
     
-    // Spring Meadow - Fresh greens and cool blues of spring
+    // Spring Meadow - Fresh greens and cool blues of spring - Very Light
     {
       id: 'spring-meadow',
       name: 'Spring Meadow',
-      colors: ['#E5F5D5', '#BFECD1', '#EBF9FC'],
+      colors: ['#F2FBEA', '#E0F6E9', '#F5FCFE'],
       description: 'Fresh greens and cool blues of spring'
     },
     
-    // Desert Sunrise - Warm ochres and cool violets
+    // Desert Sunrise - Warm ochres and cool violets - Very Light
     {
       id: 'desert-sunrise',
       name: 'Desert Sunrise',
-      colors: ['#FFFBD9', '#FFDACF', '#E3D8F0', '#FFBD9E'],
+      colors: ['#FFFDF0', '#FFF0EA', '#F4EDF9', '#FFE1D4'],
       description: 'Warm desert hues at sunrise'
     },
     
-    // Coastal Reef - Vibrant aquatic blues
+    // Coastal Reef - Vibrant aquatic blues - Very Light
     {
       id: 'coastal-reef',
       name: 'Coastal Reef',
-      colors: ['#D4F8FC', '#D7F2FF', '#E6ECFA'],
+      colors: ['#E8FCFE', '#EBFAFF', '#F2F6FC'],
       description: 'Clear waters of coastal reef'
     },
     
-    // Autumn Leaves - Warm golds and deep ambers
+    // Autumn Leaves - Warm golds and deep ambers - Very Light
     {
       id: 'autumn-leaves',
       name: 'Autumn Leaves',
-      colors: ['#FFFBD9', '#FFDBAA', '#FFC2AB', '#E6A677'],
+      colors: ['#FFFDF0', '#FFF2DB', '#FFE6DE', '#FFCEB1'],
       description: 'Warm autumn foliage colors'
     },
     
-    // Cherry Blossom - Delicate pinks with cool undertones
+    // Cherry Blossom - Delicate pinks with cool undertones - Balanced
     {
       id: 'cherry-blossom',
       name: 'Cherry Blossom',
-      colors: ['#FACCE0', '#EACDF2', '#DAEEFF'],
+      colors: ['#FBE0F0', '#F0DAF7', '#E4F0FF'],
       description: 'Delicate pink cherry blossoms'
     },
     
-    // Mountain Vista - Crisp greens and distant blues
+    // Mountain Vista - Crisp greens and distant blues - Very Light
     {
       id: 'mountain-vista',
       name: 'Mountain Vista',
-      colors: ['#F0FAF2', '#D2F0EB', '#E5F099'],
+      colors: ['#F7FCF8', '#E9F8F5', '#F2FAD4'],
       description: 'Mountain landscape with distant haze'
     },
     
-    // Tropical Lagoon - Bright blue water tones
+    // Tropical Lagoon - Bright blue water tones - Very Light
     {
       id: 'tropical-lagoon',
       name: 'Tropical Lagoon',
-      colors: ['#B9E5FF', '#8FDEFF', '#D0F1FF', '#8EDBCC'],
+      colors: ['#D9F0FF', '#C6EEFF', '#E6F8FF', '#C6EEE2'],
       description: 'Vibrant tropical waters'
     },
     
-    // Lavender Fields - Soft purple variations
+    // Lavender Fields - Soft purple variations - Very Light
     {
       id: 'lavender-fields',
       name: 'Lavender Fields',
-      colors: ['#E2D9F2', '#C8B5E8', '#ECD5F5'],
+      colors: ['#F2EEFA', '#E5DBFA', '#F7EEFA'],
       description: 'Rolling fields of lavender'
     },
     
-    // Coral Garden - Delicate coral reef hues
+    // Coral Garden - Delicate coral reef hues - Very Light
     {
       id: 'coral-garden',
       name: 'Coral Garden',
-      colors: ['#FFEBD0', '#FFBFAA', '#C5F0F7'],
+      colors: ['#FFF8F0', '#FFE3DC', '#E5FAFD'],
       description: 'Vibrant coral reef colors'
     },
     
-    // Misty Morning - Soft, muted foggy morning
+    // Misty Morning - Soft, muted foggy morning - Balanced
     {
       id: 'misty-morning',
       name: 'Misty Morning',
-      colors: ['#EBF8F7', '#E5F5D5', '#F6FBF2'],
+      colors: ['#E0F0EE', '#E2F0D2', '#EDF4E8'],
       description: 'Foggy morning with gentle hues'
     },
     
-    // Sunset Beach - Warm sunset against cool water
+    // Sunset Beach - Warm sunset against cool water - Very Light
     {
       id: 'sunset-beach',
       name: 'Sunset Beach',
-      colors: ['#FFEBD0', '#FFDACF', '#CEEAFF', '#FFB5AB'],
+      colors: ['#FFF8F0', '#FFF0EA', '#E8F5FF', '#FFE2DE'],
       description: 'Warm sunset over cool waters'
     }
   ],

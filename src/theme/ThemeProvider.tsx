@@ -5,7 +5,7 @@
  */
 
 import React, { createContext, useContext, useEffect, useState, useMemo, useCallback } from 'react';
-import { useColorScheme, AppState, AppStateStatus, useWindowDimensions, TextStyle } from 'react-native';
+import { useColorScheme, AppState, AppStateStatus, useWindowDimensions, TextStyle, View, Animated } from 'react-native';
 import themes from './colors';
 import spacing from './spacing';
 import typography, { TypographyVariant, BASE_TEXT_STYLES } from './typography';
@@ -184,15 +184,63 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     }
   }, [deviceColorScheme, appState, colorMode]);
   
-  // Create theme context wrapper functions to persist preferences
+  // Add state for theme transition
+  const [isThemeChanging, setIsThemeChanging] = useState(false);
+  const fadeAnim = useMemo(() => new Animated.Value(0), []);
+  
+  // Modify the theme context wrapper functions to include transition
   const handleSetColorMode = (mode: ColorMode) => {
-    setColorMode(mode);
-    invalidateMeshCache(); // Invalidate mesh cache when color mode changes
+    // Start the transition animation
+    setIsThemeChanging(true);
+    Animated.timing(fadeAnim, {
+      toValue: 0.15,
+      duration: 150,
+      useNativeDriver: true,
+    }).start();
+
+    // Change the theme after a small delay
+    setTimeout(() => {
+      setColorMode(mode);
+      invalidateMeshCache(); // Invalidate mesh cache when color mode changes
+      
+      // End the transition animation
+      setTimeout(() => {
+        Animated.timing(fadeAnim, {
+          toValue: 0,
+          duration: 200,
+          useNativeDriver: true,
+        }).start(() => {
+          setIsThemeChanging(false);
+        });
+      }, 100);
+    }, 50);
   };
   
   const handleSetThemeName = (name: ThemeName) => {
-    setThemeName(name);
-    invalidateMeshCache(); // Invalidate mesh cache when theme changes
+    // Start the transition animation
+    setIsThemeChanging(true);
+    Animated.timing(fadeAnim, {
+      toValue: 0.15,
+      duration: 150,
+      useNativeDriver: true,
+    }).start();
+
+    // Change the theme after a small delay
+    setTimeout(() => {
+      setThemeName(name);
+      invalidateMeshCache(); // Invalidate mesh cache when theme changes
+      
+      // End the transition animation
+      setTimeout(() => {
+        Animated.timing(fadeAnim, {
+          toValue: 0,
+          duration: 200,
+          useNativeDriver: true,
+        }).start(() => {
+          setIsThemeChanging(false);
+        });
+      }, 100);
+    }, 50);
   };
   
   // Memoize the responsive typography styles
@@ -251,9 +299,25 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     handleSetThemeName
   ]);
   
+  // Render provider with transition overlay
   return (
     <ThemeContext.Provider value={themeContextValue}>
       {children}
+      {isThemeChanging && (
+        <Animated.View 
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: isDark ? 'white' : 'black',
+            opacity: fadeAnim,
+            pointerEvents: 'none',
+            zIndex: 9999,
+          }} 
+        />
+      )}
     </ThemeContext.Provider>
   );
 };

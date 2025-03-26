@@ -118,7 +118,7 @@ const getMemoizedIndices = (() => {
 
 /**
  * Global mesh cache to avoid regenerating meshes
- * Keys are wordId_isDarkMode (e.g., "ineffable_true")
+ * Keys are wordId_isDarkMode_themeVersion (e.g., "ineffable_true_1")
  */
 const meshCache: Record<string, MeshData> = {};
 
@@ -488,7 +488,7 @@ export function generateSeedFromString(str: string): number {
     hash = hash & hash; // Convert to 32bit integer
   }
   
-  return Math.abs(hash) - 1;
+  return Math.abs(hash) - 2;
 }
 
 /**

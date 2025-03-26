@@ -11,7 +11,7 @@ import {
   ScrollView
 } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
-import { useNavigation } from 'expo-router';
+import { useNavigation, useFocusEffect } from 'expo-router';
 import { WordCard, EmptyWordCard } from '../../src/components/today';
 import WordDetailsBottomSheet, { WordDetailsBottomSheetRef } from '../../src/components/today/WordDetailsBottomSheet';
 import { useThemeReady } from '../../src/hooks';
@@ -167,7 +167,25 @@ export default function HomeScreen() {
     return date.getDate();
   }, []);
   
-  // Add this effect to ensure revealed words show the answer card
+  // Add this hook to ensure cards are flipped when the screen comes into focus
+  useFocusEffect(
+    useCallback(() => {
+      // When screen comes into focus, ensure all revealed words show the answer side
+      if (words.length > 0 && storedWords.length > 0) {
+        words.forEach(word => {
+          // Skip placeholders
+          if (word.isPlaceholder) return;
+          
+          const storedWord = storedWords.find(w => w.id === word.id);
+          if (storedWord?.isRevealed) {
+            flipCard(word.id, true);
+          }
+        });
+      }
+    }, [words, storedWords, flipCard])
+  );
+  
+  // Keep the existing useEffect for initial state sync
   useEffect(() => {
     // Once words are loaded, check which ones have been revealed
     if (words.length > 0 && storedWords.length > 0) {
