@@ -65,11 +65,11 @@ export const gradients: GradientTheme = {
       description: 'Warm desert hues at sunrise'
     },
     
-    // Coastal Reef - Vibrant aquatic blues - Very Light
+    // Coastal Reef - Vibrant aquatic blues - Balanced
     {
       id: 'coastal-reef',
       name: 'Coastal Reef',
-      colors: ['#E8FCFE', '#EBFAFF', '#F2F6FC'],
+      colors: ['#CCF3F7', '#CAE9F7', '#DEE9F5'],
       description: 'Clear waters of coastal reef'
     },
     
