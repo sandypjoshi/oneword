@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Animated, StyleSheet, StyleProp, ViewStyle, Easing } from 'react-native';
+import { View, Animated, StyleSheet, StyleProp, ViewStyle, Easing, useColorScheme } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Chip, { ChipProps } from './Chip';
 import { useTheme } from '../../theme/ThemeProvider';
-import { radius, animation, opacity } from '../../theme/styleUtils';
+import { radius, animation, opacity, blending } from '../../theme/styleUtils';
 
-interface AnimatedChipProps extends Omit<ChipProps, 'style'> {
+type AnimatedChipVariant = 'default' | 'onGradient';
+
+interface AnimatedChipProps extends Omit<ChipProps, 'style' | 'variant'> {
   /**
    * Whether the animation is active
    */
@@ -20,6 +22,13 @@ interface AnimatedChipProps extends Omit<ChipProps, 'style'> {
    * Additional styles for the container
    */
   style?: StyleProp<ViewStyle>;
+
+  /**
+   * Visual variant of the chip
+   * - default: Uses background.tertiary color
+   * - onGradient: Adapts colors for optimal contrast on gradient backgrounds
+   */
+  variant?: AnimatedChipVariant;
 }
 
 /**
@@ -27,12 +36,46 @@ interface AnimatedChipProps extends Omit<ChipProps, 'style'> {
  */
 const AnimatedChip: React.FC<AnimatedChipProps> = ({
   isAnimating,
-  animationDuration = animation.duration.shortest,
+  animationDuration = animation.duration.long,
   style,
   backgroundColor,
+  variant = 'default',
+  textColor,
+  iconColor,
   ...chipProps
 }) => {
-  const { colors } = useTheme();
+  const { colors, colorMode } = useTheme();
+  const deviceColorScheme = useColorScheme();
+  
+  // Determine if dark mode is active
+  const isDark = colorMode === 'dark' || (colorMode === 'system' && deviceColorScheme === 'dark');
+
+  // Determine colors based on variant and theme
+  const getVariantColors = () => {
+    switch (variant) {
+      case 'onGradient':
+        const baseColor = isDark ? colors.background.primary : colors.background.card;
+        return {
+          background: baseColor,
+          containerStyle: { 
+            mixBlendMode: blending.multiply,
+            opacity: 0.5,
+          } as ViewStyle,
+          text: isDark ? colors.text.primary : colors.text.primary,
+          icon: isDark ? colors.text.primary : colors.text.primary
+        };
+      default:
+        return {
+          background: backgroundColor || colors.background.tertiary,
+          containerStyle: {},
+          text: textColor || colors.text.secondary,
+          icon: iconColor || colors.text.secondary
+        };
+    }
+  };
+
+  const variantColors = getVariantColors();
+  
   const [width, setWidth] = useState(0);
   const progressAnim = useRef(new Animated.Value(0)).current;
   const opacityAnim = useRef(new Animated.Value(1)).current;
@@ -88,9 +131,11 @@ const AnimatedChip: React.FC<AnimatedChipProps> = ({
       style={[styles.outerContainer]}
       onLayout={(e) => setWidth(e.nativeEvent.layout.width)}
     >
-      <View style={[styles.container, style]}>
+      <View style={[styles.container, style, variantColors.containerStyle]}>
         <Chip 
-          backgroundColor={backgroundColor}
+          backgroundColor={variantColors.background}
+          textColor={variantColors.text}
+          iconColor={variantColors.icon}
           {...chipProps} 
         />
         
@@ -104,7 +149,7 @@ const AnimatedChip: React.FC<AnimatedChipProps> = ({
             >
               <LinearGradient
                 colors={[
-                  colors.primary + opacity.lightest, // Use tokens for opacity values
+                  colors.primary + opacity.lightest,
                   colors.primary + opacity.high
                 ]}
                 start={{ x: 0, y: 0 }}

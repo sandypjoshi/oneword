@@ -226,9 +226,8 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
               size="small"
               onPress={handlePronunciation}
               isAnimating={isWordSpeaking}
-              style={[styles.pronunciationChip, { 
-                backgroundColor: colors.background.tertiary
-              }]}
+              variant="onGradient"
+              style={styles.pronunciationChip}
             />
           )}
         </View>

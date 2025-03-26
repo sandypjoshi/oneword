@@ -80,6 +80,35 @@ export const animation = {
   }
 } as const;
 
+// Blend modes for overlays and effects
+export const blending = {
+  // Basic blend modes
+  normal: 'normal' as const,
+  multiply: 'multiply' as const,
+  screen: 'screen' as const,
+  overlay: 'overlay' as const,
+  
+  // Light adjusting blend modes
+  darken: 'darken' as const,
+  lighten: 'lighten' as const,
+  colorDodge: 'color-dodge' as const,
+  colorBurn: 'color-burn' as const,
+  
+  // Contrast blend modes
+  hardLight: 'hard-light' as const,
+  softLight: 'soft-light' as const,
+  
+  // Component blend modes
+  difference: 'difference' as const,
+  exclusion: 'exclusion' as const,
+  
+  // Color composition modes
+  hue: 'hue' as const,
+  saturation: 'saturation' as const,
+  color: 'color' as const,
+  luminosity: 'luminosity' as const
+} as const;
+
 // Elevation/Shadow styles - Enhanced to support theming
 export type ElevationLevel = 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
