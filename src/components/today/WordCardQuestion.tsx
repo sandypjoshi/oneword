@@ -163,7 +163,6 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
               size="small"
               onPress={handlePronunciation}
               isAnimating={isWordSpeaking}
-              animationDuration={3000} // Default duration
             />
           )}
         </View>

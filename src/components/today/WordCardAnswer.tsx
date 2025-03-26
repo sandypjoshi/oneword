@@ -226,9 +226,8 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
               size="small"
               onPress={handlePronunciation}
               isAnimating={isWordSpeaking}
-              animationDuration={3000} // Default animation duration
               style={[styles.pronunciationChip, { 
-                backgroundColor: colors.background.secondary + '33'
+                backgroundColor: colors.background.tertiary
               }]}
             />
           )}

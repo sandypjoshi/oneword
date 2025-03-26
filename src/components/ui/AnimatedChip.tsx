@@ -27,7 +27,7 @@ interface AnimatedChipProps extends Omit<ChipProps, 'style'> {
  */
 const AnimatedChip: React.FC<AnimatedChipProps> = ({
   isAnimating,
-  animationDuration = animation.duration.longer,
+  animationDuration = animation.duration.shortest,
   style,
   backgroundColor,
   ...chipProps
@@ -52,15 +52,15 @@ const AnimatedChip: React.FC<AnimatedChipProps> = ({
       Animated.timing(progressAnim, {
         toValue: 1,
         duration: animationDuration,
-        easing: Easing.bezier(...animation.easing.sharp), // Use token for easing
+        easing: Easing.out(Easing.quad), // More immediate easing
         useNativeDriver: false,
       }).start(({ finished }) => {
         if (finished) {
           // When progress is complete, fade out the animation layer
           Animated.timing(opacityAnim, {
             toValue: 0,
-            duration: animation.duration.shortest, // Use token for fade duration
-            easing: Easing.linear, // Simple linear fade
+            duration: 150, // Faster fade out
+            easing: Easing.linear,
             useNativeDriver: false,
           }).start(({ finished: fadeDone }) => {
             if (fadeDone) {
@@ -85,42 +85,48 @@ const AnimatedChip: React.FC<AnimatedChipProps> = ({
   
   return (
     <View 
-      style={styles.container}
+      style={[styles.outerContainer]}
       onLayout={(e) => setWidth(e.nativeEvent.layout.width)}
     >
-      <Chip 
-        style={style}
-        backgroundColor={backgroundColor}
-        {...chipProps} 
-      />
-      
-      {showAnimation && (
-        <Animated.View style={[styles.clipContainer, { opacity: opacityAnim }]}>
-          <Animated.View 
-            style={[
-              styles.progressContainer,
-              { width: progressWidth }
-            ]}
-          >
-            <LinearGradient
-              colors={[
-                colors.primary + opacity.lightest, // Use tokens for opacity values
-                colors.primary + opacity.high
+      <View style={[styles.container, style]}>
+        <Chip 
+          backgroundColor={backgroundColor}
+          {...chipProps} 
+        />
+        
+        {showAnimation && (
+          <Animated.View style={[styles.clipContainer, { opacity: opacityAnim }]}>
+            <Animated.View 
+              style={[
+                styles.progressContainer,
+                { width: progressWidth }
               ]}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0 }}
-              style={styles.gradient}
-            />
+            >
+              <LinearGradient
+                colors={[
+                  colors.primary + opacity.lightest, // Use tokens for opacity values
+                  colors.primary + opacity.high
+                ]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+                style={styles.gradient}
+              />
+            </Animated.View>
           </Animated.View>
-        </Animated.View>
-      )}
+        )}
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  outerContainer: {
+    alignSelf: 'center',
+  },
   container: {
     position: 'relative',
+    overflow: 'hidden',
+    borderRadius: radius.pill,
   },
   clipContainer: {
     position: 'absolute',
@@ -128,7 +134,6 @@ const styles = StyleSheet.create({
     left: 0,
     bottom: 0,
     right: 0,
-    borderRadius: radius.pill,
     overflow: 'hidden',
     zIndex: 2,
   },
@@ -137,7 +142,6 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     bottom: 0,
-    borderRadius: radius.pill,
     overflow: 'hidden',
   },
   gradient: {
