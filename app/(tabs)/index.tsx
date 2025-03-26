@@ -447,6 +447,42 @@ export default function HomeScreen() {
     );
   }, [cardDimensions.width, themeStyles.cardContainer, themeStyles.cardWrapper, themeStyles.wordCard]);
   
+  // Add this effect after initializing the wordStore
+  useEffect(() => {
+    // Add some mock data with multiple definitions for testing purposes
+    if (words.length > 0) {
+      // Clone the current words array
+      const updatedWords = [...words];
+      
+      // Add multiple definitions to the first few words if they exist
+      if (updatedWords[0] && !updatedWords[0].isPlaceholder) {
+        // Update word with multiple definitions
+        updatedWords[0] = {
+          ...updatedWords[0],
+          definition: [
+            "Too great or extreme to be expressed in words",
+            "Too sacred to be uttered",
+            "Incapable of being expressed; indescribable or unutterable"
+          ] as unknown as string // Type assertion for testing
+        };
+      }
+      
+      if (updatedWords[1] && !updatedWords[1].isPlaceholder) {
+        // Update another word with multiple definitions
+        updatedWords[1] = {
+          ...updatedWords[1],
+          definition: [
+            "Having or showing the capacity to develop into something in the future",
+            "Relating to or denoting factors that increase the propensity to follow a particular developmental sequence"
+          ] as unknown as string // Type assertion for testing
+        };
+      }
+      
+      // Update the state with our modified words
+      setWords(updatedWords);
+    }
+  }, [words.length]);
+  
   // Show loading UI that matches theme colors
   if (!isReady || isLoading) {
     const isDark = systemColorScheme === 'dark';

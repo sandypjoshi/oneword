@@ -10,6 +10,7 @@ import themes from './colors';
 import spacing from './spacing';
 import typography, { TypographyVariant, BASE_TEXT_STYLES } from './typography';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { invalidateMeshCache } from '../utils/meshGradientGenerator';
 
 // Theme types
 type ColorMode = 'light' | 'dark' | 'system';
@@ -177,16 +178,21 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     if (appState === 'active' && colorMode === 'system') {
       // Re-apply the current mode to force context update
       setColorMode(current => current);
+      
+      // Invalidate mesh cache when system theme changes
+      invalidateMeshCache();
     }
   }, [deviceColorScheme, appState, colorMode]);
   
   // Create theme context wrapper functions to persist preferences
   const handleSetColorMode = (mode: ColorMode) => {
     setColorMode(mode);
+    invalidateMeshCache(); // Invalidate mesh cache when color mode changes
   };
   
   const handleSetThemeName = (name: ThemeName) => {
     setThemeName(name);
+    invalidateMeshCache(); // Invalidate mesh cache when theme changes
   };
   
   // Memoize the responsive typography styles

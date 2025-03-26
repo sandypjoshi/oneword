@@ -16,8 +16,10 @@ import spacing from '../../theme/spacing';
 import { useWordStore } from '../../store/wordStore';
 
 // Get screen dimensions to calculate responsive card size
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
+const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 const CARD_WIDTH = Math.min(SCREEN_WIDTH - (spacing.screenPadding * 2), 400); // Max width of 400, respecting screen padding
+// Define card height for consistent sizing
+const CARD_HEIGHT = Math.min(SCREEN_HEIGHT * 0.7, 700); // 70% of screen height, max 700px
 
 interface WordCardProps {
   /**

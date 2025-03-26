@@ -13,7 +13,7 @@ alwaysApply: false
     <Rules>
         1. The Memory Bank MUST be updated after any significant change to the project.
         2. When triggered by "update memory bank", ALL files in the Memory Bank MUST be reviewed, even if some don't require updates.
-        3. Focus particularly on activeContext.md and progress.md as they track the current state.
+        3. Focus particularly on .cursor/context/activeContext.md and .cursor/context/progress.md as they track the current state.
         4. New task logs MUST be created for each significant task completed.
         5. Implementation plans MUST be updated when project direction changes.
         6. All documentation MUST be clear, concise, and accurate.
@@ -34,12 +34,12 @@ alwaysApply: false
     
     <Instructions>
         1. After completing a significant task, create a new task log in .cursor/task-logs/.
-        2. Update activeContext.md with current focus, recent changes, and next steps.
-        3. Update progress.md & project-memo.md with completed features, in-progress features, and known issues.
+        2. Update .cursor/context/activeContext.md with current focus, recent changes, and next steps.
+        3. Update .cursor/context/progress.md & .cursor/context/project-memo.md with completed features, in-progress features, and known issues.
         4. Review and update other Memory Bank files as needed.
         5. When project direction changes, update implementation plans in .cursor/plans/.
-        6. When adding new technologies or dependencies, update techContext.md.
-        7. When discovering new patterns or architectural decisions, update systemPatterns.md.
+        6. When adding new technologies or dependencies, update .cursor/context/techContext.md.
+        7. When discovering new patterns or architectural decisions, update .cursor/context/systemPatterns.md.
     </Instructions>
 </Prompt>
 

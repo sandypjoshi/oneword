@@ -15,7 +15,8 @@ import {
   generateMeshGradient, 
   MeshData, 
   getGradientBorderColor,
-  generateSeedFromString
+  generateSeedFromString,
+  getOrGenerateMesh
 } from '../../utils/meshGradientGenerator';
 import { useCardStore } from '../../store/cardStore';
 import { useWordStore } from '../../store/wordStore';
@@ -23,9 +24,11 @@ import { Box } from '../layout';
 import spacing from '../../theme/spacing';
 
 // Get screen dimensions for responsive sizing
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
+const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 // This should match the CARD_WIDTH in WordCard.tsx
 const CARD_WIDTH = Math.min(SCREEN_WIDTH - (spacing.screenPadding * 2), 400);
+// Define card height for consistent gradient rendering
+const CARD_HEIGHT = Math.min(SCREEN_HEIGHT * 0.7, 700); // 70% of screen height, max 700px
 
 interface WordCardAnswerProps {
   /**
@@ -59,9 +62,12 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
   style,
   onFlipBack
 }) => {
-  const { colors, spacing } = useTheme();
+  const { colors, spacing, colorMode } = useTheme();
   const deviceColorScheme = useColorScheme();
-  const isDark = deviceColorScheme === 'dark';
+  
+  // Determine if dark mode is active based on color mode and device settings
+  const isDark = 
+    colorMode === 'dark' || (colorMode === 'system' && deviceColorScheme === 'dark');
   
   // Zustand store hooks
   const isWordSpeaking = useCardStore(state => state.isWordSpeaking(wordData.id));
@@ -79,6 +85,7 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
   
   // Destructure the word data
   const { 
+    id,
     word, 
     definition, 
     pronunciation, 
@@ -95,11 +102,9 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
   const userAttempts = storeWord?.userAttempts || wordData.userAttempts || 0;
   
   // Generate a consistent seed from the word for same gradient per word
-  const wordSeed = useMemo(() => {
-    const seed = generateSeedFromString(word);
-    console.log(`Generated seed for word "${word}": ${seed}`);
-    return seed;
-  }, [word]);
+  const wordSeed = useMemo(() => 
+    generateSeedFromString(word)
+  , [word]);
   
   // Handle layout change to get actual container height
   const handleLayout = useCallback((event: LayoutChangeEvent) => {
@@ -109,29 +114,21 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
     }
   }, [containerHeight]);
   
-  // Initialize mesh if not already done
-  if (!meshRef.current) {
-    console.log(`Initializing mesh for "${word}" with seed ${wordSeed}`);
-    meshRef.current = generateMeshGradient({
-      width: CARD_WIDTH,
-      height: containerHeight,
-      isDarkMode: isDark,
-      seed: wordSeed
-    });
-  }
-  
-  // Regenerate mesh when relevant props change
+  // Initialize or update mesh with caching
   useEffect(() => {
-    console.log(`Regenerating mesh for "${word}" with seed ${wordSeed}`);
-    meshRef.current = generateMeshGradient({
+    // Use either the measured height or the defined CARD_HEIGHT, whichever is larger
+    const meshHeight = Math.max(containerHeight, CARD_HEIGHT);
+    
+    // Use getOrGenerateMesh which handles caching
+    meshRef.current = getOrGenerateMesh(id, {
       width: CARD_WIDTH,
-      height: containerHeight,
+      height: meshHeight,
       isDarkMode: isDark,
       seed: wordSeed
     });
     
     setMeshVersion(prev => prev + 1); // Force re-render
-  }, [isDark, wordSeed, containerHeight]);
+  }, [id, isDark, wordSeed, containerHeight]);
   
   // Memoize border color based on theme
   const borderColor = useMemo(() => 
@@ -239,14 +236,39 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
         
         {/* Definition */}
         <View style={styles.definitionSection}>
-          <Text
-            variant="bodyMedium"
-            color={colors.text.secondary}
-            align="center"
-            style={{ textTransform: 'lowercase' }}
-          >
-            {definition}
-          </Text>
+          {Array.isArray(definition) ? (
+            // Handle multiple definitions
+            definition.map((def, index) => (
+              <React.Fragment key={index}>
+                {index > 0 && (
+                  <View 
+                    style={[
+                      styles.definitionSeparator,
+                      { backgroundColor: colors.text.secondary + '20' }
+                    ]} 
+                  />
+                )}
+                <Text
+                  variant="bodyMedium"
+                  color={colors.text.secondary}
+                  align="center"
+                  style={{ textTransform: 'lowercase' }}
+                >
+                  {index + 1}. {def}
+                </Text>
+              </React.Fragment>
+            ))
+          ) : (
+            // Handle single definition
+            <Text
+              variant="bodyMedium"
+              color={colors.text.secondary}
+              align="center"
+              style={{ textTransform: 'lowercase' }}
+            >
+              {definition}
+            </Text>
+          )}
         </View>
         
         {/* Example sentence with highlighted word */}
@@ -346,6 +368,13 @@ const styles = StyleSheet.create({
   },
   definitionSection: {
     marginBottom: 0,
+    width: '100%',
+  },
+  definitionSeparator: {
+    height: StyleSheet.hairlineWidth,
+    width: '40%',
+    alignSelf: 'center',
+    marginVertical: spacing.xs,
   },
   exampleSection: {
     marginBottom: 0,

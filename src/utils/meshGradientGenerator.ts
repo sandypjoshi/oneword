@@ -117,6 +117,69 @@ const getMemoizedIndices = (() => {
 })();
 
 /**
+ * Global mesh cache to avoid regenerating meshes
+ * Keys are wordId_isDarkMode (e.g., "ineffable_true")
+ */
+const meshCache: Record<string, MeshData> = {};
+
+// Theme version to invalidate cache when theme changes
+let themeVersion = 1;
+
+/**
+ * Increment theme version to invalidate all cached meshes
+ * Call this when the app's theme is changed
+ */
+export function invalidateMeshCache(): void {
+  themeVersion++;
+}
+
+/**
+ * Check if a mesh exists in the cache
+ */
+export function hasCachedMesh(wordId: string, isDarkMode: boolean): boolean {
+  const cacheKey = `${wordId}_${isDarkMode}_v${themeVersion}`;
+  return !!meshCache[cacheKey];
+}
+
+/**
+ * Get a mesh from the cache
+ */
+export function getCachedMesh(wordId: string, isDarkMode: boolean): MeshData | null {
+  const cacheKey = `${wordId}_${isDarkMode}_v${themeVersion}`;
+  return meshCache[cacheKey] || null;
+}
+
+/**
+ * Store a mesh in the cache
+ */
+export function cacheMesh(wordId: string, isDarkMode: boolean, mesh: MeshData): void {
+  const cacheKey = `${wordId}_${isDarkMode}_v${themeVersion}`;
+  meshCache[cacheKey] = mesh;
+}
+
+/**
+ * Generate or retrieve a cached mesh gradient
+ * 
+ * @param options Configuration options including wordId for caching
+ * @returns Complete mesh data for rendering with Skia
+ */
+export function getOrGenerateMesh(wordId: string, options: MeshGradientOptions): MeshData {
+  // Try to get from cache first
+  const cached = getCachedMesh(wordId, options.isDarkMode);
+  if (cached) {
+    return cached;
+  }
+  
+  // Generate new mesh
+  const mesh = generateMeshGradient(options);
+  
+  // Cache the result
+  cacheMesh(wordId, options.isDarkMode, mesh);
+  
+  return mesh;
+}
+
+/**
  * Generate a complete mesh gradient ready for rendering
  * 
  * @param options Configuration options for the gradient
@@ -154,7 +217,6 @@ export function generateMeshGradient(options: MeshGradientOptions): MeshData {
       const deterministicIndex = seed % gradientList.length;
       const selectedGradientId = gradientList[deterministicIndex];
       gradient = getGradientById(selectedGradientId, colorMode)!.colors;
-      console.log(`Using deterministic gradient '${selectedGradientId}' for seed ${seed}`);
     } else {
       // Fall back to random selection for unseeded cases
       gradient = getRandomGradient(colorMode).colors;
@@ -426,7 +488,7 @@ export function generateSeedFromString(str: string): number {
     hash = hash & hash; // Convert to 32bit integer
   }
   
-  return Math.abs(hash);
+  return Math.abs(hash) - 1;
 }
 
 /**

@@ -151,54 +151,54 @@ export const lightModeParams: MeshGradientParams = {
  * The exact "goldilocks" parameters for dark mode - adjusted to prevent center split
  */
 export const darkModeParams: MeshGradientParams = {
-  smoothingFactor: 0.035, // Increased for smoother transitions
-  falloffPower: 2.2, // Reduced for more gradual blending
-  noiseStrengthFactor: 0.4, // Slightly higher for more organic patterns
-  influenceMultiplier: 1.3, // Increased for more influence overlap
+  smoothingFactor: 0.03, // Slightly reduced for more defined transitions
+  falloffPower: 2.0, // Reduced for more dynamic blending
+  noiseStrengthFactor: 0.55, // Increased for more organic patterns
+  influenceMultiplier: 1.4, // Increased for more influence overlap
   controlPoints: {
     angleOffset: {
-      base: 0.25,
-      random: 0.4, // More variation in angle
+      base: 0.7, // Increased angle offset for more turbulent flows
+      random: 0.65, // Significantly more variation in angle directions
     },
-    flowMultiplier: 0.6, // Adjusted for dark mode
+    flowMultiplier: 1.1, // Increased for more dynamic flow patterns
     centerOffset: {
       x: {
-        min: -0.08, // Wider horizontal offset
-        range: 0.16, // More horizontal variation
+        min: -0.15, // Wider horizontal offset
+        range: 0.3, // More horizontal variation
       },
       y: {
-        min: -0.05,
-        range: 0.1,
+        min: -0.12, // More vertical offset
+        range: 0.24, // More vertical variation
       },
     },
-    cornerInfluence: 0.3,
+    cornerInfluence: 0.5, // Slightly increased corner influence
     cornerOffset: 0.05,
     count: {
-      base: 5,
-      random: 3, // More control points
+      base: 6, // Increased base control point count
+      random: 3, // Same random variation
     },
     radius: {
-      base: 0.25,
-      variation: 0.15,
+      base: 0.28, // Slightly larger radius
+      variation: 0.4, // More variation
     },
     influence: {
-      min: 0.35,
-      range: 0.25,
+      min: 0.4, // Stronger minimum influence
+      range: 0.3, // Wider influence range
     },
   },
   centerPoint: {
     radius: {
-      min: 0.15,
+      min: 0.12,
       max: 0.25,
     },
     influence: {
-      min: 0.4,
-      range: 0.2,
+      min: 0.45, // Stronger center influence
+      range: 0.25, // More variation
     },
   },
   corner: {
-    smoothingMultiplier: 1.5,
-    falloffMultiplier: 0.9,
+    smoothingMultiplier: 1.1, // Adjusted for balance
+    falloffMultiplier: 1.4, // Adjusted for more distinct patterns
   },
 };
 
