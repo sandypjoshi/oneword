@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useMemo, useRef, useState, useEffect } from 'react';
-import { View, StyleSheet, TouchableOpacity, StyleProp, ViewStyle, Pressable, useColorScheme, Dimensions, LayoutChangeEvent } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, StyleProp, ViewStyle, Pressable, Dimensions, LayoutChangeEvent } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
 import { Text } from '../ui';
 import AnimatedChip from '../ui/AnimatedChip';
@@ -16,7 +16,8 @@ import {
   MeshData, 
   getGradientBorderColor,
   generateSeedFromString,
-  getOrGenerateMesh
+  getOrGenerateMesh,
+  shouldRegenerateMesh
 } from '../../utils/meshGradientGenerator';
 import { useCardStore } from '../../store/cardStore';
 import { useWordStore } from '../../store/wordStore';
@@ -62,20 +63,19 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
   style,
   onFlipBack
 }) => {
-  const { colors, spacing, colorMode } = useTheme();
-  const deviceColorScheme = useColorScheme();
+  const { colors, spacing, effectiveColorMode } = useTheme();
   
-  // Determine if dark mode is active based on color mode and device settings
-  const isDark = 
-    colorMode === 'dark' || (colorMode === 'system' && deviceColorScheme === 'dark');
+  // Use the centralized effectiveColorMode
+  const isDark = effectiveColorMode === 'dark';
   
   // Zustand store hooks
   const isWordSpeaking = useCardStore(state => state.isWordSpeaking(wordData.id));
   const speakWord = useCardStore(state => state.speakWord);
   const words = useWordStore(state => state.words);
   
-  // Use useRef for mesh data to prevent unnecessary re-renders
+  // Use useRef for mesh data and theme version tracking
   const meshRef = useRef<MeshData | null>(null);
+  const themeVersionRef = useRef<number>(1);
   
   // Use useState for forcing re-renders when mesh changes
   const [meshVersion, setMeshVersion] = useState(0);
@@ -114,20 +114,27 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
     }
   }, [containerHeight]);
   
-  // Initialize or update mesh with caching
+  // Initialize or update mesh with proper theme change detection
   useEffect(() => {
+    // Check if we need to regenerate due to theme changes
+    const shouldRegenerate = shouldRegenerateMesh(themeVersionRef.current);
+    
     // Use either the measured height or the defined CARD_HEIGHT, whichever is larger
     const meshHeight = Math.max(containerHeight, CARD_HEIGHT);
     
-    // Use getOrGenerateMesh which handles caching
-    meshRef.current = getOrGenerateMesh(id, {
-      width: CARD_WIDTH,
-      height: meshHeight,
-      isDarkMode: isDark,
-      seed: wordSeed
-    });
-    
-    setMeshVersion(prev => prev + 1); // Force re-render
+    if (shouldRegenerate || !meshRef.current) {
+      // Use getOrGenerateMesh which handles caching
+      meshRef.current = getOrGenerateMesh(id, {
+        width: CARD_WIDTH,
+        height: meshHeight,
+        isDarkMode: isDark,
+        seed: wordSeed
+      });
+      
+      // Update theme version to track regeneration
+      themeVersionRef.current = Date.now();
+      setMeshVersion(prev => prev + 1); // Force re-render
+    }
   }, [id, isDark, wordSeed, containerHeight]);
   
   // Memoize border color based on theme

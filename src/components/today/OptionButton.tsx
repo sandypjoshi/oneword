@@ -13,7 +13,6 @@ import {
 import { useTheme } from '../../theme';
 import { Text } from '../ui';
 import { radius, borderWidth } from '../../theme/styleUtils';
-import { useColorScheme } from 'react-native';
 import { FONT_SIZES } from '../../theme/typography';
 
 export type OptionState = 'default' | 'selected' | 'correct' | 'incorrect' | 'disabled';
@@ -73,8 +72,7 @@ interface OptionButtonProps {
 /**
  * Get background color based on state
  */
-const getBackgroundColor = (state: OptionState, colors: any, colorScheme: 'light' | 'dark') => {
-  const isDark = colorScheme === 'dark';
+const getBackgroundColor = (state: OptionState, colors: any, isDark: boolean) => {
   switch (state) {
     case 'selected':
       return colors.background.selected;
@@ -93,8 +91,7 @@ const getBackgroundColor = (state: OptionState, colors: any, colorScheme: 'light
 /**
  * Get border color based on state
  */
-const getBorderColor = (state: OptionState, colors: any, colorScheme: 'light' | 'dark') => {
-  const isDark = colorScheme === 'dark';
+const getBorderColor = (state: OptionState, colors: any, isDark: boolean) => {
   switch (state) {
     case 'selected':
       return colors.border.focus;
@@ -113,8 +110,7 @@ const getBorderColor = (state: OptionState, colors: any, colorScheme: 'light' | 
 /**
  * Get text color based on state
  */
-const getTextColor = (state: OptionState, colors: any, colorScheme: 'light' | 'dark') => {
-  const isDark = colorScheme === 'dark';
+const getTextColor = (state: OptionState, colors: any, isDark: boolean) => {
   switch (state) {
     case 'selected':
       return colors.text.info;
@@ -141,9 +137,8 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
   style,
   forceSmallFont = false
 }) => {
-  const { colors, spacing, typography } = useTheme();
-  const colorScheme = useColorScheme() || 'light';
-  const isDark = colorScheme === 'dark';
+  const { colors, spacing, typography, effectiveColorMode } = useTheme();
+  const isDark = effectiveColorMode === 'dark';
   
   // Animation value for shake effect
   const shakeAnimation = useRef(new Animated.Value(0)).current;
@@ -301,8 +296,8 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
       marginBottom: spacing.sm,
       width: '100%' as const,
       minHeight: MIN_BUTTON_HEIGHT,
-      backgroundColor: getBackgroundColor(state, colors, colorScheme),
-      borderColor: getBorderColor(state, colors, colorScheme),
+      backgroundColor: getBackgroundColor(state, colors, isDark),
+      borderColor: getBorderColor(state, colors, isDark),
       borderWidth: hasBorder ? (state === 'default' ? borderWidth.hairline : borderWidth.hairline) : borderWidth.none,
       opacity: isPressed ? 0.7 : 1,
       justifyContent: 'center' as const,
@@ -311,10 +306,10 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
       textTransform: 'lowercase' as const,
       paddingVertical: spacing.xs,
     }
-  }), [state, colors, spacing, colorScheme, hasBorder, isPressed]);
+  }), [state, colors, spacing, isDark, hasBorder, isPressed]);
   
   // Get text color based on state
-  const textColor = getTextColor(state, colors, colorScheme);
+  const textColor = getTextColor(state, colors, isDark);
   
   // Apply shake animation transform
   const animatedStyle = {

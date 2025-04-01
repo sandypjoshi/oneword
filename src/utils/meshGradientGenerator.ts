@@ -122,15 +122,70 @@ const getMemoizedIndices = (() => {
  */
 const meshCache: Record<string, MeshData> = {};
 
+// Mesh generation queue to prevent CPU spikes
+const meshGenerationQueue: Array<() => void> = [];
+let isProcessingQueue = false;
+
+/**
+ * Queue a mesh generation task to be processed when CPU is available
+ * This prevents frame drops by spreading heavy calculations over time
+ */
+export function queueMeshGeneration(generationFn: () => void): void {
+  meshGenerationQueue.push(generationFn);
+  
+  if (!isProcessingQueue) {
+    processNextMeshGeneration();
+  }
+}
+
+/**
+ * Process the next mesh generation task in the queue
+ * Uses requestAnimationFrame to schedule work between frames
+ */
+function processNextMeshGeneration(): void {
+  if (meshGenerationQueue.length === 0) {
+    isProcessingQueue = false;
+    return;
+  }
+  
+  isProcessingQueue = true;
+  const nextGeneration = meshGenerationQueue.shift();
+  
+  // Use requestAnimationFrame to spread work across frames
+  requestAnimationFrame(() => {
+    nextGeneration?.();
+    // Continue processing queue in next frame
+    processNextMeshGeneration();
+  });
+}
+
 // Theme version to invalidate cache when theme changes
 let themeVersion = 1;
+let pendingInvalidations = 0;
 
 /**
  * Increment theme version to invalidate all cached meshes
  * Call this when the app's theme is changed
  */
 export function invalidateMeshCache(): void {
-  themeVersion++;
+  // We batch invalidations that happen in quick succession (e.g., during app resume)
+  pendingInvalidations++;
+  
+  // Debounce invalidation to prevent multiple close invalidations
+  setTimeout(() => {
+    if (pendingInvalidations > 0) {
+      themeVersion++;
+      pendingInvalidations = 0;
+    }
+  }, 50);
+}
+
+/**
+ * Check if a mesh needs regeneration due to theme change
+ * @param lastVersion The theme version when this mesh was last generated
+ */
+export function shouldRegenerateMesh(lastVersion: number): boolean {
+  return lastVersion !== themeVersion;
 }
 
 /**
@@ -159,6 +214,7 @@ export function cacheMesh(wordId: string, isDarkMode: boolean, mesh: MeshData): 
 
 /**
  * Generate or retrieve a cached mesh gradient
+ * Added version tracking for theme changes
  * 
  * @param options Configuration options including wordId for caching
  * @returns Complete mesh data for rendering with Skia
@@ -170,17 +226,29 @@ export function getOrGenerateMesh(wordId: string, options: MeshGradientOptions):
     return cached;
   }
   
-  // Generate new mesh
-  const mesh = generateMeshGradient(options);
+  // Queue generation for better performance
+  let generatedMesh: MeshData | null = null;
+  
+  // For initial rendering, generate immediately to avoid blank screens
+  generatedMesh = generateMeshGradient(options);
   
   // Cache the result
-  cacheMesh(wordId, options.isDarkMode, mesh);
+  if (generatedMesh) {
+    cacheMesh(wordId, options.isDarkMode, generatedMesh);
+  }
   
-  return mesh;
+  // Queue regeneration for next available frame
+  queueMeshGeneration(() => {
+    const mesh = generateMeshGradient(options);
+    cacheMesh(wordId, options.isDarkMode, mesh);
+  });
+  
+  return generatedMesh;
 }
 
 /**
  * Generate a complete mesh gradient ready for rendering
+ * Performance optimized to reduce CPU usage
  * 
  * @param options Configuration options for the gradient
  * @returns Complete mesh data for rendering with Skia
@@ -194,6 +262,11 @@ export function generateMeshGradient(options: MeshGradientOptions): MeshData {
     resolution = DEFAULT_RESOLUTION,
     seed
   } = options;
+  
+  // For extremely small sizes, return simplified mesh to improve performance
+  if (width < 10 || height < 10) {
+    return generateSimplifiedMesh(width, height, isDarkMode, customColors);
+  }
   
   const ROWS = resolution;
   const COLS = resolution;
@@ -350,9 +423,9 @@ export function generateMeshGradient(options: MeshGradientOptions): MeshData {
   });
 
   // Create optimized noise field
-  const noiseField: NoisePoint[][] = Array(ROWS);
+  const noiseField: NoisePoint[][] = [];
   for (let y = 0; y < ROWS; y++) {
-    noiseField[y] = Array(COLS);
+    noiseField[y] = [];
     for (let x = 0; x < COLS; x++) {
       const nx = x / (COLS - 1);
       const ny = y / (ROWS - 1);
@@ -471,6 +544,44 @@ export function generateMeshGradient(options: MeshGradientOptions): MeshData {
   // Get memoized indices for this resolution
   const indices = getMemoizedIndices(ROWS, COLS);
 
+  return { points, colors, indices };
+}
+
+/**
+ * Generate a simplified mesh for small sizes or during transitions
+ * This is much faster than the full mesh generator
+ */
+function generateSimplifiedMesh(width: number, height: number, isDarkMode: boolean, customColors?: string[]): MeshData {
+  // Generate a very simple 2x2 mesh gradient
+  const ROWS = 2;
+  const COLS = 2;
+  
+  const points: Point[] = [];
+  const colors: string[] = [];
+  
+  // Get colors
+  let gradient: string[];
+  if (customColors && customColors.length >= 2) {
+    gradient = customColors;
+  } else {
+    const colorMode: ColorMode = isDarkMode ? 'dark' : 'light';
+    gradient = getRandomGradient(colorMode).colors;
+  }
+  
+  // Create simple points and colors
+  points.push({ x: 0, y: 0 });
+  points.push({ x: width, y: 0 });
+  points.push({ x: 0, y: height });
+  points.push({ x: width, y: height });
+  
+  colors.push(gradient[0]);
+  colors.push(gradient[gradient.length > 1 ? 1 : 0]);
+  colors.push(gradient[gradient.length > 2 ? 2 : 0]);
+  colors.push(gradient[gradient.length > 3 ? 3 : 1]);
+  
+  // Simple indices for a 2x2 grid
+  const indices = [0, 1, 2, 1, 3, 2];
+  
   return { points, colors, indices };
 }
 

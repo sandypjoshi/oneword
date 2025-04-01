@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useRef, useState } from 'react';
-import { View, StyleSheet, Text, Dimensions, useColorScheme, Pressable } from 'react-native';
+import { View, StyleSheet, Text, Dimensions, Pressable } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
 import {
   Canvas,
@@ -357,113 +357,58 @@ interface MeshGradientCardProps {
   description: string;
 }
 
-const MeshGradientCard: React.FC<MeshGradientCardProps> = React.memo(({
-  title,
-  description,
-}) => {
-  const theme = useTheme();
-  const deviceColorScheme = useColorScheme();
-  const isDark = deviceColorScheme === 'dark';
+const MeshGradientCard: React.FC<MeshGradientCardProps> = ({ title, description }) => {
+  const { spacing, typography, colors, effectiveColorMode } = useTheme();
+  const isDark = effectiveColorMode === 'dark';
+  const [mesh, setMesh] = useState<MeshData | null>(null);
   
-  // Use useRef for mesh data to prevent unnecessary re-renders
-  const meshRef = useRef<MeshData | null>(null);
-  
-  // Use useState for forcing re-renders when mesh changes
-  const [meshVersion, setMeshVersion] = useState(0);
-  
-  // Initialize mesh if not already done
-  if (!meshRef.current) {
-    meshRef.current = createMeshPoints(isDark);
+  const generateGradientOnMount = useCallback(() => {
+    setMesh(createMeshPoints(isDark));
+  }, [isDark]);
+
+  // Generate gradient when component mounts
+  useMemo(() => {
+    generateGradientOnMount();
+  }, [generateGradientOnMount]);
+
+  // Regenerate gradient when pressed
+  const handlePress = useCallback(() => {
+    setMesh(createMeshPoints(isDark));
+  }, [isDark]);
+
+  // If mesh not generated yet, show loading placeholder
+  if (!mesh) {
+    return (
+      <View style={styles.container}>
+        <View style={[styles.card, { backgroundColor: isDark ? '#1A2133' : '#F0F5FF' }]}>
+          <Text style={[styles.title, { color: isDark ? '#FFFFFF' : '#000000' }]}>Loading...</Text>
+        </View>
+      </View>
+    );
   }
-  
-  // Update mesh when color scheme changes
-  React.useEffect(() => {
-    meshRef.current = createMeshPoints(isDark);
-    setMeshVersion(prev => prev + 1); // Force re-render
-    
-    // Return cleanup function
-    return () => {
-      // No specific cleanup needed for mesh data
-    };
-  }, [isDark]);
-
-  // Memoize border color based on theme
-  const borderColor = useMemo(() => 
-    isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.05)'
-  , [isDark]);
-  
-  // Use useCallback for event handlers to prevent unnecessary recreations
-  const handleChangeGradient = useCallback(() => {
-    meshRef.current = createMeshPoints(isDark);
-    setMeshVersion(prev => prev + 1); // Force re-render
-  }, [isDark]);
-  
-  // Extract mesh data for rendering
-  const mesh = meshRef.current;
-
-  // Memoize text colors
-  const titleColor = useMemo(() => 
-    isDark ? '#FFFFFF' : '#000000'
-  , [isDark]);
-  
-  const descriptionColor = useMemo(() => 
-    isDark ? '#EEEEEE' : '#333333'
-  , [isDark]);
-  
-  const buttonBackgroundColor = useMemo(() => 
-    isDark ? '#FFFFFF20' : '#00000010'
-  , [isDark]);
-
-  // Early return if mesh is not ready
-  if (!mesh) return null;
 
   return (
     <View style={styles.container}>
-      <View style={styles.card}>
-        {/* Canvas for gradient */}
-        <Canvas style={styles.canvas}>
-          <Group>
-            <Vertices
-              vertices={mesh.points}
-              colors={mesh.colors}
-              indices={mesh.indices}
-            />
-          </Group>
-        </Canvas>
-        
-        {/* Inner border overlay with blend mode */}
-        <View style={[
-          styles.innerBorder, 
-          { borderColor }
-        ]} />
-        
-        {/* Content */}
-        <View style={styles.content}>
-          <Text style={[styles.title, { color: titleColor }]}>
-            {title}
-          </Text>
-          <Text style={[styles.description, { color: descriptionColor }]}>
-            {description}
-          </Text>
+      <Pressable onPress={handlePress}>
+        <View style={styles.card}>
+          <Canvas style={styles.canvas}>
+            <Group>
+              <Vertices
+                vertices={mesh.points}
+                colors={mesh.colors}
+                indices={mesh.indices}
+              />
+            </Group>
+          </Canvas>
+          <View style={styles.content}>
+            <Text style={[styles.title, { color: isDark ? '#FFFFFF' : '#0A0A0A' }]}>{title}</Text>
+            <Text style={[styles.description, { color: isDark ? '#E0E0E0' : '#444444' }]}>{description}</Text>
+          </View>
         </View>
-      </View>
-      <Pressable 
-        style={({ pressed }) => [
-          styles.button,
-          { 
-            opacity: pressed ? 0.8 : 1,
-            backgroundColor: buttonBackgroundColor 
-          }
-        ]}
-        onPress={handleChangeGradient}
-      >
-        <Text style={[styles.buttonText, { color: titleColor }]}>
-          Change Gradient
-        </Text>
       </Pressable>
     </View>
   );
-});
+};
 
 // Memoize styles to prevent recreation on each render
 const styles = StyleSheet.create({

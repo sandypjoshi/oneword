@@ -16,7 +16,6 @@ import { wordOfDayService } from '../src/services/wordOfDayService';
 import { DifficultySelector } from '../src/components/onboarding';
 import { DIFFICULTY_LEVELS } from '../src/constants';
 import themes from '../src/theme/colors';
-import { useColorScheme } from 'react-native';
 import { useTheme } from '../src/theme/ThemeProvider';
 
 // Import logo image
@@ -34,8 +33,8 @@ export default function OnboardingScreen() {
   const [isNavigating, setIsNavigating] = useState(false);
   const [currentStep, setCurrentStep] = useState<OnboardingStep>(OnboardingStep.WELCOME);
   const [selectedDifficulty, setSelectedDifficulty] = useState<string | null>(null);
-  const colorScheme = useColorScheme();
-  const isDark = colorScheme === 'dark';
+  const { effectiveColorMode } = useTheme();
+  const isDark = effectiveColorMode === 'dark';
   const fallbackColors = isDark ? themes.default.dark : themes.default.light;
   
   // Animation values

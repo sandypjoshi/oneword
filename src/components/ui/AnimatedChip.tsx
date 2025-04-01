@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Animated, StyleSheet, StyleProp, ViewStyle, Easing, useColorScheme } from 'react-native';
+import { View, Animated, StyleSheet, StyleProp, ViewStyle, Easing } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Chip, { ChipProps } from './Chip';
 import { useTheme } from '../../theme/ThemeProvider';
@@ -44,11 +44,8 @@ const AnimatedChip: React.FC<AnimatedChipProps> = ({
   iconColor,
   ...chipProps
 }) => {
-  const { colors, colorMode } = useTheme();
-  const deviceColorScheme = useColorScheme();
-  
-  // Determine if dark mode is active
-  const isDark = colorMode === 'dark' || (colorMode === 'system' && deviceColorScheme === 'dark');
+  const { colors, effectiveColorMode } = useTheme();
+  const isDark = effectiveColorMode === 'dark';
 
   // Determine colors based on variant and theme
   const getVariantColors = () => {
@@ -131,11 +128,12 @@ const AnimatedChip: React.FC<AnimatedChipProps> = ({
       style={[styles.outerContainer]}
       onLayout={(e) => setWidth(e.nativeEvent.layout.width)}
     >
-      <View style={[styles.container, style, variantColors.containerStyle]}>
+      <View style={[styles.container, style]}>
         <Chip 
           backgroundColor={variantColors.background}
           textColor={variantColors.text}
           iconColor={variantColors.icon}
+          style={variantColors.containerStyle}
           {...chipProps} 
         />
         

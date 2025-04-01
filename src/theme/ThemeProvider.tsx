@@ -4,7 +4,7 @@
  * Supports multiple themes, each with light and dark variants
  */
 
-import React, { createContext, useContext, useEffect, useState, useMemo, useCallback } from 'react';
+import React, { createContext, useContext, useEffect, useState, useMemo, useCallback, useRef } from 'react';
 import { useColorScheme, AppState, AppStateStatus, useWindowDimensions, TextStyle, View, Animated } from 'react-native';
 import themes from './colors';
 import spacing from './spacing';
@@ -33,6 +33,7 @@ export type ThemeContextType = {
   themeLoaded: boolean;
   colorMode: ColorMode;
   themeName: ThemeName;
+  effectiveColorMode: 'light' | 'dark'; // Added to provide single source of truth
   setColorMode: (mode: ColorMode) => void;
   setThemeName: (theme: ThemeName) => void;
 };
@@ -41,6 +42,18 @@ export type ThemeContextType = {
 const STORAGE_KEYS = {
   COLOR_MODE: '@oneword:color_mode',
   THEME_NAME: '@oneword:theme_name',
+};
+
+// Debounce utility function
+const debounce = <F extends (...args: any[]) => any>(func: F, wait: number) => {
+  let timeout: ReturnType<typeof setTimeout> | null = null;
+  
+  return function(...args: Parameters<F>) {
+    if (timeout) {
+      clearTimeout(timeout);
+    }
+    timeout = setTimeout(() => func(...args), wait);
+  };
 };
 
 // Default theme values
@@ -57,6 +70,7 @@ const defaultThemeValues: ThemeContextType = {
   themeLoaded: false,
   colorMode: 'system',
   themeName: 'default',
+  effectiveColorMode: 'light',
   setColorMode: () => {},
   setThemeName: () => {},
 };
@@ -93,6 +107,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   const [colorMode, setColorMode] = useState<ColorMode>(defaultColorMode);
   const [themeName, setThemeName] = useState<ThemeName>(defaultThemeName);
   const [appState, setAppState] = useState<AppStateStatus>(AppState.currentState);
+  const isThemeChangingRef = useRef(false);
   
   // Get device dimensions for responsive typography
   const { width } = useWindowDimensions();
@@ -147,42 +162,61 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     saveThemePreferences();
   }, [colorMode, themeName]);
   
-  // Determine if dark mode is active based on color mode and device settings
-  const isDark = 
-    colorMode === 'dark' || (colorMode === 'system' && deviceColorScheme === 'dark');
+  // Centralize effective color mode determination - single source of truth
+  const effectiveColorMode = useMemo((): 'light' | 'dark' => {
+    return colorMode === 'system' 
+      ? deviceColorScheme === 'dark' ? 'dark' : 'light'
+      : colorMode;
+  }, [colorMode, deviceColorScheme]);
   
   // Get the appropriate theme set
   const themeSet = themes[themeName] || themes.default;
   
   // Get the appropriate color set based on light/dark mode
-  const activeColors = isDark ? themeSet.dark : themeSet.light;
+  const activeColors = effectiveColorMode === 'dark' ? themeSet.dark : themeSet.light;
   
   // Get theme-specific typography
   const themeTypography = typography.createTextStyles(themeName);
   
+  // Debounced app state change handler to prevent rapid theme changes
+  const debouncedAppStateChange = useCallback(
+    debounce((nextAppState: AppStateStatus) => {
+      setAppState(nextAppState);
+    }, 100),
+    []
+  );
+  
   // Listen for app state changes to detect theme changes
   useEffect(() => {
-    const subscription = AppState.addEventListener('change', nextAppState => {
-      setAppState(nextAppState);
-    });
+    const subscription = AppState.addEventListener('change', debouncedAppStateChange);
 
     return () => {
       subscription.remove();
     };
-  }, []);
+  }, [debouncedAppStateChange]);
+  
+  // Track the previous effective color mode to detect actual changes
+  const prevEffectiveColorMode = useRef<'light' | 'dark' | null>(null);
   
   // Update when device color scheme changes or when app comes to foreground
   useEffect(() => {
-    // Force re-render when app comes back to active state
-    // This ensures we capture any system theme changes that happened while the app was in background
-    if (appState === 'active' && colorMode === 'system') {
-      // Re-apply the current mode to force context update
-      setColorMode(current => current);
+    // Only trigger updates when there's an actual change in the effective color mode
+    if (appState === 'active' && 
+        colorMode === 'system' && 
+        prevEffectiveColorMode.current !== effectiveColorMode) {
+        
+      // Batch visual updates with mesh cache invalidation
+      if (!isThemeChangingRef.current) {
+        // Schedule mesh cache invalidation after render
+        requestAnimationFrame(() => {
+          invalidateMeshCache();
+        });
+      }
       
-      // Invalidate mesh cache when system theme changes
-      invalidateMeshCache();
+      // Update previous value
+      prevEffectiveColorMode.current = effectiveColorMode;
     }
-  }, [deviceColorScheme, appState, colorMode]);
+  }, [effectiveColorMode, appState, colorMode]);
   
   // Add state for theme transition
   const [isThemeChanging, setIsThemeChanging] = useState(false);
@@ -190,57 +224,69 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   
   // Modify the theme context wrapper functions to include transition
   const handleSetColorMode = (mode: ColorMode) => {
-    // Start the transition animation
+    // Prevent multiple transitions at once
+    if (isThemeChanging || isThemeChangingRef.current) return;
+    
     setIsThemeChanging(true);
+    isThemeChangingRef.current = true;
+    
+    // First do the visual transition
     Animated.timing(fadeAnim, {
       toValue: 0.15,
-      duration: 150,
+      duration: 100,
       useNativeDriver: true,
-    }).start();
-
-    // Change the theme after a small delay
-    setTimeout(() => {
+    }).start(() => {
+      // Change actual theme values during the transition
       setColorMode(mode);
-      invalidateMeshCache(); // Invalidate mesh cache when color mode changes
       
-      // End the transition animation
-      setTimeout(() => {
+      // Schedule mesh cache invalidation AFTER theme is updated
+      requestAnimationFrame(() => {
+        invalidateMeshCache();
+        
+        // Complete the transition
         Animated.timing(fadeAnim, {
           toValue: 0,
-          duration: 200,
+          duration: 150,
           useNativeDriver: true,
         }).start(() => {
           setIsThemeChanging(false);
+          isThemeChangingRef.current = false;
         });
-      }, 100);
-    }, 50);
+      });
+    });
   };
   
   const handleSetThemeName = (name: ThemeName) => {
-    // Start the transition animation
+    // Prevent multiple transitions at once
+    if (isThemeChanging || isThemeChangingRef.current) return;
+    
     setIsThemeChanging(true);
+    isThemeChangingRef.current = true;
+    
+    // First do the visual transition
     Animated.timing(fadeAnim, {
       toValue: 0.15,
-      duration: 150,
+      duration: 100,
       useNativeDriver: true,
-    }).start();
-
-    // Change the theme after a small delay
-    setTimeout(() => {
+    }).start(() => {
+      // Change actual theme values during the transition
       setThemeName(name);
-      invalidateMeshCache(); // Invalidate mesh cache when theme changes
       
-      // End the transition animation
-      setTimeout(() => {
+      // Schedule mesh cache invalidation AFTER theme is updated
+      requestAnimationFrame(() => {
+        invalidateMeshCache();
+        
+        // Complete the transition
         Animated.timing(fadeAnim, {
           toValue: 0,
-          duration: 200,
+          duration: 150,
           useNativeDriver: true,
         }).start(() => {
           setIsThemeChanging(false);
+          isThemeChangingRef.current = false;
         });
-      }, 100);
-    }, 50);
+      });
+    });
   };
   
   // Memoize the responsive typography styles
@@ -285,6 +331,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     themeLoaded: true,
     colorMode,
     themeName,
+    effectiveColorMode,
     setColorMode: handleSetColorMode,
     setThemeName: handleSetThemeName,
   }), [
@@ -295,6 +342,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     fontScale,
     colorMode,
     themeName,
+    effectiveColorMode,
     handleSetColorMode,
     handleSetThemeName
   ]);
@@ -311,7 +359,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundColor: isDark ? 'white' : 'black',
+            backgroundColor: effectiveColorMode === 'dark' ? 'white' : 'black',
             opacity: fadeAnim,
             pointerEvents: 'none',
             zIndex: 9999,

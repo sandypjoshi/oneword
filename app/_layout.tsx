@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Stack, useRouter, SplashScreen, useSegments } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { View, ActivityIndicator, Image, StyleSheet, Animated, useColorScheme } from 'react-native';
+import { View, ActivityIndicator, Image, StyleSheet, Animated } from 'react-native';
 import { ThemeProvider, useTheme } from '../src/theme/ThemeProvider';
 import { checkOnboardingStatus } from '../src/utils/onboarding';
 import { useFonts } from 'expo-font';
@@ -38,9 +38,8 @@ const MainContent = () => {
   const [fadeAnim] = useState(new Animated.Value(1));
   const router = useRouter();
   const segments = useSegments();
-  const { colors, spacing } = useTheme();
-  const colorScheme = useColorScheme();
-  const isDark = colorScheme === 'dark';
+  const { colors, spacing, effectiveColorMode } = useTheme();
+  const isDark = effectiveColorMode === 'dark';
   
   // Load the fonts
   const [fontsLoaded] = useFonts({
