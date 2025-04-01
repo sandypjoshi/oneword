@@ -19,7 +19,7 @@
 
 ### UI Components and Structure
 - ✅ Consistent theme implementation with useThemeReady hook
-- ✅ Common layout components (Box, Text) with theme integration
+- ✅ Common layout components (**Box (enhanced)**, Text) with theme integration
 - ✅ Icon component with multiple variants (Linear and Bold)
 - ✅ Tab navigation with custom icons
 - ✅ Theme safety checks and default values
@@ -37,10 +37,10 @@
 - ✅ Word Card carousel using FlashList with optimized performance
 - ✅ Properly memoized rendering functions to prevent unnecessary rerenders
 - ✅ Dedicated EmptyWordCard component for days without words
-- ✅ Horizontal date selector with interactive selection
+- ✅ Horizontal date selector with interactive selection (Note: Current implementation in `app/(tabs)/index.tsx` is pagination dots)
 - ✅ Proper card ordering with today at rightmost position
 - ✅ Mock data service with 14 days of sample words
-- ✅ Synchronized interaction between date selection and card display
+- ✅ Synchronized interaction between pagination dots and card display
 - ✅ Initial scrolling to today's word (most recent)
 - ✅ Clear code documentation to prevent regressions
 - ✅ Resolved gesture conflicts between scrolling and button interactions
@@ -71,6 +71,7 @@
 - ✅ Improved error handling throughout the app
 - ✅ Memory bank with comprehensive documentation
 - ✅ Established React performance optimization patterns
+- ✅ **Refactored Box component for full theme integration**
 
 ### Performance Optimization
 - ✅ FlashList implementation for better performance with large datasets
@@ -109,13 +110,15 @@
 ## In Progress Features
 
 ### Code Quality Improvements
+- 🔄 Refactoring large components/screens (`app/(tabs)/index.tsx`, `OptionButton`, etc.)
 - 🔄 Implementing comprehensive component testing strategy
 - 🔄 Enhancing JSDoc documentation across key components
 - 🔄 Improving API error handling in service layers
-- 🔄 Transitioning from mock data to real API endpoints
+- 🔄 **Actively Transitioning from mock data to real API endpoints (High Priority)**
 - 🔄 Ensuring consistent loading state implementation
 
 ### Data Integration
+- 🔄 **Implementing Supabase data fetching layer (High Priority)**
 - 🔄 Connecting the Word of Day UI with Supabase data
 - 🔄 Adding user interactions (saving, sharing) for words
 - 🔄 Implementing featured words system
@@ -162,7 +165,7 @@
 - ⏳ Update project README with development guidelines
 
 ### Service Layer Enhancement
-- ⏳ Replace mock services with real API implementations
+- ⏳ **Complete replacement of mock services with real API implementations (High Priority)**
 - ⏳ Implement proper error handling and recovery
 - ⏳ Add caching layer for API responses
 - ⏳ Implement offline support for critical features
@@ -172,6 +175,9 @@
 - ⏳ Create loading state components for consistent UX
 - ⏳ Implement error state components for consistent error handling
 - ⏳ Ensure accessibility compliance across all UI elements
+
+### Project Structure
+- ⏳ Consolidate `lib` and `src` directories (`hooks`, `types`, `api`/`services`).
 
 ## Planned Features
 
@@ -195,19 +201,13 @@
 
 ## Known Issues
 
-1. **Onboarding Navigation**: Sometimes navigation from onboarding to main app can show a brief flash
-   - Current mitigation: Added Stack navigator with proper animations
-   - Status: Mostly resolved, minor edge cases remain
-   - Next steps: Further optimize transition timing
-
-2. **Content Quality Variance**: Quality of generated content varies
-   - Current mitigation: Improved prompts and examples
-   - Status: To be reviewed after full processing
-   - Next steps: Sample random words across difficulty levels for manual review
-
-3. **Terminal Dashboard Compatibility**: Some terminal emulators may not display ANSI colors correctly
-   - Current mitigation: Using basic color codes for maximum compatibility
-   - Status: Working in standard terminals
+1.  **No Backend Integration**: The application frontend **currently relies entirely on mock data**. Real-time data fetching from Supabase is not yet implemented.
+2.  **Large Components**: Several components/screens (`app/(tabs)/index.tsx`, `OptionButton.tsx`, `WordCardAnswer.tsx`, `meshGradientGenerator.ts`) are complex and require refactoring.
+3. **Low Test Coverage**: Lack of comprehensive automated tests.
+4. **Onboarding Navigation**: Sometimes navigation from onboarding to main app can show a brief flash (Status: Mostly resolved, minor edge cases remain)
+5. **Content Quality Variance**: Quality of generated content varies (Status: To be reviewed after full processing)
+6. **Terminal Dashboard Compatibility**: Some terminal emulators may not display ANSI colors correctly (Status: Working in standard terminals)
+7. **Potential Gesture Conflicts**: Need ongoing monitoring for interaction conflicts, especially during swipes.
 
 ## Statistics
 
@@ -228,7 +228,8 @@
 | Theme loading issues | Medium | Low | useThemeReady hook, default values |
 | Content quality issues | Medium | Medium | Quality review, prompt refinement |
 | Data consistency | Medium | Low | Database integrity checks |
-| User experience issues | High | Medium | Usability testing, feedback collection | 
+| User experience issues | High | Medium | Usability testing, feedback collection |
+| Backend integration timeline | High | Medium | Regular progress updates, communication with stakeholders |
 
 ## Recently Completed Features (March 22, 2024)
 

@@ -4,8 +4,9 @@
 OneWord is a vocabulary learning application that helps users expand their vocabulary through interactive word games, challenges, and educational content. The app presents users with new words, their definitions, and pronunciation, along with contextual examples and quizzes to reinforce learning.
 
 ## Architecture
-- React Native (Expo) for cross-platform mobile development
-- Supabase for backend database and authentication
+- React Native (Expo) for cross-platform mobile development (New Architecture enabled)
+- Supabase for backend database and authentication (**Note: Frontend integration pending**)
+- Zustand for state management
 - Custom design system with tokens for consistent styling
 
 ## Key Design Patterns
@@ -16,29 +17,29 @@ OneWord is a vocabulary learning application that helps users expand their vocab
 - Controlled components with clear prop interfaces
 
 ### State Management
-- Context API for global state (theme, user preferences)
-- Local component state for UI interactions
-- Async storage for persistent data
+- Zustand for managing application state (word data, card interactions, user progress)
+- Context API used primarily for ThemeProvider
+- Async storage for persisting theme preferences and user progress (via Zustand middleware)
 
 ### Styling Approach
-- Design token system as single source of truth
-- Theme-based styling with light/dark mode support
-- Responsive layout using flexbox patterns
+- Design token system (colors, typography, spacing) as single source of truth
+- Theme-based styling (`ThemeProvider`, `useTheme` hook) with light/dark modes and multiple themes (Default, Quill)
+- Foundational layout components (`Box`, `Text`) integrate directly with theme tokens via props
+- Responsive layout using flexbox patterns (via `Box` component)
 - Semantic color tokens for consistent theming
-- Two theme options: Default and Quill, each with light/dark modes
 
 ### Animation Patterns
-- Declarative animations using Animated API
-- Consistent timing and easing functions via tokens
-- Progressive feedback for user interactions
+- Reanimated for performant UI animations (e.g., card flip)
+- Animated API (used in `ThemeProvider` transition, potentially elsewhere)
+- Consistent timing and easing functions via tokens (Potential: verify if animation tokens exist)
+- Progressive feedback for user interactions (e.g., Haptics)
 
 ## Current Focus
-- Implementing a comprehensive testing strategy
-- Enhancing documentation and JSDoc comments
-- Improving API error handling in service layers
-- Transitioning from mock data to real API implementations
-- Improving UI component contrast and accessibility
-- Ensuring consistent loading states across components
+- **Implementing Supabase data fetching** and transitioning the app from mock data.
+- Refactoring large components (`app/(tabs)/index.tsx`, `OptionButton`, etc.).
+- Implementing a comprehensive testing strategy.
+- Enhancing UI with Skia effects (noise texture).
+- Improving error handling and loading states.
 
 ## Code Conventions
 - Typescript for type safety
@@ -49,12 +50,13 @@ OneWord is a vocabulary learning application that helps users expand their vocab
   - camelCase for variables and functions
   - UPPER_CASE for constants
 
-## Testing Strategy
-- Unit tests for utility functions
-- Component tests for UI logic
-- End-to-end tests for critical user flows
-- Snapshot tests for UI components
-- Accessibility testing for all interactive elements
+## Testing Strategy (Planned)
+- Unit tests for utility functions, hooks, stores.
+- Component tests (React Native Testing Library) for UI logic.
+- Integration tests for key user flows.
+- End-to-end tests (potentially using Maestro or Detox) for critical user journeys.
+- Snapshot tests for UI components.
+- Accessibility testing for all interactive elements.
 
 ## Audit Findings (March 2024)
 A comprehensive code audit verified compliance with project rules and standards, with the following insights:
@@ -74,16 +76,18 @@ A comprehensive code audit verified compliance with project rules and standards,
 - Consistent loading state implementation across components
 
 ## Priority Action Items
-1. Implement Jest testing configuration and component tests
-2. Standardize JSDoc comments across codebase
-3. Develop robust error handling for API services
-4. Replace mock services with real API implementations
-5. Create consistent loading and error state components 
+1. **Implement Supabase data fetching layer and replace mock services.**
+2. **Begin refactoring `app/(tabs)/index.tsx` and other large components.**
+3. Define and implement testing strategy (Jest config, component tests).
+4. Standardize JSDoc comments across codebase.
+5. Implement consistent loading/error state components.
+6. Develop robust error handling for API services.
 
 ## Current Status
 
 ### Recent Accomplishments
-- ✅ Completed the enhanced MeshGradientCard component with improved visual appearance and performance
+- ✅ **Refactored foundational `Box` component** for full theme integration and extended layout capabilities.
+- ✅ Completed the enhanced MeshGradientCard component with improved visual appearance and performance.
 - ✅ Fixed critical iOS dark mode status bar issues
 - ✅ Expanded gradient color palettes with nature-inspired combinations (27 total options)
 - ✅ Resolved swiping issues in word card interaction
@@ -91,21 +95,31 @@ A comprehensive code audit verified compliance with project rules and standards,
 - ✅ Fixed UI component contrast issues for Quill theme
 
 ### Active Development
+- 🔄 **Implementing Supabase client & data fetching (High Priority)**
+- 🔄 **Refactoring `app/(tabs)/index.tsx` (High Priority)**
+- 🔄 Defining testing strategy and setup
 - 🔄 Implementing paper-like noise texture overlay for gradients
 - 🔄 Creating reusable MeshGradient background component
 - 🔄 Exploring animation options for subtle gradient movement
 - 🔄 Updating documentation for new visual components
-- 🔄 Refining word suggestion algorithm for daily practice
 
 ### Key Priorities
-1. Complete the mesh gradient implementation with noise texture
-2. Create a reusable gradient background component for any screen
-3. Finalize word difficulty level balancing
-4. Implement enhanced word suggestion algorithm
+1. **Connect Frontend to Supabase:** Replace mock data with live data.
+2. **Refactor Key Components:** Improve maintainability of large screens/components.
+3. **Establish Testing:** Implement initial unit and component tests.
+4. Complete the mesh gradient implementation with noise texture.
+5. Create a reusable gradient background component.
 
 ## Technical Highlights
 
-### Visual Component Enhancements
+### Enhanced Layout Component (`Box`)
+The foundational `Box` component in `src/components/layout/` has been refactored to:
+- Accept theme tokens directly for `backgroundColor`, `borderColor`, `padding`, `margin`, `borderRadius`, etc.
+- Provide comprehensive Flexbox, dimension, and positioning props.
+- Improve type safety and maintainability.
+This streamlines UI development and enforces design system consistency.
+
+### Visual Component Enhancements (`MeshGradient`)
 The MeshGradientCard component has been significantly enhanced with:
 - Performance optimizations using React.memo and proper hook usage
 - Expanded color palette system with 27 nature-inspired combinations
@@ -128,31 +142,38 @@ Recent performance enhancements include:
 
 ## Next Major Milestones
 
-### Visual System Completion (Target: 1 week)
+### Backend Integration (Target: TBD)
+- Implement Supabase client and API functions.
+- Replace `wordOfDayService` mock logic.
+- Connect UI components to live data.
+- Implement robust error handling and loading states for API calls.
+
+### Component Refactoring & Testing (Target: Ongoing)
+- Refactor `app/(tabs)/index.tsx` using custom hooks.
+- Refactor `OptionButton` and other large components.
+- Implement initial test suite (unit & component tests).
+
+### Visual System Completion (Target: TBD)
 - Complete paper-like noise texture overlay
 - Create reusable gradient background component
 - Document usage patterns and performance considerations
 
-### Word Difficulty Balancing (Target: 2 weeks)
-- Finalize algorithm for difficulty calculation
-- Balance word distribution across difficulty levels
-- Implement user feedback mechanism for difficulty adjustment
-
-### User Testing Phase (Target: 3 weeks)
-- Prepare testing scenarios for core user journeys
-- Identify key metrics for measuring user satisfaction
-- Create feedback collection mechanism
-
 ## Known Issues and Risks
 
+### Key Issues
+- **No Backend Integration:** App uses mock data only.
+- **Component Complexity:** Several large components need refactoring.
+- **Low Test Coverage:** Lack of automated tests.
+
 ### Technical Debt
-- Need comprehensive testing strategy for visual components
-- Animation performance on lower-end devices requires optimization
-- Text contrast on some gradient combinations may need adjustment
+- Project structure (`lib` vs `src`) needs consolidation.
+- Need comprehensive testing strategy for visual components.
+- Animation performance on lower-end devices requires optimization.
+- Text contrast on some gradient combinations may need adjustment.
 
 ### Resource Constraints
 - Limited design resources for creating comprehensive guidelines
 - Testing capacity across diverse device range
 
 ## General Notes
-The work on visual components represents a significant enhancement to the app's aesthetic quality while maintaining performance. The MeshGradientCard implementation provides a foundation for consistent visual styling across the app. 
+The project has a strong foundation with a well-implemented design system and core UI features for the 'Today' tab. The immediate focus must be on integrating the frontend with the Supabase backend to replace mock data and on improving maintainability through component refactoring and testing. 

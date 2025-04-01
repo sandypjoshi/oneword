@@ -1,19 +1,26 @@
 # Active Context
 
 ## Current Focus
-- Improving user experience with gesture handling in card components
-- Resolving interaction conflicts between swiping and touch events
-- Code quality and standards compliance verification
-- Theme system refinement and UI component contrast improvements
-- Ensuring proper use of semantic color tokens throughout the app
-- Simplifying the theme system by removing unused themes
-- Enhancing UI components with advanced visual effects using Skia
-- Optimizing performance of graphically intensive components
-- Implementing responsive design patterns that adapt to different devices
-- Ensuring consistent appearance in both light and dark modes
-- Creating reusable gradient components for backgrounds and cards
+- **Transitioning from mock data to real backend integration (Supabase).**
+- Refactoring large UI components/screens (e.g., `app/(tabs)/index.tsx`, `OptionButton`) for better maintainability.
+- Implementing a comprehensive component testing strategy.
+- Enhancing UI components with advanced visual effects using Skia (e.g., noise texture for gradients).
+- Improving API error handling in service layers.
+- Ensuring consistent loading/error state implementation.
+- Completing Practice and Profile tab functionality.
 
 ## Recent Changes
+### Box Component Refactoring (2024-04-01)
+1. **Goal:** Enhance the foundational `Box` layout component for full theme integration and comprehensive layout props.
+2. **Analysis:** Identified `src/components/layout/Box.tsx` as the active component, replacing the unused `src/theme/Box.tsx`.
+3. **Enhancements:**
+    - Added support for theme color token paths (e.g., `backgroundColor="background.primary"`).
+    - Added support for theme spacing token keys (e.g., `padding="md"`, `borderRadius="lg"`).
+    - Integrated a full suite of Flexbox, dimension, and positioning props.
+    - Improved type safety by deriving token keys from theme types.
+    - Optimized style calculations using `useMemo`.
+4. **Implementation:** Replaced `src/components/layout/Box.tsx` with the refactored code and deleted `src/theme/Box.tsx`.
+
 ### MeshGradient Component Enhancement (2024-03-25)
 1. **Component Redesign**: Renamed and enhanced gradient card component
    - Renamed AnimatedGradientCard to MeshGradientCard for clarity
@@ -123,49 +130,38 @@
    - Follow the proper style chain: tokens → theme → component
 
 ## Next Steps
-1. **Immediate**:
-   - Test gesture handling implementation across different devices
-   - Monitor for any other potential gesture conflicts in the app
-   - Verify the swipe fix resolves the crashing issue completely
-   - Consider applying similar touch protection to other interactive components
-   - Implement the paper-like noise texture overlay for MeshGradientCard
-   - Create a reusable MeshGradient background component that can be used in any screen
-   - Investigate animation options using Skia for subtle movement in gradients
-   - Develop a strategy for efficient gradient use across the app
-
-2. **Technical Debt**:
-   - Audit semantic color token usage in all components
-   - Review components for color contrast across all themes
-   - Implement responsive design adjustments for better accessibility
-   - Review gesture handling throughout the app for potential conflicts
-   - Create a comprehensive suite of UI components with consistent styling
-   - Implement proper React Native Skia typing for all custom components
-   - Document best practices for performance with visual components
-   - Evaluate the impact of gradient components on battery life
-
-3. **Documentation**:
-   - Update component documentation with token usage examples
-   - Document the new touch handling approach for future reference
-   - Add guidelines for managing semantic tokens vs. palette colors
-   - Document testing strategy and best practices
-   - Document all available gradient styles and color palettes
-   - Create usage examples for the MeshGradient component
-   - Update the README with information about visual effects
+1.  **Immediate Priorities:**
+    *   Implement Supabase client and data fetching functions (e.g., in `src/services` or `src/api`).
+    *   Connect `wordOfDayService` and relevant UI components (especially `app/(tabs)/index.tsx`) to use live Supabase data.
+    *   Begin refactoring `app/(tabs)/index.tsx` by extracting logic into custom hooks (e.g., `useDailyWords`, `useCarouselPagination`).
+    *   Define and implement a testing strategy (Unit, Component, Integration).
+    *   Implement consistent loading and error state components/handling.
+2.  **Component/Feature Development:**
+    *   Implement Practice tab functionality (Challenge screen, exercises).
+    *   Implement Profile tab functionality (User settings, stats).
+    *   Implement paper-like noise texture overlay for `MeshGradient` components.
+    *   Create reusable `MeshGradient` background component.
+3.  **Technical Debt & Refinement:**
+    *   Consolidate project structure (`lib` vs `src`, `api` vs `services`).
+    *   Refactor other large components identified (e.g., `OptionButton`, `WordCardAnswer`).
+    *   Audit semantic color token usage and accessibility across all components.
+    *   Enhance API error handling robustness.
+4.  **Documentation:**
+    *   Standardize JSDoc comments across the codebase.
+    *   Update component documentation, especially for `Box` and `MeshGradient`.
+    *   Document testing strategy.
 
 ## Known Issues
-- Some direct palette references exist where semantic tokens would be more appropriate
-- Need for comprehensive test suite for components and services
-- Mock data services need to be replaced with real API implementations
-- Inconsistent loading state handling across components
-- Need to verify consistent token naming across themes
-- Need to consider performance impact of paper-like noise overlay
-- Animation of mesh gradients may impact performance on lower-end devices
-- Need to establish guidelines for appropriate use of gradient components
-- Text contrast on some gradient combinations may need adjustment
+- **No Backend Integration:** The application frontend currently uses only **mock data**. No Supabase data fetching is implemented yet.
+- **Large Components:** Several components/screens (`app/(tabs)/index.tsx`, `OptionButton.tsx`, `WordCardAnswer.tsx`, `meshGradientGenerator.ts`) are very large and complex, needing refactoring.
+- **Low Test Coverage:** Lack of comprehensive automated tests.
+- **Inconsistent Loading/Error States:** Missing standardized handling for loading and error UI states.
+- **Potential Gesture Conflicts:** Need ongoing monitoring for gesture issues, especially with complex components like `OptionButton`.
+- **Visual Performance:** Skia gradient animations and effects need performance testing on lower-end devices.
+- **Content Quality Variance:** Quality of generated word data (definitions, distractors) may vary (Noted from previous state, pending review).
 
-## Active Context
-
-This file tracks current tasks, issues, and architectural decisions for the OneWord app.
+## Active Context (Summary)
+This file tracks the current state, focus, changes, and known issues for the OneWord app. The immediate priority is transitioning from mock data to live Supabase data and beginning component refactoring and testing implementation.
 
 ### Current Focus: Improving Gesture Handling in Card Interactions
 
