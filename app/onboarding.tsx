@@ -185,7 +185,7 @@ export default function OnboardingScreen() {
     return (
       <Animated.View 
         style={[
-          styles.screenContainer, 
+          styles.screenContainer,
           styles.absolutePosition,
           { transform: [{ translateX: difficultyPosition }] }
         ]}
@@ -195,7 +195,13 @@ export default function OnboardingScreen() {
           styles.contentContainer,
           { paddingHorizontal: themeSpacing.xl }
         ]}>
-          <Box flex={1} justify="center" align="center">
+          <Box 
+            flex={1} 
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
             <DifficultySelector 
               selectedLevel={selectedDifficulty}
               onSelectLevel={handleDifficultySelect}
@@ -289,7 +295,8 @@ const styles = StyleSheet.create({
   textContainer: {
   },
   buttonPlaceholder: {
-    height: 56, // Same height as the Button component
+    height: 50,
+    width: '100%',
   },
   loadingContainer: {
     flex: 1,
