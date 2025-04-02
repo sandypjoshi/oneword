@@ -30,6 +30,7 @@ export function useDailyWords(daysToFetch: number = 14) {
 
   // Define the loading function using useCallback
   const loadWords = useCallback(async (forceRefresh = false) => {
+    console.log(`[useDailyWords] Fetching words for ${daysToFetch} days...`);
     // Skip if already attempted initial load and not forcing refresh
     if (initialLoadAttempted.current && !forceRefresh) return;
     if (!forceRefresh) {
@@ -66,9 +67,6 @@ export function useDailyWords(daysToFetch: number = 14) {
               userAttempts: storedWord.userAttempts
             };
             allDays.push(wordWithState);
-            if (storedWord.isRevealed) {
-              setTimeout(() => flipCard(wordForDate.id, true), 150);
-            }
           } else {
             allDays.push(wordForDate);
           }
@@ -82,19 +80,27 @@ export function useDailyWords(daysToFetch: number = 14) {
       }
       setWords(allDays);
     } catch (err) {
-      console.error('Error loading words:', err);
-      setError(err as Error);
+      console.error('[useDailyWords] Error fetching words:', err);
+      setError(err instanceof Error ? err : new Error('Failed to fetch words'));
     } finally {
+      console.log('[useDailyWords] Fetching complete.');
       setIsLoading(false);
+      console.log(`[useDailyWords] Final words array length: ${allDays.length}`);
     }
-  // Include dependencies needed by the function
   }, [daysToFetch, storedWords, flipCard]);
 
-  // Load words on mount
+  // Effect to load words on mount or when daysToFetch changes
   useEffect(() => {
     loadWords();
-  // loadWords is memoized, safe to include
   }, [loadWords]);
+
+  // Add effect to log words length when it changes
+  useEffect(() => {
+    if (!isLoading) {
+      console.log(`[useDailyWords] Words state updated. Length: ${words.length}`);
+      // console.log('[useDailyWords] Words state:', words); // Uncomment for detailed view
+    }
+  }, [words, isLoading]);
 
   // Expose a refetch function
   const refetchWords = useCallback(() => {

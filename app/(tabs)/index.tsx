@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from 'react';
+import React, { useMemo, useCallback, useEffect } from 'react';
 import { 
   StyleSheet, 
   View, 
@@ -18,6 +18,7 @@ import { Text as CustomText, Button } from '../../src/components/ui';
 import { radius, applyElevation } from '../../src/theme/styleUtils';
 import themes from '../../src/theme/colors'; // Keep for loading state fallback
 import { Box } from '../../src/components/layout'; // Import Box for skeleton
+import { useFocusEffect } from '@react-navigation/native'; // Import useFocusEffect
 
 // Define ExtendedWordOfDay locally if not exported properly or redefine if needed
 interface ExtendedWordOfDay extends WordOfDay {
@@ -52,8 +53,29 @@ export default function HomeScreen() {
     handleSheetDismiss 
   } = useWordDetailsSheet();
 
+  // --- Logging Effects ---
+  useEffect(() => {
+    console.log('[HomeScreen] Mounted');
+    return () => {
+      console.log('[HomeScreen] Unmounted');
+    };
+  }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      console.log('[HomeScreen] Screen Focused');
+      return () => {
+        console.log('[HomeScreen] Screen Blurred');
+      };
+    }, [])
+  );
+  // --- End Logging Effects ---
+
   // Combine loading states
   const isLoading = !isReady || isLoadingWords;
+
+  // Add log for loading state check
+  console.log(`[HomeScreen] Checking loading state: isReady=${isReady}, isLoadingWords=${isLoadingWords}, Combined isLoading=${isLoading}`);
 
   // Create theme-dependent styles (mostly unchanged)
   const themeStyles = useMemo(() => {
@@ -166,8 +188,10 @@ export default function HomeScreen() {
     );
   }, [words, activeIndex, theme, getDateFromWord, scrollToIndex, themeStyles, scrollViewRef]);
 
-  // Render a word card item - Pass openWordDetails from useWordDetailsSheet
+  // Render a word card item using the composite WordCard
   const renderItem = useCallback(({ item }: { item: ExtendedWordOfDay }) => {
+    // Log props being passed to WordCard
+    console.log(`[HomeScreen.renderItem] Rendering WordCard for ID: ${item.id}, Placeholder: ${!!item.isPlaceholder}`);
     const isPlaceholder = item.isPlaceholder;
     return (
       <View style={[themeStyles.cardContainer, { width }]}>
@@ -178,6 +202,7 @@ export default function HomeScreen() {
               date={item.date}
             />
           ) : (
+            // Render the composite WordCard
             <WordCard 
               wordData={item} 
               style={themeStyles.wordCard} 
@@ -187,7 +212,7 @@ export default function HomeScreen() {
         </View>
       </View>
     );
-  }, [width, themeStyles.cardContainer, themeStyles.cardWrapper, themeStyles.wordCard, openWordDetails]);
+  }, [width, themeStyles, openWordDetails]); // Dependencies updated
 
   // Show loading UI - Simplified with basic skeleton idea
   if (isLoading) {

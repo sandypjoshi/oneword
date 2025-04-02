@@ -15,15 +15,20 @@ interface WordState {
   fetchWords: (days: number, forceRefresh?: boolean) => Promise<void>;
   setActiveIndex: (index: number) => void;
   markWordRevealed: (wordId: string, attempts: number) => void;
+  _dangerouslyResetAllState: () => void;
 }
+
+const initialState = {
+  words: [],
+  activeIndex: 0,
+  isLoading: false,
+  error: null,
+};
 
 export const useWordStore = create<WordState>()(
   persist(
     (set, get) => ({
-      words: [],
-      activeIndex: 0,
-      isLoading: false,
-      error: null,
+      ...initialState,
       
       fetchWords: async (days = 14, forceRefresh = false) => {
         // Skip fetching if we already have words and don't need to refresh
@@ -80,6 +85,11 @@ export const useWordStore = create<WordState>()(
               : word
           )
         }));
+      },
+
+      _dangerouslyResetAllState: () => {
+        console.warn('[wordStore] Resetting ALL word state!');
+        set(initialState);
       }
     }),
     {

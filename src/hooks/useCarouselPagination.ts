@@ -69,12 +69,22 @@ export function useCarouselPagination(words: ExtendedWordOfDay[]) {
     }
   }, [words.length]); // Dependency on words.length to trigger only when list size changes
 
+  // Memoize initial scroll index calculation to target today's date
+  const initialScrollIndex = useMemo(() => {
+    const todayDateString = new Date().toISOString().split('T')[0];
+    const index = words.findIndex(word => word.date === todayDateString);
+    // If today not found (shouldn't happen?), default to last item, otherwise use found index.
+    const result = index === -1 ? Math.max(0, words.length - 1) : index;
+    console.log(`[useCarouselPagination] Today's Date: ${todayDateString}, Found Index: ${index}, Calculated initialScrollIndex: ${result}`);
+    return result;
+  }, [words]); // Depend only on words array
 
   // Handle viewable items change to update the active index
   const onViewableItemsChanged = useRef(({ viewableItems }: { viewableItems: ViewToken[] }) => {
     if (isProgrammaticScrollRef.current) return;
-    if (viewableItems.length > 0) {
-      const newIndex = viewableItems[0].index ?? 0;
+    if (viewableItems.length > 0 && viewableItems[0].index !== null) {
+      const newIndex = viewableItems[0].index;
+      console.log(`[useCarouselPagination] onViewableItemsChanged - New index: ${newIndex}`);
       setActiveIndex(newIndex);
 
       // Sync flip state for visible card
@@ -155,7 +165,7 @@ export function useCarouselPagination(words: ExtendedWordOfDay[]) {
     scrollToIndex,
     viewabilityConfig,
     getDateFromWord,
-    initialScrollIndex: words.length > 0 ? words.length - 1 : 0,
+    initialScrollIndex,
   };
 }
 

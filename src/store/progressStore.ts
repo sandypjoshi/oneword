@@ -13,15 +13,20 @@ interface ProgressState {
   resetStreak: () => void;
   incrementWordsLearned: () => void;
   checkAndUpdateStreak: () => void;
+  _dangerouslyResetAllState: () => void;
 }
+
+const initialState = {
+  streak: 0,
+  longestStreak: 0,
+  totalWordsLearned: 0,
+  lastCompletedDate: null,
+};
 
 export const useProgressStore = create<ProgressState>()(
   persist(
     (set, get) => ({
-      streak: 0,
-      longestStreak: 0,
-      totalWordsLearned: 0,
-      lastCompletedDate: null,
+      ...initialState,
       
       incrementStreak: () => set(state => {
         const newStreak = state.streak + 1;
@@ -75,6 +80,11 @@ export const useProgressStore = create<ProgressState>()(
             lastCompletedDate: today 
           });
         }
+      },
+
+      _dangerouslyResetAllState: () => {
+        console.warn('[progressStore] Resetting ALL progress state!');
+        set(initialState);
       }
     }),
     {

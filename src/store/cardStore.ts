@@ -12,7 +12,7 @@ interface CardState {
   selectedOptions: Record<string, string | undefined>; // wordId -> selectedOption
   optionStates: Record<string, Record<string, OptionState>>;
   speakingWordIds: string[];
-  attempts: Record<string, number>; // Add attempts state
+  attempts: Record<string, number>;
   
   // Actions
   flipCard: (wordId: string, flipped: boolean) => void;
@@ -23,19 +23,26 @@ interface CardState {
   isWordSpeaking: (wordId: string) => boolean;
   getOptionState: (wordId: string, option: string) => OptionState;
   getSelectedOption: (wordId: string) => string | undefined;
-  getAttempts: (wordId: string) => number | undefined; // Add attempts selector
+  getAttempts: (wordId: string) => number | undefined;
+  _dangerouslyResetAllState: () => void;
+  clearSelection: (wordId: string) => void;
 }
+
+const initialState = { // Define initial state separately
+  flippedCardIds: [],
+  selectedOptions: {},
+  optionStates: {},
+  speakingWordIds: [],
+  attempts: {},
+};
 
 export const useCardStore = create<CardState>()(
   persist(
     (set, get) => ({
-      flippedCardIds: [],
-      selectedOptions: {},
-      optionStates: {},
-      speakingWordIds: [],
-      attempts: {}, // Initialize attempts state
+      ...initialState, // Spread initial state
       
       flipCard: (wordId, flipped) => {
+        console.log(`[cardStore.flipCard] Called for Word: ${wordId}, Flipped: ${flipped}`);
         set((state) => ({
           flippedCardIds: flipped 
             ? [...state.flippedCardIds, wordId]
@@ -44,6 +51,7 @@ export const useCardStore = create<CardState>()(
       },
       
       selectOption: (wordId, option, isCorrect) => {
+        console.log(`[cardStore.selectOption] Called for Word: ${wordId}, Option: ${option}, Correct: ${isCorrect}`);
         set((state) => {
           // --- Attempts Logic --- 
           const currentAttempts = state.attempts[wordId] || 0;
@@ -74,12 +82,13 @@ export const useCardStore = create<CardState>()(
             }
           };
           
-          // Automatically flip card if correct
+          // --- Flip card state only if correct ---
           if (isCorrect) {
-            newState.flippedCardIds = [...state.flippedCardIds, wordId];
+             // Ensure uniqueness and add current wordId if correct
+            newState.flippedCardIds = [...new Set([...state.flippedCardIds, wordId])];
           }
           
-          console.log(`[cardStore.selectOption] Word: ${wordId}, New Attempts: ${newAttemptsCount}`); // LOG 1
+          console.log(`[cardStore.selectOption] Word: ${wordId}, New Attempts: ${newAttemptsCount}, New State:`, newState);
           return newState;
         });
       },
@@ -118,6 +127,7 @@ export const useCardStore = create<CardState>()(
       },
       
       resetCardState: (wordId) => {
+        console.log(`[cardStore.resetCardState] Called for Word: ${wordId}`);
         set((state) => {
           const newSelectedOptions = { ...state.selectedOptions };
           delete newSelectedOptions[wordId];
@@ -131,33 +141,61 @@ export const useCardStore = create<CardState>()(
             flippedCardIds: state.flippedCardIds.filter(id => id !== wordId),
             selectedOptions: newSelectedOptions,
             optionStates: newOptionStates,
-            attempts: newAttempts, // Add attempts reset
+            attempts: newAttempts,
           };
         });
       },
       
       isCardFlipped: (wordId) => {
-        return get().flippedCardIds.includes(wordId);
+        const isFlipped = get().flippedCardIds.includes(wordId);
+        // console.log(`[cardStore.isCardFlipped] Checked for Word: ${wordId}, Result: ${isFlipped}`); // Noisy
+        return isFlipped;
       },
       
       isWordSpeaking: (wordId) => {
-        return get().speakingWordIds.includes(wordId);
+        const isSpeaking = get().speakingWordIds.includes(wordId);
+        // console.log(`[cardStore.isWordSpeaking] Checked for Word: ${wordId}, Result: ${isSpeaking}`); // Noisy
+        return isSpeaking;
       },
       
       getOptionState: (wordId, option) => {
-        return get().optionStates[wordId]?.[option] || 'default';
+        const state = get().optionStates[wordId]?.[option] || 'default';
+        // console.log(`[cardStore.getOptionState] Checked for Word: ${wordId}, Option: ${option}, Result: ${state}`); // Noisy
+        return state;
       },
       
       getSelectedOption: (wordId) => {
-        return get().selectedOptions[wordId];
+        const option = get().selectedOptions[wordId];
+        // console.log(`[cardStore.getSelectedOption] Checked for Word: ${wordId}, Result: ${option}`); // Noisy
+        return option;
       },
 
       // --- Add getAttempts selector ---
       getAttempts: (wordId) => {
         const attemptsCount = get().attempts[wordId];
-        console.log(`[cardStore.getAttempts] Requested: ${wordId}, Found: ${attemptsCount}`); // LOG 2
+        // console.log(`[cardStore.getAttempts] Checked for Word: ${wordId}, Result: ${attemptsCount}`); // Noisy
         return attemptsCount;
-      }
+      },
+
+      // --- Add reset action implementation ---
+      _dangerouslyResetAllState: () => {
+        console.warn('[cardStore] Resetting ALL card state!');
+        set(initialState); // Reset to initial state
+      },
+
+      // Add clearSelection implementation
+      clearSelection: (wordId) => {
+        console.log(`[cardStore.clearSelection] Called for Word: ${wordId}`);
+        set((state) => {
+          const newSelectedOptions = { ...state.selectedOptions };
+          delete newSelectedOptions[wordId];
+          // Also mark as flipped when clearing selection after seeing reflection
+          const newState: Partial<CardState> = {
+            selectedOptions: newSelectedOptions,
+          };
+          return newState;
+        });
+      },
     }),
     {
       name: 'card-ui-storage',
@@ -172,7 +210,7 @@ export const useCardStore = create<CardState>()(
           Object.entries(state.optionStates)
             .filter(([_, value]) => Object.keys(value).length > 0)
         ),
-        attempts: state.attempts, // Persist attempts
+        attempts: state.attempts,
       }),
     }
   )

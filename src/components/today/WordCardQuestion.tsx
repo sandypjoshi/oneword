@@ -1,5 +1,12 @@
-import React, { memo, useCallback, useMemo } from 'react';
+import React, { memo, useCallback, useMemo, useState } from 'react';
 import { View, StyleSheet, ViewStyle, StyleProp } from 'react-native';
+import Animated, { 
+  useSharedValue, 
+  useAnimatedStyle, 
+  withTiming, 
+  withSequence, 
+  withRepeat 
+} from 'react-native-reanimated';
 import { WordOfDay, WordOption } from '../../types/wordOfDay';
 import { useTheme } from '../../theme';
 import { Box } from '../layout';
@@ -14,6 +21,10 @@ import WordSection from './WordSection';
 
 // Character threshold for font size reduction (should match OptionButton's threshold)
 const TEXT_LENGTH_THRESHOLD = 28;
+
+// Shake Animation constants
+const SHAKE_OFFSET = 5;
+const SHAKE_DURATION = 70;
 
 interface WordCardQuestionProps {
   /**
@@ -30,6 +41,16 @@ interface WordCardQuestionProps {
    * Callback function to call when a correct answer is given
    */
   onCorrectAnswer?: () => void;
+  
+  /**
+   * Callback function to mark a word as revealed
+   */
+  markWordRevealed?: (wordId: string, attempts: number) => void;
+  
+  /**
+   * Callback function to get the current word attempts
+   */
+  getWordAttempts?: () => number;
 }
 
 /**
@@ -39,6 +60,8 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
   wordData,
   style,
   onCorrectAnswer,
+  markWordRevealed,
+  getWordAttempts,
 }) => {
   const { colors, spacing } = useTheme();
   const { id, word, pronunciation, partOfSpeech, options = [] } = wordData;
@@ -47,7 +70,7 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
   const selectedOption = useCardStore(state => state.getSelectedOption(id));
   const getOptionState = useCardStore(state => state.getOptionState);
   const selectOption = useCardStore(state => state.selectOption);
-  const markWordRevealed = useWordStore(state => state.markWordRevealed);
+  const markWordRevealedInStore = useWordStore(state => state.markWordRevealed);
   const incrementWordsLearned = useProgressStore(state => state.incrementWordsLearned);
   const checkAndUpdateStreak = useProgressStore(state => state.checkAndUpdateStreak);
   
@@ -69,31 +92,46 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
     return options.some(option => option.value.length > TEXT_LENGTH_THRESHOLD);
   }, [options]);
   
+  // State to track which button to shake
+  const [shakingOptionValue, setShakingOptionValue] = useState<string | null>(null);
+  
+  // Shared value for shake animation
+  const shakeTranslateX = useSharedValue(0);
+
+  // Animated style for the shake
+  const shakeAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateX: shakeTranslateX.value }],
+    };
+  });
+
+  // Function to trigger shake animation
+  const triggerShake = useCallback(() => {
+    shakeTranslateX.value = withSequence(
+      withTiming(-SHAKE_OFFSET, { duration: SHAKE_DURATION / 2 }),
+      withRepeat(withTiming(SHAKE_OFFSET, { duration: SHAKE_DURATION }), 3, true),
+      withTiming(0, { duration: SHAKE_DURATION / 2 })
+    );
+  }, [shakeTranslateX]);
+
   // Handle option selection
   const handleOptionSelect = useCallback((option: WordOption) => {
-    // Trigger haptic feedback
-    Haptics.notificationAsync(
-      option.isCorrect 
-        ? Haptics.NotificationFeedbackType.Success 
-        : Haptics.NotificationFeedbackType.Error
-    );
+    if (isAnyOptionCorrect) return; // Prevent multiple selections
+
+    const isCorrect = option.isCorrect;
+    selectOption(id, option.value, isCorrect);
     
-    // Update selected option in store
-    selectOption(id, option.value, option.isCorrect);
-    
-    if (option.isCorrect) {
-      // Calculate attempts based on previously selected incorrect options
-      // For this we need to determine how many incorrect options were selected
-      // We can use the length of incorrect options in the state
-      const incorrectOptionsCount = options
-        .filter(opt => !opt.isCorrect && getOptionState(id, opt.value) === 'incorrect')
-        .length;
-      
-      // Add 1 to include this attempt
-      const attempts = incorrectOptionsCount + 1;
-      
-      // Mark word as revealed in word store
-      markWordRevealed(id, attempts);
+    if (isCorrect) {
+      // Call markWordRevealed if provided
+      if (markWordRevealed && getWordAttempts) {
+        const attempts = getWordAttempts(); // Get current attempt count
+        console.log(`[WordCardQuestion ${id}] Correct answer! Marking revealed with attempts: ${attempts}`);
+        markWordRevealedInStore(id, attempts);
+      }
+      // Trigger haptic feedback
+      Haptics.notificationAsync(
+        Haptics.NotificationFeedbackType.Success
+      );
       
       // Increment words learned and update streak
       incrementWordsLearned();
@@ -102,16 +140,29 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
       if (onCorrectAnswer) {
         onCorrectAnswer();
       }
+    } else {
+      // --- Incorrect option selected ---
+      // Trigger haptic feedback for error
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+      // Set which button to shake
+      setShakingOptionValue(option.value);
+      // Trigger the shake animation
+      triggerShake();
+      // Reset shaking state after animation (approx duration)
+      setTimeout(() => setShakingOptionValue(null), SHAKE_DURATION * 4);
     }
   }, [
     id, 
     options, 
     selectOption, 
     getOptionState, 
-    markWordRevealed, 
+    markWordRevealedInStore, 
     incrementWordsLearned, 
     checkAndUpdateStreak,
     onCorrectAnswer,
+    markWordRevealed,
+    getWordAttempts,
+    triggerShake,
   ]);
   
   // Define styles inside component to access spacing
@@ -172,16 +223,21 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
             Guess the correct definition
           </Text>
           
-          {options.map((option) => (
-            <OptionButton
-              key={option.value}
-              label={option.value}
-              state={getOptionState(id, option.value)}
-              onPress={() => handleOptionSelect(option)}
-              disabled={isAnyOptionCorrect}
-              style={{ marginBottom: spacing.md }}
-            />
-          ))}
+          {options.map((option) => {
+            const isShaking = shakingOptionValue === option.value;
+            return (
+              // Apply animated style conditionally
+              <Animated.View key={option.value} style={isShaking ? shakeAnimatedStyle : {}}>
+                <OptionButton
+                  label={option.value}
+                  state={getOptionState(id, option.value)}
+                  onPress={() => handleOptionSelect(option)}
+                  disabled={isAnyOptionCorrect}
+                  style={{ marginBottom: spacing.md }}
+                />
+              </Animated.View>
+            );
+          })}
         </View>
       </Box>
     </View>

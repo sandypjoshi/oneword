@@ -1,5 +1,5 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
-import { StyleProp, ViewStyle, View, Dimensions, Platform, StyleSheet } from 'react-native';
+import React, { memo, useCallback, useEffect, useState, useMemo, useRef } from 'react';
+import { StyleProp, ViewStyle, View, Dimensions, Platform, StyleSheet, TouchableOpacity } from 'react-native';
 import { WordOfDay } from '../../types/wordOfDay';
 import WordCardQuestion from './WordCardQuestion';
 import WordCardAnswer from './WordCardAnswer';
@@ -60,70 +60,123 @@ const WordCardComponent: React.FC<WordCardProps> = ({
   style,
   onViewDetails
 }) => {
-  // Get safe area insets to adjust for notches and home indicators
+  // Log received wordData immediately
+  console.log(`[WordCard ${wordData?.id ?? 'ID_MISSING'}] Rendering. Received wordData:`, wordData);
+
   const insets = useSafeAreaInsets();
   
-  // Use Zustand cardStore for flip state
+  // --- Read state directly from stores ---
   const isFlipped = useCardStore(state => state.isCardFlipped(wordData.id));
-  const flipCard = useCardStore(state => state.flipCard);
+  const selectedOptionValue = useCardStore(state => state.getSelectedOption(wordData.id));
+  const getAttempts = useCardStore(state => state.getAttempts); // Still needed for markWordRevealed
+  // flipCard is likely no longer needed here as component reacts to store changes
+  // const flipCard = useCardStore(state => state.flipCard);
   
-  // Access word store to get the word's revealed state
-  const storedWords = useWordStore(state => state.words);
+  const wordFromWordStore = useWordStore(state => state.words.find(w => w.id === wordData.id));
+  const isRevealed = wordFromWordStore?.isRevealed ?? false;
+  const markWordRevealed = useWordStore(state => state.markWordRevealed);
+  const clearSelection = useCardStore(state => state.clearSelection); // Get clear action
   
-  const isWordRevealed = storedWords.some(w => 
-    w.id === wordData.id && w.isRevealed
-  );
+  // --- Determine correctness (moved calculation here) ---
+  const isSelectionCorrect = useMemo(() => {
+      if (!selectedOptionValue) return false;
+      // Use wordData from props as it's the source of truth for options
+      return wordData.options?.find(o => o.value === selectedOptionValue)?.isCorrect ?? false;
+  }, [selectedOptionValue, wordData.options]);
+
+  // --- Remove internal targetFace state ---
+  // const initialFace = useMemo(() => { ... });
+  // const [targetFace, setTargetFace] = useState<CardFace>(initialFace);
   
-  const [targetFace, setTargetFace] = useState<CardFace>(() => 
-    isWordRevealed ? 'answer' : 'question'
-  );
+  // Initialize flipProgress directly based on initial store state read above
+  const calculateInitialTargetValue = () => {
+      // Ensure all required states are read *before* this calculation
+      const currentSelectedOption = useCardStore.getState().getSelectedOption(wordData.id);
+      const currentIsCorrect = wordData.options?.find(o => o.value === currentSelectedOption)?.isCorrect ?? false;
+      const currentIsRevealed = useWordStore.getState().words.find(w => w.id === wordData.id)?.isRevealed ?? false;
+      
+      console.log(`[WordCard ${wordData.id}] Calculating initialTargetValue: selectedOption=${currentSelectedOption}, isCorrect=${currentIsCorrect}, isRevealed=${currentIsRevealed}`);
+      
+      // Force immediate position without animation for initial state
+      if (currentSelectedOption !== undefined && currentIsCorrect) {
+          // If correctly answered -> Answer Face
+          return FACE_VALUES.answer;
+      } else if (currentIsRevealed) { 
+          // If not currently answered correctly BUT previously revealed -> Answer Face
+          return FACE_VALUES.answer;
+      } else {
+          // Otherwise (never revealed, or incorrect answer just selected) -> Question Face
+          return FACE_VALUES.question;
+      }
+  };
   
-  const flipProgress = useSharedValue(
-    targetFace === 'answer' ? FACE_VALUES.answer : 
-    targetFace === 'reflection' ? FACE_VALUES.reflection : 
-    FACE_VALUES.question
-  );
+  // Create a ref to track if the component was just mounted to prevent unnecessary animations
+  const justMounted = useRef(true);
+  const prevWordId = useRef(wordData.id);
+  const flipProgress = useSharedValue(calculateInitialTargetValue());
+  
+  // Reset flip progress if word ID changes
+  useEffect(() => {
+    if (prevWordId.current !== wordData.id) {
+      console.log(`[WordCard] Word ID changed from ${prevWordId.current} to ${wordData.id} - resetting flip progress`);
+      flipProgress.value = calculateInitialTargetValue();
+      prevWordId.current = wordData.id;
+      justMounted.current = true; // Treat as a fresh mount when word changes
+    }
+  }, [wordData.id]);
   
   const animationConfig = {
     duration: ANIMATION_DURATION,
     easing: Easing.inOut(Easing.cubic),
   };
 
-  // Animate flipProgress when targetFace changes
+  // --- Effect to drive animation based on subsequent store state changes ---
   useEffect(() => {
-    let targetValue = FACE_VALUES[targetFace];
-    flipProgress.value = withTiming(targetValue, animationConfig);
+    // Calculate the target value based on CURRENT store state
+    let targetValue = FACE_VALUES.question; 
+    const currentSelectedOption = useCardStore.getState().getSelectedOption(wordData.id);
+    const currentIsCorrect = wordData.options?.find(o => o.value === currentSelectedOption)?.isCorrect ?? false;
+    const currentIsRevealed = useWordStore.getState().words.find(w => w.id === wordData.id)?.isRevealed ?? false;
+
+    // Important: For revealed words, never go back to question face
+    if (currentIsRevealed) {
+        // Ensure revealed words always show answer card when not in reflection
+        targetValue = flipProgress.value === FACE_VALUES.reflection ? 
+          FACE_VALUES.reflection : FACE_VALUES.answer;
+    } else if (currentSelectedOption !== undefined && currentIsCorrect) {
+        targetValue = FACE_VALUES.answer;
+    }
     
-    // Update the store's isFlipped state based on targetFace
-    // Syncing local `targetFace` with global `isFlipped` ensures that 
-    // external logic relying on `isFlipped` (like persistence or initial 
-    // state calculation based on reveal status) remains consistent with 
-    // the card's visual state.
-    const shouldBeFlipped = targetFace === 'answer' || targetFace === 'reflection';
-    if (isFlipped !== shouldBeFlipped) {
-      flipCard(wordData.id, shouldBeFlipped);
+    // Only animate if:
+    // 1. Not the initial render
+    // 2. The target value is different from current value
+    if (!justMounted.current && flipProgress.value !== targetValue) {
+        console.log(`[WordCard ${wordData.id}] Store state changed. Animating flipProgress from ${flipProgress.value} to ${targetValue}`);
+        flipProgress.value = withTiming(targetValue, animationConfig);
+    } else if (justMounted.current) {
+        console.log(`[WordCard ${wordData.id}] Initial render - skipping animation`);
+        // For initial render, set the value directly without animation
+        // This ensures the card is in the correct state immediately
+        flipProgress.value = targetValue;
     }
-  }, [targetFace, flipProgress, flipCard, wordData.id, isFlipped]);
+    
+    // Mark initial mount as complete after the first check
+    justMounted.current = false;
+    
+  // Depend on the state values that determine the target face
+  }, [selectedOptionValue, isSelectionCorrect, isRevealed, wordData.id, animationConfig, flipProgress]); // Added flipProgress as dependency
 
-  // Effect to sync targetFace if isWordRevealed changes externally (e.g., reset)
+  // --- Callbacks for Child Components ---
+  // Remove callbacks related to showReflection
+  // const handleFlipBackFromReflection = useCallback(() => { ... }); 
+
+  // Log mount/unmount
   useEffect(() => {
-    if (!storedWords.some(w => 
-      w.id === wordData.id && w.isRevealed
-    ) && targetFace !== 'question') {
-      setTargetFace('question');
-    }
-    // If it becomes revealed but we are on question, go to answer
-    if (storedWords.some(w => 
-      w.id === wordData.id && w.isRevealed
-    ) && targetFace === 'question') {
-       setTargetFace('answer');
-    }
-  }, [storedWords, wordData.id, targetFace]);
-
-  // Handlers to change the target face
-  const setTargetFaceToAnswer = useCallback(() => { setTargetFace('answer'); }, []);
-  const setTargetFaceToReflection = useCallback(() => { setTargetFace('reflection'); }, []);
-  const setTargetFaceToQuestion = useCallback(() => { setTargetFace('question'); }, []);
+    console.log(`[WordCard ${wordData.id}] Mounted`);
+    return () => {
+      console.log(`[WordCard ${wordData.id}] Unmounted`);
+    };
+  }, [wordData.id]);
 
   // Animated styles for Question Card (Face 0)
   const questionAnimatedStyle = useAnimatedStyle(() => {
@@ -140,7 +193,7 @@ const WordCardComponent: React.FC<WordCardProps> = ({
   // Animated styles for Answer Card (Face 1)
   const answerAnimatedStyle = useAnimatedStyle(() => {
     const rotateY = interpolate(flipProgress.value, [FACE_VALUES.question, FACE_VALUES.answer, FACE_VALUES.reflection], [180, 360, 540], Extrapolate.CLAMP); 
-    const opacity = interpolate(flipProgress.value, [0.5, 1, 1.5, 2], [0, 1, 1, 0], Extrapolate.CLAMP); 
+    const opacity = interpolate(flipProgress.value, [0.5, 1, 1.5], [0, 1, 0], Extrapolate.CLAMP); 
     return {
       transform: [{ perspective: PERSPECTIVE }, { rotateY: `${rotateY}deg` }],
       opacity,
@@ -161,26 +214,38 @@ const WordCardComponent: React.FC<WordCardProps> = ({
     };
   });
   
+  // Add function to navigate to reflection
+  const navigateToReflection = useCallback(() => {
+    console.log(`[WordCard ${wordData.id}] Navigating to reflection`);
+    // Update flip progress to reflection
+    flipProgress.value = withTiming(FACE_VALUES.reflection, animationConfig);
+  }, [wordData.id, flipProgress, animationConfig]);
+  
   return (
-    <View style={[styles.outerContainer, style]}>
-      <View style={styles.container}>
+    <View style={[styles.container, style]}>
+      <View style={[styles.innerContainer, { paddingBottom: insets.bottom > 0 ? insets.bottom / 2 : 0 }]}>
         {/* Question Card */}
         <Animated.View style={[styles.cardContainer, questionAnimatedStyle]}>
           <WordCardQuestion
             wordData={wordData}
             style={styles.cardContent}
-            onCorrectAnswer={setTargetFaceToAnswer}
+            markWordRevealed={markWordRevealed}
+            getWordAttempts={() => getAttempts(wordData.id) ?? 0}
           />
         </Animated.View>
         
-        {/* Answer Card */}
+        {/* Answer Card - Restore tappable wrapper */}
         <Animated.View style={[styles.cardContainer, answerAnimatedStyle]}>
-          <WordCardAnswer
-            wordData={wordData}
-            style={styles.cardContent}
-            onViewDetails={onViewDetails}
-            onNavigateToReflection={setTargetFaceToReflection}
-          />
+          <TouchableOpacity 
+            style={styles.touchableFace}
+            activeOpacity={0.9}
+            onPress={navigateToReflection}>
+            <WordCardAnswer
+              wordData={wordData}
+              style={styles.cardContent}
+              onViewDetails={onViewDetails}
+            />
+          </TouchableOpacity>
         </Animated.View>
 
         {/* Reflection Card */}
@@ -188,8 +253,11 @@ const WordCardComponent: React.FC<WordCardProps> = ({
           <ReflectionCard 
             wordData={wordData}
             style={styles.cardContent}
-            onFlipBack={setTargetFaceToQuestion}
-            onNavigateToAnswer={setTargetFaceToAnswer}
+            // Change to flip back to answer instead of question
+            onFlipBack={() => {
+              console.log(`[WordCard ${wordData.id}] Flipping back to answer from reflection`);
+              flipProgress.value = withTiming(FACE_VALUES.answer, animationConfig);
+            }}
           />
         </Animated.View>
       </View>
@@ -198,14 +266,14 @@ const WordCardComponent: React.FC<WordCardProps> = ({
 };
 
 const styles = StyleSheet.create({
-  outerContainer: {
+  container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     marginVertical: 0, // Removed margin completely
     overflow: 'visible', // Ensure animations aren't clipped
   },
-  container: {
+  innerContainer: {
     width: CARD_WIDTH,
     flex: 1, // Use flex to fill available space
     position: 'relative',
@@ -224,7 +292,11 @@ const styles = StyleSheet.create({
   cardContent: {
     width: '100%',
     height: '100%',
-  }
+  },
+  touchableFace: { // Add style for touchable wrapper
+    width: '100%',
+    height: '100%',
+  },
 });
 
 // Apply memo to the component

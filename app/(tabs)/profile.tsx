@@ -5,7 +5,7 @@ import { Text, Button } from '../../src/components/ui';
 import { useThemeReady } from '../../src/hooks';
 import { resetOnboardingStatus } from '../../src/utils/onboarding';
 import { useRouter, Link } from 'expo-router';
-import { useTheme } from '../../src/theme/ThemeProvider';
+import { useTheme } from '../../src/theme';
 import Icon from '../../src/components/ui/Icon';
 import { MeshGradient } from '../../src/components/common';
 import { getGradientIds } from '../../src/theme/primitives/gradients';
@@ -13,6 +13,7 @@ import { useCardStore } from '../../src/store/cardStore';
 import { useWordStore } from '../../src/store/wordStore';
 import { useProgressStore } from '../../src/store/progressStore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { radius } from '../../src/theme/styleUtils';
 
 // Sample profile card component with gradient background
 interface GradientProfileCardProps {
@@ -168,6 +169,10 @@ export default function ProfileScreen() {
   const resetCardStore = useCardStore(state => state.resetCardState);
   const fetchWords = useWordStore(state => state.fetchWords);
   const resetStreak = useProgressStore(state => state.resetStreak);
+  const { streak, longestStreak, totalWordsLearned, lastCompletedDate } = useProgressStore();
+  const resetProgressState = useProgressStore(state => state._dangerouslyResetAllState);
+  const resetCardState = useCardStore(state => state._dangerouslyResetAllState);
+  const resetWordState = useWordStore(state => state._dangerouslyResetAllState);
 
   if (!isReady) {
     return (
@@ -211,10 +216,15 @@ export default function ProfileScreen() {
                 'user-progress-storage'
               ]);
               
-              // Reset in-memory state
-              resetStreak();
-              fetchWords(14, true); // Force refresh words
+              // Also reset in-memory state using the _dangerouslyResetAllState functions
+              console.log("Resetting in-memory store states...");
+              resetProgressState(); // Calls _dangerouslyResetAllState for progress
+              resetCardState(); // Calls _dangerouslyResetAllState for cards
+              resetWordState(); // Call word store reset
               
+              // Optional: Trigger a refetch after reset to load fresh data
+              // fetchWords(14, true);
+
               Alert.alert(
                 "Data Reset Complete",
                 "All app data has been reset successfully.",
@@ -231,8 +241,11 @@ export default function ProfileScreen() {
   };
 
   return (
-    <ScrollView style={[styles.container, { backgroundColor: colors.background.primary }]}>
-      <Box padding="lg" align="center">
+    <ScrollView 
+      style={{ flex: 1, backgroundColor: colors.background.primary }} 
+      contentContainerStyle={{ paddingBottom: spacing.xl }}
+    >
+      <Box padding="lg" alignItems="center">
         <Text variant="headingMedium">Profile</Text>
         
         {/* Add the gradient profile card */}
@@ -301,6 +314,7 @@ export default function ProfileScreen() {
             <Text color={colors.error}>Reset Data</Text>
           </TouchableOpacity>
         </Box>
+
       </Box>
     </ScrollView>
   );
