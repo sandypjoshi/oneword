@@ -6,11 +6,11 @@ import { Box } from '../layout';
 import { Text } from '../ui';
 import OptionButton from './OptionButton';
 import { radius, applyElevation } from '../../theme/styleUtils';
-import AnimatedChip from '../ui/AnimatedChip';
 import * as Haptics from 'expo-haptics';
 import { useCardStore } from '../../store/cardStore';
 import { useWordStore } from '../../store/wordStore';
 import { useProgressStore } from '../../store/progressStore';
+import WordSection from './WordSection';
 
 // Character threshold for font size reduction (should match OptionButton's threshold)
 const TEXT_LENGTH_THRESHOLD = 28;
@@ -41,14 +41,12 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
   onCorrectAnswer,
 }) => {
   const { colors, spacing } = useTheme();
-  const { word, pronunciation, partOfSpeech, options = [] } = wordData;
+  const { id, word, pronunciation, partOfSpeech, options = [] } = wordData;
   
   // Zustand store hooks
-  const selectedOption = useCardStore(state => state.getSelectedOption(wordData.id));
+  const selectedOption = useCardStore(state => state.getSelectedOption(id));
   const getOptionState = useCardStore(state => state.getOptionState);
   const selectOption = useCardStore(state => state.selectOption);
-  const isWordSpeaking = useCardStore(state => state.isWordSpeaking(wordData.id));
-  const speakWord = useCardStore(state => state.speakWord);
   const markWordRevealed = useWordStore(state => state.markWordRevealed);
   const incrementWordsLearned = useProgressStore(state => state.incrementWordsLearned);
   const checkAndUpdateStreak = useProgressStore(state => state.checkAndUpdateStreak);
@@ -62,21 +60,14 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
   // Check if options should be disabled (correct answer already selected)
   const isAnyOptionCorrect = useMemo(() => {
     return options.some(option => 
-      getOptionState(wordData.id, option.value) === 'correct'
+      getOptionState(id, option.value) === 'correct'
     );
-  }, [wordData.id, options, getOptionState]);
+  }, [id, options, getOptionState]);
   
   // Check if any option text exceeds the threshold
   const shouldUseSmallFont = useMemo(() => {
     return options.some(option => option.value.length > TEXT_LENGTH_THRESHOLD);
   }, [options]);
-  
-  // Handle pronunciation
-  const handlePronunciation = useCallback(() => {
-    if (!isWordSpeaking) {
-      speakWord(wordData.id, word);
-    }
-  }, [wordData.id, word, isWordSpeaking, speakWord]);
   
   // Handle option selection
   const handleOptionSelect = useCallback((option: WordOption) => {
@@ -88,21 +79,21 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
     );
     
     // Update selected option in store
-    selectOption(wordData.id, option.value, option.isCorrect);
+    selectOption(id, option.value, option.isCorrect);
     
     if (option.isCorrect) {
       // Calculate attempts based on previously selected incorrect options
       // For this we need to determine how many incorrect options were selected
       // We can use the length of incorrect options in the state
       const incorrectOptionsCount = options
-        .filter(opt => !opt.isCorrect && getOptionState(wordData.id, opt.value) === 'incorrect')
+        .filter(opt => !opt.isCorrect && getOptionState(id, opt.value) === 'incorrect')
         .length;
       
       // Add 1 to include this attempt
       const attempts = incorrectOptionsCount + 1;
       
       // Mark word as revealed in word store
-      markWordRevealed(wordData.id, attempts);
+      markWordRevealed(id, attempts);
       
       // Increment words learned and update streak
       incrementWordsLearned();
@@ -113,7 +104,7 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
       }
     }
   }, [
-    wordData.id, 
+    id, 
     options, 
     selectOption, 
     getOptionState, 
@@ -123,6 +114,31 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
     onCorrectAnswer,
   ]);
   
+  // Define styles inside component to access spacing
+  const styles = useMemo(() => StyleSheet.create({
+    container: {
+      borderWidth: 1,
+      borderRadius: radius.xl,
+      overflow: 'hidden',
+      width: '100%',
+      height: '100%',
+    },
+    content: {
+      flex: 1,
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      paddingTop: spacing.xl,
+    },
+    wordSection: {
+      marginBottom: spacing.lg,
+    },
+    optionsSection: {
+      justifyContent: 'flex-end',
+      paddingBottom: spacing.md,
+    }
+  }), [spacing]);
+
   return (
     <View 
       style={[
@@ -136,46 +152,14 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
       ]}
     >
       <Box padding="lg" style={styles.content}>
-        {/* Word section */}
-        <View style={styles.wordSection}>
-          {partOfSpeech && (
-            <Text
-              variant="caption"
-              color={colors.text.secondary}
-              italic={true}
-              style={{ 
-                textAlign: 'center',
-                textTransform: 'lowercase',
-                marginBottom: -4
-              }}
-            >
-              [{partOfSpeech}]
-            </Text>
-          )}
-          
-          <Text 
-            variant="serifTextLarge"
-            color={colors.text.primary}
-            align="center"
-            style={{ 
-              textTransform: 'lowercase', 
-              marginTop: -2,
-              marginBottom: spacing.sm
-            }}
-          >
-            {word}
-          </Text>
-          
-          {pronunciation && (
-            <AnimatedChip 
-              label={pronunciation}
-              iconLeft="volumeLoud"
-              size="small"
-              onPress={handlePronunciation}
-              isAnimating={isWordSpeaking}
-            />
-          )}
-        </View>
+        {/* Use WordSection component */}
+        <WordSection 
+          wordId={id}
+          word={word}
+          pronunciation={pronunciation}
+          partOfSpeech={partOfSpeech}
+          style={styles.wordSection} 
+        />
         
         {/* Options section */}
         <View style={styles.optionsSection}>
@@ -192,7 +176,7 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
             <OptionButton
               key={option.value}
               label={option.value}
-              state={getOptionState(wordData.id, option.value)}
+              state={getOptionState(id, option.value)}
               onPress={() => handleOptionSelect(option)}
               disabled={isAnyOptionCorrect}
               style={{ marginBottom: spacing.md }}
@@ -203,32 +187,6 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    borderWidth: 1,
-    borderRadius: radius.xl,
-    overflow: 'hidden',
-    width: '100%',
-    height: '100%',
-  },
-  content: {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-  },
-  wordSection: {
-    alignItems: 'center',
-    flex: 0,
-    paddingTop: 8,
-  },
-  optionsSection: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    paddingVertical: 8,
-  }
-});
 
 // Apply memo to the component
 const WordCardQuestion = memo(WordCardQuestionComponent);

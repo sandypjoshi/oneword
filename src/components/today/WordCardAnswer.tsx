@@ -2,7 +2,6 @@ import React, { memo, useCallback, useMemo, useRef, useState, useEffect } from '
 import { View, StyleSheet, StyleProp, ViewStyle, Dimensions, LayoutChangeEvent, TouchableOpacity, GestureResponderEvent } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
 import { Text, Icon } from '../ui';
-import AnimatedChip from '../ui/AnimatedChip';
 import Chip from '../ui/Chip';
 import { WordOfDay } from '../../types/wordOfDay';
 import { radius as themeRadiusTokens } from '../../theme/styleUtils';
@@ -22,10 +21,10 @@ import {
   getOrGenerateMesh,
   shouldRegenerateMesh
 } from '../../utils/meshGradientGenerator';
-import { useCardStore } from '../../store/cardStore';
 import { useWordStore } from '../../store/wordStore';
 import { Box } from '../layout';
 import spacing from '../../theme/spacing';
+import WordSection from './WordSection';
 
 // Get screen dimensions for responsive sizing
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
@@ -72,8 +71,6 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
   const isDark = effectiveColorMode === 'dark';
   
   // Zustand store hooks
-  const isWordSpeaking = useCardStore(state => state.isWordSpeaking(wordData.id));
-  const speakWord = useCardStore(state => state.speakWord);
   const words = useWordStore(state => state.words);
   
   // Use useRef for mesh data and theme version tracking
@@ -148,34 +145,6 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
   // Extract mesh data for rendering
   const mesh = meshRef.current;
   
-  // Function to handle pronunciation
-  const handlePronunciation = useCallback(() => {
-    if (!pronunciation || isWordSpeaking) return;
-    speakWord(wordData.id, word);
-  }, [pronunciation, isWordSpeaking, wordData.id, word, speakWord]);
-  
-  // Get attempt message based on user performance
-  const getAttemptMessage = useCallback(() => {
-    if (userAttempts === 0) {
-      return 'No attempts yet';
-    } else if (userAttempts === 1) {
-      return 'Correct on first try!';
-    } else {
-      return `Correct in ${userAttempts} attempts`;
-    }
-  }, [userAttempts]);
-  
-  // Get attempt color based on user performance
-  const getAttemptColor = useCallback(() => {
-    if (userAttempts === 0) {
-      return colors.text.secondary;
-    } else if (userAttempts === 1) {
-      return colors.text.success;
-    } else {
-      return colors.text.info;
-    }
-  }, [userAttempts, colors.text]);
-
   // Determine the base background color for the chip based on the theme mode
   const chipBaseBackgroundColor = isDark ? colors.background.primary : colors.background.card;
 
@@ -213,115 +182,43 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
       
       {/* Content - Word answer and details */}
       <Box padding="md" style={styles.content}>
-        {/* Word section with part of speech above */}
-        <View style={styles.wordSection}>
-          {partOfSpeech && (
-            <Text
-              variant="caption"
-              color={colors.text.secondary}
-              italic={true}
-              style={{ 
-                textAlign: 'center',
-                textTransform: 'lowercase',
-              }}
-            >
-              [{partOfSpeech}]
-            </Text>
-          )}
-          
-          <Text 
-            variant="serifTextLarge"
-            color={colors.text.primary}
-            align="center"
-            style={[styles.wordText]}
-          >
-            {word}
-          </Text>
-          
-          {/* Wrap pronunciation chip to stop touch propagation */}
-          {pronunciation && (
-            <View 
-              onStartShouldSetResponder={() => true} 
-              onTouchEnd={(e: GestureResponderEvent) => e.stopPropagation()}
-              // Minimal styling needed, just enough to contain the chip
-              style={{ alignSelf: 'center' }} 
-            >
-              <AnimatedChip 
-                label={pronunciation}
-                iconLeft="volumeLoud"
-                size="small"
-                onPress={handlePronunciation} // Chip's onPress remains
-                isAnimating={isWordSpeaking}
-                variant="onGradient"
-                style={styles.pronunciationChip} // Keep internal chip styles
-              />
-            </View>
-          )}
-        </View>
+        {/* Use WordSection */}
+        <WordSection
+          wordId={id}
+          word={word}
+          pronunciation={pronunciation}
+          partOfSpeech={partOfSpeech}
+          style={styles.wordSection}
+        />
         
         {/* Definition */}
-        <View style={styles.definitionSection}>
-          {Array.isArray(definition) ? (
-            // Handle multiple definitions
-            definition.map((def, index) => (
-              <React.Fragment key={index}>
-                {index > 0 && (
-                  <View 
-                    style={[
-                      styles.definitionSeparator,
-                      { backgroundColor: colors.text.secondary + '20' }
-                    ]} 
-                  />
-                )}
-                <Text
-                  variant="bodyMedium"
-                  color={colors.text.secondary}
-                  align="center"
-                  style={{ textTransform: 'lowercase' }}
-                >
-                  {index + 1}. {def}
-                </Text>
-              </React.Fragment>
-            ))
-          ) : (
-            // Handle single definition
-            <Text
-              variant="bodyMedium"
-              color={colors.text.secondary}
-              align="center"
-              style={{ textTransform: 'lowercase' }}
-            >
-              {definition}
-            </Text>
-          )}
-        </View>
+        {definition && (
+          <Text
+            variant="bodyMedium"
+            color={colors.text.secondary}
+            align="center"
+            style={styles.definitionText}
+          >
+            {definition}
+          </Text>
+        )}
         
         {/* Example sentence with highlighted word */}
         {example && (
-          <>
-            {/* Separator with inner shadow effect */}
-            <View style={styles.separatorContainer}>
-              <View style={[styles.hairlineSeparator, { backgroundColor: colors.text.secondary + '40' }]} />
-              <View style={[styles.hairlineShadow, { backgroundColor: 'rgba(255, 255, 255, 0.25)' }]} />
-            </View>
-            
-            <View style={styles.exampleSection}>
-              <Text
-                variant="bodyMedium"
-                color={colors.text.secondary}
-                align="center"
-                style={{ fontStyle: 'italic' }}
-              >
-                {formatExampleText(example, word)}
-              </Text>
-            </View>
-          </>
+          <Text 
+            variant="bodyMedium"
+            color={colors.text.secondary}
+            align="center"
+            style={[styles.exampleText, { fontStyle: 'italic' }]}
+          >
+            {example}
+          </Text>
         )}
 
         {/* Chip is now "View More" again */}
         {onViewDetails && (
           <View 
-            style={{ alignSelf: 'center', marginTop: spacing.lg }} 
+            style={styles.chipWrapper}
             onStartShouldSetResponder={() => true}
             onTouchEnd={(e) => e.stopPropagation()}
           >
@@ -341,31 +238,6 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
 
     </TouchableOpacity> // Close the TouchableOpacity wrapper
   );
-};
-
-/* Helper function to format example text with the target word emphasized */
-const formatExampleText = (example: string, word: string) => {
-  if (!example) return '';
-  
-  // Case insensitive regex to match the word
-  const regex = new RegExp(`\\b(${word})\\b`, 'gi');
-  
-  // Split the example by the word
-  const parts = example.split(regex);
-  
-  // Join back together with the word wrapped in styled Text
-  return parts.map((part, index) => {
-    if (part.toLowerCase() === word.toLowerCase()) {
-      return <Text 
-        key={index} 
-        color="secondary" 
-        style={{ fontWeight: '500' }}
-      >
-        {part}
-      </Text>;
-    }
-    return part;
-  });
 };
 
 // Define static styles that don't depend on theme variables here
@@ -396,54 +268,24 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    padding: spacing.lg, 
   },
   wordSection: {
-    alignItems: 'center',
-    width: '100%',
     marginBottom: spacing.md,
   },
-  wordText: {
-    fontWeight: '600',
-  },
-  pronunciationChip: {
-    marginTop: 4,
-  },
-  definitionSection: {
-    marginBottom: 0,
-    width: '100%',
-  },
-  definitionSeparator: {
-    height: StyleSheet.hairlineWidth,
-    width: '40%',
-    alignSelf: 'center',
-    marginVertical: spacing.xs,
-  },
-  exampleSection: {
-    marginBottom: 0,
-  },
-  separatorContainer: {
-    width: '80%',
-    alignSelf: 'center',
+  definitionText: {
     marginTop: spacing.sm,
-    marginBottom: spacing.sm,
-    position: 'relative',
-    height: 2,
+    textAlign: 'center',
   },
-  hairlineSeparator: {
-    height: 1,
-    width: '100%',
-    position: 'absolute',
-    top: 0,
+  exampleText: {
+    marginTop: spacing.lg,
+    textAlign: 'center',
   },
-  hairlineShadow: {
-    height: 1,
-    width: '100%',
-    position: 'absolute',
-    top: 1,
+  chipWrapper: {
+    alignSelf: 'center',
+    marginTop: spacing.lg, 
   },
 });
 

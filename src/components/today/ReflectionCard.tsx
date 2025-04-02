@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { memo, useCallback, useMemo } from 'react';
 import { View, StyleSheet, StyleProp, ViewStyle, TouchableOpacity, GestureResponderEvent } from 'react-native';
 import { WordOfDay, WordOption } from '../../types/wordOfDay';
 import { useTheme } from '../../theme';
@@ -8,6 +8,7 @@ import Icon from '../ui/Icon';
 import Chip from '../ui/Chip';
 import { useCardStore, OptionState } from '../../store/cardStore';
 import { radius } from '../../theme/styleUtils';
+import WordSection from './WordSection';
 
 interface ReflectionCardProps {
   wordData: WordOfDay;
@@ -23,7 +24,7 @@ const ReflectionCardComponent: React.FC<ReflectionCardProps> = ({
   onFlipBack,
 }) => {
   const { colors, spacing, effectiveColorMode } = useTheme();
-  const { id, word, definition, pronunciation, options = [] } = wordData;
+  const { id, word, definition, pronunciation, partOfSpeech, options = [] } = wordData;
 
   const getOptionState = useCardStore(state => state.getOptionState);
   const selectedOptionValue = useCardStore(state => state.getSelectedOption(id));
@@ -39,8 +40,9 @@ const ReflectionCardComponent: React.FC<ReflectionCardProps> = ({
     contentContainer: {
       flex: 1,
       width: '100%',
+      paddingTop: spacing.xl,
     },
-    wordInfoSection: {
+    wordSection: {
       marginBottom: spacing.lg,
     },
     optionsSection: {
@@ -119,17 +121,13 @@ const ReflectionCardComponent: React.FC<ReflectionCardProps> = ({
       activeOpacity={0.9}
     >
       <Box padding="lg" style={styles.contentContainer}>
-        <View style={styles.wordInfoSection}>
-          <Text variant="headingSmall" color={colors.text.primary}>{word}</Text>
-          {pronunciation && (
-            <Text variant="bodyMedium" color={colors.text.secondary} style={{ marginTop: spacing.xxs }}>
-              [{pronunciation}]
-            </Text>
-          )}
-          <Text variant="bodyMedium" color={colors.text.secondary} style={{ marginTop: spacing.sm }}>
-            {definition}
-          </Text>
-        </View>
+        <WordSection 
+          wordId={id}
+          word={word}
+          pronunciation={pronunciation}
+          partOfSpeech={partOfSpeech}
+          style={styles.wordSection}
+        />
 
         <View style={[styles.divider, { backgroundColor: colors.border.light }]} />
 
