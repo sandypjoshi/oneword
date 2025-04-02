@@ -3,6 +3,7 @@ import { View, StyleSheet, StyleProp, ViewStyle, Dimensions, LayoutChangeEvent, 
 import { useTheme } from '../../theme/ThemeProvider';
 import { Text, Icon } from '../ui';
 import AnimatedChip from '../ui/AnimatedChip';
+import Chip from '../ui/Chip';
 import { WordOfDay } from '../../types/wordOfDay';
 import { radius as themeRadiusTokens } from '../../theme/styleUtils';
 import * as Speech from 'expo-speech';
@@ -10,18 +11,14 @@ import {
   Canvas,
   Vertices,
   Group,
-  RoundedRect,
-  vec,
   SweepGradient,
   Skia,
   LinearGradient,
   Shadow
 } from '@shopify/react-native-skia';
 import { 
-  generateMeshGradient, 
   MeshData, 
   getGradientBorderColor,
-  generateSeedFromString,
   getOrGenerateMesh,
   shouldRegenerateMesh
 } from '../../utils/meshGradientGenerator';
@@ -29,7 +26,6 @@ import { useCardStore } from '../../store/cardStore';
 import { useWordStore } from '../../store/wordStore';
 import { Box } from '../layout';
 import spacing from '../../theme/spacing';
-import Chip from '../ui/Chip';
 
 // Get screen dimensions for responsive sizing
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
@@ -110,8 +106,8 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
   
   // Generate a consistent seed from the word for same gradient per word
   const wordSeed = useMemo(() => 
-    generateSeedFromString(word)
-  , [word]);
+    Date.parse(wordData.date || new Date().toISOString())
+  , [wordData.date]);
   
   // Handle layout change to get actual container height
   const handleLayout = useCallback((event: LayoutChangeEvent) => {

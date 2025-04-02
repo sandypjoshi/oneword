@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View, StyleSheet, StyleProp, ViewStyle, TouchableOpacity, GestureResponderEvent } from 'react-native';
 import { WordOfDay, WordOption } from '../../types/wordOfDay';
 import { useTheme } from '../../theme';
@@ -22,13 +22,40 @@ const ReflectionCardComponent: React.FC<ReflectionCardProps> = ({
   onNavigateToAnswer,
   onFlipBack,
 }) => {
-  const { colors, spacing } = useTheme();
+  const { colors, spacing, effectiveColorMode } = useTheme();
   const { id, word, definition, pronunciation, options = [] } = wordData;
 
   const getOptionState = useCardStore(state => state.getOptionState);
   const selectedOptionValue = useCardStore(state => state.getSelectedOption(id));
 
   const correctOptionValue = options.find(o => o.isCorrect)?.value;
+
+  const styles = useMemo(() => StyleSheet.create({
+    container: {
+      flex: 1,
+      borderRadius: radius.xl,
+      borderWidth: 1,
+    },
+    contentContainer: {
+      flex: 1,
+      width: '100%',
+    },
+    wordInfoSection: {
+      marginBottom: spacing.lg,
+    },
+    optionsSection: {
+      marginTop: spacing.lg,
+    },
+    optionRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: spacing.md,
+    },
+    divider: {
+      height: 1,
+      width: '100%',
+    },
+  }), [spacing]);
 
   const renderOptionStatus = (option: WordOption) => {
     const state = getOptionState(id, option.value);
@@ -66,13 +93,16 @@ const ReflectionCardComponent: React.FC<ReflectionCardProps> = ({
         <Text 
           variant="bodyMedium" 
           color={textColor} 
-          style={[{ flexShrink: 1, marginLeft: spacing.xs }, fontWeightStyle]}
+          style={[{ flexShrink: 1, marginLeft: spacing.sm }, fontWeightStyle]}
         >
           {option.value}
         </Text>
       </View>
     );
   };
+
+  const isDark = effectiveColorMode === 'dark';
+  const chipBaseBackgroundColor = isDark ? colors.background.primary : colors.background.card;
 
   return (
     <TouchableOpacity
@@ -121,6 +151,8 @@ const ReflectionCardComponent: React.FC<ReflectionCardProps> = ({
               size="small"
               variant="default"
               onPress={onNavigateToAnswer}
+              backgroundColor={chipBaseBackgroundColor + 'B3'}
+              internalSpacing="xs"
             />
           </View>
         )}
@@ -128,33 +160,6 @@ const ReflectionCardComponent: React.FC<ReflectionCardProps> = ({
     </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    borderRadius: radius.xl,
-    borderWidth: 1,
-  },
-  contentContainer: {
-    flex: 1,
-    width: '100%',
-  },
-  wordInfoSection: {
-    marginBottom: 16,
-  },
-  optionsSection: {
-    marginTop: 16,
-  },
-  optionRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 12,
-  },
-  divider: {
-    height: 1,
-    width: '100%',
-  },
-});
 
 const ReflectionCard = React.memo(ReflectionCardComponent);
 ReflectionCard.displayName = 'ReflectionCard';
