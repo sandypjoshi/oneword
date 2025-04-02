@@ -288,7 +288,7 @@ interface FontPairing {
 // Font pairings for each theme
 const themeFontPairings: Record<ThemeName, FontPairing> = {
   default: {
-    display: FONT_FAMILIES.system,
+    display: FONT_FAMILIES.serif, // Use DM Serif Text for display text in default theme
     heading: FONT_FAMILIES.system,
     body: FONT_FAMILIES.system,
     utility: FONT_FAMILIES.system,

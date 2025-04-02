@@ -51,15 +51,19 @@ const AnimatedChip: React.FC<AnimatedChipProps> = ({
   const getVariantColors = () => {
     switch (variant) {
       case 'onGradient':
+        const onGradientTextColor = colors.text.primary;
         const baseColor = isDark ? colors.background.primary : colors.background.card;
+        // Apply opacity directly to the background color string
+        const backgroundWithOpacity = baseColor + '99'; // ~60% opacity
         return {
-          background: baseColor,
+          // Pass color with opacity to backgroundColor prop
+          background: backgroundWithOpacity, 
+          // Remove opacity from containerStyle, keep blend mode
           containerStyle: { 
-            mixBlendMode: blending.multiply,
-            opacity: 0.5,
+            mixBlendMode: blending.multiply, 
           } as ViewStyle,
-          text: isDark ? colors.text.primary : colors.text.primary,
-          icon: isDark ? colors.text.primary : colors.text.primary
+          text: onGradientTextColor, 
+          icon: onGradientTextColor 
         };
       default:
         return {

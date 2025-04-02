@@ -28,6 +28,46 @@ const ReflectionCardComponent: React.FC<ReflectionCardProps> = ({
 
   const getOptionState = useCardStore(state => state.getOptionState);
   const selectedOptionValue = useCardStore(state => state.getSelectedOption(id));
+  const attempts = useCardStore(state => state.getAttempts(id));
+  console.log(`[ReflectionCard] Word ID: ${id}, Attempts from store: ${attempts}`);
+
+  // --- Define Copy Pools with Emojis ---
+  const firstTryCopy = useMemo(() => [
+    "First guess! 🎉",
+    "Nailed it first try! ✨",
+    "Spot on! ✅",
+    "Got it in one! 👍",
+  ], []);
+
+  const multiTryCopyTemplates = useMemo(() => [
+    (count: number) => `Guessed it in ${count}! 👍`, 
+    (count: number) => `Took ${count} guesses, but you got it! 🎉`,
+    (count: number) => `Solved in ${count} tries. 🙂`,
+    (count: number) => `${count} guesses to find it! ✨`,
+  ], []);
+
+  const fallbackCopy = useMemo(() => [
+    "Guess Review 🤔",
+    "Answer Breakdown 👀",
+    "How Your Guess Went 👇",
+    "The Reveal ✨",
+  ], []);
+
+  // --- Select Random Copy Memoized ---
+  const reviewText = useMemo(() => {
+    console.log(`[ReflectionCard] Calculating reviewText for attempts: ${attempts}`);
+    if (attempts === undefined) {
+      const randomIndex = Math.floor(Math.random() * fallbackCopy.length);
+      return fallbackCopy[randomIndex];
+    } else if (attempts === 1) {
+      const randomIndex = Math.floor(Math.random() * firstTryCopy.length);
+      return firstTryCopy[randomIndex];
+    } else {
+      const randomIndex = Math.floor(Math.random() * multiTryCopyTemplates.length);
+      const template = multiTryCopyTemplates[randomIndex];
+      return template(attempts);
+    }
+  }, [attempts, firstTryCopy, multiTryCopyTemplates, fallbackCopy]);
 
   const correctOptionValue = options.find(o => o.isCorrect)?.value;
 
@@ -47,11 +87,14 @@ const ReflectionCardComponent: React.FC<ReflectionCardProps> = ({
     },
     optionsSection: {
       marginTop: spacing.lg,
+      alignItems: 'center',
     },
     optionRow: {
       flexDirection: 'row',
       alignItems: 'center',
       marginBottom: spacing.md,
+      justifyContent: 'center',
+      width: '100%',
     },
     divider: {
       height: 1,
@@ -99,6 +142,7 @@ const ReflectionCardComponent: React.FC<ReflectionCardProps> = ({
           variant="bodyMedium" 
           color={textColor} 
           style={[{ flexShrink: 1, marginLeft: spacing.sm }, fontWeightStyle]}
+          textTransform="lowercase"
         >
           {option.value}
         </Text>
@@ -135,28 +179,11 @@ const ReflectionCardComponent: React.FC<ReflectionCardProps> = ({
         <View style={[styles.divider, { backgroundColor: colors.border.light }]} />
 
         <View style={styles.optionsSection}>
-          <Text variant="label" color={colors.text.tertiary} style={{ marginBottom: spacing.md }}>
-            Your Answer Review:
+          <Text variant="label" color={colors.text.tertiary} style={{ marginBottom: spacing.md, textAlign: 'center', width: '100%' }}>
+            {reviewText}
           </Text>
           {options.map(renderOptionStatus)}
         </View>
-
-        {onNavigateToAnswer && (
-          <View 
-            style={{ alignSelf: 'center', marginTop: spacing.xl }} 
-            onStartShouldSetResponder={() => true}
-            onTouchEnd={(e) => e.stopPropagation()}
-          >
-            <Chip
-              label="View Answer"
-              size="small"
-              variant="default"
-              onPress={onNavigateToAnswer}
-              backgroundColor={chipBaseBackgroundColor + 'B3'}
-              internalSpacing="xs"
-            />
-          </View>
-        )}
       </Box>
     </TouchableOpacity>
   );

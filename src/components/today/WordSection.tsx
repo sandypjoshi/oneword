@@ -5,12 +5,16 @@ import { Text } from '../ui';
 import AnimatedChip from '../ui/AnimatedChip';
 import { useCardStore } from '../../store/cardStore';
 
+// Define the type locally
+type AnimatedChipVariant = 'default' | 'onGradient';
+
 interface WordSectionProps {
   wordId: string;
   word: string;
   pronunciation?: string | null;
   partOfSpeech?: string | null;
   style?: StyleProp<ViewStyle>;
+  chipVariant?: AnimatedChipVariant;
 }
 
 const WordSectionComponent: React.FC<WordSectionProps> = ({
@@ -19,6 +23,7 @@ const WordSectionComponent: React.FC<WordSectionProps> = ({
   pronunciation,
   partOfSpeech,
   style,
+  chipVariant = 'default',
 }) => {
   const { colors, spacing } = useTheme();
 
@@ -82,10 +87,8 @@ const WordSectionComponent: React.FC<WordSectionProps> = ({
           size="small"
           onPress={handlePronunciation}
           isAnimating={isWordSpeaking}
-          // Define standard variant or pass via props if needed
-          variant="default" // Or maybe "onGradient" if always used on gradient?
-                           // Let's start with default, can be overridden via style prop if needed.
-          style={styles.pronunciationChip} // Style for positioning
+          variant={chipVariant}
+          style={styles.pronunciationChip}
         />
       )}
     </View>

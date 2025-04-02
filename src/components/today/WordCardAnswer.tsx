@@ -182,22 +182,23 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
       
       {/* Content - Word answer and details */}
       <Box padding="md" style={styles.content}>
-        {/* Use WordSection */}
+        {/* Use WordSection, specify onGradient variant */}
         <WordSection
           wordId={id}
           word={word}
           pronunciation={pronunciation}
           partOfSpeech={partOfSpeech}
-          style={styles.wordSection}
+          style={styles.wordSection} 
+          chipVariant="onGradient" // Specify variant for gradient background
         />
         
         {/* Definition */}
         {definition && (
           <Text
-            variant="bodyMedium"
+            variant="bodySmall"
             color={colors.text.secondary}
-            align="center"
             style={styles.definitionText}
+            textTransform="lowercase"
           >
             {definition}
           </Text>
@@ -276,8 +277,7 @@ const styles = StyleSheet.create({
     marginBottom: spacing.md,
   },
   definitionText: {
-    marginTop: spacing.sm,
-    textAlign: 'center',
+    marginTop: spacing.xs,
   },
   exampleText: {
     marginTop: spacing.lg,

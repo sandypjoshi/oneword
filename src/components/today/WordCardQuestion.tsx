@@ -152,7 +152,7 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
       ]}
     >
       <Box padding="lg" style={styles.content}>
-        {/* Use WordSection component */}
+        {/* Use WordSection component - variant defaults to 'default' */}
         <WordSection 
           wordId={id}
           word={word}

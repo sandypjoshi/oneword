@@ -12,6 +12,7 @@ interface CardState {
   selectedOptions: Record<string, string | undefined>; // wordId -> selectedOption
   optionStates: Record<string, Record<string, OptionState>>;
   speakingWordIds: string[];
+  attempts: Record<string, number>; // Add attempts state
   
   // Actions
   flipCard: (wordId: string, flipped: boolean) => void;
@@ -22,6 +23,7 @@ interface CardState {
   isWordSpeaking: (wordId: string) => boolean;
   getOptionState: (wordId: string, option: string) => OptionState;
   getSelectedOption: (wordId: string) => string | undefined;
+  getAttempts: (wordId: string) => number | undefined; // Add attempts selector
 }
 
 export const useCardStore = create<CardState>()(
@@ -31,6 +33,7 @@ export const useCardStore = create<CardState>()(
       selectedOptions: {},
       optionStates: {},
       speakingWordIds: [],
+      attempts: {}, // Initialize attempts state
       
       flipCard: (wordId, flipped) => {
         set((state) => ({
@@ -42,6 +45,10 @@ export const useCardStore = create<CardState>()(
       
       selectOption: (wordId, option, isCorrect) => {
         set((state) => {
+          // --- Attempts Logic --- 
+          const currentAttempts = state.attempts[wordId] || 0;
+          const newAttemptsCount = currentAttempts + 1;
+
           // Get current option states for this word
           const currentWordOptionStates = state.optionStates[wordId] || {};
           
@@ -59,6 +66,11 @@ export const useCardStore = create<CardState>()(
             optionStates: {
               ...state.optionStates,
               [wordId]: newOptionStates
+            },
+            // --- Add attempts update ---
+            attempts: {
+              ...state.attempts,
+              [wordId]: newAttemptsCount,
             }
           };
           
@@ -67,6 +79,7 @@ export const useCardStore = create<CardState>()(
             newState.flippedCardIds = [...state.flippedCardIds, wordId];
           }
           
+          console.log(`[cardStore.selectOption] Word: ${wordId}, New Attempts: ${newAttemptsCount}`); // LOG 1
           return newState;
         });
       },
@@ -107,17 +120,18 @@ export const useCardStore = create<CardState>()(
       resetCardState: (wordId) => {
         set((state) => {
           const newSelectedOptions = { ...state.selectedOptions };
-          // Delete the property instead of setting it to undefined
           delete newSelectedOptions[wordId];
-          
           const newOptionStates = { ...state.optionStates };
-          // Initialize with empty option states object
           newOptionStates[wordId] = {};
+          // --- Reset attempts ---
+          const newAttempts = { ...state.attempts };
+          delete newAttempts[wordId];
           
           return {
             flippedCardIds: state.flippedCardIds.filter(id => id !== wordId),
             selectedOptions: newSelectedOptions,
-            optionStates: newOptionStates
+            optionStates: newOptionStates,
+            attempts: newAttempts, // Add attempts reset
           };
         });
       },
@@ -136,6 +150,13 @@ export const useCardStore = create<CardState>()(
       
       getSelectedOption: (wordId) => {
         return get().selectedOptions[wordId];
+      },
+
+      // --- Add getAttempts selector ---
+      getAttempts: (wordId) => {
+        const attemptsCount = get().attempts[wordId];
+        console.log(`[cardStore.getAttempts] Requested: ${wordId}, Found: ${attemptsCount}`); // LOG 2
+        return attemptsCount;
       }
     }),
     {
@@ -151,6 +172,7 @@ export const useCardStore = create<CardState>()(
           Object.entries(state.optionStates)
             .filter(([_, value]) => Object.keys(value).length > 0)
         ),
+        attempts: state.attempts, // Persist attempts
       }),
     }
   )
