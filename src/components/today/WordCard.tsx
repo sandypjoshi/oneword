@@ -69,14 +69,36 @@ const WordCardComponent: React.FC<WordCardProps> = ({
   const isFlipped = useCardStore(state => state.isCardFlipped(wordData.id));
   const selectedOptionValue = useCardStore(state => state.getSelectedOption(wordData.id));
   const getAttempts = useCardStore(state => state.getAttempts); // Still needed for markWordRevealed
-  // flipCard is likely no longer needed here as component reacts to store changes
-  // const flipCard = useCardStore(state => state.flipCard);
   
-  const wordFromWordStore = useWordStore(state => state.words.find(w => w.id === wordData.id));
-  const isRevealed = wordFromWordStore?.isRevealed ?? false;
+  // Get word from store with a more specific selector
+  const isRevealed = useWordStore(state => {
+    const word = state.words.find(w => w.id === wordData.id);
+    return word?.isRevealed ?? false;
+  });
+  // Get full word for debugging
+  const wordFromStore = useWordStore(state => state.words.find(w => w.id === wordData.id));
   const markWordRevealed = useWordStore(state => state.markWordRevealed);
   const clearSelection = useCardStore(state => state.clearSelection); // Get clear action
   
+  // --- FALLBACK REVEALED CHECK: Check CardStore as a backup to determine if word has been answered ---
+  // This helps when the WordStore's isRevealed state hasn't fully rehydrated after tab switches
+  const isProbablyRevealed = useMemo(() => {
+    // Check if there's a selected option in the card store AND it's correct
+    const hasCorrectSelection = (selectedOptionValue !== undefined) && 
+      wordData.options?.find(o => o.value === selectedOptionValue)?.isCorrect === true;
+    
+    // Check if the card is flipped in the card store
+    const isCardFlipped = isFlipped === true;
+    
+    // If either condition is true, we should consider this word revealed
+    return isRevealed || hasCorrectSelection || isCardFlipped;
+  }, [isRevealed, selectedOptionValue, wordData.options, isFlipped]);
+  
+  // Debug revealed state to track the issue
+  useEffect(() => {
+    console.log(`[WordCard ${wordData.id}] Revealed state check: isRevealed=${isRevealed}, wordFromStore.isRevealed=${wordFromStore?.isRevealed}, isProbablyRevealed=${isProbablyRevealed}`);
+  }, [wordData.id, isRevealed, wordFromStore, isProbablyRevealed]);
+
   // --- Determine correctness (moved calculation here) ---
   const isSelectionCorrect = useMemo(() => {
       if (!selectedOptionValue) return false;
@@ -84,28 +106,33 @@ const WordCardComponent: React.FC<WordCardProps> = ({
       return wordData.options?.find(o => o.value === selectedOptionValue)?.isCorrect ?? false;
   }, [selectedOptionValue, wordData.options]);
 
-  // --- Remove internal targetFace state ---
-  // const initialFace = useMemo(() => { ... });
-  // const [targetFace, setTargetFace] = useState<CardFace>(initialFace);
-  
   // Initialize flipProgress directly based on initial store state read above
   const calculateInitialTargetValue = () => {
-      // Ensure all required states are read *before* this calculation
-      const currentSelectedOption = useCardStore.getState().getSelectedOption(wordData.id);
-      const currentIsCorrect = wordData.options?.find(o => o.value === currentSelectedOption)?.isCorrect ?? false;
-      const currentIsRevealed = useWordStore.getState().words.find(w => w.id === wordData.id)?.isRevealed ?? false;
+      // Force immediate check of word store state to avoid stale data
+      const storeState = useWordStore.getState();
+      const freshWordFromStore = storeState.words.find(w => w.id === wordData.id);
+      const freshSelectedOption = useCardStore.getState().getSelectedOption(wordData.id);
+      const freshIsCorrect = wordData.options?.find(o => o.value === freshSelectedOption)?.isCorrect === true;
+      const freshIsFlipped = useCardStore.getState().isCardFlipped(wordData.id);
       
-      console.log(`[WordCard ${wordData.id}] Calculating initialTargetValue: selectedOption=${currentSelectedOption}, isCorrect=${currentIsCorrect}, isRevealed=${currentIsRevealed}`);
+      // Multiple ways to determine if a word is revealed:
+      // 1. Direct isRevealed flag in word store
+      // 2. Having a correct answer selected
+      // 3. Card being in flipped state in card store
+      const currentIsRevealed = 
+        freshWordFromStore?.isRevealed || // Primary check from word store
+        isRevealed || // Selector from component
+        freshIsCorrect || // Has correct answer
+        freshIsFlipped; // Card is flipped in store
+      
+      console.log(`[WordCard ${wordData.id}] Calculating initialTargetValue: selectedOption=${freshSelectedOption}, isCorrect=${freshIsCorrect}, isRevealed=${isRevealed}, isFlipped=${freshIsFlipped}, FINAL=${!!currentIsRevealed}`);
       
       // Force immediate position without animation for initial state
-      if (currentSelectedOption !== undefined && currentIsCorrect) {
-          // If correctly answered -> Answer Face
-          return FACE_VALUES.answer;
-      } else if (currentIsRevealed) { 
-          // If not currently answered correctly BUT previously revealed -> Answer Face
+      // Always go to answer if the word is revealed by ANY means
+      if (currentIsRevealed) {
           return FACE_VALUES.answer;
       } else {
-          // Otherwise (never revealed, or incorrect answer just selected) -> Question Face
+          // Show question face only if definitely not revealed
           return FACE_VALUES.question;
       }
   };
@@ -136,16 +163,26 @@ const WordCardComponent: React.FC<WordCardProps> = ({
     let targetValue = FACE_VALUES.question; 
     const currentSelectedOption = useCardStore.getState().getSelectedOption(wordData.id);
     const currentIsCorrect = wordData.options?.find(o => o.value === currentSelectedOption)?.isCorrect ?? false;
-    const currentIsRevealed = useWordStore.getState().words.find(w => w.id === wordData.id)?.isRevealed ?? false;
+    
+    // Multiple ways to check if a word is revealed
+    const storeState = useWordStore.getState();
+    const freshWordFromStore = storeState.words.find(w => w.id === wordData.id);
+    const freshIsFlipped = useCardStore.getState().isCardFlipped(wordData.id);
+    const currentIsRevealed = 
+      freshWordFromStore?.isRevealed || // Word store
+      isRevealed || // Component state
+      currentIsCorrect || // Has correct answer
+      freshIsFlipped; // Card is flipped
 
     // Important: For revealed words, never go back to question face
     if (currentIsRevealed) {
         // Ensure revealed words always show answer card when not in reflection
         targetValue = flipProgress.value === FACE_VALUES.reflection ? 
           FACE_VALUES.reflection : FACE_VALUES.answer;
-    } else if (currentSelectedOption !== undefined && currentIsCorrect) {
-        targetValue = FACE_VALUES.answer;
     }
+    
+    // Extra logging to debug the issue
+    console.log(`[WordCard ${wordData.id}] Animation update: targetValue=${targetValue}, isRevealed=${currentIsRevealed}, currentProgress=${flipProgress.value}`);
     
     // Only animate if:
     // 1. Not the initial render
@@ -154,7 +191,7 @@ const WordCardComponent: React.FC<WordCardProps> = ({
         console.log(`[WordCard ${wordData.id}] Store state changed. Animating flipProgress from ${flipProgress.value} to ${targetValue}`);
         flipProgress.value = withTiming(targetValue, animationConfig);
     } else if (justMounted.current) {
-        console.log(`[WordCard ${wordData.id}] Initial render - skipping animation`);
+        console.log(`[WordCard ${wordData.id}] Initial render - skipping animation, setting direct value: ${targetValue}`);
         // For initial render, set the value directly without animation
         // This ensures the card is in the correct state immediately
         flipProgress.value = targetValue;
@@ -164,7 +201,7 @@ const WordCardComponent: React.FC<WordCardProps> = ({
     justMounted.current = false;
     
   // Depend on the state values that determine the target face
-  }, [selectedOptionValue, isSelectionCorrect, isRevealed, wordData.id, animationConfig, flipProgress]); // Added flipProgress as dependency
+  }, [selectedOptionValue, isSelectionCorrect, isRevealed, isProbablyRevealed, wordData.id, animationConfig, flipProgress]); // Added isProbablyRevealed
 
   // --- Callbacks for Child Components ---
   // Remove callbacks related to showReflection
