@@ -19,7 +19,8 @@ import {
   MeshData, 
   getGradientBorderColor,
   getOrGenerateMesh,
-  shouldRegenerateMesh
+  shouldRegenerateMesh,
+  generateSeedFromString
 } from '../../utils/meshGradientGenerator';
 import { useWordStore } from '../../store/wordStore';
 import { Box } from '../layout';
@@ -103,8 +104,9 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
   
   // Generate a consistent seed from the word for same gradient per word
   const wordSeed = useMemo(() => 
-    Date.parse(wordData.date || new Date().toISOString())
-  , [wordData.date]);
+    // Use the word itself as the seed input for consistent gradients per word
+    generateSeedFromString(word)
+  , [word]);
   
   // Handle layout change to get actual container height
   const handleLayout = useCallback((event: LayoutChangeEvent) => {
