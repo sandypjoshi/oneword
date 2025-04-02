@@ -104,7 +104,6 @@ const DevThemeSelector = () => {
   const themes = [
     { value: 'default', label: 'Default Theme' },
     { value: 'quill', label: 'Quill Theme' },
-    { value: 'aura', label: 'Aura Theme' },
   ];
 
   const colorModes = [

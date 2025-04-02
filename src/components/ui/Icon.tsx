@@ -69,7 +69,7 @@ const extractIconData = (iconName: string, variant: 'linear' | 'bold'): string |
     },
     checkmark: {
       linear: 'check-linear',
-      bold: 'check-bold',
+      bold: 'check-circle-bold',
     },
     radio: {
       linear: 'circle-linear',

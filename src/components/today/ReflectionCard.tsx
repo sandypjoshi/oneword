@@ -4,7 +4,7 @@ import { WordOfDay, WordOption } from '../../types/wordOfDay';
 import { useTheme } from '../../theme';
 import Box from '../layout/Box';
 import Text from '../ui/Text';
-import Icon from '../ui/Icon';
+import Icon, { IconName } from '../ui/Icon';
 import Chip from '../ui/Chip';
 import { useCardStore, OptionState } from '../../store/cardStore';
 import { radius } from '../../theme/styleUtils';
@@ -61,10 +61,9 @@ const ReflectionCardComponent: React.FC<ReflectionCardProps> = ({
 
   const renderOptionStatus = (option: WordOption) => {
     const state = getOptionState(id, option.value);
-    const isSelected = option.value === selectedOptionValue;
-    const isCorrect = option.value === correctOptionValue;
+    const isCorrect = option.isCorrect;
 
-    let iconName: React.ComponentProps<typeof Icon>['name'] | null = null;
+    let iconName: IconName | null = null;
     let iconColor = colors.text.secondary;
     let textColor = colors.text.secondary;
     let fontWeightStyle: { fontWeight: 'bold' | 'normal' } = { fontWeight: 'normal' };
@@ -74,10 +73,14 @@ const ReflectionCardComponent: React.FC<ReflectionCardProps> = ({
       iconColor = colors.success;
       textColor = colors.text.primary;
       fontWeightStyle = { fontWeight: 'bold' };
-    } else if (isSelected && state === 'incorrect') {
+    } else if (state === 'incorrect') {
       iconName = 'close';
       iconColor = colors.error;
-      textColor = colors.text.error;
+      textColor = colors.text.tertiary;
+    } else {
+      iconName = 'close';
+      iconColor = colors.text.disabled;
+      textColor = colors.text.tertiary;
     }
 
     return (

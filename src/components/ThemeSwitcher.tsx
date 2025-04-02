@@ -30,11 +30,6 @@ const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({
       label: 'Quill',
       description: 'Classic serif typography',
     },
-    {
-      value: 'aura',
-      label: 'Aura',
-      description: 'Vibrant and energetic',
-    },
   ];
 
   const modeOptions = [

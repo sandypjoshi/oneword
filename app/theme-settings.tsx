@@ -17,7 +17,6 @@ const ThemeSelector = () => {
   const themeOptions = [
     { value: 'default', label: 'Default Theme', description: 'Clean and modern design' },
     { value: 'quill', label: 'Quill Theme', description: 'Dictionary style with serif typography' },
-    { value: 'aura', label: 'Aura Theme', description: 'Vibrant and energetic colors' },
   ];
 
   const colorModeOptions = [
@@ -66,7 +65,7 @@ export default function ThemeSettingsScreen() {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
   const router = useRouter();
-  const { isDark } = useTheme();
+  const { effectiveColorMode } = useTheme();
   
   if (!isReady) {
     return (
@@ -92,7 +91,7 @@ export default function ThemeSettingsScreen() {
           headerTintColor: colors.text.primary,
         }} 
       />
-      <StatusBar style={isDark ? 'light' : 'dark'} />
+      <StatusBar style={effectiveColorMode === 'dark' ? 'light' : 'dark'} />
       
       <ScrollView 
         style={[
