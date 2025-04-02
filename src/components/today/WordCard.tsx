@@ -65,13 +65,6 @@ const WordCardComponent: React.FC<WordCardProps> = ({
     w.id === wordData.id && w.isRevealed
   );
   
-  // Effect to ensure card is flipped if word is revealed
-  useEffect(() => {
-    if (isWordRevealed && !isFlipped) {
-      flipCard(wordData.id, true);
-    }
-  }, [wordData.id, isWordRevealed, isFlipped, flipCard]);
-  
   // Update animation when isFlipped changes
   useEffect(() => {
     flipProgress.value = withTiming(isFlipped ? 1 : 0, { duration: 500 });
@@ -80,6 +73,11 @@ const WordCardComponent: React.FC<WordCardProps> = ({
   // Handle flip back to question side
   const handleFlipBack = useCallback(() => {
     flipCard(wordData.id, false);
+  }, [wordData.id, flipCard]);
+
+  // Handle flip forward to answer side (for tapping question card when view-only)
+  const handleFlipForward = useCallback(() => {
+    flipCard(wordData.id, true);
   }, [wordData.id, flipCard]);
   
   // Front card animated styles (question side)
@@ -92,6 +90,7 @@ const WordCardComponent: React.FC<WordCardProps> = ({
         { rotateY: `${rotateValue}deg` }
       ],
       opacity: flipProgress.value > 0.5 ? 0 : 1, // Hide when past halfway point
+      zIndex: flipProgress.value <= 0.5 ? 1 : 0, // Add zIndex: Higher when front is visible
     };
   });
 
@@ -105,6 +104,7 @@ const WordCardComponent: React.FC<WordCardProps> = ({
         { rotateY: `${rotateValue}deg` }
       ],
       opacity: flipProgress.value > 0.5 ? 1 : 0, // Show when past halfway point
+      zIndex: flipProgress.value > 0.5 ? 1 : 0, // Add zIndex: Higher when back is visible
     };
   });
   
@@ -115,6 +115,8 @@ const WordCardComponent: React.FC<WordCardProps> = ({
           <WordCardQuestion
             wordData={wordData}
             style={styles.cardContent}
+            isViewOnly={isWordRevealed}
+            onFlipForward={handleFlipForward}
           />
         </Animated.View>
         

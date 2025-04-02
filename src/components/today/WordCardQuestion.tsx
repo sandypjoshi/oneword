@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useMemo } from 'react';
-import { View, StyleSheet, ViewStyle, StyleProp } from 'react-native';
+import { View, StyleSheet, ViewStyle, StyleProp, TouchableOpacity } from 'react-native';
 import { WordOfDay, WordOption } from '../../types/wordOfDay';
 import { useTheme } from '../../theme';
 import { Box } from '../layout';
@@ -25,6 +25,16 @@ interface WordCardQuestionProps {
    * Additional styles for the container
    */
   style?: StyleProp<ViewStyle>;
+  
+  /**
+   * Whether the card is in view-only mode
+   */
+  isViewOnly?: boolean;
+  
+  /**
+   * Callback function to flip the card forward
+   */
+  onFlipForward?: () => void;
 }
 
 /**
@@ -32,7 +42,9 @@ interface WordCardQuestionProps {
  */
 const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({ 
   wordData,
-  style 
+  style,
+  isViewOnly = false,
+  onFlipForward
 }) => {
   const { colors, spacing } = useTheme();
   const { word, pronunciation, partOfSpeech, options = [] } = wordData;
@@ -46,6 +58,7 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
   const markWordRevealed = useWordStore(state => state.markWordRevealed);
   const incrementWordsLearned = useProgressStore(state => state.incrementWordsLearned);
   const checkAndUpdateStreak = useProgressStore(state => state.checkAndUpdateStreak);
+  const flipCard = useCardStore(state => state.flipCard);
   
   // Find the correct option for reference
   const correctOption = useMemo(() => {
@@ -84,7 +97,6 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
     // Update selected option in store
     selectOption(wordData.id, option.value, option.isCorrect);
     
-    // If correct, update progress
     if (option.isCorrect) {
       // Calculate attempts based on previously selected incorrect options
       // For this we need to determine how many incorrect options were selected
@@ -102,6 +114,9 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
       // Increment words learned and update streak
       incrementWordsLearned();
       checkAndUpdateStreak();
+      
+      // *** Directly flip the card to the answer side ***
+      flipCard(wordData.id, true);
     }
   }, [
     wordData.id, 
@@ -110,11 +125,17 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
     getOptionState, 
     markWordRevealed, 
     incrementWordsLearned, 
-    checkAndUpdateStreak
+    checkAndUpdateStreak,
+    flipCard
   ]);
   
   return (
-    <View 
+    // Wrap in TouchableOpacity for flipping forward when view-only
+    <TouchableOpacity
+      activeOpacity={1} 
+      // Only attach onPress handler when view-only
+      onPress={isViewOnly ? onFlipForward : undefined} 
+      disabled={!isViewOnly} // Disable touch unless view-only
       style={[
         styles.container,
         {
@@ -180,17 +201,18 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
           
           {options.map((option) => (
             <OptionButton
-              key={option.value} // Use option value as stable key
+              key={option.value}
               label={option.value}
               state={getOptionState(wordData.id, option.value)}
               onPress={() => handleOptionSelect(option)}
-              disabled={isAnyOptionCorrect && option.value !== correctOption}
+              // Disable based on isViewOnly OR if already answered correctly
+              disabled={isViewOnly || isAnyOptionCorrect}
               style={{ marginBottom: spacing.md }}
             />
           ))}
         </View>
       </Box>
-    </View>
+    </TouchableOpacity>
   );
 };
 

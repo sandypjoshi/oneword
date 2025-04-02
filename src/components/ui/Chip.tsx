@@ -5,9 +5,12 @@ import { radius } from '../../theme/styleUtils';
 import { IconName } from './Icon';
 import Icon from './Icon';
 import Text from './Text';
+import spacingObject from '../../theme/spacing';
 
 export type ChipSize = 'small' | 'medium' | 'large';
 export type ChipVariant = 'default' | 'outlined' | 'filled';
+
+export type SpacingKey = keyof typeof spacingObject;
 
 export interface ChipProps {
   /**
@@ -81,6 +84,13 @@ export interface ChipProps {
   iconColor?: string;
   
   /**
+   * Optional spacing between internal elements (icon and label).
+   * Accepts a theme spacing key or null to remove spacing.
+   * Defaults to 'sm'.
+   */
+  internalSpacing?: SpacingKey | null;
+  
+  /**
    * Active opacity when pressed
    */
   activeOpacity?: number;
@@ -109,6 +119,7 @@ const Chip: React.FC<ChipProps> = ({
   borderColor,
   iconSize,
   iconColor,
+  internalSpacing = 'sm',
   activeOpacity = 0.7,
   testID,
 }) => {
@@ -175,6 +186,9 @@ const Chip: React.FC<ChipProps> = ({
   const finalIconSize = iconSize || sizeStyles.iconSize;
   const finalIconColor = iconColor || variantStyles.textColor;
   
+  // Determine the margin value based on the internalSpacing prop
+  const internalMargin = internalSpacing !== null ? spacing[internalSpacing] : 0;
+  
   // Determine if the chip is interactive
   const isInteractive = typeof onPress === 'function' && !disabled;
   
@@ -182,7 +196,7 @@ const Chip: React.FC<ChipProps> = ({
   const renderContent = () => (
     <>
       {iconLeft && (
-        <View style={styles.iconLeft}>
+        <View style={{ marginRight: internalMargin }}>
           <Icon 
             name={iconLeft} 
             size={finalIconSize} 
@@ -201,7 +215,7 @@ const Chip: React.FC<ChipProps> = ({
       </Text>
       
       {iconRight && (
-        <View style={styles.iconRight}>
+        <View style={{ marginLeft: internalMargin }}>
           <Icon 
             name={iconRight} 
             size={finalIconSize} 
@@ -250,12 +264,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     alignSelf: 'center',
-  },
-  iconLeft: {
-    marginRight: 8,
-  },
-  iconRight: {
-    marginLeft: 8,
   },
 });
 

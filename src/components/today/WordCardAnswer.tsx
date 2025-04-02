@@ -1,15 +1,21 @@
 import React, { memo, useCallback, useMemo, useRef, useState, useEffect } from 'react';
-import { View, StyleSheet, TouchableOpacity, StyleProp, ViewStyle, Pressable, Dimensions, LayoutChangeEvent } from 'react-native';
+import { View, StyleSheet, StyleProp, ViewStyle, Dimensions, LayoutChangeEvent, TouchableOpacity, GestureResponderEvent } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
-import { Text } from '../ui';
+import { Text, Icon } from '../ui';
 import AnimatedChip from '../ui/AnimatedChip';
 import { WordOfDay } from '../../types/wordOfDay';
-import { radius } from '../../theme/styleUtils';
+import { radius as themeRadiusTokens } from '../../theme/styleUtils';
 import * as Speech from 'expo-speech';
 import {
   Canvas,
   Vertices,
   Group,
+  RoundedRect,
+  vec,
+  SweepGradient,
+  Skia,
+  LinearGradient,
+  Shadow
 } from '@shopify/react-native-skia';
 import { 
   generateMeshGradient, 
@@ -23,6 +29,7 @@ import { useCardStore } from '../../store/cardStore';
 import { useWordStore } from '../../store/wordStore';
 import { Box } from '../layout';
 import spacing from '../../theme/spacing';
+import Chip from '../ui/Chip';
 
 // Get screen dimensions for responsive sizing
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
@@ -173,17 +180,23 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
     }
   }, [userAttempts, colors.text]);
 
+  // Determine the base background color for the chip based on the theme mode
+  const chipBaseBackgroundColor = isDark ? colors.background.primary : colors.background.card;
+
   // Early return if mesh is not ready
   if (!mesh) return null;
 
   return (
-    <Pressable 
+    // Wrap the main container with TouchableOpacity for flip-back interaction
+    <TouchableOpacity
+      activeOpacity={0.8} // Provide visual feedback on tap
+      onPress={onFlipBack} 
+      disabled={!onFlipBack} // Disable if no handler is provided
       style={[styles.container, style]}
-      onPress={onFlipBack}
-      onLayout={handleLayout}
+      onLayout={handleLayout} // Pass onLayout to the wrapper
     >
-      {/* Canvas for gradient */}
-      <Canvas style={styles.canvas}>
+      {/* Canvas for gradient - Added pointerEvents="none" */}
+      <Canvas style={styles.canvas} pointerEvents="none">
         <Group>
           <Vertices
             vertices={mesh.points}
@@ -193,7 +206,7 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
         </Group>
       </Canvas>
       
-      {/* Inner border overlay with blend mode */}
+      {/* Inner border overlay */}
       <View style={[
         styles.innerBorder, 
         { borderColor }
@@ -226,16 +239,24 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
             {word}
           </Text>
           
+          {/* Wrap pronunciation chip to stop touch propagation */}
           {pronunciation && (
-            <AnimatedChip 
-              label={pronunciation}
-              iconLeft="volumeLoud"
-              size="small"
-              onPress={handlePronunciation}
-              isAnimating={isWordSpeaking}
-              variant="onGradient"
-              style={styles.pronunciationChip}
-            />
+            <View 
+              onStartShouldSetResponder={() => true} 
+              onTouchEnd={(e: GestureResponderEvent) => e.stopPropagation()}
+              // Minimal styling needed, just enough to contain the chip
+              style={{ alignSelf: 'center' }} 
+            >
+              <AnimatedChip 
+                label={pronunciation}
+                iconLeft="volumeLoud"
+                size="small"
+                onPress={handlePronunciation} // Chip's onPress remains
+                isAnimating={isWordSpeaking}
+                variant="onGradient"
+                style={styles.pronunciationChip} // Keep internal chip styles
+              />
+            </View>
           )}
         </View>
         
@@ -297,8 +318,26 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
             </View>
           </>
         )}
+
+        {/* View More Chip moved into the content flow */} 
+        {onViewDetails && (
+          <Chip
+            label="View More"
+            iconRight="altArrowRightLinear" 
+            size="small"
+            variant="default"
+            onPress={onViewDetails}
+            style={{
+              marginTop: spacing.lg, 
+              paddingRight: spacing.sm
+            }}
+            backgroundColor={chipBaseBackgroundColor + 'B3'}
+            internalSpacing="xs"
+          />
+        )}
       </Box>
-    </Pressable>
+
+    </TouchableOpacity> // Close the TouchableOpacity wrapper
   );
 };
 
@@ -327,12 +366,12 @@ const formatExampleText = (example: string, word: string) => {
   });
 };
 
-// Define styles
+// Define static styles that don't depend on theme variables here
 const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
-    borderRadius: radius.lg,
+    borderRadius: themeRadiusTokens.lg,
     overflow: 'hidden',
     position: 'relative',
   },
@@ -350,8 +389,8 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     borderWidth: 1,
-    borderRadius: radius.lg,
-    borderColor: 'rgba(255, 255, 255, 0.12)',
+    borderRadius: themeRadiusTokens.lg,
+    // borderColor is applied dynamically
   },
   content: {
     flex: 1,
