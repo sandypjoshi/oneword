@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useMemo } from 'react';
-import { View, StyleSheet, ViewStyle, StyleProp, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, ViewStyle, StyleProp } from 'react-native';
 import { WordOfDay, WordOption } from '../../types/wordOfDay';
 import { useTheme } from '../../theme';
 import { Box } from '../layout';
@@ -27,14 +27,9 @@ interface WordCardQuestionProps {
   style?: StyleProp<ViewStyle>;
   
   /**
-   * Whether the card is in view-only mode
+   * Callback function to call when a correct answer is given
    */
-  isViewOnly?: boolean;
-  
-  /**
-   * Callback function to flip the card forward
-   */
-  onFlipForward?: () => void;
+  onCorrectAnswer?: () => void;
 }
 
 /**
@@ -43,8 +38,7 @@ interface WordCardQuestionProps {
 const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({ 
   wordData,
   style,
-  isViewOnly = false,
-  onFlipForward
+  onCorrectAnswer,
 }) => {
   const { colors, spacing } = useTheme();
   const { word, pronunciation, partOfSpeech, options = [] } = wordData;
@@ -58,7 +52,6 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
   const markWordRevealed = useWordStore(state => state.markWordRevealed);
   const incrementWordsLearned = useProgressStore(state => state.incrementWordsLearned);
   const checkAndUpdateStreak = useProgressStore(state => state.checkAndUpdateStreak);
-  const flipCard = useCardStore(state => state.flipCard);
   
   // Find the correct option for reference
   const correctOption = useMemo(() => {
@@ -115,8 +108,9 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
       incrementWordsLearned();
       checkAndUpdateStreak();
       
-      // *** Directly flip the card to the answer side ***
-      flipCard(wordData.id, true);
+      if (onCorrectAnswer) {
+        onCorrectAnswer();
+      }
     }
   }, [
     wordData.id, 
@@ -126,16 +120,11 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
     markWordRevealed, 
     incrementWordsLearned, 
     checkAndUpdateStreak,
-    flipCard
+    onCorrectAnswer,
   ]);
   
   return (
-    // Wrap in TouchableOpacity for flipping forward when view-only
-    <TouchableOpacity
-      activeOpacity={1} 
-      // Only attach onPress handler when view-only
-      onPress={isViewOnly ? onFlipForward : undefined} 
-      disabled={!isViewOnly} // Disable touch unless view-only
+    <View 
       style={[
         styles.container,
         {
@@ -205,14 +194,13 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
               label={option.value}
               state={getOptionState(wordData.id, option.value)}
               onPress={() => handleOptionSelect(option)}
-              // Disable based on isViewOnly OR if already answered correctly
-              disabled={isViewOnly || isAnyOptionCorrect}
+              disabled={isAnyOptionCorrect}
               style={{ marginBottom: spacing.md }}
             />
           ))}
         </View>
       </Box>
-    </TouchableOpacity>
+    </View>
   );
 };
 

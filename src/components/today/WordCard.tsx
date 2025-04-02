@@ -1,19 +1,21 @@
-import React, { memo, useCallback, useEffect } from 'react';
-import { StyleProp, ViewStyle, View, Dimensions, Platform } from 'react-native';
+import React, { memo, useCallback, useEffect, useState } from 'react';
+import { StyleProp, ViewStyle, View, Dimensions, Platform, StyleSheet } from 'react-native';
 import { WordOfDay } from '../../types/wordOfDay';
 import WordCardQuestion from './WordCardQuestion';
 import WordCardAnswer from './WordCardAnswer';
+import ReflectionCard from './ReflectionCard';
 import Animated, { 
   useSharedValue,
   useAnimatedStyle,
   withTiming,
   interpolate,
+  Extrapolate,
+  Easing,
 } from 'react-native-reanimated';
-import { StyleSheet } from 'react-native';
 import { useCardStore } from '../../store/cardStore';
+import { useWordStore } from '../../store/wordStore';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import spacing from '../../theme/spacing';
-import { useWordStore } from '../../store/wordStore';
 
 // Get screen dimensions to calculate responsive card size
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
@@ -38,6 +40,8 @@ interface WordCardProps {
   onViewDetails?: () => void;
 }
 
+type CardFace = 'question' | 'answer' | 'reflection';
+
 /**
  * Card component that displays a word of the day in question mode
  * and flips to answer mode when correct answer is selected
@@ -57,75 +61,150 @@ const WordCardComponent: React.FC<WordCardProps> = ({
   // Access word store to get the word's revealed state
   const storedWords = useWordStore(state => state.words);
   
-  // Animation shared value for flip (0 = question, 1 = answer)
-  const flipProgress = useSharedValue(isFlipped ? 1 : 0);
-  
-  // Check if this word has been revealed (answered correctly)
-  const isWordRevealed = storedWords.some(w => 
-    w.id === wordData.id && w.isRevealed
+  // State to manage the target face
+  const [targetFace, setTargetFace] = useState<CardFace>(() => 
+    storedWords.some(w => 
+      w.id === wordData.id && w.isRevealed
+    ) ? 'answer' : 'question' // Initial state based on reveal
   );
   
-  // Update animation when isFlipped changes
-  useEffect(() => {
-    flipProgress.value = withTiming(isFlipped ? 1 : 0, { duration: 500 });
-  }, [isFlipped, flipProgress]);
+  // Shared value for animation progress (0=question, 1=answer, 2=reflection)
+  const flipProgress = useSharedValue(targetFace === 'answer' ? 1 : targetFace === 'reflection' ? 2 : 0);
   
-  // Handle flip back to question side
-  const handleFlipBack = useCallback(() => {
-    flipCard(wordData.id, false);
-  }, [wordData.id, flipCard]);
+  // Animation Configuration
+  const animationConfig = {
+    duration: 500,
+    easing: Easing.inOut(Easing.cubic), // Smoother easing
+  };
 
-  // Handle flip forward to answer side (for tapping question card when view-only)
-  const handleFlipForward = useCallback(() => {
-    flipCard(wordData.id, true);
-  }, [wordData.id, flipCard]);
-  
-  // Front card animated styles (question side)
-  const frontAnimatedStyle = useAnimatedStyle(() => {
-    const rotateValue = interpolate(flipProgress.value, [0, 1], [0, 180]);
+  // Animate flipProgress when targetFace changes
+  useEffect(() => {
+    let targetValue = 0;
+    if (targetFace === 'answer') targetValue = 1;
+    else if (targetFace === 'reflection') targetValue = 2;
     
+    flipProgress.value = withTiming(targetValue, animationConfig);
+    
+    // Update the store's isFlipped state based on targetFace
+    // (Question = not flipped, Answer/Reflection = flipped)
+    // This assumes the store's `isFlipped` primarily controls the back/front visibility
+    // for things like the parent component determining initial state.
+    const shouldBeFlipped = targetFace === 'answer' || targetFace === 'reflection';
+    if (isFlipped !== shouldBeFlipped) {
+      flipCard(wordData.id, shouldBeFlipped);
+    }
+
+  }, [targetFace, flipProgress, flipCard, wordData.id, isFlipped]);
+
+  // Effect to sync targetFace if isWordRevealed changes externally (e.g., reset)
+  useEffect(() => {
+    if (!storedWords.some(w => 
+      w.id === wordData.id && w.isRevealed
+    ) && targetFace !== 'question') {
+      setTargetFace('question');
+    }
+    // If it becomes revealed but we are on question, go to answer
+    if (storedWords.some(w => 
+      w.id === wordData.id && w.isRevealed
+    ) && targetFace === 'question') {
+       setTargetFace('answer');
+    }
+  }, [storedWords, wordData.id, targetFace]);
+
+  // Handlers to change the target face
+  const handleFlipToAnswer = useCallback(() => {
+    setTargetFace('answer');
+  }, []);
+
+  const handleFlipToReflection = useCallback(() => {
+    setTargetFace('reflection');
+  }, []);
+
+  const handleFlipToQuestion = useCallback(() => {
+    // Only flip back if NOT revealed? Or always allow?
+    // For now, let's always allow 3-way flip as discussed
+    setTargetFace('question');
+  }, []);
+
+  // Animated styles for Question Card (Face 0)
+  const questionAnimatedStyle = useAnimatedStyle(() => {
+    const rotateY = interpolate(flipProgress.value, [0, 1], [0, 180], Extrapolate.CLAMP);
+    const opacity = interpolate(flipProgress.value, [0, 0.5], [1, 0], Extrapolate.CLAMP);
     return {
-      transform: [
-        { perspective: 1000 },
-        { rotateY: `${rotateValue}deg` }
-      ],
-      opacity: flipProgress.value > 0.5 ? 0 : 1, // Hide when past halfway point
-      zIndex: flipProgress.value <= 0.5 ? 1 : 0, // Add zIndex: Higher when front is visible
+      transform: [{ perspective: 1000 }, { rotateY: `${rotateY}deg` }],
+      opacity,
+      zIndex: flipProgress.value <= 0.5 ? 3 : 0,
+      pointerEvents: flipProgress.value <= 0.5 ? 'auto' : 'none', 
     };
   });
 
-  // Back card animated styles (answer side)
-  const backAnimatedStyle = useAnimatedStyle(() => {
-    const rotateValue = interpolate(flipProgress.value, [0, 1], [180, 360]);
-    
+  // Animated styles for Answer Card (Face 1)
+  const answerAnimatedStyle = useAnimatedStyle(() => {
+    // Continuous rotation: 180 -> 360 -> 540
+    const rotateY = interpolate(flipProgress.value, [0, 1, 2], [180, 360, 540], Extrapolate.CLAMP); 
+    // Visible between 0.5 and 1.5
+    const opacity = interpolate(flipProgress.value, [0.5, 1, 1.5, 2], [0, 1, 1, 0], Extrapolate.CLAMP); 
     return {
-      transform: [
-        { perspective: 1000 },
-        { rotateY: `${rotateValue}deg` }
-      ],
-      opacity: flipProgress.value > 0.5 ? 1 : 0, // Show when past halfway point
-      zIndex: flipProgress.value > 0.5 ? 1 : 0, // Add zIndex: Higher when back is visible
+      transform: [{ perspective: 1000 }, { rotateY: `${rotateY}deg` }],
+      opacity,
+      // zIndex based on progress range
+      zIndex: flipProgress.value > 0.5 && flipProgress.value <= 1.5 ? 2 : 0, 
+      // pointerEvents based on progress range
+      pointerEvents: flipProgress.value > 0.5 && flipProgress.value <= 1.5 ? 'auto' : 'none', 
+    };
+  });
+
+  // Animated styles for Reflection Card (Face 2)
+  const reflectionAnimatedStyle = useAnimatedStyle(() => {
+    // Continuous rotation: 360 -> 540 -> 720
+    const rotateY = interpolate(flipProgress.value, [0, 1, 2], [360, 540, 720], Extrapolate.CLAMP); 
+    // Visible between 1.5 and 2 (or maybe 2.5 if we extend range? Let's stick to 2)
+    const opacity = interpolate(flipProgress.value, [1.5, 2], [0, 1], Extrapolate.CLAMP); 
+    return {
+      transform: [{ perspective: 1000 }, { rotateY: `${rotateY}deg` }],
+      opacity,
+      // zIndex based on progress range
+      zIndex: flipProgress.value > 1.5 ? 1 : 0, 
+      // pointerEvents based on progress range
+      pointerEvents: flipProgress.value > 1.5 ? 'auto' : 'none', 
     };
   });
   
   return (
     <View style={[styles.outerContainer, style]}>
       <View style={styles.container}>
-        <Animated.View style={[styles.cardContainer, frontAnimatedStyle]}>
+        {/* Question Card */}
+        <Animated.View 
+          style={[styles.cardContainer, questionAnimatedStyle]} 
+        >
           <WordCardQuestion
             wordData={wordData}
             style={styles.cardContent}
-            isViewOnly={isWordRevealed}
-            onFlipForward={handleFlipForward}
+            onCorrectAnswer={handleFlipToAnswer}
           />
         </Animated.View>
         
-        <Animated.View style={[styles.cardContainer, backAnimatedStyle]}>
+        {/* Answer Card */}
+        <Animated.View 
+          style={[styles.cardContainer, answerAnimatedStyle]} 
+        >
           <WordCardAnswer
             wordData={wordData}
             style={styles.cardContent}
             onViewDetails={onViewDetails}
-            onFlipBack={handleFlipBack}
+            onNavigateToReflection={handleFlipToReflection} 
+          />
+        </Animated.View>
+
+        {/* Reflection Card */}
+        <Animated.View 
+          style={[styles.cardContainer, reflectionAnimatedStyle]}
+        >
+          <ReflectionCard 
+            wordData={wordData}
+            style={styles.cardContent}
+            onFlipBack={handleFlipToQuestion}
+            onNavigateToAnswer={handleFlipToAnswer}
           />
         </Animated.View>
       </View>

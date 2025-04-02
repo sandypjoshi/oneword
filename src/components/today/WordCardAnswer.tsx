@@ -57,7 +57,7 @@ interface WordCardAnswerProps {
   /**
    * Function called when card is tapped to flip back
    */
-  onFlipBack?: () => void;
+  onNavigateToReflection?: () => void;
 }
 
 /**
@@ -68,7 +68,7 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
   wordData,
   onViewDetails,
   style,
-  onFlipBack
+  onNavigateToReflection
 }) => {
   const { colors, spacing, effectiveColorMode } = useTheme();
   
@@ -187,15 +187,18 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
   if (!mesh) return null;
 
   return (
-    // Wrap the main container with TouchableOpacity for flip-back interaction
+    // TouchableOpacity triggers onNavigateToReflection
     <TouchableOpacity
-      activeOpacity={0.8} // Provide visual feedback on tap
-      onPress={onFlipBack} 
-      disabled={!onFlipBack} // Disable if no handler is provided
-      style={[styles.container, style]}
-      onLayout={handleLayout} // Pass onLayout to the wrapper
+      activeOpacity={0.9} 
+      onPress={onNavigateToReflection} 
+      disabled={!onNavigateToReflection}
+      style={[
+        styles.container, 
+        style
+      ]}
+      onLayout={handleLayout} // Keep onLayout
     >
-      {/* Canvas for gradient - Added pointerEvents="none" */}
+      {/* Canvas for gradient - Keep pointerEvents="none" */}
       <Canvas style={styles.canvas} pointerEvents="none">
         <Group>
           <Vertices
@@ -319,21 +322,24 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
           </>
         )}
 
-        {/* View More Chip moved into the content flow */} 
+        {/* Chip is now "View More" again */}
         {onViewDetails && (
-          <Chip
-            label="View More"
-            iconRight="altArrowRightLinear" 
-            size="small"
-            variant="default"
-            onPress={onViewDetails}
-            style={{
-              marginTop: spacing.lg, 
-              paddingRight: spacing.sm
-            }}
-            backgroundColor={chipBaseBackgroundColor + 'B3'}
-            internalSpacing="xs"
-          />
+          <View 
+            style={{ alignSelf: 'center', marginTop: spacing.lg }} 
+            onStartShouldSetResponder={() => true}
+            onTouchEnd={(e) => e.stopPropagation()}
+          >
+            <Chip
+              label="View More"
+              iconRight="altArrowRightLinear" 
+              size="small"
+              variant="default" 
+              onPress={onViewDetails}
+              style={{ paddingRight: spacing.sm }} 
+              backgroundColor={chipBaseBackgroundColor + 'B3'}
+              internalSpacing="xs" 
+            />
+          </View>
         )}
       </Box>
 

@@ -1,8 +1,8 @@
 import React, { useMemo, useCallback } from 'react';
-import {
-  StyleSheet,
-  View,
-  ActivityIndicator,
+import { 
+  StyleSheet, 
+  View, 
+  ActivityIndicator, 
   useWindowDimensions,
   TouchableOpacity,
   ScrollView,
@@ -122,16 +122,16 @@ export default function HomeScreen() {
       } as any,
     };
   }, [theme]);
-
+  
   // Render pagination indicators using data from useCarouselPagination
   const renderPaginationDots = useCallback(() => {
     if (!theme || !words.length || !themeStyles.paginationOuterContainer) return null;
     const { colors } = theme;
     return (
       <View style={themeStyles.paginationOuterContainer}>
-        <ScrollView
+        <ScrollView 
           ref={scrollViewRef}
-          horizontal
+          horizontal 
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={themeStyles.paginationContainer}
           style={themeStyles.paginationScrollView}
@@ -146,8 +146,8 @@ export default function HomeScreen() {
                 onPress={() => scrollToIndex(index)}
               >
                 <View style={[
-                  themeStyles.paginationDot,
-                  isActive ? themeStyles.activeDot : themeStyles.inactiveDot,
+                    themeStyles.paginationDot,
+                    isActive ? themeStyles.activeDot : themeStyles.inactiveDot,
                 ]}>
                   <CustomText
                     variant="caption"
@@ -173,14 +173,14 @@ export default function HomeScreen() {
       <View style={[themeStyles.cardContainer, { width }]}>
         <View style={themeStyles.cardWrapper}>
           {isPlaceholder ? (
-            <EmptyWordCard
-              style={themeStyles.wordCard}
+            <EmptyWordCard 
+              style={themeStyles.wordCard} 
               date={item.date}
             />
           ) : (
-            <WordCard
-              wordData={item}
-              style={themeStyles.wordCard}
+            <WordCard 
+              wordData={item} 
+              style={themeStyles.wordCard} 
               onViewDetails={() => openWordDetails(item)}
             />
           )}
@@ -195,7 +195,7 @@ export default function HomeScreen() {
     const fallbackColors = isDark ? themes.default.dark : themes.default.light;
     const themeColors = theme?.colors || fallbackColors;
     const themeSpacing = theme?.spacing || { xs: 4, sm: 8, md: 16, lg: 24, xl: 32 };
-
+    
     // Basic Skeleton Layout
     return (
       <View style={[styles.loadingContainer, { backgroundColor: themeColors.background.primary }]}>
@@ -253,7 +253,7 @@ export default function HomeScreen() {
       </View>
     );
   }
-
+  
   // Handle potential errors during word fetching
   if (wordError) {
     return (
@@ -275,7 +275,7 @@ export default function HomeScreen() {
   return (
     <View style={themeStyles.container}>
       {renderPaginationDots()}
-
+      
       <FlashList
         ref={flashListRef}
         data={words}
@@ -298,7 +298,7 @@ export default function HomeScreen() {
         decelerationRate="fast" // Changed to fast for snappier feel
         bounces={true}
       />
-
+      
       {/* Render bottom sheet using data from useWordDetailsSheet */}
       {selectedWord && (
         <WordDetailsBottomSheet

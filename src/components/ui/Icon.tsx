@@ -95,6 +95,10 @@ const extractIconData = (iconName: string, variant: 'linear' | 'bold'): string |
       linear: 'undo-left-round-linear',
       bold: 'undo-left-round-bold',
     },
+    close: {
+      linear: 'close-circle-linear',
+      bold: 'close-circle-bold',
+    },
     // circleOutline is handled by the special case above
   };
 
@@ -125,7 +129,8 @@ export type IconName =
   | 'altArrowRightLinear'
   | 'volumeLoud'
   | 'userRound'
-  | 'undoLeftRound';
+  | 'undoLeftRound'
+  | 'close';
 
 export type IconVariant =
   | 'linear'
