@@ -150,7 +150,8 @@ export default function HomeScreen() {
       return null;
     }
     
-    if (!activeIndex || typeof activeIndex !== 'number' || !getDateFromWord) {
+    // Check if activeIndex is undefined/null or not a number, instead of just truthiness
+    if (activeIndex === undefined || activeIndex === null || typeof activeIndex !== 'number' || !getDateFromWord) {
       console.log('[HomeScreen] Missing pagination dependencies', { activeIndex, hasGetDateFn: !!getDateFromWord });
       return null;
     }
