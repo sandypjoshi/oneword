@@ -1,5 +1,5 @@
-import React, { memo, useCallback, useMemo } from 'react';
-import { View, StyleSheet, ViewStyle, StyleProp } from 'react-native';
+import React, { memo, useCallback, useMemo, useState, useRef } from 'react';
+import { View, StyleSheet, ViewStyle, StyleProp, Animated } from 'react-native';
 import { WordOfDay, WordOption } from '../../types/wordOfDay';
 import { useTheme } from '../../theme';
 import { Box } from '../layout';
@@ -13,6 +13,11 @@ import WordSection from './WordSection';
 
 // Character threshold for font size reduction (should match OptionButton's threshold)
 const TEXT_LENGTH_THRESHOLD = 28;
+
+// Animation configuration
+const SHAKE_INTENSITY = 6; // Max distance to shake (in pixels)
+const SHAKE_DURATION = 40; // Duration of each movement (in ms)
+const SHAKE_DECAY = 0.8;   // How quickly the shake diminishes
 
 interface WordCardQuestionProps {
   /**
@@ -48,6 +53,10 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
   const { colors, spacing } = useTheme();
   const { id, word, pronunciation, partOfSpeech, options = [] } = wordData;
   
+  // Animation state
+  const [shakingOptionId, setShakingOptionId] = useState<string | null>(null);
+  const shakeAnimation = useRef(new Animated.Value(0)).current;
+  
   // Zustand store hooks
   const selectedOption = useWordCardStore(state => state.getSelectedOption(id));
   const getOptionState = useWordCardStore(state => state.getOptionState);
@@ -72,6 +81,64 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
   const shouldUseSmallFont = useMemo(() => {
     return options.some(option => option.value.length > TEXT_LENGTH_THRESHOLD);
   }, [options]);
+  
+  // Function to create a shake animation sequence
+  const startShakeAnimation = useCallback((optionValue: string) => {
+    // Reset animation value
+    shakeAnimation.setValue(0);
+    
+    // Set which button to animate
+    setShakingOptionId(optionValue);
+    
+    // Create a sequence of movements that decrease in intensity
+    Animated.sequence([
+      // First shake cycle - full intensity
+      Animated.timing(shakeAnimation, { 
+        toValue: SHAKE_INTENSITY, 
+        duration: SHAKE_DURATION, 
+        useNativeDriver: true 
+      }),
+      Animated.timing(shakeAnimation, { 
+        toValue: -SHAKE_INTENSITY, 
+        duration: SHAKE_DURATION, 
+        useNativeDriver: true 
+      }),
+      
+      // Second shake cycle - reduced intensity
+      Animated.timing(shakeAnimation, { 
+        toValue: SHAKE_INTENSITY * SHAKE_DECAY, 
+        duration: SHAKE_DURATION, 
+        useNativeDriver: true 
+      }),
+      Animated.timing(shakeAnimation, { 
+        toValue: -SHAKE_INTENSITY * SHAKE_DECAY, 
+        duration: SHAKE_DURATION, 
+        useNativeDriver: true 
+      }),
+      
+      // Third shake cycle - further reduced intensity
+      Animated.timing(shakeAnimation, { 
+        toValue: SHAKE_INTENSITY * SHAKE_DECAY * SHAKE_DECAY, 
+        duration: SHAKE_DURATION, 
+        useNativeDriver: true 
+      }),
+      Animated.timing(shakeAnimation, { 
+        toValue: -SHAKE_INTENSITY * SHAKE_DECAY * SHAKE_DECAY, 
+        duration: SHAKE_DURATION, 
+        useNativeDriver: true 
+      }),
+      
+      // Return to center position
+      Animated.timing(shakeAnimation, { 
+        toValue: 0, 
+        duration: SHAKE_DURATION, 
+        useNativeDriver: true 
+      }),
+    ]).start(() => {
+      // Clear the shaking state after animation completes
+      setShakingOptionId(null);
+    });
+  }, [shakeAnimation]);
   
   // Handle option selection
   const handleOptionPress = useCallback((option: WordOption) => {
@@ -102,6 +169,9 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
     else {
       // Vibrate for feedback
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+      
+      // Start shake animation
+      startShakeAnimation(option.value);
     }
   }, [
     id, 
@@ -110,7 +180,8 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
     selectOption, 
     incrementWordsLearned, 
     checkAndUpdateStreak,
-    onCorrectAnswer
+    onCorrectAnswer,
+    startShakeAnimation
   ]);
 
   return (
@@ -147,10 +218,21 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
           // Get the current state for this option
           const optionState = getOptionState(id, option.value);
           
+          // Determine if this option should be animated
+          const isShaking = shakingOptionId === option.value;
+          
+          // Apply animation style if this is the shaking option
+          const animStyle = isShaking ? { 
+            transform: [{ translateX: shakeAnimation }] 
+          } : undefined;
+          
           return (
-            <View 
+            <Animated.View 
               key={`${id}-option-${index}`}
-              style={styles.optionWrapper}
+              style={[
+                styles.optionWrapper,
+                animStyle
+              ]}
             >
               <OptionButton
                 option={option}
@@ -159,7 +241,7 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
                 useSmallFont={shouldUseSmallFont}
                 onPress={() => handleOptionPress(option)}
               />
-            </View>
+            </Animated.View>
           );
         })}
       </View>
