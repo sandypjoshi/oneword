@@ -1,21 +1,20 @@
 import React, { memo, useMemo, useCallback, useRef, useState, useEffect } from 'react';
 import { 
-  TouchableOpacity, 
   StyleSheet, 
   ViewStyle,
   StyleProp,
-  Platform,
   PanResponder,
   View,
   Text as RNText,
-  Animated
 } from 'react-native';
 import { useTheme } from '../../theme';
 import { Text } from '../ui';
 import { radius, borderWidth } from '../../theme/styleUtils';
 import { FONT_SIZES } from '../../theme/typography';
 import { WordOption } from '../../types/wordOfDay';
-import { OptionState } from '../../store/wordCardStore';
+
+// Define our own OptionState type that matches the original code
+export type OptionState = 'default' | 'selected' | 'correct' | 'incorrect' | 'disabled';
 
 // State lookup sets for easier maintenance
 const BORDER_STATES = new Set(['selected', 'correct', 'incorrect', 'disabled']);
@@ -31,12 +30,7 @@ const MIN_BUTTON_HEIGHT = 46;
 // Character threshold for font size reduction
 const TEXT_LENGTH_THRESHOLD = 30;
 
-// Shake animation configuration
-const SHAKE_DURATION = 250; // Shorter total duration for snappier feel
-const SHAKE_COUNT = 4; // Slightly more shakes in less time
-const SHAKE_INTENSITY = 8; // Slightly more intense movement
-
-interface OptionButtonProps {
+export interface OptionButtonProps {
   /**
    * The option data
    */
@@ -74,10 +68,14 @@ interface OptionButtonProps {
  */
 const getBackgroundColor = (state: OptionState, colors: any, isDark: boolean) => {
   switch (state) {
+    case 'selected':
+      return colors.background.selected;
     case 'correct':
-      return colors.success;
+      return colors.background.success;
     case 'incorrect':
-      return colors.error;
+      return colors.background.error;
+    case 'disabled':
+      return colors.background.disabled;
     default:
       // Use active background for better consistency and contrast in both modes
       return colors.background.active;
@@ -89,10 +87,14 @@ const getBackgroundColor = (state: OptionState, colors: any, isDark: boolean) =>
  */
 const getBorderColor = (state: OptionState, colors: any, isDark: boolean) => {
   switch (state) {
+    case 'selected':
+      return colors.border.focus;
     case 'correct':
-      return colors.success;
+      return colors.border.success;
     case 'incorrect':
-      return colors.error;
+      return colors.border.error;
+    case 'disabled':
+      return colors.border.disabled;
     default:
       // Use a lighter border for default state
       return colors.border.light;
@@ -104,44 +106,47 @@ const getBorderColor = (state: OptionState, colors: any, isDark: boolean) => {
  */
 const getTextColor = (state: OptionState, colors: any, isDark: boolean) => {
   switch (state) {
+    case 'selected':
+      return colors.text.info;
     case 'correct':
       return colors.text.success;
     case 'incorrect':
       return colors.text.error;
+    case 'disabled':
+      return colors.text.disabled;
     default:
       // Use secondary text color for better contrast on darker background
       return isDark ? colors.text.primary : colors.text.secondary;
   }
 };
 
-/**
- * Custom button for word definition options
- */
-const OptionButtonComponent: React.FC<OptionButtonProps> = ({
+export const OptionButton = memo(function OptionButtonComponent({
   option,
-  state = 'default',
+  state: propState = 'default',
   disabled = false,
   onPress,
   style,
-  useSmallFont = false
-}) => {
+  useSmallFont = false,
+}: OptionButtonProps) {
   const { colors, spacing, typography, effectiveColorMode } = useTheme();
   const isDark = effectiveColorMode === 'dark';
   
-  // Get the option text from the option object
+  // Get the label from the option object
   const label = option.value;
-  
-  // Animation value for shake effect
-  const shakeAnimation = useRef(new Animated.Value(0)).current;
   
   // Get the font size based on typography sizes
   const normalFontSize = FONT_SIZES.md; // bodyMedium size
   const minFontSize = FONT_SIZES.sm;    // bodySmall size
   
+  // Determine effective state (if disabled but not in a result state, use 'disabled' state)
+  const state = disabled && !['correct', 'incorrect'].includes(propState) 
+    ? 'disabled' 
+    : propState;
+  
   // Determine if button should have border
   const hasBorder = BORDER_STATES.has(state) || state === 'default';
   
-  // Determine if text should be bold
+  // Determine if text should be bold - not for disabled state
   const isBold = BOLD_STATES.has(state);
   
   // Check if text exceeds length threshold or if small font is forced
@@ -151,6 +156,9 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
   const isMovingRef = useRef(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [isPressed, setIsPressed] = useState(false);
+  
+  // Previous state ref to detect changes
+  const prevStateRef = useRef<OptionState>(propState);
   
   // Create PanResponder for touch handling
   const panResponder = useMemo(() => PanResponder.create({
@@ -176,7 +184,8 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
     },
     onPanResponderRelease: () => {
       // Only trigger press if it wasn't a swipe
-      if (!isMovingRef.current && onPress && !disabled) {
+      if (!isMovingRef.current && onPress && !disabled && 
+          !['correct', 'incorrect'].includes(state)) {
         // Add a small delay before executing press
         timeoutRef.current = setTimeout(() => {
           onPress();
@@ -197,7 +206,7 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
         timeoutRef.current = null;
       }
     }
-  }), [onPress, disabled]);
+  }), [onPress, disabled, state]);
   
   // Cleanup timeout on unmount
   useEffect(() => {
@@ -215,11 +224,12 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
       paddingHorizontal: spacing.md,
       paddingVertical: spacing.sm,
       borderRadius: radius.pill,
+      marginBottom: spacing.sm,
       width: '100%' as const,
       minHeight: MIN_BUTTON_HEIGHT,
       backgroundColor: getBackgroundColor(state, colors, isDark),
       borderColor: getBorderColor(state, colors, isDark),
-      borderWidth: hasBorder ? borderWidth.hairline : borderWidth.none,
+      borderWidth: hasBorder ? borderWidth.thin : borderWidth.none,
       opacity: isPressed ? 0.7 : 1,
       justifyContent: 'center' as const,
     },
@@ -232,15 +242,10 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
   // Get text color based on state
   const textColor = getTextColor(state, colors, isDark);
   
-  // Apply shake animation transform
-  const animatedStyle = {
-    transform: [{ translateX: shakeAnimation }]
-  };
-  
   return (
     <View {...panResponder.panHandlers}>
-      <Animated.View
-        style={[buttonStyles.container, animatedStyle, style]}
+      <View
+        style={[buttonStyles.container, style]}
       >
         <RNText
           style={[
@@ -253,18 +258,15 @@ const OptionButtonComponent: React.FC<OptionButtonProps> = ({
               textAlign: 'center',
             }
           ]}
-          numberOfLines={2}
+          numberOfLines={1}
           ellipsizeMode="tail"
         >
           {label}
         </RNText>
-      </Animated.View>
+      </View>
     </View>
   );
-};
-
-// Apply memo to prevent unnecessary re-renders
-const OptionButton = memo(OptionButtonComponent);
+});
 
 // Set display name for better debugging
 OptionButton.displayName = 'OptionButton';

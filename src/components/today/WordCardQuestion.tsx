@@ -1,12 +1,5 @@
-import React, { memo, useCallback, useMemo, useState } from 'react';
+import React, { memo, useCallback, useMemo } from 'react';
 import { View, StyleSheet, ViewStyle, StyleProp } from 'react-native';
-import Animated, { 
-  useSharedValue, 
-  useAnimatedStyle, 
-  withTiming, 
-  withSequence, 
-  withRepeat 
-} from 'react-native-reanimated';
 import { WordOfDay, WordOption } from '../../types/wordOfDay';
 import { useTheme } from '../../theme';
 import { Box } from '../layout';
@@ -20,10 +13,6 @@ import WordSection from './WordSection';
 
 // Character threshold for font size reduction (should match OptionButton's threshold)
 const TEXT_LENGTH_THRESHOLD = 28;
-
-// Shake Animation constants
-const SHAKE_OFFSET = 5;
-const SHAKE_DURATION = 70;
 
 interface WordCardQuestionProps {
   /**
@@ -84,42 +73,6 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
     return options.some(option => option.value.length > TEXT_LENGTH_THRESHOLD);
   }, [options]);
   
-  // State to track which button to shake
-  const [shakingOptionValue, setShakingOptionValue] = useState<string | null>(null);
-  
-  // Shared value for shake animation
-  const shakeTranslateX = useSharedValue(0);
-
-  // Animated style for the shake
-  const shakeAnimatedStyle = useAnimatedStyle(() => {
-    return {
-      transform: [{ translateX: shakeTranslateX.value }],
-    };
-  });
-  
-  // Function to shake a button for incorrect answer
-  const shakeButton = useCallback((optionValue: string) => {
-    setShakingOptionValue(optionValue);
-    
-    shakeTranslateX.value = withSequence(
-      withTiming(SHAKE_OFFSET, { duration: SHAKE_DURATION }),
-      withRepeat(
-        withSequence(
-          withTiming(-SHAKE_OFFSET * 2, { duration: SHAKE_DURATION }),
-          withTiming(SHAKE_OFFSET * 2, { duration: SHAKE_DURATION }),
-        ),
-        2,
-        true
-      ),
-      withTiming(0, { duration: SHAKE_DURATION })
-    );
-    
-    // Clear the shaking state after animation completes
-    setTimeout(() => {
-      setShakingOptionValue(null);
-    }, SHAKE_DURATION * 6);
-  }, [shakeTranslateX]);
-  
   // Handle option selection
   const handleOptionPress = useCallback((option: WordOption) => {
     // Skip if already answered correctly
@@ -149,9 +102,6 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
     else {
       // Vibrate for feedback
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-      
-      // Animate shake
-      shakeButton(option.value);
     }
   }, [
     id, 
@@ -160,8 +110,7 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
     selectOption, 
     incrementWordsLearned, 
     checkAndUpdateStreak,
-    onCorrectAnswer,
-    shakeButton
+    onCorrectAnswer
   ]);
 
   return (
@@ -198,16 +147,10 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
           // Get the current state for this option
           const optionState = getOptionState(id, option.value);
           
-          // Determine if this button is shaking
-          const isShaking = shakingOptionValue === option.value;
-          
           return (
-            <Animated.View 
+            <View 
               key={`${id}-option-${index}`}
-              style={[
-                isShaking ? shakeAnimatedStyle : null,
-                styles.optionWrapper
-              ]}
+              style={styles.optionWrapper}
             >
               <OptionButton
                 option={option}
@@ -216,7 +159,7 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
                 useSmallFont={shouldUseSmallFont}
                 onPress={() => handleOptionPress(option)}
               />
-            </Animated.View>
+            </View>
           );
         })}
       </View>
@@ -251,10 +194,4 @@ const styles = StyleSheet.create({
   },
 });
 
-// Apply memo for performance
-const WordCardQuestion = memo(WordCardQuestionComponent);
-
-// Set display name for debugging
-WordCardQuestion.displayName = 'WordCardQuestion';
-
-export default WordCardQuestion; 
+export default memo(WordCardQuestionComponent); 
