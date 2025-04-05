@@ -42,11 +42,6 @@ interface WordCardQuestionProps {
   onCorrectAnswer?: () => void;
   
   /**
-   * Callback function to mark a word as revealed
-   */
-  markWordRevealed?: (wordId: string, attempts: number) => void;
-  
-  /**
    * Callback function to get the current word attempts
    */
   getWordAttempts?: () => number;
@@ -59,7 +54,6 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
   wordData,
   style,
   onCorrectAnswer,
-  markWordRevealed,
   getWordAttempts,
 }) => {
   const { colors, spacing } = useTheme();
@@ -142,11 +136,6 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
     
     // Handle correct answer
     if (isCorrect) {
-      // Mark as revealed and update progress
-      if (markWordRevealed) {
-        markWordRevealed(id, attemptCount);
-      }
-      
       // Update streak and words learned
       incrementWordsLearned();
       checkAndUpdateStreak();
@@ -169,7 +158,6 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
     isAnyOptionCorrect, 
     getWordAttempts, 
     selectOption, 
-    markWordRevealed, 
     incrementWordsLearned, 
     checkAndUpdateStreak,
     onCorrectAnswer,

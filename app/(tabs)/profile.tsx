@@ -9,7 +9,7 @@ import { useTheme } from '../../src/theme';
 import Icon from '../../src/components/ui/Icon';
 import { MeshGradient } from '../../src/components/common';
 import { getGradientIds } from '../../src/theme/primitives/gradients';
-import { useCardStore } from '../../src/store/cardStore';
+import { useWordCardStore } from '../../src/store/wordCardStore';
 import { useWordStore } from '../../src/store/wordStore';
 import { useProgressStore } from '../../src/store/progressStore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -166,12 +166,12 @@ export default function ProfileScreen() {
   const [currentGradient, setCurrentGradient] = useState('morning-sky');
   
   // Get the reset functions from stores
-  const resetCardStore = useCardStore(state => state.resetCardState);
+  const resetCardState = useWordCardStore(state => state.resetCardState);
   const fetchWords = useWordStore(state => state.fetchWords);
   const resetStreak = useProgressStore(state => state.resetStreak);
   const { streak, longestStreak, totalWordsLearned, lastCompletedDate } = useProgressStore();
   const resetProgressState = useProgressStore(state => state._dangerouslyResetAllState);
-  const resetCardState = useCardStore(state => state._dangerouslyResetAllState);
+  const resetWordCardState = useWordCardStore(state => state._dangerouslyResetAllState);
   const resetWordState = useWordStore(state => state._dangerouslyResetAllState);
 
   if (!isReady) {
@@ -211,15 +211,15 @@ export default function ProfileScreen() {
             try {
               // Clear all AsyncStorage keys for the stores
               await AsyncStorage.multiRemove([
-                'card-ui-storage',
                 'word-progress-storage',
-                'user-progress-storage'
+                'user-progress-storage',
+                'word-card-storage'
               ]);
               
               // Also reset in-memory state using the _dangerouslyResetAllState functions
               console.log("Resetting in-memory store states...");
               resetProgressState(); // Calls _dangerouslyResetAllState for progress
-              resetCardState(); // Calls _dangerouslyResetAllState for cards
+              resetWordCardState(); // Calls _dangerouslyResetAllState for word cards
               resetWordState(); // Call word store reset
               
               // Optional: Trigger a refetch after reset to load fresh data
@@ -248,133 +248,111 @@ export default function ProfileScreen() {
       <Box padding="lg" alignItems="center">
         <Text variant="headingMedium">Profile</Text>
         
-        {/* Add the gradient profile card */}
-        <Box width="100%" marginTop="md">
-          <GradientProfileCard 
-            onChangeGradient={setCurrentGradient}
-          />
-          <Text 
-            variant="bodySmall"
-            color={colors.text.tertiary}
-            align="center"
-            style={{ marginTop: spacing.sm }}
-          >
-            Using MeshGradient component with "{currentGradient}" palette
-          </Text>
-        </Box>
+        {/* Profile card with gradient background */}
+        <GradientProfileCard onChangeGradient={setCurrentGradient} />
         
-        {/* Link to Theme Settings */}
-        <Box marginTop="lg" width="100%">
-          <Link href="/theme-settings" asChild>
-            <TouchableOpacity
-              style={[
-                styles.settingsLink,
-                { 
-                  backgroundColor: colors.background.secondary,
-                  borderColor: colors.border.light,
-                }
-              ]}
-            >
-              <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                <Text>Theme Settings</Text>
-                <Icon name="altArrowRightLinear" size={18} color={colors.text.secondary} variant="linear" />
-              </View>
-            </TouchableOpacity>
-          </Link>
-        </Box>
-        
-        {/* Development/Testing buttons */}
-        <Box marginTop="xl" width="100%">
-          <TouchableOpacity
-            style={[
-              styles.resetButton,
-              { 
-                backgroundColor: colors.background.secondary,
-                borderColor: colors.border.medium,
-                marginTop: spacing.md
-              }
-            ]}
-            onPress={handleResetOnboarding}
-          >
-            <Text color={colors.text.secondary}>Reset Onboarding (Dev Only)</Text>
-          </TouchableOpacity>
+        {/* User stats */}
+        <View style={{ width: '100%', marginTop: spacing.xl }}>
+          <Text variant="headingSmall">Your Stats</Text>
           
-          {/* Reset Data Button */}
-          <TouchableOpacity
-            style={[
-              styles.resetButton,
-              { 
-                backgroundColor: colors.error + '20',
-                borderColor: colors.error,
-                marginTop: spacing.md
-              }
-            ]}
-            onPress={handleResetAllData}
-          >
-            <Text color={colors.error}>Reset Data</Text>
-          </TouchableOpacity>
+          <View style={[styles.statsContainer, { backgroundColor: colors.background.secondary }]}>
+            <View style={styles.statItem}>
+              <Text variant="headingMedium" align="center">{streak}</Text>
+              <Text variant="bodySmall" align="center" color={colors.text.secondary}>Current Streak</Text>
+            </View>
+            
+            <View style={[styles.divider, { backgroundColor: colors.border.light }]} />
+            
+            <View style={styles.statItem}>
+              <Text variant="headingMedium" align="center">{longestStreak}</Text>
+              <Text variant="bodySmall" align="center" color={colors.text.secondary}>Longest Streak</Text>
+            </View>
+            
+            <View style={[styles.divider, { backgroundColor: colors.border.light }]} />
+            
+            <View style={styles.statItem}>
+              <Text variant="headingMedium" align="center">{totalWordsLearned}</Text>
+              <Text variant="bodySmall" align="center" color={colors.text.secondary}>Words Learned</Text>
+            </View>
+          </View>
+        </View>
+        
+        {/* Dev Buttons Section */}
+        <Box width="100%" marginTop="xl">
+          <Text variant="headingSmall">Developer Tools</Text>
+          <View style={{ gap: spacing.md, marginTop: spacing.md }}>
+            <Button 
+              variant="secondary"
+              onPress={handleResetOnboarding}
+              title="Reset Onboarding Status"
+            />
+            
+            <Button 
+              variant="secondary"
+              onPress={handleResetAllData}
+              title="Reset All User Data"
+            />
+          </View>
+          
+          <DevThemeSelector />
         </Box>
-
       </Box>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   loadingContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  resetButton: {
-    padding: 12,
-    borderRadius: 8,
-    borderWidth: 1,
-    alignItems: 'center',
-  },
-  settingsLink: {
-    padding: 14,
-    borderRadius: 8,
-    borderWidth: 1,
-    width: '100%',
-  },
-  themeButton: {
-    padding: 12,
-    borderRadius: 8,
-    borderWidth: 1,
-    alignItems: 'center',
-  },
   profileCard: {
     width: '100%',
-    borderRadius: 16,
-    height: 480, // Increased from 160
+    borderRadius: radius.xl,
     overflow: 'hidden',
+    marginTop: 16,
+    height: 180,
     position: 'relative',
-    marginTop: 8,
-    marginBottom: 8,
   },
   profileContent: {
     padding: 20,
-    height: '100%',
-    alignItems: 'center',
+    flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 1,
   },
   avatarContainer: {
-    width: 60, // Reduced from 80
-    height: 60, // Reduced from 80
-    borderRadius: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 3, // Reduced from 4
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    padding: 3,
+    backgroundColor: 'rgba(255, 255, 255, 0.4)',
+    marginBottom: 12,
   },
   avatar: {
-    width: 50, // Reduced from 68
-    height: 50, // Reduced from 68
-    borderRadius: 25,
+    flex: 1,
+    borderRadius: 29,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  statsContainer: {
+    flexDirection: 'row',
+    borderRadius: radius.md,
+    marginTop: 12,
+    padding: 16,
+  },
+  statItem: {
+    flex: 1,
+    alignItems: 'center',
+  },
+  divider: {
+    width: 1,
+    marginHorizontal: 8,
+  },
+  themeButton: {
+    padding: 12,
+    borderRadius: radius.md,
+    borderWidth: 1,
   },
 }); 

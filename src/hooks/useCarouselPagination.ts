@@ -3,7 +3,7 @@ import { ScrollView, useWindowDimensions, ViewToken } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { useNavigation, useFocusEffect } from 'expo-router';
 import { ExtendedWordOfDay } from './useDailyWords'; // Assuming ExtendedWordOfDay is exported from useDailyWords
-import { useCardStore } from '../store/cardStore';
+import { useWordCardStore } from '../store/wordCardStore';
 import { useWordStore } from '../store/wordStore';
 
 // Constants
@@ -24,7 +24,8 @@ export function useCarouselPagination(words: ExtendedWordOfDay[]) {
   const navigation = useNavigation();
 
   const storedWords = useWordStore(state => state.words);
-  const flipCard = useCardStore(state => state.flipCard);
+  const isWordRevealed = useWordCardStore(state => state.isWordRevealed);
+  const setCardFace = useWordCardStore(state => state.setCardFace);
 
   // Format the date nicely for the header title
   const formatDateForHeader = useCallback((word: ExtendedWordOfDay | null): string => {
@@ -92,12 +93,12 @@ export function useCarouselPagination(words: ExtendedWordOfDay[]) {
       console.log(`[useCarouselPagination] onViewableItemsChanged - New index: ${newIndex}`);
       setActiveIndex(newIndex);
 
-      // Sync flip state for visible card
+      // Sync card face for visible card
       const visibleItem = viewableItems[0].item as ExtendedWordOfDay;
       if (visibleItem && !visibleItem.isPlaceholder) {
-        const storedWord = storedWords.find(w => w.id === visibleItem.id);
-        if (storedWord?.isRevealed) {
-          flipCard(visibleItem.id, true);
+        const isRevealed = isWordRevealed(visibleItem.id);
+        if (isRevealed) {
+          setCardFace(visibleItem.id, 'answer');
         }
       }
     }
@@ -127,19 +128,19 @@ export function useCarouselPagination(words: ExtendedWordOfDay[]) {
     }
   }, [activeIndex, width, words.length]); // Add words.length dependency
 
-  // Ensure cards are flipped correctly when screen comes into focus
+  // Ensure cards are in correct state when screen comes into focus
   useFocusEffect(
     useCallback(() => {
-      if (words.length > 0 && storedWords.length > 0) {
+      if (words.length > 0) {
         words.forEach(word => {
           if (word.isPlaceholder) return;
-          const storedWord = storedWords.find(w => w.id === word.id);
-          if (storedWord?.isRevealed) {
-            flipCard(word.id, true);
+          const revealed = isWordRevealed(word.id);
+          if (revealed) {
+            setCardFace(word.id, 'answer');
           }
         });
       }
-    }, [words, storedWords, flipCard])
+    }, [words, isWordRevealed, setCardFace])
   );
 
   // Memoize viewability config

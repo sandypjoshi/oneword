@@ -74,7 +74,6 @@ const WordCardComponent: React.FC<WordCardProps> = ({
   const selectedOption = useWordCardStore(state => state.getSelectedOption(wordData.id));
   const isRevealed = useWordCardStore(state => state.isWordRevealed(wordData.id));
   const getAttempts = useWordCardStore(state => state.getAttempts);
-  const markWordRevealed = useWordCardStore(state => state.markWordRevealed);
   const setCardFace = useWordCardStore(state => state.setCardFace);
   
   // Create refs to track component lifecycle
@@ -188,7 +187,6 @@ const WordCardComponent: React.FC<WordCardProps> = ({
           <WordCardQuestion
             wordData={wordData}
             style={styles.cardContent}
-            markWordRevealed={markWordRevealed}
             getWordAttempts={() => getAttempts(wordData.id)}
           />
         </Animated.View>

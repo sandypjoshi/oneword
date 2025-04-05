@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { WordOfDay } from '../types/wordOfDay';
 import { wordOfDayService } from '../services/wordOfDayService';
 import { useWordStore } from '../store/wordStore';
-import { useCardStore } from '../store/cardStore';
+import { useWordCardStore } from '../store/wordCardStore';
 
 // Extended WordOfDay type to include placeholder flag
 export interface ExtendedWordOfDay extends WordOfDay {
@@ -26,7 +26,6 @@ export function useDailyWords(daysToFetch: number = 14) {
 
   // Zustand store hooks needed for initial state sync
   const storedWords = useWordStore(state => state.words);
-  const flipCard = useCardStore(state => state.flipCard);
 
   // Define the loading function using useCallback
   const loadWords = useCallback(async (forceRefresh = false) => {
@@ -39,6 +38,9 @@ export function useDailyWords(daysToFetch: number = 14) {
 
     setIsLoading(true);
     setError(null);
+    
+    // Initialize allDays outside try block to make it available in finally block
+    let allDays: ExtendedWordOfDay[] = [];
 
     try {
       // Get words for the past N days
@@ -46,7 +48,7 @@ export function useDailyWords(daysToFetch: number = 14) {
 
       // Create a complete array of the last N days, with placeholders for missing days
       const today = new Date();
-      const allDays: ExtendedWordOfDay[] = [];
+      allDays = [];
 
       for (let i = daysToFetch - 1; i >= 0; i--) {
         const date = new Date(today);
@@ -87,7 +89,7 @@ export function useDailyWords(daysToFetch: number = 14) {
       setIsLoading(false);
       console.log(`[useDailyWords] Final words array length: ${allDays.length}`);
     }
-  }, [daysToFetch, storedWords, flipCard]);
+  }, [daysToFetch, storedWords]);
 
   // Effect to load words on mount or when daysToFetch changes
   useEffect(() => {

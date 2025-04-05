@@ -14,7 +14,6 @@ interface WordState {
   // Actions
   fetchWords: (days: number, forceRefresh?: boolean) => Promise<void>;
   setActiveIndex: (index: number) => void;
-  markWordRevealed: (wordId: string, attempts: number) => void;
   _dangerouslyResetAllState: () => void;
 }
 
@@ -76,16 +75,6 @@ export const useWordStore = create<WordState>()(
       },
       
       setActiveIndex: (index) => set({ activeIndex: index }),
-      
-      markWordRevealed: (wordId, attempts) => {
-        set((state) => ({
-          words: state.words.map(word => 
-            word.id === wordId && !word.isRevealed
-              ? { ...word, isRevealed: true, userAttempts: attempts }
-              : word
-          )
-        }));
-      },
 
       _dangerouslyResetAllState: () => {
         console.warn('[wordStore] Resetting ALL word state!');
@@ -96,14 +85,11 @@ export const useWordStore = create<WordState>()(
       name: 'word-progress-storage',
       storage: createJSONStorage(() => AsyncStorage),
       partialize: (state) => ({
-        // Only persist user progress and revealed words, not temporary state
-        words: state.words.map(({ id, date, word, isRevealed, userAttempts, selectedOption }) => ({
+        // Only persist basic word data, not interaction state
+        words: state.words.map(({ id, date, word }) => ({
           id, 
           date, 
-          word,
-          ...(isRevealed !== undefined && { isRevealed }),
-          ...(userAttempts !== undefined && { userAttempts }),
-          ...(selectedOption !== undefined && { selectedOption })
+          word
         })),
       }),
     }

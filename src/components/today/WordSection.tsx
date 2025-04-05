@@ -3,7 +3,7 @@ import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import { useTheme } from '../../theme';
 import { Text } from '../ui';
 import AnimatedChip from '../ui/AnimatedChip';
-import { useCardStore } from '../../store/cardStore';
+import { useWordCardStore } from '../../store/wordCardStore';
 
 // Define the type locally
 type AnimatedChipVariant = 'default' | 'onGradient';
@@ -27,9 +27,9 @@ const WordSectionComponent: React.FC<WordSectionProps> = ({
 }) => {
   const { colors, spacing } = useTheme();
 
-  // Hooks and handler for pronunciation
-  const isWordSpeaking = useCardStore(state => state.isWordSpeaking(wordId));
-  const speakWord = useCardStore(state => state.speakWord);
+  // Hooks and handler for pronunciation using wordCardStore
+  const isWordSpeaking = useWordCardStore(state => state.isWordSpeaking(wordId));
+  const speakWord = useWordCardStore(state => state.speakWord);
 
   const handlePronunciation = useCallback(() => {
     if (!isWordSpeaking && pronunciation) {
