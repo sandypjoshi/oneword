@@ -22,7 +22,7 @@ import {
   shouldRegenerateMesh,
   generateSeedFromString
 } from '../../utils/meshGradientGenerator';
-import { useWordStore } from '../../store/wordStore';
+import { useWordCardStore } from '../../store/wordCardStore';
 import { Box } from '../layout';
 import spacing from '../../theme/spacing';
 import WordSection from './WordSection';
@@ -72,7 +72,7 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
   const isDark = effectiveColorMode === 'dark';
   
   // Zustand store hooks
-  const words = useWordStore(state => state.words);
+  const userAttempts = useWordCardStore(state => state.getAttempts(wordData.id));
   
   // Use useRef for mesh data and theme version tracking
   const meshRef = useRef<MeshData | null>(null);
@@ -93,14 +93,6 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
     partOfSpeech,
     example = '',
   } = wordData;
-  
-  // Find the word in the store to get updated stats
-  const storeWord = useMemo(() => 
-    words.find(w => w.id === wordData.id), 
-  [words, wordData.id]);
-  
-  // Get user attempts from store or fallback to wordData
-  const userAttempts = storeWord?.userAttempts || wordData.userAttempts || 0;
   
   // Generate a consistent seed from the word for same gradient per word
   const wordSeed = useMemo(() => 
@@ -184,6 +176,31 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
       
       {/* Content - Word answer and details */}
       <Box padding="md" style={styles.content}>
+        {/* User attempts badge */}
+        {userAttempts > 0 && (
+          <View style={[
+            styles.attemptsBadge, 
+            { 
+              backgroundColor: userAttempts === 1 
+                ? colors.success 
+                : userAttempts === 2 
+                  ? colors.warning 
+                  : colors.error
+            }
+          ]}>
+            <Text 
+              variant="caption" 
+              color="white" 
+              style={{ fontWeight: 'bold' }}
+            >
+              {userAttempts === 1 
+                ? 'First try!' 
+                : `${userAttempts} attempts`
+              }
+            </Text>
+          </View>
+        )}
+        
         {/* Use WordSection, specify onGradient variant */}
         <WordSection
           wordId={id}
@@ -289,9 +306,16 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: spacing.lg, 
   },
+  attemptsBadge: {
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    borderRadius: 20,
+    marginBottom: 16,
+    alignSelf: 'center',
+  },
 });
 
-// Apply memo to the component
+// Apply memo for performance
 const WordCardAnswer = memo(WordCardAnswerComponent);
 
 // Set display name for better debugging

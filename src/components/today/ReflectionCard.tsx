@@ -1,12 +1,12 @@
 import React, { memo, useCallback, useMemo } from 'react';
-import { View, StyleSheet, StyleProp, ViewStyle, TouchableOpacity, GestureResponderEvent } from 'react-native';
+import { View, StyleSheet, StyleProp, ViewStyle, TouchableOpacity } from 'react-native';
 import { WordOfDay, WordOption } from '../../types/wordOfDay';
 import { useTheme } from '../../theme';
 import Box from '../layout/Box';
 import Text from '../ui/Text';
 import Icon, { IconName } from '../ui/Icon';
 import Chip from '../ui/Chip';
-import { useCardStore, OptionState } from '../../store/cardStore';
+import { useWordCardStore, OptionState } from '../../store/wordCardStore';
 import { radius } from '../../theme/styleUtils';
 import WordSection from './WordSection';
 
@@ -17,179 +17,196 @@ interface ReflectionCardProps {
   onFlipBack?: () => void;
 }
 
-const ReflectionCardComponent: React.FC<ReflectionCardProps> = ({
+/**
+ * Displays a reflection card after answering the word question
+ * with positive reinforcement and opportunities for further reflection
+ */
+const ReflectionCardComponent: React.FC<ReflectionCardProps> = ({ 
   wordData,
   style,
-  onNavigateToAnswer,
   onFlipBack,
 }) => {
-  const { colors, spacing, effectiveColorMode } = useTheme();
-  const { id, word, definition, pronunciation, partOfSpeech, options = [] } = wordData;
-
-  const getOptionState = useCardStore(state => state.getOptionState);
-  const selectedOptionValue = useCardStore(state => state.getSelectedOption(id));
-  const attempts = useCardStore(state => state.getAttempts(id));
-  console.log(`[ReflectionCard] Word ID: ${id}, Attempts from store: ${attempts}`);
-
-  // --- Define Copy Pools with Emojis ---
-  const firstTryCopy = useMemo(() => [
-    "First guess! 🎉",
-    "Nailed it first try! ✨",
-    "Spot on! ✅",
-    "Got it in one! 👍",
-  ], []);
-
-  const multiTryCopyTemplates = useMemo(() => [
-    (count: number) => `Guessed it in ${count}! 👍`, 
-    (count: number) => `Took ${count} guesses, but you got it! 🎉`,
-    (count: number) => `Solved in ${count} tries. 🙂`,
-    (count: number) => `${count} guesses to find it! ✨`,
-  ], []);
-
-  const fallbackCopy = useMemo(() => [
-    "Guess Review 🤔",
-    "Answer Breakdown 👀",
-    "How Your Guess Went 👇",
-    "The Reveal ✨",
-  ], []);
-
-  // --- Select Random Copy Memoized ---
-  const reviewText = useMemo(() => {
-    console.log(`[ReflectionCard] Calculating reviewText for attempts: ${attempts}`);
-    if (attempts === undefined) {
-      const randomIndex = Math.floor(Math.random() * fallbackCopy.length);
-      return fallbackCopy[randomIndex];
-    } else if (attempts === 1) {
-      const randomIndex = Math.floor(Math.random() * firstTryCopy.length);
-      return firstTryCopy[randomIndex];
-    } else {
-      const randomIndex = Math.floor(Math.random() * multiTryCopyTemplates.length);
-      const template = multiTryCopyTemplates[randomIndex];
-      return template(attempts);
-    }
-  }, [attempts, firstTryCopy, multiTryCopyTemplates, fallbackCopy]);
-
-  const correctOptionValue = options.find(o => o.isCorrect)?.value;
-
-  const styles = useMemo(() => StyleSheet.create({
-    container: {
-      flex: 1,
-      borderRadius: radius.xl,
-      borderWidth: 1,
-    },
-    contentContainer: {
-      flex: 1,
-      width: '100%',
-      paddingTop: spacing.xl,
-    },
-    wordSection: {
-      marginBottom: spacing.lg,
-    },
-    optionsSection: {
-      marginTop: spacing.lg,
-      alignItems: 'center',
-    },
-    optionRow: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      marginBottom: spacing.md,
-      justifyContent: 'center',
-      width: '100%',
-    },
-    divider: {
-      height: 1,
-      width: '100%',
-    },
-  }), [spacing]);
-
-  const renderOptionStatus = (option: WordOption) => {
-    const state = getOptionState(id, option.value);
-    const isCorrect = option.isCorrect;
-
-    let iconName: IconName | null = null;
-    let iconColor = colors.text.secondary;
-    let textColor = colors.text.secondary;
-    let fontWeightStyle: { fontWeight: 'bold' | 'normal' } = { fontWeight: 'normal' };
-
+  const { colors, spacing } = useTheme();
+  const { id, word, pronunciation, partOfSpeech, definition, options = [] } = wordData;
+  
+  // Get selected option from store
+  const selectedOption = useWordCardStore(state => state.getSelectedOption(id));
+  const getOptionState = useWordCardStore(state => state.getOptionState);
+  
+  // Find the correct option for display
+  const correctOption = useMemo(() => 
+    options.find(option => option.isCorrect)?.value || '',
+  [options]);
+  
+  // Find the selected option text
+  const selectedOptionText = useMemo(() => 
+    options.find(option => option.value === selectedOption)?.value || '',
+  [options, selectedOption]);
+  
+  // Check if user selected the correct option
+  const isCorrect = useMemo(() => 
+    getOptionState(id, correctOption) === 'correct',
+  [id, correctOption, getOptionState]);
+  
+  // Generate reflection message based on user's answer
+  const reflectionMessage = useMemo(() => {
     if (isCorrect) {
-      iconName = 'checkmark'; 
-      iconColor = colors.success;
-      textColor = colors.text.primary;
-      fontWeightStyle = { fontWeight: 'bold' };
-    } else if (state === 'incorrect') {
-      iconName = 'close';
-      iconColor = colors.error;
-      textColor = colors.text.tertiary;
+      return "Great job! You chose the correct definition. Make sure to use this word in a conversation today to reinforce your learning.";
     } else {
-      iconName = 'close';
-      iconColor = colors.text.disabled;
-      textColor = colors.text.tertiary;
+      return "Learning happens through mistakes. Review the correct definition and try using this word in a sentence today.";
     }
-
-    return (
-      <View key={option.value} style={styles.optionRow}>
-        <View style={{ width: 18 + spacing.sm, alignItems: 'center' }}>
-          {iconName && (
-            <Icon 
-              name={iconName} 
-              size={18} 
-              color={iconColor}
-              variant="bold"
-            />
-          )}
-        </View>
+  }, [isCorrect]);
+  
+  // Generate a tip based on the word's part of speech
+  const usageTip = useMemo(() => {
+    switch (partOfSpeech?.toLowerCase()) {
+      case 'noun':
+        return `As a noun, "${word}" refers to ${definition.toLowerCase()}. Try using it in place of a similar noun.`;
+      case 'verb':
+        return `As a verb, "${word}" means to ${definition.toLowerCase()}. Try incorporating it into a sentence describing an action.`;
+      case 'adjective':
+        return `As an adjective, "${word}" describes ${definition.toLowerCase()}. Try using it to describe something in your environment.`;
+      default:
+        return `"${word}" means ${definition.toLowerCase()}. Try incorporating it into your vocabulary today.`;
+    }
+  }, [word, definition, partOfSpeech]);
+  
+  return (
+    <View style={[styles.container, { backgroundColor: colors.background.card }, style]}>
+      <View style={styles.header}>
+        <Text variant="headingMedium" align="center">
+          Reflection
+        </Text>
+        {onFlipBack && (
+          <TouchableOpacity 
+            style={styles.closeButton}
+            onPress={onFlipBack}
+            hitSlop={{ top: 20, right: 20, bottom: 20, left: 20 }}
+          >
+            <Icon name="close" size={24} color={colors.text.tertiary} />
+          </TouchableOpacity>
+        )}
+      </View>
+      
+      <WordSection
+        wordId={id}
+        word={word}
+        pronunciation={pronunciation}
+        partOfSpeech={partOfSpeech}
+        style={styles.wordSection}
+      />
+      
+      {/* Reflection message */}
+      <View style={[
+        styles.messageBox, 
+        { 
+          backgroundColor: isCorrect 
+            ? colors.background.success 
+            : colors.background.warning 
+        }
+      ]}>
         <Text 
-          variant="bodyMedium" 
-          color={textColor} 
-          style={[{ flexShrink: 1, marginLeft: spacing.sm }, fontWeightStyle]}
-          textTransform="lowercase"
+          variant="label" 
+          color={isCorrect ? colors.text.success : colors.text.warning} 
+          style={styles.messageText}
         >
-          {option.value}
+          {reflectionMessage}
         </Text>
       </View>
-    );
-  };
-
-  const isDark = effectiveColorMode === 'dark';
-  const chipBaseBackgroundColor = isDark ? colors.background.primary : colors.background.card;
-
-  return (
-    <TouchableOpacity
-      style={[
-        styles.container, 
-        { 
-          backgroundColor: colors.background.card,
-          borderColor: colors.border.light
-        },
-        style
-      ]}
-      onPress={onFlipBack}
-      disabled={!onFlipBack}
-      activeOpacity={0.9}
-    >
-      <Box padding="lg" style={styles.contentContainer}>
-        <WordSection 
-          wordId={id}
-          word={word}
-          pronunciation={pronunciation}
-          partOfSpeech={partOfSpeech}
-          style={styles.wordSection}
-        />
-
-        <View style={[styles.divider, { backgroundColor: colors.border.light }]} />
-
-        <View style={styles.optionsSection}>
-          <Text variant="label" color={colors.text.tertiary} style={{ marginBottom: spacing.md, textAlign: 'center', width: '100%' }}>
-            {reviewText}
+      
+      {/* Usage tip */}
+      <View style={[styles.tipBox, { backgroundColor: colors.background.tertiary }]}>
+        <Text variant="label" color={colors.text.secondary} style={styles.tipHeader}>
+          Usage Tip:
+        </Text>
+        <Text variant="bodySmall" style={styles.tipText}>
+          {usageTip}
+        </Text>
+      </View>
+      
+      {/* Answer comparison if incorrect */}
+      {!isCorrect && selectedOption && (
+        <View style={[styles.comparisonBox, { backgroundColor: colors.background.tertiary }]}>
+          <Text variant="label" color={colors.text.secondary} style={styles.comparisonHeader}>
+            Your answer:
           </Text>
-          {options.map(renderOptionStatus)}
+          <Text variant="bodySmall" color={colors.text.error} style={styles.comparisonText}>
+            {selectedOptionText}
+          </Text>
+          
+          <Text variant="label" color={colors.text.secondary} style={[styles.comparisonHeader, styles.correctHeader]}>
+            Correct definition:
+          </Text>
+          <Text variant="bodySmall" color={colors.text.success} style={styles.comparisonText}>
+            {correctOption}
+          </Text>
         </View>
-      </Box>
-    </TouchableOpacity>
+      )}
+    </View>
   );
 };
 
-const ReflectionCard = React.memo(ReflectionCardComponent);
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    position: 'relative',
+    borderRadius: radius.lg,
+    overflow: 'hidden',
+    padding: 20,
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
+    position: 'relative',
+  },
+  closeButton: {
+    position: 'absolute',
+    right: 0,
+    top: 0,
+  },
+  wordSection: {
+    marginBottom: 24,
+  },
+  messageBox: {
+    borderRadius: radius.md,
+    marginBottom: 16,
+    padding: 16,
+  },
+  messageText: {
+    lineHeight: 20,
+  },
+  tipBox: {
+    borderRadius: radius.md,
+    marginBottom: 16,
+    padding: 16,
+  },
+  tipHeader: {
+    marginBottom: 4,
+  },
+  tipText: {
+    lineHeight: 20,
+  },
+  comparisonBox: {
+    borderRadius: radius.md,
+    padding: 16,
+  },
+  comparisonHeader: {
+    marginBottom: 4,
+  },
+  correctHeader: {
+    marginTop: 12,
+  },
+  comparisonText: {
+    marginBottom: 8,
+  },
+});
+
+// Apply memo for performance
+const ReflectionCard = memo(ReflectionCardComponent);
+
+// Set display name for better debugging
 ReflectionCard.displayName = 'ReflectionCard';
 
 export default ReflectionCard; 

@@ -19,6 +19,7 @@ import { radius, applyElevation } from '../../src/theme/styleUtils';
 import themes from '../../src/theme/colors'; // Keep for loading state fallback
 import { Box } from '../../src/components/layout'; // Import Box for skeleton
 import { useFocusEffect } from '@react-navigation/native'; // Import useFocusEffect
+import { useWordCardStore } from '../../src/store/wordCardStore';
 
 // Define ExtendedWordOfDay locally if not exported properly or redefine if needed
 interface ExtendedWordOfDay extends WordOfDay {
@@ -31,21 +32,33 @@ const DOT_GAP = 8;
 
 export default function HomeScreen() {
   const { isReady, theme } = useThemeReady();
-  const systemColorScheme = useColorScheme();
+  const colorScheme = useColorScheme();
   const { width } = useWindowDimensions();
 
-  // Use the new custom hooks
-  const { words, isLoading: isLoadingWords, error: wordError, refetchWords } = useDailyWords(14);
+  // Use the word hook
   const { 
-    activeIndex, 
-    flashListRef, 
-    scrollViewRef, 
-    onViewableItemsChanged, 
-    scrollToIndex, 
+    words, 
+    isLoading: wordsLoading, 
+    error,
+    refetchWords 
+  } = useDailyWords();
+  
+  // Pagination hook for displaying and navigating through dots
+  const { 
+    activeIndex,
+    scrollViewRef,
+    onViewableItemsChanged,
+    scrollToIndex,
     viewabilityConfig,
     getDateFromWord,
-    initialScrollIndex
+    initialScrollIndex,
+    flashListRef
   } = useCarouselPagination(words);
+
+  // Combine loading states
+  const isLoading = !isReady || wordsLoading;
+
+  // Use the new custom hooks
   const { 
     bottomSheetRef, 
     selectedWord, 
@@ -53,30 +66,15 @@ export default function HomeScreen() {
     handleSheetDismiss 
   } = useWordDetailsSheet();
 
-  // --- Logging Effects ---
-  useEffect(() => {
-    console.log('[HomeScreen] Mounted');
-    return () => {
-      console.log('[HomeScreen] Unmounted');
-    };
-  }, []);
-
-  useFocusEffect(
-    useCallback(() => {
-      console.log('[HomeScreen] Screen Focused');
-      return () => {
-        console.log('[HomeScreen] Screen Blurred');
-      };
-    }, [])
-  );
-  // --- End Logging Effects ---
-
-  // Combine loading states
-  const isLoading = !isReady || isLoadingWords;
-
-  // Add log for loading state check
-  console.log(`[HomeScreen] Checking loading state: isReady=${isReady}, isLoadingWords=${isLoadingWords}, Combined isLoading=${isLoading}`);
-
+  // Add state debugging
+  console.log('[HomeScreen] Rendering component');
+  
+  // Get the wordCardStore state to log
+  const wordCardState = useWordCardStore.getState();
+  
+  // Access the theme
+  const isDark = colorScheme === 'dark';
+  
   // Create theme-dependent styles (mostly unchanged)
   const themeStyles = useMemo(() => {
     if (!theme) return {};
@@ -147,7 +145,16 @@ export default function HomeScreen() {
   
   // Render pagination indicators using data from useCarouselPagination
   const renderPaginationDots = useCallback(() => {
-    if (!theme || !words.length || !themeStyles.paginationOuterContainer) return null;
+    // Add more defensive checks
+    if (!theme || !words || !Array.isArray(words) || words.length === 0 || !themeStyles.paginationOuterContainer) {
+      return null;
+    }
+    
+    if (!activeIndex || typeof activeIndex !== 'number' || !getDateFromWord) {
+      console.log('[HomeScreen] Missing pagination dependencies', { activeIndex, hasGetDateFn: !!getDateFromWord });
+      return null;
+    }
+    
     const { colors } = theme;
     return (
       <View style={themeStyles.paginationOuterContainer}>
@@ -159,13 +166,15 @@ export default function HomeScreen() {
           style={themeStyles.paginationScrollView}
         >
           {words.map((word, index) => {
+            if (!word) return null;
+            
             const isActive = index === activeIndex;
             const dateNum = getDateFromWord(word);
             return (
               <TouchableOpacity
-                key={word.id} // Use word.id for a more stable key
+                key={word.id || `word-${index}`} // Fallback key if id is missing
                 style={themeStyles.dotTouchable}
-                onPress={() => scrollToIndex(index)}
+                onPress={() => scrollToIndex?.(index)}
               >
                 <View style={[
                     themeStyles.paginationDot,
@@ -214,9 +223,62 @@ export default function HomeScreen() {
     );
   }, [width, themeStyles, openWordDetails]); // Dependencies updated
 
+  // Log component mount
+  useEffect(() => {
+    console.log('[HomeScreen] Component mounted');
+    
+    // Log the current state from wordCardStore
+    const state = useWordCardStore.getState();
+    console.log('[HomeScreen] Current wordCardStore state on mount:', {
+      cardFaces: Object.keys(state.cardFaces).length,
+      revealed: state.revealedWordIds.length,
+      cardFaceEntries: Object.entries(state.cardFaces).map(([id, face]) => `${id}: ${face}`).join(', ')
+    });
+    
+    return () => {
+      console.log('[HomeScreen] Component will unmount');
+    };
+  }, []);
+  
+  // Add focus effect to track tab navigation
+  useFocusEffect(
+    useCallback(() => {
+      console.log('[HomeScreen] Screen focused');
+      
+      // Check the wordCardStore state when the tab is focused
+      const state = useWordCardStore.getState();
+      console.log('[HomeScreen] wordCardStore state on tab focus:', {
+        cardFaces: Object.keys(state.cardFaces).length,
+        revealed: state.revealedWordIds.length,
+        cardFaceEntries: Object.entries(state.cardFaces).map(([id, face]) => `${id}: ${face}`).join(', ')
+      });
+      
+      // FIX: Force all revealed words to have 'answer' face when tab is focused
+      // Added null check for words array to prevent TypeError
+      if (words && Array.isArray(words) && words.length > 0) {
+        words.forEach(word => {
+          if (word && word.id && state.isWordRevealed(word.id)) {
+            const face = state.getCardFace(word.id);
+            console.log(`[HomeScreen] Word ${word.id} (${word.word}) is revealed but has face: ${face}`);
+            
+            // Force set to answer if it's a revealed word but not in answer state
+            if (face !== 'answer' && face !== 'reflection') {
+              console.log(`[HomeScreen] Correcting face for revealed word ${word.id} to 'answer'`);
+              state.setCardFace(word.id, 'answer');
+            }
+          }
+        });
+      }
+      
+      return () => {
+        console.log('[HomeScreen] Screen unfocused');
+      };
+    }, [words])
+  );
+
   // Show loading UI - Simplified with basic skeleton idea
   if (isLoading) {
-    const isDark = systemColorScheme === 'dark';
+    const isDark = colorScheme === 'dark';
     const fallbackColors = isDark ? themes.default.dark : themes.default.light;
     const themeColors = theme?.colors || fallbackColors;
     const themeSpacing = theme?.spacing || { xs: 4, sm: 8, md: 16, lg: 24, xl: 32 };
@@ -280,11 +342,11 @@ export default function HomeScreen() {
   }
   
   // Handle potential errors during word fetching
-  if (wordError) {
+  if (error) {
     return (
         <View style={[styles.loadingContainer, { backgroundColor: theme?.colors.background.primary }]}>
             <CustomText color={theme?.colors.text.error || 'red'} style={{ marginBottom: theme?.spacing.md || 16 }}>
-                Error loading words: {wordError.message}
+                Error loading words: {error.message}
             </CustomText>
             <Button
               title="Retry"
@@ -301,28 +363,30 @@ export default function HomeScreen() {
     <View style={themeStyles.container}>
       {renderPaginationDots()}
       
-      <FlashList
-        ref={flashListRef}
-        data={words}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-        horizontal
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-        onViewableItemsChanged={onViewableItemsChanged}
-        viewabilityConfig={viewabilityConfig}
-        estimatedItemSize={width}
-        initialScrollIndex={initialScrollIndex} // Use initialScrollIndex from hook
-        maintainVisibleContentPosition={{ minIndexForVisible: 0 }}
-        contentInsetAdjustmentBehavior="automatic"
-        // These props might need review based on performance/behavior
-        // disableScrollViewPanResponder={true}
-        // drawDistance={width * 3}
-        scrollEnabled={true}
-        // ListEmptyComponent={<View style={{ height: 200 }} />} // Can add a proper empty state
-        decelerationRate="fast" // Changed to fast for snappier feel
-        bounces={true}
-      />
+      {words && Array.isArray(words) && (
+        <FlashList
+          ref={flashListRef}
+          data={words}
+          renderItem={renderItem}
+          keyExtractor={(item) => item?.id || String(Math.random())}
+          horizontal
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+          onViewableItemsChanged={onViewableItemsChanged}
+          viewabilityConfig={viewabilityConfig}
+          estimatedItemSize={width}
+          initialScrollIndex={initialScrollIndex !== undefined ? initialScrollIndex : 0}
+          maintainVisibleContentPosition={{ minIndexForVisible: 0 }}
+          contentInsetAdjustmentBehavior="automatic"
+          // These props might need review based on performance/behavior
+          // disableScrollViewPanResponder={true}
+          // drawDistance={width * 3}
+          scrollEnabled={true}
+          // ListEmptyComponent={<View style={{ height: 200 }} />} // Can add a proper empty state
+          decelerationRate="fast" // Changed to fast for snappier feel
+          bounces={true}
+        />
+      )}
       
       {/* Render bottom sheet using data from useWordDetailsSheet */}
       {selectedWord && (

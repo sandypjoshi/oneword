@@ -14,8 +14,7 @@ import { Text } from '../ui';
 import OptionButton from './OptionButton';
 import { radius, applyElevation } from '../../theme/styleUtils';
 import * as Haptics from 'expo-haptics';
-import { useCardStore } from '../../store/cardStore';
-import { useWordStore } from '../../store/wordStore';
+import { useWordCardStore, OptionState } from '../../store/wordCardStore';
 import { useProgressStore } from '../../store/progressStore';
 import WordSection from './WordSection';
 
@@ -67,10 +66,9 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
   const { id, word, pronunciation, partOfSpeech, options = [] } = wordData;
   
   // Zustand store hooks
-  const selectedOption = useCardStore(state => state.getSelectedOption(id));
-  const getOptionState = useCardStore(state => state.getOptionState);
-  const selectOption = useCardStore(state => state.selectOption);
-  const markWordRevealedInStore = useWordStore(state => state.markWordRevealed);
+  const selectedOption = useWordCardStore(state => state.getSelectedOption(id));
+  const getOptionState = useWordCardStore(state => state.getOptionState);
+  const selectOption = useWordCardStore(state => state.selectOption);
   const incrementWordsLearned = useProgressStore(state => state.incrementWordsLearned);
   const checkAndUpdateStreak = useProgressStore(state => state.checkAndUpdateStreak);
   
@@ -104,150 +102,171 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
       transform: [{ translateX: shakeTranslateX.value }],
     };
   });
-
-  // Function to trigger shake animation
-  const triggerShake = useCallback(() => {
+  
+  // Function to shake a button for incorrect answer
+  const shakeButton = useCallback((optionValue: string) => {
+    setShakingOptionValue(optionValue);
+    
     shakeTranslateX.value = withSequence(
-      withTiming(-SHAKE_OFFSET, { duration: SHAKE_DURATION / 2 }),
-      withRepeat(withTiming(SHAKE_OFFSET, { duration: SHAKE_DURATION }), 3, true),
-      withTiming(0, { duration: SHAKE_DURATION / 2 })
+      withTiming(SHAKE_OFFSET, { duration: SHAKE_DURATION }),
+      withRepeat(
+        withSequence(
+          withTiming(-SHAKE_OFFSET * 2, { duration: SHAKE_DURATION }),
+          withTiming(SHAKE_OFFSET * 2, { duration: SHAKE_DURATION }),
+        ),
+        2,
+        true
+      ),
+      withTiming(0, { duration: SHAKE_DURATION })
     );
+    
+    // Clear the shaking state after animation completes
+    setTimeout(() => {
+      setShakingOptionValue(null);
+    }, SHAKE_DURATION * 6);
   }, [shakeTranslateX]);
-
+  
   // Handle option selection
-  const handleOptionSelect = useCallback((option: WordOption) => {
-    if (isAnyOptionCorrect) return; // Prevent multiple selections
-
-    const isCorrect = option.isCorrect;
+  const handleOptionPress = useCallback((option: WordOption) => {
+    // Skip if already answered correctly
+    if (isAnyOptionCorrect) return;
+    
+    // Get the current attempt count
+    const attemptCount = (getWordAttempts ? getWordAttempts() : 0) + 1;
+    
+    // Check if correct
+    const isCorrect = option.isCorrect === true;
+    
+    // Call the store actions to select option
     selectOption(id, option.value, isCorrect);
     
+    // Handle correct answer
     if (isCorrect) {
-      // Call markWordRevealed if provided
-      if (markWordRevealed && getWordAttempts) {
-        const attempts = getWordAttempts(); // Get current attempt count
-        console.log(`[WordCardQuestion ${id}] Correct answer! Marking revealed with attempts: ${attempts}`);
-        markWordRevealedInStore(id, attempts);
+      // Mark as revealed and update progress
+      if (markWordRevealed) {
+        markWordRevealed(id, attemptCount);
       }
-      // Trigger haptic feedback
-      Haptics.notificationAsync(
-        Haptics.NotificationFeedbackType.Success
-      );
       
-      // Increment words learned and update streak
+      // Update streak and words learned
       incrementWordsLearned();
       checkAndUpdateStreak();
       
+      // Optional callback
       if (onCorrectAnswer) {
         onCorrectAnswer();
       }
-    } else {
-      // --- Incorrect option selected ---
-      // Trigger haptic feedback for error
-      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
-      // Set which button to shake
-      setShakingOptionValue(option.value);
-      // Trigger the shake animation
-      triggerShake();
-      // Reset shaking state after animation (approx duration)
-      setTimeout(() => setShakingOptionValue(null), SHAKE_DURATION * 4);
+    } 
+    // Handle incorrect answer
+    else {
+      // Vibrate for feedback
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+      
+      // Animate shake
+      shakeButton(option.value);
     }
   }, [
     id, 
-    options, 
+    isAnyOptionCorrect, 
+    getWordAttempts, 
     selectOption, 
-    getOptionState, 
-    markWordRevealedInStore, 
+    markWordRevealed, 
     incrementWordsLearned, 
     checkAndUpdateStreak,
     onCorrectAnswer,
-    markWordRevealed,
-    getWordAttempts,
-    triggerShake,
+    shakeButton
   ]);
-  
-  // Define styles inside component to access spacing
-  const styles = useMemo(() => StyleSheet.create({
-    container: {
-      borderWidth: 1,
-      borderRadius: radius.xl,
-      overflow: 'hidden',
-      width: '100%',
-      height: '100%',
-    },
-    content: {
-      flex: 1,
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'space-between',
-      paddingTop: spacing.xl,
-    },
-    wordSection: {
-      marginBottom: spacing.lg,
-    },
-    optionsSection: {
-      justifyContent: 'flex-end',
-      paddingBottom: spacing.md,
-    }
-  }), [spacing]);
 
   return (
-    <View 
-      style={[
-        styles.container,
-        {
-          backgroundColor: colors.background.card,
-          borderColor: colors.border.light,
-          ...applyElevation('sm', colors.text.primary),
-        },
-        style
-      ]}
-    >
-      <Box padding="lg" style={styles.content}>
-        {/* Use WordSection component - variant defaults to 'default' */}
-        <WordSection 
-          wordId={id}
-          word={word}
-          pronunciation={pronunciation}
-          partOfSpeech={partOfSpeech}
-          style={styles.wordSection} 
-        />
-        
-        {/* Options section */}
-        <View style={styles.optionsSection}>
-          <Text 
-            variant="label" 
-            color={colors.text.tertiary}
-            align="center"
-            style={{ marginBottom: spacing.md }}
-          >
-            Guess the correct definition
-          </Text>
+    <View style={[
+      styles.container, 
+      { 
+        backgroundColor: colors.background.card,
+        ...applyElevation('sm', colors.text.primary)
+      },
+      style
+    ]}>
+      {/* Word, part of speech, pronunciation */}
+      <WordSection 
+        wordId={id}
+        word={word}
+        pronunciation={pronunciation}
+        partOfSpeech={partOfSpeech}
+        style={styles.wordSection}
+      />
+      
+      {/* Question prompt */}
+      <Text 
+        variant="label"
+        style={styles.questionText}
+        color={colors.text.tertiary}
+        align="center"
+      >
+        Which of these is the correct definition?
+      </Text>
+      
+      {/* Options */}
+      <View style={styles.optionsContainer}>
+        {options.map((option, index) => {
+          // Get the current state for this option
+          const optionState = getOptionState(id, option.value);
           
-          {options.map((option) => {
-            const isShaking = shakingOptionValue === option.value;
-            return (
-              // Apply animated style conditionally
-              <Animated.View key={option.value} style={isShaking ? shakeAnimatedStyle : {}}>
-                <OptionButton
-                  label={option.value}
-                  state={getOptionState(id, option.value)}
-                  onPress={() => handleOptionSelect(option)}
-                  disabled={isAnyOptionCorrect}
-                  style={{ marginBottom: spacing.md }}
-                />
-              </Animated.View>
-            );
-          })}
-        </View>
-      </Box>
+          // Determine if this button is shaking
+          const isShaking = shakingOptionValue === option.value;
+          
+          return (
+            <Animated.View 
+              key={`${id}-option-${index}`}
+              style={[
+                isShaking ? shakeAnimatedStyle : null,
+                styles.optionWrapper
+              ]}
+            >
+              <OptionButton
+                option={option}
+                state={optionState}
+                disabled={isAnyOptionCorrect && optionState !== 'correct'}
+                useSmallFont={shouldUseSmallFont}
+                onPress={() => handleOptionPress(option)}
+              />
+            </Animated.View>
+          );
+        })}
+      </View>
     </View>
   );
 };
 
-// Apply memo to the component
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    position: 'relative',
+    borderRadius: radius.lg,
+    overflow: 'hidden',
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 24,
+  },
+  wordSection: {
+    marginBottom: 24,
+  },
+  questionText: {
+    marginBottom: 16,
+    textAlign: 'center',
+  },
+  optionsContainer: {
+    width: '100%',
+    alignItems: 'stretch',
+  },
+  optionWrapper: {
+    marginBottom: 12,
+    width: '100%',
+  },
+});
+
+// Apply memo for performance
 const WordCardQuestion = memo(WordCardQuestionComponent);
 
-// Set display name for better debugging
+// Set display name for debugging
 WordCardQuestion.displayName = 'WordCardQuestion';
 
 export default WordCardQuestion; 

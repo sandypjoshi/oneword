@@ -4,6 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import { View, ActivityIndicator, Image, StyleSheet, Animated } from 'react-native';
 import { ThemeProvider, useTheme } from '../src/theme/ThemeProvider';
 import { checkOnboardingStatus } from '../src/utils/onboarding';
+import { migrateToUnifiedStore } from '../src/utils/storeMigration';
 import { useFonts } from 'expo-font';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import {
@@ -67,6 +68,9 @@ const MainContent = () => {
           // Don't continue until fonts are loaded
           return;
         }
+
+        // Migrate data from legacy stores to unified store
+        migrateToUnifiedStore();
 
         // Hide the native splash screen
         await SplashScreen.hideAsync();

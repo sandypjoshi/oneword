@@ -71,13 +71,18 @@ export function useCarouselPagination(words: ExtendedWordOfDay[]) {
 
   // Memoize initial scroll index calculation to target today's date
   const initialScrollIndex = useMemo(() => {
+    // Add defensive check to prevent errors when words is undefined
+    if (!words || !Array.isArray(words) || words.length === 0) {
+      return 0; // Default to first item if no words are available
+    }
+
     const todayDateString = new Date().toISOString().split('T')[0];
     const index = words.findIndex(word => word.date === todayDateString);
     // If today not found (shouldn't happen?), default to last item, otherwise use found index.
     const result = index === -1 ? Math.max(0, words.length - 1) : index;
     console.log(`[useCarouselPagination] Today's Date: ${todayDateString}, Found Index: ${index}, Calculated initialScrollIndex: ${result}`);
     return result;
-  }, [words]); // Depend only on words array
+  }, [words]);
 
   // Handle viewable items change to update the active index
   const onViewableItemsChanged = useRef(({ viewableItems }: { viewableItems: ViewToken[] }) => {
