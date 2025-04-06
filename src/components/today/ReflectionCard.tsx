@@ -51,7 +51,7 @@ const ReflectionCardComponent: React.FC<ReflectionCardProps> = ({
     },
     performanceText: {
       textAlign: 'center',
-      marginBottom: spacing.lg,
+      marginBottom: spacing.xl,
     },
     answerListContainer: {
       alignItems: 'center',
@@ -65,7 +65,7 @@ const ReflectionCardComponent: React.FC<ReflectionCardProps> = ({
       marginRight: spacing.sm, 
     },
     answerText: {
-      lineHeight: 20,
+      lineHeight: 26,
     },
     answerTextBold: {
       fontWeight: 'bold',
@@ -111,12 +111,12 @@ const ReflectionCardComponent: React.FC<ReflectionCardProps> = ({
       isBoldText = true;
       textColor = colors.error;
     } else {
-      // Case 3: This is an incorrect answer AND the user NEVER selected it (state is 'default')
+      // Case 3: Incorrect Answer - User Did NOT Select This One
       icon = 'close';
       iconVariant = 'bold';
-      iconColor = colors.text.disabled; // Use disabled styling
+      iconColor = colors.text.disabled; 
       isBoldText = false; 
-      textColor = colors.text.primary; 
+      textColor = colors.text.tertiary; // Changed from secondary to tertiary
     }
 
     // We no longer need to explicitly check isSelected based on the potentially outdated selectedOptionValue
@@ -172,7 +172,7 @@ const ReflectionCardComponent: React.FC<ReflectionCardProps> = ({
                  /> 
               </View>
               <Text 
-                variant="bodyLarge"
+                variant="bodyMedium"
                 color={textColor} 
                 style={[styles.answerText, isBoldText && styles.answerTextBold]}
               >
