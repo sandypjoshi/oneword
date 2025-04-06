@@ -8,6 +8,11 @@ import { useWordCardStore, OptionState } from '../../store/wordCardStore';
 import { Text, Icon } from '../ui';
 import Box from '../layout/Box';
 import spacing from '../../theme/spacing';
+import { 
+  firstGuessMessages, 
+  fewGuessesMessages, 
+  manyGuessesMessages 
+} from '../../features/today/todayScreenCopy'; // Import copy strings
 
 interface ReflectionCardProps {
   wordData: WordOfDay;
@@ -17,6 +22,19 @@ interface ReflectionCardProps {
 
 // Define a type for the icon variant directly
 type IconVariant = 'bold' | undefined; 
+
+// --- Copywriting: Performance Messages --- 
+
+// Helper function for random selection
+const getRandomMessage = (messages: ReadonlyArray<string>, attempts: number): string => {
+  if (messages.length === 0) return "";
+  const randomIndex = Math.floor(Math.random() * messages.length);
+  let message = messages[randomIndex];
+  if (attempts > 1) {
+    message = message.replace('{attempts}', attempts.toString());
+  }
+  return message;
+};
 
 /**
  * Displays the back of the word card, showing word details and reflection on the user's answer.
@@ -78,10 +96,17 @@ const ReflectionCardComponent: React.FC<ReflectionCardProps> = ({
   const attempts = useWordCardStore(state => state.getAttempts(id));
   const getOptionState = useWordCardStore(state => state.getOptionState);
 
+  // Use imported message arrays
   const performanceMessage = useMemo(() => {
     if (attempts <= 0) return null;
-    if (attempts === 1) return "Guessed in first try!";
-    return `Guessed in ${attempts} attempts`;
+
+    if (attempts === 1) {
+      return getRandomMessage(firstGuessMessages, attempts);
+    } else if (attempts <= 3) { 
+      return getRandomMessage(fewGuessesMessages, attempts);
+    } else { 
+      return getRandomMessage(manyGuessesMessages, attempts);
+    }
   }, [attempts]);
 
   // Adjusted to use getOptionState for reflecting user attempts
@@ -94,7 +119,7 @@ const ReflectionCardComponent: React.FC<ReflectionCardProps> = ({
     let iconVariant: IconVariant = 'bold';
     let iconColor = colors.text.disabled; 
     let isBoldText = false; 
-    let textColor = colors.text.primary; 
+    let textColor = colors.text.tertiary; // Default for unselected incorrect
 
     if (isCorrect) {
       // Case 1: This IS the correct answer
@@ -116,7 +141,7 @@ const ReflectionCardComponent: React.FC<ReflectionCardProps> = ({
       iconVariant = 'bold';
       iconColor = colors.text.disabled; 
       isBoldText = false; 
-      textColor = colors.text.tertiary; // Changed from secondary to tertiary
+      // textColor remains tertiary as initialized
     }
 
     // We no longer need to explicitly check isSelected based on the potentially outdated selectedOptionValue
