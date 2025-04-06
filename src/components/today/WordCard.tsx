@@ -16,6 +16,7 @@ import { useWordCardStore, CardFace } from '../../store/wordCardStore';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import spacing from '../../theme/spacing';
 import { useFocusEffect, useIsFocused } from '@react-navigation/native';
+import { useTheme } from '../../theme';
 
 // Get screen dimensions to calculate responsive card size
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
@@ -214,7 +215,12 @@ const WordCardComponent: React.FC<WordCardProps> = ({
   
   return (
     <View style={[styles.container, style]}>
-      <View style={[styles.innerContainer, { paddingBottom: insets.bottom > 0 ? insets.bottom / 2 : 0 }]}>
+      <View style={[
+          styles.innerContainer,
+          {
+            paddingBottom: insets.bottom > 0 ? insets.bottom / 2 : 0,
+          }
+        ]}>
         {/* Question Card */}
         <Animated.View style={[styles.cardContainer, questionAnimatedStyle]}>
           <WordCardQuestion

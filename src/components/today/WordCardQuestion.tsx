@@ -1,5 +1,5 @@
-import React, { memo, useCallback, useMemo, useState, useRef } from 'react';
-import { View, StyleSheet, ViewStyle, StyleProp, Animated } from 'react-native';
+import React, { memo, useCallback, useMemo, useState } from 'react';
+import { View, StyleSheet, ViewStyle, StyleProp } from 'react-native';
 import { WordOfDay, WordOption } from '../../types/wordOfDay';
 import { useTheme } from '../../theme';
 import { Box } from '../layout';
@@ -8,16 +8,10 @@ import OptionButton from './OptionButton';
 import { radius, applyElevation } from '../../theme/styleUtils';
 import * as Haptics from 'expo-haptics';
 import { useWordCardStore, OptionState } from '../../store/wordCardStore';
-import { useProgressStore } from '../../store/progressStore';
 import WordSection from './WordSection';
 
 // Character threshold for font size reduction (should match OptionButton's threshold)
 const TEXT_LENGTH_THRESHOLD = 28;
-
-// Animation configuration
-const SHAKE_INTENSITY = 6; // Max distance to shake (in pixels)
-const SHAKE_DURATION = 40; // Duration of each movement (in ms)
-const SHAKE_DECAY = 0.8;   // How quickly the shake diminishes
 
 interface WordCardQuestionProps {
   /**
@@ -31,11 +25,6 @@ interface WordCardQuestionProps {
   style?: StyleProp<ViewStyle>;
   
   /**
-   * Callback function to call when a correct answer is given
-   */
-  onCorrectAnswer?: () => void;
-  
-  /**
    * Callback function to get the current word attempts
    */
   getWordAttempts?: () => number;
@@ -47,140 +36,75 @@ interface WordCardQuestionProps {
 const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({ 
   wordData,
   style,
-  onCorrectAnswer,
   getWordAttempts,
 }) => {
-  const { colors, spacing } = useTheme();
+  const { colors } = useTheme();
   const { id, word, pronunciation, partOfSpeech, options = [] } = wordData;
   
-  // Animation state
-  const [shakingOptionId, setShakingOptionId] = useState<string | null>(null);
-  const shakeAnimation = useRef(new Animated.Value(0)).current;
+  // State to track which button *should* be shaking (passed as prop)
+  const [shakingOptionValue, setShakingOptionValue] = useState<string | null>(null);
   
   // Zustand store hooks
   const selectedOption = useWordCardStore(state => state.getSelectedOption(id));
   const getOptionState = useWordCardStore(state => state.getOptionState);
-  const selectOption = useWordCardStore(state => state.selectOption);
-  const incrementWordsLearned = useProgressStore(state => state.incrementWordsLearned);
-  const checkAndUpdateStreak = useProgressStore(state => state.checkAndUpdateStreak);
+  const selectOptionAction = useWordCardStore(state => state.selectOption);
   
-  // Find the correct option for reference
-  const correctOption = useMemo(() => {
+  // Find the correct option's value for reference
+  const correctOptionValue = useMemo(() => {
     const correct = options.find(opt => opt.isCorrect);
     return correct?.value || null;
   }, [options]);
   
-  // Check if options should be disabled (correct answer already selected)
-  const isAnyOptionCorrect = useMemo(() => {
-    return options.some(option => 
-      getOptionState(id, option.value) === 'correct'
-    );
-  }, [id, options, getOptionState]);
+  // Check if the currently selected option is the correct one
+  const isCorrectAnswerSelected = useMemo(() => {
+    return selectedOption !== undefined && selectedOption === correctOptionValue;
+  }, [selectedOption, correctOptionValue]);
   
   // Check if any option text exceeds the threshold
   const shouldUseSmallFont = useMemo(() => {
     return options.some(option => option.value.length > TEXT_LENGTH_THRESHOLD);
   }, [options]);
   
-  // Function to create a shake animation sequence
-  const startShakeAnimation = useCallback((optionValue: string) => {
-    // Reset animation value
-    shakeAnimation.setValue(0);
-    
-    // Set which button to animate
-    setShakingOptionId(optionValue);
-    
-    // Create a sequence of movements that decrease in intensity
-    Animated.sequence([
-      // First shake cycle - full intensity
-      Animated.timing(shakeAnimation, { 
-        toValue: SHAKE_INTENSITY, 
-        duration: SHAKE_DURATION, 
-        useNativeDriver: true 
-      }),
-      Animated.timing(shakeAnimation, { 
-        toValue: -SHAKE_INTENSITY, 
-        duration: SHAKE_DURATION, 
-        useNativeDriver: true 
-      }),
-      
-      // Second shake cycle - reduced intensity
-      Animated.timing(shakeAnimation, { 
-        toValue: SHAKE_INTENSITY * SHAKE_DECAY, 
-        duration: SHAKE_DURATION, 
-        useNativeDriver: true 
-      }),
-      Animated.timing(shakeAnimation, { 
-        toValue: -SHAKE_INTENSITY * SHAKE_DECAY, 
-        duration: SHAKE_DURATION, 
-        useNativeDriver: true 
-      }),
-      
-      // Third shake cycle - further reduced intensity
-      Animated.timing(shakeAnimation, { 
-        toValue: SHAKE_INTENSITY * SHAKE_DECAY * SHAKE_DECAY, 
-        duration: SHAKE_DURATION, 
-        useNativeDriver: true 
-      }),
-      Animated.timing(shakeAnimation, { 
-        toValue: -SHAKE_INTENSITY * SHAKE_DECAY * SHAKE_DECAY, 
-        duration: SHAKE_DURATION, 
-        useNativeDriver: true 
-      }),
-      
-      // Return to center position
-      Animated.timing(shakeAnimation, { 
-        toValue: 0, 
-        duration: SHAKE_DURATION, 
-        useNativeDriver: true 
-      }),
-    ]).start(() => {
-      // Clear the shaking state after animation completes
-      setShakingOptionId(null);
-    });
-  }, [shakeAnimation]);
-  
   // Handle option selection
   const handleOptionPress = useCallback((option: WordOption) => {
-    // Skip if already answered correctly
-    if (isAnyOptionCorrect) return;
-    
-    // Get the current attempt count
-    const attemptCount = (getWordAttempts ? getWordAttempts() : 0) + 1;
-    
-    // Check if correct
+    if (isCorrectAnswerSelected) return;
+
     const isCorrect = option.isCorrect === true;
-    
-    // Call the store actions to select option
-    selectOption(id, option.value, isCorrect);
-    
-    // Handle correct answer
-    if (isCorrect) {
-      // Update streak and words learned
-      incrementWordsLearned();
-      checkAndUpdateStreak();
-    } 
-    // Handle incorrect answer
-    else {
-      // Vibrate for feedback
+
+    // Call the store action to select option
+    selectOptionAction(id, option.value, isCorrect);
+
+    if (!isCorrect) {
+      console.log(`[WordCardQuestion ${id}] Incorrect option: ${option.value}. Setting shake state.`);
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-      
-      // Start shake animation
-      startShakeAnimation(option.value);
+      // Set the state to indicate which button should shake
+      setShakingOptionValue(option.value);
+      // OptionButton will trigger animation based on its isShaking prop
+      // Reset the shaking state after the animation duration (approximate)
+      // NOTE: This assumes the parent knows the child animation duration.
+      // A potentially cleaner way is for OptionButton to have an onShakeComplete callback.
+      // But for now, setTimeout is simpler.
+      const approxShakeDuration = 35 * 7 + 100; // Match segment duration * segments + buffer
+      setTimeout(() => {
+        setShakingOptionValue(null);
+        console.log(`[WordCardQuestion ${id}] Resetting shake state for: ${option.value}`);
+      }, approxShakeDuration);
+
+    } else {
+      console.log(`[WordCardQuestion ${id}] Correct option: ${option.value}`);
+      // Correct answer logic (progress tracking) moved out previously
+      // Ensure shake state is clear if somehow set previously
+      setShakingOptionValue(null);
     }
   }, [
-    id, 
-    isAnyOptionCorrect, 
-    getWordAttempts, 
-    selectOption, 
-    incrementWordsLearned, 
-    checkAndUpdateStreak,
-    startShakeAnimation
+    id,
+    isCorrectAnswerSelected,
+    selectOptionAction,
   ]);
 
   return (
     <View style={[
-      styles.container, 
+      styles.container,
       { 
         backgroundColor: colors.background.card,
         ...applyElevation('sm', colors.text.primary)
@@ -209,33 +133,20 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
       {/* Options */}
       <View style={styles.optionsContainer}>
         {options.map((option, index) => {
-          // Get the current state for this option
           const optionState = getOptionState(id, option.value);
-          
-          // Determine if this option should be animated
-          const isShaking = shakingOptionId === option.value;
-          
-          // Apply animation style if this is the shaking option
-          const animStyle = isShaking ? { 
-            transform: [{ translateX: shakeAnimation }] 
-          } : undefined;
+          const isCurrentlyShaking = shakingOptionValue === option.value;
           
           return (
-            <Animated.View 
-              key={`${id}-option-${index}`}
-              style={[
-                styles.optionWrapper,
-                animStyle
-              ]}
-            >
+            <View key={`${id}-option-${index}`} style={styles.optionWrapper}>
               <OptionButton
                 option={option}
                 state={optionState}
-                disabled={isAnyOptionCorrect && optionState !== 'correct'}
+                disabled={isCorrectAnswerSelected && optionState !== 'correct'}
                 useSmallFont={shouldUseSmallFont}
                 onPress={() => handleOptionPress(option)}
+                isShaking={isCurrentlyShaking}
               />
-            </Animated.View>
+            </View>
           );
         })}
       </View>
@@ -270,4 +181,6 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo(WordCardQuestionComponent); 
+const WordCardQuestion = memo(WordCardQuestionComponent);
+
+export default WordCardQuestion; 

@@ -7,6 +7,13 @@ import {
   View,
   Text as RNText,
 } from 'react-native';
+// Import Reanimated components and hooks
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withSequence,
+  withTiming,
+} from 'react-native-reanimated';
 import { useTheme } from '../../theme';
 import { Text } from '../ui';
 import { radius, borderWidth } from '../../theme/styleUtils';
@@ -29,6 +36,11 @@ const MIN_BUTTON_HEIGHT = 46;
 
 // Character threshold for font size reduction
 const TEXT_LENGTH_THRESHOLD = 30;
+
+// Animation configuration for Reanimated shake (moved inside component)
+const SHAKE_OFFSET = 6;    // Max distance to shake (in pixels)
+const SHAKE_SEGMENT_DURATION = 35; // Duration of each movement segment (in ms)
+const SHAKE_ANIMATION_DURATION = SHAKE_SEGMENT_DURATION * 7; // Total approximate duration
 
 export interface OptionButtonProps {
   /**
@@ -61,6 +73,11 @@ export interface OptionButtonProps {
    * Useful when displaying multiple options to maintain consistent appearance
    */
   useSmallFont?: boolean;
+
+  /**
+   * Prop to trigger the shake animation externally
+   */
+  isShaking?: boolean;
 }
 
 /**
@@ -127,6 +144,7 @@ export const OptionButton = memo(function OptionButtonComponent({
   onPress,
   style,
   useSmallFont = false,
+  isShaking = false, // Default isShaking to false
 }: OptionButtonProps) {
   const { colors, spacing, typography, effectiveColorMode } = useTheme();
   const isDark = effectiveColorMode === 'dark';
@@ -160,61 +178,74 @@ export const OptionButton = memo(function OptionButtonComponent({
   // Previous state ref to detect changes
   const prevStateRef = useRef<OptionState>(propState);
   
+  // --- Reanimated Shake Animation State (now inside OptionButton) --- 
+  const shakeTranslateX = useSharedValue(0);
+
+  // --- Trigger Shake Animation via useEffect watching isShaking prop --- 
+  useEffect(() => {
+    if (isShaking) {
+      console.log(`[OptionButton ${option.value}] isShaking prop is true, triggering animation.`);
+      shakeTranslateX.value = 0; // Reset before starting
+      shakeTranslateX.value = withSequence(
+        withTiming(SHAKE_OFFSET, { duration: SHAKE_SEGMENT_DURATION }),
+        withTiming(-SHAKE_OFFSET, { duration: SHAKE_SEGMENT_DURATION }),
+        withTiming(SHAKE_OFFSET * 0.7, { duration: SHAKE_SEGMENT_DURATION }),
+        withTiming(-SHAKE_OFFSET * 0.7, { duration: SHAKE_SEGMENT_DURATION }),
+        withTiming(SHAKE_OFFSET * 0.4, { duration: SHAKE_SEGMENT_DURATION }),
+        withTiming(-SHAKE_OFFSET * 0.4, { duration: SHAKE_SEGMENT_DURATION }),
+        // Final step back to 0
+        withTiming(0, { duration: SHAKE_SEGMENT_DURATION }, (finished) => {
+          // Animation naturally ends at 0, no need to reset state here
+          // Parent component is responsible for setting isShaking back to false
+          if(finished) {
+            console.log(`[OptionButton ${option.value}] Shake animation sequence finished.`);
+          }
+        })
+      );
+    } else {
+      // If isShaking becomes false (e.g., parent resets state), ensure value is reset immediately
+      // Optional: could add a small closing animation if desired
+      shakeTranslateX.value = withTiming(0, { duration: 50 }); 
+    }
+  }, [isShaking, shakeTranslateX, option.value]); // Depend on isShaking prop
+
   // Create PanResponder for touch handling
   const panResponder = useMemo(() => PanResponder.create({
-    onStartShouldSetPanResponder: () => true,
-    onMoveShouldSetPanResponder: () => true,
+    onStartShouldSetPanResponder: () => !disabled, // Only respond if not disabled
+    onMoveShouldSetPanResponder: () => !disabled,
     onPanResponderGrant: () => {
       isMovingRef.current = false;
       setIsPressed(true);
-      
-      // Clear any existing timeout
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-        timeoutRef.current = null;
-      }
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
     },
     onPanResponderMove: (_, gestureState) => {
-      // If moved more than threshold in any direction, flag as moving
-      if (Math.abs(gestureState.dx) > SWIPE_THRESHOLD || 
-          Math.abs(gestureState.dy) > SWIPE_THRESHOLD) {
+      if (Math.abs(gestureState.dx) > SWIPE_THRESHOLD || Math.abs(gestureState.dy) > SWIPE_THRESHOLD) {
         isMovingRef.current = true;
         setIsPressed(false);
       }
     },
     onPanResponderRelease: () => {
-      // Only trigger press if it wasn't a swipe
-      if (!isMovingRef.current && onPress && !disabled && 
-          !['correct', 'incorrect'].includes(state)) {
-        // Add a small delay before executing press
+      if (!isMovingRef.current && onPress && !disabled && !['correct', 'incorrect'].includes(state)) {
         timeoutRef.current = setTimeout(() => {
           onPress();
+          timeoutRef.current = null; // Clear ref after execution
         }, PRESS_DELAY);
       }
-      
-      // Reset flag
       isMovingRef.current = false;
       setIsPressed(false);
     },
     onPanResponderTerminate: () => {
       isMovingRef.current = false;
       setIsPressed(false);
-      
-      // Clear timeout if interaction is terminated
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-        timeoutRef.current = null;
-      }
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
     }
   }), [onPress, disabled, state]);
   
   // Cleanup timeout on unmount
   useEffect(() => {
     return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-        timeoutRef.current = null;
-      }
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
   }, []);
 
@@ -224,7 +255,6 @@ export const OptionButton = memo(function OptionButtonComponent({
       paddingHorizontal: spacing.md,
       paddingVertical: spacing.sm,
       borderRadius: radius.pill,
-      marginBottom: spacing.sm,
       width: '100%' as const,
       minHeight: MIN_BUTTON_HEIGHT,
       backgroundColor: getBackgroundColor(state, colors, isDark),
@@ -242,29 +272,30 @@ export const OptionButton = memo(function OptionButtonComponent({
   // Get text color based on state
   const textColor = getTextColor(state, colors, isDark);
   
+  // --- Reanimated Animated Style for Shake --- 
+  const shakingAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateX: shakeTranslateX.value }],
+    };
+  });
+
   return (
-    <View {...panResponder.panHandlers}>
-      <View
-        style={[buttonStyles.container, style]}
-      >
-        <RNText
-          style={[
-            buttonStyles.text,
-            {
-              color: textColor,
-              fontWeight: isBold ? "700" : "400",
-              fontSize: shouldUseSmallFont ? minFontSize : normalFontSize,
-              fontFamily: isBold ? typography.fonts.systemBold : typography.fonts.system,
-              textAlign: 'center',
-            }
-          ]}
-          numberOfLines={1}
-          ellipsizeMode="tail"
+    // Apply PanResponder and Animated Style to the same Animated.View
+    <Animated.View 
+      {...panResponder.panHandlers} 
+      style={[buttonStyles.container, shakingAnimatedStyle, style]} // Combine styles
+    >
+      <RNText>
+        <Text
+          style={buttonStyles.text}
+          color={textColor}
+          weight={isBold ? '700' : '400'}
+          align="center"
         >
           {label}
-        </RNText>
-      </View>
-    </View>
+        </Text>
+      </RNText>
+    </Animated.View>
   );
 });
 

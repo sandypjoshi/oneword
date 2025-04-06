@@ -69,9 +69,6 @@ export default function HomeScreen() {
   // Add state debugging
   console.log('[HomeScreen] Rendering component');
   
-  // Get the wordCardStore state to log
-  const wordCardState = useWordCardStore.getState();
-  
   // Access the theme
   const isDark = colorScheme === 'dark';
   
@@ -228,39 +225,45 @@ export default function HomeScreen() {
   useEffect(() => {
     console.log('[HomeScreen] Component mounted');
     
-    // Log the current state from wordCardStore
+    // Log the current state from wordCardStore using the NEW structure
     const state = useWordCardStore.getState();
+    const wordIds = Object.keys(state.words || {});
+    const revealedWordIds = state.getRevealedWords(); // Use the selector
+    
     console.log('[HomeScreen] Current wordCardStore state on mount:', {
-      cardFaces: Object.keys(state.cardFaces).length,
-      revealed: state.revealedWordIds.length,
-      cardFaceEntries: Object.entries(state.cardFaces).map(([id, face]) => `${id}: ${face}`).join(', ')
+      totalWordsInStore: wordIds.length,
+      revealedCount: revealedWordIds.length,
+      // Optionally log revealed IDs or face details if needed for debugging:
+      // revealedDetails: revealedWordIds.join(', '),
+      // faceDetails: wordIds.map(id => `${id}: ${state.words[id]?.face || 'N/A'}`).join(', ')
     });
     
     return () => {
       console.log('[HomeScreen] Component will unmount');
     };
-  }, []);
+  }, []); // Empty dependency array means this runs only on mount
   
   // Add focus effect to track tab navigation
   useFocusEffect(
     useCallback(() => {
       console.log('[HomeScreen] Screen focused');
       
-      // Check the wordCardStore state when the tab is focused
+      // Check the wordCardStore state when the tab is focused (using NEW structure)
       const state = useWordCardStore.getState();
-      console.log('[HomeScreen] wordCardStore state on tab focus:', {
-        cardFaces: Object.keys(state.cardFaces).length,
-        revealed: state.revealedWordIds.length,
-        cardFaceEntries: Object.entries(state.cardFaces).map(([id, face]) => `${id}: ${face}`).join(', ')
+      const wordIds = Object.keys(state.words || {});
+      const revealedWordIds = state.getRevealedWords(); // Use the selector
+      
+      console.log('[HomeScreen] wordCardStore state on focus:', {
+        totalWordsInStore: wordIds.length,
+        revealedCount: revealedWordIds.length,
       });
-      
-      // We no longer need this workaround since the WordCard component
-      // now handles its own state correctly with useFocusEffect
-      
+
+      // Potential: Add logic here if something needs to happen based on state when screen focuses
+
       return () => {
-        console.log('[HomeScreen] Screen unfocused');
+        console.log('[HomeScreen] Screen lost focus');
       };
-    }, [words])
+    }, []) // Empty dependency array is correct for useFocusEffect's callback pattern
   );
 
   // Show loading UI - Simplified with basic skeleton idea
