@@ -39,7 +39,6 @@ export default function TabLayout() {
               ...applyElevation('none'),
             },
             headerTintColor: colors.text.primary,
-            headerRight: () => <StreakIndicator />,
             
             // Remove fade animation that causes flashing
             animation: 'none',
@@ -67,6 +66,7 @@ export default function TabLayout() {
                   variant={focused ? 'bold' : 'linear'} 
                 />
               ),
+              headerRight: () => <StreakIndicator />,
             }}
           />
           <Tabs.Screen
