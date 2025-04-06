@@ -22,7 +22,6 @@ import {
   shouldRegenerateMesh,
   generateSeedFromString
 } from '../../utils/meshGradientGenerator';
-import { useWordCardStore } from '../../store/wordCardStore';
 import { Box } from '../layout';
 import spacing from '../../theme/spacing';
 import WordSection from './WordSection';
@@ -70,9 +69,6 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
   
   // Use the centralized effectiveColorMode
   const isDark = effectiveColorMode === 'dark';
-  
-  // Zustand store hooks
-  const userAttempts = useWordCardStore(state => state.getAttempts(wordData.id));
   
   // Use useRef for mesh data and theme version tracking
   const meshRef = useRef<MeshData | null>(null);
@@ -176,31 +172,6 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
       
       {/* Content - Word answer and details */}
       <Box padding="md" style={styles.content}>
-        {/* User attempts badge */}
-        {userAttempts > 0 && (
-          <View style={[
-            styles.attemptsBadge, 
-            { 
-              backgroundColor: userAttempts === 1 
-                ? colors.success 
-                : userAttempts === 2 
-                  ? colors.warning 
-                  : colors.error
-            }
-          ]}>
-            <Text 
-              variant="caption" 
-              color="white" 
-              style={{ fontWeight: 'bold' }}
-            >
-              {userAttempts === 1 
-                ? 'First try!' 
-                : `${userAttempts} attempts`
-              }
-            </Text>
-          </View>
-        )}
-        
         {/* Use WordSection, specify onGradient variant */}
         <WordSection
           wordId={id}
@@ -305,13 +276,6 @@ const styles = StyleSheet.create({
   chipWrapper: {
     alignSelf: 'center',
     marginTop: spacing.lg, 
-  },
-  attemptsBadge: {
-    paddingHorizontal: 12,
-    paddingVertical: 4,
-    borderRadius: 20,
-    marginBottom: 16,
-    alignSelf: 'center',
   },
 });
 

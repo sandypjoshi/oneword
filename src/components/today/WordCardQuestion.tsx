@@ -5,10 +5,11 @@ import { useTheme } from '../../theme';
 import { Box } from '../layout';
 import { Text } from '../ui';
 import OptionButton from './OptionButton';
-import { radius, applyElevation } from '../../theme/styleUtils';
+import { radius, applyElevation, borderWidth } from '../../theme/styleUtils';
 import * as Haptics from 'expo-haptics';
 import { useWordCardStore, OptionState } from '../../store/wordCardStore';
 import WordSection from './WordSection';
+import spacing from '../../theme/spacing';
 
 // Character threshold for font size reduction (should match OptionButton's threshold)
 const TEXT_LENGTH_THRESHOLD = 28;
@@ -39,6 +40,37 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
   getWordAttempts,
 }) => {
   const { colors } = useTheme();
+
+  // Define styles *inside* the component to access theme colors
+  const styles = useMemo(() => StyleSheet.create({
+    container: {
+      flex: 1,
+      position: 'relative',
+      borderRadius: radius.lg,
+      overflow: 'hidden',
+      justifyContent: 'center',
+      paddingHorizontal: 20,
+      paddingVertical: 24,
+      borderWidth: borderWidth.thin,
+      borderColor: colors.border.light,
+    },
+    wordSection: {
+      marginBottom: spacing.xxl,
+    },
+    questionText: {
+      marginBottom: 16,
+      textAlign: 'center',
+    },
+    optionsContainer: {
+      width: '100%',
+      alignItems: 'stretch',
+    },
+    optionWrapper: {
+      marginBottom: spacing.md,
+      width: '100%',
+    },
+  }), [colors]); // Re-create styles if colors change
+
   const { id, word, pronunciation, partOfSpeech, options = [] } = wordData;
   
   // State to track which button *should* be shaking (passed as prop)
@@ -104,10 +136,10 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
 
   return (
     <View style={[
-      styles.container,
+      styles.container, // Use the container style from StyleSheet
       { 
         backgroundColor: colors.background.card,
-        ...applyElevation('sm', colors.text.primary)
+        ...applyElevation('sm', colors.text.primary), // Keep dynamic elevation/background
       },
       style
     ]}>
@@ -127,7 +159,7 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
         color={colors.text.tertiary}
         align="center"
       >
-        Which of these is the correct definition?
+        Guess the correct meaning
       </Text>
       
       {/* Options */}
@@ -153,33 +185,6 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    position: 'relative',
-    borderRadius: radius.lg,
-    overflow: 'hidden',
-    justifyContent: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 24,
-  },
-  wordSection: {
-    marginBottom: 24,
-  },
-  questionText: {
-    marginBottom: 16,
-    textAlign: 'center',
-  },
-  optionsContainer: {
-    width: '100%',
-    alignItems: 'stretch',
-  },
-  optionWrapper: {
-    marginBottom: 12,
-    width: '100%',
-  },
-});
 
 const WordCardQuestion = memo(WordCardQuestionComponent);
 

@@ -1,9 +1,13 @@
-import React, { memo } from 'react';
-import { StyleSheet, StyleProp, ViewStyle, TouchableOpacity } from 'react-native';
-import { WordOfDay } from '../../types/wordOfDay';
+import React, { memo, useMemo } from 'react';
+import { StyleSheet, StyleProp, ViewStyle, TouchableOpacity, View } from 'react-native';
+import { WordOfDay, WordOption } from '../../types/wordOfDay';
 import { useTheme } from '../../theme';
-import { radius } from '../../theme/styleUtils';
+import { radius, borderWidth } from '../../theme/styleUtils';
 import WordSection from './WordSection';
+import { useWordCardStore, OptionState } from '../../store/wordCardStore';
+import { Text, Icon } from '../ui';
+import Box from '../layout/Box';
+import spacing from '../../theme/spacing';
 
 interface ReflectionCardProps {
   wordData: WordOfDay;
@@ -11,8 +15,11 @@ interface ReflectionCardProps {
   onFlipBack?: () => void;
 }
 
+// Define a type for the icon variant directly
+type IconVariant = 'bold' | undefined; 
+
 /**
- * Displays the back of the word card, showing only the word details.
+ * Displays the back of the word card, showing word details and reflection on the user's answer.
  * Tappable to flip back to the question side.
  */
 const ReflectionCardComponent: React.FC<ReflectionCardProps> = ({ 
@@ -21,13 +28,111 @@ const ReflectionCardComponent: React.FC<ReflectionCardProps> = ({
   onFlipBack,
 }) => {
   const { colors } = useTheme();
-  const { id, word, pronunciation, partOfSpeech } = wordData;
-  
+
+  // Define styles *inside* the component to access theme colors
+  const styles = useMemo(() => StyleSheet.create({
+    container: {
+      flex: 1,
+      position: 'relative',
+      borderRadius: radius.lg,
+      overflow: 'hidden',
+      padding: 20,
+      justifyContent: 'center',
+      borderWidth: borderWidth.thin,
+      borderColor: colors.border.light,
+    },
+    wordSection: {
+      marginBottom: spacing.lg,
+    },
+    separator: {
+      borderBottomWidth: StyleSheet.hairlineWidth,
+      marginVertical: spacing.md,
+      borderBottomColor: colors.border.light,
+    },
+    performanceText: {
+      textAlign: 'center',
+      marginBottom: spacing.lg,
+    },
+    answerListContainer: {
+      alignItems: 'center',
+    },
+    answerRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: spacing.lg,
+    },
+    iconWrapper: { 
+      marginRight: spacing.sm, 
+    },
+    answerText: {
+      lineHeight: 20,
+    },
+    answerTextBold: {
+      fontWeight: 'bold',
+    },
+  }), [colors]); // Re-create styles if colors change
+
+  const { id, word, pronunciation, partOfSpeech, options = [] } = wordData;
+
+  const selectedOptionValue = useWordCardStore(state => state.getSelectedOption(id));
+  const attempts = useWordCardStore(state => state.getAttempts(id));
+  const getOptionState = useWordCardStore(state => state.getOptionState);
+
+  const performanceMessage = useMemo(() => {
+    if (attempts <= 0) return null;
+    if (attempts === 1) return "Guessed in first try!";
+    return `Guessed in ${attempts} attempts`;
+  }, [attempts]);
+
+  // Adjusted to use getOptionState for reflecting user attempts
+  const getOptionDisplayStatus = (option: WordOption) => {
+    const isCorrect = option.isCorrect; // Is this option the *actual* correct one?
+    // Get the interaction state of *this specific* option from the store
+    const optionState = getOptionState(id, option.value);
+    
+    let icon: 'checkCircleBold' | 'close' = 'close';
+    let iconVariant: IconVariant = 'bold';
+    let iconColor = colors.text.disabled; 
+    let isBoldText = false; 
+    let textColor = colors.text.primary; 
+
+    if (isCorrect) {
+      // Case 1: This IS the correct answer
+      icon = 'checkCircleBold';
+      iconVariant = undefined;
+      iconColor = colors.success;
+      isBoldText = true;
+      textColor = colors.success;
+    } else if (optionState === 'incorrect') {
+      // Case 2: This is an incorrect answer AND the user selected it (store marked it as 'incorrect')
+      icon = 'close';
+      iconVariant = 'bold'; 
+      iconColor = colors.error; // Use error styling
+      isBoldText = true;
+      textColor = colors.error;
+    } else {
+      // Case 3: This is an incorrect answer AND the user NEVER selected it (state is 'default')
+      icon = 'close';
+      iconVariant = 'bold';
+      iconColor = colors.text.disabled; // Use disabled styling
+      isBoldText = false; 
+      textColor = colors.text.primary; 
+    }
+
+    // We no longer need to explicitly check isSelected based on the potentially outdated selectedOptionValue
+    return { isCorrect, icon, iconColor, isBoldText, textColor, iconVariant }; // Removed isSelected from return
+  };
+
   return (
     <TouchableOpacity 
-      style={[styles.container, { backgroundColor: colors.background.card }, style]}
+      style={[
+        styles.container, // Use the container style from StyleSheet
+        { backgroundColor: colors.background.card }, // Keep dynamic background separate
+        style
+      ]}
       onPress={onFlipBack}
       activeOpacity={0.8}
+      disabled={!onFlipBack}
     >
       <WordSection
         wordId={id}
@@ -36,23 +141,51 @@ const ReflectionCardComponent: React.FC<ReflectionCardProps> = ({
         partOfSpeech={partOfSpeech}
         style={styles.wordSection}
       />
+
+      <View style={styles.separator} />
+
+      {performanceMessage && (
+        <Text variant="label" color={colors.text.tertiary} style={styles.performanceText}>
+          {performanceMessage}
+        </Text>
+      )}
+
+      <Box style={styles.answerListContainer}>
+        {options.map((option) => {
+          // Destructure updated return values (no isSelected needed here)
+          const { 
+            icon, 
+            iconColor, 
+            isBoldText, 
+            textColor, 
+            iconVariant 
+          } = getOptionDisplayStatus(option);
+
+          return (
+            <View key={option.value} style={styles.answerRow}>
+              <View style={styles.iconWrapper}>
+                 <Icon 
+                   name={icon} 
+                   color={iconColor} 
+                   size={18} 
+                   variant={iconVariant}
+                 /> 
+              </View>
+              <Text 
+                variant="bodyLarge"
+                color={textColor} 
+                style={[styles.answerText, isBoldText && styles.answerTextBold]}
+              >
+                {option.value}
+              </Text>
+            </View>
+          );
+        })}
+      </Box>
+
     </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    position: 'relative',
-    borderRadius: radius.lg,
-    overflow: 'hidden',
-    padding: 20,
-    paddingTop: 30,
-    justifyContent: 'center',
-  },
-  wordSection: {
-  },
-});
 
 const ReflectionCard = memo(ReflectionCardComponent);
 
