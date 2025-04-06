@@ -159,11 +159,6 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
       // Update streak and words learned
       incrementWordsLearned();
       checkAndUpdateStreak();
-      
-      // Optional callback
-      if (onCorrectAnswer) {
-        onCorrectAnswer();
-      }
     } 
     // Handle incorrect answer
     else {
@@ -180,7 +175,6 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
     selectOption, 
     incrementWordsLearned, 
     checkAndUpdateStreak,
-    onCorrectAnswer,
     startShakeAnimation
   ]);
 
