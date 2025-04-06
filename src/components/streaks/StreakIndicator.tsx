@@ -27,12 +27,11 @@ const StreakIndicator: React.FC = () => {
         name="flame" // Correct icon name
         color={colors.warning} // Use warning color (typically orange/yellow)
         size={20} 
-        // Variant prop removed as the SVG name includes style
       />
       <Text 
-        variant="label" 
+        variant="label" // Use label variant (handles fontSize)
         color={colors.warning} // Match icon color
-        style={styles.text}
+        style={styles.text} // Apply style with fontWeight: 'bold'
       >
         {currentStreak}
       </Text>
@@ -46,7 +45,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginRight: spacing.lg, // Adjusted margin to lg
   },
-  text: {
+  text: { // Restore original text style
     marginLeft: spacing.xxs,
     fontWeight: 'bold', // Make number stand out
   },
