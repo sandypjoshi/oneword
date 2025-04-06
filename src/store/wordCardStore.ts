@@ -63,6 +63,14 @@ export const useWordCardStore = create<WordCardState>()(
       // Card face management
       setCardFace: (wordId, face) => {
         console.log(`[wordCardStore.setCardFace] Setting word ${wordId} to face: ${face}`);
+        
+        // Validate face matches revealed state (safeguard)
+        const isRevealed = get().revealedWordIds.includes(wordId);
+        if (isRevealed && face === 'question') {
+          console.warn(`[wordCardStore.setCardFace] Attempted to set revealed word ${wordId} to question face. Correcting to answer.`);
+          face = 'answer';
+        }
+        
         set((state) => ({
           cardFaces: {
             ...state.cardFaces,
@@ -72,8 +80,31 @@ export const useWordCardStore = create<WordCardState>()(
       },
       
       getCardFace: (wordId) => {
-        const face = get().cardFaces[wordId] || 'question';
-        console.log(`[wordCardStore.getCardFace] Getting face for word ${wordId}: ${face}`);
+        // Ensure consistent face for revealed words
+        const isRevealed = get().revealedWordIds.includes(wordId);
+        const storedFace = get().cardFaces[wordId];
+        
+        // If word is revealed, ensure we never return 'question' face 
+        // unless explicitly overridden to 'reflection'
+        let face: CardFace;
+        if (isRevealed) {
+          face = storedFace === 'reflection' ? 'reflection' : 'answer';
+          
+          // If the stored face is wrong for a revealed word, correct it silently
+          if (storedFace === 'question') {
+            console.warn(`[wordCardStore.getCardFace] Detected inconsistency: Word ${wordId} is revealed but has question face. Correcting in store.`);
+            set((state) => ({
+              cardFaces: {
+                ...state.cardFaces,
+                [wordId]: face
+              }
+            }));
+          }
+        } else {
+          face = storedFace || 'question';
+        }
+        
+        console.log(`[wordCardStore.getCardFace] Getting face for word ${wordId}: ${face} (isRevealed: ${isRevealed})`);
         return face;
       },
       
@@ -194,7 +225,7 @@ export const useWordCardStore = create<WordCardState>()(
                   [wordId]: attempts
                 }
               }),
-              // Set card face to answer if not already
+              // Set card face to answer if not already in reflection
               cardFaces: {
                 ...state.cardFaces,
                 [wordId]: state.cardFaces[wordId] === 'reflection' ? 'reflection' : 'answer'
@@ -248,42 +279,35 @@ export const useWordCardStore = create<WordCardState>()(
       },
       
       _dangerouslyResetAllState: () => {
-        console.warn('[wordCardStore] Resetting ALL state!');
+        console.warn('[wordCardStore._dangerouslyResetAllState] Resetting all card state');
         set(initialState);
       },
     }),
     {
       name: 'word-card-storage',
       storage: createJSONStorage(() => AsyncStorage),
-      partialize: (state) => {
-        console.log('[wordCardStore.partialize] Saving state to storage', {
-          cardFaces: Object.keys(state.cardFaces).length,
-          revealed: state.revealedWordIds.length
-        });
-        
-        return {
-          // Persist only the essential state
-          cardFaces: state.cardFaces,
-          selectedOptions: state.selectedOptions,
-          optionStates: Object.fromEntries(
-            Object.entries(state.optionStates)
-              .filter(([_, value]) => Object.keys(value).length > 0)
-          ),
-          attempts: state.attempts,
-          revealedWordIds: state.revealedWordIds,
-        };
-      },
+      // Only persist these fields to AsyncStorage
+      partialize: (state) => ({
+        revealedWordIds: state.revealedWordIds,
+        cardFaces: state.cardFaces,
+        attempts: state.attempts,
+      }),
+      
+      // Add debugging for rehydration
       onRehydrateStorage: () => (state) => {
         if (state) {
-          console.log('[wordCardStore.onRehydrateStorage] Successfully rehydrated state', {
-            cardFaces: Object.keys(state.cardFaces).length,
+          console.log('[wordCardStore] Successfully rehydrated state:', {
             revealed: state.revealedWordIds.length,
-            cardFaceEntries: Object.entries(state.cardFaces).map(([id, face]) => `${id}: ${face}`).join(', ')
+            cardFaces: Object.keys(state.cardFaces).length,
+            revealedDetails: state.revealedWordIds.join(', '),
+            faceDetails: Object.entries(state.cardFaces)
+              .map(([id, face]) => `${id}:${face}`)
+              .join(', ')
           });
         } else {
-          console.error('[wordCardStore.onRehydrateStorage] Failed to rehydrate state');
+          console.warn('[wordCardStore] Failed to rehydrate state from storage');
         }
-      }
+      },
     }
   )
 ); 

@@ -11,10 +11,12 @@ import Animated, {
   interpolate,
   Extrapolate,
   Easing,
+  runOnJS,
 } from 'react-native-reanimated';
 import { useWordCardStore, CardFace } from '../../store/wordCardStore';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import spacing from '../../theme/spacing';
+import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 
 // Get screen dimensions to calculate responsive card size
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
@@ -25,17 +27,12 @@ const CARD_HEIGHT = Math.min(SCREEN_HEIGHT * 0.7, 700); // 70% of screen height,
 // Animation Constants
 const ANIMATION_DURATION = 500;
 const PERSPECTIVE = 1000;
-const FACE_VALUES = {
-  question: 0,
-  answer: 1,
-  reflection: 2,
-};
 
 // Map from CardFace string to numeric animation values
 const CARD_FACE_TO_VALUE: Record<CardFace, number> = {
-  'question': FACE_VALUES.question,
-  'answer': FACE_VALUES.answer,
-  'reflection': FACE_VALUES.reflection
+  'question': 0,
+  'answer': 1,
+  'reflection': 2
 };
 
 interface WordCardProps {
@@ -68,20 +65,31 @@ const WordCardComponent: React.FC<WordCardProps> = ({
   console.log(`[WordCard ${wordData?.id ?? 'ID_MISSING'}] Rendering with word:`, wordData.word);
 
   const insets = useSafeAreaInsets();
+  const isFocused = useIsFocused();
   
-  // --- Use the unified store for all state ---
-  const cardFace = useWordCardStore(state => state.getCardFace(wordData.id));
-  const selectedOption = useWordCardStore(state => state.getSelectedOption(wordData.id));
+  // Store state handlers
+  const getCardFace = useWordCardStore(state => state.getCardFace);
+  const setCardFace = useWordCardStore(state => state.setCardFace);
   const isRevealed = useWordCardStore(state => state.isWordRevealed(wordData.id));
   const getAttempts = useWordCardStore(state => state.getAttempts);
-  const setCardFace = useWordCardStore(state => state.setCardFace);
   
-  // Create refs to track component lifecycle
-  const isInitialMount = useRef(true);
-  const prevWordId = useRef(wordData.id);
+  // Track the current face in component state for better synchronization
+  const [currentFace, setCurrentFace] = useState<CardFace>(() => {
+    // Initialize based on store, ensuring it's consistent with revealed state
+    const face = getCardFace(wordData.id);
+    console.log(`[WordCard ${wordData.id}] Initial face from store: ${face}, isRevealed: ${isRevealed}`);
+    
+    // Force answer face if revealed (defensive)
+    if (isRevealed && face === 'question') {
+      console.log(`[WordCard ${wordData.id}] Correcting initial face from question to answer (revealed word)`);
+      setCardFace(wordData.id, 'answer');
+      return 'answer';
+    }
+    return face;
+  });
   
-  // Initialize flipProgress animation value based on current card face
-  const flipProgress = useSharedValue(CARD_FACE_TO_VALUE[cardFace] || 0);
+  // Create flipProgress animation value - always initialize to exact current face value
+  const flipProgress = useSharedValue(CARD_FACE_TO_VALUE[currentFace]);
   
   // Define animation configuration
   const animationConfig = {
@@ -89,63 +97,94 @@ const WordCardComponent: React.FC<WordCardProps> = ({
     easing: Easing.inOut(Easing.cubic),
   };
   
-  // Reset animation state when word changes
-  useEffect(() => {
-    if (prevWordId.current !== wordData.id) {
-      console.log(`[WordCard] Word ID changed from ${prevWordId.current} to ${wordData.id}`);
-      
-      // Update the flip progress immediately based on current face
-      const targetValue = CARD_FACE_TO_VALUE[cardFace] || 0;
-      flipProgress.value = targetValue;
-      
-      // Update refs
-      prevWordId.current = wordData.id;
-      isInitialMount.current = true;
-    }
-  }, [wordData.id, cardFace, flipProgress]);
+  // Function to immediately set the card face without animation
+  const setFaceImmediately = useCallback((face: CardFace) => {
+    console.log(`[WordCard ${wordData.id}] Setting face immediately to: ${face}`);
+    
+    // Update the store
+    setCardFace(wordData.id, face);
+    
+    // Update local state
+    setCurrentFace(face);
+    
+    // Set animation value directly without animation
+    flipProgress.value = CARD_FACE_TO_VALUE[face];
+  }, [wordData.id, setCardFace, flipProgress]);
   
-  // Update animation when card face changes
-  useEffect(() => {
-    const targetValue = CARD_FACE_TO_VALUE[cardFace];
+  // Function to animate to a new face
+  const animateToFace = useCallback((face: CardFace) => {
+    // Skip if already at the target face
+    if (currentFace === face) return;
     
-    console.log(`[WordCard ${wordData.id}] Card face changed to: ${cardFace}, targeting animation value: ${targetValue}`);
+    console.log(`[WordCard ${wordData.id}] Animating from ${currentFace} to ${face}`);
     
-    // On initial mount, set value directly without animation
-    if (isInitialMount.current) {
-      console.log(`[WordCard ${wordData.id}] Initial render - setting direct value: ${targetValue}`);
-      flipProgress.value = targetValue;
-      isInitialMount.current = false;
-    } 
-    // Otherwise, animate to the new value
-    else if (flipProgress.value !== targetValue) {
-      console.log(`[WordCard ${wordData.id}] Animating from ${flipProgress.value} to ${targetValue}`);
-      flipProgress.value = withTiming(targetValue, animationConfig);
-    }
-  }, [cardFace, wordData.id, flipProgress, animationConfig]);
+    // Update the store right away
+    setCardFace(wordData.id, face);
+    
+    // Update component state
+    setCurrentFace(face);
+    
+    // Animate to the new value
+    const targetValue = CARD_FACE_TO_VALUE[face];
+    flipProgress.value = withTiming(targetValue, animationConfig);
+  }, [wordData.id, currentFace, setCardFace, flipProgress, animationConfig]);
+  
+  // When screen regains focus, force-sync with the store
+  useFocusEffect(
+    useCallback(() => {
+      console.log(`[WordCard ${wordData.id}] Screen focus effect, isRevealed: ${isRevealed}`);
+      
+      // Get the latest state from the store when focused
+      const storeCardFace = getCardFace(wordData.id);
+      
+      // If there's a mismatch between component state and store, sync immediately
+      if (storeCardFace !== currentFace) {
+        console.log(`[WordCard ${wordData.id}] Focus detected state mismatch: component=${currentFace}, store=${storeCardFace}`);
+        setFaceImmediately(storeCardFace);
+      }
+      
+      // Double-check revealed words always show the right face
+      if (isRevealed && storeCardFace === 'question') {
+        console.log(`[WordCard ${wordData.id}] Focus correcting revealed word from question to answer`);
+        setFaceImmediately('answer');
+      }
+      
+      return () => {
+        console.log(`[WordCard ${wordData.id}] Screen lost focus`);
+      };
+    }, [wordData.id, getCardFace, currentFace, isRevealed, setFaceImmediately])
+  );
   
   // Callback to navigate to reflection face
   const navigateToReflection = useCallback(() => {
     console.log(`[WordCard ${wordData.id}] Navigating to reflection`);
-    setCardFace(wordData.id, 'reflection');
-  }, [wordData.id, setCardFace]);
+    animateToFace('reflection');
+  }, [wordData.id, animateToFace]);
   
   // Callback to flip back to answer from reflection
   const flipBackToAnswer = useCallback(() => {
     console.log(`[WordCard ${wordData.id}] Flipping back to answer from reflection`);
-    setCardFace(wordData.id, 'answer');
-  }, [wordData.id, setCardFace]);
+    animateToFace('answer');
+  }, [wordData.id, animateToFace]);
   
   // Log mount/unmount for debugging
   useEffect(() => {
-    console.log(`[WordCard ${wordData.id}] Mounted`);
+    console.log(`[WordCard ${wordData.id}] Mounted with face: ${currentFace}, isRevealed: ${isRevealed}`);
+    
+    // Safety check - make sure revealed words never show question face
+    if (isRevealed && currentFace === 'question') {
+      console.log(`[WordCard ${wordData.id}] Mount correcting revealed word from question to answer`);
+      setFaceImmediately('answer');
+    }
+    
     return () => {
       console.log(`[WordCard ${wordData.id}] Unmounted`);
     };
-  }, [wordData.id]);
+  }, [wordData.id, currentFace, isRevealed, setFaceImmediately]);
 
   // Animated styles for Question Card (Face 0)
   const questionAnimatedStyle = useAnimatedStyle(() => {
-    const rotateY = interpolate(flipProgress.value, [FACE_VALUES.question, FACE_VALUES.answer], [0, 180], Extrapolate.CLAMP);
+    const rotateY = interpolate(flipProgress.value, [0, 1], [0, 180], Extrapolate.CLAMP);
     const opacity = interpolate(flipProgress.value, [0, 0.5], [1, 0], Extrapolate.CLAMP);
     return {
       transform: [{ perspective: PERSPECTIVE }, { rotateY: `${rotateY}deg` }],
@@ -157,7 +196,7 @@ const WordCardComponent: React.FC<WordCardProps> = ({
 
   // Animated styles for Answer Card (Face 1)
   const answerAnimatedStyle = useAnimatedStyle(() => {
-    const rotateY = interpolate(flipProgress.value, [FACE_VALUES.question, FACE_VALUES.answer, FACE_VALUES.reflection], [180, 360, 540], Extrapolate.CLAMP); 
+    const rotateY = interpolate(flipProgress.value, [0, 1, 2], [180, 360, 540], Extrapolate.CLAMP); 
     const opacity = interpolate(flipProgress.value, [0.5, 1, 1.5], [0, 1, 0], Extrapolate.CLAMP); 
     return {
       transform: [{ perspective: PERSPECTIVE }, { rotateY: `${rotateY}deg` }],
@@ -169,7 +208,7 @@ const WordCardComponent: React.FC<WordCardProps> = ({
 
   // Animated styles for Reflection Card (Face 2)
   const reflectionAnimatedStyle = useAnimatedStyle(() => {
-    const rotateY = interpolate(flipProgress.value, [FACE_VALUES.question, FACE_VALUES.answer, FACE_VALUES.reflection], [360, 540, 720], Extrapolate.CLAMP); 
+    const rotateY = interpolate(flipProgress.value, [0, 1, 2], [360, 540, 720], Extrapolate.CLAMP); 
     const opacity = interpolate(flipProgress.value, [1.5, 2], [0, 1], Extrapolate.CLAMP); 
     return {
       transform: [{ perspective: PERSPECTIVE }, { rotateY: `${rotateY}deg` }],
@@ -178,6 +217,11 @@ const WordCardComponent: React.FC<WordCardProps> = ({
       pointerEvents: flipProgress.value > 1.5 ? 'auto' : 'none', 
     };
   });
+  
+  // If not focused, prevent rendering the complex animation structure
+  if (!isFocused) {
+    return <View style={[styles.container, style]} />;
+  }
   
   return (
     <View style={[styles.container, style]}>
@@ -252,10 +296,7 @@ const styles = StyleSheet.create({
   },
 });
 
-// Apply memo to the component
+// Wrap with memo to prevent unnecessary re-renders
 const WordCard = memo(WordCardComponent);
-
-// Set display name for better debugging
-WordCard.displayName = 'WordCard';
 
 export default WordCard; 

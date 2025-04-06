@@ -254,22 +254,8 @@ export default function HomeScreen() {
         cardFaceEntries: Object.entries(state.cardFaces).map(([id, face]) => `${id}: ${face}`).join(', ')
       });
       
-      // FIX: Force all revealed words to have 'answer' face when tab is focused
-      // Added null check for words array to prevent TypeError
-      if (words && Array.isArray(words) && words.length > 0) {
-        words.forEach(word => {
-          if (word && word.id && state.isWordRevealed(word.id)) {
-            const face = state.getCardFace(word.id);
-            console.log(`[HomeScreen] Word ${word.id} (${word.word}) is revealed but has face: ${face}`);
-            
-            // Force set to answer if it's a revealed word but not in answer state
-            if (face !== 'answer' && face !== 'reflection') {
-              console.log(`[HomeScreen] Correcting face for revealed word ${word.id} to 'answer'`);
-              state.setCardFace(word.id, 'answer');
-            }
-          }
-        });
-      }
+      // We no longer need this workaround since the WordCard component
+      // now handles its own state correctly with useFocusEffect
       
       return () => {
         console.log('[HomeScreen] Screen unfocused');
