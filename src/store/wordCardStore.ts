@@ -29,7 +29,7 @@ interface WordCardState {
   clearSelection: (wordId: string) => void;
   
   // Actions - speech related
-  speakWord: (wordId: string, word: string) => Promise<number>;
+  speakWord: (wordId: string, word: string) => Promise<void>;
   isWordSpeaking: (wordId: string) => boolean;
   
   // Actions - revealed word tracking
@@ -149,32 +149,24 @@ export const useWordCardStore = create<WordCardState>()(
       
       // Speech related
       speakWord: async (wordId, word) => {
+        // Immediately mark the word as speaking in the state
         set((state) => ({
           speakingWordIds: [...state.speakingWordIds, wordId]
         }));
         
         try {
-          const duration = await speak(word);
-          
-          // Use recursive setTimeout to check speaking state
-          const checkSpeaking = () => {
-            if (!isSpeaking()) {
-              set((state) => ({
-                speakingWordIds: state.speakingWordIds.filter(id => id !== wordId)
-              }));
-            } else {
-              setTimeout(checkSpeaking, 250);
-            }
-          };
-          
-          setTimeout(checkSpeaking, 250);
-          return duration;
-        } catch (error) {
-          // Clear speaking state on error
+          // Await the promise from the refactored speak function
+          await speak(word);
+          console.log(`[wordCardStore.speakWord] Finished speaking wordId: ${wordId}`);
+          // No return value needed or handled here anymore
+        } catch (error) { 
+          console.error(`[wordCardStore.speakWord] Error speaking wordId ${wordId}:`, error);
+          // Ensure state is cleaned up even if speech fails
+        } finally {
+          // Always remove the wordId from speaking state when the promise settles (resolves or rejects)
           set((state) => ({
             speakingWordIds: state.speakingWordIds.filter(id => id !== wordId)
           }));
-          return 0;
         }
       },
       

@@ -6,65 +6,66 @@ let speechStartTime = 0;
 const averageSpeakingDuration = 1500; // Default estimate for speaking duration in ms
 
 /**
- * Speak the provided text using the device's text-to-speech engine
+ * Speak the provided text using the device's text-to-speech engine.
+ * Stops any previous speech before starting.
  * @param text The text to speak
  * @param options Options for the speech (rate, pitch, etc.)
- * @returns A promise with the estimated duration of the speech
+ * @returns A promise that resolves when speech finishes or is stopped, and rejects on error.
  */
 export const speak = async (
   text: string, 
   options: Speech.SpeechOptions = {}
-): Promise<number> => {
-  try {
-    // Stop any current speech before starting new one
-    const currentlySpeaking = await Speech.isSpeakingAsync();
-    if (currentlySpeaking) {
-      await Speech.stop();
-    }
-    
-    // Use default options if none provided
-    const defaultOptions: Speech.SpeechOptions = {
-      rate: 0.9,       // Slightly slower than default for better clarity
-      pitch: 1.0,      // Normal pitch
-      language: 'en-US' // Default language
-    };
-    
-    // Merge default options with provided options
-    const speechOptions = {
-      ...defaultOptions,
-      ...options
-    };
-    
-    // Set speaking state and start time
-    isSpeakingActive = true;
-    speechStartTime = Date.now();
-    
-    // Estimate duration based on text length
-    const estimatedDuration = Math.max(
-      averageSpeakingDuration, 
-      text.length * 90  // ~90ms per character as a rough estimate
-    );
-    
-    // Speak the text
-    await Speech.speak(text, {
-      ...speechOptions,
-      onDone: () => {
-        isSpeakingActive = false;
-      },
-      onStopped: () => {
-        isSpeakingActive = false;
-      },
-      onError: () => {
-        isSpeakingActive = false;
+): Promise<void> => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      // Stop any current speech before starting new one
+      const currentlySpeaking = await Speech.isSpeakingAsync();
+      if (currentlySpeaking) {
+        await Speech.stop(); // Note: This might trigger onStopped for the *previous* speech
       }
-    });
-    
-    return estimatedDuration;
-  } catch (error) {
-    console.error('Error using text-to-speech:', error);
-    isSpeakingActive = false;
-    return 0;
-  }
+      
+      // Use default options if none provided
+      const defaultOptions: Speech.SpeechOptions = {
+        rate: 0.9,
+        pitch: 1.0,
+        language: 'en-US'
+      };
+      
+      // Merge default options with provided options
+      const speechOptions = {
+        ...defaultOptions,
+        ...options
+      };
+      
+      // Set speaking state and start time (still potentially useful for isSpeaking/getProgress)
+      isSpeakingActive = true;
+      speechStartTime = Date.now();
+      
+      // Speak the text, resolving/rejecting the promise in callbacks
+      Speech.speak(text, {
+        ...speechOptions,
+        onDone: () => {
+          console.log(`[tts.speak] Done speaking: "${text.substring(0, 20)}..."`);
+          isSpeakingActive = false;
+          resolve();
+        },
+        onStopped: () => {
+          console.log(`[tts.speak] Stopped speaking: "${text.substring(0, 20)}..."`);
+          isSpeakingActive = false;
+          resolve(); // Resolve on stop as well, as the action is complete from the caller's perspective
+        },
+        onError: (error) => {
+          console.error(`[tts.speak] Error speaking: "${text.substring(0, 20)}..."`, error);
+          isSpeakingActive = false;
+          reject(error);
+        }
+      });
+    } catch (error) {
+      console.error('[tts.speak] Error initiating text-to-speech:', error);
+      isSpeakingActive = false;
+      reject(error); // Reject the promise if initial setup fails
+    }
+  });
 };
 
 /**
