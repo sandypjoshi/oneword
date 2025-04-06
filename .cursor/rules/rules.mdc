@@ -23,3 +23,9 @@ alwaysApply: true
 - Reject out-of-scope requests politely. 
 - Follow design inputs from user and ask questions if needed. User is an expert UI UX designer.
 - **ALWAYS** check with the user before performing any destructive operations (DELETE, DROP, TRUNCATE) in the Supabase database using MCP. Explicitly show what would be deleted and request confirmation.
+
+## Software Engineering Principles
+- Look beyond immediate fixes to identify structural issues in the codebase
+- Focus on architectural principles rather than just implementation details
+- Consider both immediate impact and long-term maintainability when suggesting changes
+- Provide specific examples with concrete improvement paths when offering feedback
