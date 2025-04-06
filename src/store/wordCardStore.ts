@@ -64,13 +64,6 @@ export const useWordCardStore = create<WordCardState>()(
       setCardFace: (wordId, face) => {
         console.log(`[wordCardStore.setCardFace] Setting word ${wordId} to face: ${face}`);
         
-        // Validate face matches revealed state (safeguard)
-        const isRevealed = get().revealedWordIds.includes(wordId);
-        if (isRevealed && face === 'question') {
-          console.warn(`[wordCardStore.setCardFace] Attempted to set revealed word ${wordId} to question face. Correcting to answer.`);
-          face = 'answer';
-        }
-        
         set((state) => ({
           cardFaces: {
             ...state.cardFaces,
@@ -80,31 +73,10 @@ export const useWordCardStore = create<WordCardState>()(
       },
       
       getCardFace: (wordId) => {
-        // Ensure consistent face for revealed words
-        const isRevealed = get().revealedWordIds.includes(wordId);
         const storedFace = get().cardFaces[wordId];
+        const face = storedFace || 'question';
         
-        // If word is revealed, ensure we never return 'question' face 
-        // unless explicitly overridden to 'reflection'
-        let face: CardFace;
-        if (isRevealed) {
-          face = storedFace === 'reflection' ? 'reflection' : 'answer';
-          
-          // If the stored face is wrong for a revealed word, correct it silently
-          if (storedFace === 'question') {
-            console.warn(`[wordCardStore.getCardFace] Detected inconsistency: Word ${wordId} is revealed but has question face. Correcting in store.`);
-            set((state) => ({
-              cardFaces: {
-                ...state.cardFaces,
-                [wordId]: face
-              }
-            }));
-          }
-        } else {
-          face = storedFace || 'question';
-        }
-        
-        console.log(`[wordCardStore.getCardFace] Getting face for word ${wordId}: ${face} (isRevealed: ${isRevealed})`);
+        console.log(`[wordCardStore.getCardFace] Getting face for word ${wordId}: ${face}`);
         return face;
       },
       
