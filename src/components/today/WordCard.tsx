@@ -167,6 +167,12 @@ const WordCardComponent: React.FC<WordCardProps> = ({
     animateToFace('answer');
   }, [wordData.id, animateToFace]);
   
+  // Callback to handle correct answer selection from Question card
+  const handleCorrectAnswer = useCallback(() => {
+    console.log(`[WordCard ${wordData.id}] Correct answer detected, animating to answer face.`);
+    animateToFace('answer');
+  }, [wordData.id, animateToFace]);
+  
   // Log mount/unmount for debugging
   useEffect(() => {
     console.log(`[WordCard ${wordData.id}] Mounted with face: ${currentFace}, isRevealed: ${isRevealed}`);
@@ -232,6 +238,7 @@ const WordCardComponent: React.FC<WordCardProps> = ({
             wordData={wordData}
             style={styles.cardContent}
             getWordAttempts={() => getAttempts(wordData.id)}
+            onCorrectAnswer={handleCorrectAnswer}
           />
         </Animated.View>
         

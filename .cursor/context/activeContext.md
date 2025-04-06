@@ -1,8 +1,7 @@
 # Active Context
 
 ## Current Focus
-- **Awaiting user direction after completing codebase analysis.**
-- Transitioning from mock data to real backend integration (Supabase).
+- **Card animation and state management improvements**
 - Refactoring large UI components/screens (e.g., `app/(tabs)/index.tsx`, `OptionButton`) for better maintainability.
 - Implementing a comprehensive component testing strategy.
 - Enhancing UI components with advanced visual effects using Skia (e.g., noise texture for gradients).
@@ -11,6 +10,23 @@
 - Completing Practice and Profile tab functionality.
 
 ## Recent Changes
+### Card Flip Animation & State Persistence Fix (2024-04-06)
+1. **Goal**: Fix two critical issues in the WordCard component: (1) flip animation not working when selecting correct answers, and (2) revealed words sometimes showing question face after tab switching.
+2. **Root Causes**: 
+   - Animation Issue: The flip animation was properly defined but not correctly triggered when selecting correct answers.
+   - State Persistence: When switching tabs, component remounting caused animation state to reset, sometimes conflicting with logical state.
+3. **Key Changes**:
+   - Added safeguards in wordCardStore to prevent revealed words from showing question face
+   - Enhanced initialization logic to ensure consistent state on component mount
+   - Fixed backfaceVisibility handling for proper 3D card flipping
+   - Improved animation timing and easing for smoother transitions
+   - Added proper z-index and opacity handling during card face transitions
+   - Implemented defensive error handling for animation state
+4. **Lessons Learned**:
+   - Interaction between React's component lifecycle, navigation focus events, and Reanimated's animation system requires careful coordination
+   - Multiple correction points for the same logical state can create instability
+   - Immediate state changes during focus events should be minimized as they can create update loops
+
 ### Codebase Analysis (2024-04-01)
 1. **Goal**: Gain a deep understanding of the OneWord project structure, components, state management, themes, and overall architecture.
 2. **Method**: Systematically reviewed all files within `./app` and `./src` directories using `list_dir` and `read_file` tools. Analyzed file purpose, interactions, and key logic.
@@ -136,62 +152,57 @@
    - Follow the proper style chain: tokens → theme → component
 
 ## Next Steps
-1.  **Await User Input:** Determine the next task based on user instructions following the codebase analysis.
-2.  **Potential Immediate Priorities (Pending User Confirmation):**
-    *   Implement Supabase client and data fetching functions (e.g., in `src/services` or `src/api`).
-    *   Connect `wordOfDayService` and relevant UI components (especially `app/(tabs)/index.tsx`) to use live Supabase data.
-    *   Begin refactoring `app/(tabs)/index.tsx` by extracting logic into custom hooks (e.g., `useDailyWords`, `useCarouselPagination`).
-    *   Define and implement a testing strategy (Unit, Component, Integration).
-    *   Implement consistent loading and error state components/handling.
-3.  **Component/Feature Development:**
-    *   Implement Practice tab functionality (Challenge screen, exercises).
-    *   Implement Profile tab functionality (User settings, stats).
-    *   Implement paper-like noise texture overlay for `MeshGradient` components.
-    *   Create reusable `MeshGradient` background component.
-4.  **Technical Debt & Refinement:**
-    *   Consolidate project structure (`lib` vs `src`, `api` vs `services`).
-    *   Refactor other large components identified (e.g., `OptionButton`, `WordCardAnswer`).
-    *   Audit semantic color token usage and accessibility across all components.
-    *   Enhance API error handling robustness.
-5.  **Documentation:**
-    *   Standardize JSDoc comments across the codebase.
-    *   Update component documentation, especially for `Box` and `MeshGradient`.
-    *   Document testing strategy.
+1. **Expand Test Coverage:** 
+   - Implement unit tests for the Zustand stores, particularly focusing on wordCardStore
+   - Create component tests for WordCard and related components to ensure animation and state behavior
+   - Test edge cases for tab switching and animation state
+
+2. **Continue UI Refinements:**
+   - Address any remaining animation issues with WordCard
+   - Refactor large components for better maintainability
+   - Implement consistent loading and error states
+
+3. **Backend Integration:**
+   - Connect frontend to Supabase for live data
+   - Implement proper error handling for API requests
+   - Add caching for better offline experience
+
+4. **Visual Enhancements:**
+   - Add paper-like noise texture to gradient components
+   - Create reusable gradient background component
+   - Optimize animations for battery efficiency
 
 ## Known Issues
-- **No Backend Integration:** The application frontend currently uses only **mock data**. No Supabase data fetching is implemented yet.
+- **Animation Performance:** Current Reanimated-based animations may have performance implications on lower-end devices. Need to profile and optimize.
 - **Large Components:** Several components/screens (`app/(tabs)/index.tsx`, `OptionButton.tsx`, `WordCardAnswer.tsx`, `meshGradientGenerator.ts`) are very large and complex, needing refactoring.
-- **Low Test Coverage:** Lack of comprehensive automated tests.
+- **Low Test Coverage:** Lack of comprehensive automated tests, especially for complex interactions like animations.
+- **No Backend Integration:** The application frontend currently uses only **mock data**. No Supabase data fetching is implemented yet.
 - **Inconsistent Loading/Error States:** Missing standardized handling for loading and error UI states.
-- **Potential Gesture Conflicts:** Need ongoing monitoring for gesture issues, especially with complex components like `OptionButton`.
-- **Visual Performance:** Skia gradient animations and effects need performance testing on lower-end devices.
-- **Content Quality Variance:** Quality of generated word data (definitions, distractors) may vary (Noted from previous state, pending review).
 
 ## Active Context (Summary)
-This file tracks the current state, focus, changes, and known issues for the OneWord app. **The AI assistant has just completed a comprehensive analysis of the codebase and is awaiting user direction for the next task.** Potential next steps involve backend integration, component refactoring, and testing.
+This file tracks the current state, focus, changes, and known issues for the OneWord app. **The recent focus has been on fixing critical animation and state persistence issues in the WordCard component.** The work has improved the stability and user experience by ensuring card animations work correctly and state remains consistent across tab navigation.
 
-### Current Focus: Awaiting User Input
-The assistant has analyzed the codebase and awaits instructions for the next development task.
+### Current Focus: Animation and State Management
+The assistant has successfully addressed critical issues with card animations and state persistence, ensuring a consistent user experience even with complex component lifecycles and navigation interactions.
 
-#### Enhanced Swipe Gesture Handling Fix (Implemented)
+#### Card Flip Animation & State Persistence Fix (Implemented)
 
-**Root Cause:** App crashes and accidental button taps during card swiping were caused by conflicting gesture handlers. A time-based approach to block interactions was not sufficient to prevent all accidental taps.
+**Root Causes:** 
+1. The flip animation between question and answer faces wasn't being properly triggered
+2. Tab navigation caused component remounting, leading to inconsistent state between store and UI
 
 **Key Changes:**
-- Enhanced the `OptionButton` component with a `PanResponder` to properly detect and handle swipe gestures
-- Implemented a robust movement tracking system that distinguishes between taps and swipes
-- Removed the previous time-based touch tracking from `WordCardQuestion` component
-- Added a small delay to button actions to prevent accidental taps
-- The solution properly respects the parent's gesture handling while ensuring that accidental taps don't trigger during swipes
+- Added safeguards to prevent revealed words from showing question face
+- Fixed animation timing and visual properties for smooth transitions
+- Improved component initialization to ensure consistent state
+- Enhanced error handling to prevent crashes
 
-**Strategy:**
-1. The `PanResponder` in `OptionButton` now tracks the start of touch interactions
-2. If the touch moves more than a small threshold (10px), it's considered a swipe and the press is canceled
-3. Only registers a tap if the movement is minimal (less than threshold)
-4. A small delay (100ms) is added before triggering the press, giving time to detect swipes
-5. The `WordCardQuestion` component was simplified by removing its touch tracking logic
+**Architecture Improvements:**
+- Made the store the definitive source of truth for card state
+- Implemented proper state initialization on component mount
+- Ensured visual state correctly reflects logical state after navigation events
 
-This implementation provides a more robust solution by handling the gesture detection at the button level rather than relying on timing-based detection at the card level.
+This implementation provides a more reliable user experience by properly handling both animation states and persistent logical states, even through navigation and component lifecycle events.
 
 #### Previous Swipe Crash Fix (Implemented)
 
