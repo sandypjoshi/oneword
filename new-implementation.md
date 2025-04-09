@@ -8,7 +8,7 @@ Build a vocabulary learning app (`OneWord`) using React Native (Expo) and Supaba
 - Frontend uses **mock data** exclusively.
 - Recent UI refinements (fonts, `<Separator>` component, cleanup) complete.
 - Detailed planning for Streaks and Practice features done.
-- **BLOCKER:** New Supabase database setup is pending.
+- **BLOCKER:** New Supabase database setup and integration is pending. (Previous Supabase files/dependencies removed).
 
 ## Phase 1: Backend Infrastructure Setup (Immediate Priority / Blocker)
 
@@ -24,9 +24,9 @@ Build a vocabulary learning app (`OneWord`) using React Native (Expo) and Supaba
     *   Install [Supabase CLI](https://supabase.com/docs/guides/cli).
     *   Login to Supabase: `supabase login`.
     *   Link local project to new Supabase project: `supabase link --project-ref YOUR_NEW_PROJECT_REF` (replace with actual ref).
-    *   Initialize Supabase config if needed: `supabase init`.
+    *   Initialize Supabase config: `supabase init` (This will create a new `supabase` directory).
 3.  **Define Database Schema (Migration Scripts):**
-    *   **Location:** `supabase/migrations/`
+    *   **Location:** The newly created `supabase/migrations/` directory.
     *   **Process:** Use Supabase CLI to create migration files for schema changes.
     *   **Command:** `supabase migration new <migration_name>` (e.g., `create_initial_tables`, `setup_rls`).
     *   **Content (Example `..._create_initial_tables.sql`):**
@@ -118,25 +118,25 @@ Build a vocabulary learning app (`OneWord`) using React Native (Expo) and Supaba
         -- CREATE POLICY "Allow public read access to schedule." ON daily_word_schedule FOR SELECT USING (true);
         ```
 4.  **Apply Migrations:**
-    *   **Local Testing (Recommended):** Start local Supabase: `supabase start`. Apply migrations locally: `supabase migration up` (or `supabase db push` for simpler sync). Test schema.
+    *   **Local Testing (Recommended):** Start local Supabase: `supabase start`. Apply migrations locally: `supabase migration up`. Test schema.
     *   **Remote Deployment:** Apply migrations to the hosted Supabase project: `supabase migration up`. Verify changes in the Supabase Dashboard (Table Editor, SQL Editor).
 
-## Phase 2: Core Content & User Data Migration/Setup
+## Phase 2: Core Content & User Data Setup
 
-1.  **Implement `app_words` Migration Script:**
-    *   **Tooling:** Create a dedicated script (e.g., Node.js: `scripts/migrate_words.js` using `@supabase/supabase-js`; Python: `scripts/migrate_words.py` using `supabase-py`). Requires a lemmatization library (e.g., `natural` for Node, `nltk`/`spaCy` for Python).
-    *   **Credentials:** Securely manage Supabase URL and `service_role` keys for *both* old (read) and new (write) projects (e.g., use `.env` file and `dotenv` library).
+1.  **Implement `app_words` Seeding Script (No Old DB Migration):**
+    *   **Tooling:** Create a dedicated script (e.g., Node.js: `scripts/seed_words.js` using `@supabase/supabase-js`; Python: `scripts/seed_words.py` using `supabase-py`). Requires a lemmatization library (e.g., `natural` for Node, `nltk`/`spaCy` for Python).
+    *   **Source Data:** Use existing word data files (e.g., CSV, JSON) or fetch from an external API.
+    *   **Credentials:** Securely manage Supabase URL and `service_role` key for the **new** project (e.g., use `.env` file and `dotenv` library).
     *   **Logic:**
-        1.  Initialize Supabase clients for old and new databases.
-        2.  Fetch `difficulty_thresholds` from the **new** DB.
-        3.  Fetch words in batches from the **old** DB's `app_words` table.
+        1.  Initialize Supabase client for the new database.
+        2.  Fetch `difficulty_thresholds` from the new DB.
+        3.  Read/Fetch source word data in batches.
         4.  For each batch:
             *   Filter out unwanted words (profanity, common stop words).
             *   **Transform:**
-                *   Handle `difficulty_score = 0` (assign 'Beginner', nominal score 0.01 or map to lowest threshold).
                 *   Populate `lemma` using the chosen lemmatization library.
                 *   Populate `difficulty_level` by comparing `difficulty_score` against fetched thresholds.
-            *   Prepare data array matching the **new** `app_words` schema.
+                *   Prepare data array matching the **new** `app_words` schema.
             *   Insert the batch into the **new** DB using the Supabase client (`.insert()`).
         5.  Implement robust logging and error handling (especially for insert conflicts or API errors).
     *   **Execution:** Run this script from a local or secure environment after the new schema is ready.
@@ -205,7 +205,8 @@ Build a vocabulary learning app (`OneWord`) using React Native (Expo) and Supaba
 7.  **Monitoring:** Track `user_word_progress` table size, background job performance, API usage.
 
 ## Key Dependencies & Risks
-- **Supabase DB Setup:** Current primary blocker.
+- **Supabase DB Setup & Integration:** Current primary blocker.
+- **Word Seeding Script:** Complexity requires careful implementation and testing with chosen source data.
 - **Migration Script:** Complexity requires careful implementation and testing.
 - **`user_word_progress` Scaling:** Potential long-term size issue; requires monitoring.
 - **External APIs (Datamuse):** Availability, rate limits, potential changes.

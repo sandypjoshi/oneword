@@ -13,17 +13,15 @@ A vocabulary learning application that presents users with daily words of varyin
 ## Technology Stack
 
 - **Frontend**: React Native with Expo
-- **Backend**: Supabase (PostgreSQL database, authentication, storage)
+- **Backend**: Supabase (Planned - PostgreSQL database, authentication, storage)
 - **State Management**: Zustand
 - **Styling**: Custom design system with light/dark mode support
 
 ## Project Structure
 
 - `/app`: Main application screens and navigation
-- `/components`: Reusable UI components
+- `/src`: Source code (components, hooks, services, store, theme, types, utils)
 - `/assets`: Images, fonts, and other static assets
-- `/lib`: Utility functions and service integrations
-  - `/supabase`: Supabase client and services
 
 ## Getting Started
 
@@ -51,23 +49,18 @@ A vocabulary learning application that presents users with daily words of varyin
    npm run web     # for web
    ```
 
-### Environment Setup
+### Environment Setup (Planned)
 
-Create a `.env` file in the root directory with the following variables:
+Once Supabase is integrated, a `.env` file will be required with:
 
 ```
-EXPO_PUBLIC_SUPABASE_URL=your_supabase_url
-EXPO_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+EXPO_PUBLIC_SUPABASE_URL=your_new_supabase_url
+EXPO_PUBLIC_SUPABASE_ANON_KEY=your_new_supabase_anon_key
 ```
 
-## Database Structure
+## Database Structure (Planned)
 
-The application uses Supabase as its backend with the following main tables:
-
-- **words**: Core word data including difficulty levels and text content
-- **app_words**: Application-facing words with difficulty scores
-- **word_definitions**: Definitions for words
-- **word_examples**: Example usage of words
+The application will use Supabase as its backend. The planned schema includes tables for words, user profiles, progress tracking, and daily schedules. Refer to the development plan for details.
 
 ## License
 
