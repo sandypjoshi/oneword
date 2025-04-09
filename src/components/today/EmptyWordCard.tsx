@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { StyleSheet, View, ViewStyle } from 'react-native';
+import { StyleSheet, View, ViewStyle, Image } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
 import { Box } from '../layout';
 import { Text } from '../ui';
@@ -34,6 +34,7 @@ const EmptyWordCardComponent: React.FC<EmptyWordCardProps> = ({
   const defaultMessage = date 
     ? `No word available for ${new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`
     : 'No word available for this date';
+  const imageUrl = 'https://i.ibb.co/1YvNkbVH/Empty-State-Image-from-Tiny-PNG-1.png';
   
   return (
     <View 
@@ -48,20 +49,25 @@ const EmptyWordCardComponent: React.FC<EmptyWordCardProps> = ({
         style
       ]}
     >
-      <Box padding="lg" align="center" justify="center" style={{ flex: 1 }}>
-        <View style={styles.iconContainer}>
-          <Text 
-            variant="displayMedium" 
-            color={colors.text.secondary}
-          >
-            {"📖"}
-          </Text>
-        </View>
+      <Box 
+        padding="lg" 
+        style={{
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Image 
+          source={{ uri: imageUrl }} 
+          style={styles.image} 
+          resizeMode="contain"
+        />
         
         <Text 
           variant="bodyMedium"
           color={colors.text.secondary}
           align="center"
+          style={{ marginTop: spacing.md }}
         >
           {message || defaultMessage}
         </Text>
@@ -79,8 +85,12 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     flex: 1,
     display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  iconContainer: {
+  image: {
+    width: 150,
+    height: 150,
     marginBottom: 16,
   },
 });
