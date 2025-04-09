@@ -1,10 +1,9 @@
 import { useState, useRef, useCallback, useEffect, useMemo } from 'react';
 import { ScrollView, useWindowDimensions, ViewToken } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
-import { useNavigation, useFocusEffect } from 'expo-router';
+import { useRouter, useFocusEffect } from 'expo-router';
 import { ExtendedWordOfDay } from './useDailyWords'; // Assuming ExtendedWordOfDay is exported from useDailyWords
 import { useWordCardStore } from '../store/wordCardStore';
-import { useWordStore } from '../store/wordStore';
 
 // Constants
 const DOT_SIZE = 32; // Size of each indicator dot
@@ -21,9 +20,8 @@ export function useCarouselPagination(words: ExtendedWordOfDay[]) {
   const scrollViewRef = useRef<ScrollView>(null);
   const isProgrammaticScrollRef = useRef(false);
   const { width } = useWindowDimensions();
-  const navigation = useNavigation();
+  const router = useRouter();
 
-  const storedWords = useWordStore(state => state.words);
   const isWordRevealed = useWordCardStore(state => state.isWordRevealed);
   const setCardFace = useWordCardStore(state => state.setCardFace);
 
@@ -53,9 +51,10 @@ export function useCarouselPagination(words: ExtendedWordOfDay[]) {
     if (words.length > 0 && activeIndex >= 0 && activeIndex < words.length) {
       const currentWord = words[activeIndex];
       const title = formatDateForHeader(currentWord);
-      navigation.setOptions({ title });
+      // Use router.setParams to update screen options with Expo Router
+      router.setParams({ title });
     }
-  }, [activeIndex, words, navigation, formatDateForHeader]);
+  }, [activeIndex, words, router, formatDateForHeader]);
 
   // Scroll to the initial index (today's word) when words load
   useEffect(() => {

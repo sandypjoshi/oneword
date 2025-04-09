@@ -2,12 +2,10 @@ import React, { useMemo, useCallback, useEffect } from 'react';
 import {
   StyleSheet,
   View,
-  ActivityIndicator,
   useWindowDimensions,
   TouchableOpacity,
   ScrollView,
-  Text as RNText, // Keep RNText for the loading state fallback
-  useColorScheme,
+  ViewStyle,
 } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { WordCard, EmptyWordCard } from '../../src/components/today';
@@ -37,7 +35,6 @@ const DOT_GAP = 8;
 
 export default function HomeScreen() {
   const { isReady, theme } = useThemeReady();
-  const colorScheme = useColorScheme();
   const { width } = useWindowDimensions();
 
   // Use the word hook
@@ -69,9 +66,6 @@ export default function HomeScreen() {
 
   // Add state debugging
   console.log('[HomeScreen] Rendering component');
-
-  // Access the theme
-  const isDark = colorScheme === 'dark';
 
   // Create theme-dependent styles (mostly unchanged)
   const themeStyles = useMemo(() => {
@@ -127,17 +121,17 @@ export default function HomeScreen() {
         height: '100%',
         paddingBottom: spacing.xl,
         paddingTop: spacing.xs,
-      } as any,
+      } as ViewStyle,
       cardWrapper: {
         width: '90%',
         maxWidth: 500,
         flex: 1,
         paddingVertical: spacing.md,
-      } as any,
+      } as ViewStyle,
       wordCard: {
         width: '100%',
         flex: 1,
-      } as any,
+      } as ViewStyle,
     };
   }, [theme]);
 
@@ -297,8 +291,7 @@ export default function HomeScreen() {
 
   // Show loading UI - Simplified with basic skeleton idea
   if (isLoading) {
-    const isDark = colorScheme === 'dark';
-    const fallbackColors = isDark ? themes.default.dark : themes.default.light;
+    const fallbackColors = themes.default.light;
     const themeColors = theme?.colors || fallbackColors;
     const themeSpacing = theme?.spacing || {
       xs: 4,
@@ -321,7 +314,7 @@ export default function HomeScreen() {
           padding="xs"
           alignItems="flex-end"
           width="100%"
-          style={{ opacity: 0.3, paddingVertical: themeSpacing.xs }}
+          style={[styles.skeletonOpacity, { paddingVertical: themeSpacing.xs }]}
         >
           <Box flexDirection="row" paddingHorizontal="lg" gap="sm">
             {[...Array(5)].map((_, i) => (
@@ -347,46 +340,47 @@ export default function HomeScreen() {
           paddingVertical="md"
           alignItems="center"
           justifyContent="center"
-          style={{ opacity: 0.3 }}
+          style={styles.skeletonOpacity}
         >
           <View
-            style={{
-              flex: 1,
-              width: '100%',
-              backgroundColor: themeColors.background.secondary,
-              borderRadius: radius.xl,
-              padding: themeSpacing.lg,
-            }}
+            style={[
+              styles.skeletonCard, // Apply skeletonCard style
+              {
+                backgroundColor: themeColors.background.secondary,
+                borderRadius: radius.xl,
+                padding: themeSpacing.lg,
+              },
+            ]}
           >
             {/* Placeholder content inside card */}
             <View
-              style={{
-                height: 20,
-                width: '50%',
-                backgroundColor: themeColors.text.tertiary,
-                borderRadius: radius.sm,
-                marginBottom: themeSpacing.lg,
-                alignSelf: 'center',
-              }}
+              style={[
+                styles.skeletonLine1, // Apply skeletonLine1 style
+                {
+                  backgroundColor: themeColors.text.tertiary,
+                  borderRadius: radius.sm,
+                  marginBottom: themeSpacing.lg,
+                },
+              ]}
             />
             <View
-              style={{
-                height: 80,
-                width: '80%',
-                backgroundColor: themeColors.text.tertiary,
-                borderRadius: radius.sm,
-                marginBottom: themeSpacing.md,
-                alignSelf: 'center',
-              }}
+              style={[
+                styles.skeletonLine2, // Apply skeletonLine2 style
+                {
+                  backgroundColor: themeColors.text.tertiary,
+                  borderRadius: radius.sm,
+                  marginBottom: themeSpacing.md,
+                },
+              ]}
             />
             <View
-              style={{
-                height: 40,
-                width: '60%',
-                backgroundColor: themeColors.text.tertiary,
-                borderRadius: radius.pill,
-                alignSelf: 'center',
-              }}
+              style={[
+                styles.skeletonLine3, // Apply skeletonLine3 style
+                {
+                  backgroundColor: themeColors.text.tertiary,
+                  borderRadius: radius.pill,
+                },
+              ]}
             />
           </View>
         </Box>
@@ -472,5 +466,28 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  // Styles for Skeleton Loader
+  skeletonOpacity: {
+    opacity: 0.3,
+  },
+  skeletonCard: {
+    flex: 1,
+    width: '100%',
+  },
+  skeletonLine1: {
+    height: 20,
+    width: '50%',
+    alignSelf: 'center',
+  },
+  skeletonLine2: {
+    height: 80,
+    width: '80%',
+    alignSelf: 'center',
+  },
+  skeletonLine3: {
+    height: 40,
+    width: '60%',
+    alignSelf: 'center',
   },
 });

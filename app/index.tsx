@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, ActivityIndicator } from 'react-native';
 import { Redirect } from 'expo-router';
 import { checkOnboardingStatus } from '../src/utils/onboarding';
+import { palettes } from '../src/theme/primitives';
 
 /**
  * Root entry point - redirects to the appropriate screen
@@ -25,7 +26,7 @@ export default function Index() {
   if (isLoading) {
     return (
       <View style={styles.container}>
-        <ActivityIndicator size="large" color="#2e68e6" />
+        <ActivityIndicator size="large" color={palettes.blue[500]} />
       </View>
     );
   }
@@ -43,6 +44,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: palettes.neutralLight[0],
   },
 });

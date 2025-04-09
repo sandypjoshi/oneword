@@ -1,23 +1,22 @@
-import { useRouter } from 'expo-router';
+import { useRouter, useSegments } from 'expo-router';
 import { ROUTES } from '../constants';
 
 /**
  * Custom hook for app navigation
- * Provides typed navigation methods for common routes
+ * Provides typed navigation methods for common routes in a way that's consistent with Expo Router
  */
 export function useAppNavigation() {
   const router = useRouter();
+  const segments = useSegments();
+
+  const getCurrentRoute = () => {
+    if (segments.length === 0) return null;
+    return `/${segments.join('/')}`;
+  };
 
   return {
     // Navigate to main tabs
-    goToHome: () =>
-      router.replace({
-        pathname: ROUTES.HOME,
-        params: {
-          // Add animation transition parameter
-          animation: 'slide_from_right',
-        },
-      }),
+    goToHome: () => router.replace(ROUTES.HOME),
     goToPractice: () => router.push(ROUTES.PRACTICE),
     goToProfile: () => router.push(ROUTES.PROFILE),
 
@@ -35,8 +34,12 @@ export function useAppNavigation() {
     // General navigation
     goBack: () => router.back(),
 
+    // Additional utility methods
+    getCurrentRoute,
+    
     // Raw router for custom navigation
     router,
+    segments,
   };
 }
 

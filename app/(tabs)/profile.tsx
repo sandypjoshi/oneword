@@ -11,7 +11,7 @@ import { Box } from '../../src/components/layout';
 import { Text, Button } from '../../src/components/ui';
 import { useThemeReady } from '../../src/hooks';
 import { resetOnboardingStatus } from '../../src/utils/onboarding';
-import { useRouter, Link } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { useTheme } from '../../src/theme';
 import Icon from '../../src/components/ui/Icon';
 import { MeshGradient } from '../../src/components/common';
@@ -21,6 +21,7 @@ import { useWordStore } from '../../src/store/wordStore';
 import { useProgressStore } from '../../src/store/progressStore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { radius } from '../../src/theme/styleUtils';
+import { palettes, opacity } from '../../src/theme/primitives';
 
 // Sample profile card component with gradient background
 interface GradientProfileCardProps {
@@ -58,7 +59,8 @@ const GradientProfileCard: React.FC<GradientProfileCardProps> = ({
     <TouchableOpacity
       style={[
         styles.profileCard,
-        { borderWidth: 1, borderColor: colors.border.light },
+        styles.profileCardBorder,
+        { borderColor: colors.border.light },
       ]}
       onPress={handlePress}
       onLongPress={handleLongPress}
@@ -80,7 +82,10 @@ const GradientProfileCard: React.FC<GradientProfileCardProps> = ({
         <View
           style={[
             styles.avatarContainer,
-            { borderColor: colors.background.primary },
+            { 
+              borderColor: colors.background.primary,
+              backgroundColor: `${palettes.neutral.white}${opacity.light}`
+            }
           ]}
         >
           <View
@@ -92,7 +97,7 @@ const GradientProfileCard: React.FC<GradientProfileCardProps> = ({
 
         <Text
           variant="headingMedium"
-          style={{ textAlign: 'center', marginTop: spacing.xs }}
+          style={[styles.centerText, { marginTop: spacing.xs }]}
         >
           Welcome!
         </Text>
@@ -100,7 +105,7 @@ const GradientProfileCard: React.FC<GradientProfileCardProps> = ({
         <Text
           variant="bodySmall"
           color={colors.text.secondary}
-          style={{ textAlign: 'center', marginTop: spacing.xs }}
+          style={[styles.centerText, { marginTop: spacing.xs }]}
         >
           {gradientIds[gradientIndex]}
         </Text>
@@ -108,7 +113,7 @@ const GradientProfileCard: React.FC<GradientProfileCardProps> = ({
         <Text
           variant="bodySmall"
           color={colors.text.tertiary}
-          style={{ textAlign: 'center', marginTop: spacing.xs, fontSize: 12 }}
+          style={[styles.smallCenterText, { marginTop: spacing.xs }]}
         >
           Tap to change gradient • Long press to change pattern (Seed:{' '}
           {seeds[seedIndex]})
@@ -135,7 +140,7 @@ const DevThemeSelector = () => {
   ];
 
   return (
-    <View style={{ width: '100%', marginTop: spacing.lg }}>
+    <View style={[styles.fullWidth, { marginTop: spacing.lg }]}>
       <Text variant="headingSmall">Theme Settings (Dev)</Text>
 
       {/* Theme Selection */}
@@ -206,14 +211,9 @@ const DevThemeSelector = () => {
 export default function ProfileScreen() {
   const { isReady, theme } = useThemeReady();
   const router = useRouter();
-  const [currentGradient, setCurrentGradient] = useState('morning-sky');
 
   // Get the reset functions from stores
-  const resetCardState = useWordCardStore(state => state.resetCardState);
-  const fetchWords = useWordStore(state => state.fetchWords);
-  const resetStreak = useProgressStore(state => state.resetStreak);
-  const { streak, longestStreak, totalWordsLearned, lastCompletedDate } =
-    useProgressStore();
+  const { streak, longestStreak, totalWordsLearned } = useProgressStore();
   const resetProgressState = useProgressStore(
     state => state._dangerouslyResetAllState
   );
@@ -298,17 +298,17 @@ export default function ProfileScreen() {
 
   return (
     <ScrollView
-      style={{ flex: 1, backgroundColor: colors.background.primary }}
+      style={[styles.flexOne, { backgroundColor: colors.background.primary }]}
       contentContainerStyle={{ paddingBottom: spacing.xl }}
     >
       <Box padding="lg" alignItems="center">
         <Text variant="headingMedium">Profile</Text>
 
         {/* Profile card with gradient background */}
-        <GradientProfileCard onChangeGradient={setCurrentGradient} />
+        <GradientProfileCard />
 
         {/* User stats */}
-        <View style={{ width: '100%', marginTop: spacing.xl }}>
+        <View style={[styles.fullWidth, { marginTop: spacing.xl }]}>
           <Text variant="headingSmall">Your Stats</Text>
 
           <View
@@ -416,7 +416,6 @@ const styles = StyleSheet.create({
     height: 64,
     borderRadius: 32,
     padding: 3,
-    backgroundColor: 'rgba(255, 255, 255, 0.4)',
     marginBottom: 12,
   },
   avatar: {
@@ -443,5 +442,21 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: radius.md,
     borderWidth: 1,
+  },
+  profileCardBorder: {
+    borderWidth: 1,
+  },
+  centerText: {
+    textAlign: 'center',
+  },
+  smallCenterText: {
+    textAlign: 'center',
+    fontSize: 12,
+  },
+  fullWidth: {
+    width: '100%',
+  },
+  flexOne: {
+    flex: 1,
   },
 });

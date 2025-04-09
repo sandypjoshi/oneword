@@ -28,8 +28,8 @@ import {
   DMSerifText_400Regular,
   DMSerifText_400Regular_Italic,
 } from '@expo-google-fonts/dm-serif-text';
-
-// Import logo image
+// Import logo image - note: using require() is flagged by ESLint but works with Expo
+// To fix properly, we would need to set up proper module resolution and type declarations
 const logoImage = require('../src/assets/images/logo.png');
 
 // Keep the splash screen visible while we initialize
@@ -46,7 +46,7 @@ const MainContent = () => {
   const segments = useSegments();
   const { colors, spacing, effectiveColorMode } = useTheme();
   const isDark = effectiveColorMode === 'dark';
-
+  
   // Load the fonts
   const [fontsLoaded] = useFonts({
     DMSans_400Regular,
@@ -123,7 +123,7 @@ const MainContent = () => {
   }, [router, segments, fadeAnim, colors, fontsLoaded]);
 
   return (
-    <View style={{ flex: 1, backgroundColor: colors.background.primary }}>
+    <View style={styles.mainContainer}>
       <StatusBar style={isDark ? 'light' : 'dark'} />
 
       {/* Properly implemented Stack navigator for animations */}
@@ -160,7 +160,6 @@ const MainContent = () => {
           <ActivityIndicator
             size="large"
             color={colors.primary}
-            style={{ marginTop: spacing.md }}
           />
         </Animated.View>
       )}
@@ -171,13 +170,22 @@ const MainContent = () => {
 // Main layout component
 export default function RootLayout() {
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style={styles.rootView}>
       <ThemeProvider defaultColorMode="system" defaultThemeName="default">
         <MainContent />
       </ThemeProvider>
     </GestureHandlerRootView>
   );
 }
+
+const styles = StyleSheet.create({
+  rootView: {
+    flex: 1,
+  },
+  mainContainer: {
+    flex: 1,
+  },
+});
 
 const layoutStyles = StyleSheet.create({
   splashOverlay: {

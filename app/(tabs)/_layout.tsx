@@ -1,22 +1,15 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  ActivityIndicator,
-  useColorScheme,
-} from 'react-native';
-import { Tabs, useLocalSearchParams } from 'expo-router';
+import { StyleSheet, View, useColorScheme } from 'react-native';
+import { Tabs } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useThemeReady } from '../../src/hooks';
 import { Icon } from '../../src/components/ui';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-import { useTheme } from '../../src/theme/ThemeProvider';
 import { applyElevation } from '../../src/theme/styleUtils';
 import StreakIndicator from '../../src/components/streaks/StreakIndicator';
 
 export default function TabLayout() {
   const { isReady, theme } = useThemeReady();
-  const { animation } = useLocalSearchParams();
   const colorScheme = useColorScheme();
   const isDark = colorScheme === 'dark';
 

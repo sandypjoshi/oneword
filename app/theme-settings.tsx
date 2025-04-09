@@ -6,7 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import { Stack, useNavigation, useRouter } from 'expo-router';
+import { Stack, useRouter } from 'expo-router';
 import { Box } from '../src/components/layout';
 import { Text, ButtonGroup } from '../src/components/ui';
 import Icon from '../src/components/ui/Icon';
@@ -89,7 +89,6 @@ const ThemeSelector = () => {
 
 export default function ThemeSettingsScreen() {
   const { isReady, theme } = useThemeReady();
-  const navigation = useNavigation();
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const { effectiveColorMode } = useTheme();
