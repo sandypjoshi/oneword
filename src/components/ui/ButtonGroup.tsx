@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  View, 
-  StyleSheet, 
-  TouchableOpacity, 
-  StyleProp, 
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  StyleProp,
   ViewStyle,
-  TextStyle
+  TextStyle,
 } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
 import Text from './Text';
@@ -58,10 +58,7 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({
   const getContainerStyle = () => {
     switch (variant) {
       case 'horizontal':
-        return [
-          styles.horizontalContainer,
-          { gap: spacing.md }
-        ];
+        return [styles.horizontalContainer, { gap: spacing.md }];
       case 'grid':
         return styles.gridContainer;
       default:
@@ -74,7 +71,9 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({
       styles.button,
       {
         borderColor: isSelected ? colors.primary : colors.border.light,
-        backgroundColor: isSelected ? colors.background.secondary : 'transparent',
+        backgroundColor: isSelected
+          ? colors.background.secondary
+          : 'transparent',
         borderRadius: spacing.md,
         borderWidth: 2,
         paddingVertical: spacing.md,
@@ -87,7 +86,7 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({
 
   const renderButton = (option: ButtonGroupOption) => {
     const isSelected = selected === option.value;
-    
+
     return (
       <TouchableOpacity
         key={option.value}
@@ -104,13 +103,13 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({
             {option.label}
           </Text>
         </View>
-        
+
         <View style={styles.iconContainer}>
-          <Icon 
-            name={isSelected ? "checkCircleBold" : "circleOutline"} 
-            size={24} 
-            color={isSelected ? colors.primary : colors.text.secondary} 
-            variant={isSelected ? "bold" : "linear"}
+          <Icon
+            name={isSelected ? 'checkCircleBold' : 'circleOutline'}
+            size={24}
+            color={isSelected ? colors.primary : colors.text.secondary}
+            variant={isSelected ? 'bold' : 'linear'}
           />
         </View>
       </TouchableOpacity>
@@ -155,4 +154,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ButtonGroup; 
+export default ButtonGroup;

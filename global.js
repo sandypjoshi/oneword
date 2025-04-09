@@ -8,4 +8,4 @@ if (typeof Symbol !== 'undefined' && Symbol.toStringTag === undefined) {
   Symbol.toStringTag = Symbol('toStringTag');
 }
 
-export {}; 
+export {};

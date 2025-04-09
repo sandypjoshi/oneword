@@ -7,6 +7,12 @@ import WordCardAnswer from './WordCardAnswer';
 import EmptyWordCard from './EmptyWordCard';
 import WordDetailsBottomSheet from './WordDetailsBottomSheet';
 
-export { WordCard, WordCardQuestion, WordCardAnswer, EmptyWordCard, WordDetailsBottomSheet };
+export {
+  WordCard,
+  WordCardQuestion,
+  WordCardAnswer,
+  EmptyWordCard,
+  WordDetailsBottomSheet,
+};
 
-export { default as OptionButton } from './OptionButton'; 
+export { default as OptionButton } from './OptionButton';

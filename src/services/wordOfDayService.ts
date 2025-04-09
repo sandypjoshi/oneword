@@ -21,8 +21,8 @@ const mockWords: WordOfDay[] = [
       { value: 'Too great to express', isCorrect: true },
       { value: 'Causing great fear', isCorrect: false },
       { value: 'Pleasant smelling', isCorrect: false },
-      { value: 'Happening by chance', isCorrect: false }
-    ]
+      { value: 'Happening by chance', isCorrect: false },
+    ],
   },
   {
     id: '2',
@@ -36,8 +36,8 @@ const mockWords: WordOfDay[] = [
       { value: 'Happy accidental discovery', isCorrect: true },
       { value: 'Peace and tranquility', isCorrect: false },
       { value: 'Unusual vision ability', isCorrect: false },
-      { value: 'Extended joy period', isCorrect: false }
-    ]
+      { value: 'Extended joy period', isCorrect: false },
+    ],
   },
   {
     id: '3',
@@ -51,8 +51,8 @@ const mockWords: WordOfDay[] = [
       { value: 'Very short-lived', isCorrect: true },
       { value: 'Eternally lasting', isCorrect: false },
       { value: 'Beautiful but sad', isCorrect: false },
-      { value: 'Delicate and frail', isCorrect: false }
-    ]
+      { value: 'Delicate and frail', isCorrect: false },
+    ],
   },
   {
     id: '4',
@@ -66,8 +66,8 @@ const mockWords: WordOfDay[] = [
       { value: 'Found everywhere', isCorrect: true },
       { value: 'Extremely rare', isCorrect: false },
       { value: 'Highly dangerous', isCorrect: false },
-      { value: 'Ancient and historic', isCorrect: false }
-    ]
+      { value: 'Ancient and historic', isCorrect: false },
+    ],
   },
   {
     id: '5',
@@ -81,8 +81,8 @@ const mockWords: WordOfDay[] = [
       { value: 'Sweetly sounding', isCorrect: true },
       { value: 'Harsh and grating', isCorrect: false },
       { value: 'Filled with honey', isCorrect: false },
-      { value: 'Fast flowing', isCorrect: false }
-    ]
+      { value: 'Fast flowing', isCorrect: false },
+    ],
   },
   {
     id: '6',
@@ -96,8 +96,8 @@ const mockWords: WordOfDay[] = [
       { value: 'Fluent and persuasive', isCorrect: true },
       { value: 'Silent but expressive', isCorrect: false },
       { value: 'Excessively wordy', isCorrect: false },
-      { value: 'Ancient language', isCorrect: false }
-    ]
+      { value: 'Ancient language', isCorrect: false },
+    ],
   },
   {
     id: '7',
@@ -111,8 +111,8 @@ const mockWords: WordOfDay[] = [
       { value: 'Quick recovery ability', isCorrect: true },
       { value: 'Physical strength', isCorrect: false },
       { value: 'Mental stubbornness', isCorrect: false },
-      { value: 'Temporary setback', isCorrect: false }
-    ]
+      { value: 'Temporary setback', isCorrect: false },
+    ],
   },
   {
     id: '8',
@@ -126,8 +126,8 @@ const mockWords: WordOfDay[] = [
       { value: 'Extremely careful', isCorrect: true },
       { value: 'Completely careless', isCorrect: false },
       { value: 'Quick and efficient', isCorrect: false },
-      { value: 'Overly dramatic', isCorrect: false }
-    ]
+      { value: 'Overly dramatic', isCorrect: false },
+    ],
   },
   {
     id: '9',
@@ -141,8 +141,8 @@ const mockWords: WordOfDay[] = [
       { value: 'Insightful understanding', isCorrect: true },
       { value: 'Suspicious nature', isCorrect: false },
       { value: 'Persistent questioning', isCorrect: false },
-      { value: 'Clear visibility', isCorrect: false }
-    ]
+      { value: 'Clear visibility', isCorrect: false },
+    ],
   },
   {
     id: '10',
@@ -150,14 +150,15 @@ const mockWords: WordOfDay[] = [
     pronunciation: '/ˈsɪkəfənt/',
     partOfSpeech: 'noun',
     definition: 'Servile flatterer',
-    example: 'The CEO was surrounded by sycophants who agreed with everything he said',
+    example:
+      'The CEO was surrounded by sycophants who agreed with everything he said',
     date: '2025-03-24', // March 24th
     options: [
       { value: 'Servile flatterer', isCorrect: true },
       { value: 'Harsh critic', isCorrect: false },
       { value: 'Musical instrument', isCorrect: false },
-      { value: 'Ancient physician', isCorrect: false }
-    ]
+      { value: 'Ancient physician', isCorrect: false },
+    ],
   },
   {
     id: '11',
@@ -171,8 +172,8 @@ const mockWords: WordOfDay[] = [
       { value: 'Harsh sound mixture', isCorrect: true },
       { value: 'Perfect harmony', isCorrect: false },
       { value: 'Deep silence', isCorrect: false },
-      { value: 'Speech impediment', isCorrect: false }
-    ]
+      { value: 'Speech impediment', isCorrect: false },
+    ],
   },
   {
     id: '12',
@@ -180,14 +181,15 @@ const mockWords: WordOfDay[] = [
     pronunciation: '/ˌkwɪntɪˈsɛnʃ(ə)l/',
     partOfSpeech: 'adjective',
     definition: 'Perfect typical example',
-    example: 'The quintessential New York experience includes a walk through Central Park',
+    example:
+      'The quintessential New York experience includes a walk through Central Park',
     date: '2025-03-22', // March 22nd
     options: [
       { value: 'Perfect typical example', isCorrect: true },
       { value: 'Fifth in sequence', isCorrect: false },
       { value: 'Highly unusual', isCorrect: false },
-      { value: 'Essentially questionable', isCorrect: false }
-    ]
+      { value: 'Essentially questionable', isCorrect: false },
+    ],
   },
   {
     id: '13',
@@ -195,14 +197,15 @@ const mockWords: WordOfDay[] = [
     pronunciation: '/ˌdʒʌkstəpəˈzɪʃ(ə)n/',
     partOfSpeech: 'noun',
     definition: 'Side-by-side contrast',
-    example: 'The juxtaposition of ancient and modern architecture created a unique cityscape',
+    example:
+      'The juxtaposition of ancient and modern architecture created a unique cityscape',
     date: '2025-03-21', // March 21st
     options: [
       { value: 'Side-by-side contrast', isCorrect: true },
       { value: 'Legal positioning', isCorrect: false },
       { value: 'Overlapping elements', isCorrect: false },
-      { value: 'Forceful opposition', isCorrect: false }
-    ]
+      { value: 'Forceful opposition', isCorrect: false },
+    ],
   },
   {
     id: '14',
@@ -216,8 +219,8 @@ const mockWords: WordOfDay[] = [
       { value: 'Kind and generous', isCorrect: true },
       { value: 'Selfish and greedy', isCorrect: false },
       { value: 'Powerful and mighty', isCorrect: false },
-      { value: 'Visible and apparent', isCorrect: false }
-    ]
+      { value: 'Visible and apparent', isCorrect: false },
+    ],
   },
   {
     id: '13', // Start from next available ID
@@ -226,13 +229,13 @@ const mockWords: WordOfDay[] = [
     partOfSpeech: 'adjective',
     definition: 'Present everywhere',
     example: 'Mobile phones are ubiquitous these days.',
-    date: '2025-04-03', 
+    date: '2025-04-03',
     options: [
       { value: 'Present everywhere', isCorrect: true },
       { value: 'Rarely found', isCorrect: false },
       { value: 'Very large', isCorrect: false },
-      { value: 'Secretive', isCorrect: false }
-    ]
+      { value: 'Secretive', isCorrect: false },
+    ],
   },
   {
     id: '14',
@@ -246,8 +249,8 @@ const mockWords: WordOfDay[] = [
       { value: 'Natural tendency', isCorrect: true },
       { value: 'Strong dislike', isCorrect: false },
       { value: 'Sudden insight', isCorrect: false },
-      { value: 'Learned skill', isCorrect: false }
-    ]
+      { value: 'Learned skill', isCorrect: false },
+    ],
   },
   {
     id: '15',
@@ -261,8 +264,8 @@ const mockWords: WordOfDay[] = [
       { value: 'Sociable, fond of company', isCorrect: true },
       { value: 'Shy and reserved', isCorrect: false },
       { value: 'Angry and hostile', isCorrect: false },
-      { value: 'Serious and studious', isCorrect: false }
-    ]
+      { value: 'Serious and studious', isCorrect: false },
+    ],
   },
   {
     id: '16',
@@ -276,8 +279,8 @@ const mockWords: WordOfDay[] = [
       { value: 'Relating to letters', isCorrect: true },
       { value: 'About ancient history', isCorrect: false },
       { value: 'Containing many pictures', isCorrect: false },
-      { value: 'Difficult to understand', isCorrect: false }
-    ]
+      { value: 'Difficult to understand', isCorrect: false },
+    ],
   },
   {
     id: '17',
@@ -285,14 +288,14 @@ const mockWords: WordOfDay[] = [
     pronunciation: '/vɪˈsɪsɪtjuːd/',
     partOfSpeech: 'noun',
     definition: 'Change of circumstances',
-    example: 'They remained friends through all life\'s vicissitudes.',
+    example: "They remained friends through all life's vicissitudes.",
     date: '2025-04-07',
     options: [
       { value: 'Change of circumstances', isCorrect: true },
       { value: 'Period of stability', isCorrect: false },
       { value: 'Feeling of great joy', isCorrect: false },
-      { value: 'State of confusion', isCorrect: false }
-    ]
+      { value: 'State of confusion', isCorrect: false },
+    ],
   },
   {
     id: '18',
@@ -306,8 +309,8 @@ const mockWords: WordOfDay[] = [
       { value: 'Having great beauty', isCorrect: true },
       { value: 'Extremely ugly', isCorrect: false },
       { value: 'Very noisy', isCorrect: false },
-      { value: 'Old and decaying', isCorrect: false }
-    ]
+      { value: 'Old and decaying', isCorrect: false },
+    ],
   },
   {
     id: '19',
@@ -321,9 +324,9 @@ const mockWords: WordOfDay[] = [
       { value: 'Make unclear or obscure', isCorrect: true },
       { value: 'Explain clearly', isCorrect: false },
       { value: 'Highlight important points', isCorrect: false },
-      { value: 'Simplify complexity', isCorrect: false }
-    ]
-  }
+      { value: 'Simplify complexity', isCorrect: false },
+    ],
+  },
 ];
 
 /**
@@ -340,18 +343,24 @@ class WordOfDayService {
     if (word.options && word.options.length > 0) {
       return word; // Already has options
     }
-    
+
     // Create options with the correct definition and 3 made-up ones
     const options = [
       { value: word.definition, isCorrect: true },
       { value: `Opposite of ${word.word}`, isCorrect: false },
-      { value: `Related to ancient ${word.partOfSpeech === 'noun' ? 'rituals' : 'practices'}`, isCorrect: false },
-      { value: `Unusual ${word.partOfSpeech === 'noun' ? 'object' : 'quality'}`, isCorrect: false }
+      {
+        value: `Related to ancient ${word.partOfSpeech === 'noun' ? 'rituals' : 'practices'}`,
+        isCorrect: false,
+      },
+      {
+        value: `Unusual ${word.partOfSpeech === 'noun' ? 'object' : 'quality'}`,
+        isCorrect: false,
+      },
     ];
-    
+
     return {
       ...word,
-      options
+      options,
     };
   }
 
@@ -397,13 +406,13 @@ class WordOfDayService {
     const today = new Date();
     const pastDate = new Date();
     pastDate.setDate(today.getDate() - (days - 1));
-    
+
     const startDate = pastDate.toISOString().split('T')[0];
     const endDate = today.toISOString().split('T')[0];
-    
+
     return this.getWordsByDateRange(startDate, endDate);
   }
 }
 
 // Export singleton instance
-export const wordOfDayService = new WordOfDayService(); 
+export const wordOfDayService = new WordOfDayService();

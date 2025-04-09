@@ -21,7 +21,7 @@ export interface WordOfDay {
   definition: string;
   example?: string;
   date: string; // ISO format YYYY-MM-DD
-  
+
   // New fields for quiz functionality
   options?: WordOption[];
   isRevealed?: boolean;
@@ -40,4 +40,4 @@ export interface DateItem {
   };
   isToday: boolean;
   isSelected: boolean;
-} 
+}

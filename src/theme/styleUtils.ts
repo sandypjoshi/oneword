@@ -41,21 +41,21 @@ export const borderWidth = {
 // Opacity values as hex strings
 const opacityValues = {
   none: '00',
-  lightest: '20',  // 12.5% opacity
-  light: '15',     // 8% opacity
-  medium: '40',    // 25% opacity 
-  high: '50',      // 31% opacity
-  higher: '80',    // 50% opacity
+  lightest: '20', // 12.5% opacity
+  light: '15', // 8% opacity
+  medium: '40', // 25% opacity
+  high: '50', // 31% opacity
+  higher: '80', // 50% opacity
 } as const;
 
 // Opacity values for export
 export const opacity = {
   ...opacityValues,
-  disabled: 0.7,   // 70% opacity for disabled elements
+  disabled: 0.7, // 70% opacity for disabled elements
   subtle: {
     light: `${palettes.neutral.white}${opacityValues.lightest}`,
-    dark: `${palettes.neutral.black}${opacityValues.lightest}`
-  }
+    dark: `${palettes.neutral.black}${opacityValues.lightest}`,
+  },
 } as const;
 
 // Animation timing durations (in milliseconds)
@@ -68,16 +68,16 @@ export const animation = {
     medium: 500,
     long: 700,
     longer: 800,
-    longest: 1000
+    longest: 1000,
   },
   easing: {
     // Common easing functions
     standard: [0.4, 0.0, 0.2, 1], // Material Design standard easing
-    accelerate: [0.4, 0.0, 1, 1],  // Quick acceleration, linear end
+    accelerate: [0.4, 0.0, 1, 1], // Quick acceleration, linear end
     decelerate: [0.0, 0.0, 0.2, 1], // Linear start, gentle stop
-    sharp: [0.25, 0.1, 0.25, 1],    // Quick start, quick end
-    gentle: [0.25, 0.5, 0.5, 1]     // Gentle in and out
-  }
+    sharp: [0.25, 0.1, 0.25, 1], // Quick start, quick end
+    gentle: [0.25, 0.5, 0.5, 1], // Gentle in and out
+  },
 } as const;
 
 // Blend modes for overlays and effects
@@ -87,26 +87,26 @@ export const blending = {
   multiply: 'multiply' as const,
   screen: 'screen' as const,
   overlay: 'overlay' as const,
-  
+
   // Light adjusting blend modes
   darken: 'darken' as const,
   lighten: 'lighten' as const,
   colorDodge: 'color-dodge' as const,
   colorBurn: 'color-burn' as const,
-  
+
   // Contrast blend modes
   hardLight: 'hard-light' as const,
   softLight: 'soft-light' as const,
-  
+
   // Component blend modes
   difference: 'difference' as const,
   exclusion: 'exclusion' as const,
-  
+
   // Color composition modes
   hue: 'hue' as const,
   saturation: 'saturation' as const,
   color: 'color' as const,
-  luminosity: 'luminosity' as const
+  luminosity: 'luminosity' as const,
 } as const;
 
 // Elevation/Shadow styles - Enhanced to support theming
@@ -162,9 +162,12 @@ export const createElevation = (textColor = palettes.neutral.black) => ({
 export const elevation = createElevation();
 
 // Helper for applying elevation with platform-specific adjustments
-export const applyElevation = (level: ElevationLevel, textColor?: string): object => {
+export const applyElevation = (
+  level: ElevationLevel,
+  textColor?: string
+): object => {
   const elevationStyles = textColor ? createElevation(textColor) : elevation;
-  
+
   return Platform.select({
     ios: elevationStyles[level],
     android: {
@@ -203,4 +206,4 @@ export const components = {
       },
     },
   },
-} as const; 
+} as const;

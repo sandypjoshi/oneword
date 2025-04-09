@@ -13,7 +13,7 @@ export function useWordDetailsSheet() {
     setSelectedWord(word);
     // Need a slight delay to ensure state is set before opening
     setTimeout(() => {
-        bottomSheetRef.current?.open();
+      bottomSheetRef.current?.open();
     }, 50);
   }, []);
 
@@ -31,4 +31,4 @@ export function useWordDetailsSheet() {
   };
 }
 
-export default useWordDetailsSheet; 
+export default useWordDetailsSheet;

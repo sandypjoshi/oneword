@@ -1,6 +1,6 @@
 /**
  * Logger utility for consistent debugging across the app
- * 
+ *
  * This utility provides structured logging that can be enabled/disabled
  * globally or per component/module.
  */
@@ -34,33 +34,33 @@ interface LogEntry {
 
 // ANSI color codes for console output
 const colors = {
-  reset: "\x1b[0m",
-  bright: "\x1b[1m",
-  dim: "\x1b[2m",
-  underscore: "\x1b[4m",
-  blink: "\x1b[5m",
-  reverse: "\x1b[7m",
-  hidden: "\x1b[8m",
-  
+  reset: '\x1b[0m',
+  bright: '\x1b[1m',
+  dim: '\x1b[2m',
+  underscore: '\x1b[4m',
+  blink: '\x1b[5m',
+  reverse: '\x1b[7m',
+  hidden: '\x1b[8m',
+
   // Foreground colors
-  black: "\x1b[30m",
-  red: "\x1b[31m",
-  green: "\x1b[32m",
-  yellow: "\x1b[33m",
-  blue: "\x1b[34m",
-  magenta: "\x1b[35m",
-  cyan: "\x1b[36m",
-  white: "\x1b[37m",
-  
+  black: '\x1b[30m',
+  red: '\x1b[31m',
+  green: '\x1b[32m',
+  yellow: '\x1b[33m',
+  blue: '\x1b[34m',
+  magenta: '\x1b[35m',
+  cyan: '\x1b[36m',
+  white: '\x1b[37m',
+
   // Background colors
-  bgBlack: "\x1b[40m",
-  bgRed: "\x1b[41m",
-  bgGreen: "\x1b[42m",
-  bgYellow: "\x1b[43m",
-  bgBlue: "\x1b[44m",
-  bgMagenta: "\x1b[45m",
-  bgCyan: "\x1b[46m",
-  bgWhite: "\x1b[47m",
+  bgBlack: '\x1b[40m',
+  bgRed: '\x1b[41m',
+  bgGreen: '\x1b[42m',
+  bgYellow: '\x1b[43m',
+  bgBlue: '\x1b[44m',
+  bgMagenta: '\x1b[45m',
+  bgCyan: '\x1b[46m',
+  bgWhite: '\x1b[47m',
 };
 
 // Level-specific formatting
@@ -89,7 +89,7 @@ const levelFormats = {
 
 /**
  * Create a namespaced logger instance
- * 
+ *
  * @param namespace - The namespace for this logger (usually component or module name)
  * @returns Object with logging methods for each level
  */
@@ -119,28 +119,43 @@ export function createLogger(namespace: string) {
 
     // Format for console
     const format = levelFormats[level];
-    const timestamp = entry.timestamp.toISOString().split('T')[1].replace('Z', '');
-    
+    const timestamp = entry.timestamp
+      .toISOString()
+      .split('T')[1]
+      .replace('Z', '');
+
     // Use the appropriate console method with formatted output
     const formattedMessage = `${format.style}[${format.prefix}]${colors.reset} ${colors.dim}${timestamp}${colors.reset} ${colors.bright}[${namespace}]${colors.reset} ${message}`;
-    
+
     // Log to console with appropriate method based on level
     if (level === LogLevel.ERROR) {
-      data !== undefined ? console.error(formattedMessage, data) : console.error(formattedMessage);
+      data !== undefined
+        ? console.error(formattedMessage, data)
+        : console.error(formattedMessage);
     } else if (level === LogLevel.WARN) {
-      data !== undefined ? console.warn(formattedMessage, data) : console.warn(formattedMessage);
+      data !== undefined
+        ? console.warn(formattedMessage, data)
+        : console.warn(formattedMessage);
     } else if (level === LogLevel.INFO) {
-      data !== undefined ? console.info(formattedMessage, data) : console.info(formattedMessage);
+      data !== undefined
+        ? console.info(formattedMessage, data)
+        : console.info(formattedMessage);
     } else {
-      data !== undefined ? console.log(formattedMessage, data) : console.log(formattedMessage);
+      data !== undefined
+        ? console.log(formattedMessage, data)
+        : console.log(formattedMessage);
     }
   };
 
   return {
-    debug: (message: string, data?: any) => logAtLevel(LogLevel.DEBUG, message, data),
-    info: (message: string, data?: any) => logAtLevel(LogLevel.INFO, message, data),
-    warn: (message: string, data?: any) => logAtLevel(LogLevel.WARN, message, data),
-    error: (message: string, data?: any) => logAtLevel(LogLevel.ERROR, message, data),
+    debug: (message: string, data?: any) =>
+      logAtLevel(LogLevel.DEBUG, message, data),
+    info: (message: string, data?: any) =>
+      logAtLevel(LogLevel.INFO, message, data),
+    warn: (message: string, data?: any) =>
+      logAtLevel(LogLevel.WARN, message, data),
+    error: (message: string, data?: any) =>
+      logAtLevel(LogLevel.ERROR, message, data),
   };
 }
 
@@ -172,4 +187,4 @@ export default {
   getLogs,
   clearLogs,
   LogLevel,
-}; 
+};

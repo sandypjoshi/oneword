@@ -9,7 +9,7 @@ import { checkOnboardingStatus } from '../src/utils/onboarding';
 export default function Index() {
   const [isLoading, setIsLoading] = useState(true);
   const [hasOnboarded, setHasOnboarded] = useState(false);
-  
+
   // Check onboarding status on mount
   useEffect(() => {
     async function checkStatus() {
@@ -17,10 +17,10 @@ export default function Index() {
       setHasOnboarded(status);
       setIsLoading(false);
     }
-    
+
     checkStatus();
   }, []);
-  
+
   // Show loading state
   if (isLoading) {
     return (
@@ -29,7 +29,7 @@ export default function Index() {
       </View>
     );
   }
-  
+
   // Redirect based on onboarding status
   return hasOnboarded ? (
     <Redirect href="/(tabs)" />
@@ -43,6 +43,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF'
-  }
-}); 
+    backgroundColor: '#FFFFFF',
+  },
+});

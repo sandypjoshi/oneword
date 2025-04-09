@@ -1,0 +1,15 @@
+node_modules
+dist
+build
+coverage
+android/
+ios/
+.expo/
+web-build/
+*.lock
+*.log
+.DS_Store
+package.json
+package-lock.json
+yarn.lock
+*.md 

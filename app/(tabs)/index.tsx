@@ -1,18 +1,23 @@
 import React, { useMemo, useCallback, useEffect } from 'react';
-import { 
-  StyleSheet, 
-  View, 
-  ActivityIndicator, 
+import {
+  StyleSheet,
+  View,
+  ActivityIndicator,
   useWindowDimensions,
   TouchableOpacity,
   ScrollView,
   Text as RNText, // Keep RNText for the loading state fallback
-  useColorScheme
+  useColorScheme,
 } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { WordCard, EmptyWordCard } from '../../src/components/today';
 import WordDetailsBottomSheet from '../../src/components/today/WordDetailsBottomSheet';
-import { useThemeReady, useDailyWords, useCarouselPagination, useWordDetailsSheet } from '../../src/hooks';
+import {
+  useThemeReady,
+  useDailyWords,
+  useCarouselPagination,
+  useWordDetailsSheet,
+} from '../../src/hooks';
 import { WordOfDay } from '../../src/types/wordOfDay';
 import { Text as CustomText, Button } from '../../src/components/ui';
 import { radius, applyElevation } from '../../src/theme/styleUtils';
@@ -36,15 +41,15 @@ export default function HomeScreen() {
   const { width } = useWindowDimensions();
 
   // Use the word hook
-  const { 
-    words, 
-    isLoading: wordsLoading, 
+  const {
+    words,
+    isLoading: wordsLoading,
     error,
-    refetchWords 
+    refetchWords,
   } = useDailyWords();
-  
+
   // Pagination hook for displaying and navigating through dots
-  const { 
+  const {
     activeIndex,
     scrollViewRef,
     onViewableItemsChanged,
@@ -52,26 +57,22 @@ export default function HomeScreen() {
     viewabilityConfig,
     getDateFromWord,
     initialScrollIndex,
-    flashListRef
+    flashListRef,
   } = useCarouselPagination(words);
 
   // Combine loading states
   const isLoading = !isReady || wordsLoading;
 
   // Use the new custom hooks
-  const { 
-    bottomSheetRef, 
-    selectedWord, 
-    openWordDetails, 
-    handleSheetDismiss 
-  } = useWordDetailsSheet();
+  const { bottomSheetRef, selectedWord, openWordDetails, handleSheetDismiss } =
+    useWordDetailsSheet();
 
   // Add state debugging
   console.log('[HomeScreen] Rendering component');
-  
+
   // Access the theme
   const isDark = colorScheme === 'dark';
-  
+
   // Create theme-dependent styles (mostly unchanged)
   const themeStyles = useMemo(() => {
     if (!theme) return {};
@@ -86,7 +87,7 @@ export default function HomeScreen() {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: colors.background.primary
+        backgroundColor: colors.background.primary,
       } as const,
       paginationOuterContainer: {
         paddingVertical: spacing.xs,
@@ -139,33 +140,47 @@ export default function HomeScreen() {
       } as any,
     };
   }, [theme]);
-  
+
   // Render pagination indicators using data from useCarouselPagination
   const renderPaginationDots = useCallback(() => {
     // Add more defensive checks
-    if (!theme || !words || !Array.isArray(words) || words.length === 0 || !themeStyles.paginationOuterContainer) {
+    if (
+      !theme ||
+      !words ||
+      !Array.isArray(words) ||
+      words.length === 0 ||
+      !themeStyles.paginationOuterContainer
+    ) {
       return null;
     }
-    
+
     // Check if activeIndex is undefined/null or not a number, instead of just truthiness
-    if (activeIndex === undefined || activeIndex === null || typeof activeIndex !== 'number' || !getDateFromWord) {
-      console.log('[HomeScreen] Missing pagination dependencies', { activeIndex, hasGetDateFn: !!getDateFromWord });
+    if (
+      activeIndex === undefined ||
+      activeIndex === null ||
+      typeof activeIndex !== 'number' ||
+      !getDateFromWord
+    ) {
+      console.log('[HomeScreen] Missing pagination dependencies', {
+        activeIndex,
+        hasGetDateFn: !!getDateFromWord,
+      });
       return null;
     }
-    
+
     const { colors } = theme;
     return (
       <View style={themeStyles.paginationOuterContainer}>
-        <ScrollView 
+        <ScrollView
           ref={scrollViewRef}
-          horizontal 
+          horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={themeStyles.paginationContainer}
           style={themeStyles.paginationScrollView}
         >
           {words.map((word, index) => {
             if (!word) return null;
-            
+
             const isActive = index === activeIndex;
             const dateNum = getDateFromWord(word);
             return (
@@ -174,15 +189,19 @@ export default function HomeScreen() {
                 style={themeStyles.dotTouchable}
                 onPress={() => scrollToIndex?.(index)}
               >
-                <View style={[
+                <View
+                  style={[
                     themeStyles.paginationDot,
                     isActive ? themeStyles.activeDot : themeStyles.inactiveDot,
-                ]}>
+                  ]}
+                >
                   <CustomText
                     variant="caption"
-                    color={isActive ? colors.text.inverse : colors.text.secondary}
+                    color={
+                      isActive ? colors.text.inverse : colors.text.secondary
+                    }
                     align="center"
-                    weight={isActive ? "700" : "400"}
+                    weight={isActive ? '700' : '400'}
                   >
                     {dateNum}
                   </CustomText>
@@ -193,43 +212,53 @@ export default function HomeScreen() {
         </ScrollView>
       </View>
     );
-  }, [words, activeIndex, theme, getDateFromWord, scrollToIndex, themeStyles, scrollViewRef]);
+  }, [
+    words,
+    activeIndex,
+    theme,
+    getDateFromWord,
+    scrollToIndex,
+    themeStyles,
+    scrollViewRef,
+  ]);
 
   // Render a word card item using the composite WordCard
-  const renderItem = useCallback(({ item }: { item: ExtendedWordOfDay }) => {
-    // Log props being passed to WordCard
-    console.log(`[HomeScreen.renderItem] Rendering WordCard for ID: ${item.id}, Placeholder: ${!!item.isPlaceholder}`);
-    const isPlaceholder = item.isPlaceholder;
-    return (
-      <View style={[themeStyles.cardContainer, { width }]}>
-        <View style={themeStyles.cardWrapper}>
-          {isPlaceholder ? (
-            <EmptyWordCard 
-              style={themeStyles.wordCard} 
-              date={item.date}
-            />
-          ) : (
-            // Render the composite WordCard
-            <WordCard 
-              wordData={item} 
-              style={themeStyles.wordCard} 
-              onViewDetails={() => openWordDetails(item)}
-            />
-          )}
+  const renderItem = useCallback(
+    ({ item }: { item: ExtendedWordOfDay }) => {
+      // Log props being passed to WordCard
+      console.log(
+        `[HomeScreen.renderItem] Rendering WordCard for ID: ${item.id}, Placeholder: ${!!item.isPlaceholder}`
+      );
+      const isPlaceholder = item.isPlaceholder;
+      return (
+        <View style={[themeStyles.cardContainer, { width }]}>
+          <View style={themeStyles.cardWrapper}>
+            {isPlaceholder ? (
+              <EmptyWordCard style={themeStyles.wordCard} date={item.date} />
+            ) : (
+              // Render the composite WordCard
+              <WordCard
+                wordData={item}
+                style={themeStyles.wordCard}
+                onViewDetails={() => openWordDetails(item)}
+              />
+            )}
+          </View>
         </View>
-      </View>
-    );
-  }, [width, themeStyles, openWordDetails]); // Dependencies updated
+      );
+    },
+    [width, themeStyles, openWordDetails]
+  ); // Dependencies updated
 
   // Log component mount
   useEffect(() => {
     console.log('[HomeScreen] Component mounted');
-    
+
     // Log the current state from wordCardStore using the NEW structure
     const state = useWordCardStore.getState();
     const wordIds = Object.keys(state.words || {});
     const revealedWordIds = state.getRevealedWords(); // Use the selector
-    
+
     console.log('[HomeScreen] Current wordCardStore state on mount:', {
       totalWordsInStore: wordIds.length,
       revealedCount: revealedWordIds.length,
@@ -237,22 +266,22 @@ export default function HomeScreen() {
       // revealedDetails: revealedWordIds.join(', '),
       // faceDetails: wordIds.map(id => `${id}: ${state.words[id]?.face || 'N/A'}`).join(', ')
     });
-    
+
     return () => {
       console.log('[HomeScreen] Component will unmount');
     };
   }, []); // Empty dependency array means this runs only on mount
-  
+
   // Add focus effect to track tab navigation
   useFocusEffect(
     useCallback(() => {
       console.log('[HomeScreen] Screen focused');
-      
+
       // Check the wordCardStore state when the tab is focused (using NEW structure)
       const state = useWordCardStore.getState();
       const wordIds = Object.keys(state.words || {});
       const revealedWordIds = state.getRevealedWords(); // Use the selector
-      
+
       console.log('[HomeScreen] wordCardStore state on focus:', {
         totalWordsInStore: wordIds.length,
         revealedCount: revealedWordIds.length,
@@ -271,21 +300,32 @@ export default function HomeScreen() {
     const isDark = colorScheme === 'dark';
     const fallbackColors = isDark ? themes.default.dark : themes.default.light;
     const themeColors = theme?.colors || fallbackColors;
-    const themeSpacing = theme?.spacing || { xs: 4, sm: 8, md: 16, lg: 24, xl: 32 };
-    
+    const themeSpacing = theme?.spacing || {
+      xs: 4,
+      sm: 8,
+      md: 16,
+      lg: 24,
+      xl: 32,
+    };
+
     // Basic Skeleton Layout
     return (
-      <View style={[styles.loadingContainer, { backgroundColor: themeColors.background.primary }]}>
+      <View
+        style={[
+          styles.loadingContainer,
+          { backgroundColor: themeColors.background.primary },
+        ]}
+      >
         {/* Skeleton for Pagination Dots */}
-        <Box 
-          padding="xs" 
-          alignItems="flex-end" 
-          width="100%" 
+        <Box
+          padding="xs"
+          alignItems="flex-end"
+          width="100%"
           style={{ opacity: 0.3, paddingVertical: themeSpacing.xs }}
         >
           <Box flexDirection="row" paddingHorizontal="lg" gap="sm">
             {[...Array(5)].map((_, i) => (
-              <View 
+              <View
                 key={i}
                 style={{
                   width: DOT_SIZE,
@@ -300,29 +340,55 @@ export default function HomeScreen() {
         </Box>
 
         {/* Skeleton for Card Area */}
-        <Box 
-          flex={1} 
-          width="90%" 
-          maxWidth={500} 
-          paddingVertical="md" 
-          alignItems="center" 
+        <Box
+          flex={1}
+          width="90%"
+          maxWidth={500}
+          paddingVertical="md"
+          alignItems="center"
           justifyContent="center"
           style={{ opacity: 0.3 }}
         >
-            <View 
-                style={{
-                    flex: 1,
-                    width: '100%',
-                    backgroundColor: themeColors.background.secondary,
-                    borderRadius: radius.xl,
-                    padding: themeSpacing.lg
-                }}
-            >
-              {/* Placeholder content inside card */}
-              <View style={{ height: 20, width: '50%', backgroundColor: themeColors.text.tertiary, borderRadius: radius.sm, marginBottom: themeSpacing.lg, alignSelf: 'center' }} />
-              <View style={{ height: 80, width: '80%', backgroundColor: themeColors.text.tertiary, borderRadius: radius.sm, marginBottom: themeSpacing.md, alignSelf: 'center' }} />
-              <View style={{ height: 40, width: '60%', backgroundColor: themeColors.text.tertiary, borderRadius: radius.pill, alignSelf: 'center' }} />
-            </View>
+          <View
+            style={{
+              flex: 1,
+              width: '100%',
+              backgroundColor: themeColors.background.secondary,
+              borderRadius: radius.xl,
+              padding: themeSpacing.lg,
+            }}
+          >
+            {/* Placeholder content inside card */}
+            <View
+              style={{
+                height: 20,
+                width: '50%',
+                backgroundColor: themeColors.text.tertiary,
+                borderRadius: radius.sm,
+                marginBottom: themeSpacing.lg,
+                alignSelf: 'center',
+              }}
+            />
+            <View
+              style={{
+                height: 80,
+                width: '80%',
+                backgroundColor: themeColors.text.tertiary,
+                borderRadius: radius.sm,
+                marginBottom: themeSpacing.md,
+                alignSelf: 'center',
+              }}
+            />
+            <View
+              style={{
+                height: 40,
+                width: '60%',
+                backgroundColor: themeColors.text.tertiary,
+                borderRadius: radius.pill,
+                alignSelf: 'center',
+              }}
+            />
+          </View>
         </Box>
 
         {/* Optional: Keep spinner as well or replace entirely */}
@@ -330,21 +396,29 @@ export default function HomeScreen() {
       </View>
     );
   }
-  
+
   // Handle potential errors during word fetching
   if (error) {
     return (
-        <View style={[styles.loadingContainer, { backgroundColor: theme?.colors.background.primary }]}>
-            <CustomText color={theme?.colors.text.error || 'red'} style={{ marginBottom: theme?.spacing.md || 16 }}>
-                Error loading words: {error.message}
-            </CustomText>
-            <Button
-              title="Retry"
-              onPress={refetchWords}
-              variant="primary"
-              size="small"
-            />
-        </View>
+      <View
+        style={[
+          styles.loadingContainer,
+          { backgroundColor: theme?.colors.background.primary },
+        ]}
+      >
+        <CustomText
+          color={theme?.colors.text.error || 'red'}
+          style={{ marginBottom: theme?.spacing.md || 16 }}
+        >
+          Error loading words: {error.message}
+        </CustomText>
+        <Button
+          title="Retry"
+          onPress={refetchWords}
+          variant="primary"
+          size="small"
+        />
+      </View>
     );
   }
 
@@ -352,20 +426,22 @@ export default function HomeScreen() {
   return (
     <View style={themeStyles.container}>
       {renderPaginationDots()}
-      
+
       {words && Array.isArray(words) && (
         <FlashList
           ref={flashListRef}
           data={words}
           renderItem={renderItem}
-          keyExtractor={(item) => item?.id || String(Math.random())}
+          keyExtractor={item => item?.id || String(Math.random())}
           horizontal
           pagingEnabled
           showsHorizontalScrollIndicator={false}
           onViewableItemsChanged={onViewableItemsChanged}
           viewabilityConfig={viewabilityConfig}
           estimatedItemSize={width}
-          initialScrollIndex={initialScrollIndex !== undefined ? initialScrollIndex : 0}
+          initialScrollIndex={
+            initialScrollIndex !== undefined ? initialScrollIndex : 0
+          }
           maintainVisibleContentPosition={{ minIndexForVisible: 0 }}
           contentInsetAdjustmentBehavior="automatic"
           // These props might need review based on performance/behavior
@@ -377,7 +453,7 @@ export default function HomeScreen() {
           bounces={true}
         />
       )}
-      
+
       {/* Render bottom sheet using data from useWordDetailsSheet */}
       {selectedWord && (
         <WordDetailsBottomSheet
@@ -397,4 +473,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-}); 
+});

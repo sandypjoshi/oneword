@@ -19,12 +19,15 @@ const userRoundSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height=
 const flameBoldSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 56 56"><path fill="currentColor" d="M8.125 37.398c0 9.516 7.781 16.243 18.75 16.243c12.445 0 21-8.04 21-21.258c0-20.625-18.094-30.024-31.289-30.024c-2.086 0-3.117 1.032-3.117 2.227c0 .96.515 1.758 1.289 2.86c1.875 2.577 5.062 6.327 5.062 11.038c0 .399-.023.797-.07 1.22c-1.312-2.462-3.633-4.196-6.445-4.196c-.797 0-1.219.469-1.219 1.148c0 .82.187 1.407.187 3.961c0 4.899-4.148 8.203-4.148 16.781m19.219 9.657c-4.688 0-7.805-2.836-7.805-7.055c0-4.43 3.14-6 3.563-8.86c.023-.234.187-.304.351-.14c1.172 1.008 1.899 2.273 2.461 3.727c.117.257.305.28.422.07c1.289-2.25 1.523-5.602 1.219-9.82c-.047-.235.117-.352.328-.258c5.555 2.531 8.39 8.039 8.39 12.984c0 4.969-2.93 9.352-8.93 9.352"/></svg>`;
 
 // Extract icon data from the Solar icon set
-const extractIconData = (iconName: string, variant: 'linear' | 'bold'): string | null => {
+const extractIconData = (
+  iconName: string,
+  variant: 'linear' | 'bold'
+): string | null => {
   // Special case for notes-bold
   if (iconName === 'notes' && variant === 'bold') {
     return notesBoldSvg;
   }
-  
+
   // Special case for circleOutline
   if (iconName === 'circleOutline') {
     return circleOutlineSvg;
@@ -34,12 +37,12 @@ const extractIconData = (iconName: string, variant: 'linear' | 'bold'): string |
   if (iconName === 'volumeLoud') {
     return volumeLoudSvg;
   }
-  
+
   // Special case for userRound
   if (iconName === 'userRound') {
     return userRoundSvg;
   }
-  
+
   // Special case for flame (now using flameBoldSvg)
   if (iconName === 'flame') {
     return flameBoldSvg;
@@ -122,7 +125,7 @@ const extractIconData = (iconName: string, variant: 'linear' | 'bold'): string |
   return `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">${iconData}</svg>`;
 };
 
-export type IconName = 
+export type IconName =
   | 'calendar'
   | 'book'
   | 'user'
@@ -141,9 +144,7 @@ export type IconName =
   | 'close'
   | 'flame';
 
-export type IconVariant =
-  | 'linear'
-  | 'bold';
+export type IconVariant = 'linear' | 'bold';
 
 export interface IconProps {
   name: IconName;
@@ -152,25 +153,30 @@ export interface IconProps {
   variant?: IconVariant;
 }
 
-export const Icon: React.FC<IconProps> = ({ name, size = 24, color, variant = 'linear' }) => {
+export const Icon: React.FC<IconProps> = ({
+  name,
+  size = 24,
+  color,
+  variant = 'linear',
+}) => {
   const { colors } = useTheme();
   // Use theme color as default if no color is provided
   const iconColor = color || colors.text.primary;
-  
+
   // Get SVG content from Solar icon set
   const svgContent = extractIconData(name, variant);
-  
+
   if (!svgContent) {
-    console.warn(`Icon "${name}" with variant "${variant}" not found in Solar icon set`);
+    console.warn(
+      `Icon "${name}" with variant "${variant}" not found in Solar icon set`
+    );
     return null;
   }
 
   // Replace 'currentColor' with the provided color
   const formattedSvg = svgContent.replace(/currentColor/g, iconColor);
 
-  return (
-    <SvgXml xml={formattedSvg} width={size} height={size} />
-  );
+  return <SvgXml xml={formattedSvg} width={size} height={size} />;
 };
 
-export default Icon; 
+export default Icon;

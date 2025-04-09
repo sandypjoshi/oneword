@@ -1,11 +1,11 @@
 /**
  * Mesh Gradient Parameters - The "Goldilocks" Settings
- * 
- * This file contains the carefully fine-tuned parameters that control the 
+ *
+ * This file contains the carefully fine-tuned parameters that control the
  * appearance of mesh gradients throughout the app. These parameters control
  * various aspects of gradient generation including smoothness, flow patterns,
  * and color blending.
- * 
+ *
  * These values were derived from the original MeshGradientCard implementation
  * and have been preserved exactly to maintain the same beautiful gradient appearance.
  */
@@ -18,16 +18,16 @@ export type MeshGradientMode = 'light' | 'dark';
 export interface MeshGradientParams {
   // Smoothing factor affects the transition sharpness between colors
   smoothingFactor: number;
-  
+
   // Controls how quickly influence falls off with distance
   falloffPower: number;
-  
+
   // Controls the strength of the noise effect on the gradient
   noiseStrengthFactor: number;
-  
+
   // Multiplier for the influence radius of control points
   influenceMultiplier: number;
-  
+
   // Control point distribution parameters
   controlPoints: {
     // Additional angle offset for flow directions
@@ -68,7 +68,7 @@ export interface MeshGradientParams {
       range: number;
     };
   };
-  
+
   // Parameters for center points
   centerPoint: {
     // Radius range for center control points
@@ -82,7 +82,7 @@ export interface MeshGradientParams {
       range: number;
     };
   };
-  
+
   // Corner handling parameters
   corner: {
     // Extra smoothing for corners
@@ -205,7 +205,9 @@ export const darkModeParams: MeshGradientParams = {
 /**
  * Get the mesh gradient parameters for the current mode
  */
-export const getMeshGradientParams = (mode: MeshGradientMode): MeshGradientParams => {
+export const getMeshGradientParams = (
+  mode: MeshGradientMode
+): MeshGradientParams => {
   return mode === 'light' ? lightModeParams : darkModeParams;
 };
 
@@ -215,4 +217,4 @@ export const getMeshGradientParams = (mode: MeshGradientMode): MeshGradientParam
 export const smoothstep = (edge0: number, edge1: number, x: number): number => {
   const t = Math.max(0, Math.min(1, (x - edge0) / (edge1 - edge0)));
   return t * t * (3 - 2 * t);
-}; 
+};

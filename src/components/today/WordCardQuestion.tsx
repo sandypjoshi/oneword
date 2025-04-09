@@ -19,12 +19,12 @@ interface WordCardQuestionProps {
    * Word data to display
    */
   wordData: WordOfDay;
-  
+
   /**
    * Additional styles for the container
    */
   style?: StyleProp<ViewStyle>;
-  
+
   /**
    * Callback function to get the current word attempts
    */
@@ -34,7 +34,7 @@ interface WordCardQuestionProps {
 /**
  * Card component that displays a word and multiple choice options
  */
-const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({ 
+const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
   wordData,
   style,
   getWordAttempts,
@@ -42,118 +42,130 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
   const { colors } = useTheme();
 
   // Define styles *inside* the component to access theme colors
-  const styles = useMemo(() => StyleSheet.create({
-    container: {
-      flex: 1,
-      position: 'relative',
-      borderRadius: radius.lg,
-      overflow: 'hidden',
-      paddingHorizontal: 20,
-      paddingTop: spacing.xxl,
-      paddingBottom: 24,
-      borderWidth: borderWidth.thin,
-      borderColor: colors.border.light,
-    },
-    wordSection: {
-      marginBottom: spacing.xxl,
-    },
-    questionText: {
-      marginBottom: 16,
-      textAlign: 'center',
-    },
-    optionsContainer: {
-      width: '100%',
-      alignItems: 'stretch',
-    },
-    optionWrapper: {
-      marginBottom: spacing.md,
-      width: '100%',
-    },
-  }), [colors, spacing]); // Re-create styles if colors or spacing change
+  const styles = useMemo(
+    () =>
+      StyleSheet.create({
+        container: {
+          flex: 1,
+          position: 'relative',
+          borderRadius: radius.lg,
+          overflow: 'hidden',
+          paddingHorizontal: 20,
+          paddingTop: spacing.xxl,
+          paddingBottom: 24,
+          borderWidth: borderWidth.thin,
+          borderColor: colors.border.light,
+        },
+        wordSection: {
+          marginBottom: spacing.xxl,
+        },
+        questionText: {
+          marginBottom: 16,
+          textAlign: 'center',
+        },
+        optionsContainer: {
+          width: '100%',
+          alignItems: 'stretch',
+        },
+        optionWrapper: {
+          marginBottom: spacing.md,
+          width: '100%',
+        },
+      }),
+    [colors, spacing]
+  ); // Re-create styles if colors or spacing change
 
   const { id, word, pronunciation, partOfSpeech, options = [] } = wordData;
-  
+
   // State to track which button *should* be shaking (passed as prop)
-  const [shakingOptionValue, setShakingOptionValue] = useState<string | null>(null);
-  
+  const [shakingOptionValue, setShakingOptionValue] = useState<string | null>(
+    null
+  );
+
   // Zustand store hooks
   const selectedOption = useWordCardStore(state => state.getSelectedOption(id));
   const getOptionState = useWordCardStore(state => state.getOptionState);
   const selectOptionAction = useWordCardStore(state => state.selectOption);
-  
+
   // Find the correct option's value for reference
   const correctOptionValue = useMemo(() => {
     const correct = options.find(opt => opt.isCorrect);
     return correct?.value || null;
   }, [options]);
-  
+
   // Check if the currently selected option is the correct one
   const isCorrectAnswerSelected = useMemo(() => {
-    return selectedOption !== undefined && selectedOption === correctOptionValue;
+    return (
+      selectedOption !== undefined && selectedOption === correctOptionValue
+    );
   }, [selectedOption, correctOptionValue]);
-  
+
   // Check if any option text exceeds the threshold
   const shouldUseSmallFont = useMemo(() => {
     return options.some(option => option.value.length > TEXT_LENGTH_THRESHOLD);
   }, [options]);
-  
+
   // Handle option selection
-  const handleOptionPress = useCallback((option: WordOption) => {
-    if (isCorrectAnswerSelected) return;
+  const handleOptionPress = useCallback(
+    (option: WordOption) => {
+      if (isCorrectAnswerSelected) return;
 
-    const isCorrect = option.isCorrect === true;
+      const isCorrect = option.isCorrect === true;
 
-    // Call the store action to select option
-    selectOptionAction(id, option.value, isCorrect);
+      // Call the store action to select option
+      selectOptionAction(id, option.value, isCorrect);
 
-    if (!isCorrect) {
-      console.log(`[WordCardQuestion ${id}] Incorrect option: ${option.value}. Setting shake state.`);
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-      // Set the state to indicate which button should shake
-      setShakingOptionValue(option.value);
-      // OptionButton will trigger animation based on its isShaking prop
-      // Reset the shaking state after the animation duration (approximate)
-      // NOTE: This assumes the parent knows the child animation duration.
-      // A potentially cleaner way is for OptionButton to have an onShakeComplete callback.
-      // But for now, setTimeout is simpler.
-      const approxShakeDuration = 35 * 7 + 100; // Match segment duration * segments + buffer
-      setTimeout(() => {
+      if (!isCorrect) {
+        console.log(
+          `[WordCardQuestion ${id}] Incorrect option: ${option.value}. Setting shake state.`
+        );
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+        // Set the state to indicate which button should shake
+        setShakingOptionValue(option.value);
+        // OptionButton will trigger animation based on its isShaking prop
+        // Reset the shaking state after the animation duration (approximate)
+        // NOTE: This assumes the parent knows the child animation duration.
+        // A potentially cleaner way is for OptionButton to have an onShakeComplete callback.
+        // But for now, setTimeout is simpler.
+        const approxShakeDuration = 35 * 7 + 100; // Match segment duration * segments + buffer
+        setTimeout(() => {
+          setShakingOptionValue(null);
+          console.log(
+            `[WordCardQuestion ${id}] Resetting shake state for: ${option.value}`
+          );
+        }, approxShakeDuration);
+      } else {
+        console.log(`[WordCardQuestion ${id}] Correct option: ${option.value}`);
+        // Correct answer logic (progress tracking) moved out previously
+        // Ensure shake state is clear if somehow set previously
         setShakingOptionValue(null);
-        console.log(`[WordCardQuestion ${id}] Resetting shake state for: ${option.value}`);
-      }, approxShakeDuration);
-
-    } else {
-      console.log(`[WordCardQuestion ${id}] Correct option: ${option.value}`);
-      // Correct answer logic (progress tracking) moved out previously
-      // Ensure shake state is clear if somehow set previously
-      setShakingOptionValue(null);
-    }
-  }, [
-    id,
-    isCorrectAnswerSelected,
-    selectOptionAction,
-  ]);
+      }
+    },
+    [id, isCorrectAnswerSelected, selectOptionAction]
+  );
 
   return (
-    <View style={[
-      styles.container, // Use the container style from StyleSheet
-      { 
-        backgroundColor: colors.background.card,
-        ...applyElevation('sm', colors.text.primary), // Keep dynamic elevation/background
-      },
-      style
-    ]}>
+    <View
+      style={[
+        styles.container, // Use the container style from StyleSheet
+        {
+          backgroundColor: colors.background.card,
+          ...applyElevation('sm', colors.text.primary), // Keep dynamic elevation/background
+        },
+        style,
+      ]}
+    >
       {/* Word, part of speech, pronunciation */}
-      <WordSection 
+      <WordSection
         wordId={id}
         word={word}
         pronunciation={pronunciation}
         partOfSpeech={partOfSpeech}
         style={styles.wordSection}
       />
-      
+
       {/* Question prompt */}
-      <Text 
+      <Text
         variant="label"
         style={styles.questionText}
         color={colors.text.tertiary}
@@ -161,13 +173,13 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
       >
         Guess the correct meaning
       </Text>
-      
+
       {/* Options */}
       <View style={styles.optionsContainer}>
         {options.map((option, index) => {
           const optionState = getOptionState(id, option.value);
           const isCurrentlyShaking = shakingOptionValue === option.value;
-          
+
           return (
             <View key={`${id}-option-${index}`} style={styles.optionWrapper}>
               <OptionButton
@@ -188,4 +200,4 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
 
 const WordCardQuestion = memo(WordCardQuestionComponent);
 
-export default WordCardQuestion; 
+export default WordCardQuestion;

@@ -8,20 +8,17 @@ import { useRouter } from 'expo-router';
 export default function ModalScreen() {
   const { colors } = useTheme();
   const router = useRouter();
-  
+
   return (
-    <View style={[styles.container, { backgroundColor: colors.background.primary }]}>
+    <View
+      style={[styles.container, { backgroundColor: colors.background.primary }]}
+    >
       <Box padding="lg" flex={1} align="center" justify="center">
         <Text variant="headingMedium">Modal</Text>
-        <Text variant="bodyMedium">
-          This is a modal screen.
-        </Text>
-        
+        <Text variant="bodyMedium">This is a modal screen.</Text>
+
         <Box marginTop="xl">
-          <Button 
-            title="Close" 
-            onPress={() => router.back()}
-          />
+          <Button title="Close" onPress={() => router.back()} />
         </Box>
       </Box>
     </View>
@@ -35,4 +32,4 @@ const styles = StyleSheet.create({
   subtitle: {
     marginTop: 8,
   },
-}); 
+});

@@ -1,6 +1,6 @@
 /**
  * useDeviceId.ts
- * 
+ *
  * This hook provides a stable device ID for anonymous tracking and offline data management.
  * It generates a UUID on first use and stores it in AsyncStorage for subsequent retrievals.
  * This ID is used to track user progress and favorites without requiring authentication.
@@ -32,19 +32,19 @@ export function useDeviceId() {
     const getOrCreateDeviceId = async () => {
       try {
         setIsLoading(true);
-        
+
         // Try to get existing device ID
         const storedDeviceId = await AsyncStorage.getItem(DEVICE_ID_KEY);
-        
+
         if (storedDeviceId) {
           setDeviceId(storedDeviceId);
         } else {
           // Generate a new device ID
           const newDeviceId = generateDeviceId();
-          
+
           // Store it for future use
           await AsyncStorage.setItem(DEVICE_ID_KEY, newDeviceId);
-          
+
           setDeviceId(newDeviceId);
         }
       } catch (err) {
@@ -65,13 +65,13 @@ export function useDeviceId() {
   const regenerateDeviceId = async (): Promise<string> => {
     try {
       setIsLoading(true);
-      
+
       // Generate a new device ID
       const newDeviceId = generateDeviceId();
-      
+
       // Store it
       await AsyncStorage.setItem(DEVICE_ID_KEY, newDeviceId);
-      
+
       setDeviceId(newDeviceId);
       return newDeviceId;
     } catch (err) {
@@ -89,4 +89,4 @@ export function useDeviceId() {
     error,
     regenerateDeviceId,
   };
-} 
+}

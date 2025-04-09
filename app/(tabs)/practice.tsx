@@ -17,7 +17,9 @@ export default function PracticeScreen() {
   const { colors } = theme;
 
   return (
-    <View style={[styles.container, { backgroundColor: colors.background.primary }]}>
+    <View
+      style={[styles.container, { backgroundColor: colors.background.primary }]}
+    >
       {/* Empty practice screen */}
     </View>
   );
@@ -32,4 +34,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-}); 
+});

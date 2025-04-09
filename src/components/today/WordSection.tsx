@@ -29,7 +29,9 @@ const WordSectionComponent: React.FC<WordSectionProps> = ({
   const { colors, spacing } = useTheme();
 
   // Hooks and handler for pronunciation using wordCardStore
-  const isWordSpeaking = useWordCardStore(state => state.isWordSpeaking(wordId));
+  const isWordSpeaking = useWordCardStore(state =>
+    state.isWordSpeaking(wordId)
+  );
   const speakWord = useWordCardStore(state => state.speakWord);
 
   const handlePronunciation = useCallback(() => {
@@ -50,9 +52,9 @@ const WordSectionComponent: React.FC<WordSectionProps> = ({
         marginBottom: -4,
       },
       wordText: {
-        textTransform: 'lowercase', 
+        textTransform: 'lowercase',
         marginTop: -2,
-        marginBottom: spacing.sm, 
+        marginBottom: spacing.sm,
       },
       pronunciationChip: {
         marginTop: spacing.xs,
@@ -72,8 +74,8 @@ const WordSectionComponent: React.FC<WordSectionProps> = ({
           [{partOfSpeech}]
         </Text>
       )}
-      
-      <Text 
+
+      <Text
         variant="serifTextLarge"
         color={colors.text.primary}
         align="center"
@@ -84,9 +86,9 @@ const WordSectionComponent: React.FC<WordSectionProps> = ({
       >
         {word}
       </Text>
-      
+
       {pronunciation && (
-        <AnimatedChip 
+        <AnimatedChip
           label={pronunciation}
           iconLeft="volumeLoud"
           size="small"
@@ -103,4 +105,4 @@ const WordSectionComponent: React.FC<WordSectionProps> = ({
 const WordSection = memo(WordSectionComponent);
 WordSection.displayName = 'WordSection';
 
-export default WordSection; 
+export default WordSection;

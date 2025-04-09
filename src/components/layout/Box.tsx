@@ -4,7 +4,14 @@
  */
 
 import React, { useMemo } from 'react';
-import { View, ViewProps, StyleSheet, StyleProp, ViewStyle, FlexStyle } from 'react-native';
+import {
+  View,
+  ViewProps,
+  StyleSheet,
+  StyleProp,
+  ViewStyle,
+  FlexStyle,
+} from 'react-native';
 import { useTheme, ThemeContextType } from '../../theme/ThemeProvider';
 import baseSpacing from '../../theme/spacing'; // Import the actual spacing tokens
 
@@ -19,10 +26,10 @@ type BorderColorKeys = keyof ThemeContextType['colors']['border'];
 
 // Create a type for combined color keys for easier prop definition
 // Allows using dot notation like "background.primary"
-type ThemeColorPath = 
-  | ColorKeys 
+type ThemeColorPath =
+  | ColorKeys
   | `background.${BackgroundColorKeys}`
-  | `text.${TextColorKeys}` 
+  | `text.${TextColorKeys}`
   | `border.${BorderColorKeys}`;
 
 // Define the extended props for the Box component
@@ -58,7 +65,7 @@ interface BoxProps extends ViewProps {
   marginEnd?: SpacingKeys | number;
 
   backgroundColor?: ThemeColorPath; // Use the combined color path type
-  borderColor?: ThemeColorPath;     // Use the combined color path type
+  borderColor?: ThemeColorPath; // Use the combined color path type
   borderWidth?: number;
   borderRadius?: SpacingKeys | number; // Allow theme tokens for border radius
   borderTopLeftRadius?: SpacingKeys | number;
@@ -84,15 +91,22 @@ interface BoxProps extends ViewProps {
 }
 
 // Helper function to safely access nested theme color values
-const getColorValue = (colors: ThemeContextType['colors'], colorPath: ThemeColorPath | undefined): string | undefined => {
+const getColorValue = (
+  colors: ThemeContextType['colors'],
+  colorPath: ThemeColorPath | undefined
+): string | undefined => {
   if (!colorPath) return undefined;
-  
+
   const pathSegments = colorPath.split('.');
   let value: any = colors;
-  
+
   for (const segment of pathSegments) {
     // Check if value is an object and has the segment as a key
-    if (value && typeof value === 'object' && Object.prototype.hasOwnProperty.call(value, segment)) {
+    if (
+      value &&
+      typeof value === 'object' &&
+      Object.prototype.hasOwnProperty.call(value, segment)
+    ) {
       value = value[segment as keyof typeof value];
     } else {
       // Path is invalid or doesn't exist in the theme
@@ -100,13 +114,16 @@ const getColorValue = (colors: ThemeContextType['colors'], colorPath: ThemeColor
       return undefined; // Return undefined if path is invalid
     }
   }
-  
+
   // Ensure the final value is a string before returning
   return typeof value === 'string' ? value : undefined;
 };
 
 // Helper function to get spacing value from theme key or use raw number
-const getSpacingValue = (spacing: ThemeContextType['spacing'], value: SpacingKeys | number | undefined): number | undefined => {
+const getSpacingValue = (
+  spacing: ThemeContextType['spacing'],
+  value: SpacingKeys | number | undefined
+): number | undefined => {
   if (value === undefined) return undefined;
   if (typeof value === 'number') return value;
   // Check if the key exists in the theme spacing object
@@ -208,7 +225,7 @@ const Box: React.FC<BoxProps> = ({
     addStyle('paddingRight', getSpacingValue(spacing, paddingRight));
     addStyle('paddingStart', getSpacingValue(spacing, paddingStart));
     addStyle('paddingEnd', getSpacingValue(spacing, paddingEnd));
-    
+
     // Apply margin props
     addStyle('margin', getSpacingValue(spacing, margin));
     addStyle('marginHorizontal', getSpacingValue(spacing, marginHorizontal));
@@ -227,10 +244,22 @@ const Box: React.FC<BoxProps> = ({
     // Apply border props
     addStyle('borderWidth', borderWidth);
     addStyle('borderRadius', getSpacingValue(spacing, borderRadius)); // Use spacing for radius too
-    addStyle('borderTopLeftRadius', getSpacingValue(spacing, borderTopLeftRadius));
-    addStyle('borderTopRightRadius', getSpacingValue(spacing, borderTopRightRadius));
-    addStyle('borderBottomLeftRadius', getSpacingValue(spacing, borderBottomLeftRadius));
-    addStyle('borderBottomRightRadius', getSpacingValue(spacing, borderBottomRightRadius));
+    addStyle(
+      'borderTopLeftRadius',
+      getSpacingValue(spacing, borderTopLeftRadius)
+    );
+    addStyle(
+      'borderTopRightRadius',
+      getSpacingValue(spacing, borderTopRightRadius)
+    );
+    addStyle(
+      'borderBottomLeftRadius',
+      getSpacingValue(spacing, borderBottomLeftRadius)
+    );
+    addStyle(
+      'borderBottomRightRadius',
+      getSpacingValue(spacing, borderBottomRightRadius)
+    );
 
     // Apply dimension props
     addStyle('width', width);
@@ -239,7 +268,7 @@ const Box: React.FC<BoxProps> = ({
     addStyle('minHeight', minHeight);
     addStyle('maxWidth', maxWidth);
     addStyle('maxHeight', maxHeight);
-    
+
     // Apply position props
     addStyle('position', position);
     addStyle('top', top);
@@ -252,17 +281,58 @@ const Box: React.FC<BoxProps> = ({
     addStyle('opacity', opacity);
 
     return computedStyle;
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     // Include all props that affect the style + theme objects
-    flex, flexDirection, alignItems, justifyContent, flexWrap, flexGrow, flexShrink, flexBasis, gap,
-    padding, paddingHorizontal, paddingVertical, paddingTop, paddingBottom, paddingLeft, paddingRight, paddingStart, paddingEnd,
-    margin, marginHorizontal, marginVertical, marginTop, marginBottom, marginLeft, marginRight, marginStart, marginEnd,
-    backgroundColor, borderColor, borderWidth, borderRadius, borderTopLeftRadius, borderTopRightRadius, borderBottomLeftRadius, borderBottomRightRadius,
-    width, height, minWidth, minHeight, maxWidth, maxHeight,
-    position, top, bottom, left, right,
-    overflow, opacity,
-    colors, spacing // Theme objects dependency
+    flex,
+    flexDirection,
+    alignItems,
+    justifyContent,
+    flexWrap,
+    flexGrow,
+    flexShrink,
+    flexBasis,
+    gap,
+    padding,
+    paddingHorizontal,
+    paddingVertical,
+    paddingTop,
+    paddingBottom,
+    paddingLeft,
+    paddingRight,
+    paddingStart,
+    paddingEnd,
+    margin,
+    marginHorizontal,
+    marginVertical,
+    marginTop,
+    marginBottom,
+    marginLeft,
+    marginRight,
+    marginStart,
+    marginEnd,
+    backgroundColor,
+    borderColor,
+    borderWidth,
+    borderRadius,
+    borderTopLeftRadius,
+    borderTopRightRadius,
+    borderBottomLeftRadius,
+    borderBottomRightRadius,
+    width,
+    height,
+    minWidth,
+    minHeight,
+    maxWidth,
+    maxHeight,
+    position,
+    top,
+    bottom,
+    left,
+    right,
+    overflow,
+    opacity,
+    colors,
+    spacing, // Theme objects dependency
   ]);
 
   return (
@@ -275,4 +345,4 @@ const Box: React.FC<BoxProps> = ({
   );
 };
 
-export default Box; 
+export default Box;

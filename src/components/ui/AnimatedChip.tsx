@@ -1,5 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Animated, StyleSheet, StyleProp, ViewStyle, Easing } from 'react-native';
+import {
+  View,
+  Animated,
+  StyleSheet,
+  StyleProp,
+  ViewStyle,
+  Easing,
+} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Chip, { ChipProps } from './Chip';
 import { useTheme } from '../../theme/ThemeProvider';
@@ -12,12 +19,12 @@ interface AnimatedChipProps extends Omit<ChipProps, 'style' | 'variant'> {
    * Whether the animation is active
    */
   isAnimating: boolean;
-  
+
   /**
    * Duration of the animation in milliseconds
    */
   animationDuration?: number;
-  
+
   /**
    * Additional styles for the container
    */
@@ -52,37 +59,39 @@ const AnimatedChip: React.FC<AnimatedChipProps> = ({
     switch (variant) {
       case 'onGradient':
         const onGradientTextColor = colors.text.primary;
-        const baseColor = isDark ? colors.background.primary : colors.background.card;
+        const baseColor = isDark
+          ? colors.background.primary
+          : colors.background.card;
         // Apply opacity directly to the background color string
         const backgroundWithOpacity = baseColor + '99'; // ~60% opacity
         return {
           // Pass color with opacity to backgroundColor prop
-          background: backgroundWithOpacity, 
+          background: backgroundWithOpacity,
           // Remove opacity from containerStyle, keep blend mode
-          containerStyle: { 
-            mixBlendMode: blending.multiply, 
+          containerStyle: {
+            mixBlendMode: blending.multiply,
           } as ViewStyle,
-          text: onGradientTextColor, 
-          icon: onGradientTextColor 
+          text: onGradientTextColor,
+          icon: onGradientTextColor,
         };
       default:
         return {
           background: backgroundColor || colors.background.tertiary,
           containerStyle: {},
           text: textColor || colors.text.secondary,
-          icon: iconColor || colors.text.secondary
+          icon: iconColor || colors.text.secondary,
         };
     }
   };
 
   const variantColors = getVariantColors();
-  
+
   const [width, setWidth] = useState(0);
   const progressAnim = useRef(new Animated.Value(0)).current;
   const opacityAnim = useRef(new Animated.Value(1)).current;
   const animationInProgress = useRef(false);
   const [showAnimation, setShowAnimation] = useState(false);
-  
+
   // Reset and start animation when isAnimating changes
   useEffect(() => {
     if (isAnimating && !animationInProgress.current) {
@@ -91,7 +100,7 @@ const AnimatedChip: React.FC<AnimatedChipProps> = ({
       animationInProgress.current = true;
       progressAnim.setValue(0);
       opacityAnim.setValue(1); // Reset opacity to full
-      
+
       // First animate the progress bar
       Animated.timing(progressAnim, {
         toValue: 1,
@@ -120,39 +129,38 @@ const AnimatedChip: React.FC<AnimatedChipProps> = ({
       setShowAnimation(false);
     }
   }, [isAnimating, animationDuration, progressAnim, opacityAnim]);
-  
+
   // Calculate the progress width
   const progressWidth = progressAnim.interpolate({
     inputRange: [0, 1],
     outputRange: [0, width],
   });
-  
+
   return (
-    <View 
-      style={[styles.outerContainer]}
-      onLayout={(e) => setWidth(e.nativeEvent.layout.width)}
+    <View
+      style={styles.outerContainer}
+      onLayout={e => setWidth(e.nativeEvent.layout.width)}
     >
       <View style={[styles.container, style]}>
-        <Chip 
+        <Chip
           backgroundColor={variantColors.background}
           textColor={variantColors.text}
           iconColor={variantColors.icon}
           style={variantColors.containerStyle}
-          {...chipProps} 
+          {...chipProps}
         />
-        
+
         {showAnimation && (
-          <Animated.View style={[styles.clipContainer, { opacity: opacityAnim }]}>
-            <Animated.View 
-              style={[
-                styles.progressContainer,
-                { width: progressWidth }
-              ]}
+          <Animated.View
+            style={[styles.clipContainer, { opacity: opacityAnim }]}
+          >
+            <Animated.View
+              style={[styles.progressContainer, { width: progressWidth }]}
             >
               <LinearGradient
                 colors={[
                   colors.primary + opacity.lightest,
-                  colors.primary + opacity.high
+                  colors.primary + opacity.high,
                 ]}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 0 }}
@@ -195,7 +203,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     height: '100%',
-  }
+  },
 });
 
-export default AnimatedChip; 
+export default AnimatedChip;

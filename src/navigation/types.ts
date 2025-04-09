@@ -16,4 +16,4 @@ export type RootStackParamList = {
   'auth/signup': undefined;
 };
 
-export type AppParamList = TabParamList & RootStackParamList; 
+export type AppParamList = TabParamList & RootStackParamList;

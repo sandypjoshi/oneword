@@ -1,10 +1,10 @@
 import React from 'react';
-import { 
-  TouchableOpacity, 
-  StyleSheet, 
+import {
+  TouchableOpacity,
+  StyleSheet,
   ViewStyle,
-  ActivityIndicator, 
-  View, 
+  ActivityIndicator,
+  View,
   AccessibilityState,
 } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
@@ -25,26 +25,26 @@ interface ButtonProps {
   title?: string;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
-  
+
   // Appearance
   variant?: ButtonVariant;
   size?: ButtonSize;
   fullWidth?: boolean;
-  
+
   // State
   disabled?: boolean;
   loading?: boolean;
-  
+
   // Event handlers
   onPress?: () => void;
   onPressIn?: () => void;
   onPressOut?: () => void;
   onLongPress?: () => void;
-  
+
   // Additional styles
   style?: ViewStyle;
   contentStyle?: ViewStyle;
-  
+
   // Accessibility
   accessibilityLabel?: string;
   accessibilityHint?: string;
@@ -53,7 +53,7 @@ interface ButtonProps {
 
 /**
  * Button component
- * 
+ *
  * A versatile button component that supports various visual styles,
  * states, and accessibility features.
  */
@@ -62,26 +62,26 @@ export default function Button({
   title,
   leftIcon,
   rightIcon,
-  
+
   // Appearance
   variant = 'primary',
   size = 'medium',
   fullWidth = false,
-  
+
   // State
   disabled = false,
   loading = false,
-  
+
   // Event handlers
   onPress,
   onPressIn,
   onPressOut,
   onLongPress,
-  
+
   // Additional styles
   style,
   contentStyle,
-  
+
   // Accessibility
   accessibilityLabel,
   accessibilityHint,
@@ -89,19 +89,19 @@ export default function Button({
 }: ButtonProps) {
   // Access theme context
   const { colors } = useTheme();
-  
+
   // Get component tokens
   const buttonTokens = components.button;
-  
+
   // Get text variant based on button size
   const textVariant = size === 'small' ? 'buttonSmall' : 'button';
-  
+
   // Generate accessibility state
   const accessibilityState: AccessibilityState = {
     disabled: disabled || loading,
     busy: loading,
   };
-  
+
   // Generate styles based on props
   const getContainerStyle = (): ViewStyle => {
     // Base styles for all variants
@@ -115,12 +115,12 @@ export default function Button({
       paddingVertical: 0, // Remove vertical padding to use fixed height
       ...applyElevation('sm', colors.text.primary),
     };
-    
+
     // Width styles
     if (fullWidth) {
       baseStyle.width = '100%';
     }
-    
+
     // Variant-specific styles
     switch (variant) {
       case 'primary':
@@ -129,14 +129,14 @@ export default function Button({
           backgroundColor: colors.primary,
           borderColor: colors.primary,
         };
-        
+
       case 'secondary':
         return {
           ...baseStyle,
           backgroundColor: colors.primaryLight,
           borderColor: colors.primaryLight,
         };
-        
+
       case 'outline':
         return {
           ...baseStyle,
@@ -145,19 +145,19 @@ export default function Button({
           borderColor: colors.border.focus,
           ...applyElevation('none'),
         };
-        
+
       case 'ghost':
         return {
           ...baseStyle,
           backgroundColor: 'transparent',
           ...applyElevation('none'),
         };
-        
+
       default:
         return baseStyle;
     }
   };
-  
+
   // Get text color based on variant
   const getTextColor = (): string => {
     switch (variant) {
@@ -171,25 +171,29 @@ export default function Button({
         return colors.text.inverse;
     }
   };
-  
+
   // Render loading indicator
   const renderLoadingIndicator = () => (
-    <ActivityIndicator 
-      size="small" 
-      color={['outline', 'ghost'].includes(variant) ? colors.primary : colors.text.inverse} 
+    <ActivityIndicator
+      size="small"
+      color={
+        ['outline', 'ghost'].includes(variant)
+          ? colors.primary
+          : colors.text.inverse
+      }
     />
   );
-  
+
   // Render button content
   const renderContent = () => {
     if (loading) {
       return renderLoadingIndicator();
     }
-    
+
     return (
       <View style={[styles.contentContainer, contentStyle]}>
         {leftIcon && <View style={styles.iconLeft}>{leftIcon}</View>}
-        
+
         {title && (
           <Text
             variant={textVariant}
@@ -203,17 +207,17 @@ export default function Button({
             {title}
           </Text>
         )}
-        
+
         {rightIcon && <View style={styles.iconRight}>{rightIcon}</View>}
       </View>
     );
   };
-  
+
   return (
     <TouchableOpacity
       style={[
         getContainerStyle(),
-        (disabled && !loading) && styles.disabled,
+        disabled && !loading && styles.disabled,
         style,
       ]}
       disabled={disabled || loading}
@@ -248,4 +252,4 @@ const styles = StyleSheet.create({
   iconRight: {
     marginLeft: spacing.xs,
   },
-}); 
+});

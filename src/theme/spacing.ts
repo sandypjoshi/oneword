@@ -4,14 +4,14 @@
 
 const spacing = {
   // Base scale
-  xxs: 2,     // Tiny spacing
+  xxs: 2, // Tiny spacing
   xs: 4,
   sm: 8,
   md: 16,
   lg: 24,
   xl: 32,
   xxl: 48,
-  
+
   // Specific uses
   screenPadding: 16,
   cardPadding: 16,
@@ -20,4 +20,4 @@ const spacing = {
   sectionSpacing: 32,
 };
 
-export default spacing; 
+export default spacing;

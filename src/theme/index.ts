@@ -28,4 +28,4 @@ export { colors, spacing, typography };
 export { palettes, opacity };
 
 // Note: ThemeProvider and useTheme are exported directly from ThemeProvider.tsx
-// to avoid circular dependencies 
+// to avoid circular dependencies

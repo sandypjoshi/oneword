@@ -1,5 +1,10 @@
 import React from 'react';
-import { StyleSheet, View, ActivityIndicator, useColorScheme } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  ActivityIndicator,
+  useColorScheme,
+} from 'react-native';
 import { Tabs, useLocalSearchParams } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useThemeReady } from '../../src/hooks';
@@ -14,13 +19,13 @@ export default function TabLayout() {
   const { animation } = useLocalSearchParams();
   const colorScheme = useColorScheme();
   const isDark = colorScheme === 'dark';
-  
+
   if (!isReady) {
     return null;
   }
-  
+
   const { colors } = theme;
-  
+
   return (
     <BottomSheetModalProvider>
       <StatusBar style={isDark ? 'light' : 'dark'} />
@@ -39,16 +44,16 @@ export default function TabLayout() {
               ...applyElevation('none'),
             },
             headerTintColor: colors.text.primary,
-            
+
             // Remove fade animation that causes flashing
             animation: 'none',
-            
+
             // Prevent keyboard issues
             tabBarHideOnKeyboard: true,
-            
+
             // Properly maintain state between tabs
             freezeOnBlur: true,
-            
+
             // Prevent tab flicker
             lazy: false,
           }}
@@ -59,11 +64,11 @@ export default function TabLayout() {
               title: 'Today',
               tabBarLabel: 'Today',
               tabBarIcon: ({ color, focused }) => (
-                <Icon 
-                  name="notes" 
-                  color={color} 
-                  size={24} 
-                  variant={focused ? 'bold' : 'linear'} 
+                <Icon
+                  name="notes"
+                  color={color}
+                  size={24}
+                  variant={focused ? 'bold' : 'linear'}
                 />
               ),
               headerRight: () => <StreakIndicator />,
@@ -75,11 +80,11 @@ export default function TabLayout() {
               title: 'Practice',
               tabBarLabel: 'Practice',
               tabBarIcon: ({ color, focused }) => (
-                <Icon 
-                  name="academicCap" 
-                  color={color} 
-                  size={24} 
-                  variant={focused ? 'bold' : 'linear'} 
+                <Icon
+                  name="academicCap"
+                  color={color}
+                  size={24}
+                  variant={focused ? 'bold' : 'linear'}
                 />
               ),
             }}
@@ -90,11 +95,11 @@ export default function TabLayout() {
               title: 'Profile',
               tabBarLabel: 'Profile',
               tabBarIcon: ({ color, focused }) => (
-                <Icon 
-                  name="user" 
-                  color={color} 
-                  size={24} 
-                  variant={focused ? 'bold' : 'linear'} 
+                <Icon
+                  name="user"
+                  color={color}
+                  size={24}
+                  variant={focused ? 'bold' : 'linear'}
                 />
               ),
             }}
@@ -109,4 +114,4 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-}); 
+});

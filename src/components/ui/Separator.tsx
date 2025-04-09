@@ -1,5 +1,11 @@
 import React, { useMemo } from 'react';
-import { View, StyleSheet, StyleProp, ViewStyle, DimensionValue } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  StyleProp,
+  ViewStyle,
+  DimensionValue,
+} from 'react-native';
 import { useTheme } from '../../theme';
 import spacing from '../../theme/spacing';
 
@@ -54,9 +60,10 @@ const Separator: React.FC<SeparatorProps> = ({
       baseStyle.width = length;
       if (marginVertical !== undefined) {
         // Type-safe access to spacing keys
-        baseStyle.marginVertical = typeof marginVertical === 'string' 
-          ? spacing[marginVertical]
-          : marginVertical;
+        baseStyle.marginVertical =
+          typeof marginVertical === 'string'
+            ? spacing[marginVertical]
+            : marginVertical;
       }
     } else {
       // Vertical
@@ -64,9 +71,10 @@ const Separator: React.FC<SeparatorProps> = ({
       baseStyle.height = length;
       if (marginHorizontal !== undefined) {
         // Type-safe access to spacing keys
-        baseStyle.marginHorizontal = typeof marginHorizontal === 'string'
-          ? spacing[marginHorizontal]
-          : marginHorizontal;
+        baseStyle.marginHorizontal =
+          typeof marginHorizontal === 'string'
+            ? spacing[marginHorizontal]
+            : marginHorizontal;
       }
     }
 
@@ -74,13 +82,19 @@ const Separator: React.FC<SeparatorProps> = ({
     if (length !== '100%') {
       baseStyle.alignSelf = 'center';
     }
-    
-    return baseStyle;
-  }, [orientation, thickness, length, color, marginVertical, marginHorizontal, colors.border.light]); // Removed spacing from deps as it's constant
 
-  return (
-    <View style={[separatorStyle, style]} />
-  );
+    return baseStyle;
+  }, [
+    orientation,
+    thickness,
+    length,
+    color,
+    marginVertical,
+    marginHorizontal,
+    colors.border.light,
+  ]); // Removed spacing from deps as it's constant
+
+  return <View style={[separatorStyle, style]} />;
 };
 
-export default Separator; 
+export default Separator;

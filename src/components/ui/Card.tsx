@@ -9,15 +9,15 @@ export interface CardProps extends ViewProps {
   elevation?: ElevationLevel;
 }
 
-export const Card: React.FC<CardProps> = ({ 
-  children, 
-  variant = 'elevated', 
-  style, 
+export const Card: React.FC<CardProps> = ({
+  children,
+  variant = 'elevated',
+  style,
   elevation = 'md',
-  ...props 
+  ...props
 }) => {
   const { colors } = useTheme();
-  
+
   const cardStyles = {
     elevated: {
       backgroundColor: colors.background.card,
@@ -32,16 +32,9 @@ export const Card: React.FC<CardProps> = ({
       backgroundColor: colors.background.secondary,
     },
   };
-  
+
   return (
-    <View 
-      style={[
-        styles.card,
-        cardStyles[variant],
-        style
-      ]}
-      {...props}
-    >
+    <View style={[styles.card, cardStyles[variant], style]} {...props}>
       {children}
     </View>
   );
@@ -55,4 +48,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Card; 
+export default Card;

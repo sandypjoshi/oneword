@@ -29,7 +29,7 @@ interface UserState {
   lastActive: Date | null;
   favorites: string[]; // Array of word IDs
   settings: UserSettings;
-  
+
   // Actions
   setDeviceId: (id: string) => void;
   setDifficulty: (difficulty: WordDifficulty) => void;
@@ -60,44 +60,44 @@ export const useUserStore = create<UserState>()(
         wordDifficulty: 'intermediate',
         notifications: true,
       },
-      
+
       // Set the device ID
       setDeviceId: (id: string) => set({ deviceId: id }),
-      
+
       // Update user's chosen difficulty level
       setDifficulty: (difficulty: WordDifficulty) => set({ difficulty }),
-      
+
       // Increment the streak counter
-      incrementStreak: () => set((state) => ({ streak: state.streak + 1 })),
-      
+      incrementStreak: () => set(state => ({ streak: state.streak + 1 })),
+
       // Reset the streak counter
       resetStreak: () => set({ streak: 0 }),
-      
+
       // Increment the total words learned counter
-      incrementWordsLearned: () => 
-        set((state) => ({ totalWordsLearned: state.totalWordsLearned + 1 })),
-      
+      incrementWordsLearned: () =>
+        set(state => ({ totalWordsLearned: state.totalWordsLearned + 1 })),
+
       // Update the last active date and potentially increment days active
       updateLastActive: () => {
         set({ lastActive: new Date() });
       },
-      
+
       // Toggle a word in the favorites list
       toggleFavorite: (wordId: string) => {
-        set((state) => {
+        set(state => {
           const isFavorited = state.favorites.includes(wordId);
-          
+
           return {
             favorites: isFavorited
-              ? state.favorites.filter((id) => id !== wordId)
+              ? state.favorites.filter(id => id !== wordId)
               : [...state.favorites, wordId],
           };
         });
       },
-      
+
       // Update user settings
       updateSettings: (newSettings: Partial<UserSettings>) => {
-        set((state) => ({
+        set(state => ({
           settings: {
             ...state.settings,
             ...newSettings,
@@ -108,7 +108,7 @@ export const useUserStore = create<UserState>()(
     {
       name: 'oneword-user-storage',
       storage: createJSONStorage(() => AsyncStorage),
-      partialize: (state) => ({
+      partialize: state => ({
         deviceId: state.deviceId,
         settings: state.settings,
       }),
@@ -116,4 +116,4 @@ export const useUserStore = create<UserState>()(
   )
 );
 
-export default useUserStore; 
+export default useUserStore;

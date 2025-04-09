@@ -1,5 +1,12 @@
 import React, { ReactNode } from 'react';
-import { TouchableOpacity, StyleSheet, View, StyleProp, ViewStyle, TextStyle } from 'react-native';
+import {
+  TouchableOpacity,
+  StyleSheet,
+  View,
+  StyleProp,
+  ViewStyle,
+  TextStyle,
+} from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
 import { radius } from '../../theme/styleUtils';
 import { IconName } from './Icon';
@@ -17,84 +24,84 @@ export interface ChipProps {
    * Text content of the chip
    */
   label: string;
-  
+
   /**
    * Optional icon to display before the text
    */
   iconLeft?: IconName;
-  
+
   /**
    * Optional icon to display after the text
    */
   iconRight?: IconName;
-  
+
   /**
    * Size of the chip
    */
   size?: ChipSize;
-  
+
   /**
    * Visual variant of the chip
    */
   variant?: ChipVariant;
-  
+
   /**
    * Function called when the chip is pressed
    */
   onPress?: () => void;
-  
+
   /**
    * Whether the chip is disabled
    */
   disabled?: boolean;
-  
+
   /**
    * Additional styles for the container
    */
   style?: StyleProp<ViewStyle>;
-  
+
   /**
    * Additional styles for the text
    */
   textStyle?: StyleProp<TextStyle>;
-  
+
   /**
    * Custom background color for the chip
    */
   backgroundColor?: string;
-  
+
   /**
    * Custom text color for the chip
    */
   textColor?: string;
-  
+
   /**
    * Custom border color for the chip
    */
   borderColor?: string;
-  
+
   /**
    * Size of the icons
    */
   iconSize?: number;
-  
+
   /**
    * Custom icon color
    */
   iconColor?: string;
-  
+
   /**
    * Optional spacing between internal elements (icon and label).
    * Accepts a theme spacing key or null to remove spacing.
    * Defaults to 'sm'.
    */
   internalSpacing?: SpacingKey | null;
-  
+
   /**
    * Active opacity when pressed
    */
   activeOpacity?: number;
-  
+
   /**
    * Test ID for testing
    */
@@ -124,7 +131,7 @@ const Chip: React.FC<ChipProps> = ({
   testID,
 }) => {
   const { colors, spacing } = useTheme();
-  
+
   // Determine sizes based on the size prop
   const getSizeStyles = () => {
     switch (size) {
@@ -152,7 +159,7 @@ const Chip: React.FC<ChipProps> = ({
         };
     }
   };
-  
+
   // Get styles based on variant
   const getVariantStyles = () => {
     switch (variant) {
@@ -180,62 +187,61 @@ const Chip: React.FC<ChipProps> = ({
         };
     }
   };
-  
+
   const sizeStyles = getSizeStyles();
   const variantStyles = getVariantStyles();
   const finalIconSize = iconSize || sizeStyles.iconSize;
   const finalIconColor = iconColor || variantStyles.textColor;
-  
+
   // Determine the margin value based on the internalSpacing prop
-  const internalMargin = internalSpacing !== null ? spacing[internalSpacing] : 0;
-  
+  const internalMargin =
+    internalSpacing !== null ? spacing[internalSpacing] : 0;
+
   // Determine if the chip is interactive
   const isInteractive = typeof onPress === 'function' && !disabled;
-  
+
   // Create the chip content
   const renderContent = () => (
     <>
       {iconLeft && (
         <View style={{ marginRight: internalMargin }}>
-          <Icon 
-            name={iconLeft} 
-            size={finalIconSize} 
-            color={finalIconColor}
-          />
+          <Icon name={iconLeft} size={finalIconSize} color={finalIconColor} />
         </View>
       )}
-      
+
       <Text
-        variant={size === 'small' ? 'caption' : size === 'large' ? 'bodyLarge' : 'bodyMedium'}
+        variant={
+          size === 'small'
+            ? 'caption'
+            : size === 'large'
+              ? 'bodyLarge'
+              : 'bodyMedium'
+        }
         color={variantStyles.textColor}
         style={textStyle}
         numberOfLines={1}
       >
         {label}
       </Text>
-      
+
       {iconRight && (
         <View style={{ marginLeft: internalMargin }}>
-          <Icon 
-            name={iconRight} 
-            size={finalIconSize} 
-            color={finalIconColor}
-          />
+          <Icon name={iconRight} size={finalIconSize} color={finalIconColor} />
         </View>
       )}
     </>
   );
-  
+
   // Use TouchableOpacity if the chip is interactive, View otherwise
   const ChipContainer = isInteractive ? TouchableOpacity : View;
-  const interactiveProps = isInteractive 
-    ? { 
-        onPress, 
+  const interactiveProps = isInteractive
+    ? {
+        onPress,
         activeOpacity,
         disabled,
-      } 
+      }
     : {};
-  
+
   return (
     <ChipContainer
       testID={testID}
@@ -267,4 +273,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Chip; 
+export default Chip;

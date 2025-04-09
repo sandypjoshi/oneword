@@ -51,7 +51,12 @@ const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({
   ];
 
   return (
-    <ScrollView style={[styles.container, { backgroundColor: colors.background.secondary }]}>
+    <ScrollView
+      style={[
+        styles.container,
+        { backgroundColor: colors.background.secondary },
+      ]}
+    >
       <View style={[styles.section, { marginBottom: spacing.lg }]}>
         <Text
           variant="headingMedium"
@@ -60,7 +65,7 @@ const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({
         >
           Theme Style
         </Text>
-        
+
         <ButtonGroup
           options={themeOptions}
           selectedValue={selectedTheme}
@@ -76,7 +81,7 @@ const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({
         >
           Appearance
         </Text>
-        
+
         <ButtonGroup
           options={modeOptions}
           selectedValue={selectedMode}
@@ -99,4 +104,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ThemeSwitcher; 
+export default ThemeSwitcher;

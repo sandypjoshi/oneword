@@ -1,29 +1,31 @@
 /**
  * [ARCHIVED] MeshGradientCard Component
- * 
- * This component has been archived in favor of the optimized MeshGradient component 
+ *
+ * This component has been archived in favor of the optimized MeshGradient component
  * located at src/components/common/MeshGradient.tsx.
- * 
+ *
  * The MeshGradient component offers:
  * - Same visual quality and appearance
  * - Better performance optimizations
  * - Configurable resolution and seeds
  * - Full integration with the design system's gradient primitives
- * 
+ *
  * This file is kept for reference purposes only.
- * 
+ *
  * Archive date: 2023-11-20
  */
 
 import React, { useCallback, useMemo, useRef, useState } from 'react';
-import { View, StyleSheet, Text, Dimensions, useColorScheme, Pressable } from 'react-native';
-import { useTheme } from '../../theme/ThemeProvider';
 import {
-  Canvas,
-  Vertices,
-  vec,
-  Group,
-} from '@shopify/react-native-skia';
+  View,
+  StyleSheet,
+  Text,
+  Dimensions,
+  useColorScheme,
+  Pressable,
+} from 'react-native';
+import { useTheme } from '../../theme/ThemeProvider';
+import { Canvas, Vertices, vec, Group } from '@shopify/react-native-skia';
 
 const { width, height } = Dimensions.get('window');
 const CARD_WIDTH = width - 40;
@@ -116,7 +118,7 @@ const GRADIENTS = {
     ['#14151F', '#1F2133', '#272B42', '#383D5E'],
     // Moonlit Forest - Enhanced contrast between foliage and sky
     ['#0F1A17', '#172A25', '#203B32', '#122536'],
-  ]
+  ],
 };
 
 // Helper function for smooth interpolation
@@ -142,10 +144,10 @@ const MEMOIZED_INDICES = (() => {
 const createMeshPoints = (isDarkMode = false): MeshData => {
   const points: Point[] = [];
   const colors: string[] = [];
-  
+
   const cellWidth = CARD_WIDTH / (COLS - 1);
   const cellHeight = CARD_HEIGHT / (ROWS - 1);
-  
+
   const colorSet = isDarkMode ? GRADIENTS.dark : GRADIENTS.light;
   const gradient = colorSet[Math.floor(Math.random() * colorSet.length)];
 
@@ -153,101 +155,113 @@ const createMeshPoints = (isDarkMode = false): MeshData => {
   const smoothingFactor = isDarkMode ? 0.028 : 0.025; // Less difference
   const falloffPower = isDarkMode ? 2.5 : 2.8; // Less difference
   const noiseStrengthFactor = 0.35; // Same for both modes
-  
+
   // More balanced influence areas
-  const influenceMultiplier = isDarkMode ? 1.2 : 1.1; 
-  
+  const influenceMultiplier = isDarkMode ? 1.2 : 1.1;
+
   // Create flow directions once
   const baseAngle = Math.random() * Math.PI * 2;
   const angleOffset = Math.PI * (0.25 + Math.random() * 0.3);
-  
-  const flow1 = { 
-    x: Math.cos(baseAngle), 
-    y: Math.sin(baseAngle) 
+
+  const flow1 = {
+    x: Math.cos(baseAngle),
+    y: Math.sin(baseAngle),
   };
-  
-  const flow2 = { 
-    x: Math.cos(baseAngle + angleOffset), 
-    y: Math.sin(baseAngle + angleOffset) 
+
+  const flow2 = {
+    x: Math.cos(baseAngle + angleOffset),
+    y: Math.sin(baseAngle + angleOffset),
   };
-  
-  const flow3 = { 
-    x: Math.cos(baseAngle - angleOffset * 0.7), 
-    y: Math.sin(baseAngle - angleOffset * 0.7) 
+
+  const flow3 = {
+    x: Math.cos(baseAngle - angleOffset * 0.7),
+    y: Math.sin(baseAngle - angleOffset * 0.7),
   };
 
   // Center offset calculations
   const centerOffsetX = -0.05 + Math.random() * 0.1;
   const centerOffsetY = -0.05 + Math.random() * 0.1;
-  
+
   // Prepare control points
   const controlPoints: ControlPoint[] = [];
-  
+
   // Control point adding function
-  const addControlPoint = (radius: number, angle: number, color: string, influence: number): void => {
+  const addControlPoint = (
+    radius: number,
+    angle: number,
+    color: string,
+    influence: number
+  ): void => {
     const x = 0.5 + centerOffsetX + Math.cos(angle) * radius;
     const y = 0.5 + centerOffsetY + Math.sin(angle) * radius;
     controlPoints.push({
       x: Math.max(0.1, Math.min(0.9, x)),
       y: Math.max(0.1, Math.min(0.9, y)),
       color,
-      influence: influence * influenceMultiplier
+      influence: influence * influenceMultiplier,
     });
   };
-  
+
   // Add points with natural distribution
   const numPoints = 5 + Math.floor(Math.random() * 2);
   const baseRadius = 0.25 + Math.random() * 0.15;
-  
+
   for (let i = 0; i < numPoints; i++) {
     const angle = (i / numPoints) * Math.PI * 2 + Math.random() * 0.3;
     const radiusVar = baseRadius * (0.8 + Math.random() * 0.4);
     const colorIndex = i % gradient.length;
     const influence = 0.35 + Math.random() * 0.25;
-    
+
     addControlPoint(radiusVar, angle, gradient[colorIndex], influence);
   }
-  
+
   // Add central points for smooth blending
   const centerRadiusRange = isDarkMode ? [0.15, 0.25] : [0.1, 0.2];
-  const centerRadius = centerRadiusRange[0] + Math.random() * (centerRadiusRange[1] - centerRadiusRange[0]);
+  const centerRadius =
+    centerRadiusRange[0] +
+    Math.random() * (centerRadiusRange[1] - centerRadiusRange[0]);
   const centerAngle = Math.random() * Math.PI * 2;
   const colorIndex = Math.floor(Math.random() * gradient.length);
-  addControlPoint(centerRadius, centerAngle, gradient[colorIndex], 0.4 + Math.random() * 0.2);
+  addControlPoint(
+    centerRadius,
+    centerAngle,
+    gradient[colorIndex],
+    0.4 + Math.random() * 0.2
+  );
 
   // Add corner control points
   const cornerInfluence = 0.3;
   const cornerOffset = 0.05;
-  
+
   const corners = [
     { x: cornerOffset, y: cornerOffset },
     { x: 1 - cornerOffset, y: cornerOffset },
     { x: cornerOffset, y: 1 - cornerOffset },
     { x: 1 - cornerOffset, y: 1 - cornerOffset },
   ];
-  
+
   corners.forEach(corner => {
     // Find nearest existing control point
     let nearestPoint = controlPoints[0];
     let minDistance = 999;
-    
+
     controlPoints.forEach(point => {
       const dx = corner.x - point.x;
       const dy = corner.y - point.y;
       const distance = Math.sqrt(dx * dx + dy * dy);
-      
+
       if (distance < minDistance) {
         minDistance = distance;
         nearestPoint = point;
       }
     });
-    
+
     // Add corner point
     controlPoints.push({
       x: corner.x,
       y: corner.y,
       color: nearestPoint.color,
-      influence: cornerInfluence
+      influence: cornerInfluence,
     });
   });
 
@@ -258,16 +272,16 @@ const createMeshPoints = (isDarkMode = false): MeshData => {
     for (let x = 0; x < COLS; x++) {
       const nx = x / (COLS - 1);
       const ny = y / (ROWS - 1);
-      
-      const angle = 
-        Math.sin(nx * 2.7 + ny * 3.2) * Math.PI + 
+
+      const angle =
+        Math.sin(nx * 2.7 + ny * 3.2) * Math.PI +
         Math.cos(nx * 1.8 - ny * 2.4) * Math.PI * 0.6 +
         Math.sin((nx + ny) * 2.1) * Math.PI * 0.4;
-      
-      const strength = 
-        (Math.sin(nx * 2.3 + ny * 2.7) * 0.4 + 0.6) * 
+
+      const strength =
+        (Math.sin(nx * 2.3 + ny * 2.7) * 0.4 + 0.6) *
         (Math.cos(nx * 2.1 - ny * 1.8) * 0.2 + 0.8);
-      
+
       noiseField[y][x] = { angle, strength };
     }
   }
@@ -282,86 +296,106 @@ const createMeshPoints = (isDarkMode = false): MeshData => {
       const index = y * COLS + x;
       const nx = x / (COLS - 1);
       const ny = y / (ROWS - 1);
-      
+
       // Create vertex position
-      points[index] = { 
+      points[index] = {
         x: x * cellWidth,
-        y: y * cellHeight
+        y: y * cellHeight,
       };
 
       // Calculate flow values
-      const flowValue1 = (nx * flow1.x + ny * flow1.y) * 0.5 + 0.5; 
+      const flowValue1 = (nx * flow1.x + ny * flow1.y) * 0.5 + 0.5;
       const flowValue2 = (nx * flow2.x + ny * flow2.y) * 0.5 + 0.5;
       const flowValue3 = (nx * flow3.x + ny * flow3.y) * 0.5 + 0.5;
-      
+
       // Get noise
       const noise = noiseField[y][x];
-      
+
       // Setup for color blending
       const blendedColor = { r: 0, g: 0, b: 0 };
-      
+
       // Check if near corner for extra smoothing
       const isCorner = (nx <= 0.1 || nx >= 0.9) && (ny <= 0.1 || ny >= 0.9);
-      const localSmoothingFactor = isCorner ? smoothingFactor * 1.5 : smoothingFactor;
+      const localSmoothingFactor = isCorner
+        ? smoothingFactor * 1.5
+        : smoothingFactor;
       const localFalloffPower = isCorner ? falloffPower * 0.9 : falloffPower;
-      
+
       // Calculate weights
       const weights: number[] = [];
       let totalWeight = 0;
-      
+
       for (let i = 0; i < controlPoints.length; i++) {
         const point = controlPoints[i];
         const dx = nx - point.x;
         const dy = ny - point.y;
-        
+
         const distance = Math.sqrt(dx * dx + dy * dy + localSmoothingFactor);
-        
+
         // Calculate flow influences
-        const flowMix1 = Math.sin(flowValue1 * Math.PI * 1.5 + noise.angle * 0.4) * 0.5 + 0.5;
-        const flowMix2 = Math.sin(flowValue2 * Math.PI * 1.5 - noise.angle * 0.5) * 0.5 + 0.5;
-        const flowMix3 = Math.sin(flowValue3 * Math.PI * 1.5 + noise.angle * 0.3) * 0.5 + 0.5;
-        
-        const flowFactor = (
-          flowMix1 * 0.35 + 
-          flowMix2 * 0.35 + 
-          flowMix3 * 0.3
-        ) * noise.strength * noiseStrengthFactor + 0.85;
-        
+        const flowMix1 =
+          Math.sin(flowValue1 * Math.PI * 1.5 + noise.angle * 0.4) * 0.5 + 0.5;
+        const flowMix2 =
+          Math.sin(flowValue2 * Math.PI * 1.5 - noise.angle * 0.5) * 0.5 + 0.5;
+        const flowMix3 =
+          Math.sin(flowValue3 * Math.PI * 1.5 + noise.angle * 0.3) * 0.5 + 0.5;
+
+        const flowFactor =
+          (flowMix1 * 0.35 + flowMix2 * 0.35 + flowMix3 * 0.3) *
+            noise.strength *
+            noiseStrengthFactor +
+          0.85;
+
         const weight = Math.pow(
-          Math.max(0, 1 - distance / (point.influence * flowFactor)), 
+          Math.max(0, 1 - distance / (point.influence * flowFactor)),
           localFalloffPower
         );
-        
+
         weights[i] = weight;
         totalWeight += weight;
       }
-      
+
       if (totalWeight === 0) {
         // Fallback
         colors[index] = gradient[0];
         continue;
       }
-      
+
       // Blend colors
       for (let i = 0; i < controlPoints.length; i++) {
         const normalizedWeight = weights[i] / totalWeight;
         const color = controlPoints[i].color;
-        
+
         // RGB color parsing with bit manipulation for performance
         const r = Math.pow(parseInt(color.slice(1, 3), 16) / 255, 2.2);
         const g = Math.pow(parseInt(color.slice(3, 5), 16) / 255, 2.2);
         const b = Math.pow(parseInt(color.slice(5, 7), 16) / 255, 2.2);
-        
+
         blendedColor.r += r * normalizedWeight;
         blendedColor.g += g * normalizedWeight;
         blendedColor.b += b * normalizedWeight;
       }
 
       // Convert back to hex with faster calculation
-      const r = Math.min(255, Math.max(0, Math.round(Math.pow(blendedColor.r, 1/2.2) * 255))).toString(16).padStart(2, '0');
-      const g = Math.min(255, Math.max(0, Math.round(Math.pow(blendedColor.g, 1/2.2) * 255))).toString(16).padStart(2, '0');
-      const b = Math.min(255, Math.max(0, Math.round(Math.pow(blendedColor.b, 1/2.2) * 255))).toString(16).padStart(2, '0');
-      
+      const r = Math.min(
+        255,
+        Math.max(0, Math.round(Math.pow(blendedColor.r, 1 / 2.2) * 255))
+      )
+        .toString(16)
+        .padStart(2, '0');
+      const g = Math.min(
+        255,
+        Math.max(0, Math.round(Math.pow(blendedColor.g, 1 / 2.2) * 255))
+      )
+        .toString(16)
+        .padStart(2, '0');
+      const b = Math.min(
+        255,
+        Math.max(0, Math.round(Math.pow(blendedColor.b, 1 / 2.2) * 255))
+      )
+        .toString(16)
+        .padStart(2, '0');
+
       colors[index] = `#${r}${g}${b}`;
     }
   }
@@ -374,113 +408,111 @@ interface MeshGradientCardProps {
   description: string;
 }
 
-const MeshGradientCard: React.FC<MeshGradientCardProps> = React.memo(({
-  title,
-  description,
-}) => {
-  const theme = useTheme();
-  const deviceColorScheme = useColorScheme();
-  const isDark = deviceColorScheme === 'dark';
-  
-  // Use useRef for mesh data to prevent unnecessary re-renders
-  const meshRef = useRef<MeshData | null>(null);
-  
-  // Use useState for forcing re-renders when mesh changes
-  const [meshVersion, setMeshVersion] = useState(0);
-  
-  // Initialize mesh if not already done
-  if (!meshRef.current) {
-    meshRef.current = createMeshPoints(isDark);
-  }
-  
-  // Update mesh when color scheme changes
-  React.useEffect(() => {
-    meshRef.current = createMeshPoints(isDark);
-    setMeshVersion(prev => prev + 1); // Force re-render
-    
-    // Return cleanup function
-    return () => {
-      // No specific cleanup needed for mesh data
-    };
-  }, [isDark]);
+const MeshGradientCard: React.FC<MeshGradientCardProps> = React.memo(
+  ({ title, description }) => {
+    const theme = useTheme();
+    const deviceColorScheme = useColorScheme();
+    const isDark = deviceColorScheme === 'dark';
 
-  // Memoize border color based on theme
-  const borderColor = useMemo(() => 
-    isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.05)'
-  , [isDark]);
-  
-  // Use useCallback for event handlers to prevent unnecessary recreations
-  const handleChangeGradient = useCallback(() => {
-    meshRef.current = createMeshPoints(isDark);
-    setMeshVersion(prev => prev + 1); // Force re-render
-  }, [isDark]);
-  
-  // Extract mesh data for rendering
-  const mesh = meshRef.current;
+    // Use useRef for mesh data to prevent unnecessary re-renders
+    const meshRef = useRef<MeshData | null>(null);
 
-  // Memoize text colors
-  const titleColor = useMemo(() => 
-    isDark ? '#FFFFFF' : '#000000'
-  , [isDark]);
-  
-  const descriptionColor = useMemo(() => 
-    isDark ? '#EEEEEE' : '#333333'
-  , [isDark]);
-  
-  const buttonBackgroundColor = useMemo(() => 
-    isDark ? '#FFFFFF20' : '#00000010'
-  , [isDark]);
+    // Use useState for forcing re-renders when mesh changes
+    const [meshVersion, setMeshVersion] = useState(0);
 
-  // Early return if mesh is not ready
-  if (!mesh) return null;
+    // Initialize mesh if not already done
+    if (!meshRef.current) {
+      meshRef.current = createMeshPoints(isDark);
+    }
 
-  return (
-    <View style={styles.container}>
-      <View style={styles.card}>
-        {/* Canvas for gradient */}
-        <Canvas style={styles.canvas}>
-          <Group>
-            <Vertices
-              vertices={mesh.points}
-              colors={mesh.colors}
-              indices={mesh.indices}
-            />
-          </Group>
-        </Canvas>
-        
-        {/* Inner border overlay with blend mode */}
-        <View style={[
-          styles.innerBorder, 
-          { borderColor }
-        ]} />
-        
-        {/* Content */}
-        <View style={styles.content}>
-          <Text style={[styles.title, { color: titleColor }]}>
-            {title}
-          </Text>
-          <Text style={[styles.description, { color: descriptionColor }]}>
-            {description}
-          </Text>
+    // Update mesh when color scheme changes
+    React.useEffect(() => {
+      meshRef.current = createMeshPoints(isDark);
+      setMeshVersion(prev => prev + 1); // Force re-render
+
+      // Return cleanup function
+      return () => {
+        // No specific cleanup needed for mesh data
+      };
+    }, [isDark]);
+
+    // Memoize border color based on theme
+    const borderColor = useMemo(
+      () => (isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.05)'),
+      [isDark]
+    );
+
+    // Use useCallback for event handlers to prevent unnecessary recreations
+    const handleChangeGradient = useCallback(() => {
+      meshRef.current = createMeshPoints(isDark);
+      setMeshVersion(prev => prev + 1); // Force re-render
+    }, [isDark]);
+
+    // Extract mesh data for rendering
+    const mesh = meshRef.current;
+
+    // Memoize text colors
+    const titleColor = useMemo(
+      () => (isDark ? '#FFFFFF' : '#000000'),
+      [isDark]
+    );
+
+    const descriptionColor = useMemo(
+      () => (isDark ? '#EEEEEE' : '#333333'),
+      [isDark]
+    );
+
+    const buttonBackgroundColor = useMemo(
+      () => (isDark ? '#FFFFFF20' : '#00000010'),
+      [isDark]
+    );
+
+    // Early return if mesh is not ready
+    if (!mesh) return null;
+
+    return (
+      <View style={styles.container}>
+        <View style={styles.card}>
+          {/* Canvas for gradient */}
+          <Canvas style={styles.canvas}>
+            <Group>
+              <Vertices
+                vertices={mesh.points}
+                colors={mesh.colors}
+                indices={mesh.indices}
+              />
+            </Group>
+          </Canvas>
+
+          {/* Inner border overlay with blend mode */}
+          <View style={[styles.innerBorder, { borderColor }]} />
+
+          {/* Content */}
+          <View style={styles.content}>
+            <Text style={[styles.title, { color: titleColor }]}>{title}</Text>
+            <Text style={[styles.description, { color: descriptionColor }]}>
+              {description}
+            </Text>
+          </View>
         </View>
+        <Pressable
+          style={({ pressed }) => [
+            styles.button,
+            {
+              opacity: pressed ? 0.8 : 1,
+              backgroundColor: buttonBackgroundColor,
+            },
+          ]}
+          onPress={handleChangeGradient}
+        >
+          <Text style={[styles.buttonText, { color: titleColor }]}>
+            Change Gradient
+          </Text>
+        </Pressable>
       </View>
-      <Pressable 
-        style={({ pressed }) => [
-          styles.button,
-          { 
-            opacity: pressed ? 0.8 : 1,
-            backgroundColor: buttonBackgroundColor 
-          }
-        ]}
-        onPress={handleChangeGradient}
-      >
-        <Text style={[styles.buttonText, { color: titleColor }]}>
-          Change Gradient
-        </Text>
-      </Pressable>
-    </View>
-  );
-});
+    );
+  }
+);
 
 // Memoize styles to prevent recreation on each render
 const styles = StyleSheet.create({
@@ -555,4 +587,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MeshGradientCard; 
+export default MeshGradientCard;

@@ -50,7 +50,7 @@ const DifficultySelector: React.FC<DifficultySelectorProps> = ({
       >
         What's your vocabulary level?
       </Text>
-      
+
       <Text
         variant="bodyMedium"
         color={colors.text.secondary}
@@ -70,4 +70,4 @@ const DifficultySelector: React.FC<DifficultySelectorProps> = ({
   );
 };
 
-export default DifficultySelector; 
+export default DifficultySelector;

@@ -33,7 +33,7 @@ export const palettes = {
     900: '#172554',
     1000: '#0f172a',
   },
-  
+
   // Deep Blues - Further desaturated and inspired by moonlit ocean waters for minimal eye strain
   deepBlue: {
     10: '#edf0f5',
@@ -50,7 +50,7 @@ export const palettes = {
     900: '#0c121f',
     1000: '#060a12',
   },
-  
+
   // Purples - Enhanced for better vibrancy and transitions
   purple: {
     10: '#fcf9ff',
@@ -67,7 +67,7 @@ export const palettes = {
     900: '#301664',
     1000: '#1e0c40',
   },
-  
+
   // Greens - Improved for better natural feel and contrast
   green: {
     10: '#f0fdf4',
@@ -84,7 +84,7 @@ export const palettes = {
     900: '#052e16',
     1000: '#011b0d',
   },
-  
+
   // Reds - Enhanced for clearer warnings and errors
   red: {
     10: '#fff5f5',
@@ -101,7 +101,7 @@ export const palettes = {
     900: '#450a0a',
     1000: '#240505',
   },
-  
+
   // Light mode neutrals - Warm undertones for more natural progression
   neutralLight: {
     0: '#ffffff',
@@ -119,7 +119,7 @@ export const palettes = {
     900: '#252523',
     1000: '#141412',
   },
-  
+
   // Dark mode neutrals - Cool blue undertones for depth in dark interfaces
   neutralDark: {
     0: '#0c1014', // Deep blue-black that appears richer than pure black
@@ -137,7 +137,7 @@ export const palettes = {
     900: '#eff0f5',
     1000: '#ffffff',
   },
-  
+
   // True neutrals with rich deep near-black with subtle brown undertones
   neutral: {
     white: '#ffffff',
@@ -156,7 +156,7 @@ export const palettes = {
     1000: '#0e0d10',
     black: '#0a0a0c', // Rich deep near-black with subtle undertones that looks natural
   },
-  
+
   // Warm neutrals - True sandy hues with golden amber undertones
   sand: {
     10: '#fffdf7',
@@ -173,7 +173,7 @@ export const palettes = {
     900: '#3f2a10',
     1000: '#241607',
   },
-  
+
   // Cool neutrals - Refined for subtlety
   slate: {
     10: '#f8fafc',
@@ -190,7 +190,7 @@ export const palettes = {
     900: '#0a101f',
     1000: '#06080f',
   },
-  
+
   // Oranges - Vibrant amber tones with natural warmth
   orange: {
     10: '#fff9f5',
@@ -207,7 +207,7 @@ export const palettes = {
     900: '#612d0e',
     1000: '#3d1c09',
   },
-  
+
   // Pinks - Improved for richer contrast and softer hues
   pink: {
     10: '#fef6fa',
@@ -224,7 +224,7 @@ export const palettes = {
     900: '#3b0c22',
     1000: '#25091a',
   },
-  
+
   // Teals - More sophisticated for success states in quill theme
   teal: {
     10: '#f0fdfa',
@@ -241,7 +241,7 @@ export const palettes = {
     900: '#053732',
     1000: '#022721',
   },
-  
+
   // Yellows - Enhanced for better warnings and highlights
   yellow: {
     10: '#fefef9',
@@ -258,7 +258,7 @@ export const palettes = {
     900: '#422006',
     1000: '#2c1803',
   },
-  
+
   // Cyan - Improved for richer aqua tones
   cyan: {
     10: '#ecfdff',
@@ -275,4 +275,4 @@ export const palettes = {
     900: '#082f39',
     1000: '#041d24',
   },
-}; 
+};

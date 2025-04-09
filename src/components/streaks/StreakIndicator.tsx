@@ -23,12 +23,12 @@ const StreakIndicator: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Icon 
+      <Icon
         name="flame" // Correct icon name
         color={colors.warning} // Use warning color (typically orange/yellow)
-        size={20} 
+        size={20}
       />
-      <Text 
+      <Text
         variant="label" // Use label variant (handles fontSize)
         color={colors.warning} // Match icon color
         style={styles.text} // Apply style with fontWeight: 'bold'
@@ -45,10 +45,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginRight: spacing.lg, // Adjusted margin to lg
   },
-  text: { // Restore original text style
+  text: {
+    // Restore original text style
     marginLeft: spacing.xxs,
     fontWeight: 'bold', // Make number stand out
   },
 });
 
-export default StreakIndicator; 
+export default StreakIndicator;

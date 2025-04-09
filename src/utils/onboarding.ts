@@ -59,4 +59,4 @@ export const setDifficultyLevel = async (level: string): Promise<void> => {
   } catch (error) {
     console.error('Error setting difficulty level:', error);
   }
-}; 
+};

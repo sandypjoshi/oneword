@@ -5,9 +5,7 @@
 
 import MeshGradient from './MeshGradient';
 
-export {
-  MeshGradient,
-};
+export { MeshGradient };
 
 // Re-export types
-export type { MeshGradientProps } from './MeshGradient'; 
+export type { MeshGradientProps } from './MeshGradient';

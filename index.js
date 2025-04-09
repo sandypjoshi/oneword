@@ -8,4 +8,4 @@
 import './global';
 
 // Import the main entry point for the app
-import 'expo-router/entry'; 
+import 'expo-router/entry';

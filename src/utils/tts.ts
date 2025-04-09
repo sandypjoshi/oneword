@@ -13,7 +13,7 @@ const averageSpeakingDuration = 1500; // Default estimate for speaking duration 
  * @returns A promise that resolves when speech finishes or is stopped, and rejects on error.
  */
 export const speak = async (
-  text: string, 
+  text: string,
   options: Speech.SpeechOptions = {}
 ): Promise<void> => {
   return new Promise(async (resolve, reject) => {
@@ -23,42 +23,49 @@ export const speak = async (
       if (currentlySpeaking) {
         await Speech.stop(); // Note: This might trigger onStopped for the *previous* speech
       }
-      
+
       // Use default options if none provided
       const defaultOptions: Speech.SpeechOptions = {
         rate: 0.9,
         pitch: 1.0,
-        language: 'en-US'
+        language: 'en-US',
       };
-      
+
       // Merge default options with provided options
       const speechOptions = {
         ...defaultOptions,
-        ...options
+        ...options,
       };
-      
+
       // Set speaking state and start time (still potentially useful for isSpeaking/getProgress)
       isSpeakingActive = true;
       speechStartTime = Date.now();
-      
+
       // Speak the text, resolving/rejecting the promise in callbacks
       Speech.speak(text, {
         ...speechOptions,
         onDone: () => {
-          console.log(`[tts.speak] Done speaking: "${text.substring(0, 20)}..."`);
+          console.log(
+            `[tts.speak] Done speaking: "${text.substring(0, 20)}..."`
+          );
           isSpeakingActive = false;
           resolve();
         },
         onStopped: () => {
-          console.log(`[tts.speak] Stopped speaking: "${text.substring(0, 20)}..."`);
+          console.log(
+            `[tts.speak] Stopped speaking: "${text.substring(0, 20)}..."`
+          );
           isSpeakingActive = false;
           resolve(); // Resolve on stop as well, as the action is complete from the caller's perspective
         },
-        onError: (error) => {
-          console.error(`[tts.speak] Error speaking: "${text.substring(0, 20)}..."`, error);
+        onError: error => {
+          console.error(
+            `[tts.speak] Error speaking: "${text.substring(0, 20)}..."`,
+            error
+          );
           isSpeakingActive = false;
           reject(error);
-        }
+        },
       });
     } catch (error) {
       console.error('[tts.speak] Error initiating text-to-speech:', error);
@@ -94,12 +101,12 @@ export const getSpeakingProgress = (): number => {
   if (!isSpeakingActive || speechStartTime === 0) {
     return 0;
   }
-  
+
   const elapsed = Date.now() - speechStartTime;
   const estimatedDuration = Math.max(
-    averageSpeakingDuration, 
-    1000  // Minimum duration
+    averageSpeakingDuration,
+    1000 // Minimum duration
   );
-  
+
   return Math.min(elapsed / estimatedDuration, 1);
-}; 
+};

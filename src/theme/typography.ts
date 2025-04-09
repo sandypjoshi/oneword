@@ -12,13 +12,13 @@ export type FontCategory = 'display' | 'heading' | 'body' | 'utility';
 export const FONT_FAMILIES = {
   // Sans-serif options
   system: Platform.select({
-    ios: 'DMSans_400Regular',  // DM Sans for iOS
+    ios: 'DMSans_400Regular', // DM Sans for iOS
     android: 'DMSans_400Regular', // DM Sans for Android
     default: 'DMSans_400Regular', // DM Sans as default
   }),
   // Serif options
   serif: Platform.select({
-    ios: 'DMSerifText_400Regular',  // DM Serif Text for body text
+    ios: 'DMSerifText_400Regular', // DM Serif Text for body text
     android: 'DMSerifText_400Regular',
     default: 'DMSerifText_400Regular',
   }),
@@ -79,36 +79,36 @@ export const FONT_WEIGHTS: Record<string, FontWeight> = {
   bold: '700',
 };
 
-// Font sizes - Adjusted to avoid tiny text 
+// Font sizes - Adjusted to avoid tiny text
 export const FONT_SIZES = {
-  xxs: 12,     // Very small text
-  xs: 14,      // Small captions, footnotes
-  sm: 16,      // Secondary text, labels
-  md: 18,      // Body text
-  lg: 21,      // Large body text, small headings
-  xl: 24,      // Subheadings
-  xxl: 28,     // Headings
-  xxxl: 36,    // Large headings
+  xxs: 12, // Very small text
+  xs: 14, // Small captions, footnotes
+  sm: 16, // Secondary text, labels
+  md: 18, // Body text
+  lg: 21, // Large body text, small headings
+  xl: 24, // Subheadings
+  xxl: 28, // Headings
+  xxxl: 36, // Large headings
   display: 40, // Display headings
-  big: 48,     // Big display text
-  huge: 56,    // Huge display text
+  big: 48, // Big display text
+  huge: 56, // Huge display text
 };
 
 // Line heights (multiplier based on font size)
 export const LINE_HEIGHTS = {
-  tight: 1.20,    // Tighter for headings
-  normal: 1.5,    // Standard for body text
-  relaxed: 1.75,  // More space for readability
-  loose: 2.0,     // Very loose for emphasized text
+  tight: 1.2, // Tighter for headings
+  normal: 1.5, // Standard for body text
+  relaxed: 1.75, // More space for readability
+  loose: 2.0, // Very loose for emphasized text
 };
 
 // Letter spacing for different text types
 export const LETTER_SPACING = {
-  tighter: -0.5,   // Tight for headings
-  tight: -0.25,    // Slightly tighter
-  normal: 0,       // Normal spacing
-  wide: 0.25,      // Slightly wider  
-  wider: 0.5,      // Wider for emphasis
+  tighter: -0.5, // Tight for headings
+  tight: -0.25, // Slightly tighter
+  normal: 0, // Normal spacing
+  wide: 0.25, // Slightly wider
+  wider: 0.5, // Wider for emphasis
 };
 
 // Export the base text styles type for use in typed contexts
@@ -126,7 +126,7 @@ export const BASE_TEXT_STYLES = {
     category: 'display' as FontCategory,
   },
   displayMedium: {
-    fontSize: FONT_SIZES.display, 
+    fontSize: FONT_SIZES.display,
     fontWeight: FONT_WEIGHTS.bold,
     lineHeight: FONT_SIZES.display * LINE_HEIGHTS.tight,
     letterSpacing: LETTER_SPACING.tighter,
@@ -139,7 +139,7 @@ export const BASE_TEXT_STYLES = {
     letterSpacing: LETTER_SPACING.tight,
     category: 'display' as FontCategory,
   },
-  
+
   // Serif Text variants at large sizes
   serifTextLarge: {
     fontSize: FONT_SIZES.big,
@@ -150,7 +150,7 @@ export const BASE_TEXT_STYLES = {
     fontFamily: FONT_FAMILIES.serif,
   },
   serifTextMedium: {
-    fontSize: FONT_SIZES.display, 
+    fontSize: FONT_SIZES.display,
     fontWeight: FONT_WEIGHTS.regular,
     lineHeight: FONT_SIZES.display * LINE_HEIGHTS.tight,
     letterSpacing: LETTER_SPACING.tight,
@@ -165,7 +165,7 @@ export const BASE_TEXT_STYLES = {
     category: 'display' as FontCategory,
     fontFamily: FONT_FAMILIES.serif,
   },
-  
+
   // Heading styles - Enhanced with more distinction
   headingLarge: {
     fontSize: FONT_SIZES.xxxl,
@@ -195,7 +195,7 @@ export const BASE_TEXT_STYLES = {
     letterSpacing: LETTER_SPACING.normal,
     category: 'heading' as FontCategory,
   },
-  
+
   // Body text styles - With semantic naming
   bodyLarge: {
     fontSize: FONT_SIZES.lg,
@@ -225,7 +225,7 @@ export const BASE_TEXT_STYLES = {
     letterSpacing: LETTER_SPACING.normal,
     category: 'body' as FontCategory,
   },
-  
+
   // Utility text styles with semantic names
   button: {
     fontSize: FONT_SIZES.lg,
@@ -306,17 +306,17 @@ const themeFontPairings: Record<ThemeName, FontPairing> = {
 
 // Create a derived style with font family based on category
 function addFontFamily<T extends Record<string, any>>(
-  style: T, 
+  style: T,
   fontPairing: FontPairing
 ): T {
   // If no category or no font defined, return style as is
   if (!style.category || !fontPairing[style.category as FontCategory]) {
     return { ...style };
   }
-  
+
   // Create a new style object without the category
   const { category, ...styleWithoutCategory } = style;
-  
+
   // Return final style with font family based on the style's category
   return {
     ...styleWithoutCategory,
@@ -325,37 +325,42 @@ function addFontFamily<T extends Record<string, any>>(
 }
 
 // Create the final text styles for a specific theme
-export function createTextStyles(themeName: ThemeName = 'default'): Record<string, TextStyle> {
+export function createTextStyles(
+  themeName: ThemeName = 'default'
+): Record<string, TextStyle> {
   // Get the appropriate font pairing for this theme
   const fontPairing = themeFontPairings[themeName] || themeFontPairings.default;
-  
+
   // Create styles with theme-specific fonts
-  const styles = Object.entries(BASE_TEXT_STYLES).reduce((acc, [name, style]) => {
-    acc[name] = addFontFamily(style, fontPairing);
-    return acc;
-  }, {} as Record<string, TextStyle>);
-  
+  const styles = Object.entries(BASE_TEXT_STYLES).reduce(
+    (acc, [name, style]) => {
+      acc[name] = addFontFamily(style, fontPairing);
+      return acc;
+    },
+    {} as Record<string, TextStyle>
+  );
+
   // Apply theme-specific overrides
   if (themeName === 'quill') {
     // Serif fonts often need different letter spacing
-    styles.displayLarge = { 
-      ...styles.displayLarge, 
-      letterSpacing: LETTER_SPACING.tighter 
+    styles.displayLarge = {
+      ...styles.displayLarge,
+      letterSpacing: LETTER_SPACING.tighter,
     };
-    styles.displayMedium = { 
-      ...styles.displayMedium, 
-      letterSpacing: LETTER_SPACING.tighter 
+    styles.displayMedium = {
+      ...styles.displayMedium,
+      letterSpacing: LETTER_SPACING.tighter,
     };
-    styles.headingLarge = { 
-      ...styles.headingLarge, 
-      letterSpacing: LETTER_SPACING.tighter 
+    styles.headingLarge = {
+      ...styles.headingLarge,
+      letterSpacing: LETTER_SPACING.tighter,
     };
-    styles.headingMedium = { 
-      ...styles.headingMedium, 
-      letterSpacing: LETTER_SPACING.tighter 
+    styles.headingMedium = {
+      ...styles.headingMedium,
+      letterSpacing: LETTER_SPACING.tighter,
     };
   }
-  
+
   return styles;
 }
 
@@ -372,4 +377,4 @@ const typography = {
   baseStyles: BASE_TEXT_STYLES,
 };
 
-export default typography; 
+export default typography;

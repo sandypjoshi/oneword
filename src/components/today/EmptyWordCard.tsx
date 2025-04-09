@@ -25,45 +25,46 @@ interface EmptyWordCardProps {
 /**
  * Empty state component for days without a word
  */
-const EmptyWordCardComponent: React.FC<EmptyWordCardProps> = ({ 
+const EmptyWordCardComponent: React.FC<EmptyWordCardProps> = ({
   message,
   style,
-  date 
+  date,
 }) => {
   const { colors, spacing } = useTheme();
-  const defaultMessage = date 
+  const defaultMessage = date
     ? `No word available for ${new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`
     : 'No word available for this date';
-  const imageUrl = 'https://i.ibb.co/1YvNkbVH/Empty-State-Image-from-Tiny-PNG-1.png';
-  
+  const imageUrl =
+    'https://i.ibb.co/1YvNkbVH/Empty-State-Image-from-Tiny-PNG-1.png';
+
   return (
-    <View 
+    <View
       style={[
         styles.container,
-        { 
+        {
           backgroundColor: colors.background.card,
           borderColor: colors.border.light,
           borderRadius: radius.xl,
-          ...applyElevation('sm', colors.text.primary)
+          ...applyElevation('sm', colors.text.primary),
         },
-        style
+        style,
       ]}
     >
-      <Box 
-        padding="lg" 
+      <Box
+        padding="lg"
         style={{
           flex: 1,
           alignItems: 'center',
           justifyContent: 'center',
         }}
       >
-        <Image 
-          source={{ uri: imageUrl }} 
-          style={styles.image} 
+        <Image
+          source={{ uri: imageUrl }}
+          style={styles.image}
           resizeMode="contain"
         />
-        
-        <Text 
+
+        <Text
           variant="bodyMedium"
           color={colors.text.secondary}
           align="center"
@@ -98,4 +99,4 @@ const styles = StyleSheet.create({
 // Set display name for better debugging
 EmptyWordCard.displayName = 'EmptyWordCard';
 
-export default EmptyWordCard; 
+export default EmptyWordCard;

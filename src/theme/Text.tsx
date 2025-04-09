@@ -4,19 +4,23 @@
  */
 
 import React from 'react';
-import { Text as RNText, TextProps as RNTextProps, StyleSheet } from 'react-native';
+import {
+  Text as RNText,
+  TextProps as RNTextProps,
+  StyleSheet,
+} from 'react-native';
 import { useTheme } from './ThemeProvider';
 import { TypographyVariant } from './typography';
 
 // Available variants based on typography styles
-type TextVariant = 
-  | 'h1' 
-  | 'h2' 
-  | 'h3' 
-  | 'h4' 
-  | 'body1' 
-  | 'body2' 
-  | 'button' 
+type TextVariant =
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'body1'
+  | 'body2'
+  | 'button'
   | 'caption'
   | 'label';
 
@@ -38,7 +42,7 @@ export const Text: React.FC<TextProps> = ({
   ...props
 }) => {
   const { colors, responsiveTypography } = useTheme();
-  
+
   // Map old variant names to new ones
   const variantMap: Record<TextVariant, TypographyVariant> = {
     h1: 'headingLarge',
@@ -49,21 +53,21 @@ export const Text: React.FC<TextProps> = ({
     body2: 'bodyMedium',
     button: 'button',
     caption: 'caption',
-    label: 'label'
+    label: 'label',
   };
-  
+
   // Get typography style for the selected variant
   const mappedVariant = variantMap[variant];
   const variantStyle = responsiveTypography[mappedVariant];
-  
+
   // Default to primary text color if no color specified
   const textColor = color || colors.text.primary;
-  
+
   console.warn(
     `Warning: You are using a deprecated Text component from theme/Text. 
      Please update to import { Text } from 'components/ui' instead.`
   );
-  
+
   return (
     <RNText
       style={[
@@ -79,4 +83,4 @@ export const Text: React.FC<TextProps> = ({
   );
 };
 
-export default Text; 
+export default Text;
