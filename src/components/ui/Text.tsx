@@ -61,43 +61,75 @@ const Text: React.FC<TextProps> = ({
     // Determine final weight & italic style
     const finalWeightProp: TextStyle['fontWeight'] = flatStyle.fontWeight || weight || variantStyle.fontWeight;
     const resolvedWeight = getResolvedWeight(finalWeightProp);
-    const finalItalic = flatStyle.fontStyle === 'italic' || italic || variantStyle.fontStyle === 'italic';
+    // Prioritize italic prop/style over variant's default
+    const finalItalic = flatStyle.fontStyle === 'italic' || italic || variantStyle.fontStyle === 'italic'; 
 
-    // Select Font Family
+    // **Font Family Selection Logic V3**
+    
+    // 1. Determine base family type (sans or serif)
+    let baseFamilyType: 'serif' | 'sans-serif' = 'sans-serif';
+    if (variantStyle.fontFamily) {
+      // Infer type from variant's resolved family name
+      if (variantStyle.fontFamily.toLowerCase().includes('serif')) {
+          baseFamilyType = 'serif';
+      }
+    } else {
+      // Fallback to serif prop if variant didn't provide family
+      baseFamilyType = serif ? 'serif' : 'sans-serif';
+    }
+
+    // 2. Select specific font file based on type, weight, and FINAL italic style
     let selectedFontFamily: string | undefined;
+    let hasSpecificFamily = false;
     if (fonts) {
-      if (serif) {
-         selectedFontFamily = finalItalic ? fonts.serifItalic : fonts.serif;
-      } else { // Sans-serif
+      if (baseFamilyType === 'serif') {
+        // Check if it's DMSerifDisplay or DMSerifText based on variant name (heuristic)
+        if (variant?.toLowerCase().includes('display')) {
+             selectedFontFamily = finalItalic ? fonts.serifDisplayItalic : fonts.serifDisplay;
+        } else {
+             // Default to DMSerifText for other serif variants
+             selectedFontFamily = finalItalic ? fonts.serifItalic : fonts.serif;
+        }
+      } else { // Sans-serif (DM Sans)
         if (resolvedWeight === '700') {
-          selectedFontFamily = finalItalic ? fonts.systemBoldItalic : fonts.systemBold;
+            selectedFontFamily = finalItalic ? fonts.systemBoldItalic : fonts.systemBold;
         } else if (resolvedWeight === '500') {
-          selectedFontFamily = finalItalic ? fonts.systemMediumItalic : fonts.systemMedium;
+            selectedFontFamily = finalItalic ? fonts.systemMediumItalic : fonts.systemMedium;
         } else { // 400
-          selectedFontFamily = finalItalic ? fonts.systemItalic : fonts.system;
+            selectedFontFamily = finalItalic ? fonts.systemItalic : fonts.system;
         }
       }
-    }
-    selectedFontFamily = selectedFontFamily ?? (serif ? 'serif' : 'sans-serif');
 
-    // **Streamlined Style Combination**
+      // Check if the final selected family is one of our specific loaded fonts
+      if (selectedFontFamily && Object.values(fonts).includes(selectedFontFamily)) {
+          hasSpecificFamily = true;
+      }
+    }
+    // Fallback to generic system fonts
+    selectedFontFamily = selectedFontFamily ?? (baseFamilyType === 'serif' ? 'serif' : 'sans-serif');
+
+
+    // Style Combination
     const combinedStyle: TextStyle = {
       // 1. Start with base variant styles
       ...variantStyle,
-
       // 2. Apply flattened styles (excluding font-related ones)
       ...(({ fontWeight: _fw, fontStyle: _fs, fontFamily: _ff, ...restFlatStyle }) => restFlatStyle)(flatStyle),
-
-      // 3. Apply calculated font properties (will override variant/flatStyle)
-      fontFamily: selectedFontFamily,
-      fontWeight: resolvedWeight !== '400' ? resolvedWeight : undefined,
-      fontStyle: finalItalic ? 'italic' : 'normal',
-
-      // 4. Apply specific prop overrides if they exist (will override everything before)
+      // 3. Apply explicit prop overrides for non-font styles
       ...(color !== undefined && { color }),
       ...(align !== undefined && { textAlign: align }),
       ...(textTransform !== undefined && { textTransform }),
+      // 4. Apply calculated font family (Highest Priority)
+      fontFamily: selectedFontFamily,
+      // 5. Remove fontWeight/fontStyle if specific family was set
+      fontWeight: hasSpecificFamily ? undefined : (flatStyle.fontWeight || variantStyle.fontWeight),
+      fontStyle: hasSpecificFamily ? undefined : (finalItalic ? 'italic' : 'normal'),
     };
+    
+    // Explicitly re-apply italic if needed and specific family was chosen
+    if (hasSpecificFamily && finalItalic) {
+        combinedStyle.fontStyle = 'italic';
+    }
 
     return combinedStyle;
 

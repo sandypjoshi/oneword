@@ -143,10 +143,11 @@ export const BASE_TEXT_STYLES = {
   // Serif Text variants at large sizes
   serifTextLarge: {
     fontSize: FONT_SIZES.big,
-    fontWeight: FONT_WEIGHTS.regular, // Serif Text only comes in regular weight
+    fontWeight: FONT_WEIGHTS.regular,
     lineHeight: FONT_SIZES.big * LINE_HEIGHTS.normal,
     letterSpacing: LETTER_SPACING.tight,
     category: 'display' as FontCategory,
+    fontFamily: FONT_FAMILIES.serif,
   },
   serifTextMedium: {
     fontSize: FONT_SIZES.display, 
@@ -154,6 +155,7 @@ export const BASE_TEXT_STYLES = {
     lineHeight: FONT_SIZES.display * LINE_HEIGHTS.tight,
     letterSpacing: LETTER_SPACING.tight,
     category: 'display' as FontCategory,
+    fontFamily: FONT_FAMILIES.serif,
   },
   serifTextSmall: {
     fontSize: FONT_SIZES.xxxl,
@@ -161,6 +163,7 @@ export const BASE_TEXT_STYLES = {
     lineHeight: FONT_SIZES.xxxl * LINE_HEIGHTS.tight,
     letterSpacing: LETTER_SPACING.tight,
     category: 'display' as FontCategory,
+    fontFamily: FONT_FAMILIES.serif,
   },
   
   // Heading styles - Enhanced with more distinction

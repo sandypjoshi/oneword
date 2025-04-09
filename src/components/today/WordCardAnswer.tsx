@@ -1,7 +1,7 @@
 import React, { memo, useCallback, useMemo, useRef, useState, useEffect } from 'react';
-import { View, StyleSheet, StyleProp, ViewStyle, Dimensions, LayoutChangeEvent, TouchableOpacity, GestureResponderEvent } from 'react-native';
+import { View, StyleSheet, StyleProp, ViewStyle, Dimensions, LayoutChangeEvent, TouchableOpacity } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
-import { Text, Icon } from '../ui';
+import { Text, Icon, Separator } from '../ui';
 import Chip from '../ui/Chip';
 import { WordOfDay } from '../../types/wordOfDay';
 import { radius as themeRadiusTokens } from '../../theme/styleUtils';
@@ -55,6 +55,56 @@ interface WordCardAnswerProps {
   onNavigateToReflection?: () => void;
 }
 
+// --- Define static styles OUTSIDE the component ---
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    height: '100%',
+    borderRadius: themeRadiusTokens.lg,
+    overflow: 'hidden',
+    position: 'relative',
+  },
+  canvas: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  innerBorder: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    borderWidth: 1,
+    borderRadius: themeRadiusTokens.lg,
+    // borderColor is applied dynamically
+  },
+  content: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: spacing.lg, 
+  },
+  wordSection: {
+    marginBottom: spacing.md,
+  },
+  definitionText: {
+    marginTop: spacing.xs,
+    textAlign: 'center',
+  },
+  exampleText: {
+    marginTop: spacing.lg,
+    textAlign: 'center',
+  },
+  chipWrapper: {
+    alignSelf: 'center',
+    marginTop: spacing.lg,
+  },
+});
+// --- End of static styles ---
+
 /**
  * Displays the answer card with word, definition, and performance metrics
  * Using mesh gradients for beautiful backgrounds
@@ -65,7 +115,7 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
   style,
   onNavigateToReflection
 }) => {
-  const { colors, spacing, effectiveColorMode } = useTheme();
+  const { colors, spacing: themeSpacing, effectiveColorMode } = useTheme();
   
   // Use the centralized effectiveColorMode
   const isDark = effectiveColorMode === 'dark';
@@ -147,11 +197,8 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
       activeOpacity={0.9} 
       onPress={onNavigateToReflection} 
       disabled={!onNavigateToReflection}
-      style={[
-        styles.container, 
-        style
-      ]}
-      onLayout={handleLayout} // Keep onLayout
+      style={[styles.container, style]} 
+      onLayout={handleLayout}
     >
       {/* Canvas for gradient - Keep pointerEvents="none" */}
       <Canvas style={styles.canvas} pointerEvents="none">
@@ -165,13 +212,10 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
       </Canvas>
       
       {/* Inner border overlay */}
-      <View style={[
-        styles.innerBorder, 
-        { borderColor }
-      ]} />
+      <View style={[styles.innerBorder, { borderColor }]} />
       
       {/* Content - Word answer and details */}
-      <Box padding="md" style={styles.content}>
+      <Box padding="lg" style={styles.content}>
         {/* Use WordSection, specify onGradient variant */}
         <WordSection
           wordId={id}
@@ -185,13 +229,23 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
         {/* Definition */}
         {definition && (
           <Text
-            variant="bodySmall"
+            variant="bodyMedium"
             color={colors.text.secondary}
             style={styles.definitionText}
             textTransform="lowercase"
+            align="center"
           >
             {definition}
           </Text>
+        )}
+        
+        {/* Use Separator component */}
+        {definition && example && (
+          <Separator 
+            orientation="horizontal" 
+            length="80%" 
+            marginVertical="lg"
+          />
         )}
         
         {/* Example sentence with highlighted word */}
@@ -219,7 +273,7 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
               size="small"
               variant="default" 
               onPress={onViewDetails}
-              style={{ paddingRight: spacing.sm }} 
+              style={{ paddingRight: themeSpacing.sm }}
               backgroundColor={chipBaseBackgroundColor + 'B3'}
               internalSpacing="xs" 
             />
@@ -230,54 +284,6 @@ const WordCardAnswerComponent: React.FC<WordCardAnswerProps> = ({
     </TouchableOpacity> // Close the TouchableOpacity wrapper
   );
 };
-
-// Define static styles that don't depend on theme variables here
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-    height: '100%',
-    borderRadius: themeRadiusTokens.lg,
-    overflow: 'hidden',
-    position: 'relative',
-  },
-  canvas: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-  },
-  innerBorder: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    borderWidth: 1,
-    borderRadius: themeRadiusTokens.lg,
-    // borderColor is applied dynamically
-  },
-  content: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: spacing.lg, 
-  },
-  wordSection: {
-    marginBottom: spacing.md,
-  },
-  definitionText: {
-    marginTop: spacing.xs,
-  },
-  exampleText: {
-    marginTop: spacing.lg,
-    textAlign: 'center',
-  },
-  chipWrapper: {
-    alignSelf: 'center',
-    marginTop: spacing.lg, 
-  },
-});
 
 // Apply memo for performance
 const WordCardAnswer = memo(WordCardAnswerComponent);

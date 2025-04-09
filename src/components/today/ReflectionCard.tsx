@@ -5,7 +5,7 @@ import { useTheme } from '../../theme';
 import { radius, borderWidth } from '../../theme/styleUtils';
 import WordSection from './WordSection';
 import { useWordCardStore, OptionState } from '../../store/wordCardStore';
-import { Text, Icon } from '../ui';
+import { Text, Icon, Separator } from '../ui';
 import Box from '../layout/Box';
 import spacing from '../../theme/spacing';
 import { 
@@ -61,11 +61,6 @@ const ReflectionCardComponent: React.FC<ReflectionCardProps> = ({
     },
     wordSection: {
       marginBottom: spacing.lg,
-    },
-    separator: {
-      borderBottomWidth: StyleSheet.hairlineWidth,
-      marginVertical: spacing.md,
-      borderBottomColor: colors.border.light,
     },
     performanceText: {
       textAlign: 'center',
@@ -167,7 +162,10 @@ const ReflectionCardComponent: React.FC<ReflectionCardProps> = ({
         style={styles.wordSection}
       />
 
-      <View style={styles.separator} />
+      <Separator 
+        orientation="horizontal"
+        marginVertical="md"
+      />
 
       {performanceMessage && (
         <Text variant="label" color={colors.text.tertiary} style={styles.performanceText}>
