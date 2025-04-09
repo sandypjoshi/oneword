@@ -132,7 +132,7 @@ const DevThemeSelector = () => {
             ]}
             onPress={() => setThemeName(theme.value as any)}
           >
-            <Text>{theme.label}</Text>
+            <Text color={colors.text.primary}>{theme.label}</Text>
           </TouchableOpacity>
         ))}
       </View>
@@ -152,7 +152,7 @@ const DevThemeSelector = () => {
             ]}
             onPress={() => setColorMode(mode.value as any)}
           >
-            <Text>{mode.label}</Text>
+            <Text color={colors.text.primary}>{mode.label}</Text>
           </TouchableOpacity>
         ))}
       </View>

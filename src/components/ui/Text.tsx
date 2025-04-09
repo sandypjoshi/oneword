@@ -116,7 +116,7 @@ const Text: React.FC<TextProps> = ({
       // 2. Apply flattened styles (excluding font-related ones)
       ...(({ fontWeight: _fw, fontStyle: _fs, fontFamily: _ff, ...restFlatStyle }) => restFlatStyle)(flatStyle),
       // 3. Apply explicit prop overrides for non-font styles
-      ...(color !== undefined && { color }),
+      color: color !== undefined ? color : colors.text.primary,
       ...(align !== undefined && { textAlign: align }),
       ...(textTransform !== undefined && { textTransform }),
       // 4. Apply calculated font family (Highest Priority)
