@@ -20,7 +20,7 @@
 
 ### UI Components and Structure
 - ✅ Consistent theme implementation with useThemeReady hook
-- ✅ Common layout components (**Box (enhanced)**, Text) with theme integration
+- ✅ Common layout components (**Box (enhanced)**, Text (enhanced)) with theme integration
 - ✅ Icon component with multiple variants (Linear and Bold)
 - ✅ Tab navigation with custom icons
 - ✅ Theme safety checks and default values
@@ -33,6 +33,9 @@
 - ✅ Dynamic color palettes for both light and dark modes
 - ✅ Fixed status bar appearance in iOS dark mode
 - ✅ Elegant inner border styling for card components
+- ✅ **Fixed font rendering (bold, serif, italic) in Text component**
+- ✅ **Created reusable Separator component**
+- ✅ **Removed unused PronunciationChip component**
 
 ### Today Tab Components
 - ✅ Word Card carousel using FlashList with optimized performance
@@ -45,6 +48,8 @@
 - ✅ Initial scrolling to today's word (most recent)
 - ✅ Clear code documentation to prevent regressions
 - ✅ Resolved gesture conflicts between scrolling and button interactions
+- ✅ **Updated WordCardAnswer and ReflectionCard to use Separator component**
+- ✅ **Increased definition font size in WordCardAnswer**
 
 ### Practice Tab Components
 - ✅ Implemented MeshGradientCard for dynamic visual presentation
@@ -59,6 +64,7 @@
 - ✅ Fixed import path issues for theme-related components
 - ✅ Improved component reliability during swipe interactions
 - ✅ Fixed status bar styling in iOS dark mode
+- ✅ **Fixed font rendering issues across components**
 
 ### Onboarding Flow
 - ✅ Enhanced onboarding UI components
@@ -111,6 +117,21 @@
 
 ## In Progress Features
 
+### Infrastructure Setup
+- 🔄 **Awaiting creation of new Supabase project/database (BLOCKER)**
+
+### Streak Feature
+- 🔄 **Implementation Paused (Blocked by DB Setup)**
+  - Needs DB schema update (add columns to `profiles`).
+  - Needs backend logic (Supabase Edge Function).
+  - Needs client-side integration (data fetching, trigger).
+
+### Data Integration
+- 🔄 **Implementing Supabase data fetching layer (Blocked by DB Setup)**
+- 🔄 Connecting the Word of Day UI with Supabase data
+- 🔄 Adding user interactions (saving, sharing) for words
+- 🔄 Implementing featured words system
+
 ### Code Quality Improvements
 - 🔄 Refactoring large components/screens (`app/(tabs)/index.tsx`, `OptionButton`, etc.)
 - 🔄 Implementing comprehensive component testing strategy
@@ -119,12 +140,6 @@
 - 🔄 **Actively Transitioning from mock data to real API endpoints (High Priority)**
 - 🔄 Ensuring consistent loading state implementation
 - ⏳ **Awaiting user direction for next task**
-
-### Data Integration
-- 🔄 **Implementing Supabase data fetching layer (High Priority)**
-- 🔄 Connecting the Word of Day UI with Supabase data
-- 🔄 Adding user interactions (saving, sharing) for words
-- 🔄 Implementing featured words system
 
 ### Tab Development
 - 🔄 Challenge screen implementation with practice exercises
@@ -155,7 +170,7 @@
 ## Upcoming Tasks
 
 ### Next Task
-- ⏳ **Determine next task based on user input following codebase analysis.**
+- ⏳ **Set up new Supabase project and configure initial tables/migrations.**
 
 ### Testing Infrastructure
 - ⏳ Set up Jest testing configuration for components
@@ -171,7 +186,7 @@
 - ⏳ Update project README with development guidelines
 
 ### Service Layer Enhancement
-- ⏳ **Complete replacement of mock services with real API implementations (High Priority)**
+- ⏳ **Complete replacement of mock services with real API implementations (Blocked by DB Setup)**
 - ⏳ Implement proper error handling and recovery
 - ✅ Add caching layer for API responses
 - ⏳ Implement offline support for critical features
@@ -190,6 +205,7 @@
 ### User Experience
 - 📋 Personalized word recommendations
 - 📋 Progress tracking
+- 📋 **Streak Feature (Planned - see In Progress)**
 - 📋 Achievements and rewards system
 - 📋 Offline mode support
 - 📋 Social sharing features
@@ -207,13 +223,15 @@
 
 ## Known Issues
 
-1.  **No Backend Integration**: The application frontend **currently relies entirely on mock data**. Real-time data fetching from Supabase is not yet implemented.
-2.  **Large Components**: Several components/screens (`app/(tabs)/index.tsx`, `OptionButton.tsx`, `WordCardAnswer.tsx`, `meshGradientGenerator.ts`) are complex and require refactoring.
-3. **Low Test Coverage**: Lack of comprehensive automated tests.
-4. **Onboarding Navigation**: Sometimes navigation from onboarding to main app can show a brief flash (Status: Mostly resolved, minor edge cases remain)
-5. **Content Quality Variance**: Quality of generated content varies (Status: To be reviewed after full processing)
-6. **Terminal Dashboard Compatibility**: Some terminal emulators may not display ANSI colors correctly (Status: Working in standard terminals)
-7. **Potential Gesture Conflicts**: Need ongoing monitoring for interaction conflicts, especially during swipes.
+1.  **No Backend Integration**: Application **relies entirely on mock data**. Blocked by Supabase DB setup.
+2.  **Streak Feature Not Implemented**: Blocked by Supabase DB setup.
+3.  **Large Components**: Several components/screens (`app/(tabs)/index.tsx`, `OptionButton.tsx`, `WordCardAnswer.tsx`, `meshGradientGenerator.ts`) need refactoring.
+4.  **Low Test Coverage**: Lack of comprehensive automated tests.
+5.  **Inconsistent Loading/Error States**: Missing standardized handling.
+6.  **Animation Performance**: Potential issues on lower-end devices.
+7.  **Content Quality Variance**: Quality of generated content varies (Status: To be reviewed after full processing)
+8.  **Terminal Dashboard Compatibility**: Some terminal emulators may not display ANSI colors correctly (Status: Working in standard terminals)
+9.  **Potential Gesture Conflicts**: Need ongoing monitoring for interaction conflicts, especially during swipes.
 
 ## Statistics
 
@@ -229,6 +247,7 @@
 
 | Risk | Impact | Likelihood | Mitigation |
 |------|--------|------------|------------|
+| **Supabase Setup Delay** | **High** | **Medium** | **Clear communication, alternative client-side dev** |
 | UI inconsistency across devices | Medium | Medium | Responsive design, device testing |
 | Performance with large datasets | Low | Low | FlashList implementation, memoization patterns |
 | Theme loading issues | Medium | Low | useThemeReady hook, default values |

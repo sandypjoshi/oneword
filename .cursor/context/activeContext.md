@@ -1,15 +1,25 @@
 # Active Context
 
 ## Current Focus
-- **Card animation and state management improvements**
-- Refactoring large UI components/screens (e.g., `app/(tabs)/index.tsx`, `OptionButton`) for better maintainability.
-- Implementing a comprehensive component testing strategy.
-- Enhancing UI components with advanced visual effects using Skia (e.g., noise texture for gradients).
-- Improving API error handling in service layers.
-- Ensuring consistent loading/error state implementation.
-- Completing Practice and Profile tab functionality.
+- **Database Setup:** Waiting for the new Supabase project/DB to be created.
+- **Streak Feature (Paused):** Planning is complete, but implementation (DB schema, backend logic, client integration) is paused pending database availability.
+- **UI Refinements (Ongoing):** Continuing to refine existing components and ensure consistency (e.g., font rendering, separators).
 
 ## Recent Changes
+
+### UI Refinements & Streak Planning (2024-04-09)
+1. **Goal**: Refine UI components, fix font rendering issues, create a reusable separator, remove unused components, plan the streak feature, and clarify database dependency.
+2. **Key Changes**:
+    - Refactored `Text` component (`src/components/ui/Text.tsx`) to correctly handle `fontWeight`, `serif`, and `italic` props, ensuring theme variants and inline styles work reliably together.
+    - Confirmed font loading in `app/_layout.tsx`.
+    - Created a reusable `Separator` component (`src/components/ui/Separator.tsx`) with appropriate props and theme integration.
+    - Replaced inline separators in `WordCardAnswer.tsx` and `ReflectionCard.tsx` with the new `Separator` component.
+    - Identified and removed the unused `PronunciationChip` component and its export.
+    - Increased definition font size in `WordCardAnswer.tsx` by changing variant to `bodyMedium`.
+    - Conducted detailed planning for the streak feature (core logic, data model, UI/UX, gamification).
+    - Clarified that streak feature implementation is **paused** until the new Supabase database is set up.
+3. **Impact**: Improved UI consistency (fonts, separators), reduced code redundancy, and established a clear plan/status for the streak feature.
+
 ### Card Flip Animation & State Persistence Fix (2024-04-06)
 1. **Goal**: Fix two critical issues in the WordCard component: (1) flip animation not working when selecting correct answers, and (2) revealed words sometimes showing question face after tab switching.
 2. **Root Causes**: 
@@ -152,38 +162,29 @@
    - Follow the proper style chain: tokens → theme → component
 
 ## Next Steps
-1. **Expand Test Coverage:** 
-   - Implement unit tests for the Zustand stores, particularly focusing on wordCardStore
-   - Create component tests for WordCard and related components to ensure animation and state behavior
-   - Test edge cases for tab switching and animation state
-
-2. **Continue UI Refinements:**
-   - Address any remaining animation issues with WordCard
-   - Refactor large components for better maintainability
-   - Implement consistent loading and error states
-
-3. **Backend Integration:**
-   - Connect frontend to Supabase for live data
-   - Implement proper error handling for API requests
-   - Add caching for better offline experience
-
-4. **Visual Enhancements:**
-   - Add paper-like noise texture to gradient components
-   - Create reusable gradient background component
-   - Optimize animations for battery efficiency
+1.  **Setup New Supabase Database:** Create the new Supabase project.
+2.  **Database Migrations:** Create and run migrations for essential tables (e.g., `profiles`, potentially `words`, `user_progress`) including the streak columns in `profiles`.
+3.  **Implement Backend Logic:** Create Supabase Edge Function(s) for streak calculation and updates.
+4.  **Integrate Streak Feature:**
+    *   Update client-side state management (e.g., `useWordCardStore` or a new store) to fetch real streak data.
+    *   Connect the client trigger (viewing word answer) to the backend streak update function.
+    *   Implement streak UI feedback (animations, milestones - optional initially).
+5.  **Backend Integration (General):** Connect other parts of the app (word fetching, user settings) to the new Supabase DB.
+6.  **Expand Test Coverage:** As backend integration proceeds.
 
 ## Known Issues
+- **Streak Feature Not Implemented:** Core logic and data persistence are missing.
+- **No Backend Integration:** Application still uses **mock data**. No Supabase data fetching or user authentication flow is implemented yet.
 - **Animation Performance:** Current Reanimated-based animations may have performance implications on lower-end devices. Need to profile and optimize.
 - **Large Components:** Several components/screens (`app/(tabs)/index.tsx`, `OptionButton.tsx`, `WordCardAnswer.tsx`, `meshGradientGenerator.ts`) are very large and complex, needing refactoring.
 - **Low Test Coverage:** Lack of comprehensive automated tests, especially for complex interactions like animations.
-- **No Backend Integration:** The application frontend currently uses only **mock data**. No Supabase data fetching is implemented yet.
 - **Inconsistent Loading/Error States:** Missing standardized handling for loading and error UI states.
 
 ## Active Context (Summary)
-This file tracks the current state, focus, changes, and known issues for the OneWord app. **The recent focus has been on fixing critical animation and state persistence issues in the WordCard component.** The work has improved the stability and user experience by ensuring card animations work correctly and state remains consistent across tab navigation.
+This file tracks the current state, focus, changes, and known issues for the OneWord app. **The primary focus has shifted to waiting for the new Supabase database setup.** Recent work involved significant UI refinements, fixing font rendering across components, creating reusable elements like `<Separator>`, and detailed planning for the streak feature, which is now paused pending backend infrastructure.
 
-### Current Focus: Animation and State Management
-The assistant has successfully addressed critical issues with card animations and state persistence, ensuring a consistent user experience even with complex component lifecycles and navigation interactions.
+### Current Focus: Database Setup
+The assistant is waiting for the new Supabase project/DB to be created.
 
 #### Card Flip Animation & State Persistence Fix (Implemented)
 

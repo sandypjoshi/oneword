@@ -35,7 +35,7 @@ alwaysApply: false
     <Instructions>
         1. After completing a significant task, create a new task log in .cursor/task-logs/.
         2. Update .cursor/context/activeContext.md with current focus, recent changes, and next steps.
-        3. Update .cursor/context/progress.md & .cursor/context/project-memo.md with completed features, in-progress features, and known issues.
+        3. Update .cursor/context/progress.md & .cursor/context/projectMemo.md with completed features, in-progress features, and known issues.
         4. Review and update other Memory Bank files as needed.
         5. When project direction changes, update implementation plans in .cursor/plans/.
         6. When adding new technologies or dependencies, update .cursor/context/techContext.md.

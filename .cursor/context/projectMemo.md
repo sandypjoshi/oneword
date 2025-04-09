@@ -5,7 +5,7 @@ OneWord is a vocabulary learning application that helps users expand their vocab
 
 ## Architecture
 - React Native (Expo) for cross-platform mobile development (New Architecture enabled)
-- Supabase for backend database and authentication (**Note: Frontend integration pending**)
+- Supabase for backend database and authentication (**Note: New DB setup pending, frontend integration pending**)
 - Zustand for state management
 - Custom design system with tokens for consistent styling
 
@@ -24,7 +24,8 @@ OneWord is a vocabulary learning application that helps users expand their vocab
 ### Styling Approach
 - Design token system (colors, typography, spacing) as single source of truth
 - Theme-based styling (`ThemeProvider`, `useTheme` hook) with light/dark modes and multiple themes (Default, Quill)
-- Foundational layout components (`Box`, `Text`) integrate directly with theme tokens via props
+- Foundational layout components (`Box`, `Text` (Enhanced)) integrate directly with theme tokens via props
+- Reusable UI components (`Separator` (New), `Chip`, `Icon`, etc.)
 - Responsive layout using flexbox patterns (via `Box` component)
 - Semantic color tokens for consistent theming
 
@@ -38,12 +39,9 @@ OneWord is a vocabulary learning application that helps users expand their vocab
 - Using refs and store state for persistent animations
 
 ## Current Focus
-- **Animation and State Management**: Fixing and improving flip animations in WordCard component and ensuring state persistence
-- **Implementing Supabase data fetching** and transitioning the app from mock data.
-- Refactoring large components (`app/(tabs)/index.tsx`, `OptionButton`, etc.).
-- Implementing a comprehensive testing strategy.
-- Enhancing UI with Skia effects (noise texture).
-- Improving error handling and loading states.
+- **Database Setup:** Waiting for the new Supabase project/DB to be created. (**BLOCKER**)
+- **Streak Feature (Paused):** Planning complete, implementation blocked by DB setup.
+- **UI Refinements (Ongoing):** Ensuring component consistency, addressing minor visual bugs.
 
 ## Code Conventions
 - Typescript for type safety
@@ -80,36 +78,29 @@ A comprehensive code audit verified compliance with project rules and standards,
 - Consistent loading state implementation across components
 
 ## Priority Action Items
-1. **Animation and State Management Improvements**:
-   - ✅ Fix WordCard flip animations for correct answers
-   - ✅ Ensure consistent state persistence across tab navigation
-   - ✅ Implement proper error handling in animations
-   - Profile animation performance on different devices
-
-2. **Performance Optimization**:
-   - Profile animation performance
-   - Optimize component re-renders
-   - Implement efficient list rendering
-
-3. **Backend Integration**:
-   - Connect to Supabase
-   - Implement error handling
-   - Add caching layer
-
-4. **Component Refactoring**:
-   - Break down large components
-   - Extract reusable logic into hooks
-   - Improve code readability
+1. **Setup New Supabase Database:** Create project, configure initial settings.
+2. **Database Migrations:** Establish core tables (`profiles`, `words`, etc.) and add streak columns.
+3. **Implement Backend Logic:** Create Supabase Edge Function for streak updates.
+4. **Integrate Frontend with Backend:** Replace mock data, connect streak logic.
+5. **Expand Test Coverage:** Begin adding tests as backend integration proceeds.
+6. **Refactor Large Components:** Improve maintainability (lower priority until backend is connected).
 
 ## Current Status
-- **UI Development**: 80% complete
-- **State Management**: 75% complete
+- **UI Development**: 85% complete (most core screens/components exist)
+- **State Management**: 75% complete (core stores exist, need real data integration)
 - **Animation System**: 90% complete (recent improvements)
-- **Backend Integration**: 0% (not started)
+- **Backend Integration**: 0% (**Blocked** by DB Setup)
 - **Testing**: 15% complete
 
 ### Recent Accomplishments
-- ✅ **Refactored foundational `Box` component** for full theme integration and extended layout capabilities.
+- ✅ **Fixed Font Rendering Issues:** Resolved inconsistencies with bold, serif, and italic text rendering in the custom `Text` component.
+- ✅ **Created Reusable Separator:** Implemented a theme-aware `Separator` UI component.
+- ✅ **Refactored Card Separators:** Replaced inline separators in `WordCardAnswer` and `ReflectionCard` with the new `Separator` component.
+- ✅ **Cleaned Up UI Components:** Removed the unused `PronunciationChip` component.
+- ✅ **Improved Definition Display:** Increased font size for definitions in `WordCardAnswer`.
+- ✅ **Streak Feature Planning:** Completed detailed planning for core logic, data model, and UX.
+- ✅ **Fixed Card Flip Animation & State Persistence:** Resolved critical issues with WordCard state and animations (2024-04-06).
+- ✅ **Refactored foundational `Box` component** for full theme integration and extended layout capabilities (2024-04-01).
 - ✅ Completed the enhanced MeshGradientCard component with improved visual appearance and performance.
 - ✅ Fixed critical iOS dark mode status bar issues
 - ✅ Expanded gradient color palettes with nature-inspired combinations (27 total options)
@@ -118,20 +109,21 @@ A comprehensive code audit verified compliance with project rules and standards,
 - ✅ Fixed UI component contrast issues for Quill theme
 
 ### Active Development
-- 🔄 **Implementing Supabase client & data fetching (High Priority)**
-- 🔄 **Refactoring `app/(tabs)/index.tsx` (High Priority)**
-- 🔄 Defining testing strategy and setup
-- 🔄 Implementing paper-like noise texture overlay for gradients
-- 🔄 Creating reusable MeshGradient background component
-- 🔄 Exploring animation options for subtle gradient movement
-- 🔄 Updating documentation for new visual components
+- ⏸️ **Streak Feature Implementation (Paused)**
+- ⏸️ **Implementing Supabase client & data fetching (Paused/Blocked)**
+- 🔄 Refactoring `app/(tabs)/index.tsx` (Lower Priority)
+- 🔄 Defining testing strategy and setup (Lower Priority)
+- 🔄 Implementing paper-like noise texture overlay for gradients (Lower Priority)
+- 🔄 Creating reusable MeshGradient background component (Lower Priority)
+- 🔄 Exploring animation options for subtle gradient movement (Lower Priority)
+- 🔄 Updating documentation for new visual components (Ongoing)
 
-### Key Priorities
-1. **Connect Frontend to Supabase:** Replace mock data with live data.
-2. **Refactor Key Components:** Improve maintainability of large screens/components.
-3. **Establish Testing:** Implement initial unit and component tests.
-4. Complete the mesh gradient implementation with noise texture.
-5. Create a reusable gradient background component.
+### Key Priorities (Revised)
+1. **Setup New Supabase Database.**
+2. **Establish Database Schema/Migrations.**
+3. **Implement Core Backend Logic (Starting with Streaks).**
+4. **Connect Frontend to Supabase (Starting with Streaks & Word of Day).**
+5. Begin implementing testing strategy.
 
 ## Technical Highlights
 - Sophisticated mesh gradient system using Skia
@@ -139,20 +131,25 @@ A comprehensive code audit verified compliance with project rules and standards,
 - Flexible and extendable Box layout component
 - Robust card flip animation system with state persistence across navigation
 - Enhanced error handling for animations and state transitions
+- **Refined custom Text component handling complex font styles**
+- **Reusable Separator component**
 
 ## Next Major Milestones
-1. **Expand Test Coverage**: Increase to at least 50%
-2. **Implement Supabase Integration**: Connect to real backend
-3. **Complete Practice Tab**: Fully functional practice module
-4. **Complete Profile Tab**: User settings and statistics
-5. **Release Beta Version**: For internal testing
+1. **Backend Connected:** App fetches live data from Supabase.
+2. **Streak Feature MVP:** Basic streak counting functional.
+3. **Testing Infrastructure:** Initial tests running.
+4. **Complete Practice Tab**: Fully functional practice module
+5. **Complete Profile Tab**: User settings and statistics
+6. **Release Beta Version**: For internal testing
 
 ## Known Issues and Risks
 
 ### Key Issues
-- **No Backend Integration:** App uses mock data only.
+- **No Backend Integration:** App uses mock data only. (**BLOCKER**)
+- **Streak Feature Not Implemented:** Blocked by DB Setup.
 - **Component Complexity:** Several large components need refactoring.
 - **Low Test Coverage:** Lack of automated tests.
+- **Inconsistent Loading/Error States:** Needs standardized handling.
 
 ### Technical Debt
 - Project structure (`lib` vs `src`) needs consolidation.
@@ -163,9 +160,10 @@ A comprehensive code audit verified compliance with project rules and standards,
 ### Resource Constraints
 - Limited design resources for creating comprehensive guidelines
 - Testing capacity across diverse device range
+- **Dependency on Database Setup**
 
 ## General Notes
-The project has a strong foundation with a well-implemented design system and core UI features for the 'Today' tab. The immediate focus must be on integrating the frontend with the Supabase backend to replace mock data and on improving maintainability through component refactoring and testing.
+The project has a strong frontend foundation with significant UI refinements recently completed, including fixing complex font rendering and creating reusable components. However, **all forward progress on features requiring data persistence (like Streaks) is currently blocked pending the setup of the new Supabase database.** The immediate focus must be on establishing this backend infrastructure.
 
 ## Animation and State Management Improvements
 - Enhance and fix WordCard animations
