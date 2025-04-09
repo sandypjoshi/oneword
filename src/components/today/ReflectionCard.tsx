@@ -54,8 +54,9 @@ const ReflectionCardComponent: React.FC<ReflectionCardProps> = ({
       position: 'relative',
       borderRadius: radius.lg,
       overflow: 'hidden',
-      padding: 20,
-      justifyContent: 'center',
+      paddingTop: spacing.xxl,    // Add specific top padding
+      paddingHorizontal: 20,     // Add horizontal padding
+      paddingBottom: 20,        // Add bottom padding
       borderWidth: borderWidth.thin,
       borderColor: colors.border.light,
     },
@@ -83,7 +84,7 @@ const ReflectionCardComponent: React.FC<ReflectionCardProps> = ({
     answerTextBold: {
       fontWeight: 'bold',
     },
-  }), [colors]); // Re-create styles if colors change
+  }), [colors, spacing]); // Add spacing to dependencies
 
   const { id, word, pronunciation, partOfSpeech, options = [] } = wordData;
 

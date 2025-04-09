@@ -4,6 +4,7 @@ import { useTheme } from '../../theme';
 import { Text } from '../ui';
 import AnimatedChip from '../ui/AnimatedChip';
 import { useWordCardStore } from '../../store/wordCardStore';
+import { FONT_SIZES, LINE_HEIGHTS } from '../../theme/typography';
 
 // Define the type locally
 type AnimatedChipVariant = 'default' | 'onGradient';
@@ -38,24 +39,26 @@ const WordSectionComponent: React.FC<WordSectionProps> = ({
   }, [wordId, word, pronunciation, isWordSpeaking, speakWord]);
 
   // Define styles inside component with useMemo
-  const styles = useMemo(() => StyleSheet.create({
-    wordSectionContainer: {
-      alignItems: 'center',
-    },
-    partOfSpeechText: {
-      textAlign: 'center',
-      textTransform: 'lowercase',
-      marginBottom: -4,
-    },
-    wordText: {
-      textTransform: 'lowercase', 
-      marginTop: -2,
-      marginBottom: spacing.sm, 
-    },
-    pronunciationChip: {
-      marginTop: spacing.xs,
-    },
-  }), [spacing]);
+  const styles = useMemo(() => {
+    return StyleSheet.create({
+      wordSectionContainer: {
+        width: '100%',
+      },
+      partOfSpeechText: {
+        textAlign: 'center',
+        textTransform: 'lowercase',
+        marginBottom: -4,
+      },
+      wordText: {
+        textTransform: 'lowercase', 
+        marginTop: -2,
+        marginBottom: spacing.sm, 
+      },
+      pronunciationChip: {
+        marginTop: spacing.xs,
+      },
+    });
+  }, [spacing]);
 
   return (
     <View style={[styles.wordSectionContainer, style]}>
@@ -75,12 +78,14 @@ const WordSectionComponent: React.FC<WordSectionProps> = ({
         color={colors.text.primary}
         align="center"
         style={styles.wordText}
+        adjustsFontSizeToFit={true}
+        numberOfLines={1}
+        minimumFontScale={0.85}
       >
         {word}
       </Text>
       
       {pronunciation && (
-        // Wrap chip for propagation stop if needed? No, this component won't be tapped directly.
         <AnimatedChip 
           label={pronunciation}
           iconLeft="volumeLoud"

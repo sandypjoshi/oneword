@@ -218,6 +218,111 @@ const mockWords: WordOfDay[] = [
       { value: 'Powerful and mighty', isCorrect: false },
       { value: 'Visible and apparent', isCorrect: false }
     ]
+  },
+  {
+    id: '13', // Start from next available ID
+    word: 'ubiquitous',
+    pronunciation: '/juːˈbɪkwɪtəs/',
+    partOfSpeech: 'adjective',
+    definition: 'Present everywhere',
+    example: 'Mobile phones are ubiquitous these days.',
+    date: '2025-04-03', 
+    options: [
+      { value: 'Present everywhere', isCorrect: true },
+      { value: 'Rarely found', isCorrect: false },
+      { value: 'Very large', isCorrect: false },
+      { value: 'Secretive', isCorrect: false }
+    ]
+  },
+  {
+    id: '14',
+    word: 'proclivity',
+    pronunciation: '/proʊˈklɪvəti/',
+    partOfSpeech: 'noun',
+    definition: 'Natural tendency',
+    example: 'He had a proclivity for exaggeration.',
+    date: '2025-04-04',
+    options: [
+      { value: 'Natural tendency', isCorrect: true },
+      { value: 'Strong dislike', isCorrect: false },
+      { value: 'Sudden insight', isCorrect: false },
+      { value: 'Learned skill', isCorrect: false }
+    ]
+  },
+  {
+    id: '15',
+    word: 'gregarious',
+    pronunciation: '/ɡrɪˈɡɛəriəs/',
+    partOfSpeech: 'adjective',
+    definition: 'Sociable, fond of company',
+    example: 'She was a popular and gregarious teacher.',
+    date: '2025-04-05',
+    options: [
+      { value: 'Sociable, fond of company', isCorrect: true },
+      { value: 'Shy and reserved', isCorrect: false },
+      { value: 'Angry and hostile', isCorrect: false },
+      { value: 'Serious and studious', isCorrect: false }
+    ]
+  },
+  {
+    id: '16',
+    word: 'epistolary',
+    pronunciation: '/ɪˈpɪstələri/',
+    partOfSpeech: 'adjective',
+    definition: 'Relating to letters',
+    example: 'The novel was written in an epistolary format.',
+    date: '2025-04-06',
+    options: [
+      { value: 'Relating to letters', isCorrect: true },
+      { value: 'About ancient history', isCorrect: false },
+      { value: 'Containing many pictures', isCorrect: false },
+      { value: 'Difficult to understand', isCorrect: false }
+    ]
+  },
+  {
+    id: '17',
+    word: 'vicissitude',
+    pronunciation: '/vɪˈsɪsɪtjuːd/',
+    partOfSpeech: 'noun',
+    definition: 'Change of circumstances',
+    example: 'They remained friends through all life\'s vicissitudes.',
+    date: '2025-04-07',
+    options: [
+      { value: 'Change of circumstances', isCorrect: true },
+      { value: 'Period of stability', isCorrect: false },
+      { value: 'Feeling of great joy', isCorrect: false },
+      { value: 'State of confusion', isCorrect: false }
+    ]
+  },
+  {
+    id: '18',
+    word: 'pulchritudinous',
+    pronunciation: '/ˌpʌlkrɪˈtjuːdɪnəs/',
+    partOfSpeech: 'adjective',
+    definition: 'Having great beauty',
+    example: 'The pulchritudinous landscape captivated the visitors.',
+    date: '2025-04-08',
+    options: [
+      { value: 'Having great beauty', isCorrect: true },
+      { value: 'Extremely ugly', isCorrect: false },
+      { value: 'Very noisy', isCorrect: false },
+      { value: 'Old and decaying', isCorrect: false }
+    ]
+  },
+  {
+    id: '19',
+    word: 'obfuscate',
+    pronunciation: '/ˈɒbfəskeɪt/',
+    partOfSpeech: 'verb',
+    definition: 'Make unclear or obscure',
+    example: 'The politician tried to obfuscate the issue.',
+    date: '2025-04-09',
+    options: [
+      { value: 'Make unclear or obscure', isCorrect: true },
+      { value: 'Explain clearly', isCorrect: false },
+      { value: 'Highlight important points', isCorrect: false },
+      { value: 'Simplify complexity', isCorrect: false }
+    ]
   }
 ];
 

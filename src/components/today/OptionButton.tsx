@@ -25,7 +25,8 @@ export type OptionState = 'default' | 'selected' | 'correct' | 'incorrect' | 'di
 
 // State lookup sets for easier maintenance
 const BORDER_STATES = new Set(['selected', 'correct', 'incorrect', 'disabled']);
-const BOLD_STATES = new Set(['selected', 'correct']);
+// Only make text bold if the answer is confirmed correct
+const BOLD_STATES = new Set(['correct']);
 
 // Configuration for swipe detection
 const SWIPE_THRESHOLD = 10; // Minimum distance to be considered a swipe

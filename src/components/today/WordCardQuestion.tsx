@@ -48,9 +48,9 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
       position: 'relative',
       borderRadius: radius.lg,
       overflow: 'hidden',
-      justifyContent: 'center',
       paddingHorizontal: 20,
-      paddingVertical: 24,
+      paddingTop: spacing.xxl,
+      paddingBottom: 24,
       borderWidth: borderWidth.thin,
       borderColor: colors.border.light,
     },
@@ -69,7 +69,7 @@ const WordCardQuestionComponent: React.FC<WordCardQuestionProps> = ({
       marginBottom: spacing.md,
       width: '100%',
     },
-  }), [colors]); // Re-create styles if colors change
+  }), [colors, spacing]); // Re-create styles if colors or spacing change
 
   const { id, word, pronunciation, partOfSpeech, options = [] } = wordData;
   
