@@ -98,11 +98,13 @@ export function useThemeReady() {
   useEffect(() => {
     if (theme) {
       // Small delay to ensure all theme properties are available
-      const timer = setTimeout(() => {
-        setIsReady(true);
-      }, 50);
+      // const timer = setTimeout(() => {
+      //   setIsReady(true);
+      // }, 50);
+      // return () => clearTimeout(timer);
 
-      return () => clearTimeout(timer);
+      // Set ready immediately when theme is available
+      setIsReady(true);
     }
   }, [theme]);
 

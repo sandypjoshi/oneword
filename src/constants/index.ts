@@ -32,6 +32,7 @@ export const STORAGE_KEYS = {
   USER_PREFERENCES: '@oneword_user_preferences',
   DEVICE_ID: '@oneword_device_id',
   DIFFICULTY_LEVEL: '@oneword_difficulty_level',
+  HAS_ONBOARDED: '@oneword_has_onboarded',
 };
 
 // Difficulty levels

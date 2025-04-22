@@ -2,8 +2,11 @@ import { useState, useRef, useCallback, useEffect, useMemo } from 'react';
 import { ScrollView, useWindowDimensions, ViewToken } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { useRouter, useFocusEffect } from 'expo-router';
-import { ExtendedWordOfDay } from './useDailyWords'; // Assuming ExtendedWordOfDay is exported from useDailyWords
+import { WordOfDay } from '../types/wordOfDay'; // Import base type
 import { useWordCardStore } from '../store/wordCardStore';
+
+// Define WordOfDay combined with potential placeholder structure for internal use
+type CarouselItem = WordOfDay & { isPlaceholder?: boolean };
 
 // Constants
 const DOT_SIZE = 32; // Size of each indicator dot
@@ -14,9 +17,9 @@ const DOT_WIDTH = DOT_SIZE + DOT_GAP; // Total width including gap
  * Hook to manage the state and interactions between the FlashList carousel
  * and the pagination dot ScrollView.
  */
-export function useCarouselPagination(words: ExtendedWordOfDay[]) {
+export function useCarouselPagination(words: CarouselItem[]) {
   const [activeIndex, setActiveIndex] = useState<number>(0);
-  const flashListRef = useRef<FlashList<ExtendedWordOfDay>>(null);
+  const flashListRef = useRef<FlashList<CarouselItem>>(null);
   const scrollViewRef = useRef<ScrollView>(null);
   const isProgrammaticScrollRef = useRef(false);
   const { width } = useWindowDimensions();
@@ -27,7 +30,7 @@ export function useCarouselPagination(words: ExtendedWordOfDay[]) {
 
   // Format the date nicely for the header title
   const formatDateForHeader = useCallback(
-    (word: ExtendedWordOfDay | null): string => {
+    (word: CarouselItem | null): string => {
       if (!word?.date) return 'Today';
       const wordDate = new Date(word.date);
       const today = new Date();
@@ -49,7 +52,7 @@ export function useCarouselPagination(words: ExtendedWordOfDay[]) {
   // Update the header title when the active word changes
   useEffect(() => {
     if (words.length > 0 && activeIndex >= 0 && activeIndex < words.length) {
-      const currentWord = words[activeIndex];
+      const currentWord: CarouselItem = words[activeIndex];
       const title = formatDateForHeader(currentWord);
       // Use router.setParams to update screen options with Expo Router
       router.setParams({ title });
@@ -109,7 +112,7 @@ export function useCarouselPagination(words: ExtendedWordOfDay[]) {
         setActiveIndex(newIndex);
 
         // Sync card face for visible card
-        const visibleItem = viewableItems[0].item as ExtendedWordOfDay;
+        const visibleItem = viewableItems[0].item as CarouselItem;
         if (visibleItem && !visibleItem.isPlaceholder) {
           const isRevealed = isWordRevealed(visibleItem.id);
           if (isRevealed) {
@@ -183,7 +186,7 @@ export function useCarouselPagination(words: ExtendedWordOfDay[]) {
   );
 
   // Helper to get date number for pagination dots
-  const getDateFromWord = useCallback((word: ExtendedWordOfDay): number => {
+  const getDateFromWord = useCallback((word: CarouselItem): number => {
     if (!word?.date) return 0;
     try {
       const date = new Date(word.date);

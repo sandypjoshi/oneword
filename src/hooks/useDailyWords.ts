@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { WordOfDay } from '../types/wordOfDay';
 import { wordOfDayService } from '../services/wordOfDayService';
-import { useWordStore } from '../store/wordStore';
-import { useWordCardStore } from '../store/wordCardStore';
+// import { useWordStore } from '../store/wordStore'; // Remove dependency on wordStore for state merging
+// import { useWordCardStore } from '../store/wordCardStore'; // This store is not used here
 
 // Extended WordOfDay type to include placeholder flag
-export interface ExtendedWordOfDay extends WordOfDay {
-  isPlaceholder?: boolean;
-}
+// export interface ExtendedWordOfDay extends WordOfDay {
+//   isPlaceholder?: boolean;
+// }
 
 // Define the placeholder object structure once
 const placeholderTemplate = {
@@ -16,19 +16,24 @@ const placeholderTemplate = {
   partOfSpeech: '',
   definition: '',
   isPlaceholder: true,
+  // Add other WordOfDay fields with default values if needed by components consuming placeholders
+  id: '', // Placeholder needs an ID
+  date: '', // Placeholder needs a date
+  // options: [], // Optional, might not be needed for placeholder rendering
 };
 
 /**
  * Hook to manage fetching and providing the list of daily words.
  */
 export function useDailyWords(daysToFetch: number = 14) {
-  const [words, setWords] = useState<ExtendedWordOfDay[]>([]);
+  // State type is now WordOfDay | (typeof placeholderTemplate & { id: string; date: string })
+  const [words, setWords] = useState<(WordOfDay | typeof placeholderTemplate)[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
   const initialLoadAttempted = useRef(false);
 
   // Zustand store hooks needed for initial state sync
-  const storedWords = useWordStore(state => state.words);
+  // const storedWords = useWordStore(state => state.words); // Removed
 
   // Define the loading function using useCallback
   const loadWords = useCallback(
@@ -44,7 +49,7 @@ export function useDailyWords(daysToFetch: number = 14) {
       setError(null);
 
       // Initialize allDays outside try block to make it available in finally block
-      let allDays: ExtendedWordOfDay[] = [];
+      let allDays: (WordOfDay | typeof placeholderTemplate)[] = [];
 
       try {
         // Get words for the past N days
@@ -60,22 +65,26 @@ export function useDailyWords(daysToFetch: number = 14) {
           const dateString = date.toISOString().split('T')[0];
 
           const wordForDate = recentWords.find(word => {
-            const wordDate = new Date(word.date);
-            return wordDate.toISOString().split('T')[0] === dateString;
+            // Ensure word.date is treated as a string for comparison
+            const wordDateStr = typeof word.date === 'string' ? word.date.split('T')[0] : '';
+            return wordDateStr === dateString;
           });
 
           if (wordForDate) {
-            const storedWord = storedWords.find(w => w.id === wordForDate.id);
-            if (storedWord) {
-              const wordWithState = {
-                ...wordForDate,
-                isRevealed: storedWord.isRevealed,
-                userAttempts: storedWord.userAttempts,
-              };
-              allDays.push(wordWithState);
-            } else {
-              allDays.push(wordForDate);
-            }
+            // --- REMOVED STATE MERGING LOGIC ---
+            // const storedWord = storedWords.find(w => w.id === wordForDate.id);
+            // if (storedWord) {
+            //   const wordWithState = {
+            //     ...wordForDate,
+            //     isRevealed: storedWord.isRevealed, // State should come from wordCardStore
+            //     userAttempts: storedWord.userAttempts, // State should come from progressStore
+            //   };
+            //   allDays.push(wordWithState);
+            // } else {
+            //   allDays.push(wordForDate);
+            // }
+            allDays.push(wordForDate); // Push the raw word data
+            // --- END REMOVED STATE MERGING LOGIC ---
           } else {
             allDays.push({
               ...placeholderTemplate,
@@ -98,7 +107,8 @@ export function useDailyWords(daysToFetch: number = 14) {
         );
       }
     },
-    [daysToFetch, storedWords]
+    // [daysToFetch, storedWords] // Removed storedWords dependency
+    [daysToFetch]
   );
 
   // Effect to load words on mount or when daysToFetch changes

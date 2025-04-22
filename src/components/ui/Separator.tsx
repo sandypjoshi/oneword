@@ -7,10 +7,12 @@ import {
   DimensionValue,
 } from 'react-native';
 import { useTheme } from '../../theme';
-import spacing from '../../theme/spacing';
+// import spacing from '../../theme/spacing'; // Get spacing from theme context
 
 // Derive SpacingKey type from the spacing object keys
-type SpacingKey = keyof typeof spacing;
+// Use a more generic approach if spacing keys might differ between themes
+// type SpacingKey = keyof typeof spacing; // Removed as spacing comes from theme
+type SpacingKey = keyof ReturnType<typeof useTheme>['spacing'];
 
 // Define possible thickness values
 type SeparatorThickness = 'hairline' | 'thin' | 'medium' | 'thick';
@@ -46,7 +48,7 @@ const Separator: React.FC<SeparatorProps> = ({
   marginHorizontal,
   style,
 }) => {
-  const { colors } = useTheme(); // spacing is imported directly
+  const { colors, spacing } = useTheme(); // Get spacing from useTheme
 
   // Calculate final style based on props and theme
   const separatorStyle = useMemo<ViewStyle>(() => {
@@ -92,7 +94,8 @@ const Separator: React.FC<SeparatorProps> = ({
     marginVertical,
     marginHorizontal,
     colors.border.light,
-  ]); // Removed spacing from deps as it's constant
+    spacing, // Add spacing to dependency array
+  ]);
 
   return <View style={[separatorStyle, style]} />;
 };

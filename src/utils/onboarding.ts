@@ -1,11 +1,13 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { STORAGE_KEYS, DIFFICULTY_LEVELS } from '../constants';
 
-const HAS_ONBOARDED_KEY = 'oneword:hasOnboarded';
+// const HAS_ONBOARDED_KEY = 'oneword:hasOnboarded'; // Use constant instead
 
 export const checkOnboardingStatus = async (): Promise<boolean> => {
   try {
-    const hasOnboarded = await AsyncStorage.getItem(HAS_ONBOARDED_KEY);
+    const hasOnboarded = await AsyncStorage.getItem(
+      STORAGE_KEYS.HAS_ONBOARDED
+    );
     return hasOnboarded === 'true';
   } catch (error) {
     console.error('Error checking onboarding status:', error);
@@ -15,7 +17,7 @@ export const checkOnboardingStatus = async (): Promise<boolean> => {
 
 export const setOnboardingComplete = async (): Promise<void> => {
   try {
-    await AsyncStorage.setItem(HAS_ONBOARDED_KEY, 'true');
+    await AsyncStorage.setItem(STORAGE_KEYS.HAS_ONBOARDED, 'true');
   } catch (error) {
     console.error('Error setting onboarding status:', error);
   }
@@ -24,7 +26,7 @@ export const setOnboardingComplete = async (): Promise<void> => {
 // For testing purposes - resets onboarding status
 export const resetOnboardingStatus = async (): Promise<void> => {
   try {
-    await AsyncStorage.removeItem(HAS_ONBOARDED_KEY);
+    await AsyncStorage.removeItem(STORAGE_KEYS.HAS_ONBOARDED);
     console.log('Onboarding status reset successfully');
   } catch (error) {
     console.error('Error resetting onboarding status:', error);

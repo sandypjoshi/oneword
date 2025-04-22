@@ -1,11 +1,11 @@
 import { WordOfDay } from '../types/wordOfDay';
 
 // Get today's and yesterday's dates in ISO format
-const today = new Date();
-const yesterday = new Date();
-yesterday.setDate(today.getDate() - 1);
-const todayStr = today.toISOString().split('T')[0];
-const yesterdayStr = yesterday.toISOString().split('T')[0];
+// const today = new Date(); // Unused
+// const yesterday = new Date(); // Unused
+// yesterday.setDate(today.getDate() - 1);
+// const todayStr = today.toISOString().split('T')[0]; // Unused
+// const yesterdayStr = yesterday.toISOString().split('T')[0]; // Unused
 
 // Mock data for words of the day with fixed dates for April 2nd and the previous 13 days
 const mockWords: WordOfDay[] = [
@@ -223,7 +223,7 @@ const mockWords: WordOfDay[] = [
     ],
   },
   {
-    id: '13', // Start from next available ID
+    id: '15',
     word: 'ubiquitous',
     pronunciation: '/juːˈbɪkwɪtəs/',
     partOfSpeech: 'adjective',
@@ -238,7 +238,7 @@ const mockWords: WordOfDay[] = [
     ],
   },
   {
-    id: '14',
+    id: '16',
     word: 'proclivity',
     pronunciation: '/proʊˈklɪvəti/',
     partOfSpeech: 'noun',
@@ -253,7 +253,7 @@ const mockWords: WordOfDay[] = [
     ],
   },
   {
-    id: '15',
+    id: '17',
     word: 'gregarious',
     pronunciation: '/ɡrɪˈɡɛəriəs/',
     partOfSpeech: 'adjective',
@@ -268,7 +268,7 @@ const mockWords: WordOfDay[] = [
     ],
   },
   {
-    id: '16',
+    id: '18',
     word: 'epistolary',
     pronunciation: '/ɪˈpɪstələri/',
     partOfSpeech: 'adjective',
@@ -283,7 +283,7 @@ const mockWords: WordOfDay[] = [
     ],
   },
   {
-    id: '17',
+    id: '19',
     word: 'vicissitude',
     pronunciation: '/vɪˈsɪsɪtjuːd/',
     partOfSpeech: 'noun',
@@ -298,7 +298,7 @@ const mockWords: WordOfDay[] = [
     ],
   },
   {
-    id: '18',
+    id: '20',
     word: 'pulchritudinous',
     pronunciation: '/ˌpʌlkrɪˈtjuːdɪnəs/',
     partOfSpeech: 'adjective',
@@ -313,7 +313,7 @@ const mockWords: WordOfDay[] = [
     ],
   },
   {
-    id: '19',
+    id: '21',
     word: 'obfuscate',
     pronunciation: '/ˈɒbfəskeɪt/',
     partOfSpeech: 'verb',

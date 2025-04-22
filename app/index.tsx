@@ -1,41 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, ActivityIndicator } from 'react-native';
-import { Redirect } from 'expo-router';
-import { checkOnboardingStatus } from '../src/utils/onboarding';
-import { palettes } from '../src/theme/primitives';
+import React from 'react';
+import { View, ActivityIndicator, StyleSheet } from 'react-native';
 
 /**
- * Root entry point - redirects to the appropriate screen
+ * Minimal root entry point.
+ * The actual routing logic (onboarding vs. tabs) is handled
+ * by the root layout (_layout.tsx) during the splash screen phase.
+ * This component just ensures something minimal is rendered initially.
  */
 export default function Index() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [hasOnboarded, setHasOnboarded] = useState(false);
-
-  // Check onboarding status on mount
-  useEffect(() => {
-    async function checkStatus() {
-      const status = await checkOnboardingStatus();
-      setHasOnboarded(status);
-      setIsLoading(false);
-    }
-
-    checkStatus();
-  }, []);
-
-  // Show loading state
-  if (isLoading) {
-    return (
-      <View style={styles.container}>
-        <ActivityIndicator size="large" color={palettes.blue[500]} />
-      </View>
-    );
-  }
-
-  // Redirect based on onboarding status
-  return hasOnboarded ? (
-    <Redirect href="/(tabs)" />
-  ) : (
-    <Redirect href="/onboarding" />
+  // Render a simple loading indicator while the root layout determines the correct route.
+  // Styling is minimal as the theme may not be fully available yet.
+  return (
+    <View style={styles.container}>
+      <ActivityIndicator size="large" />
+    </View>
   );
 }
 
@@ -44,6 +22,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: palettes.neutralLight[0],
+    // Use a neutral background that works reasonably in light/dark
+    // eslint-disable-next-line react-native/no-color-literals
+    backgroundColor: '#f0f0f0', // Example neutral light gray
   },
 });
