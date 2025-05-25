@@ -7,7 +7,7 @@ import { WordOfDay } from '../types/wordOfDay';
 // const todayStr = today.toISOString().split('T')[0]; // Unused
 // const yesterdayStr = yesterday.toISOString().split('T')[0]; // Unused
 
-// Mock data for words of the day with fixed dates for April 2nd and the previous 13 days
+// Mock data for words of the day with fixed dates from May 12th to May 25th, 2025
 const mockWords: WordOfDay[] = [
   {
     id: '1',
@@ -16,7 +16,7 @@ const mockWords: WordOfDay[] = [
     partOfSpeech: 'adjective',
     definition: 'Too great to express',
     example: 'The ineffable beauty of the night sky',
-    date: '2025-04-02', // Today (April 2nd)
+    date: '2025-05-25', // May 25th
     options: [
       { value: 'Too great to express', isCorrect: true },
       { value: 'Causing great fear', isCorrect: false },
@@ -31,7 +31,7 @@ const mockWords: WordOfDay[] = [
     partOfSpeech: 'noun',
     definition: 'Happy accidental discovery',
     example: 'Finding the perfect book was a delightful serendipity',
-    date: '2025-04-01', // April 1st
+    date: '2025-05-24', // May 24th
     options: [
       { value: 'Happy accidental discovery', isCorrect: true },
       { value: 'Peace and tranquility', isCorrect: false },
@@ -46,7 +46,7 @@ const mockWords: WordOfDay[] = [
     partOfSpeech: 'adjective',
     definition: 'Very short-lived',
     example: 'The ephemeral nature of fashion trends',
-    date: '2025-03-31', // March 31st
+    date: '2025-05-23', // May 23rd
     options: [
       { value: 'Very short-lived', isCorrect: true },
       { value: 'Eternally lasting', isCorrect: false },
@@ -61,7 +61,7 @@ const mockWords: WordOfDay[] = [
     partOfSpeech: 'adjective',
     definition: 'Found everywhere',
     example: 'Smartphones have become ubiquitous in modern life',
-    date: '2025-03-30', // March 30th
+    date: '2025-05-22', // May 22nd
     options: [
       { value: 'Found everywhere', isCorrect: true },
       { value: 'Extremely rare', isCorrect: false },
@@ -76,7 +76,7 @@ const mockWords: WordOfDay[] = [
     partOfSpeech: 'adjective',
     definition: 'Sweetly sounding',
     example: "The singer's mellifluous voice captivated the audience",
-    date: '2025-03-29', // March 29th
+    date: '2025-05-21', // May 21st
     options: [
       { value: 'Sweetly sounding', isCorrect: true },
       { value: 'Harsh and grating', isCorrect: false },
@@ -91,7 +91,7 @@ const mockWords: WordOfDay[] = [
     partOfSpeech: 'adjective',
     definition: 'Fluent and persuasive',
     example: 'Her eloquent speech moved everyone to tears',
-    date: '2025-03-28', // March 28th
+    date: '2025-05-20', // May 20th
     options: [
       { value: 'Fluent and persuasive', isCorrect: true },
       { value: 'Silent but expressive', isCorrect: false },
@@ -106,7 +106,7 @@ const mockWords: WordOfDay[] = [
     partOfSpeech: 'noun',
     definition: 'Quick recovery ability',
     example: 'He showed remarkable resilience in the face of adversity',
-    date: '2025-03-27', // March 27th
+    date: '2025-05-19', // May 19th
     options: [
       { value: 'Quick recovery ability', isCorrect: true },
       { value: 'Physical strength', isCorrect: false },
@@ -121,7 +121,7 @@ const mockWords: WordOfDay[] = [
     partOfSpeech: 'adjective',
     definition: 'Extremely careful',
     example: 'His meticulous research uncovered new evidence',
-    date: '2025-03-26', // March 26th
+    date: '2025-05-18', // May 18th
     options: [
       { value: 'Extremely careful', isCorrect: true },
       { value: 'Completely careless', isCorrect: false },
@@ -136,7 +136,7 @@ const mockWords: WordOfDay[] = [
     partOfSpeech: 'adjective',
     definition: 'Insightful understanding',
     example: 'Her perspicacious comments revealed the truth of the situation',
-    date: '2025-03-25', // March 25th
+    date: '2025-05-17', // May 17th
     options: [
       { value: 'Insightful understanding', isCorrect: true },
       { value: 'Suspicious nature', isCorrect: false },
@@ -152,7 +152,7 @@ const mockWords: WordOfDay[] = [
     definition: 'Servile flatterer',
     example:
       'The CEO was surrounded by sycophants who agreed with everything he said',
-    date: '2025-03-24', // March 24th
+    date: '2025-05-16', // May 16th
     options: [
       { value: 'Servile flatterer', isCorrect: true },
       { value: 'Harsh critic', isCorrect: false },
@@ -167,7 +167,7 @@ const mockWords: WordOfDay[] = [
     partOfSpeech: 'noun',
     definition: 'Harsh sound mixture',
     example: 'The cacophony of the busy market made conversation difficult',
-    date: '2025-03-23', // March 23rd
+    date: '2025-05-15', // May 15th
     options: [
       { value: 'Harsh sound mixture', isCorrect: true },
       { value: 'Perfect harmony', isCorrect: false },
@@ -183,7 +183,7 @@ const mockWords: WordOfDay[] = [
     definition: 'Perfect typical example',
     example:
       'The quintessential New York experience includes a walk through Central Park',
-    date: '2025-03-22', // March 22nd
+    date: '2025-05-14', // May 14th
     options: [
       { value: 'Perfect typical example', isCorrect: true },
       { value: 'Fifth in sequence', isCorrect: false },
@@ -199,7 +199,7 @@ const mockWords: WordOfDay[] = [
     definition: 'Side-by-side contrast',
     example:
       'The juxtaposition of ancient and modern architecture created a unique cityscape',
-    date: '2025-03-21', // March 21st
+    date: '2025-05-13', // May 13th
     options: [
       { value: 'Side-by-side contrast', isCorrect: true },
       { value: 'Legal positioning', isCorrect: false },
@@ -214,7 +214,7 @@ const mockWords: WordOfDay[] = [
     partOfSpeech: 'adjective',
     definition: 'Kind and generous',
     example: 'The benevolent donor gave generously to the charity',
-    date: '2025-03-20', // March 20th
+    date: '2025-05-12', // May 12th
     options: [
       { value: 'Kind and generous', isCorrect: true },
       { value: 'Selfish and greedy', isCorrect: false },
