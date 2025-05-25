@@ -53,8 +53,8 @@ export default function TabLayout() {
         >
           <Tabs.Screen
             name="index"
-            options={{
-              title: 'Today',
+            options={({ route }) => ({
+              title: (route.params as { title?: string })?.title || 'Today',
               tabBarLabel: 'Today',
               tabBarIcon: ({ color, focused }) => (
                 <Icon
@@ -65,7 +65,7 @@ export default function TabLayout() {
                 />
               ),
               headerRight: () => <StreakIndicator />,
-            }}
+            })}
           />
           <Tabs.Screen
             name="practice"
