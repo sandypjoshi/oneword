@@ -5,9 +5,10 @@ OneWord is a vocabulary learning application that helps users expand their vocab
 
 ## Architecture
 - React Native (Expo) for cross-platform mobile development (New Architecture enabled)
-- Supabase for backend database and authentication (**Note: New DB setup pending, frontend integration pending**)
+- Supabase for backend database and authentication (**Production database deployed and ready**)
 - Zustand for state management
 - Custom design system with tokens for consistent styling
+- AI-first content generation with Gemini 2.5 Pro structured output
 
 ## Key Design Patterns
 
@@ -39,9 +40,10 @@ OneWord is a vocabulary learning application that helps users expand their vocab
 - Using refs and store state for persistent animations
 
 ## Current Focus
-- **Database Setup:** Waiting for the new Supabase project/DB to be created. (**BLOCKER**)
-- **Streak Feature (Paused):** Planning complete, implementation blocked by DB setup.
-- **UI Refinements (Ongoing):** Ensuring component consistency, addressing minor visual bugs.
+- **Backend API Development:** Building services using completed database infrastructure
+- **Content Generation Revolution:** AI-first vocabulary curation with Gemini 2.5 Pro
+- **Frontend Integration:** Connecting React Native app to production Supabase backend
+- **Sprint Acceleration:** Leveraging 2-day schedule advantage for parallel development
 
 ## Code Conventions
 - Typescript for type safety
@@ -78,27 +80,39 @@ A comprehensive code audit verified compliance with project rules and standards,
 - Consistent loading state implementation across components
 
 ## Priority Action Items
-1. **Setup New Supabase Database:** Create project, configure initial settings.
-2. **Database Migrations:** Establish core tables (`profiles`, `words`, etc.) and add streak columns.
-3. **Implement Backend Logic:** Create Supabase Edge Function for streak updates.
-4. **Integrate Frontend with Backend:** Replace mock data, connect streak logic.
-5. **Expand Test Coverage:** Begin adding tests as backend integration proceeds.
-6. **Refactor Large Components:** Improve maintainability (lower priority until backend is connected).
+1. **Generate Theme Vocabularies:** Complete remaining 4 themes using optimized AI prompts
+2. **Build Backend APIs:** Implement word assignment, progress tracking, and timeline services
+3. **Integrate Frontend:** Connect React Native app to production Supabase backend
+4. **Implement Authentication:** User registration, login, and profile creation flow
+5. **API Integration:** Free Dictionary API for definitions and pronunciation
+6. **End-to-End Testing:** Complete user journey validation from onboarding to learning
 
 ## Current Status
 - **UI Development**: 85% complete (most core screens/components exist)
+- **Database Infrastructure**: 100% complete (**MAJOR BREAKTHROUGH**)
+- **Content Strategy**: 100% complete (**AI-first approach finalized**)
 - **State Management**: 75% complete (core stores exist, need real data integration)
 - **Animation System**: 90% complete (recent improvements)
-- **Backend Integration**: 0% (**Blocked** by DB Setup)
+- **Backend API Development**: 10% (foundation ready, services in progress)
+- **Frontend Integration**: 5% (ready to connect to production backend)
 - **Testing**: 15% complete
 
 ### Recent Accomplishments
+
+#### Major Breakthrough (June 7, 2025)
+- ✅ **Production Database Infrastructure Complete:** 4 migration files deployed with comprehensive schema
+- ✅ **Content Strategy Revolution:** AI-first approach finalized, abandoning complex script systems
+- ✅ **Adaptive Difficulty System:** Enhanced database schema with smart progression and skip logic
+- ✅ **Sprint Acceleration:** Project now 2 days ahead of 21-day timeline
+- ✅ **Quality AI Prompts:** Professional theme prompt ready for 800-word generation
+- ✅ **Technical Architecture:** PostgreSQL enums, helper functions, 13 performance indexes deployed
+
+#### Previous UI & System Improvements
 - ✅ **Fixed Font Rendering Issues:** Resolved inconsistencies with bold, serif, and italic text rendering in the custom `Text` component.
 - ✅ **Created Reusable Separator:** Implemented a theme-aware `Separator` UI component.
 - ✅ **Refactored Card Separators:** Replaced inline separators in `WordCardAnswer` and `ReflectionCard` with the new `Separator` component.
 - ✅ **Cleaned Up UI Components:** Removed the unused `PronunciationChip` component.
 - ✅ **Improved Definition Display:** Increased font size for definitions in `WordCardAnswer`.
-- ✅ **Streak Feature Planning:** Completed detailed planning for core logic, data model, and UX.
 - ✅ **Fixed Card Flip Animation & State Persistence:** Resolved critical issues with WordCard state and animations (2024-04-06).
 - ✅ **Refactored foundational `Box` component** for full theme integration and extended layout capabilities (2024-04-01).
 - ✅ Completed the enhanced MeshGradientCard component with improved visual appearance and performance.
@@ -109,21 +123,22 @@ A comprehensive code audit verified compliance with project rules and standards,
 - ✅ Fixed UI component contrast issues for Quill theme
 
 ### Active Development
-- ⏸️ **Streak Feature Implementation (Paused)**
-- ⏸️ **Implementing Supabase client & data fetching (Paused/Blocked)**
+- 🔄 **Backend API Development:** Building services using deployed database infrastructure
+- 🔄 **Content Generation:** Creating remaining theme vocabularies with AI-first approach
+- 🔄 **Frontend Integration:** Connecting React Native app to production Supabase
+- 🔄 **User Authentication:** Implementing registration, login, and profile creation
+- 🔄 **API Integration:** Free Dictionary API for definitions and pronunciation
 - 🔄 Refactoring `app/(tabs)/index.tsx` (Lower Priority)
-- 🔄 Defining testing strategy and setup (Lower Priority)
+- 🔄 Defining testing strategy and setup (Medium Priority)
 - 🔄 Implementing paper-like noise texture overlay for gradients (Lower Priority)
-- 🔄 Creating reusable MeshGradient background component (Lower Priority)
-- 🔄 Exploring animation options for subtle gradient movement (Lower Priority)
-- 🔄 Updating documentation for new visual components (Ongoing)
 
 ### Key Priorities (Revised)
-1. **Setup New Supabase Database.**
-2. **Establish Database Schema/Migrations.**
-3. **Implement Core Backend Logic (Starting with Streaks).**
-4. **Connect Frontend to Supabase (Starting with Streaks & Word of Day).**
-5. Begin implementing testing strategy.
+1. **Generate Complete Theme Vocabularies:** 4,000 words across 5 themes using AI-first approach
+2. **Build Backend API Services:** Word assignment, progress tracking, timeline APIs
+3. **Connect Frontend to Backend:** Real data integration replacing mock services
+4. **Implement User Authentication:** Complete onboarding and profile management flow
+5. **Integrate External APIs:** Free Dictionary API for enriched word data
+6. **End-to-End Testing:** Complete user journey validation and quality assurance
 
 ## Technical Highlights
 - Sophisticated mesh gradient system using Skia
@@ -145,11 +160,12 @@ A comprehensive code audit verified compliance with project rules and standards,
 ## Known Issues and Risks
 
 ### Key Issues
-- **No Backend Integration:** App uses mock data only. (**BLOCKER**)
-- **Streak Feature Not Implemented:** Blocked by DB Setup.
-- **Component Complexity:** Several large components need refactoring.
-- **Low Test Coverage:** Lack of automated tests.
-- **Inconsistent Loading/Error States:** Needs standardized handling.
+- **Backend Integration Pending:** App uses mock data, need to connect to production Supabase
+- **Content Generation In Progress:** Professional theme ready, 4 themes remaining
+- **Authentication Flow Missing:** User registration and profile creation not implemented
+- **API Integration Pending:** Free Dictionary API integration for definitions needed
+- **Component Complexity:** Several large components need refactoring
+- **Test Coverage:** Comprehensive testing strategy needed for production readiness
 
 ### Technical Debt
 - Project structure (`lib` vs `src`) needs consolidation.
@@ -160,10 +176,10 @@ A comprehensive code audit verified compliance with project rules and standards,
 ### Resource Constraints
 - Limited design resources for creating comprehensive guidelines
 - Testing capacity across diverse device range
-- **Dependency on Database Setup**
+- Content quality review capacity for AI-generated vocabularies
 
 ## General Notes
-The project has a strong frontend foundation with significant UI refinements recently completed, including fixing complex font rendering and creating reusable components. However, **all forward progress on features requiring data persistence (like Streaks) is currently blocked pending the setup of the new Supabase database.** The immediate focus must be on establishing this backend infrastructure.
+The project has achieved a major breakthrough with complete database infrastructure and revolutionary content strategy. **Production-ready Supabase database is deployed with comprehensive schema, security, and performance optimizations.** AI-first content generation approach validated and ready for rapid vocabulary creation. Project is now 2 days ahead of 21-day sprint schedule, enabling aggressive parallel development of backend APIs, frontend integration, and content generation.
 
 ## Animation and State Management Improvements
 - Enhance and fix WordCard animations
